@@ -42,10 +42,10 @@ try {
   await mobilePage.close();
 
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 2, 'Level 2・高速・ハンズオフ条件は2件');
+  assert.equal(await visibleCards(), 7, 'Level 2・高速・ハンズオフ条件は7件');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '深いリンクのlevel復元');
-  await page.getByRole('button', { name: '同意する' }).click();
+  await page.getByRole('button', { name: '同意する' }).click({ noWaitAfter: true });
   assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 1, '同意後にGTM読み込み');
   await page.waitForTimeout(300);
   assert.ok(analyticsRequests.some((url) => url.includes('googletagmanager')), '同意後のGTM通信');
@@ -53,13 +53,14 @@ try {
 
   await page.locator('select[name="level"]').selectOption('3');
   await page.locator('select[name="availability"]').selectOption('all');
-  await page.getByRole('button', { name: 'この条件で探す' }).click();
+  await page.getByRole('button', { name: 'この条件で探す' }).click({ noWaitAfter: true });
+  await page.waitForTimeout(100);
   assert.equal(new URL(page.url()).searchParams.get('level'), '3', 'フォーム操作でURL更新');
   assert.equal(await page.locator('[data-result-count]').innerText(), '1件', '絞り込み後件数');
   assert.equal((await events()).filter((event) => event.event === 'filter_results').length, 1, 'filter_resultsはフォーム操作時のみ1回');
   await page.goBack();
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '戻るで前の絞り込みを復元');
-  assert.equal(await visibleCards(), 2, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 7, '戻る後の結果件数');
 
   await page.goto(`${base}/cars/?availability=all`);
   assert.equal(await visibleCards(), 9, 'すべての状態で過去車両を含む9件');
@@ -84,11 +85,12 @@ try {
 
   await page.goto(`${base}/privacy/`);
   page.on('dialog', (dialog) => dialog.dismiss());
-  await page.getByRole('button', { name: '計測設定を取り消す' }).click();
-  await page.waitForLoadState('domcontentloaded');
+  await page.getByRole('button', { name: '計測設定を取り消す' }).click({ noWaitAfter: true });
+  await page.waitForTimeout(500);
+  await page.goto(`${base}/privacy/`);
   assert.equal(await page.evaluate(() => localStorage.getItem('jidouunten-analytics-consent')), null, '撤回後は再選択可能');
   assert.equal(await page.locator('[data-consent]:visible').count(), 1, '撤回後に同意バナー再表示');
-  await page.getByRole('button', { name: '拒否する' }).click();
+  await page.getByRole('button', { name: '拒否する' }).click({ noWaitAfter: true });
   assert.equal(await page.evaluate(() => localStorage.getItem('jidouunten-analytics-consent')), 'denied', '拒否状態を保存');
   await page.goto(`${base}/`);
   const beforeDenied = await events();

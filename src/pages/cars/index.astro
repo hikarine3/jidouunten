@@ -1,9 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import VehicleCard from '../../components/VehicleCard.astro';
-import { availabilityLabels, handsOffLabels, vehicles } from '../../data/loader';
-const roads = [...new Set(vehicles.flatMap((v) => v.odd.roadTypes))].sort();
-const roadOptions = roads.length ? roads : ['高速道路', '自動車専用道路', '一般道'];
+import { availabilityLabels, canonicalRoadType, handsOffLabels, roadFilterLabels, vehicles } from '../../data/loader';
+const roads = [...new Set(vehicles.flatMap((v) => v.odd.roadTypes.map(canonicalRoadType)))].sort();
+const roadOptions = roads.length ? roads : [...roadFilterLabels];
 const defaultCount = vehicles.filter((v) => v.availability === 'new_order_available' || (v.availability === 'unknown' && v.currentCatalogListed === true)).length;
 ---
 <Layout title="車を探す｜自動運転.jp" description="自動運転レベル、道路、ハンズオフ、販売状態から日本の車両を絞り込みます。">
@@ -20,7 +20,7 @@ const defaultCount = vehicles.filter((v) => v.availability === 'new_order_availa
     </form>
     <div class="notice" data-level2-notice hidden><strong>Level 2：常時監視が必要です。</strong><br />ハンズオフ可能な条件があっても、運転者は周囲を監視し、いつでも引き継げる状態を保ちます。</div>
     <div class="results-bar"><h2 style="margin:0; font-size:1.55rem;"><span data-selected-label>カタログ掲載確認</span> <span class="subtle" data-result-count>{defaultCount}件</span></h2><span class="subtle">URLに条件を保存できます</span></div>
-    <div class="cards" data-results>{vehicles.map((vehicle) => <div data-vehicle-shell hidden={vehicle.availability !== 'new_order_available' && !(vehicle.availability === 'unknown' && vehicle.currentCatalogListed === true)} data-level={vehicle.automationLevel} data-road={vehicle.odd.roadTypes.join('|')} data-hands-off={vehicle.handsOff} data-availability={vehicle.availability} data-current-catalog={String(vehicle.currentCatalogListed === true)}><VehicleCard vehicle={vehicle} /></div>)}</div>
+    <div class="cards" data-results>{vehicles.map((vehicle) => <div data-vehicle-shell hidden={vehicle.availability !== 'new_order_available' && !(vehicle.availability === 'unknown' && vehicle.currentCatalogListed === true)} data-level={vehicle.automationLevel} data-road={vehicle.odd.roadTypes.map(canonicalRoadType).join('|')} data-hands-off={vehicle.handsOff} data-availability={vehicle.availability} data-current-catalog={String(vehicle.currentCatalogListed === true)}><VehicleCard vehicle={vehicle} /></div>)}</div>
     <div class="empty" data-empty hidden><h2>条件に合う候補はまだありません</h2><p>販売状態を「すべて」にするか、道路・ハンズオフの条件をゆるめてお試しください。データ未登録の場合もこの表示になります。</p><a class="button text" href="/cars/">条件をリセット</a></div>
   </div></section>
   <script>

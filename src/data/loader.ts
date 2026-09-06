@@ -109,6 +109,16 @@ export const monitoringLabels: Record<DriverMonitoring, string> = {
 
 export const levelIds = [1, 2, 3, 4, 5] as const;
 
+export const roadFilterLabels = ['高速道路', '自動車専用道路', '一般道'] as const;
+
+/** ODDの詳細表記を、一覧フィルター用の利用者向け道路区分へ正規化する。 */
+export function canonicalRoadType(value: string) {
+  if (value.includes('高速道路')) return '高速道路';
+  if (value.includes('自動車専用道路')) return '自動車専用道路';
+  if (value.includes('一般道')) return '一般道';
+  return value;
+}
+
 export function findVehicle(id: string) {
   return vehicles.find((vehicle) => vehicle.id === id);
 }
@@ -141,7 +151,7 @@ export function filterVehicleList(list: Vehicle[], input: {
     // presented as orderable. Explicitly excluded records can opt out.
     if (!hasAvailabilityFilter && vehicle.availability !== 'new_order_available' && !(vehicle.availability === 'unknown' && vehicle.currentCatalogListed === true)) return false;
     if (level !== undefined && vehicle.automationLevel !== level) return false;
-    if (input.road && !vehicle.odd.roadTypes.includes(input.road)) return false;
+    if (input.road && !vehicle.odd.roadTypes.some((road) => canonicalRoadType(road) === input.road)) return false;
     if (input.handsOff && vehicle.handsOff !== input.handsOff) return false;
     if (input.availability && vehicle.availability !== input.availability) return false;
     return true;

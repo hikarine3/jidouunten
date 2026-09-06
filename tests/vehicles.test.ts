@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { filterVehicleList, validateVehicle, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, filterVehicleList, validateVehicle, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', grade: '標準',
@@ -28,6 +28,13 @@ describe('vehicle data contract and filters', () => {
     expect(filterVehicleList(list, { level: 2, road: '高速道路', handsOff: 'allowed_in_conditions', availability: 'new_order_available' }).map((v) => v.id)).toEqual(['a']);
     expect(filterVehicleList(list, { availability: 'used_only' }).map((v) => v.id)).toEqual(['c']);
     expect(filterVehicleList(list, {}).map((v) => v.id)).toEqual(['a', 'b']);
+    expect(filterVehicleList([makeVehicle({ id: 'mainline', odd: { ...makeVehicle().odd, roadTypes: ['高速道路の本線'] } })], { road: '高速道路' }).map((v) => v.id)).toEqual(['mainline']);
+  });
+
+  it('normalizes detailed ODD road labels for the shared filter', () => {
+    expect(canonicalRoadType('高速道路の本線')).toBe('高速道路');
+    expect(canonicalRoadType('自動車専用道路の本線')).toBe('自動車専用道路');
+    expect(canonicalRoadType('一般道')).toBe('一般道');
   });
 
   it('validates every supplied catalog record before release', () => {
