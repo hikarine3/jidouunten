@@ -1,0 +1,41 @@
+name: Delivery
+description: 利用者・事業成果へつながるSprintまたはtaskを登録する
+title: ""
+labels:
+  - work:delivery
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: 利用者・事業への成果
+      description: 誰の何がどう良くなるか。実装手段ではなく届ける結果を書く。
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 完了条件
+      description: 表示、操作、データ、計測、公開を確認できる条件を書く。
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: 根拠・仕様
+      description: repository内の戦略、requirements、データ契約、QA計画へのリンクを書く。
+    validations:
+      required: true
+  - type: textarea
+    id: urls
+    attributes:
+      label: 対象URL
+      description: local、preview、本番の対象URLを書く。
+    validations:
+      required: false
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: 依存・再開条件
+      description: 本当に開始を止める依存だけを書く。別IssueならURLでつなぐ。
+    validations:
+      required: false
