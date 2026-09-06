@@ -107,12 +107,15 @@ try {
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
   await page.locator('[data-compare-link]').click();
+  await page.waitForURL((url) => url.pathname === '/compare/' && url.searchParams.getAll('ids').length === 2);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.equal(new URL(page.url()).pathname, '/compare/', '一覧から比較へ遷移');
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '一覧選択が比較画面へ反映');
 
   await page.goto(`${base}/cars/?availability=all`);
   assert.equal(await visibleCards(), 9, 'すべての状態で過去車両を含む9件');
   await page.goto(`${base}/compare/?ids=jp-honda-accord-2025-ehev-sensing360plus&ids=jp-subaru-levorg-layback-2023-limited-ex`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '比較対象は2台');
   const compareText = await page.locator('[data-compare-result]').innerText();
   assert.match(compareText, /e:HEV Honda SENSING 360＋/);
