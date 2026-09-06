@@ -7,7 +7,7 @@ if (!vehicle) throw new Error('Vehicle not found');
 const odd = vehicle.odd;
 ---
 <Layout title={`${vehicle.maker} ${vehicle.model}｜自動運転.jp`} description={`${vehicle.maker} ${vehicle.model}の自動化レベル、作動条件、必要装備、公式情報を確認できます。`}>
-  <section class="page-intro"><div class="wrap"><a class="subtle" href="/cars/">← 車両一覧へ戻る</a></div></section>
+  <section class="page-intro"><div class="wrap"><a class="subtle" href="/">← 車両一覧へ戻る</a></div></section>
   <section class="section" style="padding-top: 0;"><div class="wrap detail-grid">
     <aside class="detail-hero"><div class="eyebrow">{vehicle.market} / {vehicle.modelYear}</div><div class="level-num">{vehicle.automationLevel}</div><div class="eyebrow" style="color:white;">{levelLabels[vehicle.automationLevel]}</div><h1>{vehicle.maker}<br />{vehicle.model}</h1><p>{vehicle.grade}</p><span class="pill lime">{availabilityLabels[vehicle.availability]}</span><p style="margin:18px 0 0; color:#d5e1e2; font-size:.84rem;">{levelCaveat(vehicle.automationLevel)}</p></aside>
     <div>

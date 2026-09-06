@@ -1,37 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { levelIds, levelLabels, levelShort } from '../data/loader';
+import VehicleList from '../components/VehicleList.astro';
 ---
-<Layout>
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="eyebrow">LEVEL-FIRST CAR SELECTOR / JAPAN</div>
-        <h1><span class="nowrap">自動運転レベル</span>から、次の一台を。</h1>
-        <p class="hero-copy">車名や広告表現ではなく、<strong>どこで、誰が、どこまで運転するか</strong>から選ぶ。日本で確認できる車両の条件を、根拠と一緒に見渡せます。</p>
-        <a class="button alt" href="/cars/">条件から車を探す <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="road-art" aria-label="道路を走る自動車のイラスト" role="img"><div class="road"><div class="lane"></div></div><div class="car"></div></div>
-    </div>
-  </section>
-  <section class="section selector" id="levels">
-    <div class="wrap">
-      <div class="section-head"><div><div class="eyebrow">START HERE</div><h2>まず、気になるレベルを選ぶ</h2></div><p>レベルは優劣ではなく、運転の役割と作動条件の分類です。</p></div>
-      <div class="level-grid">
-        {levelIds.map((level) => <a class={`level-card level-${level}`} href={`/cars/?level=${level}`} data-level={level}>
-          <div><div class="level-num">{level}</div><div class="level-name">{levelLabels[level]}</div><div class="level-desc">{levelShort[level]}</div></div>
-          <span class="subtle">候補を見る　→</span>
-        </a>)}
-      </div>
-      <div class="level-note"><strong>Level 2を選ぶ方へ：</strong>便利な支援機能が作動している間も、運転者の常時監視が必要です。手を離せる条件があっても、目を離すこととは別です。</div>
-    </div>
-  </section>
-  <section class="section" style="padding-top: 0;">
-    <div class="wrap">
-      <div class="notice"><strong>条件が違えば、同じ車名でも別の候補。</strong><br />モデル年、グレード、必要パッケージ、道路・速度・天候まで確認してから、公式情報へ進めます。</div>
-    </div>
-  </section>
-  <script>
-    document.querySelectorAll('[data-level]').forEach((el) => el.addEventListener('click', () => window.jidouuntenTrack?.('select_level', { level: el.getAttribute('data-level') })));
-  </script>
+<Layout title="車を探す｜自動運転.jp" description="自動運転レベル、道路、ハンズオフ、販売状態から日本の車両を絞り込みます。">
+  <VehicleList action="/" />
 </Layout>

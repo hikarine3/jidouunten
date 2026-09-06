@@ -6,6 +6,7 @@
 
 - `jidouunten.jp` を本体、`自動運転.jp` を301リダイレクト入口にする。
 - 中核はニュースではなく、自動運転・運転支援レベルから車を選ぶ機能。
+- 2026-09-07ユーザー修正指示: LPトップを廃し、トップを車両一覧・絞り込みにする。機能・情報密度を優先。
 - レベルは入口とし、ODD、道路、速度、監視、ハンズオフ、グレード、販売状態も比較する。
 - MVPは Astro + TypeScript + Cloudflare Pagesのstatic-first。
 - 現行Sprint/Todo状態はGitHub ProjectとIssue、repoは戦略・仕様・根拠・QAの正本。

@@ -19,7 +19,7 @@ const base = process.env.BASE_URL || 'http://127.0.0.1:4321';
 const chromePath = process.env.CHROME_BIN || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const browser = await playwright.chromium.launch({ headless: true, ...(fs.existsSync(chromePath) ? { executablePath: chromePath } : {}) });
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
-const qaDir = '.cache/jidouunten-qa';
+const qaDir = '.cache/list-home';
 fs.mkdirSync(qaDir, { recursive: true });
 const analyticsRequests = [];
 const analyticsResponses = [];
@@ -29,24 +29,40 @@ const visibleCards = () => page.locator('[data-vehicle-shell]:not([hidden])').co
 const events = () => page.evaluate(() => window.dataLayer || []);
 
 try {
-  await page.goto(`${base}/cars/`);
+  await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   assert.equal(await visibleCards(), 8, '既定カタログは現行確認8件');
+  assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('[data-vehicle-shell][data-availability="unavailable"]:visible').count(), 0, '過去車両は既定非表示');
   assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 0, '同意前はGTMなし');
   assert.deepEqual(await events(), [], '同意前の初期表示ではイベントなし');
   assert.equal(analyticsRequests.length, 0, '同意前のAnalytics通信なし');
-  await page.screenshot({ path: `${qaDir}/desktop-cars.png`, fullPage: false });
+  await page.screenshot({ path: `${qaDir}/desktop-home.png`, fullPage: false });
   const mobilePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await mobilePage.goto(`${base}/`);
+  const mobileFirstCard = await mobilePage.locator('[data-vehicle-shell]:not([hidden])').first().boundingBox();
+  assert.ok(mobileFirstCard && mobileFirstCard.y <= 450, `モバイル初期カード上端が450px以内 (${mobileFirstCard?.y ?? 'none'}px)`);
   await mobilePage.screenshot({ path: `${qaDir}/mobile-home.png`, fullPage: false });
   await mobilePage.close();
+  for (const width of [390, 520, 768, 1280]) {
+    const widthPage = width === 1280 ? page : await browser.newPage({ viewport: { width, height: 844 } });
+    await widthPage.goto(`${base}/`);
+    const dimensions = await widthPage.evaluate(() => ({ innerWidth: window.innerWidth, scrollWidth: document.documentElement.scrollWidth }));
+    assert.ok(dimensions.scrollWidth <= dimensions.innerWidth, `${width}pxで横スクロールなし (${dimensions.scrollWidth}/${dimensions.innerWidth})`);
+    if (width !== 1280) await widthPage.close();
+  }
+
+  await page.goto(`${base}/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
+  assert.equal(await visibleCards(), 7, 'トップのLevel 2・高速・ハンズオフ条件は7件');
+  assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'トップのLevel 2注意表示');
+  assert.equal(new URL(page.url()).pathname, '/', 'トップの深いリンクはトップに留まる');
 
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
   assert.equal(await visibleCards(), 7, 'Level 2・高速・ハンズオフ条件は7件');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '深いリンクのlevel復元');
+  assert.equal(await page.locator('#vehicle-filters').getAttribute('action'), '/cars/', '旧一覧は現在のルートで送信');
   await page.getByRole('button', { name: '同意する' }).click({ noWaitAfter: true });
   assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 1, '同意後にGTM読み込み');
   await page.waitForTimeout(1000);
@@ -58,16 +74,41 @@ try {
     console.log(`GA collect responses: ${collectResponses.map(({ status, url }) => `${status} ${url.split('?')[0]}`).join(' | ')}`);
   }
 
+  await page.goto(`${base}/`);
   await page.locator('select[name="level"]').selectOption('3');
   await page.locator('select[name="availability"]').selectOption('all');
   await page.getByRole('button', { name: 'この条件で探す' }).click({ noWaitAfter: true });
   await page.waitForTimeout(100);
+  assert.equal(new URL(page.url()).pathname, '/', 'トップのフォーム操作はトップに留まる');
   assert.equal(new URL(page.url()).searchParams.get('level'), '3', 'フォーム操作でURL更新');
   assert.equal(await page.locator('[data-result-count]').innerText(), '1件', '絞り込み後件数');
   assert.equal((await events()).filter((event) => event.event === 'filter_results').length, 1, 'filter_resultsはフォーム操作時のみ1回');
+  assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
-  assert.equal(new URL(page.url()).searchParams.get('level'), '2', '戻るで前の絞り込みを復元');
-  assert.equal(await visibleCards(), 7, '戻る後の結果件数');
+  assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
+  assert.equal(await visibleCards(), 8, '戻る後の結果件数');
+
+  await page.goto(`${base}/?level=3`);
+  assert.equal(await visibleCards(), 0, '空結果を表示');
+  await page.getByRole('link', { name: '条件をリセット' }).click();
+  assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
+  assert.equal(await visibleCards(), 8, 'リセット後に既定8件');
+
+  await page.locator('input[name="ids"]').nth(0).check();
+  await page.locator('input[name="ids"]').nth(1).check();
+  assert.equal(await page.locator('[data-compare-count]').innerText(), '2台選択中（最大2台）', '比較選択数を表示');
+  assert.equal(await page.locator('input[name="ids"]').nth(2).isDisabled(), true, '3台目は最大2台制限で選択不可');
+  assert.match(await page.locator('[data-compare-link]').getAttribute('href'), /ids=.+&ids=.+/, '比較リンクに2台のID');
+  await page.locator('select[name="level"]').selectOption('3');
+  await page.locator('select[name="availability"]').selectOption('all');
+  await page.getByRole('button', { name: 'この条件で探す' }).click({ noWaitAfter: true });
+  assert.equal(await page.locator('[data-compare-count]').innerText(), '0台選択中（最大2台）', '非表示になった比較選択を自動解除');
+  await page.getByRole('link', { name: 'リセット' }).click();
+  await page.locator('input[name="ids"]').nth(0).check();
+  await page.locator('input[name="ids"]').nth(1).check();
+  await page.locator('[data-compare-link]').click();
+  assert.equal(new URL(page.url()).pathname, '/compare/', '一覧から比較へ遷移');
+  assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '一覧選択が比較画面へ反映');
 
   await page.goto(`${base}/cars/?availability=all`);
   assert.equal(await visibleCards(), 9, 'すべての状態で過去車両を含む9件');
@@ -78,11 +119,6 @@ try {
   assert.match(compareText, /Limited EX/);
   assert.equal((await events()).filter((event) => event.event === 'compare_vehicles').length, 1, 'compare_vehiclesイベント');
 
-  await page.goto(`${base}/`);
-  const levelLink = page.getByRole('link', { name: /2 運転支援/ });
-  await levelLink.evaluate((element) => element.addEventListener('click', (event) => event.preventDefault(), { once: true }));
-  await levelLink.click();
-  assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelイベント');
   await page.goto(`${base}/cars/jp-honda-accord-2025-ehev-sensing360plus/`);
   assert.equal((await events()).filter((event) => event.event === 'view_vehicle').length, 1, 'view_vehicleイベント（同意後登録）');
   const manufacturerLink = page.locator('[data-source-type="manufacturer"]').first();
@@ -101,10 +137,10 @@ try {
   assert.equal(await page.evaluate(() => localStorage.getItem('jidouunten-analytics-consent')), 'denied', '拒否状態を保存');
   await page.goto(`${base}/`);
   const beforeDenied = await events();
-  await page.getByRole('link', { name: /2 運転支援/ }).click();
+  await page.locator('select[name="level"]').selectOption('2');
   assert.equal((await events()).length, beforeDenied.length, '拒否後のイベント送信なし');
   assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 0, '拒否後もGTMなし');
-  console.log('E2E PASS: 9 checks');
+  console.log('E2E PASS: 1/1 scenario');
 } finally {
   await browser.close();
 }

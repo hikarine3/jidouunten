@@ -9,7 +9,7 @@ import { availabilityLabels, handsOffLabels, levelLabels, monitoringLabels, vehi
       {vehicles.map((vehicle) => <label class="check-card"><input type="checkbox" name="ids" value={vehicle.id} /> <span><strong>{vehicle.maker} {vehicle.model}</strong><br /><small class="subtle">Level {vehicle.automationLevel} · {vehicle.modelYear} · {vehicle.grade}</small></span></label>)}
       <div style="grid-column: 1 / -1; display:flex; justify-content:flex-end;"><button class="button alt" type="submit">選択した車両を比較</button></div>
     </form>
-    <div class="empty" data-compare-empty><h2>比較する車両を一覧から選んでください。</h2><p>車両一覧の「比較」から2台を選ぶと、条件を横並びで確認できます。</p><a class="button text" href="/cars/">車を探す</a></div>
+    <div class="empty" data-compare-empty><h2>比較する車両を一覧から選んでください。</h2><p>車両一覧の「比較に追加」から2台を選ぶと、条件を横並びで確認できます。</p><a class="button text" href="/">車を探す</a></div>
     <div data-compare-result hidden></div>
   </div></section>
   <script define:vars={{ catalog: vehicles, levelLabels, availabilityLabels, handsOffLabels, monitoringLabels }}>

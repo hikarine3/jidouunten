@@ -1,6 +1,6 @@
 ---
 import type { Vehicle } from '../data/loader';
-import { availabilityLabels, displayDate, handsOffLabels, levelLabels, monitoringLabels } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, displayDate, handsOffLabels, levelLabels, monitoringLabels } from '../data/loader';
 const { vehicle, selectable = false, checked = false } = Astro.props as { vehicle: Vehicle; selectable?: boolean; checked?: boolean };
 ---
 <article class="vehicle-card">
@@ -12,15 +12,16 @@ const { vehicle, selectable = false, checked = false } = Astro.props as { vehicl
       <span class="pill lime">{availabilityLabels[vehicle.availability]}</span>
       <span class="pill">{handsOffLabels[vehicle.handsOff]}</span>
     </div>
-    <p class="subtle">{vehicle.odd.manufacturerSummary}</p>
-    <p class="subtle"><strong>監視：</strong>{monitoringLabels[vehicle.driverMonitoring]}</p>
+    <div class="card-specs">
+      <span><strong>道路</strong> {vehicle.odd.roadTypes.map(canonicalRoadType).filter((road, index, list) => list.indexOf(road) === index).join(' / ') || '不明'}</span>
+      <span><strong>監視</strong> {monitoringLabels[vehicle.driverMonitoring]}</span>
+    </div>
   </div>
   <div class="card-foot">
     <span class="subtle">確認 {displayDate(vehicle.lastReviewedAt)}</span>
-    {selectable ? (
-      <label class="check-card" style="padding: 5px 8px; display: inline-flex; font-size: .75rem;">
-        <input type="checkbox" name="ids" value={vehicle.id} checked={checked} /> 比較
-      </label>
-    ) : <a class="button small text" href={`/cars/${vehicle.id}/`}>詳細を見る <span aria-hidden="true">→</span></a>}
+    <div class="card-actions">
+      <a class="button small text" href={`/cars/${vehicle.id}/`}>詳細を見る <span aria-hidden="true">→</span></a>
+      {selectable && <label class="check-card compare-check"><input type="checkbox" name="ids" value={vehicle.id} checked={checked} aria-label={`${vehicle.maker} ${vehicle.model}を比較に追加`} /> 比較に追加</label>}
+    </div>
   </div>
 </article>
