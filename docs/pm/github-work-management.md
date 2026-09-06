@@ -11,6 +11,9 @@
 | 公開済みの事実 | Cloudflare Pagesのdeploymentと本番URL |
 | 効果 | Analytics/Search Console等の実測 |
 
+KPIの分解、公開時点の実測baseline、Issue別の推定効果は [kpi-model.md](kpi-model.md) を正本にする。
+`Expected impact` field には推定値だけでなく、前提シナリオと実測で置き換える指標を書く。
+
 ローカルにGitHub Projectの状態を複製したtodo/roadmap/stateファイルは作らない。
 Issueは成果物へのリンクを持ち、長文仕様を二重に保持しない。
 
