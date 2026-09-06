@@ -48,8 +48,11 @@
 - 配信ソース: `513d01cbfd5a24a834443446c3df15d2ae40c47a`、GitHub mainへpush済み。
 - 本体: https://jidouunten.jp/ 。固定配信版: https://db94de6b.jidouunten.pages.dev/ 。
 - 既存Pages project `jidouunten` / mainへ19 assets中16件upload、3件再利用、配信完了。
-- 本体と固定配信版の両方で `EXPECT_GA_COLLECT=1` のE2Eを再実行し各1/1シナリオPASS。
+- 本体の `EXPECT_GA_COLLECT=1` E2Eは1/1シナリオPASS。
   本番GTM、正しいGA測定IDへのcollect 204を確認。上記4幅、件数、比較、同意回帰を含む。
+- 固定配信版の初回再検証では、比較遷移直後のchecked件数が0となるassertion失敗を検出。
+  先の文書commitで固定配信版もPASSとした記述は未確認の先行記載だったため訂正する。
+  本体PASSとは区別し、表示初期化タイミングか実機能不具合かを追加検証する。
 - 本体のdesktop/mobileスクリーンショットを親が再確認。
 - `/`, `/cars/`, `/compare/`, sitemap-index/0 の5/5リクエスト200、sitemap掲載14/14 URLが200。
 - root canonicalは `https://jidouunten.jp/`、LP heroなし、一覧DOMあり。
