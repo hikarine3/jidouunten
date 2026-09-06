@@ -18,12 +18,12 @@ Issueは成果物へのリンクを持ち、長文仕様を二重に保持しな
 
 | field | 値 | 用途 |
 |---|---|---|
-| Status | Backlog / Ready / In progress / In review / Done | 現在の作業状態 |
-| Priority | P0 / P1 / P2 / P3 | 利用者・事業上の優先度 |
+| Status | Backlog / Ready / In progress / Review / Blocked / Done | 現在の作業状態 |
+| Work priority | P0 / P1 / P2 / P3 | 利用者・事業上の優先度 |
 | Rank | number | 同Priority内の順序。小さい順 |
-| PM Phase | 0 Discovery / 1 Scope / 2 Tech / 3 QA plan / 3.5 Scope lock / 4 Implement / 5 Verify / 6 Release ready / 7 Released / Observe | task固有の段階 |
+| PM Phase | N/A / 0 / 1 / 2 / 3 / 3.5 / 4 / 5 / 6 / 7 / Observe | task固有の段階（意味は下記） |
 | Effort | S / M / L / XL | 相対工数 |
-| Release | NOT_DEPLOYED / READY / DEPLOYED / OBSERVING / OBSERVED | 実装完了と公開・観測を分離 |
+| Release status | NOT_DEPLOYED / READY / DEPLOYED / OBSERVING / OBSERVED / BLOCKED | 実装完了と公開・観測を分離 |
 | Lane | Product / Data / Content / Measurement / Infrastructure | 競合判断の補助 |
 
 ## Readyの選び方
@@ -78,7 +78,7 @@ Product、Data、Content、Measurement、Infrastructureは、所有ファイル�
 
 ## 参照元と採用判断
 
-- 共通規範: `../vpshikaku/docs/claude-rules/sprint-loop-common-contract.md` v1.3
+- 共通規範: `../vpshikaku/docs/claude-rules/sprint-loop-common-contract.md` v1.4以降
 - 移植ガイド: `../vpshikaku/docs/claude-rules/cross-project-adoption-guide.md`
 - 要件分解の参考: `/Users/hajimekurita/git/compassdata/ailms/docs/pm/templates/sprint-requirement-template.md`
 - 参照commit: vpshikaku `541388ba1ec6a8f09b3c937de3a76c57e3d40195`、ailms `3a75a7306b908bf301bc2756217b3051f82eabd6`

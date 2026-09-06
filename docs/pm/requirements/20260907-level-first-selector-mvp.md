@@ -7,6 +7,10 @@
 - 種別: code + data + content + infrastructure
 - 採択日: 2026-09-07
 - Status: GitHub Projectを参照
+- 根拠: `docs/research/market-competition-20260907.md`
+- 2026-09-07追加依頼: 市場・競合を反映した初回本番公開、GTM/GA4/GSC/Bing設定
+- 所有: 親=戦略・GitHub・Cloudflare、Luna実装=src/public/tests/build、Lunaデータ=vehicles.json、Sol=市場調査・計測設定
+- 見積: 実装・調査・統合で8–16時間相当。アカウント本人確認と検索集計待ちは別。
 - 対象URL: `/`, `/levels/`, `/cars/`, `/cars/[slug]/`, `/compare/`
 
 ## 2. Why
@@ -31,6 +35,8 @@
 - mobile/desktopの主要導線
 - canonical、OG、基本JSON-LD、sitemap、robots
 - selector・filter完了・compare・outbound clickの計測イベント設計
+- GTM container、GA4 property/webstream、同意後イベント送信と拒否時非送信の確認
+- GSC/Bing Webmaster Toolsの所有権確認、sitemap登録（インデックス登録保証ではない）
 
 ## 5. 非対象
 
@@ -49,7 +55,7 @@
 - JavaScript無効時もLevel説明と車両詳細へ到達できる。
 - 根拠URL、発行元、確認日、販売状態確認日を表示する。
 - `unknown`, `stale`, `conflicting` を非表示でごまかさない。
-- build outputは `dist/`。Git連携でPR preview、`main` productionを想定する。
+- build outputは `dist/`。初回はPages Direct Upload。自動配信は認証・専用token設定後の別運用課題。
 
 ## 7. E2Eシナリオ
 
@@ -88,6 +94,7 @@
 - [ ] performance/accessibilityの初期baselineを記録
 - [ ] rollbackがPagesの直前deploymentへの切替で実行可能
 - [ ] 本番公開を行った場合は `jidouunten.jp` と `自動運転.jp` のproduction smokeを記録
+- [ ] GTM/GA4で実イベントを確認し、GSC/Bingの設定状況と待機境界を記録
 
 ## 9. QA failure条件
 
@@ -102,7 +109,8 @@
 ## 10. Riskとrollback
 
 - 最大リスクはLevel 2を自動運転と誤認させることと、販売・機能情報の陳腐化。
-- auth、個人情報、課金、DB migrationは扱わない。
+- ユーザーアカウント、課金、DB migrationは扱わない。分析用Cookieは同意後のみ。
+- GitHub Appはこのrepoだけ、Google/Bingはこのサイトだけを設定対象にする。
 - 公開不具合時はCloudflare Pagesで直前の正常deploymentへrollbackし、問題のデータレコードは
   削除せず公開対象外にして根拠を修正する。
 

@@ -10,7 +10,7 @@
 - 補助導線: 利用シーン、作動条件（ODD）、道路、速度、ハンズオフ可否などで絞り込む
 - ニュース: 集客用の補助コンテンツ。車種・比較データの更新へ接続できる記事だけを扱う
 
-MVPは Astro + TypeScript を Cloudflare Pages へ配信する静的構成を想定しています。
+MVPは Astro + TypeScript を Cloudflare Pages へ配信する静的構成です。
 戦略は [docs/strategy/product-strategy.md](docs/strategy/product-strategy.md)、車両データの契約は
 [docs/product/vehicle-data-contract.md](docs/product/vehicle-data-contract.md) を参照してください。
 
@@ -22,3 +22,19 @@ MVPは Astro + TypeScript を Cloudflare Pages へ配信する静的構成を想
 ローカルのTodo一覧を状態管理の正本にはしません。
 
 運用ルール: [docs/pm/github-work-management.md](docs/pm/github-work-management.md)
+
+## Development
+
+```bash
+npm ci
+npm run dev
+npm test
+npm run check
+npm run build
+npm run preview
+```
+
+`.env.example`を参照し、計測IDを環境変数に設定してbuildします。OAuth tokenなどの秘密情報は置かないでください。
+初回は認証済みWranglerによるPages Direct Uploadです。GitHubへのpushだけでは自動配信されません。
+再配信・rollbackは [公開運用](docs/operations/deployment.md)、計測・検索登録は
+[計測運用](docs/operations/measurement.md) を参照してください。

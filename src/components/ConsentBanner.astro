@@ -1,0 +1,55 @@
+---
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
+const gaId = import.meta.env.PUBLIC_GA_ID;
+---
+<div class="consent" data-consent hidden>
+  <p>利用状況の改善のため、Analytics計測を使えます。広告目的ではなく、同意後にのみ読み込みます。設定はいつでも取り消せます。</p>
+  <div class="consent-actions">
+    <button class="button small alt" type="button" data-consent-accept>同意する</button>
+    <button class="button small text" type="button" data-consent-deny>拒否する</button>
+  </div>
+</div>
+<script define:vars={{ gtmId, gaId }}>
+  // @ts-nocheck
+  const key = 'jidouunten-analytics-consent';
+  const banner = document.querySelector('[data-consent]');
+  const loadAnalytics = () => {
+    if (!gtmId || window.__jidouuntenAnalyticsLoaded) return;
+    window.__jidouuntenAnalyticsLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`;
+    document.head.appendChild(script);
+  };
+  const setConsent = (value) => {
+    localStorage.setItem(key, value);
+    if (value === 'denied' && gaId) window[`ga-disable-${gaId}`] = true;
+    if (banner) banner.hidden = true;
+    if (value === 'granted') {
+      loadAnalytics();
+      (window.__jidouuntenPendingEvents || []).forEach(({ event, payload }) => window.dataLayer.push({ event, ...payload }));
+      window.__jidouuntenPendingEvents = [];
+    }
+  };
+  const current = localStorage.getItem(key);
+  if (!current && banner) banner.hidden = false;
+  if (current === 'granted') {
+    loadAnalytics();
+    (window.__jidouuntenPendingEvents || []).forEach(({ event, payload }) => window.dataLayer.push({ event, ...payload }));
+    window.__jidouuntenPendingEvents = [];
+  }
+  document.querySelector('[data-consent-accept]')?.addEventListener('click', () => setConsent('granted'));
+  document.querySelector('[data-consent-deny]')?.addEventListener('click', () => setConsent('denied'));
+  window.jidouuntenTrack = (event, payload = {}) => {
+    if (localStorage.getItem(key) !== 'granted') return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event, ...payload });
+  };
+  window.jidouuntenResetConsent = () => {
+    if (gaId) window[`ga-disable-${gaId}`] = true;
+    localStorage.removeItem(key);
+    window.location.reload();
+  };
+</script>

@@ -1,0 +1,26 @@
+---
+import type { Vehicle } from '../data/loader';
+import { availabilityLabels, displayDate, handsOffLabels, levelLabels, monitoringLabels } from '../data/loader';
+const { vehicle, selectable = false, checked = false } = Astro.props as { vehicle: Vehicle; selectable?: boolean; checked?: boolean };
+---
+<article class="vehicle-card">
+  <div class="vehicle-card-body">
+    <div class="eyebrow">LEVEL {vehicle.automationLevel} · {levelLabels[vehicle.automationLevel]}</div>
+    <h3><a href={`/cars/${vehicle.id}/`}>{vehicle.maker} {vehicle.model}</a></h3>
+    <div class="maker">{vehicle.modelYear}　{vehicle.grade}</div>
+    <div class="meta">
+      <span class="pill lime">{availabilityLabels[vehicle.availability]}</span>
+      <span class="pill">{handsOffLabels[vehicle.handsOff]}</span>
+    </div>
+    <p class="subtle">{vehicle.odd.manufacturerSummary}</p>
+    <p class="subtle"><strong>監視：</strong>{monitoringLabels[vehicle.driverMonitoring]}</p>
+  </div>
+  <div class="card-foot">
+    <span class="subtle">確認 {displayDate(vehicle.lastReviewedAt)}</span>
+    {selectable ? (
+      <label class="check-card" style="padding: 5px 8px; display: inline-flex; font-size: .75rem;">
+        <input type="checkbox" name="ids" value={vehicle.id} checked={checked} /> 比較
+      </label>
+    ) : <a class="button small text" href={`/cars/${vehicle.id}/`}>詳細を見る <span aria-hidden="true">→</span></a>}
+  </div>
+</article>

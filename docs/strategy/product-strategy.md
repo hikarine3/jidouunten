@@ -2,6 +2,15 @@
 
 更新: 2026-09-07
 
+市場・競合の根拠: [2026-09-07調査](../research/market-competition-20260907.md)。
+JAMAの意向調査とメーカー・在庫検索・専門メディア・NASVAの比較から、初回公開は
+日本仕様の販売単位と作動条件の横断比較に集中する。検索量や収益規模は未測定。
+車種数より、同じ条件で候補を減らせることと、購入前の根拠確認を価値仮説とする。
+
+初回リリースでGTM/GA4の同意後計測、GSC、Bing Webmaster Tools、sitemap登録も扱う。
+公開後28日またはselector開始100セッションを初回評価の目安とし、未到達でも欠測と実測を報告する。
+検索表示・クリック、結果0件率、比較・公式遷移を見て次Sprintを採択する。
+
 ## 1. 何を作るか
 
 `jidouunten.jp` は、日本で入手・利用できる自動運転車と運転支援車を、
@@ -107,7 +116,9 @@
 - Astro + TypeScript、static-first
 - 車両データはGit管理の構造化データ + schema validation
 - 絞り込みと比較は初期はクライアント内で完結
-- Cloudflare PagesのGit連携で `main` を本番、Pull Requestをpreviewにする
+- 初回はCloudflare Pages Direct Uploadで公開する。GitHubはソース・Sprintの正本とする。
+- 自動配信は次の運用課題。Direct UploadプロジェクトはGit連携へ切替できないため、
+  GitHub ActionsからWranglerで配信する方式を優先検討する（専用token・repository secretの設定が必要）。
 - フィードバック保存や管理画面が必要になった時点でPages Functions / Workers / D1を検討
 
 Cloudflareは新規アプリではWorkersを主軸に案内しているが、MVPは静的比率が高く、ユーザー希望にも

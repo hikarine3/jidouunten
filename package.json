@@ -1,0 +1,24 @@
+{
+  "name": "jidouunten",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "check": "astro check",
+    "e2e": "PUBLIC_GTM_ID=${PUBLIC_GTM_ID:-GTM-TEST} PUBLIC_GA_ID=${PUBLIC_GA_ID:-G-TEST} npm run build && node tests/e2e-preview.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

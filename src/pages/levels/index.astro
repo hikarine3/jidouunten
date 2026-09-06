@@ -1,0 +1,9 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { levelIds, levelLabels, levelShort, levelCaveat } from '../../data/loader';
+---
+<Layout title="自動運転レベルの違い｜自動運転.jp" description="Level 1〜5の運転主体と作動条件を簡潔に確認できます。">
+  <section class="page-intro"><div class="wrap"><div class="eyebrow">UNDERSTAND THE LEVELS</div><h1>「自動運転」という言葉を、役割に分けて見る。</h1><p class="hero-copy">Level 0〜5は、システムが担う運転タスクと、運転者が担う責任の範囲を整理するための分類です。レベルの数字だけで安全性や性能の優劣は決まりません。</p></div></section>
+  <section class="section" style="padding-top: 18px;"><div class="wrap"><div class="level-grid">{levelIds.map((level) => <article class={`level-card level-${level}`}><div><div class="level-num">{level}</div><h2 class="level-name">{levelLabels[level]}</h2><p class="level-desc">{levelShort[level]}</p></div><p class="subtle">{levelCaveat(level)}</p><a class="button small text" href={`/cars/?level=${level}`}>このレベルの車両</a></article>)}</div></div></section>
+  <section class="section"><div class="wrap"><div class="notice"><strong>Level 2の常時監視</strong><br />Level 2ではシステムが前後・左右を同時に支援しても、運転者が周囲を常に監視し、いつでも操作を引き継ぎます。ハンズオフ可否は機能の条件であり、監視の免除ではありません。</div></div></section>
+</Layout>

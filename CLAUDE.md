@@ -34,6 +34,15 @@
 
 詳細は `docs/pm/github-work-management.md` を正本とする。
 
+## モデル割当
+
+割当の参照正本は `../vpshikaku/CLAUDE.md`「Phase × モデル割当」、根拠は
+`../vpshikaku/docs/model-routing.md`。古い履歴表のモデル名を現行割当にしない。
+このPJでも通常の範囲固定実装はLuna high、定型処理はLuna medium、価値判断・高riskはSol highを基本とする。
+上位モデルは未解決の判断箇所に限定し、同じ成果物の監査や調査を重ねて費用を増やさない。
+親モデルを変えられないセッションは、短いtask packetで通常作業を適切なモデルへ委任する。
+本番公開前は内容・権利・計測の独立レビューを一度実施する。参照PJ固有runnerや承認tokenは移植しない。
+
 ## QAと公開
 
 - ユーザー向け変更は、表示、操作、絞り込み結果、主要遷移をブラウザで確認する。

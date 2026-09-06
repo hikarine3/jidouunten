@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import ConsentBanner from '../components/ConsentBanner.astro';
+const { title = '自動運転.jp｜自動運転レベルから、次の一台を。', description = '自動運転レベルと作動条件から、日本で選べる車を探して比較できます。' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, 'https://jidouunten.jp').toString();
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonical,
+  url: canonical,
+  name: title,
+  description,
+  isPartOf: { '@type': 'WebSite', '@id': 'https://jidouunten.jp/#website', url: 'https://jidouunten.jp', name: '自動運転.jp' },
+};
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="/" aria-label="自動運転.jp トップ"><span class="brand-mark" aria-hidden="true"></span>自動運転.jp</a>
+        <nav aria-label="メインナビゲーション">
+          <a href="/levels/">レベルを知る</a>
+          <a href="/cars/">車を探す</a>
+          <a href="/compare/">比較する</a>
+        </nav>
+      </div>
+    </header>
+    <main><slot /></main>
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <span>© {new Date().getFullYear()} jidouunten.jp</span>
+        <span><a href="/privacy/">プライバシーと計測設定</a>　·　<a href="/levels/">レベルの定義</a></span>
+      </div>
+    </footer>
+    <ConsentBanner />
+  </body>
+</html>

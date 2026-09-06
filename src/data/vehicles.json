@@ -1,0 +1,529 @@
+[
+  {
+    "id": "jp-honda-accord-2025-ehev-sensing360plus",
+    "market": "JP",
+    "maker": "Honda",
+    "model": "ACCORD",
+    "modelYear": "2025",
+    "grade": "e:HEV Honda SENSING 360＋",
+    "requiredPackage": "Honda SENSING 360＋（タイプ標準装備）。全機能の利用にはHonda所定の手続き・設定が必要",
+    "featureVersion": "Honda SENSING 360＋（25モデル）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["高速道路", "自動車専用道路"],
+      "speedKph": {
+        "min": 0,
+        "max": 120,
+        "condition": "ACCは0km/h以上、LKASは約65〜120km/h。ハンズオフはACC/LKAS作動など一定条件下"
+      },
+      "trafficConditions": ["先行車への追従", "渋滞時の停止・発進"],
+      "weather": ["雨・霧・雪、路面状態、車線や地図の認識状況により作動が制限される場合がある"],
+      "geoRestriction": ["高精度地図・GNSSで道路情報を取得できる区間", "工事区間など地図と実道路が一致しない場合は制限"],
+      "driverConditions": ["前方を常に確認", "システム要求時に直ちに操作できる姿勢", "ドライバーモニタリングカメラが顔・目・姿勢を検知"],
+      "manufacturerSummary": "高速道路・自動車専用道路でACCとLKASが作動し、条件を満たすと車線内走行と車速・車間の支援をハンズオフで利用できる。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway", "driver_monitoring", "lane_change_support"],
+    "limitations": ["自動運転装置ではなく運転者の監視・操作が必要", "高精度地図・道路認識や天候などで作動しない場合がある", "Honda所定の手続き・設定が必要"],
+    "sources": [
+      {
+        "publisher": "本田技研工業",
+        "url": "https://www.honda.co.jp/ACCORD/",
+        "title": "アコード｜Honda公式サイト（価格・タイプ）",
+        "accessedAt": "2026-09-07",
+        "supports": ["日本向け現行タイプ名 e:HEV Honda SENSING 360＋", "25モデルの現行グレード掲載"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "本田技研工業",
+        "url": "https://www.honda.co.jp/customer/auto/accord/faq/qa002/",
+        "title": "ACCORD「Honda SENSING」搭載されている機能を教えて",
+        "accessedAt": "2026-09-07",
+        "supports": ["25モデルにHonda SENSING 360＋とハンズオフ機能付高度車線内運転支援機能を搭載"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "本田技研工業",
+        "url": "https://www.honda.co.jp/ACCORD/webcatalog/performance/",
+        "title": "性能・安全｜アコード｜Honda公式サイト",
+        "accessedAt": "2026-09-07",
+        "supports": ["高速道路・自動車専用道路でのハンズオフ条件", "ACC/LKAS、ドライバーモニタリングカメラの説明"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "本田技研工業",
+        "url": "https://www.honda.co.jp/ownersmanual/webom/jpn/accord/2025/",
+        "title": "ACCORD 2025 取扱説明書",
+        "accessedAt": "2026-09-07",
+        "supports": ["2025年の対象車両", "LKAS約65〜120km/h、ACCの条件・制限、運転者監視"],
+        "type": "manual"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1 自動走行レベルの定義）",
+        "accessedAt": "2026-09-07",
+        "supports": ["縦方向・横方向の両方を限定領域で支援し、運転者が主体のLevel 2定義"],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "Hondaは本機能を運転支援として説明している。メーカー記述のACC（縦方向）とLKAS（横方向）を、国土交通省のLevel 2定義（両方向のサブタスクを限定領域で実行、運転者が主体）に照合してLevel 2と分類した。Hondaが車両をLevel 2認証したという意味ではない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-honda-accord-2025-ehev",
+    "market": "JP",
+    "maker": "Honda",
+    "model": "ACCORD",
+    "modelYear": "2025",
+    "grade": "e:HEV",
+    "requiredPackage": "Honda SENSING 360（タイプ標準装備）",
+    "featureVersion": "Honda SENSING 360（25モデル）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["高速道路", "自動車専用道路"],
+      "speedKph": {
+        "min": 0,
+        "max": 120,
+        "condition": "ACCは停止追従を含む。LKASは約65〜120km/h、ハンドル操作を検知できないと機能停止"
+      },
+      "trafficConditions": ["先行車への追従", "渋滞時"],
+      "weather": ["雨・霧・雪、車線認識、路面状態などにより作動が制限される場合がある"],
+      "geoRestriction": ["車線が認識できる道路", "Honda SENSING 360＋の高精度地図を用いるハンズオフ機能はこのグレードに含めない"],
+      "driverConditions": ["常に前方・周囲を確認", "ステアリングを操作できる状態"],
+      "manufacturerSummary": "ACCが車間・車速を制御し、LKASが車線中央付近への操舵を支援する。360＋ではないためハンズオフ対応とは分類しない。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "not_allowed",
+    "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "lane_change_support"],
+    "limitations": ["ハンズオフ機能付高度車線内運転支援機能は非搭載", "運転者がステアリング操作と周囲監視を継続する必要がある", "天候・路面・車線認識などで作動しない場合がある"],
+    "sources": [
+      {
+        "publisher": "本田技研工業",
+        "url": "https://www.honda.co.jp/ACCORD/",
+        "title": "アコード｜Honda公式サイト（価格・タイプ）",
+        "accessedAt": "2026-09-07",
+        "supports": ["日本向け現行タイプ名 e:HEV", "25モデルの現行グレード掲載"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "本田技研工業",
+        "url": "https://www.honda.co.jp/customer/auto/accord/faq/qa002/",
+        "title": "ACCORD「Honda SENSING」搭載されている機能を教えて",
+        "accessedAt": "2026-09-07",
+        "supports": ["25モデルのe:HEVにHonda SENSING 360を搭載し、360＋のハンズオフ機能とは区別"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "本田技研工業",
+        "url": "https://www.honda.co.jp/ownersmanual/webom/jpn/accord/2025/details/136256090-278294.html",
+        "title": "車線維持支援システム（LKAS）｜ACCORD 2025 取扱説明書",
+        "accessedAt": "2026-09-07",
+        "supports": ["LKASの作動条件（約65〜120km/h）", "ステアリング操作を検知できない場合の制限"],
+        "type": "manual"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1 自動走行レベルの定義）",
+        "accessedAt": "2026-09-07",
+        "supports": ["縦方向・横方向の両方を限定領域で支援し、運転者が主体のLevel 2定義"],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "HondaのACC（縦方向）とLKAS（横方向）の機能説明を、国土交通省のLevel 2定義に照合してLevel 2と分類した。ハンズオフ機能付360＋と混同しないよう、handsOffはnot_allowedとした。Hondaが車両をLevel 2認証したという意味ではない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-nissan-ariya-2026-b6",
+    "market": "JP",
+    "maker": "Nissan",
+    "model": "日産アリア",
+    "modelYear": "2026",
+    "grade": "B6",
+    "requiredPackage": "プロパイロット 2.0（メーカーオプション）＋NissanConnectサービス（有料）",
+    "featureVersion": "2026年2月以降発売モデル / プロパイロット 2.0",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["高速道路の本線", "自動車専用道路の本線"],
+      "speedKph": {"min": null, "max": null, "condition": "対象ページでプロパイロット2.0の数値速度範囲を確認できないため未確認"},
+      "trafficConditions": ["同一車線内の走行", "先行車追い越し・車線変更の支援は条件付き"],
+      "weather": ["天候・路面状況などで作動しない場合がある"],
+      "geoRestriction": ["高速道路の同一車線内", "対面通行路・トンネル・急なカーブ・料金所・合流地点と手前はハンズオフ不可"],
+      "driverConditions": ["前方を常に注視", "直ちにハンドル・ブレーキ・アクセルを操作できる状態"],
+      "manufacturerSummary": "メーカーオプションのプロパイロット2.0は、高速道路の同一車線内で条件付きハンズオフと車線変更支援を行う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": ["adaptive_cruise_control", "lane_centering", "hands_off_highway", "lane_change_support"],
+    "limitations": ["自動運転装置ではない", "側方車両には反応しない場合がある", "NissanConnectのプロパイロットプランG契約が必要", "対象外区間ではハンドル操作が必要"],
+    "sources": [
+      {
+        "publisher": "日産自動車",
+        "url": "https://www3.nissan.co.jp/vehicles/new/ariya.html",
+        "title": "日産アリア Webカタログ トップ",
+        "accessedAt": "2026-09-07",
+        "supports": ["日本向けB6グレード", "プロパイロット2.0メーカーオプション", "現行ページの装備・諸元"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "日産自動車",
+        "url": "https://www.nissan.co.jp/CONNECT/SERVICE/ariya_2512.html",
+        "title": "NissanConnectサービス｜日産アリア 2026年2月以降発売モデル",
+        "accessedAt": "2026-09-07",
+        "supports": ["2026年2月以降発売モデル表記", "プロパイロット2.0にサービス加入が必要"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "日産自動車",
+        "url": "https://www3.nissan.co.jp/vehicles/new/ariya-details/performance_safety.html",
+        "title": "日産アリア｜走行・安全（プロパイロット2.0）",
+        "accessedAt": "2026-09-07",
+        "supports": ["高速道路同一車線内のハンズオフ説明", "安全運転者責任・天候等の制限"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "日産自動車",
+        "url": "https://www.nissan.co.jp/SP/OM/ARIYA/2602/manual_t00um5bp0a.pdf",
+        "title": "日産アリア 取扱説明書（2026年2月版）",
+        "accessedAt": "2026-09-07",
+        "supports": ["2026年仕様のプロパイロット機能・操作説明"],
+        "type": "manual"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1 自動走行レベルの定義）",
+        "accessedAt": "2026-09-07",
+        "supports": ["縦方向・横方向の両方を限定領域で支援し、運転者が主体のLevel 2定義"],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "日産はプロパイロット2.0を運転支援システムと説明し、車速・車間制御（縦方向）と車線内走行・車線変更支援（横方向）を示している。これを国土交通省のLevel 2定義に照合してLevel 2と分類した。日産が車両をLevel 2認証したという意味ではない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-nissan-ariya-2026-b6-e4orce",
+    "market": "JP",
+    "maker": "Nissan",
+    "model": "日産アリア",
+    "modelYear": "2026",
+    "grade": "B6 e-4ORCE",
+    "requiredPackage": "プロパイロット 2.0（メーカーオプション）＋NissanConnectサービス（有料）",
+    "featureVersion": "2026年2月以降発売モデル / プロパイロット 2.0",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["高速道路の本線", "自動車専用道路の本線"],
+      "speedKph": {"min": null, "max": null, "condition": "対象ページでプロパイロット2.0の数値速度範囲を確認できないため未確認"},
+      "trafficConditions": ["同一車線内の走行", "先行車追い越し・車線変更の支援は条件付き"],
+      "weather": ["天候・路面状況などで作動しない場合がある"],
+      "geoRestriction": ["高速道路の同一車線内", "対面通行路・トンネル・急なカーブ・料金所・合流地点と手前はハンズオフ不可"],
+      "driverConditions": ["前方を常に注視", "直ちにハンドル・ブレーキ・アクセルを操作できる状態"],
+      "manufacturerSummary": "B6 e-4ORCEにプロパイロット2.0を組み合わせた場合、高速道路の同一車線内で条件付きハンズオフを利用できる。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": ["adaptive_cruise_control", "lane_centering", "hands_off_highway", "lane_change_support"],
+    "limitations": ["自動運転装置ではない", "側方車両には反応しない場合がある", "NissanConnectのプロパイロットプランG契約が必要", "対象外区間ではハンドル操作が必要"],
+    "sources": [
+      {
+        "publisher": "日産自動車",
+        "url": "https://www3.nissan.co.jp/vehicles/new/ariya.html",
+        "title": "日産アリア Webカタログ トップ",
+        "accessedAt": "2026-09-07",
+        "supports": ["日本向けB6 e-4ORCEグレード", "4WD・66kWh諸元", "プロパイロット2.0メーカーオプション"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "日産自動車",
+        "url": "https://www.nissan.co.jp/CONNECT/SERVICE/ariya_2512.html",
+        "title": "NissanConnectサービス｜日産アリア 2026年2月以降発売モデル",
+        "accessedAt": "2026-09-07",
+        "supports": ["2026年2月以降発売モデル表記", "プロパイロット2.0にサービス加入が必要"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "日産自動車",
+        "url": "https://www3.nissan.co.jp/vehicles/new/ariya-details/performance_safety.html",
+        "title": "日産アリア｜走行・安全（プロパイロット2.0）",
+        "accessedAt": "2026-09-07",
+        "supports": ["高速道路同一車線内のハンズオフ説明", "安全運転者責任・天候等の制限"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1 自動走行レベルの定義）",
+        "accessedAt": "2026-09-07",
+        "supports": ["縦方向・横方向の両方を限定領域で支援し、運転者が主体のLevel 2定義"],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "日産のグレード別諸元・装備とプロパイロット2.0の機能説明を確認し、車速・車間制御と車線内走行支援が限定領域で併用されるため国土交通省定義のLevel 2に分類した。日産が車両をLevel 2認証したという意味ではない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-nissan-ariya-2026-b9",
+    "market": "JP",
+    "maker": "Nissan",
+    "model": "日産アリア",
+    "modelYear": "2026",
+    "grade": "B9",
+    "requiredPackage": "プロパイロット 2.0（メーカーオプション）＋NissanConnectサービス（有料）",
+    "featureVersion": "2026年2月以降発売モデル / プロパイロット 2.0",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["高速道路の本線", "自動車専用道路の本線"],
+      "speedKph": {"min": null, "max": null, "condition": "対象ページでプロパイロット2.0の数値速度範囲を確認できないため未確認"},
+      "trafficConditions": ["同一車線内の走行", "先行車追い越し・車線変更の支援は条件付き"],
+      "weather": ["天候・路面状況などで作動しない場合がある"],
+      "geoRestriction": ["高速道路の同一車線内", "対面通行路・トンネル・急なカーブ・料金所・合流地点と手前はハンズオフ不可"],
+      "driverConditions": ["前方を常に注視", "直ちにハンドル・ブレーキ・アクセルを操作できる状態"],
+      "manufacturerSummary": "B9にプロパイロット2.0を組み合わせた場合、高速道路の同一車線内で条件付きハンズオフを利用できる。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": ["adaptive_cruise_control", "lane_centering", "hands_off_highway", "lane_change_support"],
+    "limitations": ["自動運転装置ではない", "側方車両には反応しない場合がある", "NissanConnectのプロパイロットプランG契約が必要", "対象外区間ではハンドル操作が必要"],
+    "sources": [
+      {
+        "publisher": "日産自動車",
+        "url": "https://www3.nissan.co.jp/vehicles/new/ariya.html",
+        "title": "日産アリア Webカタログ トップ",
+        "accessedAt": "2026-09-07",
+        "supports": ["日本向けB9グレード", "2WD・91kWh諸元", "プロパイロット2.0メーカーオプション"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "日産自動車",
+        "url": "https://www.nissan.co.jp/CONNECT/SERVICE/ariya_2512.html",
+        "title": "NissanConnectサービス｜日産アリア 2026年2月以降発売モデル",
+        "accessedAt": "2026-09-07",
+        "supports": ["2026年2月以降発売モデル表記", "プロパイロット2.0にサービス加入が必要"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "日産自動車",
+        "url": "https://www3.nissan.co.jp/vehicles/new/ariya-details/performance_safety.html",
+        "title": "日産アリア｜走行・安全（プロパイロット2.0）",
+        "accessedAt": "2026-09-07",
+        "supports": ["高速道路同一車線内のハンズオフ説明", "安全運転者責任・天候等の制限"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1 自動走行レベルの定義）",
+        "accessedAt": "2026-09-07",
+        "supports": ["縦方向・横方向の両方を限定領域で支援し、運転者が主体のLevel 2定義"],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "日産のグレード別諸元・装備とプロパイロット2.0の機能説明を確認し、車速・車間制御と車線内走行支援が限定領域で併用されるため国土交通省定義のLevel 2に分類した。日産が車両をLevel 2認証したという意味ではない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-nissan-ariya-2026-b9-e4orce",
+    "market": "JP",
+    "maker": "Nissan",
+    "model": "日産アリア",
+    "modelYear": "2026",
+    "grade": "B9 e-4ORCE",
+    "requiredPackage": "プロパイロット 2.0（メーカーオプション）＋NissanConnectサービス（有料）",
+    "featureVersion": "2026年2月以降発売モデル / プロパイロット 2.0",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["高速道路の本線", "自動車専用道路の本線"],
+      "speedKph": {"min": null, "max": null, "condition": "対象ページでプロパイロット2.0の数値速度範囲を確認できないため未確認"},
+      "trafficConditions": ["同一車線内の走行", "先行車追い越し・車線変更の支援は条件付き"],
+      "weather": ["天候・路面状況などで作動しない場合がある"],
+      "geoRestriction": ["高速道路の同一車線内", "対面通行路・トンネル・急なカーブ・料金所・合流地点と手前はハンズオフ不可"],
+      "driverConditions": ["前方を常に注視", "直ちにハンドル・ブレーキ・アクセルを操作できる状態"],
+      "manufacturerSummary": "B9 e-4ORCEにプロパイロット2.0を組み合わせた場合、高速道路の同一車線内で条件付きハンズオフを利用できる。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": ["adaptive_cruise_control", "lane_centering", "hands_off_highway", "lane_change_support"],
+    "limitations": ["自動運転装置ではない", "側方車両には反応しない場合がある", "NissanConnectのプロパイロットプランG契約が必要", "対象外区間ではハンドル操作が必要"],
+    "sources": [
+      {
+        "publisher": "日産自動車",
+        "url": "https://www3.nissan.co.jp/vehicles/new/ariya.html",
+        "title": "日産アリア Webカタログ トップ",
+        "accessedAt": "2026-09-07",
+        "supports": ["日本向けB9 e-4ORCEグレード", "4WD・91kWh諸元", "プロパイロット2.0メーカーオプション"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "日産自動車",
+        "url": "https://www.nissan.co.jp/CONNECT/SERVICE/ariya_2512.html",
+        "title": "NissanConnectサービス｜日産アリア 2026年2月以降発売モデル",
+        "accessedAt": "2026-09-07",
+        "supports": ["2026年2月以降発売モデル表記", "プロパイロット2.0にサービス加入が必要"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "日産自動車",
+        "url": "https://www3.nissan.co.jp/vehicles/new/ariya-details/performance_safety.html",
+        "title": "日産アリア｜走行・安全（プロパイロット2.0）",
+        "accessedAt": "2026-09-07",
+        "supports": ["高速道路同一車線内のハンズオフ説明", "安全運転者責任・天候等の制限"],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1 自動走行レベルの定義）",
+        "accessedAt": "2026-09-07",
+        "supports": ["縦方向・横方向の両方を限定領域で支援し、運転者が主体のLevel 2定義"],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "日産のグレード別諸元・装備とプロパイロット2.0の機能説明を確認し、車速・車間制御と車線内走行支援が限定領域で併用されるため国土交通省定義のLevel 2に分類した。日産が車両をLevel 2認証したという意味ではない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-nissan-serena-2026-e-power-luxion",
+    "market": "JP",
+    "maker": "Nissan",
+    "model": "セレナ",
+    "modelYear": "2026",
+    "grade": "e-POWER LUXION",
+    "requiredPackage": "プロパイロット 2.0（グレード標準）＋NissanConnectサービス（有料）",
+    "featureVersion": "C28 / 2026年2月以降発売モデル / プロパイロット 2.0",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["高速道路の本線", "自動車専用道路の本線"],
+      "speedKph": {"min": 40, "max": null, "condition": "プロパイロット2.0のハンズオフは同一車線・高速道路で時速40km/h以上とのメーカー注記。上限は未確認"},
+      "trafficConditions": ["同一車線内の追従", "先行車追い越し・車線変更の支援は条件付き"],
+      "weather": ["天候・路面状況などで作動しない場合がある"],
+      "geoRestriction": ["高速道路の本線", "対面通行路・トンネル・カーブ・料金所・合流地点と手前はハンズオフ不可"],
+      "driverConditions": ["前方を常に注視", "直ちにハンドル・ブレーキ・アクセルを操作できる状態"],
+      "manufacturerSummary": "e-POWER LUXIONはプロパイロット2.0を搭載し、高速道路の同一車線内で条件付きハンズオフと車線変更支援を行う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": ["adaptive_cruise_control", "lane_centering", "hands_off_highway", "lane_change_support"],
+    "limitations": ["自動運転装置ではない", "側方車両には反応しない場合がある", "NissanConnectのプロパイロットプランG契約が必要", "対象外区間ではハンドル操作が必要"],
+    "sources": [
+      {"publisher": "日産自動車", "url": "https://www3.nissan.co.jp/vehicles/new/serena/specifications/luxion.html", "title": "日産セレナ e-POWER LUXION｜価格・グレード", "accessedAt": "2026-09-07", "supports": ["e-POWER LUXIONのグレード掲載", "プロパイロット2.0搭載・ハンズオフ説明"], "type": "manufacturer"},
+      {"publisher": "日産自動車", "url": "https://www3.nissan.co.jp/content/dam/Nissan/jp/vehicles/serena/2603/pdf/serena_2603_specsheet.pdf", "title": "セレナ主要装備一覧・諸元表（2026年3月）", "accessedAt": "2026-09-07", "supports": ["C28現行仕様のLUXION装備", "プロパイロット2.0・NissanConnectの必要条件"], "type": "manual"},
+      {"publisher": "日産自動車", "url": "https://faq2.nissan.co.jp/faq/show/60892?category_id=258&site_domain=default", "title": "セレナ C28/GC28 プロパイロットについて", "accessedAt": "2026-09-07", "supports": ["2026年2月マイナーチェンジとC28型", "プロパイロットの30〜135km/h設定範囲"], "type": "manufacturer"},
+      {"publisher": "国土交通省", "url": "https://www.mlit.go.jp/common/001343740.pdf", "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）", "accessedAt": "2026-09-07", "supports": ["Level 2の定義"], "type": "mlit"}
+    ],
+    "classificationRationale": "日産のプロパイロット2.0は運転支援として車速・車間制御と車線内走行を支援するため、国土交通省のLevel 2定義に照合してLevel 2と分類した。日産が車両をLevel 2認証したという意味ではない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-subaru-levorg-layback-2023-limited-ex",
+    "market": "JP",
+    "maker": "SUBARU",
+    "model": "レヴォーグ レイバック",
+    "modelYear": "2023",
+    "grade": "Limited EX",
+    "requiredPackage": "アイサイトXテクノロジー（Limited EXの標準装備欄に掲載）",
+    "featureVersion": "2026年6月カタログ / アイサイトX",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["高速道路", "自動車専用道路"],
+      "speedKph": {"min": null, "max": null, "condition": "現行公式安全ページは渋滞時ハンズオフを説明するが数値速度を記載していないため未確認"},
+      "trafficConditions": ["渋滞時", "高速巡航"],
+      "weather": ["雨・雪・霧・夜間などで認識・制御が制限される場合がある"],
+      "geoRestriction": ["3D高精度地図に登録された自動車専用道路", "2車線以上などアイサイトXの条件を満たす区間"],
+      "driverConditions": ["周囲と自車の動作を常に確認", "危険時に直ちにステアリング・ブレーキ操作"],
+      "manufacturerSummary": "アイサイトXは高速道路の渋滞時ハンズオフなどを支援するが、自動運転装置ではなく運転者の監視と操作が必要。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway", "driver_monitoring", "lane_change_support"],
+    "limitations": ["アイサイトXは自動運転装置ではない", "3D高精度地図に登録された道路など条件を満たす必要がある", "悪天候・夜間・地図未更新などで作動しない場合がある"],
+    "sources": [
+      {"publisher": "SUBARU", "url": "https://www.subaru.jp/levorg-layback/", "title": "レヴォーグ レイバック｜SUBARU公式サイト", "accessedAt": "2026-09-07", "supports": ["現行車種掲載", "アイサイトXの渋滞時ハンズオフ説明"], "type": "manufacturer"},
+      {"publisher": "SUBARU", "url": "https://www.subaru.jp/levorg-layback/safety/", "title": "アイサイト・安全｜レヴォーグ レイバック", "accessedAt": "2026-09-07", "supports": ["ツーリングアシスト・全車速追従・車線支援", "アイサイトXの渋滞時ハンズオフとドライバー監視"], "type": "manufacturer"},
+      {"publisher": "SUBARU", "url": "https://www.subaru.jp/levorg-layback/specification/docs/equipment.pdf", "title": "LEVORG LAYBACK EQUIPMENT（2026.07）", "accessedAt": "2026-09-07", "supports": ["Limited EXのグレード別装備", "アイサイトXテクノロジー・ドライバーモニタリングシステム"], "type": "manufacturer"},
+      {"publisher": "SUBARU", "url": "https://ucar.subaru.jp/php/catalog/grade.php?cat_id=10163623", "title": "レヴォーグ レイバック Limited EX（2026年6月）カタログ・スペック情報", "accessedAt": "2026-09-07", "supports": ["2026年6月カタログ表記", "Limited EXの日本仕様・生産中発売モデル表記"], "type": "manufacturer"},
+      {"publisher": "国土交通省", "url": "https://www.mlit.go.jp/common/001343740.pdf", "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）", "accessedAt": "2026-09-07", "supports": ["Level 2の定義"], "type": "mlit"}
+    ],
+    "classificationRationale": "SUBARUの説明する全車速追従（縦方向）・ツーリングアシスト／車線支援（横方向）を国土交通省のLevel 2定義に照合して分類した。アイサイトXのメーカー認証レベルを捏造していない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07",
+    "catalogAsOf": "2026-06"
+  },
+  {
+    "id": "jp-honda-legend-2021-honda-sensing-elite",
+    "market": "JP",
+    "maker": "Honda",
+    "model": "LEGEND",
+    "modelYear": "2021",
+    "grade": "Hybrid EX・Honda SENSING Elite",
+    "requiredPackage": "Honda SENSING Elite（専用グレード）",
+    "featureVersion": "Honda SENSING Elite / Traffic Jam Pilot",
+    "currentCatalogListed": false,
+    "historical": true,
+    "automationLevel": 3,
+    "category": "automated_driving",
+    "availability": "unavailable",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["高速道路", "自動車専用道路"],
+      "speedKph": {"min": null, "max": null, "condition": "公式の機能説明で渋滞時の作動を確認したが、今回参照したページでは数値速度範囲を確認できない"},
+      "trafficConditions": ["高速道路の渋滞時（Traffic Jam Pilotの限定領域）"],
+      "weather": ["作動条件・環境条件外では運転者へ引継ぎ要求"],
+      "geoRestriction": ["システムが使用可能な限定領域"],
+      "driverConditions": ["操作要求時に直ちに運転操作へ引き継ぐ", "引継ぎ要求へ応答できる状態を保つ"],
+      "manufacturerSummary": "Honda SENSING EliteのTraffic Jam Pilotは限定領域の渋滞時にシステムが運転操作を担うLevel 3機能として過去に型式指定を取得した。"
+    },
+    "driverMonitoring": "takeover_ready",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": ["traffic_jam_pilot", "adaptive_cruise_control", "lane_centering", "hands_off_highway", "lane_change_support"],
+    "limitations": ["2022年1月終了モデルで現在販売不可", "リース専用・限定生産の過去モデル", "ODD外またはシステムから要求があれば運転者が引き継ぐ"],
+    "sources": [
+      {"publisher": "本田技研工業", "url": "https://www.honda.co.jp/auto-archive/legend/4door/2022/hondasensing-elite/function/", "title": "Honda SENSING Elite 特設サイト（2022年1月終了モデル）機能編", "accessedAt": "2026-09-07", "supports": ["2018年発表・2022年1月終了", "Traffic Jam PilotのLevel 3説明", "限定領域の引継ぎ条件"], "type": "manufacturer"},
+      {"publisher": "本田技研工業", "url": "https://global.honda/jp/news/2021/4210304-legend.html", "title": "Honda SENSING Elite搭載 新型LEGENDを発売", "accessedAt": "2026-09-07", "supports": ["Hybrid EX・Honda SENSING Eliteの仕様", "ハンズオフ・Traffic Jam Pilot機能", "限定生産・リース専用"], "type": "manufacturer"},
+      {"publisher": "国土交通省", "url": "https://www.mlit.go.jp/common/001343740.pdf", "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）", "accessedAt": "2026-09-07", "supports": ["Level 3は限定領域でシステムが動的運転タスクを実施し、要求時に運転者が応答する定義"], "type": "mlit"}
+    ],
+    "classificationRationale": "Hondaが公式にTraffic Jam Pilotを自動運転レベル3の型式指定取得例として説明している過去モデルであり、Level 3として記録する。ただし販売終了・現行非掲載のため購入候補の既定一覧には含めない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  }
+]

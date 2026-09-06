@@ -39,7 +39,7 @@ market + maker + model + model_year + grade + required_package + feature_version
 | `maker`, `model` | string | 日本公式名称 |
 | `modelYear`, `grade` | string | 不明なら公開候補にしない |
 | `requiredPackage` | string/null | 標準、オプション、必要契約を明示 |
-| `automationLevel` | 0–5 | 一次情報で確認。独自推定禁止 |
+| `automationLevel` | 0–5 | 一次情報で確認。メーカー認証とサイト分類を区別 |
 | `category` | `driver_assistance` / `automated_driving` | Level 0–2 / 3–5に対応 |
 | `availability` | 下記enum | 販売・利用状態 |
 | `availabilityCheckedAt` | date | 日本での状態確認日 |
@@ -63,7 +63,10 @@ market + maker + model + model_year + grade + required_package + feature_version
 - `unavailable`: 日本で現在利用不可
 - `unknown`: 一次情報で確認できない
 
-一覧の既定は `new_order_available`。その他は利用者が明示的に切り替えた場合だけ混ぜる。
+一覧の既定は現行カタログに掲載を確認できた候補。受注未確認は `unknown` として
+「受注状況は要確認」を必ず表示し、新車注文可能とは断定しない。
+`used_only`、実証・サービス・発表段階は別の選択肢に分離する。
+現行掲載を確認できないunknownは既定表示に入れない。対象年式と最終確認日を併記する。
 
 ## ODD
 
@@ -82,6 +85,10 @@ market + maker + model + model_year + grade + required_package + feature_version
 ## 根拠と鮮度
 
 - レベル、販売状態、機能、ODDはメーカー公式、取扱説明書、国土交通省などの一次情報で確認する。
+- メーカーがレベルを明記しない運転支援は、公式の前後・左右制御と常時監視の説明を
+  国土交通省定義に照合した「サイト分類」と明示する。メーカーがLevel 2認証を得たとは記述しない。
+  根拠のない機能・レベル推測はしない。Level 3は認可等の直接根拠を必須とする。
+- 速度域は対象機能（通常ACC/LKASかハンズオフか）を明記する。別機能の速度をハンズオフ範囲へ転用しない。
 - 検索結果スニペット、販売店ブログ、まとめ記事だけで `verified` にしない。
 - sourceごとに `publisher`, `url`, `title`, `accessedAt`, `supports` を保存する。
 - 販売状態は90日、機能・ODDは180日を暫定レビュー期限とする。期限超過は削除せず `stale` 表示。
