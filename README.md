@@ -35,6 +35,8 @@ npm run preview
 ```
 
 `.env.example`を参照し、計測IDを環境変数に設定してbuildします。OAuth tokenなどの秘密情報は置かないでください。
+E2Eはインストール済みPlaywrightとChromeを利用します。必要なら `PLAYWRIGHT_PATH` / `CHROME_BIN` を指定し、
+`BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs` で公開版を検証できます。
 初回は認証済みWranglerによるPages Direct Uploadです。GitHubへのpushだけでは自動配信されません。
 再配信・rollbackは [公開運用](docs/operations/deployment.md)、計測・検索登録は
 [計測運用](docs/operations/measurement.md) を参照してください。

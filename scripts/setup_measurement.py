@@ -145,19 +145,31 @@ def ensure_trigger(svc, workspace_path, event_name, existing):
     return item, changed
 
 
-def event_html(event_name, parameters, measurement_id):
-    pairs = ",\n      ".join(
-        f"{json.dumps(key)}: {json.dumps('{{DLV - ' + key + '}}')}" for key in parameters
-    )
-    return (
-        "<script>\n"
-        "window.dataLayer = window.dataLayer || [];\n"
-        "function gtag(){window.dataLayer.push(arguments);}\n"
-        f"  gtag('event', {json.dumps(event_name)}, {{\n"
-        f"      send_to: {json.dumps(measurement_id)},\n      {pairs}\n"
-        "  });\n"
-        "</script>"
-    )
+def native_event_parameters(event_name, parameters, measurement_id):
+    """Return the GA4 Event built-in tag schema used by GTM API v2."""
+    rows = [
+        {
+            "type": "map",
+            "map": [
+                {"type": "template", "key": "parameter", "value": parameter},
+                {
+                    "type": "template",
+                    "key": "parameterValue",
+                    "value": "{{DLV - " + parameter + "}}",
+                },
+            ],
+        }
+        for parameter in parameters
+    ]
+    return [
+        {"type": "list", "key": "eventSettingsTable", "list": rows},
+        {"type": "template", "key": "eventName", "value": event_name},
+        {
+            "type": "template",
+            "key": "measurementIdOverride",
+            "value": measurement_id,
+        },
+    ]
 
 
 def ensure_tag(svc, workspace_path, name, body, existing):
@@ -173,11 +185,13 @@ def ensure_tag(svc, workspace_path, name, body, existing):
         "type": current.get("type"),
         "parameter": current.get("parameter", []),
         "firingTriggerId": current.get("firingTriggerId", []),
+        "paused": current.get("paused", False),
     }
     desired = {
         "type": body.get("type"),
         "parameter": body.get("parameter", []),
         "firingTriggerId": body.get("firingTriggerId", []),
+        "paused": body.get("paused", False),
     }
     if comparable == desired:
         return current, False
@@ -223,16 +237,11 @@ def configure(svc, container, measurement_id):
             workspace_path,
             f"GA4 Event - {event_name}",
             {
-                "type": "html",
-                "parameter": [
-                    {
-                        "type": "template",
-                        "key": "html",
-                        "value": event_html(event_name, parameters, measurement_id),
-                    },
-                    {"type": "boolean", "key": "supportDocumentWrite", "value": "false"},
-                ],
+                "type": "gaawe",
+                "parameter": native_event_parameters(event_name, parameters, measurement_id),
                 "firingTriggerId": [str(trigger["triggerId"])],
+                "tagFiringOption": "oncePerEvent",
+                "paused": False,
             },
             tags,
         )

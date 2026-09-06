@@ -22,7 +22,9 @@ const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 const qaDir = '.cache/jidouunten-qa';
 fs.mkdirSync(qaDir, { recursive: true });
 const analyticsRequests = [];
+const analyticsResponses = [];
 page.on('request', (request) => { if (/googletagmanager|google-analytics|analytics\.google/i.test(request.url())) analyticsRequests.push(request.url()); });
+page.on('response', (response) => { if (/collect|google-analytics/i.test(response.url())) analyticsResponses.push({ url: response.url(), status: response.status() }); });
 const visibleCards = () => page.locator('[data-vehicle-shell]:not([hidden])').count();
 const events = () => page.evaluate(() => window.dataLayer || []);
 
@@ -47,9 +49,14 @@ try {
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '深いリンクのlevel復元');
   await page.getByRole('button', { name: '同意する' }).click({ noWaitAfter: true });
   assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 1, '同意後にGTM読み込み');
-  await page.waitForTimeout(300);
+  await page.waitForTimeout(1000);
   assert.ok(analyticsRequests.some((url) => url.includes('googletagmanager')), '同意後のGTM通信');
-  if (process.env.EXPECT_GA_COLLECT === '1') assert.ok(analyticsRequests.some((url) => /collect|google-analytics/i.test(url)), 'GA collect通信');
+  if (process.env.EXPECT_GA_COLLECT === '1') {
+    const collectResponses = analyticsResponses.filter(({ url }) => /collect|google-analytics/i.test(url));
+    assert.ok(collectResponses.length > 0, 'GA collect通信');
+    assert.ok(collectResponses.some(({ url }) => decodeURIComponent(url).includes('G-Q58GM7BVB6')), 'GA collectが正しいMeasurement ID宛て');
+    console.log(`GA collect responses: ${collectResponses.map(({ status, url }) => `${status} ${url.split('?')[0]}`).join(' | ')}`);
+  }
 
   await page.locator('select[name="level"]').selectOption('3');
   await page.locator('select[name="availability"]').selectOption('all');

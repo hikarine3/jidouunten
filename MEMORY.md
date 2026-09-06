@@ -16,6 +16,8 @@
 - XServerで両ドメインのnameserverをCloudflareへ変更済み。Cloudflare NSの反映を確認。
 - `自動運転.jp` apex/wwwから `https://jidouunten.jp` への301 Redirect Ruleを設定済み。
 - Pages `jidouunten` をDirect Upload方式で作成し、`jidouunten.jp` custom domainを設定。
+- 初回公開: commit `c11c646`、https://e3e3710a.jidouunten.pages.dev 。本体HTTPS 200、実測証拠は `docs/qa/production-20260907.md`。
+- 道路表記による候補漏れ修正を `72c36b4` / https://9a7ea6df.jidouunten.pages.dev で配信。
 - GitHub pushだけでは自動配信しない。自動化は[JID-008](https://github.com/hikarine3/jidouunten/issues/8)。
 - GTM `GTM-PV9QVMJV`、GA4 `G-Q58GM7BVB6`。1stclass側GSC/Bing所有権確認済み。
 - 公開・計測検証の証拠は `docs/operations/` とGitHub Issueに記録。

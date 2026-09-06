@@ -85,16 +85,20 @@
 
 ## 8. 完了条件
 
-- [ ] 上記E2E 3件中3件がlocalとCloudflare previewでPASS
-- [ ] 車両schema検証が全レコードPASSし、最低6件すべてに一次情報がある
-- [ ] unit/integration/accessibility/link checksを件数付きで記録
-- [ ] mobile/desktopで表示、操作、URL復元を確認
-- [ ] Level 2の注意表示とLevel 3の引継ぎ条件を確認
-- [ ] canonical、sitemap、robots、404を確認
-- [ ] performance/accessibilityの初期baselineを記録
-- [ ] rollbackがPagesの直前deploymentへの切替で実行可能
-- [ ] 本番公開を行った場合は `jidouunten.jp` と `自動運転.jp` のproduction smokeを記録
-- [ ] GTM/GA4で実イベントを確認し、GSC/Bingの設定状況と待機境界を記録
+- [x] 上記E2E 3件中3件がlocalとCloudflare previewでPASS
+- [x] 車両schema検証が全レコードPASSし、最低6件すべてに一次情報がある
+- [x] unit/integration/accessibility/link checksを件数付きで記録
+- [x] mobile/desktopで表示、操作、URL復元を確認
+- [x] Level 2の注意表示とLevel 3の引継ぎ条件を確認
+- [x] canonical、sitemap、robots、404を確認
+- [x] performance/accessibilityの初期baselineを記録
+- [x] rollbackがPagesの直前deploymentへの切替で実行可能
+- [x] 本番公開を行った場合は `jidouunten.jp` と `自動運転.jp` のproduction smokeを記録
+- [x] GTM/GA4で実イベントを確認し、GSC/Bingの設定状況と待機境界を記録
+
+受入証拠: `docs/qa/production-20260907.md`、`docs/operations/measurement.md`。
+本番ブラウザで5イベントのdataLayer発火とGA collect HTTP 204を確認。GA管理画面の反映、
+Bingの非同期sitemap処理、検索インデックス・利用効果は設定・送信とは別の観測状態とする。
 
 ## 9. QA failure条件
 
