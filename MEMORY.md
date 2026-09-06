@@ -19,6 +19,8 @@
 - Pages `jidouunten` をDirect Upload方式で作成し、`jidouunten.jp` custom domainを設定。
 - 初回公開: commit `c11c646`、https://e3e3710a.jidouunten.pages.dev 。本体HTTPS 200、実測証拠は `docs/qa/production-20260907.md`。
 - 道路表記による候補漏れ修正を `72c36b4` / https://9a7ea6df.jidouunten.pages.dev で配信。
+- 一覧トップ・直接2台比較を `513d01c` / https://db94de6b.jidouunten.pages.dev で配信。
+  画面・機能・計測回帰の公開証拠は `docs/qa/list-first-home-20260907.md`。
 - GitHub pushだけでは自動配信しない。自動化は[JID-008](https://github.com/hikarine3/jidouunten/issues/8)。
 - GTM `GTM-PV9QVMJV`、GA4 `G-Q58GM7BVB6`。1stclass側GSC/Bing所有権確認済み。
 - 公開・計測検証の証拠は `docs/operations/` とGitHub Issueに記録。

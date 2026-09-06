@@ -45,4 +45,14 @@
 
 ## 公開
 
-本番公開後のURL・配信版・再検証を追記する。
+- 配信ソース: `513d01cbfd5a24a834443446c3df15d2ae40c47a`、GitHub mainへpush済み。
+- 本体: https://jidouunten.jp/ 。固定配信版: https://db94de6b.jidouunten.pages.dev/ 。
+- 既存Pages project `jidouunten` / mainへ19 assets中16件upload、3件再利用、配信完了。
+- 本体と固定配信版の両方で `EXPECT_GA_COLLECT=1` のE2Eを再実行し各1/1シナリオPASS。
+  本番GTM、正しいGA測定IDへのcollect 204を確認。上記4幅、件数、比較、同意回帰を含む。
+- 本体のdesktop/mobileスクリーンショットを親が再確認。
+- `/`, `/cars/`, `/compare/`, sitemap-index/0 の5/5リクエスト200、sitemap掲載14/14 URLが200。
+- root canonicalは `https://jidouunten.jp/`、LP heroなし、一覧DOMあり。
+- 日本語apex/wwwの2/2入口で `/?level=3&availability=all` が本体の同じpath/queryへ301。
+- rollback先は変更前の `9a7ea6df-db5a-4405-a06e-fddd0942d9a0`。
+- 配信確認後のこの文書追記はアプリ生成物を変えないため、文書commitのみで重複deployしない。
