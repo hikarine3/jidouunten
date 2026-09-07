@@ -8,9 +8,10 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 14 | `src/data/vehicles.json` の全レコード（現行13 + 過去1） |
-| 既定表示 | 13 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 17 | `src/data/vehicles.json` の全レコード（現行16 + 過去1） |
+| 既定表示 | 16 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
+| 今回追加（Suzuki） | 3 | e VITARA X 2WD / Z 2WD / Z 4WD。日本向け現行価格・発売資料・安全装備表で確認 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | 対象外 | 0 | 今回の候補から対象外と断定したものはない |
 
@@ -27,10 +28,13 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | SUBARU | レヴォーグ レイバック（現行仕様）Limited EX | 掲載 | 2 | 2026-09-07 |
 | Tesla | Model 3 Premium（現行仕様） / Model Y Premium（現行仕様） | 掲載（2単位） | 2相当 | 2026-09-07 |
 | Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 掲載（3単位） | 2相当 | 2026-09-07 |
+| Suzuki | e VITARA X 2WD / Z 2WD / Z 4WD（現行仕様） | 掲載（3単位） | 2相当 | 2026-09-07 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQを根拠にModel 3 / Model Yを登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
 Volvo EX30は、日本向け2027年モデルの2026年第29週生産分以降の諸元・価格表で3グレードとPilot Assist、全車速追従ACC、ドライバーモニタリングを確認した。Pilot Assistは速度・車間と操舵を支援する一方、取扱説明書が運転者に両手保持と即時介入を求めるため、Level 2相当の運転支援として登録した。税込車両本体価格は479万〜629万円で、価格適用時点は2026年7月、確認日は2026-09-07。価格根拠は内部保持し、価格表示機能はIssue #16で一貫した価格契約を実装してから公開する。
+
+Suzuki e VITARAは、現行価格ページと2025年9月16日付の日本発売資料でX 2WD / Z 2WD / Z 4WDの3販売単位、発売日2026-01-16、価格399万3000円 / 448万8000円 / 492万8000円を確認した。安全装備ページと主要装備表で、全車標準のACC（全車速追従・停止保持）、ACC作動中の車線維持支援、ドライバーモニタリングシステムを確認し、Level 2相当として登録した。車線維持支援の数値速度範囲とハンズオフ可否は公式情報で確認できないため、速度条件とhandsOffは不明としている。価格適用開始日は公式情報で確認できないため `priceEffectiveAt=null` とした。
 
 ## 時系列の正規化
 
@@ -63,7 +67,7 @@ Volvo EX30は、日本向け2027年モデルの2026年第29週生産分以降の
 |---|---|---|
 | Mazda | CX-80、CX-60、新型CX-5、MAZDA3、CX-30、MX-30 ROTARY-EV | 全グレード表記を販売単位へ展開し、CTS/MRCCの仕様期を固定 |
 | Mitsubishi | OUTLANDER PHEV、ECLIPSE CROSS、eKクロス、eKクロス EV、eKスペース、デリカミニ | MI-PILOTの標準／メーカーオプションとグレード別価格を固定 |
-| Suzuki | e VITARA、FRONX、SOLIO/BANDIT、SWIFT CVT、SPACIA系 | ACC＋車線中央維持の対象グレードとパッケージを販売単位へ展開 |
+| Suzuki | FRONX、SOLIO/BANDIT、SWIFT CVT、SPACIA系（e VITARA 3単位は掲載済み） | ACC＋車線中央維持の対象グレードとパッケージを販売単位へ展開 |
 | Daihatsu | MOVE、MOVE CANBUS、TANTO系、TAFT、ROCKY | Smart Cruise Packを含む標準／オプション差を販売単位へ展開 |
 | BMW | 3シリーズ Sedan 5グレード、Touring 4グレード | 2026年7月生産装備価格表から9販売単位を登録 |
 | MINI | Countryman 8グレード | 2026年7月生産装備価格表から8販売単位を登録 |
@@ -89,6 +93,15 @@ Volvo EX30は、日本向け2027年モデルの2026年第29週生産分以降の
 | Model Yの日本向け現行ページ、ドライバー監視下のドライビングアシスト | Tesla Japan | https://www.tesla.com/ja_JP/modely | 2026-09-07 |
 | Model S / Xの日本向け車両情報・オートパイロット導線 | Tesla Japan | https://www.tesla.com/ja_jp/support/meet-your-tesla/model-s / https://www.tesla.com/ja_jp/support/meet-your-tesla/model-x | 2026-09-07 |
 | Teslaの機能は完全自動運転ではなく、常に注意し直ちに運転を代われる準備が必要 | Tesla Japan | https://www.tesla.com/ja_jp/support/meet-your-future-tesla-faq | 2026-09-07 |
+
+## Suzuki e VITARAの根拠（内部保持）
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| 現行3販売単位と価格（X 2WD 3,993,000円、Z 2WD 4,488,000円、Z 4WD 4,928,000円） | スズキ株式会社 | https://www.suzuki.co.jp/car/evitara/detail/ | 2026-09-07 |
+| e VITARAを2026年1月16日より日本で発売、3販売単位の価格表 | スズキ株式会社 | https://www.suzuki.co.jp/release/a/2025/0916/index.html | 2026-09-07 |
+| ACC全車速追従・停止保持、ACC作動中の車線維持支援、高速道路・自動車専用道路、0km/h以上のACC作動条件、運転支援・安全運転注意、ドライバーモニタリング | スズキ株式会社 | https://www.suzuki.co.jp/car/evitara/safety/ | 2026-09-07 |
+| 車線維持支援・ACC全車速追従／停止保持・ドライバーモニタリングシステムの全車標準装備 | スズキ株式会社 | https://www.suzuki.co.jp/car/evitara/detail/pdf/detail.pdf?2026040706= | 2026-09-07 |
 
 ## Volvo EX30の根拠（内部保持）
 

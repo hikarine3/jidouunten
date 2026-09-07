@@ -42,7 +42,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(14);
+    expect(vehicles).toHaveLength(17);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
@@ -78,5 +78,19 @@ describe('vehicle data contract and filters', () => {
     expect(ex30.every((vehicle) => vehicle.modelYear === '2027' && vehicle.automationLevel === 2)).toBe(true);
     expect(ex30.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
     expect(ex30.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'ボルボ・カー・ジャパン'))).toBe(true);
+  });
+
+  it('Suzuki e VITARAの3販売単位を全車標準の縦横支援として保持する', () => {
+    const evitara = vehicles.filter((vehicle) => vehicle.maker === 'Suzuki' && vehicle.model === 'e VITARA');
+    expect(evitara.map((vehicle) => vehicle.id).sort()).toEqual([
+      'jp-suzuki-e-vitara-2026-x-2wd',
+      'jp-suzuki-e-vitara-2026-z-2wd',
+      'jp-suzuki-e-vitara-2026-z-4wd',
+    ]);
+    expect(evitara).toHaveLength(3);
+    expect(evitara.every((vehicle) => vehicle.modelYear === null && vehicle.generation === null && vehicle.catalogAsOf === null && vehicle.salesUnitIntroducedAt === '2026-01-16' && vehicle.priceEffectiveAt === null)).toBe(true);
+    expect(evitara.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance' && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'unknown')).toBe(true);
+    expect(evitara.every((vehicle) => vehicle.requiredPackage?.includes('全車標準装備') && vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,driver_monitoring')).toBe(true);
+    expect(evitara.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.suzuki.co.jp/release/a/2025/0916/index.html' && source.accessedAt === '2026-09-07'))).toBe(true);
   });
 });

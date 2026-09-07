@@ -110,6 +110,38 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:suzuki-jp-e-vitara-2026": {
+      "entity_id": "vehicle:suzuki-jp-e-vitara-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": [
+        "src/data/vehicles.json",
+        "docs/research/vehicle-inventory-20260907.md"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleList.astro",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {"url": "/", "locale": "ja", "output_path": "dist/index.html", "markers": ["Suzuki", "e VITARA", "LEVEL 2"]},
+        {"url": "/cars/", "locale": "ja", "output_path": "dist/cars/index.html", "markers": ["Suzuki", "e VITARA", "LEVEL 2"]},
+        {"url": "/cars/jp-suzuki-e-vitara-2026-x-2wd/", "locale": "ja", "output_path": "dist/cars/jp-suzuki-e-vitara-2026-x-2wd/index.html", "markers": ["Suzuki", "e VITARA", "X 2WD", "Level 2"]},
+        {"url": "/cars/jp-suzuki-e-vitara-2026-z-2wd/", "locale": "ja", "output_path": "dist/cars/jp-suzuki-e-vitara-2026-z-2wd/index.html", "markers": ["Suzuki", "e VITARA", "Z 2WD", "Level 2"]},
+        {"url": "/cars/jp-suzuki-e-vitara-2026-z-4wd/", "locale": "ja", "output_path": "dist/cars/jp-suzuki-e-vitara-2026-z-4wd/index.html", "markers": ["Suzuki", "e VITARA", "Z 4WD", "Level 2"]},
+        {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["Suzuki", "e VITARA", "X 2WD", "Z 4WD"]},
+        {"url": "/sitemap-0.xml", "locale": "ja", "output_path": "dist/sitemap-0.xml", "markers": ["jp-suzuki-e-vitara-2026-x-2wd", "jp-suzuki-e-vitara-2026-z-2wd", "jp-suzuki-e-vitara-2026-z-4wd"]}
+      ],
+      "required_render_selectors": [
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Suzuki", "e VITARA", "X 2WD"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Suzuki", "e VITARA", "Z 2WD"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Suzuki", "e VITARA", "Z 4WD"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "vehicle:catalog-temporal-semantics-v1": {
       "entity_id": "vehicle:catalog-temporal-semantics-v1",
       "entity_type": "vehicle_catalog_schema",
