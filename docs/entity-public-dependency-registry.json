@@ -142,6 +142,40 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:renault-jp-arkana-current": {
+      "entity_id": "vehicle:renault-jp-arkana-current",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": [
+        "src/data/vehicles.json",
+        "docs/research/vehicle-inventory-20260907.md"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleList.astro",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {"url": "/", "locale": "ja", "output_path": "dist/index.html", "markers": ["Renault", "ARKANA", "LEVEL 2"]},
+        {"url": "/cars/", "locale": "ja", "output_path": "dist/cars/index.html", "markers": ["Renault", "ARKANA", "LEVEL 2"]},
+        {"url": "/cars/jp-renault-arkana-esprit-alpine-full-hybrid-e-tech/", "locale": "ja", "output_path": "dist/cars/jp-renault-arkana-esprit-alpine-full-hybrid-e-tech/index.html", "markers": ["Renault", "ARKANA", "esprit Alpine FULL HYBRID E-TECH", "Level 2"]},
+        {"url": "/cars/jp-renault-arkana-esprit-alpine-mild-hybrid/", "locale": "ja", "output_path": "dist/cars/jp-renault-arkana-esprit-alpine-mild-hybrid/index.html", "markers": ["Renault", "ARKANA", "esprit Alpine MILD HYBRID", "Level 2"]},
+        {"url": "/cars/jp-renault-arkana-techno-full-hybrid-e-tech/", "locale": "ja", "output_path": "dist/cars/jp-renault-arkana-techno-full-hybrid-e-tech/index.html", "markers": ["Renault", "ARKANA", "techno FULL HYBRID E-TECH", "Level 2"]},
+        {"url": "/cars/jp-renault-arkana-techno-mild-hybrid/", "locale": "ja", "output_path": "dist/cars/jp-renault-arkana-techno-mild-hybrid/index.html", "markers": ["Renault", "ARKANA", "techno MILD HYBRID", "Level 2"]},
+        {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["Renault", "ARKANA", "esprit Alpine FULL HYBRID E-TECH", "techno MILD HYBRID"]},
+        {"url": "/sitemap-0.xml", "locale": "ja", "output_path": "dist/sitemap-0.xml", "markers": ["jp-renault-arkana-esprit-alpine-full-hybrid-e-tech", "jp-renault-arkana-esprit-alpine-mild-hybrid", "jp-renault-arkana-techno-full-hybrid-e-tech", "jp-renault-arkana-techno-mild-hybrid"]}
+      ],
+      "required_render_selectors": [
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Renault", "ARKANA", "esprit Alpine FULL HYBRID E-TECH"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Renault", "ARKANA", "esprit Alpine MILD HYBRID"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Renault", "ARKANA", "techno FULL HYBRID E-TECH"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Renault", "ARKANA", "techno MILD HYBRID"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "vehicle:catalog-temporal-semantics-v1": {
       "entity_id": "vehicle:catalog-temporal-semantics-v1",
       "entity_type": "vehicle_catalog_schema",

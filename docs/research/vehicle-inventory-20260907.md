@@ -8,10 +8,11 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 17 | `src/data/vehicles.json` の全レコード（現行16 + 過去1） |
-| 既定表示 | 16 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 21 | `src/data/vehicles.json` の全レコード（現行20 + 過去1） |
+| 既定表示 | 20 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
 | 今回追加（Suzuki） | 3 | e VITARA X 2WD / Z 2WD / Z 4WD。日本向け現行価格・発売資料・安全装備表で確認 |
+| 今回追加（Renault） | 4 | ARKANAのesprit Alpine / techno、FULL HYBRID E-TECH / MILD HYBRID。価格表・機能説明・装備資料で確認 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | 対象外 | 0 | 今回の候補から対象外と断定したものはない |
 
@@ -29,12 +30,15 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Tesla | Model 3 Premium（現行仕様） / Model Y Premium（現行仕様） | 掲載（2単位） | 2相当 | 2026-09-07 |
 | Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 掲載（3単位） | 2相当 | 2026-09-07 |
 | Suzuki | e VITARA X 2WD / Z 2WD / Z 4WD（現行仕様） | 掲載（3単位） | 2相当 | 2026-09-07 |
+| Renault | ARKANA esprit Alpine FULL HYBRID E-TECH / MILD HYBRID、techno FULL HYBRID E-TECH / MILD HYBRID | 掲載（4単位） | 2相当 | 2026-09-07 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQを根拠にModel 3 / Model Yを登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
 Volvo EX30は、日本向け2027年モデルの2026年第29週生産分以降の諸元・価格表で3グレードとPilot Assist、全車速追従ACC、ドライバーモニタリングを確認した。Pilot Assistは速度・車間と操舵を支援する一方、取扱説明書が運転者に両手保持と即時介入を求めるため、Level 2相当の運転支援として登録した。税込車両本体価格は479万〜629万円で、価格適用時点は2026年7月、確認日は2026-09-07。価格根拠は内部保持し、価格表示機能はIssue #16で一貫した価格契約を実装してから公開する。
 
 Suzuki e VITARAは、現行価格ページと2025年9月16日付の日本発売資料でX 2WD / Z 2WD / Z 4WDの3販売単位、発売日2026-01-16、価格399万3000円 / 448万8000円 / 492万8000円を確認した。安全装備ページと主要装備表で、全車標準のACC（全車速追従・停止保持）、ACC作動中の車線維持支援、ドライバーモニタリングシステムを確認し、Level 2相当として登録した。車線維持支援の数値速度範囲とハンズオフ可否は公式情報で確認できないため、速度条件とhandsOffは不明としている。価格適用開始日は公式情報で確認できないため `priceEffectiveAt=null` とした。
+
+Renault ARKANAは、現行価格表でesprit AlpineとtechnoのFULL HYBRID E-TECH / MILD HYBRIDを4販売単位として確認した。価格は順に514万9000円、474万9000円、484万円、444万円で、価格の適用開始日は公式資料から確認できないため `priceEffectiveAt=null` とした。2025年7月のesprit Alpine資料と2025年9月のtechno資料をカタログ適用時点として保持し、資料年をモデル年にはしない。公式機能説明・装備資料でACC（ストップ＆ゴー機能付）とレーンセンタリングアシストの標準装備を確認し、国土交通省のLevel 2定義に照合してLevel 2相当と分類した。ACCはおおむね0〜170km/h、レーンセンタリングアシストは先行車ありでおおむね0〜160km/h、先行車なしでおおむね60〜160km/hと記載されるが、車線・先行車認識等の条件がある。運転者は常に監視し直ちに操作する必要があり、ハンズオフ可否は公式情報で確認できないため `unknown` とした。
 
 ## 時系列の正規化
 
@@ -53,7 +57,7 @@ Suzuki e VITARAは、現行価格ページと2025年9月16日付の日本発売�
 | Volkswagenの現行IQ.DRIVE搭載車 | 日本仕様のモデル年・販売状態を未確認 | Volkswagen Japan公式モデルページ・取扱説明書 |
 | Hyundaiの現行HDA搭載車 | 日本向け販売単位・現行掲載を未確認 | Hyundai Mobility Japan公式モデルページ |
 | Mazda / Mitsubishi / Suzuki / Daihatsuの一次確認候補 | 縦横支援を確認済みのモデルがあるが、現行仕様期・全グレード・価格適用日の販売単位展開を継続中 | 各社日本公式グレード表・装備表・取扱説明書 |
-| BMW / MINI / Renaultの一次確認候補 | 現行装備・価格を確認済みの販売単位があるが、公開レコード化と独立レビューが未完 | 各社日本公式装備価格表・取扱説明書 |
+| BMW / MINIの一次確認候補 | 現行装備・価格を確認済みの販売単位があるが、公開レコード化と独立レビューが未完 | 各社日本公式装備価格表・取扱説明書 |
 | Audi / Mercedes-Benz / Porsche等 | モデル単位の支援機能は確認できるが、グレード別の標準／オプションと販売状態の確認が未完 | 各社日本公式装備価格表・コンフィギュレーター |
 
 この台帳の未確認ブランド／モデル群を確認するまでは、サイト全体の国内候補を「網羅」と主張しない。L1のみ、発売予定、過去車両、Level 4サービスは別区分として追加調査する。
@@ -71,7 +75,7 @@ Suzuki e VITARAは、現行価格ページと2025年9月16日付の日本発売�
 | Daihatsu | MOVE、MOVE CANBUS、TANTO系、TAFT、ROCKY | Smart Cruise Packを含む標準／オプション差を販売単位へ展開 |
 | BMW | 3シリーズ Sedan 5グレード、Touring 4グレード | 2026年7月生産装備価格表から9販売単位を登録 |
 | MINI | Countryman 8グレード | 2026年7月生産装備価格表から8販売単位を登録 |
-| Renault | ARKANA 4グレード | 2025年仕様資料をモデル年と誤表示しないよう、資料適用期間フィールドを先に固定 |
+| Renault | ARKANA 4グレード | 掲載済み。2025年7月 / 9月の資料適用時点をモデル年と分離して保持 |
 
 ## 対象外・証拠不足として確認した例
 
@@ -102,6 +106,15 @@ Suzuki e VITARAは、現行価格ページと2025年9月16日付の日本発売�
 | e VITARAを2026年1月16日より日本で発売、3販売単位の価格表 | スズキ株式会社 | https://www.suzuki.co.jp/release/a/2025/0916/index.html | 2026-09-07 |
 | ACC全車速追従・停止保持、ACC作動中の車線維持支援、高速道路・自動車専用道路、0km/h以上のACC作動条件、運転支援・安全運転注意、ドライバーモニタリング | スズキ株式会社 | https://www.suzuki.co.jp/car/evitara/safety/ | 2026-09-07 |
 | 車線維持支援・ACC全車速追従／停止保持・ドライバーモニタリングシステムの全車標準装備 | スズキ株式会社 | https://www.suzuki.co.jp/car/evitara/detail/pdf/detail.pdf?2026040706= | 2026-09-07 |
+
+## Renault ARKANAの根拠（内部保持）
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| 現行4販売単位と価格（esprit Alpine FULL HYBRID E-TECH 5,149,000円、esprit Alpine MILD HYBRID 4,749,000円、techno FULL HYBRID E-TECH 4,840,000円、techno MILD HYBRID 4,440,000円） | ルノー・ジャポン | https://dcms.renault.jp/car_lineup/pricelist.php | 2026-09-07 |
+| ARKANAのハイウェイ＆トラフィックジャムアシスト、ACC（ストップ＆ゴー機能付）とレーンセンタリングアシストの作動条件・注意事項 | ルノー・ジャポン | https://www.renault.jp/car_lineup/arkana/ | 2026-09-07 |
+| esprit Alpineの仕様・装備適用時点、ACC・レーンセンタリングアシスト標準装備 | ルノー・ジャポン | https://www.renault.jp/car_lineup/arkana/gps_pdf/ARKANA_ea_webspec.pdf | 2026-09-07 |
+| technoの仕様・装備適用時点、ACC・レーンセンタリングアシスト標準装備 | ルノー・ジャポン | https://www.renault.jp/car_lineup/arkana/gps_pdf/ARKANA_techno_webspec.pdf | 2026-09-07 |
 
 ## Volvo EX30の根拠（内部保持）
 
