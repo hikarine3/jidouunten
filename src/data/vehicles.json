@@ -525,5 +525,79 @@
     "classificationRationale": "Hondaが公式にTraffic Jam Pilotを自動運転レベル3の型式指定取得例として説明している過去モデルであり、Level 3として記録する。ただし販売終了・現行非掲載のため購入候補の既定一覧には含めない。",
     "factStatus": "verified",
     "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-tesla-model-3-2026-premium",
+    "market": "JP",
+    "maker": "Tesla",
+    "model": "Model 3",
+    "modelYear": "2026",
+    "grade": "Premium（日本向けページ掲載）",
+    "requiredPackage": "オートパイロット（車両構成・ソフトウェアにより利用可能機能が異なる）",
+    "featureVersion": "日本向けTesla公式情報 / 2026年9月確認",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["公道（対象道路は公式情報で未特定）"],
+      "speedKph": {"min": null, "max": null, "condition": "日本向け公式情報で数値速度範囲を確認できないため未確認"},
+      "trafficConditions": ["同一車線内の操舵・加速・ブレーキを支援する条件"],
+      "weather": ["天候・視界・道路状況などによる制限は車両の警告・公式説明に従う"],
+      "geoRestriction": ["日本向け仕様・提供地域・ソフトウェア更新により異なる"],
+      "driverConditions": ["道路状況を常に監視", "直ちに運転操作を引き継げる状態"],
+      "manufacturerSummary": "Model 3の日本向け公式ページは、オートパイロットが同じ車線内の操舵・加速・ブレーキを支援し、ドライバー自身の監視が必要と説明している。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "not_allowed",
+    "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring"],
+    "limitations": ["FSD等の名称だけで自動運転Level 3以上とは判定しない", "ドライバーの監視と即時の引継ぎが必要", "日本向けグレード・注文可否・ソフトウェア提供条件は要確認", "対象道路・速度の数値範囲は公式情報で未確認"],
+    "sources": [
+      {"publisher": "Tesla Japan", "url": "https://www.tesla.com/ja_jp/model3", "title": "Model 3 – スポーツEVセダン｜Teslaジャパン", "accessedAt": "2026-09-07", "supports": ["日本向けModel 3 Premium掲載", "今すぐ注文・試乗導線", "オートパイロットは同一車線内の操舵・加速・ブレーキを支援しドライバー監視が必要"], "type": "manufacturer"},
+      {"publisher": "Tesla Japan", "url": "https://www.tesla.com/ja_jp/support/meet-your-future-tesla-faq", "title": "Meet Your Future Tesla — よくある質問", "accessedAt": "2026-09-07", "supports": ["Model 3を含むTesla車両のドライブアシストは完全自動運転ではない", "常に道路状況へ注意し運転を代われる準備が必要"], "type": "manufacturer"},
+      {"publisher": "国土交通省", "url": "https://www.mlit.go.jp/common/001343740.pdf", "title": "自動走行の実現に向けた取組と方針 Version 4.0（表1）", "accessedAt": "2026-09-07", "supports": ["運転者が主体で前後・左右を支援するLevel 2の定義"], "type": "mlit"}
+    ],
+    "classificationRationale": "Tesla JapanはModel 3のオートパイロットを同一車線内の操舵・加速・ブレーキ支援と説明し、ドライバー自身の監視を求めている。これを国土交通省のLevel 2定義に照合し、サイト上はLevel 2相当（運転支援）と分類した。Teslaが車両をLevel 2認証したという意味ではない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07",
+    "catalogAsOf": "2026-09"
+  },
+  {
+    "id": "jp-tesla-model-y-2026-premium",
+    "market": "JP",
+    "maker": "Tesla",
+    "model": "Model Y",
+    "modelYear": "2026",
+    "grade": "Premium（日本向けページ掲載）",
+    "requiredPackage": "オートパイロット（車両構成・ソフトウェアにより利用可能機能が異なる）",
+    "featureVersion": "日本向けTesla公式情報 / 2026年9月確認",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": ["公道（対象道路は公式情報で未特定）"],
+      "speedKph": {"min": null, "max": null, "condition": "日本向け公式情報で数値速度範囲を確認できないため未確認"},
+      "trafficConditions": ["車両構成・ソフトウェアが対応する条件"],
+      "weather": ["天候・視界・道路状況などによる制限は車両の警告・公式説明に従う"],
+      "geoRestriction": ["日本向け仕様・提供地域・ソフトウェア更新により異なる"],
+      "driverConditions": ["道路状況を常に監視", "直ちに運転操作を引き継げる状態"],
+      "manufacturerSummary": "Model Yの日本向け公式ページは、ドライバーによる監視のもとでドライビングアシストを提供し、完全自動運転ではないと注記している。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "not_allowed",
+    "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring"],
+    "limitations": ["FSD等の名称だけで自動運転Level 3以上とは判定しない", "ドライバーの監視と即時の引継ぎが必要", "日本向けグレード・注文可否・ソフトウェア提供条件は要確認", "対象道路・速度の数値範囲は公式情報で未確認"],
+    "sources": [
+      {"publisher": "Tesla Japan", "url": "https://www.tesla.com/ja_JP/modely", "title": "Model Y – ミッドサイズSUVの電気自動車｜Teslaジャパン", "accessedAt": "2026-09-07", "supports": ["日本向けModel Y Premium掲載", "今すぐ注文・試乗導線", "ドライバー監視下のドライビングアシスト", "FSDは完全自動運転ではないとの注記"], "type": "manufacturer"},
+      {"publisher": "Tesla Japan", "url": "https://www.tesla.com/ja_jp/support/meet-your-future-tesla-faq", "title": "Meet Your Future Tesla — よくある質問", "accessedAt": "2026-09-07", "supports": ["Model Yを含むTesla車両のドライブアシストは完全自動運転ではない", "常に道路状況へ注意し運転を代われる準備が必要"], "type": "manufacturer"},
+      {"publisher": "国土交通省", "url": "https://www.mlit.go.jp/common/001343740.pdf", "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）", "accessedAt": "2026-09-07", "supports": ["運転者が主体で前後・左右を支援するLevel 2の定義"], "type": "mlit"}
+    ],
+    "classificationRationale": "Tesla JapanはModel Yのドライビングアシストをドライバー監視下の機能と説明し、FSDについても完全自動運転ではないと注記している。日本向け公式情報を国土交通省のLevel 2定義に照合し、サイト上はLevel 2相当（運転支援）と分類した。Teslaが車両をLevel 2認証したという意味ではない。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07",
+    "catalogAsOf": "2026-09"
   }
 ]

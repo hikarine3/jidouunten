@@ -38,7 +38,16 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles.length).toBeGreaterThanOrEqual(6);
+    expect(vehicles.length).toBeGreaterThanOrEqual(11);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
+  });
+
+  it('現行カタログ確認済みTesla 2モデルは日本向け根拠付きのLevel 2相当として扱う', () => {
+    const tesla = vehicles.filter((vehicle) => vehicle.maker === 'Tesla');
+    expect(tesla.map((vehicle) => vehicle.model).sort()).toEqual(['Model 3', 'Model Y']);
+    expect(tesla).toHaveLength(2);
+    expect(tesla.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance')).toBe(true);
+    expect(tesla.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'Tesla Japan' && source.accessedAt === '2026-09-07'))).toBe(true);
+    expect(tesla.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
   });
 });

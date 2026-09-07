@@ -1,0 +1,82 @@
+{
+  "entities": {
+    "vehicle:tesla-jp-model-3-y-2026": {
+      "entity_id": "vehicle:tesla-jp-model-3-y-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": [
+        "src/data/vehicles.json",
+        "docs/research/vehicle-inventory-20260907.md"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleList.astro",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {
+          "url": "/",
+          "locale": "ja",
+          "output_path": "dist/index.html",
+          "markers": ["Tesla", "Model 3", "Model Y", "LEVEL 2"]
+        },
+        {
+          "url": "/cars/",
+          "locale": "ja",
+          "output_path": "dist/cars/index.html",
+          "markers": ["Tesla", "Model 3", "Model Y", "LEVEL 2"]
+        },
+        {
+          "url": "/cars/jp-tesla-model-3-2026-premium/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-tesla-model-3-2026-premium/index.html",
+          "markers": ["Tesla", "Model 3", "Level 2", "常時監視が必要"]
+        },
+        {
+          "url": "/cars/jp-tesla-model-y-2026-premium/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-tesla-model-y-2026-premium/index.html",
+          "markers": ["Tesla", "Model Y", "Level 2", "常時監視が必要"]
+        },
+        {
+          "url": "/compare/",
+          "locale": "ja",
+          "output_path": "dist/compare/index.html",
+          "markers": ["Tesla", "Model 3", "Model Y"]
+        },
+        {
+          "url": "/sitemap-0.xml",
+          "locale": "ja",
+          "output_path": "dist/sitemap-0.xml",
+          "markers": ["jp-tesla-model-3-2026-premium", "jp-tesla-model-y-2026-premium"]
+        }
+      ],
+      "required_render_selectors": [
+        {
+          "url": "/",
+          "selector": "[data-vehicle-shell]:not([hidden])",
+          "markers": ["Tesla", "Model 3"]
+        },
+        {
+          "url": "/",
+          "selector": "[data-vehicle-shell]:not([hidden])",
+          "markers": ["Tesla", "Model Y"]
+        },
+        {
+          "url": "/cars/jp-tesla-model-3-2026-premium/",
+          "selector": "main",
+          "markers": ["Tesla", "Model 3", "Level 2", "常時監視が必要"]
+        },
+        {
+          "url": "/cars/jp-tesla-model-y-2026-premium/",
+          "selector": "main",
+          "markers": ["Tesla", "Model Y", "Level 2", "常時監視が必要"]
+        }
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    }
+  }
+}

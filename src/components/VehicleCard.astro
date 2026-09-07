@@ -1,6 +1,6 @@
 ---
 import type { Vehicle } from '../data/loader';
-import { availabilityLabels, canonicalRoadType, displayDate, handsOffLabels, levelLabels, monitoringLabels } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, handsOffLabels, levelLabels, monitoringLabels } from '../data/loader';
 const { vehicle, selectable = false, checked = false } = Astro.props as { vehicle: Vehicle; selectable?: boolean; checked?: boolean };
 ---
 <article class="vehicle-card">
@@ -18,7 +18,6 @@ const { vehicle, selectable = false, checked = false } = Astro.props as { vehicl
     </div>
   </div>
   <div class="card-foot">
-    <span class="subtle">確認 {displayDate(vehicle.lastReviewedAt)}</span>
     <div class="card-actions">
       <a class="button small text" href={`/cars/${vehicle.id}/`}>詳細を見る <span aria-hidden="true">→</span></a>
       {selectable && <label class="check-card compare-check"><input type="checkbox" name="ids" value={vehicle.id} checked={checked} aria-label={`${vehicle.maker} ${vehicle.model}を比較に追加`} /> 比較に追加</label>}

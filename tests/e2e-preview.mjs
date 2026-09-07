@@ -32,7 +32,10 @@ try {
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 8, '既定カタログは現行確認8件');
+  assert.equal(await visibleCards(), 10, '既定カタログは現行確認10件');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 2, 'Tesla Model 3 / Model Yを既定一覧に表示');
+  await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla Model 3' }).scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('[data-vehicle-shell][data-availability="unavailable"]:visible').count(), 0, '過去車両は既定非表示');
   assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 0, '同意前はGTMなし');
@@ -86,13 +89,13 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 8, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 10, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  assert.equal(await visibleCards(), 8, 'リセット後に既定8件');
+  assert.equal(await visibleCards(), 10, 'リセット後に既定10件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -113,7 +116,7 @@ try {
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '一覧選択が比較画面へ反映');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 9, 'すべての状態で過去車両を含む9件');
+  assert.equal(await visibleCards(), 11, 'すべての状態で過去車両を含む11件');
   await page.goto(`${base}/compare/?ids=jp-honda-accord-2025-ehev-sensing360plus&ids=jp-subaru-levorg-layback-2023-limited-ex`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '比較対象は2台');
@@ -124,10 +127,19 @@ try {
 
   await page.goto(`${base}/cars/jp-honda-accord-2025-ehev-sensing360plus/`);
   assert.equal((await events()).filter((event) => event.event === 'view_vehicle').length, 1, 'view_vehicleイベント（同意後登録）');
-  const manufacturerLink = page.locator('[data-source-type="manufacturer"]').first();
-  await manufacturerLink.evaluate((element) => element.addEventListener('click', (event) => event.preventDefault(), { once: true }));
-  await manufacturerLink.click();
-  assert.equal((await events()).filter((event) => event.event === 'outbound_manufacturer').length, 1, 'outbound_manufacturerイベント');
+
+  await page.goto(`${base}/cars/jp-tesla-model-3-2026-premium/`);
+  assert.match(await page.locator('main').innerText(), /Tesla[\s\S]*Model 3/);
+  assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '根拠URL・確認日は通常UIに出さない');
+  await page.screenshot({ path: `${qaDir}/desktop-tesla-detail.png`, fullPage: false });
+
+  await page.goto(`${base}/cars/jp-tesla-model-y-2026-premium/`);
+  assert.match(await page.locator('main').innerText(), /Tesla[\s\S]*Model Y/);
+  assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, 'Model Yでも内部根拠を通常UIに出さない');
+
+  await page.goto(`${base}/compare/?ids=jp-tesla-model-3-2026-premium&ids=jp-tesla-model-y-2026-premium`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  assert.match(await page.locator('[data-compare-result]').innerText(), /Model 3[\s\S]*Model Y/);
 
   await page.goto(`${base}/privacy/`);
   page.on('dialog', (dialog) => dialog.dismiss());
