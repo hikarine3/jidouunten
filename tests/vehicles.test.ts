@@ -42,7 +42,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(21);
+    expect(vehicles).toHaveLength(30);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
@@ -111,5 +111,28 @@ describe('vehicle data contract and filters', () => {
     expect(arkana.every((vehicle) => vehicle.requiredPackage?.includes('ACC（ストップ＆ゴー機能付）') && vehicle.requiredPackage.includes('レーンセンタリングアシスト') && vehicle.requiredPackage.includes('標準装備'))).toBe(true);
     expect(arkana.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist')).toBe(true);
     expect(arkana.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://dcms.renault.jp/car_lineup/pricelist.php' && source.accessedAt === '2026-09-07'))).toBe(true);
+  });
+
+  it('BMW 3シリーズの通常カタログ9販売単位を世代・形状別に保持する', () => {
+    const bmw = vehicles.filter((vehicle) => vehicle.maker === 'BMW');
+    expect(bmw.map((vehicle) => vehicle.id).sort()).toEqual([
+      'jp-bmw-3-series-g20-sedan-318i-m-sport',
+      'jp-bmw-3-series-g20-sedan-320d-xdrive-m-sport',
+      'jp-bmw-3-series-g20-sedan-320i-m-sport',
+      'jp-bmw-3-series-g20-sedan-330e-m-sport',
+      'jp-bmw-3-series-g20-sedan-m340i-xdrive',
+      'jp-bmw-3-series-g21-touring-318i-m-sport',
+      'jp-bmw-3-series-g21-touring-320d-xdrive-m-sport',
+      'jp-bmw-3-series-g21-touring-320i-m-sport',
+      'jp-bmw-3-series-g21-touring-m340i-xdrive',
+    ]);
+    expect(bmw.filter((vehicle) => vehicle.generation === 'G20')).toHaveLength(5);
+    expect(bmw.filter((vehicle) => vehicle.generation === 'G21')).toHaveLength(4);
+    expect(bmw.every((vehicle) => vehicle.modelYear === null && vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === '2026-07' && vehicle.salesUnitIntroducedAt === null)).toBe(true);
+    expect(bmw.every((vehicle) => vehicle.automationLevel === 2 && vehicle.requiredPackage === 'ドライビング・アシスト・プロフェッショナル（標準装備）')).toBe(true);
+    expect(bmw.every((vehicle) => vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'allowed_in_conditions' && !vehicle.capabilities.includes('driver_monitoring'))).toBe(true);
+    expect(bmw.every((vehicle) => vehicle.odd.speedKph.min === null && vehicle.odd.speedKph.max === null)).toBe(true);
+    expect(bmw.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist,hands_off_highway')).toBe(true);
+    expect(bmw.every((vehicle) => vehicle.sources.some((source) => source.url.includes('3series_') && source.url.includes('EPL_202607V1') && source.supports.some((support) => support.includes('メーカー希望小売価格'))))).toBe(true);
   });
 });

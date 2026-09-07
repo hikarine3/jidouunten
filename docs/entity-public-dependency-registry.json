@@ -176,6 +176,50 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:bmw-jp-3-series-g20-g21-202607": {
+      "entity_id": "vehicle:bmw-jp-3-series-g20-g21-202607",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": [
+        "src/data/vehicles.json",
+        "docs/research/vehicle-inventory-20260907.md"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleList.astro",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {"url": "/", "locale": "ja", "output_path": "dist/index.html", "markers": ["BMW", "3シリーズ セダン", "3シリーズ ツーリング", "LEVEL 2"]},
+        {"url": "/cars/", "locale": "ja", "output_path": "dist/cars/index.html", "markers": ["BMW", "3シリーズ セダン", "3シリーズ ツーリング", "LEVEL 2"]},
+        {"url": "/cars/jp-bmw-3-series-g20-sedan-318i-m-sport/", "locale": "ja", "output_path": "dist/cars/jp-bmw-3-series-g20-sedan-318i-m-sport/index.html", "markers": ["BMW", "3シリーズ セダン", "318i M Sport", "Level 2"]},
+        {"url": "/cars/jp-bmw-3-series-g20-sedan-320i-m-sport/", "locale": "ja", "output_path": "dist/cars/jp-bmw-3-series-g20-sedan-320i-m-sport/index.html", "markers": ["BMW", "3シリーズ セダン", "320i M Sport", "Level 2"]},
+        {"url": "/cars/jp-bmw-3-series-g20-sedan-320d-xdrive-m-sport/", "locale": "ja", "output_path": "dist/cars/jp-bmw-3-series-g20-sedan-320d-xdrive-m-sport/index.html", "markers": ["BMW", "3シリーズ セダン", "320d xDrive M Sport", "Level 2"]},
+        {"url": "/cars/jp-bmw-3-series-g20-sedan-330e-m-sport/", "locale": "ja", "output_path": "dist/cars/jp-bmw-3-series-g20-sedan-330e-m-sport/index.html", "markers": ["BMW", "3シリーズ セダン", "330e M Sport", "Level 2"]},
+        {"url": "/cars/jp-bmw-3-series-g20-sedan-m340i-xdrive/", "locale": "ja", "output_path": "dist/cars/jp-bmw-3-series-g20-sedan-m340i-xdrive/index.html", "markers": ["BMW", "3シリーズ セダン", "M340i xDrive", "Level 2"]},
+        {"url": "/cars/jp-bmw-3-series-g21-touring-318i-m-sport/", "locale": "ja", "output_path": "dist/cars/jp-bmw-3-series-g21-touring-318i-m-sport/index.html", "markers": ["BMW", "3シリーズ ツーリング", "318i M Sport", "Level 2"]},
+        {"url": "/cars/jp-bmw-3-series-g21-touring-320i-m-sport/", "locale": "ja", "output_path": "dist/cars/jp-bmw-3-series-g21-touring-320i-m-sport/index.html", "markers": ["BMW", "3シリーズ ツーリング", "320i M Sport", "Level 2"]},
+        {"url": "/cars/jp-bmw-3-series-g21-touring-320d-xdrive-m-sport/", "locale": "ja", "output_path": "dist/cars/jp-bmw-3-series-g21-touring-320d-xdrive-m-sport/index.html", "markers": ["BMW", "3シリーズ ツーリング", "320d xDrive M Sport", "Level 2"]},
+        {"url": "/cars/jp-bmw-3-series-g21-touring-m340i-xdrive/", "locale": "ja", "output_path": "dist/cars/jp-bmw-3-series-g21-touring-m340i-xdrive/index.html", "markers": ["BMW", "3シリーズ ツーリング", "M340i xDrive", "Level 2"]},
+        {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["BMW", "3シリーズ セダン", "3シリーズ ツーリング", "318i M Sport", "M340i xDrive"]},
+        {"url": "/sitemap-0.xml", "locale": "ja", "output_path": "dist/sitemap-0.xml", "markers": ["jp-bmw-3-series-g20-sedan-318i-m-sport", "jp-bmw-3-series-g20-sedan-m340i-xdrive", "jp-bmw-3-series-g21-touring-318i-m-sport", "jp-bmw-3-series-g21-touring-m340i-xdrive"]}
+      ],
+      "required_render_selectors": [
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["BMW", "3シリーズ セダン", "318i M Sport"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["BMW", "3シリーズ セダン", "320i M Sport"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["BMW", "3シリーズ セダン", "320d xDrive M Sport"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["BMW", "3シリーズ セダン", "330e M Sport"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["BMW", "3シリーズ セダン", "M340i xDrive"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["BMW", "3シリーズ ツーリング", "318i M Sport"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["BMW", "3シリーズ ツーリング", "320i M Sport"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["BMW", "3シリーズ ツーリング", "320d xDrive M Sport"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["BMW", "3シリーズ ツーリング", "M340i xDrive"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "vehicle:catalog-temporal-semantics-v1": {
       "entity_id": "vehicle:catalog-temporal-semantics-v1",
       "entity_type": "vehicle_catalog_schema",

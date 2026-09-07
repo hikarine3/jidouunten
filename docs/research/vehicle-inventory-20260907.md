@@ -8,11 +8,12 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 21 | `src/data/vehicles.json` の全レコード（現行20 + 過去1） |
-| 既定表示 | 20 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 30 | `src/data/vehicles.json` の全レコード（現行29 + 過去1） |
+| 既定表示 | 29 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
 | 今回追加（Suzuki） | 3 | e VITARA X 2WD / Z 2WD / Z 4WD。日本向け現行価格・発売資料・安全装備表で確認 |
 | 今回追加（Renault） | 4 | ARKANAのesprit Alpine / techno、FULL HYBRID E-TECH / MILD HYBRID。価格表・機能説明・装備資料で確認 |
+| 今回追加（BMW） | 9 | 3シリーズ通常カタログのSedan G20 5単位 / Touring G21 4単位。2026年7月以降生産の装備・価格表で確認 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | 対象外 | 0 | 今回の候補から対象外と断定したものはない |
 
@@ -31,6 +32,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 掲載（3単位） | 2相当 | 2026-09-07 |
 | Suzuki | e VITARA X 2WD / Z 2WD / Z 4WD（現行仕様） | 掲載（3単位） | 2相当 | 2026-09-07 |
 | Renault | ARKANA esprit Alpine FULL HYBRID E-TECH / MILD HYBRID、techno FULL HYBRID E-TECH / MILD HYBRID | 掲載（4単位） | 2相当 | 2026-09-07 |
+| BMW | 3シリーズ セダン G20 318i / 320i / 320d xDrive / 330e M Sport、M340i xDrive | 掲載（通常カタログ5単位） | 2相当 | 2026-09-07 |
+| BMW | 3シリーズ ツーリング G21 318i / 320i / 320d xDrive M Sport、M340i xDrive | 掲載（通常カタログ4単位） | 2相当 | 2026-09-07 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQを根拠にModel 3 / Model Yを登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -39,6 +42,8 @@ Volvo EX30は、日本向け2027年モデルの2026年第29週生産分以降の
 Suzuki e VITARAは、現行価格ページと2025年9月16日付の日本発売資料でX 2WD / Z 2WD / Z 4WDの3販売単位、発売日2026-01-16、価格399万3000円 / 448万8000円 / 492万8000円を確認した。安全装備ページと主要装備表で、全車標準のACC（全車速追従・停止保持）、ACC作動中の車線維持支援、ドライバーモニタリングシステムを確認し、Level 2相当として登録した。車線維持支援の数値速度範囲とハンズオフ可否は公式情報で確認できないため、速度条件とhandsOffは不明としている。価格適用開始日は公式情報で確認できないため `priceEffectiveAt=null` とした。
 
 Renault ARKANAは、現行価格表でesprit AlpineとtechnoのFULL HYBRID E-TECH / MILD HYBRIDを4販売単位として確認した。価格は順に514万9000円、474万9000円、484万円、444万円で、価格の適用開始日は公式資料から確認できないため `priceEffectiveAt=null` とした。2025年7月のesprit Alpine資料と2025年9月のtechno資料をカタログ適用時点として保持し、資料年をモデル年にはしない。公式機能説明・装備資料でACC（ストップ＆ゴー機能付）とレーンセンタリングアシストの標準装備を確認し、国土交通省のLevel 2定義に照合してLevel 2相当と分類した。ACCはおおむね0〜170km/h、レーンセンタリングアシストは先行車ありでおおむね0〜160km/h、先行車なしでおおむね60〜160km/hと記載されるが、車線・先行車認識等の条件がある。運転者は常に監視し直ちに操作する必要があり、ハンズオフ可否は公式情報で確認できないため `unknown` とした。
+
+BMW 3シリーズは、2026年7月以降生産の日本向け装備・価格表から通常カタログのセダンG20 5単位とツーリングG21 4単位を登録した。メーカー希望小売価格はセダン688万〜992万円、ツーリング716万〜1027万円で、同資料の適用月を `catalogAsOf` と `priceEffectiveAt` に保持した。全9単位でドライビング・アシスト・プロフェッショナルを標準装備し、ACCとステアリング＆レーン・コントロール・アシストをLevel 2相当と分類した。速度域は現行資料がオーナーズ・ハンドブック参照としているため数値を転用せず不明とした。高速道路渋滞時は条件付きハンズオフに対応するが、通常支援は少なくとも片手保持、運転者の常時注意と即時操作責任が必要。Edition Shadow、M3、50周年限定車は別販売単位として受注・在庫状況の確認待ちに残し、BMW全仕様の網羅とは扱わない。
 
 ## 時系列の正規化
 
@@ -51,13 +56,13 @@ Renault ARKANAは、現行価格表でesprit AlpineとtechnoのFULL HYBRID E-TEC
 | Tesla Model S / Model X | 日本向け公式サポート情報は確認できるが、現行カタログのモデル年・グレード・注文可否を一次情報で確認できない | Tesla Japanの現行デザインスタジオ・日本向けカタログ |
 | Toyota / Lexusの現行Toyota Safety Sense搭載車 | モデル年・グレード・装備の組合せを一次情報で未棚卸し | 各ブランド日本公式カタログ・取扱説明書 |
 | Mercedes-Benzの現行運転支援搭載車 | 日本仕様の販売単位と監視条件を未確認 | Mercedes-Benz Japan公式モデルページ・取扱説明書 |
-| BMWの現行Driving Assistant搭載車 | 日本仕様のグレード別装備を未確認 | BMW Japan公式モデルページ・取扱説明書 |
+| BMWの3シリーズ以外の現行Driving Assistant搭載車 | 日本仕様のグレード別装備を未確認 | BMW Japan公式モデルページ・取扱説明書 |
 | Volvo EX30 2026年モデル4グレード | 公式ラインナップには残るが、2027年モデルへの切替後の新規受注／在庫販売区分を未確認 | Volvo Cars Japan公式ラインナップ・販売店注文条件 |
 | VolvoのEX30以外の現行Pilot Assist搭載車 | 日本仕様のモデル年・必要装備を未確認 | Volvo Cars Japan公式モデルページ・取扱説明書 |
 | Volkswagenの現行IQ.DRIVE搭載車 | 日本仕様のモデル年・販売状態を未確認 | Volkswagen Japan公式モデルページ・取扱説明書 |
 | Hyundaiの現行HDA搭載車 | 日本向け販売単位・現行掲載を未確認 | Hyundai Mobility Japan公式モデルページ |
 | Mazda / Mitsubishi / Suzuki / Daihatsuの一次確認候補 | 縦横支援を確認済みのモデルがあるが、現行仕様期・全グレード・価格適用日の販売単位展開を継続中 | 各社日本公式グレード表・装備表・取扱説明書 |
-| BMW / MINIの一次確認候補 | 現行装備・価格を確認済みの販売単位があるが、公開レコード化と独立レビューが未完 | 各社日本公式装備価格表・取扱説明書 |
+| BMW限定車 / Mモデル・MINIの一次確認候補 | BMW通常3シリーズ9単位は掲載済み。限定車・M3とMINIは公開レコード化と独立レビューが未完 | 各社日本公式装備価格表・取扱説明書 |
 | Audi / Mercedes-Benz / Porsche等 | モデル単位の支援機能は確認できるが、グレード別の標準／オプションと販売状態の確認が未完 | 各社日本公式装備価格表・コンフィギュレーター |
 
 この台帳の未確認ブランド／モデル群を確認するまでは、サイト全体の国内候補を「網羅」と主張しない。L1のみ、発売予定、過去車両、Level 4サービスは別区分として追加調査する。
@@ -73,7 +78,7 @@ Renault ARKANAは、現行価格表でesprit AlpineとtechnoのFULL HYBRID E-TEC
 | Mitsubishi | OUTLANDER PHEV、ECLIPSE CROSS、eKクロス、eKクロス EV、eKスペース、デリカミニ | MI-PILOTの標準／メーカーオプションとグレード別価格を固定 |
 | Suzuki | FRONX、SOLIO/BANDIT、SWIFT CVT、SPACIA系（e VITARA 3単位は掲載済み） | ACC＋車線中央維持の対象グレードとパッケージを販売単位へ展開 |
 | Daihatsu | MOVE、MOVE CANBUS、TANTO系、TAFT、ROCKY | Smart Cruise Packを含む標準／オプション差を販売単位へ展開 |
-| BMW | 3シリーズ Sedan 5グレード、Touring 4グレード | 2026年7月生産装備価格表から9販売単位を登録 |
+| BMW | 3シリーズ Sedan 5グレード、Touring 4グレード | 掲載済み。Edition Shadow、M3、50周年限定車は受注・在庫確認待ち |
 | MINI | Countryman 8グレード | 2026年7月生産装備価格表から8販売単位を登録 |
 | Renault | ARKANA 4グレード | 掲載済み。2025年7月 / 9月の資料適用時点をモデル年と分離して保持 |
 
@@ -115,6 +120,15 @@ Renault ARKANAは、現行価格表でesprit AlpineとtechnoのFULL HYBRID E-TEC
 | ARKANAのハイウェイ＆トラフィックジャムアシスト、ACC（ストップ＆ゴー機能付）とレーンセンタリングアシストの作動条件・注意事項 | ルノー・ジャポン | https://www.renault.jp/car_lineup/arkana/ | 2026-09-07 |
 | esprit Alpineの仕様・装備適用時点、ACC・レーンセンタリングアシスト標準装備 | ルノー・ジャポン | https://www.renault.jp/car_lineup/arkana/gps_pdf/ARKANA_ea_webspec.pdf | 2026-09-07 |
 | technoの仕様・装備適用時点、ACC・レーンセンタリングアシスト標準装備 | ルノー・ジャポン | https://www.renault.jp/car_lineup/arkana/gps_pdf/ARKANA_techno_webspec.pdf | 2026-09-07 |
+
+## BMW 3シリーズの根拠（内部保持）
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| セダンG20の通常5販売単位、税込688万〜992万円、全モデルのドライビング・アシスト・プロフェッショナル標準装備、運転者責任・片手保持・高速道路渋滞時ハンズオフ、2026年7月以降生産 | ビー・エム・ダブリュー株式会社 | https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Sedan_EPL_202607V1.pdf.asset.1784184000307.pdf | 2026-09-07 |
+| ツーリングG21の通常4販売単位、税込716万〜1027万円、全モデルのドライビング・アシスト・プロフェッショナル標準装備、運転者責任・片手保持・高速道路渋滞時ハンズオフ、2026年7月以降生産 | ビー・エム・ダブリュー株式会社 | https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Touring_EPL_202607V1.pdf.asset.1784183994213.pdf | 2026-09-07 |
+| セダンG20 / ツーリングG21の日本向け現行モデルページ | ビー・エム・ダブリュー株式会社 | https://www.bmw.co.jp/ja/all-models/3-series/bmw-3-series-sedan/bmw-3-series-sedan.html / https://www.bmw.co.jp/ja/all-models/3-series/3-series-touring/bmw-3-series-touring.html | 2026-09-07 |
+| ACCの車速・車間支援と、高速道路渋滞時ハンズオフの機能概要・運転者責任 | ビー・エム・ダブリュー株式会社 | https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html | 2026-09-07 |
 
 ## Volvo EX30の根拠（内部保持）
 

@@ -1053,5 +1053,1013 @@
     "classificationRationale": "ルノー公式のACC（縦方向）とレーンセンタリングアシスト（横方向）が限定された道路・速度条件で支援し、運転者が常時監視して直ちに操作することを求めるため、国土交通省のLevel 2定義に照合してLevel 2相当と分類した。メーカーが車両をLevel 2認証したという意味ではない。",
     "factStatus": "verified",
     "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-bmw-3-series-g20-sedan-318i-m-sport",
+    "market": "JP",
+    "maker": "BMW",
+    "model": "3シリーズ セダン",
+    "modelYear": null,
+    "generation": "G20",
+    "catalogAsOf": "2026-07",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": "2026-07",
+    "grade": "318i M Sport",
+    "requiredPackage": "ドライビング・アシスト・プロフェッショナル（標準装備）",
+    "featureVersion": "ドライビング・アシスト・プロフェッショナル（2026年7月以降生産）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": [
+        "不明"
+      ],
+      "speedKph": {
+        "min": null,
+        "max": null,
+        "condition": "現行装備・価格表は作動速度域をオーナーズ・ハンドブック参照としており、数値範囲は未確認"
+      },
+      "trafficConditions": [
+        "設定した車速と先行車との車間の維持",
+        "車線中央付近の走行支援",
+        "高速道路渋滞時の停止・再発進（詳細条件は未確認）"
+      ],
+      "weather": [
+        "路面状況や気象条件などにより作動しない、または適切に作動しない場合がある"
+      ],
+      "geoRestriction": [
+        "通常のACC・ステアリング支援の対象道路は現行資料で未確認",
+        "ハンズオフは高速道路の渋滞時かつ一定条件下"
+      ],
+      "driverConditions": [
+        "進行方向と周囲へ絶えず注意",
+        "システム要求時に直ちにブレーキとステアリングを操作できる状態"
+      ],
+      "manufacturerSummary": "ドライビング・アシスト・プロフェッショナルは、車速・車間と車線中央付近の走行を支援する。高速道路の渋滞時は一定条件下でハンズオフを利用できるが、運転者が監視と操作責任を負う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway"
+    ],
+    "limitations": [
+      "完全な自動運転ではなく運転者が常に安全確認と操作責任を負う",
+      "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
+      "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
+      "作動速度の数値範囲は現行公開資料で未確認",
+      "受注状況は販売店で要確認"
+    ],
+    "sources": [
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Sedan_EPL_202607V1.pdf.asset.1784184000307.pdf",
+        "title": "BMW 3シリーズ セダン 装備・価格表（2026年7月以降生産）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "318i M Sportの日本向け販売単位とメーカー希望小売価格6,880,000円",
+          "全モデルでドライビング・アシスト・プロフェッショナルを標準装備",
+          "運転者責任・片手保持・高速道路渋滞時ハンズオフの条件",
+          "2026年7月以降生産向けの装備・価格"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/all-models/3-series/bmw-3-series-sedan/bmw-3-series-sedan.html",
+        "title": "BMW 3シリーズ セダン（G20）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "3シリーズ セダンの日本向け現行モデルページ",
+          "G20の世代表記"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html",
+        "title": "BMWの安全サポート技術 6つのシーン",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "ACCによる設定速度・車間の支援",
+          "高速道路渋滞時ハンズオフで操舵・加減速・制動を支援",
+          "運転者が周囲を把握して安全運転を確保する必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "BMW公式のアクティブ・クルーズ・コントロール（縦方向）とステアリング＆レーン・コントロール・アシスト（横方向）を国土交通省のLevel 2定義に照合し、Level 2相当と分類した。高速道路渋滞時は条件付きハンズオフに対応するが、運転者の監視・操作責任は継続する。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-bmw-3-series-g20-sedan-320i-m-sport",
+    "market": "JP",
+    "maker": "BMW",
+    "model": "3シリーズ セダン",
+    "modelYear": null,
+    "generation": "G20",
+    "catalogAsOf": "2026-07",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": "2026-07",
+    "grade": "320i M Sport",
+    "requiredPackage": "ドライビング・アシスト・プロフェッショナル（標準装備）",
+    "featureVersion": "ドライビング・アシスト・プロフェッショナル（2026年7月以降生産）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": [
+        "不明"
+      ],
+      "speedKph": {
+        "min": null,
+        "max": null,
+        "condition": "現行装備・価格表は作動速度域をオーナーズ・ハンドブック参照としており、数値範囲は未確認"
+      },
+      "trafficConditions": [
+        "設定した車速と先行車との車間の維持",
+        "車線中央付近の走行支援",
+        "高速道路渋滞時の停止・再発進（詳細条件は未確認）"
+      ],
+      "weather": [
+        "路面状況や気象条件などにより作動しない、または適切に作動しない場合がある"
+      ],
+      "geoRestriction": [
+        "通常のACC・ステアリング支援の対象道路は現行資料で未確認",
+        "ハンズオフは高速道路の渋滞時かつ一定条件下"
+      ],
+      "driverConditions": [
+        "進行方向と周囲へ絶えず注意",
+        "システム要求時に直ちにブレーキとステアリングを操作できる状態"
+      ],
+      "manufacturerSummary": "ドライビング・アシスト・プロフェッショナルは、車速・車間と車線中央付近の走行を支援する。高速道路の渋滞時は一定条件下でハンズオフを利用できるが、運転者が監視と操作責任を負う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway"
+    ],
+    "limitations": [
+      "完全な自動運転ではなく運転者が常に安全確認と操作責任を負う",
+      "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
+      "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
+      "作動速度の数値範囲は現行公開資料で未確認",
+      "受注状況は販売店で要確認"
+    ],
+    "sources": [
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Sedan_EPL_202607V1.pdf.asset.1784184000307.pdf",
+        "title": "BMW 3シリーズ セダン 装備・価格表（2026年7月以降生産）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "320i M Sportの日本向け販売単位とメーカー希望小売価格7,340,000円",
+          "全モデルでドライビング・アシスト・プロフェッショナルを標準装備",
+          "運転者責任・片手保持・高速道路渋滞時ハンズオフの条件",
+          "2026年7月以降生産向けの装備・価格"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/all-models/3-series/bmw-3-series-sedan/bmw-3-series-sedan.html",
+        "title": "BMW 3シリーズ セダン（G20）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "3シリーズ セダンの日本向け現行モデルページ",
+          "G20の世代表記"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html",
+        "title": "BMWの安全サポート技術 6つのシーン",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "ACCによる設定速度・車間の支援",
+          "高速道路渋滞時ハンズオフで操舵・加減速・制動を支援",
+          "運転者が周囲を把握して安全運転を確保する必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "BMW公式のアクティブ・クルーズ・コントロール（縦方向）とステアリング＆レーン・コントロール・アシスト（横方向）を国土交通省のLevel 2定義に照合し、Level 2相当と分類した。高速道路渋滞時は条件付きハンズオフに対応するが、運転者の監視・操作責任は継続する。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-bmw-3-series-g20-sedan-320d-xdrive-m-sport",
+    "market": "JP",
+    "maker": "BMW",
+    "model": "3シリーズ セダン",
+    "modelYear": null,
+    "generation": "G20",
+    "catalogAsOf": "2026-07",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": "2026-07",
+    "grade": "320d xDrive M Sport",
+    "requiredPackage": "ドライビング・アシスト・プロフェッショナル（標準装備）",
+    "featureVersion": "ドライビング・アシスト・プロフェッショナル（2026年7月以降生産）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": [
+        "不明"
+      ],
+      "speedKph": {
+        "min": null,
+        "max": null,
+        "condition": "現行装備・価格表は作動速度域をオーナーズ・ハンドブック参照としており、数値範囲は未確認"
+      },
+      "trafficConditions": [
+        "設定した車速と先行車との車間の維持",
+        "車線中央付近の走行支援",
+        "高速道路渋滞時の停止・再発進（詳細条件は未確認）"
+      ],
+      "weather": [
+        "路面状況や気象条件などにより作動しない、または適切に作動しない場合がある"
+      ],
+      "geoRestriction": [
+        "通常のACC・ステアリング支援の対象道路は現行資料で未確認",
+        "ハンズオフは高速道路の渋滞時かつ一定条件下"
+      ],
+      "driverConditions": [
+        "進行方向と周囲へ絶えず注意",
+        "システム要求時に直ちにブレーキとステアリングを操作できる状態"
+      ],
+      "manufacturerSummary": "ドライビング・アシスト・プロフェッショナルは、車速・車間と車線中央付近の走行を支援する。高速道路の渋滞時は一定条件下でハンズオフを利用できるが、運転者が監視と操作責任を負う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway"
+    ],
+    "limitations": [
+      "完全な自動運転ではなく運転者が常に安全確認と操作責任を負う",
+      "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
+      "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
+      "作動速度の数値範囲は現行公開資料で未確認",
+      "受注状況は販売店で要確認"
+    ],
+    "sources": [
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Sedan_EPL_202607V1.pdf.asset.1784184000307.pdf",
+        "title": "BMW 3シリーズ セダン 装備・価格表（2026年7月以降生産）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "320d xDrive M Sportの日本向け販売単位とメーカー希望小売価格7,780,000円",
+          "全モデルでドライビング・アシスト・プロフェッショナルを標準装備",
+          "運転者責任・片手保持・高速道路渋滞時ハンズオフの条件",
+          "2026年7月以降生産向けの装備・価格"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/all-models/3-series/bmw-3-series-sedan/bmw-3-series-sedan.html",
+        "title": "BMW 3シリーズ セダン（G20）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "3シリーズ セダンの日本向け現行モデルページ",
+          "G20の世代表記"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html",
+        "title": "BMWの安全サポート技術 6つのシーン",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "ACCによる設定速度・車間の支援",
+          "高速道路渋滞時ハンズオフで操舵・加減速・制動を支援",
+          "運転者が周囲を把握して安全運転を確保する必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "BMW公式のアクティブ・クルーズ・コントロール（縦方向）とステアリング＆レーン・コントロール・アシスト（横方向）を国土交通省のLevel 2定義に照合し、Level 2相当と分類した。高速道路渋滞時は条件付きハンズオフに対応するが、運転者の監視・操作責任は継続する。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-bmw-3-series-g20-sedan-330e-m-sport",
+    "market": "JP",
+    "maker": "BMW",
+    "model": "3シリーズ セダン",
+    "modelYear": null,
+    "generation": "G20",
+    "catalogAsOf": "2026-07",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": "2026-07",
+    "grade": "330e M Sport",
+    "requiredPackage": "ドライビング・アシスト・プロフェッショナル（標準装備）",
+    "featureVersion": "ドライビング・アシスト・プロフェッショナル（2026年7月以降生産）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": [
+        "不明"
+      ],
+      "speedKph": {
+        "min": null,
+        "max": null,
+        "condition": "現行装備・価格表は作動速度域をオーナーズ・ハンドブック参照としており、数値範囲は未確認"
+      },
+      "trafficConditions": [
+        "設定した車速と先行車との車間の維持",
+        "車線中央付近の走行支援",
+        "高速道路渋滞時の停止・再発進（詳細条件は未確認）"
+      ],
+      "weather": [
+        "路面状況や気象条件などにより作動しない、または適切に作動しない場合がある"
+      ],
+      "geoRestriction": [
+        "通常のACC・ステアリング支援の対象道路は現行資料で未確認",
+        "ハンズオフは高速道路の渋滞時かつ一定条件下"
+      ],
+      "driverConditions": [
+        "進行方向と周囲へ絶えず注意",
+        "システム要求時に直ちにブレーキとステアリングを操作できる状態"
+      ],
+      "manufacturerSummary": "ドライビング・アシスト・プロフェッショナルは、車速・車間と車線中央付近の走行を支援する。高速道路の渋滞時は一定条件下でハンズオフを利用できるが、運転者が監視と操作責任を負う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway"
+    ],
+    "limitations": [
+      "完全な自動運転ではなく運転者が常に安全確認と操作責任を負う",
+      "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
+      "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
+      "作動速度の数値範囲は現行公開資料で未確認",
+      "受注状況は販売店で要確認"
+    ],
+    "sources": [
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Sedan_EPL_202607V1.pdf.asset.1784184000307.pdf",
+        "title": "BMW 3シリーズ セダン 装備・価格表（2026年7月以降生産）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "330e M Sportの日本向け販売単位とメーカー希望小売価格8,890,000円",
+          "全モデルでドライビング・アシスト・プロフェッショナルを標準装備",
+          "運転者責任・片手保持・高速道路渋滞時ハンズオフの条件",
+          "2026年7月以降生産向けの装備・価格"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/all-models/3-series/bmw-3-series-sedan/bmw-3-series-sedan.html",
+        "title": "BMW 3シリーズ セダン（G20）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "3シリーズ セダンの日本向け現行モデルページ",
+          "G20の世代表記"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html",
+        "title": "BMWの安全サポート技術 6つのシーン",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "ACCによる設定速度・車間の支援",
+          "高速道路渋滞時ハンズオフで操舵・加減速・制動を支援",
+          "運転者が周囲を把握して安全運転を確保する必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "BMW公式のアクティブ・クルーズ・コントロール（縦方向）とステアリング＆レーン・コントロール・アシスト（横方向）を国土交通省のLevel 2定義に照合し、Level 2相当と分類した。高速道路渋滞時は条件付きハンズオフに対応するが、運転者の監視・操作責任は継続する。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-bmw-3-series-g20-sedan-m340i-xdrive",
+    "market": "JP",
+    "maker": "BMW",
+    "model": "3シリーズ セダン",
+    "modelYear": null,
+    "generation": "G20",
+    "catalogAsOf": "2026-07",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": "2026-07",
+    "grade": "M340i xDrive",
+    "requiredPackage": "ドライビング・アシスト・プロフェッショナル（標準装備）",
+    "featureVersion": "ドライビング・アシスト・プロフェッショナル（2026年7月以降生産）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": [
+        "不明"
+      ],
+      "speedKph": {
+        "min": null,
+        "max": null,
+        "condition": "現行装備・価格表は作動速度域をオーナーズ・ハンドブック参照としており、数値範囲は未確認"
+      },
+      "trafficConditions": [
+        "設定した車速と先行車との車間の維持",
+        "車線中央付近の走行支援",
+        "高速道路渋滞時の停止・再発進（詳細条件は未確認）"
+      ],
+      "weather": [
+        "路面状況や気象条件などにより作動しない、または適切に作動しない場合がある"
+      ],
+      "geoRestriction": [
+        "通常のACC・ステアリング支援の対象道路は現行資料で未確認",
+        "ハンズオフは高速道路の渋滞時かつ一定条件下"
+      ],
+      "driverConditions": [
+        "進行方向と周囲へ絶えず注意",
+        "システム要求時に直ちにブレーキとステアリングを操作できる状態"
+      ],
+      "manufacturerSummary": "ドライビング・アシスト・プロフェッショナルは、車速・車間と車線中央付近の走行を支援する。高速道路の渋滞時は一定条件下でハンズオフを利用できるが、運転者が監視と操作責任を負う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway"
+    ],
+    "limitations": [
+      "完全な自動運転ではなく運転者が常に安全確認と操作責任を負う",
+      "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
+      "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
+      "作動速度の数値範囲は現行公開資料で未確認",
+      "受注状況は販売店で要確認"
+    ],
+    "sources": [
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Sedan_EPL_202607V1.pdf.asset.1784184000307.pdf",
+        "title": "BMW 3シリーズ セダン 装備・価格表（2026年7月以降生産）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "M340i xDriveの日本向け販売単位とメーカー希望小売価格9,920,000円",
+          "全モデルでドライビング・アシスト・プロフェッショナルを標準装備",
+          "運転者責任・片手保持・高速道路渋滞時ハンズオフの条件",
+          "2026年7月以降生産向けの装備・価格"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/all-models/3-series/bmw-3-series-sedan/bmw-3-series-sedan.html",
+        "title": "BMW 3シリーズ セダン（G20）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "3シリーズ セダンの日本向け現行モデルページ",
+          "G20の世代表記"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html",
+        "title": "BMWの安全サポート技術 6つのシーン",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "ACCによる設定速度・車間の支援",
+          "高速道路渋滞時ハンズオフで操舵・加減速・制動を支援",
+          "運転者が周囲を把握して安全運転を確保する必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "BMW公式のアクティブ・クルーズ・コントロール（縦方向）とステアリング＆レーン・コントロール・アシスト（横方向）を国土交通省のLevel 2定義に照合し、Level 2相当と分類した。高速道路渋滞時は条件付きハンズオフに対応するが、運転者の監視・操作責任は継続する。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-bmw-3-series-g21-touring-318i-m-sport",
+    "market": "JP",
+    "maker": "BMW",
+    "model": "3シリーズ ツーリング",
+    "modelYear": null,
+    "generation": "G21",
+    "catalogAsOf": "2026-07",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": "2026-07",
+    "grade": "318i M Sport",
+    "requiredPackage": "ドライビング・アシスト・プロフェッショナル（標準装備）",
+    "featureVersion": "ドライビング・アシスト・プロフェッショナル（2026年7月以降生産）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": [
+        "不明"
+      ],
+      "speedKph": {
+        "min": null,
+        "max": null,
+        "condition": "現行装備・価格表は作動速度域をオーナーズ・ハンドブック参照としており、数値範囲は未確認"
+      },
+      "trafficConditions": [
+        "設定した車速と先行車との車間の維持",
+        "車線中央付近の走行支援",
+        "高速道路渋滞時の停止・再発進（詳細条件は未確認）"
+      ],
+      "weather": [
+        "路面状況や気象条件などにより作動しない、または適切に作動しない場合がある"
+      ],
+      "geoRestriction": [
+        "通常のACC・ステアリング支援の対象道路は現行資料で未確認",
+        "ハンズオフは高速道路の渋滞時かつ一定条件下"
+      ],
+      "driverConditions": [
+        "進行方向と周囲へ絶えず注意",
+        "システム要求時に直ちにブレーキとステアリングを操作できる状態"
+      ],
+      "manufacturerSummary": "ドライビング・アシスト・プロフェッショナルは、車速・車間と車線中央付近の走行を支援する。高速道路の渋滞時は一定条件下でハンズオフを利用できるが、運転者が監視と操作責任を負う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway"
+    ],
+    "limitations": [
+      "完全な自動運転ではなく運転者が常に安全確認と操作責任を負う",
+      "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
+      "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
+      "作動速度の数値範囲は現行公開資料で未確認",
+      "受注状況は販売店で要確認"
+    ],
+    "sources": [
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Touring_EPL_202607V1.pdf.asset.1784183994213.pdf",
+        "title": "BMW 3シリーズ ツーリング 装備・価格表（2026年7月以降生産）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "318i M Sportの日本向け販売単位とメーカー希望小売価格7,160,000円",
+          "全モデルでドライビング・アシスト・プロフェッショナルを標準装備",
+          "運転者責任・片手保持・高速道路渋滞時ハンズオフの条件",
+          "2026年7月以降生産向けの装備・価格"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/all-models/3-series/3-series-touring/bmw-3-series-touring.html",
+        "title": "BMW 3シリーズ ツーリング（G21）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "3シリーズ ツーリングの日本向け現行モデルページ",
+          "G21の世代表記"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html",
+        "title": "BMWの安全サポート技術 6つのシーン",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "ACCによる設定速度・車間の支援",
+          "高速道路渋滞時ハンズオフで操舵・加減速・制動を支援",
+          "運転者が周囲を把握して安全運転を確保する必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "BMW公式のアクティブ・クルーズ・コントロール（縦方向）とステアリング＆レーン・コントロール・アシスト（横方向）を国土交通省のLevel 2定義に照合し、Level 2相当と分類した。高速道路渋滞時は条件付きハンズオフに対応するが、運転者の監視・操作責任は継続する。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-bmw-3-series-g21-touring-320i-m-sport",
+    "market": "JP",
+    "maker": "BMW",
+    "model": "3シリーズ ツーリング",
+    "modelYear": null,
+    "generation": "G21",
+    "catalogAsOf": "2026-07",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": "2026-07",
+    "grade": "320i M Sport",
+    "requiredPackage": "ドライビング・アシスト・プロフェッショナル（標準装備）",
+    "featureVersion": "ドライビング・アシスト・プロフェッショナル（2026年7月以降生産）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": [
+        "不明"
+      ],
+      "speedKph": {
+        "min": null,
+        "max": null,
+        "condition": "現行装備・価格表は作動速度域をオーナーズ・ハンドブック参照としており、数値範囲は未確認"
+      },
+      "trafficConditions": [
+        "設定した車速と先行車との車間の維持",
+        "車線中央付近の走行支援",
+        "高速道路渋滞時の停止・再発進（詳細条件は未確認）"
+      ],
+      "weather": [
+        "路面状況や気象条件などにより作動しない、または適切に作動しない場合がある"
+      ],
+      "geoRestriction": [
+        "通常のACC・ステアリング支援の対象道路は現行資料で未確認",
+        "ハンズオフは高速道路の渋滞時かつ一定条件下"
+      ],
+      "driverConditions": [
+        "進行方向と周囲へ絶えず注意",
+        "システム要求時に直ちにブレーキとステアリングを操作できる状態"
+      ],
+      "manufacturerSummary": "ドライビング・アシスト・プロフェッショナルは、車速・車間と車線中央付近の走行を支援する。高速道路の渋滞時は一定条件下でハンズオフを利用できるが、運転者が監視と操作責任を負う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway"
+    ],
+    "limitations": [
+      "完全な自動運転ではなく運転者が常に安全確認と操作責任を負う",
+      "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
+      "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
+      "作動速度の数値範囲は現行公開資料で未確認",
+      "受注状況は販売店で要確認"
+    ],
+    "sources": [
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Touring_EPL_202607V1.pdf.asset.1784183994213.pdf",
+        "title": "BMW 3シリーズ ツーリング 装備・価格表（2026年7月以降生産）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "320i M Sportの日本向け販売単位とメーカー希望小売価格7,840,000円",
+          "全モデルでドライビング・アシスト・プロフェッショナルを標準装備",
+          "運転者責任・片手保持・高速道路渋滞時ハンズオフの条件",
+          "2026年7月以降生産向けの装備・価格"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/all-models/3-series/3-series-touring/bmw-3-series-touring.html",
+        "title": "BMW 3シリーズ ツーリング（G21）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "3シリーズ ツーリングの日本向け現行モデルページ",
+          "G21の世代表記"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html",
+        "title": "BMWの安全サポート技術 6つのシーン",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "ACCによる設定速度・車間の支援",
+          "高速道路渋滞時ハンズオフで操舵・加減速・制動を支援",
+          "運転者が周囲を把握して安全運転を確保する必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "BMW公式のアクティブ・クルーズ・コントロール（縦方向）とステアリング＆レーン・コントロール・アシスト（横方向）を国土交通省のLevel 2定義に照合し、Level 2相当と分類した。高速道路渋滞時は条件付きハンズオフに対応するが、運転者の監視・操作責任は継続する。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-bmw-3-series-g21-touring-320d-xdrive-m-sport",
+    "market": "JP",
+    "maker": "BMW",
+    "model": "3シリーズ ツーリング",
+    "modelYear": null,
+    "generation": "G21",
+    "catalogAsOf": "2026-07",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": "2026-07",
+    "grade": "320d xDrive M Sport",
+    "requiredPackage": "ドライビング・アシスト・プロフェッショナル（標準装備）",
+    "featureVersion": "ドライビング・アシスト・プロフェッショナル（2026年7月以降生産）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": [
+        "不明"
+      ],
+      "speedKph": {
+        "min": null,
+        "max": null,
+        "condition": "現行装備・価格表は作動速度域をオーナーズ・ハンドブック参照としており、数値範囲は未確認"
+      },
+      "trafficConditions": [
+        "設定した車速と先行車との車間の維持",
+        "車線中央付近の走行支援",
+        "高速道路渋滞時の停止・再発進（詳細条件は未確認）"
+      ],
+      "weather": [
+        "路面状況や気象条件などにより作動しない、または適切に作動しない場合がある"
+      ],
+      "geoRestriction": [
+        "通常のACC・ステアリング支援の対象道路は現行資料で未確認",
+        "ハンズオフは高速道路の渋滞時かつ一定条件下"
+      ],
+      "driverConditions": [
+        "進行方向と周囲へ絶えず注意",
+        "システム要求時に直ちにブレーキとステアリングを操作できる状態"
+      ],
+      "manufacturerSummary": "ドライビング・アシスト・プロフェッショナルは、車速・車間と車線中央付近の走行を支援する。高速道路の渋滞時は一定条件下でハンズオフを利用できるが、運転者が監視と操作責任を負う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway"
+    ],
+    "limitations": [
+      "完全な自動運転ではなく運転者が常に安全確認と操作責任を負う",
+      "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
+      "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
+      "作動速度の数値範囲は現行公開資料で未確認",
+      "受注状況は販売店で要確認"
+    ],
+    "sources": [
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Touring_EPL_202607V1.pdf.asset.1784183994213.pdf",
+        "title": "BMW 3シリーズ ツーリング 装備・価格表（2026年7月以降生産）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "320d xDrive M Sportの日本向け販売単位とメーカー希望小売価格8,100,000円",
+          "全モデルでドライビング・アシスト・プロフェッショナルを標準装備",
+          "運転者責任・片手保持・高速道路渋滞時ハンズオフの条件",
+          "2026年7月以降生産向けの装備・価格"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/all-models/3-series/3-series-touring/bmw-3-series-touring.html",
+        "title": "BMW 3シリーズ ツーリング（G21）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "3シリーズ ツーリングの日本向け現行モデルページ",
+          "G21の世代表記"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html",
+        "title": "BMWの安全サポート技術 6つのシーン",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "ACCによる設定速度・車間の支援",
+          "高速道路渋滞時ハンズオフで操舵・加減速・制動を支援",
+          "運転者が周囲を把握して安全運転を確保する必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "BMW公式のアクティブ・クルーズ・コントロール（縦方向）とステアリング＆レーン・コントロール・アシスト（横方向）を国土交通省のLevel 2定義に照合し、Level 2相当と分類した。高速道路渋滞時は条件付きハンズオフに対応するが、運転者の監視・操作責任は継続する。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
+  },
+  {
+    "id": "jp-bmw-3-series-g21-touring-m340i-xdrive",
+    "market": "JP",
+    "maker": "BMW",
+    "model": "3シリーズ ツーリング",
+    "modelYear": null,
+    "generation": "G21",
+    "catalogAsOf": "2026-07",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": "2026-07",
+    "grade": "M340i xDrive",
+    "requiredPackage": "ドライビング・アシスト・プロフェッショナル（標準装備）",
+    "featureVersion": "ドライビング・アシスト・プロフェッショナル（2026年7月以降生産）",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-07",
+    "odd": {
+      "roadTypes": [
+        "不明"
+      ],
+      "speedKph": {
+        "min": null,
+        "max": null,
+        "condition": "現行装備・価格表は作動速度域をオーナーズ・ハンドブック参照としており、数値範囲は未確認"
+      },
+      "trafficConditions": [
+        "設定した車速と先行車との車間の維持",
+        "車線中央付近の走行支援",
+        "高速道路渋滞時の停止・再発進（詳細条件は未確認）"
+      ],
+      "weather": [
+        "路面状況や気象条件などにより作動しない、または適切に作動しない場合がある"
+      ],
+      "geoRestriction": [
+        "通常のACC・ステアリング支援の対象道路は現行資料で未確認",
+        "ハンズオフは高速道路の渋滞時かつ一定条件下"
+      ],
+      "driverConditions": [
+        "進行方向と周囲へ絶えず注意",
+        "システム要求時に直ちにブレーキとステアリングを操作できる状態"
+      ],
+      "manufacturerSummary": "ドライビング・アシスト・プロフェッショナルは、車速・車間と車線中央付近の走行を支援する。高速道路の渋滞時は一定条件下でハンズオフを利用できるが、運転者が監視と操作責任を負う。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway"
+    ],
+    "limitations": [
+      "完全な自動運転ではなく運転者が常に安全確認と操作責任を負う",
+      "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
+      "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
+      "作動速度の数値範囲は現行公開資料で未確認",
+      "受注状況は販売店で要確認"
+    ],
+    "sources": [
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Touring_EPL_202607V1.pdf.asset.1784183994213.pdf",
+        "title": "BMW 3シリーズ ツーリング 装備・価格表（2026年7月以降生産）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "M340i xDriveの日本向け販売単位とメーカー希望小売価格10,270,000円",
+          "全モデルでドライビング・アシスト・プロフェッショナルを標準装備",
+          "運転者責任・片手保持・高速道路渋滞時ハンズオフの条件",
+          "2026年7月以降生産向けの装備・価格"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/all-models/3-series/3-series-touring/bmw-3-series-touring.html",
+        "title": "BMW 3シリーズ ツーリング（G21）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "3シリーズ ツーリングの日本向け現行モデルページ",
+          "G21の世代表記"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "ビー・エム・ダブリュー株式会社",
+        "url": "https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html",
+        "title": "BMWの安全サポート技術 6つのシーン",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "ACCによる設定速度・車間の支援",
+          "高速道路渋滞時ハンズオフで操舵・加減速・制動を支援",
+          "運転者が周囲を把握して安全運転を確保する必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-07",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "BMW公式のアクティブ・クルーズ・コントロール（縦方向）とステアリング＆レーン・コントロール・アシスト（横方向）を国土交通省のLevel 2定義に照合し、Level 2相当と分類した。高速道路渋滞時は条件付きハンズオフに対応するが、運転者の監視・操作責任は継続する。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-07"
   }
 ]
