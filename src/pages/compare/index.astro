@@ -1,18 +1,32 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { availabilityLabels, handsOffLabels, levelLabels, monitoringLabels, vehicles } from '../../data/loader';
+import { availabilityLabels, handsOffLabels, levelLabels, monitoringLabels, vehicleReferenceLabel, vehicles } from '../../data/loader';
+
+const publicCatalog = vehicles.map((vehicle) => ({
+  id: vehicle.id,
+  maker: vehicle.maker,
+  model: vehicle.model,
+  grade: vehicle.grade,
+  automationLevel: vehicle.automationLevel,
+  requiredPackage: vehicle.requiredPackage,
+  availability: vehicle.availability,
+  handsOff: vehicle.handsOff,
+  driverMonitoring: vehicle.driverMonitoring,
+  odd: vehicle.odd,
+  referenceLabel: vehicleReferenceLabel(vehicle),
+}));
 ---
 <Layout title="2台を比較する｜自動運転.jp" description="自動運転レベルと作動条件、必要装備を2台で比較できます。">
   <section class="page-intro"><div class="wrap"><div class="eyebrow">COMPARE CONDITIONS</div><h1>2台の違いを、同じ軸で。</h1><p class="hero-copy">レベルの数字だけでなく、道路・速度・監視・ハンズオフ・必要装備を並べます。不明な項目は「不明」と表示します。</p></div></section>
   <section class="section" style="padding-top: 10px;"><div class="wrap">
     <form class="compare-select" method="get" action="/compare/">
-      {vehicles.map((vehicle) => <label class="check-card"><input type="checkbox" name="ids" value={vehicle.id} /> <span><strong>{vehicle.maker} {vehicle.model}</strong><br /><small class="subtle">Level {vehicle.automationLevel} · {vehicle.modelYear} · {vehicle.grade}</small></span></label>)}
+      {vehicles.map((vehicle) => <label class="check-card"><input type="checkbox" name="ids" value={vehicle.id} /> <span><strong>{vehicle.maker} {vehicle.model}</strong><br /><small class="subtle">Level {vehicle.automationLevel} · {vehicleReferenceLabel(vehicle)} · {vehicle.grade}</small></span></label>)}
       <div style="grid-column: 1 / -1; display:flex; justify-content:flex-end;"><button class="button alt" type="submit">選択した車両を比較</button></div>
     </form>
     <div class="empty" data-compare-empty><h2>比較する車両を一覧から選んでください。</h2><p>車両一覧の「比較に追加」から2台を選ぶと、条件を横並びで確認できます。</p><a class="button text" href="/">車を探す</a></div>
     <div data-compare-result hidden></div>
   </div></section>
-  <script define:vars={{ catalog: vehicles, levelLabels, availabilityLabels, handsOffLabels, monitoringLabels }}>
+  <script define:vars={{ catalog: publicCatalog, levelLabels, availabilityLabels, handsOffLabels, monitoringLabels }}>
     // @ts-nocheck
     const escapeHtml = (value) => String(value ?? '不明').replace(/[&<>"']/g, (char) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
     const fact = (value) => Array.isArray(value) ? value.join(' / ') || '不明' : value || '不明';
@@ -39,7 +53,7 @@ import { availabilityLabels, handsOffLabels, levelLabels, monitoringLabels, vehi
       if (selected.length !== 2) return;
       const headings = selected.map((v) => `<th>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</th>`).join('');
       const cells = (fn) => selected.map((v) => `<td>${fn(v)}</td>`).join('');
-      result.innerHTML = `<div class="cards" style="margin-bottom:28px;">${selected.map((v) => `<article class="vehicle-card"><div class="vehicle-card-body"><div class="eyebrow">LEVEL ${v.automationLevel} · ${escapeHtml(levelLabels[v.automationLevel])}</div><h3>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</h3><div class="maker">${escapeHtml(v.modelYear)}　${escapeHtml(v.grade)}</div></div></article>`).join('')}</div><div style="overflow-x:auto;"><table class="compare-table"><thead><tr><th>比較項目</th>${headings}</tr></thead><tbody><tr><th>自動化レベル</th>${cells((v) => `<strong>Level ${v.automationLevel}</strong><br />${escapeHtml(levelLabels[v.automationLevel])}`)}</tr><tr><th>道路</th>${cells((v) => escapeHtml(fact(v.odd.roadTypes)))}</tr><tr><th>速度</th>${cells((v) => escapeHtml(v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明')))}</tr><tr><th>ハンズオフ</th>${cells((v) => escapeHtml(handsOffLabels[v.handsOff]))}</tr><tr><th>運転者監視</th>${cells((v) => escapeHtml(monitoringLabels[v.driverMonitoring]))}</tr><tr><th>必要パッケージ</th>${cells((v) => escapeHtml(v.requiredPackage || '不明'))}</tr><tr><th>販売・利用状態</th>${cells((v) => escapeHtml(availabilityLabels[v.availability]))}</tr></tbody></table></div>`;
+      result.innerHTML = `<div class="cards" style="margin-bottom:28px;">${selected.map((v) => `<article class="vehicle-card"><div class="vehicle-card-body"><div class="eyebrow">LEVEL ${v.automationLevel} · ${escapeHtml(levelLabels[v.automationLevel])}</div><h3>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</h3><div class="maker">${escapeHtml(v.referenceLabel)}　${escapeHtml(v.grade)}</div></div></article>`).join('')}</div><div style="overflow-x:auto;"><table class="compare-table"><thead><tr><th>比較項目</th>${headings}</tr></thead><tbody><tr><th>自動化レベル</th>${cells((v) => `<strong>Level ${v.automationLevel}</strong><br />${escapeHtml(levelLabels[v.automationLevel])}`)}</tr><tr><th>道路</th>${cells((v) => escapeHtml(fact(v.odd.roadTypes)))}</tr><tr><th>速度</th>${cells((v) => escapeHtml(v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明')))}</tr><tr><th>ハンズオフ</th>${cells((v) => escapeHtml(handsOffLabels[v.handsOff]))}</tr><tr><th>運転者監視</th>${cells((v) => escapeHtml(monitoringLabels[v.driverMonitoring]))}</tr><tr><th>必要パッケージ</th>${cells((v) => escapeHtml(v.requiredPackage || '不明'))}</tr><tr><th>販売・利用状態</th>${cells((v) => escapeHtml(availabilityLabels[v.availability]))}</tr></tbody></table></div>`;
       sendCompare(selected);
     };
     window.addEventListener('popstate', renderCompare); renderCompare();

@@ -25,7 +25,7 @@
 1レコードは次の組合せを表す。
 
 ```text
-market + maker + model + model_year + grade + required_package + feature_version
+market + maker + model + model_year + generation + grade + required_package + feature_version
 ```
 
 同じ車名でも、グレード、年式、ソフトウェア、オプションで条件が異なれば別レコードにする。
@@ -37,7 +37,12 @@ market + maker + model + model_year + grade + required_package + feature_version
 | `id` | string | 安定ID。表示名変更で変えない |
 | `market` | `JP` | 初期は日本のみ |
 | `maker`, `model` | string | 日本公式名称 |
-| `modelYear`, `grade` | string | 不明なら公開候補にしない |
+| `modelYear` | string/null | メーカーが明示したモデル年のみ。資料発行年・カタログ確認年を代入しない |
+| `generation` | string/null | メーカーが明示した世代・型式呼称。モデル年の代替推定には使わない |
+| `grade` | string | 日本公式の販売単位名 |
+| `catalogAsOf` | `YYYY-MM`/null | 現行カタログ・公式ラインアップの適用時点。確認日とは別 |
+| `salesUnitIntroducedAt` | `YYYY-MM-DD` または `YYYY-MM`/null | 当該販売単位の発売・導入時点。資料年から推定しない |
+| `priceEffectiveAt` | `YYYY-MM-DD` または `YYYY-MM`/null | 掲載価格の適用時点。価格確認日とは別 |
 | `requiredPackage` | string/null | 標準、オプション、必要契約を明示 |
 | `automationLevel` | 0–5 | 一次情報で確認。メーカー認証とサイト分類を区別 |
 | `category` | `driver_assistance` / `automated_driving` | Level 0–2 / 3–5に対応 |
@@ -68,6 +73,15 @@ market + maker + model + model_year + grade + required_package + feature_version
 `used_only`、実証・サービス・発表段階は別の選択肢に分離する。
 現行掲載を確認できないunknownは既定表示に入れない。対象年式は表示するが、
 根拠URL・確認日・最終確認日は内部のデータ正本と棚卸し台帳で管理し、通常UIには表示しない。
+
+### 時系列の意味
+
+`modelYear` はメーカーがモデル年として明示した場合だけ設定する。公式資料の発行年、
+カタログの確認年、発売年をモデル年へ流用しない。明示がない場合は `null` とし、
+表示時は `generation`、それもなければ「現行仕様」とする。
+`catalogAsOf`、`salesUnitIntroducedAt`、`priceEffectiveAt` はそれぞれ独立した時点であり、
+確認日（`sources[].accessedAt` / `lastReviewedAt`）と混同しない。精度が月までしかない
+一次情報は `YYYY-MM` のまま保持し、日を捏造しない。
 
 ## ODD
 

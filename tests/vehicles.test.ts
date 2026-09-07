@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, filterVehicleList, validateVehicle, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, filterVehicleList, validateVehicle, vehicleReferenceLabel, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
-  id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', grade: '標準',
+  id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, grade: '標準',
   requiredPackage: null, automationLevel: 2, category: 'driver_assistance', availability: 'new_order_available',
   availabilityCheckedAt: '2026-09-01', odd: { roadTypes: ['高速道路'], speedKph: { max: 100 }, trafficConditions: [], weather: [], geoRestriction: [], driverConditions: ['着座'], manufacturerSummary: '要約' },
   driverMonitoring: 'required', handsOff: 'allowed_in_conditions', capabilities: ['lane'], limitations: ['監視'],
@@ -16,6 +16,10 @@ describe('vehicle data contract and filters', () => {
     expect(validateVehicle(makeVehicle())).toBe(true);
     expect(validateVehicle({ id: 'missing' })).toBe(false);
     expect(validateVehicle({ ...makeVehicle(), currentCatalogListed: undefined })).toBe(false);
+    expect(validateVehicle({ ...makeVehicle(), catalogAsOf: undefined })).toBe(false);
+    expect(validateVehicle({ ...makeVehicle(), catalogAsOf: '2026-2' })).toBe(false);
+    expect(validateVehicle({ ...makeVehicle(), salesUnitIntroducedAt: '2026-02-31' })).toBe(false);
+    expect(validateVehicle({ ...makeVehicle(), modelYear: null })).toBe(true);
   });
 
   it('filters by level, road, hands-off and availability together', () => {
@@ -49,6 +53,18 @@ describe('vehicle data contract and filters', () => {
     expect(tesla.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance')).toBe(true);
     expect(tesla.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'Tesla Japan' && source.accessedAt === '2026-09-07'))).toBe(true);
     expect(tesla.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
+    expect(tesla.every((vehicle) => vehicleReferenceLabel(vehicle) === '現行仕様')).toBe(true);
+  });
+
+  it('時系列フィールドは公式モデル年・世代・適用時点を混同しない', () => {
+    const ariya = vehicles.filter((vehicle) => vehicle.model === '日産アリア');
+    expect(ariya).toHaveLength(4);
+    expect(ariya.every((vehicle) => vehicle.modelYear === null && vehicle.catalogAsOf === '2026-02' && vehicle.salesUnitIntroducedAt === '2026-02')).toBe(true);
+    const serena = vehicles.find((vehicle) => vehicle.model === 'セレナ');
+    expect(serena && vehicleReferenceLabel(serena)).toBe('C28');
+    expect(serena?.modelYear).toBeNull();
+    const volvo = vehicles.filter((vehicle) => vehicle.maker === 'Volvo');
+    expect(volvo.every((vehicle) => vehicleReferenceLabel(vehicle) === '2027年モデル' && vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === '2026-07')).toBe(true);
   });
 
   it('Volvo EX30の2027年モデル3グレードを同じ監視条件で別販売単位に保つ', () => {

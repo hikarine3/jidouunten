@@ -1,13 +1,13 @@
 ---
 import type { Vehicle } from '../data/loader';
-import { availabilityLabels, canonicalRoadType, handsOffLabels, levelLabels, monitoringLabels } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, handsOffLabels, levelLabels, monitoringLabels, vehicleReferenceLabel } from '../data/loader';
 const { vehicle, selectable = false, checked = false } = Astro.props as { vehicle: Vehicle; selectable?: boolean; checked?: boolean };
 ---
 <article class="vehicle-card">
   <div class="vehicle-card-body">
     <div class="eyebrow">LEVEL {vehicle.automationLevel} · {levelLabels[vehicle.automationLevel]}</div>
     <h3><a href={`/cars/${vehicle.id}/`}>{vehicle.maker} {vehicle.model}</a></h3>
-    <div class="maker">{vehicle.modelYear}　{vehicle.grade}</div>
+    <div class="maker">{vehicleReferenceLabel(vehicle)}　{vehicle.grade}</div>
     <div class="meta">
       <span class="pill lime">{availabilityLabels[vehicle.availability]}</span>
       <span class="pill">{handsOffLabels[vehicle.handsOff]}</span>

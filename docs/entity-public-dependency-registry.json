@@ -109,6 +109,38 @@
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
+    },
+    "vehicle:catalog-temporal-semantics-v1": {
+      "entity_id": "vehicle:catalog-temporal-semantics-v1",
+      "entity_type": "vehicle_catalog_schema",
+      "source_of_truth": [
+        "docs/product/vehicle-data-contract.md",
+        "src/data/loader.ts",
+        "src/data/vehicles.json"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {"url": "/", "locale": "ja", "output_path": "dist/index.html", "markers": ["Tesla", "Model 3", "現行仕様", "Volvo", "2027年モデル"]},
+        {"url": "/cars/", "locale": "ja", "output_path": "dist/cars/index.html", "markers": ["Nissan", "セレナ", "C28", "SUBARU", "現行仕様"]},
+        {"url": "/cars/jp-tesla-model-3-2026-premium/", "locale": "ja", "output_path": "dist/cars/jp-tesla-model-3-2026-premium/index.html", "markers": ["Tesla", "Model 3", "現行仕様"]},
+        {"url": "/cars/jp-nissan-serena-2026-e-power-luxion/", "locale": "ja", "output_path": "dist/cars/jp-nissan-serena-2026-e-power-luxion/index.html", "markers": ["Nissan", "セレナ", "C28"]},
+        {"url": "/cars/jp-volvo-ex30-my2027-plus-p5-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-plus-p5-electric/index.html", "markers": ["Volvo", "EX30", "2027年モデル"]},
+        {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["現行仕様", "C28", "2027年モデル"]},
+        {"url": "/sitemap-0.xml", "locale": "ja", "output_path": "dist/sitemap-0.xml", "markers": ["jp-tesla-model-3-2026-premium", "jp-nissan-serena-2026-e-power-luxion", "jp-volvo-ex30-my2027-plus-p5-electric"]}
+      ],
+      "required_render_selectors": [
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Tesla", "Model 3", "現行仕様"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Nissan", "セレナ", "C28"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "2027年モデル"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
     }
   }
 }

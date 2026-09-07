@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { availabilityLabels, handsOffLabels, levelCaveat, levelLabels, listFact, monitoringLabels, vehicles } from '../../data/loader';
+import { availabilityLabels, handsOffLabels, levelCaveat, levelLabels, listFact, monitoringLabels, vehicleReferenceLabel, vehicles } from '../../data/loader';
 export function getStaticPaths() { return vehicles.map((vehicle) => ({ params: { id: vehicle.id }, props: { vehicle } })); }
 const { vehicle } = Astro.props;
 if (!vehicle) throw new Error('Vehicle not found');
@@ -9,7 +9,7 @@ const odd = vehicle.odd;
 <Layout title={`${vehicle.maker} ${vehicle.model}｜自動運転.jp`} description={`${vehicle.maker} ${vehicle.model}の自動化レベル、作動条件、必要装備を確認できます。`}>
   <section class="page-intro"><div class="wrap"><a class="subtle" href="/">← 車両一覧へ戻る</a></div></section>
   <section class="section" style="padding-top: 0;"><div class="wrap detail-grid">
-    <aside class="detail-hero"><div class="eyebrow">{vehicle.market} / {vehicle.modelYear}</div><div class="level-num">{vehicle.automationLevel}</div><div class="eyebrow" style="color:white;">{levelLabels[vehicle.automationLevel]}</div><h1>{vehicle.maker}<br />{vehicle.model}</h1><p>{vehicle.grade}</p><span class="pill lime">{availabilityLabels[vehicle.availability]}</span><p style="margin:18px 0 0; color:#d5e1e2; font-size:.84rem;">{levelCaveat(vehicle.automationLevel)}</p></aside>
+    <aside class="detail-hero"><div class="eyebrow">{vehicle.market} / {vehicleReferenceLabel(vehicle)}</div><div class="level-num">{vehicle.automationLevel}</div><div class="eyebrow" style="color:white;">{levelLabels[vehicle.automationLevel]}</div><h1>{vehicle.maker}<br />{vehicle.model}</h1><p>{vehicle.grade}</p><span class="pill lime">{availabilityLabels[vehicle.availability]}</span><p style="margin:18px 0 0; color:#d5e1e2; font-size:.84rem;">{levelCaveat(vehicle.automationLevel)}</p></aside>
     <div>
       <section class="detail-section"><h2>まず確認したいこと</h2><dl class="fact-grid"><div class="fact"><dt>必要パッケージ</dt><dd>{vehicle.requiredPackage || '標準装備 / 不明'}</dd></div><div class="fact"><dt>ハンズオフ</dt><dd>{handsOffLabels[vehicle.handsOff]}</dd></div><div class="fact"><dt>運転者の監視</dt><dd>{monitoringLabels[vehicle.driverMonitoring]}</dd></div><div class="fact"><dt>販売・利用状態</dt><dd>{availabilityLabels[vehicle.availability]}</dd></div></dl></section>
       <section class="detail-section"><h2>作動条件（ODD）</h2><dl class="fact-grid"><div class="fact"><dt>道路</dt><dd>{listFact(odd.roadTypes)}</dd></div><div class="fact"><dt>速度</dt><dd>{odd.speedKph?.condition || (odd.speedKph?.max ? `${odd.speedKph.min ?? 0}〜${odd.speedKph.max}km/h` : '不明')}</dd></div><div class="fact"><dt>交通条件</dt><dd>{listFact(odd.trafficConditions)}</dd></div><div class="fact"><dt>天候</dt><dd>{listFact(odd.weather)}</dd></div><div class="fact"><dt>地理条件</dt><dd>{listFact(odd.geoRestriction)}</dd></div><div class="fact"><dt>運転者条件</dt><dd>{listFact(odd.driverConditions)}</dd></div></dl><p style="margin:16px 0 0;">{odd.manufacturerSummary || '作動条件の公式要約は不明です。'}</p></section>
@@ -17,7 +17,7 @@ const odd = vehicle.odd;
       {vehicle.classificationRationale && <section class="detail-section"><h2>このレベルの分類根拠</h2><p>{vehicle.classificationRationale}</p><p class="subtle">このサイトの分類は、メーカーの機能説明と国土交通省などの定義を照合した表示です。メーカーによる「Level {vehicle.automationLevel}認証」や安全性の保証を意味しません。</p></section>}
     </div>
   </div></section>
-  <script define:vars={{ vehicleId: vehicle.id, modelYear: vehicle.modelYear, grade: vehicle.grade }}>
+  <script define:vars={{ vehicleId: vehicle.id, modelYear: vehicle.modelYear ?? '', grade: vehicle.grade }}>
     // @ts-nocheck
     const viewPayload = { vehicle_id: vehicleId, model_year: modelYear, grade };
     const sendView = () => {

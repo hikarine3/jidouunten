@@ -35,7 +35,12 @@ export interface Vehicle {
   market: string;
   maker: string;
   model: string;
-  modelYear: string;
+  /** Manufacturer-explicit model year; document/publication years are not substitutes. */
+  modelYear: string | null;
+  generation: string | null;
+  catalogAsOf: string | null;
+  salesUnitIntroducedAt: string | null;
+  priceEffectiveAt: string | null;
   grade: string;
   requiredPackage: string | null;
   /** True only when the current Japanese catalog listing was checked. */
@@ -123,6 +128,12 @@ export function findVehicle(id: string) {
   return vehicles.find((vehicle) => vehicle.id === id);
 }
 
+export function vehicleReferenceLabel(vehicle: Pick<Vehicle, 'modelYear' | 'generation'>) {
+  if (vehicle.modelYear) return `${vehicle.modelYear}年モデル`;
+  if (vehicle.generation) return vehicle.generation;
+  return '現行仕様';
+}
+
 export function displayDate(date: string) {
   if (!date) return '不明';
   const parsed = new Date(date);
@@ -161,6 +172,7 @@ export function filterVehicleList(list: Vehicle[], input: {
 export function validateVehicle(value: unknown): value is Vehicle {
   if (!value || typeof value !== 'object') return false;
   const candidate = value as Partial<Vehicle>;
+  const hasOwn = (key: string) => Object.prototype.hasOwnProperty.call(candidate, key);
   const validAvailability = ['new_order_available', 'inventory_only', 'used_only', 'service_available', 'trial_or_research', 'announced', 'unavailable', 'unknown'].includes(candidate.availability ?? '');
   const validMonitoring = ['required', 'takeover_ready', 'not_required_in_odd', 'unknown'].includes(candidate.driverMonitoring ?? '');
   const validHandsOff = ['allowed_in_conditions', 'not_allowed', 'unknown'].includes(candidate.handsOff ?? '');
@@ -172,13 +184,30 @@ export function validateVehicle(value: unknown): value is Vehicle {
     && typeof candidate.odd.manufacturerSummary === 'string';
   const validDate = (date: unknown) => typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(Date.parse(date));
   const validSources = Array.isArray(candidate.sources) && candidate.sources.length > 0 && candidate.sources.every((source) => source && typeof source === 'object' && typeof source.url === 'string' && /^https?:\/\//.test(source.url) && typeof source.publisher === 'string' && typeof source.title === 'string' && validDate(source.accessedAt) && Array.isArray(source.supports));
+  const validMonth = (date: unknown) => typeof date === 'string' && /^\d{4}-(0[1-9]|1[0-2])$/.test(date);
+  const validMonthOrDate = (date: unknown) => {
+    if (validMonth(date)) return true;
+    if (typeof date !== 'string') return false;
+    const match = /^(\d{4})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.exec(date);
+    if (!match) return false;
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = Number(match[3]);
+    const parsed = new Date(Date.UTC(year, month - 1, day));
+    return parsed.getUTCFullYear() === year && parsed.getUTCMonth() === month - 1 && parsed.getUTCDate() === day;
+  };
+  const validNullable = (value: unknown, validator: (input: unknown) => boolean) => value === null || validator(value);
   const levelMatchesCategory = candidate.category === 'driver_assistance' ? Number(candidate.automationLevel) <= 2 : Number(candidate.automationLevel) >= 3;
   const numericLevel = Number(candidate.automationLevel);
   return typeof candidate.id === 'string'
     && candidate.market === 'JP'
     && typeof candidate.maker === 'string'
     && typeof candidate.model === 'string'
-    && typeof candidate.modelYear === 'string'
+    && (typeof candidate.modelYear === 'string' || candidate.modelYear === null)
+    && hasOwn('generation') && (typeof candidate.generation === 'string' || candidate.generation === null)
+    && hasOwn('catalogAsOf') && validNullable(candidate.catalogAsOf, validMonth)
+    && hasOwn('salesUnitIntroducedAt') && validNullable(candidate.salesUnitIntroducedAt, validMonthOrDate)
+    && hasOwn('priceEffectiveAt') && validNullable(candidate.priceEffectiveAt, validMonthOrDate)
     && typeof candidate.grade === 'string'
     && (typeof candidate.requiredPackage === 'string' || candidate.requiredPackage === null)
     && typeof candidate.currentCatalogListed === 'boolean'
