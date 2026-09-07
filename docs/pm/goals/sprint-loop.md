@@ -24,7 +24,10 @@ GitHubの状態を、このファイルや別のtodo/queue JSONへ複製しま�
 3. `Status=In progress` があれば、そのIssueを現在Phaseから継続する。
 4. activeがなく `Status=Ready` があれば、`Work priority`、同順位は`Rank`昇順の先頭をclaimする。
 5. Readyが1件でもある間はPhase 0の候補探索・再採点・内部基盤Sprintを開始しない。
-6. GitHub取得失敗をReady 0件として扱わない。Ready 0件を確認できた場合だけPhase 0を1回実行する。
+6. GitHub取得失敗をReady 0件として扱わない。activeもReadyも0件と確認できた場合だけ
+   [`../prompts/phase_0.md`](../prompts/phase_0.md)を実行する。
+7. Phase 0は、価値gateを通過した重複なしのReady候補10件以上をportfolioとして全件事前検証し、
+   GitHub Projectへ一括登録するまで完了扱いにしない。1〜9件の部分登録や数合わせの内部作業は禁止する。
 
 ## このPJの価値・観測・配信契約
 
@@ -62,8 +65,8 @@ Phase 0〜7の意味は `docs/pm/github-work-management.md` を使います。�
 
 件数指定がない起動では、以下のいずれかまで継続します。
 
-- active Issueを完了し、Project取得成功かつReady 0件を確認した後、Phase 0を1回実行しても
-  実測根拠を持つ有限候補が0件だった。
+- active Issueを完了し、Project取得成功かつReady 0件を確認した場合はPhase 0へ戻り、
+  実測根拠を持つ有効なReady候補10件以上を登録して次のSprintへ進む。
 - 同一の真正なblockerが3回連続し、安全な代替、再調査、別の非競合Ready Issueのいずれでも進めない。
 - R2/R3、課金、DNS/Secret、契約、個人データ、削除など、ユーザーの新しい判断がなければ越えられない。
 
@@ -73,5 +76,5 @@ Phase 0〜7の意味は `docs/pm/github-work-management.md` を使います。�
 ## Short `/goal` paste
 
 ```text
-/goal docs/pm/goals/sprint-loop.md を読み、GitHub Project `jidouunten Delivery` のIn progressを継続し、なければStatus=ReadyをWork priority、同順位はRank順に消費する。Readyがある間はPhase 0を再実行しない。通常実装はrepoのmodel routingで低コストagentへ範囲固定し、親は採択・統合・高risk判断だけを行う。Phase 5まで件数付きQAと実ブラウザ確認、Phase 6で独立レビューを行う。push/deploy/DNS/課金は対象ごとの人間承認まで実行しない。GitHub取得失敗をReady 0件扱いせず、本書の終端・停止条件まで継続する。
+/goal docs/pm/goals/sprint-loop.md を読み、GitHub Project `jidouunten Delivery` のIn progressを継続し、なければStatus=ReadyをWork priority、同順位はRank順に消費する。Readyがある間はPhase 0を再実行しない。activeもReadyも0件ならPhase 0を行い、価値gateを通る重複なしのReady候補10件以上を全件事前検証してProjectへ登録するまで完了扱いにしない。通常実装はrepoのmodel routingで低コストagentへ範囲固定し、親は採択・統合・高risk判断だけを行う。Phase 5まで件数付きQAと実ブラウザ確認、Phase 6で独立レビューを行う。push/deploy/DNS/課金は対象ごとの人間承認まで実行しない。GitHub取得失敗をReady 0件扱いせず、本書の終端・停止条件まで継続する。
 ```

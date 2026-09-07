@@ -14,6 +14,9 @@
 - レベルは入口とし、ODD、道路、速度、監視、ハンズオフ、グレード、販売状態も比較する。
 - MVPは Astro + TypeScript + Cloudflare Pagesのstatic-first。
 - 現行Sprint/Todo状態はGitHub ProjectとIssue、repoは戦略・仕様・根拠・QAの正本。
+- active/Readyがともに0件の場合だけPhase 0へ戻る。価値根拠を持つ重複なしのReady候補10件以上を
+  全件事前検証してGitHub Projectへ一括登録するまでPhase 0を閉じず、1〜9件の部分登録や
+  docs/checkerだけの数合わせ候補を認めない。
 
 ## 外部設定
 

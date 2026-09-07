@@ -35,18 +35,26 @@ Issueは成果物へのリンクを持ち、長文仕様を二重に保持しな
 1. `Status=Ready` のうちブロックされていないIssueだけを見る。
 2. Priorityの高い順、同じならRankの小さい順で選ぶ。
 3. Readyが1件でもあれば、新しい候補探索や監査改善を先に始めない。
-4. Readyが空になった時だけ、検索需要、競合、利用実測、収益機会を再確認して候補を足す。
+4. activeもReadyも空になった時だけ、検索需要、競合、利用実測、収益機会を再確認するPhase 0を行う。
+5. Phase 0は価値gateを通過した重複なしのReady候補10件以上を全件事前検証し、一括登録して閉じる。
+   1〜9件の部分登録、docs/checkerだけの候補、数合わせの低価値候補は認めない。
+
+実行入口は `python3 scripts/github_work_board.py`、接続設定とfield契約は
+[`github-project.json`](github-project.json)、Phase 0の調査・候補・停止条件は
+[`prompts/phase_0.md`](prompts/phase_0.md)を正本とする。
 
 ## Issueの要件
 
 各delivery Issueに以下を必須とする。
 
 - 誰の何がどう良くなるか
+- 現状baseline、市場需要、観測日付き根拠、競合差、利用で蓄積する優位
 - 完了条件（表示、操作、データ、計測）
 - repo内の仕様・根拠・QA計画
 - 対象URL
 - 本当に開始を止める依存と再開条件
 - 公開・観測の状態
+- 見積時間、success/failure signal、起案agent/model/effort
 
 Issue本文のチェックボックスを全体Todoの正本にしない。Acceptance criteriaとしてのみ使う。
 
@@ -64,6 +72,20 @@ Issue本文のチェックボックスを全体Todoの正本にしない。Accep
 - Observe: KPIを観測し、継続/修正/終了を判断
 
 Phaseを進めたこと自体は成果ではない。成果物・QA・deployment・観測をそれぞれリンクする。
+
+## Phase 0 portfolio gate
+
+```bash
+python3 scripts/github_work_board.py doctor
+python3 scripts/github_work_board.py next --json
+python3 scripts/github_work_board.py validate-portfolio --manifest <portfolio.json>
+python3 scripts/github_work_board.py add-portfolio --manifest <portfolio.json>
+```
+
+`next`は`In progress`を最優先し、なければReadyをPriority→Rank順で返す。両方0件の場合だけ
+`exhausted`とPhase 0の10件gateを返す。`add-portfolio`は全候補を最初の外部write前に検証し、
+stable markerによる冪等再実行、Project field設定、Statusの最後書きを行う。GitHub取得失敗は
+`exhausted`へ変換しない。
 
 ## Sprint境界
 

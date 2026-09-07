@@ -29,6 +29,9 @@
 - `todo.md`、`roadmap.md`、独自JSON/YAMLへGitHubの状態を複製しない。
 - `Status=Ready` を Priority、同順位では Rank の順で着手する。Readyがある間は候補探索を
   繰り返さない。
+- activeもReadyも0件の場合だけ `docs/pm/prompts/phase_0.md` を実行する。価値gateを通る
+  Ready候補10件以上を `scripts/github_work_board.py` で全件事前検証・一括登録するまでPhase 0を
+  完了扱いにしない。1〜9件の部分登録や数合わせの内部作業は禁止する。
 - 状態更新は作業の最後に行う。実装、統合、公開、効果観測を同じ「完了」にしない。
 - 複数Issueは、同じ正本ファイル・生成物・外部publishを同時に触らない限り並行できる。
 - 文書、checker、監査だけを利用者価値Sprintとして水増ししない。

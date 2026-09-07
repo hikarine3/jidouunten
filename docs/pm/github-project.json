@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "owner": "hikarine3",
+  "repository": "hikarine3/jidouunten",
+  "project_number": 5,
+  "project_title": "jidouunten Delivery",
+  "minimum_ready_candidates": 10,
+  "field_contract": {
+    "Status": ["Backlog", "Ready", "In progress", "Review", "Blocked", "Done"],
+    "Work type": ["Strategy", "Sprint", "Task", "Bug", "Data", "Content"],
+    "Work priority": ["P0", "P1", "P2", "P3"],
+    "Primary value": ["Decision utility", "Data trust", "Search growth", "Revenue", "Quality", "Operations"],
+    "PM Phase": ["N/A", "0", "1", "2", "3", "3.5", "4", "5", "6", "7", "Observe"],
+    "Lane": ["Product", "Data", "Content", "Measurement", "Infrastructure"],
+    "Effort": ["S", "M", "L", "XL"],
+    "Release status": ["NOT_DEPLOYED", "READY", "DEPLOYED", "OBSERVING", "OBSERVED", "BLOCKED"]
+  },
+  "required_fields": [
+    "Status",
+    "Work type",
+    "Work priority",
+    "Primary value",
+    "PM Phase",
+    "Lane",
+    "Target URL",
+    "Rank",
+    "Effort",
+    "Release status",
+    "Expected impact"
+  ]
+}
