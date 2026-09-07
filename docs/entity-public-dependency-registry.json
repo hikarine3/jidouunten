@@ -220,6 +220,44 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:mini-jp-countryman-u25-202607": {
+      "entity_id": "vehicle:mini-jp-countryman-u25-202607",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": [
+        "src/data/vehicles.json",
+        "docs/research/vehicle-inventory-20260907.md"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleList.astro",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {"url": "/", "locale": "ja", "output_path": "dist/index.html", "markers": ["MINI", "Countryman", "LEVEL 2"]},
+        {"url": "/cars/", "locale": "ja", "output_path": "dist/cars/index.html", "markers": ["MINI", "Countryman", "LEVEL 2"]},
+        {"url": "/cars/jp-mini-countryman-u25-c-select/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-c-select/index.html", "markers": ["MINI", "Countryman", "C SELECT", "Level 2"]},
+        {"url": "/cars/jp-mini-countryman-u25-c/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-c/index.html", "markers": ["MINI", "Countryman", "C", "Level 2"]},
+        {"url": "/cars/jp-mini-countryman-u25-d/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-d/index.html", "markers": ["MINI", "Countryman", "D", "Level 2"]},
+        {"url": "/cars/jp-mini-countryman-u25-s-all4-select/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-s-all4-select/index.html", "markers": ["MINI", "Countryman", "S ALL4 SELECT", "Level 2"]},
+        {"url": "/cars/jp-mini-countryman-u25-s-all4/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-s-all4/index.html", "markers": ["MINI", "Countryman", "S ALL4", "Level 2"]},
+        {"url": "/cars/jp-mini-countryman-u25-john-cooper-works-all4/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-john-cooper-works-all4/index.html", "markers": ["MINI", "Countryman", "JOHN COOPER WORKS COUNTRYMAN ALL4", "Level 2"]},
+        {"url": "/cars/jp-mini-countryman-u25-e/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-e/index.html", "markers": ["MINI", "Countryman", "E", "Level 2"]},
+        {"url": "/cars/jp-mini-countryman-u25-se-all4/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-se-all4/index.html", "markers": ["MINI", "Countryman", "SE ALL4", "Level 2"]},
+        {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["MINI", "Countryman", "C SELECT", "SE ALL4"]},
+        {"url": "/sitemap-0.xml", "locale": "ja", "output_path": "dist/sitemap-0.xml", "markers": ["jp-mini-countryman-u25-c-select", "jp-mini-countryman-u25-se-all4"]}
+      ],
+      "required_render_selectors": [
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["MINI", "Countryman", "C SELECT"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["MINI", "Countryman", "SE ALL4"]},
+        {"url": "/cars/jp-mini-countryman-u25-c-select/", "selector": "main", "markers": ["MINI", "Countryman", "C SELECT", "Level 2"]},
+        {"url": "/compare/", "selector": "[data-compare-result]", "markers": ["MINI", "Countryman", "C SELECT", "SE ALL4"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "vehicle:catalog-temporal-semantics-v1": {
       "entity_id": "vehicle:catalog-temporal-semantics-v1",
       "entity_type": "vehicle_catalog_schema",

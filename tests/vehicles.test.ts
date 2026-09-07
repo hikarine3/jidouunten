@@ -42,7 +42,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(30);
+    expect(vehicles).toHaveLength(38);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
@@ -134,5 +134,52 @@ describe('vehicle data contract and filters', () => {
     expect(bmw.every((vehicle) => vehicle.odd.speedKph.min === null && vehicle.odd.speedKph.max === null)).toBe(true);
     expect(bmw.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist,hands_off_highway')).toBe(true);
     expect(bmw.every((vehicle) => vehicle.sources.some((source) => source.url.includes('3series_') && source.url.includes('EPL_202607V1') && source.supports.some((support) => support.includes('メーカー希望小売価格'))))).toBe(true);
+  });
+
+  it('MINI Countrymanの2026年7月以降生産8販売単位を装備差・導入時点付きで保持する', () => {
+    const mini = vehicles.filter((vehicle) => vehicle.maker === 'MINI' && vehicle.model === 'Countryman');
+    expect(mini.map((vehicle) => vehicle.id).sort()).toEqual([
+      'jp-mini-countryman-u25-c',
+      'jp-mini-countryman-u25-c-select',
+      'jp-mini-countryman-u25-d',
+      'jp-mini-countryman-u25-e',
+      'jp-mini-countryman-u25-john-cooper-works-all4',
+      'jp-mini-countryman-u25-s-all4',
+      'jp-mini-countryman-u25-s-all4-select',
+      'jp-mini-countryman-u25-se-all4',
+    ]);
+    expect(mini).toHaveLength(8);
+    expect(mini.every((vehicle) => vehicle.modelYear === null && vehicle.generation === '第3世代' && vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === '2026-07')).toBe(true);
+    expect(mini.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance' && vehicle.driverMonitoring === 'required')).toBe(true);
+    const select = mini.filter((vehicle) => vehicle.grade.endsWith('SELECT'));
+    expect(select).toHaveLength(2);
+    expect(select.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist' && !vehicle.capabilities.includes('driver_monitoring'))).toBe(true);
+    expect(select.every((vehicle) => {
+      const geoRestrictions = Array.isArray(vehicle.odd.geoRestriction) ? vehicle.odd.geoRestriction : [vehicle.odd.geoRestriction];
+      return vehicle.odd.roadTypes.join(',') === '不明' && geoRestrictions.some((condition) => condition.includes('対象道路は現行公開資料で未確認'));
+    })).toBe(true);
+    expect(select.every((vehicle) => !vehicle.odd.driverConditions.some((condition) => condition.includes('両手') || condition.includes('片手')))).toBe(true);
+    const professional = mini.filter((vehicle) => !vehicle.grade.endsWith('SELECT'));
+    expect(professional).toHaveLength(6);
+    expect(professional.every((vehicle) => vehicle.handsOff === 'allowed_in_conditions' && vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist,hands_off_highway' && !vehicle.capabilities.includes('driver_monitoring'))).toBe(true);
+    expect(professional.every((vehicle) => vehicle.requiredPackage?.includes('ドライビング・アシスタント・プロフェッショナル') && vehicle.odd.roadTypes.join(',') === '不明')).toBe(true);
+    expect(mini.every((vehicle) => vehicle.odd.speedKph.min === null && vehicle.odd.speedKph.max === null)).toBe(true);
+    expect(mini.find((vehicle) => vehicle.grade === 'C SELECT')?.salesUnitIntroducedAt).toBe('2026-03-03');
+    expect(mini.find((vehicle) => vehicle.grade === 'C')?.salesUnitIntroducedAt).toBe('2026-03-03');
+    expect(mini.find((vehicle) => vehicle.grade === 'S ALL4 SELECT')?.salesUnitIntroducedAt).toBe('2026-07-13');
+    expect(mini.find((vehicle) => vehicle.grade === 'S ALL4')?.salesUnitIntroducedAt).toBe('2026-03-03');
+    expect(mini.find((vehicle) => vehicle.grade === 'E')?.salesUnitIntroducedAt).toBe('2024-03-01');
+    expect(mini.every((vehicle) => vehicle.sources.some((source) => source.url.includes('MINI_COUNTRYMAN_EPL_2607')))).toBe(true);
+    const expectedPrices = new Map([
+      ['C SELECT', '4,800,000円'],
+      ['C', '5,180,000円'],
+      ['D', '5,260,000円'],
+      ['S ALL4 SELECT', '5,530,000円'],
+      ['S ALL4', '5,920,000円'],
+      ['JOHN COOPER WORKS COUNTRYMAN ALL4', '6,830,000円'],
+      ['E', '6,040,000円'],
+      ['SE ALL4', '6,780,000円'],
+    ]);
+    expect(mini.every((vehicle) => vehicle.sources.some((source) => source.url.includes('MINI_COUNTRYMAN_EPL_2607') && source.supports.some((support) => support.includes(expectedPrices.get(vehicle.grade) ?? ''))))).toBe(true);
   });
 });

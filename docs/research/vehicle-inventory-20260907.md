@@ -8,8 +8,9 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 30 | `src/data/vehicles.json` の全レコード（現行29 + 過去1） |
-| 既定表示 | 29 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 38 | `src/data/vehicles.json` の全レコード（現行37 + 過去1） |
+| 既定表示 | 37 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
 | 今回追加（Suzuki） | 3 | e VITARA X 2WD / Z 2WD / Z 4WD。日本向け現行価格・発売資料・安全装備表で確認 |
 | 今回追加（Renault） | 4 | ARKANAのesprit Alpine / techno、FULL HYBRID E-TECH / MILD HYBRID。価格表・機能説明・装備資料で確認 |
@@ -34,6 +35,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Renault | ARKANA esprit Alpine FULL HYBRID E-TECH / MILD HYBRID、techno FULL HYBRID E-TECH / MILD HYBRID | 掲載（4単位） | 2相当 | 2026-09-07 |
 | BMW | 3シリーズ セダン G20 318i / 320i / 320d xDrive / 330e M Sport、M340i xDrive | 掲載（通常カタログ5単位） | 2相当 | 2026-09-07 |
 | BMW | 3シリーズ ツーリング G21 318i / 320i / 320d xDrive M Sport、M340i xDrive | 掲載（通常カタログ4単位） | 2相当 | 2026-09-07 |
+| MINI | Countryman C SELECT / C / D / S ALL4 SELECT / S ALL4 / JOHN COOPER WORKS COUNTRYMAN ALL4 / E / SE ALL4 | 掲載（通常8単位） | 2相当 | 2026-09-07 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQを根拠にModel 3 / Model Yを登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -44,6 +46,8 @@ Suzuki e VITARAは、現行価格ページと2025年9月16日付の日本発売�
 Renault ARKANAは、現行価格表でesprit AlpineとtechnoのFULL HYBRID E-TECH / MILD HYBRIDを4販売単位として確認した。価格は順に514万9000円、474万9000円、484万円、444万円で、価格の適用開始日は公式資料から確認できないため `priceEffectiveAt=null` とした。2025年7月のesprit Alpine資料と2025年9月のtechno資料をカタログ適用時点として保持し、資料年をモデル年にはしない。公式機能説明・装備資料でACC（ストップ＆ゴー機能付）とレーンセンタリングアシストの標準装備を確認し、国土交通省のLevel 2定義に照合してLevel 2相当と分類した。ACCはおおむね0〜170km/h、レーンセンタリングアシストは先行車ありでおおむね0〜160km/h、先行車なしでおおむね60〜160km/hと記載されるが、車線・先行車認識等の条件がある。運転者は常に監視し直ちに操作する必要があり、ハンズオフ可否は公式情報で確認できないため `unknown` とした。
 
 BMW 3シリーズは、2026年7月以降生産の日本向け装備・価格表から通常カタログのセダンG20 5単位とツーリングG21 4単位を登録した。メーカー希望小売価格はセダン688万〜992万円、ツーリング716万〜1027万円で、同資料の適用月を `catalogAsOf` と `priceEffectiveAt` に保持した。全9単位でドライビング・アシスト・プロフェッショナルを標準装備し、ACCとステアリング＆レーン・コントロール・アシストをLevel 2相当と分類した。速度域は現行資料がオーナーズ・ハンドブック参照としているため数値を転用せず不明とした。高速道路渋滞時は条件付きハンズオフに対応するが、通常支援は少なくとも片手保持、運転者の常時注意と即時操作責任が必要。Edition Shadow、M3、50周年限定車は別販売単位として受注・在庫状況の確認待ちに残し、BMW全仕様の網羅とは扱わない。
+
+MINI Countrymanは、2026年7月以降生産の日本向け装備・価格表から通常8販売単位を登録した。税込車両本体価格はC SELECT 480万円、C 518万円、D 526万円、S ALL4 SELECT 553万円、S ALL4 592万円、JOHN COOPER WORKS COUNTRYMAN ALL4 683万円、E 604万円、SE ALL4 678万円。全車でドライビング・アシスタント・プラス（ACC Stop & Go＋ステアリング＆レーン・コントロール）を標準装備として確認した。C SELECT / S ALL4 SELECTはドライビング・アシスタント・プロフェッショナルの標準装備記載がなく条件付きハンズオフには非対応、残り6単位は同機能を標準装備し高速道路渋滞時0〜約60km/hの条件付きハンズオフとして分類した。通常支援の対象道路・数値速度・ハンズオン要件と、能動ドライバーモニタリング機能は公式資料で確認できないため推定せず、`speedKph`はnull、`driverMonitoring=required`のみ保持した。C SELECTは2026-03-03、S ALL4 SELECTは2026-07-13に販売開始。C / S ALL4は2026-03-03に48Vマイルド・ハイブリッド仕様へ改定、D / JOHN COOPER WORKSは2023-11-21発表、E / SE ALL4は2024-03-01販売開始。Shadow Editionは限定車候補、Slate Blueは特別企画のため通常8単位へ含めず保留とした。
 
 ## 時系列の正規化
 
@@ -62,7 +66,7 @@ BMW 3シリーズは、2026年7月以降生産の日本向け装備・価格表�
 | Volkswagenの現行IQ.DRIVE搭載車 | 日本仕様のモデル年・販売状態を未確認 | Volkswagen Japan公式モデルページ・取扱説明書 |
 | Hyundaiの現行HDA搭載車 | 日本向け販売単位・現行掲載を未確認 | Hyundai Mobility Japan公式モデルページ |
 | Mazda / Mitsubishi / Suzuki / Daihatsuの一次確認候補 | 縦横支援を確認済みのモデルがあるが、現行仕様期・全グレード・価格適用日の販売単位展開を継続中 | 各社日本公式グレード表・装備表・取扱説明書 |
-| BMW限定車 / Mモデル・MINIの一次確認候補 | BMW通常3シリーズ9単位は掲載済み。限定車・M3とMINIは公開レコード化と独立レビューが未完 | 各社日本公式装備価格表・取扱説明書 |
+| BMW限定車 / Mモデル・MINIの一次確認候補 | BMW通常3シリーズ9単位とMINI Countryman通常8単位は掲載済み。BMW限定車・M3、MINI Countryman Shadow Edition / Slate Blueは通常単位と分けて確認待ち | 各社日本公式装備価格表・取扱説明書 |
 | Audi / Mercedes-Benz / Porsche等 | モデル単位の支援機能は確認できるが、グレード別の標準／オプションと販売状態の確認が未完 | 各社日本公式装備価格表・コンフィギュレーター |
 
 この台帳の未確認ブランド／モデル群を確認するまでは、サイト全体の国内候補を「網羅」と主張しない。L1のみ、発売予定、過去車両、Level 4サービスは別区分として追加調査する。
@@ -81,6 +85,8 @@ BMW 3シリーズは、2026年7月以降生産の日本向け装備・価格表�
 | BMW | 3シリーズ Sedan 5グレード、Touring 4グレード | 掲載済み。Edition Shadow、M3、50周年限定車は受注・在庫確認待ち |
 | MINI | Countryman 8グレード | 2026年7月生産装備価格表から8販売単位を登録 |
 | Renault | ARKANA 4グレード | 掲載済み。2025年7月 / 9月の資料適用時点をモデル年と分離して保持 |
+
+MINI Countrymanの限定仕様は通常カタログ8単位へ混在させない。MINI COUNTRYMAN SHADOW EDITIONは限定車候補、MINI COUNTRYMAN SLATE BLUEは特別企画として、受注・仕様適用を別途確認する。
 
 ## 対象外・証拠不足として確認した例
 
@@ -129,6 +135,18 @@ BMW 3シリーズは、2026年7月以降生産の日本向け装備・価格表�
 | ツーリングG21の通常4販売単位、税込716万〜1027万円、全モデルのドライビング・アシスト・プロフェッショナル標準装備、運転者責任・片手保持・高速道路渋滞時ハンズオフ、2026年7月以降生産 | ビー・エム・ダブリュー株式会社 | https://www.bmw.co.jp/content/dam/bmw/marketJP/bmw_co_jp/pdf/all-models/3/3series_Touring_EPL_202607V1.pdf.asset.1784183994213.pdf | 2026-09-07 |
 | セダンG20 / ツーリングG21の日本向け現行モデルページ | ビー・エム・ダブリュー株式会社 | https://www.bmw.co.jp/ja/all-models/3-series/bmw-3-series-sedan/bmw-3-series-sedan.html / https://www.bmw.co.jp/ja/all-models/3-series/3-series-touring/bmw-3-series-touring.html | 2026-09-07 |
 | ACCの車速・車間支援と、高速道路渋滞時ハンズオフの機能概要・運転者責任 | ビー・エム・ダブリュー株式会社 | https://www.bmw.co.jp/ja/topics/brand-and-technology/technology/visionary_safety/scene.html | 2026-09-07 |
+
+## MINI Countrymanの根拠（内部保持）
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| 通常8販売単位、税込480万〜683万円、全車共通のドライビング・アシスタント・プラス、販売単位別のプロフェッショナル標準装備、2026年7月以降生産 | ビー・エム・ダブリュー株式会社 / MINI Japan | https://www.mini.jp/content/dam/MINI/marketJP/mini_jp/home/catalog/MINI_COUNTRYMAN_EPL_2607_seisankaitei.pdf.asset.1786065168368.pdf | 2026-09-07 |
+| 第3世代Countrymanの現行モデル、通常モデルと電気自動車のラインアップ | MINI Japan | https://www.mini.jp/ja_JP/home/range/new-mini-countryman.html | 2026-09-07 |
+| ACC、ステアリング＆レーン・コントロール、0〜約60km/hの高速道路渋滞時ハンズオフ、運転者責任と気象・道路条件による限界 | MINI Japan | https://www.mini.jp/ja_JP/home/function_performance/safety_security.html | 2026-09-07 |
+| C SELECT / C / S ALL4の48Vマイルド・ハイブリッド仕様を2026年3月3日から販売開始 | ビー・エム・ダブリュー株式会社 / MINI Japan | https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20260303_The_MINI_Countryman_C_Select_MINI_Countryman_C_and_MINI_Countryman_S_ALL4_feature_a_48V_mild_hybrid_system_detail.html | 2026-09-07 |
+| S ALL4 SELECTを2026年7月13日から販売開始、同年9月以降納車予定、プラス標準装備 | ビー・エム・ダブリュー株式会社 / MINI Japan | https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20260713_add_mini_countryman_s_all4_select.html | 2026-09-07 |
+| D / S ALL4 / JOHN COOPER WORKSを含む第3世代を2023年11月21日に発表・予約開始 | ビー・エム・ダブリュー株式会社 / MINI Japan | https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20231121_The_new_MINI_Countryman_is_launched_detail.html | 2026-09-07 |
+| E / SE ALL4を2024年3月1日から販売開始 | ビー・エム・ダブリュー株式会社 / MINI Japan | https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20240301_the_new_mini_countryman_electric_car_is_born_detail.html | 2026-09-07 |
 
 ## Volvo EX30の根拠（内部保持）
 
