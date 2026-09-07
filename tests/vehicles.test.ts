@@ -38,7 +38,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles.length).toBeGreaterThanOrEqual(11);
+    expect(vehicles).toHaveLength(14);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
@@ -49,5 +49,18 @@ describe('vehicle data contract and filters', () => {
     expect(tesla.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance')).toBe(true);
     expect(tesla.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'Tesla Japan' && source.accessedAt === '2026-09-07'))).toBe(true);
     expect(tesla.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
+  });
+
+  it('Volvo EX30の2027年モデル3グレードを同じ監視条件で別販売単位に保つ', () => {
+    const ex30 = vehicles.filter((vehicle) => vehicle.maker === 'Volvo' && vehicle.model === 'EX30');
+    expect(ex30.map((vehicle) => vehicle.grade).sort()).toEqual([
+      'Plus P5 Electric',
+      'Ultra P5 Long Range Electric',
+      'Ultra P8 AWD Electric',
+    ]);
+    expect(ex30).toHaveLength(3);
+    expect(ex30.every((vehicle) => vehicle.modelYear === '2027' && vehicle.automationLevel === 2)).toBe(true);
+    expect(ex30.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
+    expect(ex30.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'ボルボ・カー・ジャパン'))).toBe(true);
   });
 });

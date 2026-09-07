@@ -8,10 +8,10 @@ Issue #17の公開候補を、販売単位（市場・メーカー・モデル�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 11 | `src/data/vehicles.json` の全レコード（現行10 + 過去1） |
-| 既定表示 | 10 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
-| 今回追加（Tesla） | 2 | Model 3 Premium / Model Y Premium。日本向け公式ページでモデル・機能を確認 |
-| 未確認候補群 | 件数未確定 | Tesla Model S / X と、下記の未確認ブランド／モデル群。公式グレード・装備・現行掲載の確認待ち |
+| 公開データ | 14 | `src/data/vehicles.json` の全レコード（現行13 + 過去1） |
+| 既定表示 | 13 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
+| 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | 対象外 | 0 | 今回の候補から対象外と断定したものはない |
 
 未確認候補群の調査が終わるまで、サイト全体の国内候補を「網羅」と主張しない。Honda LEGEND（2021、Level 3）は過去車両のため現行母集団の外にあり、公開データには含むが既定一覧には表示しない。
@@ -26,10 +26,13 @@ Issue #17の公開候補を、販売単位（市場・メーカー・モデル�
 | Nissan | セレナ 2026 e-POWER LUXION | 掲載 | 2 | 2026-09-07 |
 | SUBARU | レヴォーグ レイバック 2023 Limited EX | 掲載 | 2 | 2026-09-07 |
 | Tesla | Model 3 Premium 2026 / Model Y Premium 2026 | 掲載（2単位） | 2相当 | 2026-09-07 |
+| Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 掲載（3単位） | 2相当 | 2026-09-07 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQを根拠にModel 3 / Model Yを登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
-## 未確認候補（内訳）
+Volvo EX30は、日本向け2027年モデルの2026年第29週生産分以降の諸元・価格表で3グレードとPilot Assist、全車速追従ACC、ドライバーモニタリングを確認した。Pilot Assistは速度・車間と操舵を支援する一方、取扱説明書が運転者に両手保持と即時介入を求めるため、Level 2相当の運転支援として登録した。税込車両本体価格は479万〜629万円で、価格根拠は内部保持し、価格表示機能はIssue #16で一貫した価格契約を実装してから公開する。
+
+## 未掲載・確認継続候補（内訳）
 
 | 候補 | 未確認の理由 | 次回確認先 |
 |---|---|---|
@@ -37,11 +40,42 @@ Teslaは日本向け公式のModel別情報とサポートFAQを根拠にModel 3
 | Toyota / Lexusの現行Toyota Safety Sense搭載車 | モデル年・グレード・装備の組合せを一次情報で未棚卸し | 各ブランド日本公式カタログ・取扱説明書 |
 | Mercedes-Benzの現行運転支援搭載車 | 日本仕様の販売単位と監視条件を未確認 | Mercedes-Benz Japan公式モデルページ・取扱説明書 |
 | BMWの現行Driving Assistant搭載車 | 日本仕様のグレード別装備を未確認 | BMW Japan公式モデルページ・取扱説明書 |
-| Volvoの現行Pilot Assist搭載車 | 日本仕様のモデル年・必要装備を未確認 | Volvo Cars Japan公式モデルページ・取扱説明書 |
+| Volvo EX30 2026年モデル4グレード | 公式ラインナップには残るが、2027年モデルへの切替後の新規受注／在庫販売区分を未確認 | Volvo Cars Japan公式ラインナップ・販売店注文条件 |
+| VolvoのEX30以外の現行Pilot Assist搭載車 | 日本仕様のモデル年・必要装備を未確認 | Volvo Cars Japan公式モデルページ・取扱説明書 |
 | Volkswagenの現行IQ.DRIVE搭載車 | 日本仕様のモデル年・販売状態を未確認 | Volkswagen Japan公式モデルページ・取扱説明書 |
 | Hyundaiの現行HDA搭載車 | 日本向け販売単位・現行掲載を未確認 | Hyundai Mobility Japan公式モデルページ |
+| Mazda / Mitsubishi / Suzuki / Daihatsuの一次確認候補 | 縦横支援を確認済みのモデルがあるが、現行仕様期・全グレード・価格適用日の販売単位展開を継続中 | 各社日本公式グレード表・装備表・取扱説明書 |
+| BMW / MINI / Renaultの一次確認候補 | 現行装備・価格を確認済みの販売単位があるが、公開レコード化と独立レビューが未完 | 各社日本公式装備価格表・取扱説明書 |
+| Audi / Mercedes-Benz / Porsche等 | モデル単位の支援機能は確認できるが、グレード別の標準／オプションと販売状態の確認が未完 | 各社日本公式装備価格表・コンフィギュレーター |
 
 この台帳の未確認ブランド／モデル群を確認するまでは、サイト全体の国内候補を「網羅」と主張しない。L1のみ、発売予定、過去車両、Level 4サービスは別区分として追加調査する。
+
+## 一次確認済み・公開レコード化待ち
+
+下表は公式日本サイトで縦方向と横方向の同時支援を確認した候補。ただし、販売単位ごとのモデル年、
+資料適用期間、標準／オプション、価格適用日の正規化と独立レビューが未完のため、まだ公開件数へ含めない。
+
+| メーカー | 確認済み候補 | 残作業 |
+|---|---|---|
+| Mazda | CX-80、CX-60、新型CX-5、MAZDA3、CX-30、MX-30 ROTARY-EV | 全グレード表記を販売単位へ展開し、CTS/MRCCの仕様期を固定 |
+| Mitsubishi | OUTLANDER PHEV、ECLIPSE CROSS、eKクロス、eKクロス EV、eKスペース、デリカミニ | MI-PILOTの標準／メーカーオプションとグレード別価格を固定 |
+| Suzuki | e VITARA、FRONX、SOLIO/BANDIT、SWIFT CVT、SPACIA系 | ACC＋車線中央維持の対象グレードとパッケージを販売単位へ展開 |
+| Daihatsu | MOVE、MOVE CANBUS、TANTO系、TAFT、ROCKY | Smart Cruise Packを含む標準／オプション差を販売単位へ展開 |
+| BMW | 3シリーズ Sedan 5グレード、Touring 4グレード | 2026年7月生産装備価格表から9販売単位を登録 |
+| MINI | Countryman 8グレード | 2026年7月生産装備価格表から8販売単位を登録 |
+| Renault | ARKANA 4グレード | 2025年仕様資料をモデル年と誤表示しないよう、資料適用期間フィールドを先に固定 |
+
+## 対象外・証拠不足として確認した例
+
+| 候補 | 現時点の区分 | 理由 |
+|---|---|---|
+| Mazda2 / CX-3 | 対象外候補 | 車線中央維持を公式情報で確認できず、今回のLevel 2操作定義を満たさない |
+| Mitsubishi デリカD:5 | 対象外候補 | 現行MI-PILOTのACC＋LKAの組合せを確認できない |
+| Daihatsu Atrai | 対象外 | 商用車であり、今回の乗用車母集団外 |
+| Daihatsu Thor / Mira e:S | 証拠不足 | ACCとLKCの同時作動を確認できない |
+| Mazda MX-30 EV | 現行掲載未確認 | 現行ラインアップ掲載を確認できず、ROTARY-EVと混ぜない |
+| Toyota Roomy / Raize / Hilux / Land Cruiser 70 / GR86 | 証拠不足 | LTA＋全車速ACCの現行グレード根拠が不足 |
+| Hyundai IONIQ 5 | 監視条件の証拠不足 | HDA2等の装備は確認したが、運転者責任・常時監視の日本向け明文が未確認 |
 
 ## Teslaの根拠（内部保持）
 
@@ -51,3 +85,11 @@ Teslaは日本向け公式のModel別情報とサポートFAQを根拠にModel 3
 | Model Yの日本向け現行ページ、ドライバー監視下のドライビングアシスト | Tesla Japan | https://www.tesla.com/ja_JP/modely | 2026-09-07 |
 | Model S / Xの日本向け車両情報・オートパイロット導線 | Tesla Japan | https://www.tesla.com/ja_jp/support/meet-your-tesla/model-s / https://www.tesla.com/ja_jp/support/meet-your-tesla/model-x | 2026-09-07 |
 | Teslaの機能は完全自動運転ではなく、常に注意し直ちに運転を代われる準備が必要 | Tesla Japan | https://www.tesla.com/ja_jp/support/meet-your-future-tesla-faq | 2026-09-07 |
+
+## Volvo EX30の根拠（内部保持）
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| 2027年モデル3グレードと税込479万〜629万円 | ボルボ・カー・ジャパン | https://www.volvocars.com/jp/l/ex30/ | 2026-09-07 |
+| 3グレードにPilot Assist、全車速追従ACC、ドライバーモニタリングカメラ付DACを標準装備。内容は2026年7月現在 | ボルボ・カー・ジャパン | https://azure-eu-assets.contentstack.com/v3/assets/blt84e01a6904dbd2e8/blt65613ad142855bdf/6a466a78035de07c64d4cca5/MY27_EX30_Ver2_W29%E4%BB%A5%E9%99%8D.pdf | 2026-09-07 |
+| Pilot Assistは速度・車間・操舵を支援し、運転者は両手保持と即時介入が必要 | Volvo Support JP | https://www.volvocars.com/jp/support/car/ex30/24w17/article/47d2c97fd33effd3c0a8cc3718c999b7-85596e53922f2e19c0a8cc42679c08ea-8664b2fa77a7e089c0a8296870d1a409/47d2c97fd33effd3c0a8cc3718c999b7-835992c35a0096eec0a8b0971dfcc685-8664b2fa77a7e089c0a8296870d1a409/47d2c97fd33effd3c0a8cc3718c999b7-69b1d5f35a03429ac0a8b0970ac5ed2e-8664b2fa77a7e089c0a8296870d1a409/54f1934e3fd57300c0a8b0c1194a56be-69b1d5f35a03429ac0a8b0970ac5ed2e-8664b2fa77a7e089c0a8296870d1a409/ | 2026-09-07 |

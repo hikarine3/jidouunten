@@ -5,7 +5,7 @@
 | 素材 | 取得元・作者 | 許諾・扱い | 商用 / 改変 / 表示 |
 |---|---|---|---|
 | 画面、文章、CSSによる道路・車の装飾 | 本PJで作成 | 自社作成。既存サイトの表現・レイアウトを複製しない | 可 / 可 / 外部credit不要 |
-| 車両仕様の事実 | src/data/vehicles.json内sources | 公式の事実を独自要約。画像・原文転載なし。出典リンクと確認日を表示 | データ事実のみ利用、公式テキストの再利用許諾を主張しない |
+| 車両仕様の事実 | src/data/vehicles.json内sources | 公式の事実を独自要約。画像・原文転載なし。出典URLと確認日は内部管理 | データ事実のみ利用、公式テキストの再利用許諾を主張しない |
 | レベル定義 | 国土交通省、docs/research/official-sources.md | 定義の独自要約、出典リンク | 原文・図表転載なし |
 | Astro 7.3.1 | https://github.com/withastro/astro | MIT、node_modules/astro/LICENSE本文確認 | 可 / 可 / 配布に含まれるライセンス通知を保持 |
 | @astrojs/sitemap 3.7.4 | https://github.com/withastro/astro/tree/main/packages/integrations/sitemap | MIT、package LICENSE確認 | 可 / 可 / 同上 |
