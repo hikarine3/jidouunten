@@ -34,8 +34,6 @@ const publicCatalog = vehicles.map((vehicle) => ({
     const sendCompare = (selected) => {
       if (compareTracked) return;
       const payload = { vehicle_ids: selected.map((vehicle) => vehicle.id).join(','), vehicle_count: selected.length };
-      const consent = localStorage.getItem('jidouunten-analytics-consent');
-      if (consent === 'denied') { compareTracked = true; return; }
       if (window.jidouuntenTrack) window.jidouuntenTrack('compare_vehicles', payload);
       else { window.__jidouuntenPendingEvents = window.__jidouuntenPendingEvents || []; window.__jidouuntenPendingEvents.push({ event: 'compare_vehicles', payload }); }
       compareTracked = true;

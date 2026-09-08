@@ -22,7 +22,7 @@ Direct UploadからGit integrationへの同一project内切替は不可。
 
 1. `npm ci`、`npm test`、`npm run check`を実行する。
 2. `.env.example`と計測運用に従い公開IDを設定して `npm run build`。
-3. `npm run preview`でクエリ復元・2台比較・同意/拒否・モバイルを確認。
+3. `npm run preview`でクエリ復元・2台比較・GTM通常読み込み・同意バナー非表示・モバイルを確認。
 4. 対象差分をcommit/pushし、次を実行する。
 
 ```bash

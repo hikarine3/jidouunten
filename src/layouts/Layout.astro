@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import ConsentBanner from '../components/ConsentBanner.astro';
+import Analytics from '../components/Analytics.astro';
 const { title = '自動運転.jp｜自動運転レベルから、次の一台を。', description = '自動運転レベルと作動条件から、日本で選べる車を探して比較できます。' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, 'https://jidouunten.jp').toString();
 const structuredData = {
@@ -45,6 +45,6 @@ const structuredData = {
         <span><a href="/privacy/">プライバシーと計測設定</a>　·　<a href="/levels/">レベルの定義</a></span>
       </div>
     </footer>
-    <ConsentBanner />
+    <Analytics />
   </body>
 </html>

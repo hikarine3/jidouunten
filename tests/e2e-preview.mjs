@@ -50,9 +50,8 @@ try {
   await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('[data-vehicle-shell][data-availability="unavailable"]:visible').count(), 0, '過去車両は既定非表示');
-  assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 0, '同意前はGTMなし');
-  assert.deepEqual(await events(), [], '同意前の初期表示ではイベントなし');
-  assert.equal(analyticsRequests.length, 0, '同意前のAnalytics通信なし');
+  assert.equal(await page.locator('[data-consent]').count(), 0, 'Analytics同意バナーを表示しない');
+  assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 1, 'GTMを通常読み込み');
   await page.screenshot({ path: `${qaDir}/desktop-home.png`, fullPage: false });
   const mobilePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await mobilePage.goto(`${base}/`);
@@ -78,10 +77,8 @@ try {
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '深いリンクのlevel復元');
   assert.equal(await page.locator('#vehicle-filters').getAttribute('action'), '/cars/', '旧一覧は現在のルートで送信');
-  await page.getByRole('button', { name: '同意する' }).click({ noWaitAfter: true });
-  assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 1, '同意後にGTM読み込み');
   await page.waitForTimeout(1000);
-  assert.ok(analyticsRequests.some((url) => url.includes('googletagmanager')), '同意後のGTM通信');
+  assert.ok(analyticsRequests.some((url) => url.includes('googletagmanager')), 'GTM通信');
   if (process.env.EXPECT_GA_COLLECT === '1') {
     const collectResponses = analyticsResponses.filter(({ url }) => /collect|google-analytics/i.test(url));
     assert.ok(collectResponses.length > 0, 'GA collect通信');
@@ -138,7 +135,7 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'compare_vehicles').length, 1, 'compare_vehiclesイベント');
 
   await page.goto(`${base}/cars/jp-honda-accord-2025-ehev-sensing360plus/`);
-  assert.equal((await events()).filter((event) => event.event === 'view_vehicle').length, 1, 'view_vehicleイベント（同意後登録）');
+  assert.equal((await events()).filter((event) => event.event === 'view_vehicle').length, 1, 'view_vehicleイベント');
 
   await page.goto(`${base}/cars/jp-tesla-model-3-2026-premium/`);
   assert.match(await page.locator('main').innerText(), /Tesla[\s\S]*Model 3/);
@@ -233,19 +230,9 @@ try {
   assert.doesNotMatch(await page.content(), /catalogAsOf|salesUnitIntroducedAt|priceEffectiveAt|availabilityCheckedAt|lastReviewedAt|accessedAt|\"sources\"|bmw\.co\.jp/, 'BMW比較HTMLへ内部時点・根拠URLを配信しない');
 
   await page.goto(`${base}/privacy/`);
-  page.on('dialog', (dialog) => dialog.dismiss());
-  await page.getByRole('button', { name: '計測設定を取り消す' }).click({ noWaitAfter: true });
-  await page.waitForTimeout(500);
-  await page.goto(`${base}/privacy/`);
-  assert.equal(await page.evaluate(() => localStorage.getItem('jidouunten-analytics-consent')), null, '撤回後は再選択可能');
-  assert.equal(await page.locator('[data-consent]:visible').count(), 1, '撤回後に同意バナー再表示');
-  await page.getByRole('button', { name: '拒否する' }).click({ noWaitAfter: true });
-  assert.equal(await page.evaluate(() => localStorage.getItem('jidouunten-analytics-consent')), 'denied', '拒否状態を保存');
-  await page.goto(`${base}/`);
-  const beforeDenied = await events();
-  await page.locator('select[name="level"]').selectOption('2');
-  assert.equal((await events()).length, beforeDenied.length, '拒否後のイベント送信なし');
-  assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 0, '拒否後もGTMなし');
+  assert.equal(await page.locator('[data-consent]').count(), 0, 'privacyページにも同意バナーなし');
+  assert.equal(await page.getByRole('button', { name: '計測設定を取り消す' }).count(), 0, '存在しないサイト内撤回UIを案内しない');
+  assert.equal(await page.getByRole('link', { name: 'Google Analytics オプトアウト アドオン' }).count(), 1, '外部オプトアウト手段を案内');
   console.log('E2E PASS: 1/1 scenario');
 } finally {
   await browser.close();

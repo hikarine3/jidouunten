@@ -13,5 +13,4 @@ interface Window {
   __jidouuntenAnalyticsLoaded?: boolean;
   __jidouuntenPendingEvents?: Array<{ event: string; payload?: Record<string, unknown> }>;
   jidouuntenTrack?: (event: string, payload?: Record<string, unknown>) => void;
-  jidouuntenResetConsent?: () => void;
 }

@@ -68,10 +68,16 @@ python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish
 正しい測定ID6箇所、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
 workspaceに差分がなければpublishしない。
 
+## 読み込み方針
+
+GTM/GA4は通常読み込みとし、初回表示を遮る同意・拒否バナーは置かない。独自イベントには個人情報や
+自由入力値を含めない。計測内容とGoogleのプライバシーポリシー、Google Analyticsオプトアウト
+アドオン、ブラウザ側のCookie・トラッキング防止設定を`/privacy/`で案内する。
+
 ## 公開後QA
 
-1. 同意前はGTM/GA4へのnetwork通信が0件で、個別イベントもdataLayerへpushされないことを確認する。
-2. 同意後は`<head>`内へGTM scriptが1つだけ追加され、IDが `GTM-PV9QVMJV` であることを確認する。
+1. 全ページで同意・拒否バナーが表示されないことを確認する。
+2. GTM scriptが1つだけ追加され、IDが `GTM-PV9QVMJV` であることを確認する。
 3. ブラウザのnetworkで `G-Q58GM7BVB6` 宛ての`collect`を確認し、別にGA4 Realtimeまたは
    DebugViewで受信を確認する。
 4. 5操作を各1回実施し、イベント名と上記parameterを確認する。
@@ -83,7 +89,7 @@ GA4/GSCはresource作成直後にデータがないのが正常。公開・実�
 2026-09-07の初回公開後、トップと`/sitemap-index.xml`がHTTP 200、GSCが同sitemapを
 「成功しました」と取得したことを確認した。Bingも同URLを正常に受理し、現在は処理中である。
 
-公開version 7反映後の本番QAで、同意前のGTM/GA4通信0件、5イベントのdataLayer投入、
+公開version 7反映後の初回本番QAでは、当時の同意方式で同意前のGTM/GA4通信0件、5イベントのdataLayer投入、
 正しい測定ID宛て`collect` HTTP 204、本番とimmutable deploymentのE2E各9件正常を確認した。
 GA4 Realtimeでもactive user 1、正しいページタイトルと`page_view`を確認し、本番からの受信を
 分けて確認した。ただし、5イベントそれぞれの`collect`受理まではこのQAで断定しない。

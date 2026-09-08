@@ -21,9 +21,8 @@ const odd = vehicle.odd;
     // @ts-nocheck
     const viewPayload = { vehicle_id: vehicleId, model_year: modelYear, grade };
     const sendView = () => {
-      const consent = localStorage.getItem('jidouunten-analytics-consent');
-      if (consent === 'granted' && window.jidouuntenTrack) window.jidouuntenTrack('view_vehicle', viewPayload);
-      else if (consent !== 'denied') { window.__jidouuntenPendingEvents = window.__jidouuntenPendingEvents || []; window.__jidouuntenPendingEvents.push({ event: 'view_vehicle', payload: viewPayload }); }
+      if (window.jidouuntenTrack) window.jidouuntenTrack('view_vehicle', viewPayload);
+      else { window.__jidouuntenPendingEvents = window.__jidouuntenPendingEvents || []; window.__jidouuntenPendingEvents.push({ event: 'view_vehicle', payload: viewPayload }); }
     };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', sendView, { once: true }); else sendView();
   </script>

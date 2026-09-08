@@ -1,0 +1,22 @@
+---
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
+---
+<script define:vars={{ gtmId }}>
+  // @ts-nocheck
+  window.dataLayer = window.dataLayer || [];
+  window.jidouuntenTrack = (event, payload = {}) => {
+    window.dataLayer.push({ event, ...payload });
+  };
+
+  if (gtmId && !window.__jidouuntenAnalyticsLoaded) {
+    window.__jidouuntenAnalyticsLoaded = true;
+    window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`;
+    document.head.appendChild(script);
+  }
+
+  (window.__jidouuntenPendingEvents || []).forEach(({ event, payload }) => window.jidouuntenTrack(event, payload));
+  window.__jidouuntenPendingEvents = [];
+</script>
