@@ -68,6 +68,24 @@ class PortfolioValidationTest(unittest.TestCase):
         errors = board.validate_portfolio(CONFIG, portfolio)
         self.assertTrue(any("at least 10" in error for error in errors))
 
+    def test_config_cannot_weaken_the_ten_candidate_floor(self):
+        weak_config = {**CONFIG, "minimum_ready_candidates": 1}
+        portfolio = {"schema_version": 1, "candidates": [candidate(i) for i in range(1, 10)]}
+        errors = board.validate_portfolio(weak_config, portfolio)
+        self.assertTrue(any("at least 10" in error for error in errors))
+
+    def test_invalid_minimum_configuration_fails_closed(self):
+        invalid_config = {**CONFIG, "minimum_ready_candidates": "ten"}
+        portfolio = {"schema_version": 1, "candidates": [candidate(i) for i in range(1, 11)]}
+        errors = board.validate_portfolio(invalid_config, portfolio)
+        self.assertTrue(any("positive integer" in error for error in errors))
+
+    def test_non_jid_identifier_is_rejected(self):
+        row = candidate(1)
+        row["sprint_id"] = "PHASE0-01"
+        errors = board.validate_candidate(CONFIG, row)
+        self.assertTrue(any("start with JID-" in error for error in errors))
+
     def test_docs_only_candidate_is_not_ready_value(self):
         row = candidate(1)
         row["public_surfaces"] = []

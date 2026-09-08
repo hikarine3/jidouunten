@@ -21,8 +21,9 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "docs/pm/github-project.json"
 ID_IN_TITLE = re.compile(r"\bJID-[A-Z0-9][A-Z0-9-]*\b", re.IGNORECASE)
-ID_FORMAT = re.compile(r"^[A-Z0-9][A-Z0-9-]{2,79}$")
+ID_FORMAT = re.compile(r"^JID-[A-Z0-9][A-Z0-9-]{0,75}$")
 PRIORITY_ORDER = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
+PHASE0_MIN_READY_CANDIDATES = 10
 
 
 class BoardError(RuntimeError):
@@ -56,6 +57,13 @@ def run_gh(args: list[str], *, expect_json: bool = False) -> Any:
 
 def candidate_marker(sprint_id: str) -> str:
     return f"<!-- jidouunten-work-item:{sprint_id} -->"
+
+
+def phase0_minimum(config: dict[str, Any]) -> int:
+    value = config.get("minimum_ready_candidates")
+    if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+        raise BoardError("minimum_ready_candidates must be a positive integer")
+    return max(PHASE0_MIN_READY_CANDIDATES, value)
 
 
 def is_public_surface(value: str) -> bool:
@@ -107,7 +115,7 @@ def validate_candidate(config: dict[str, Any], candidate: Any) -> list[str]:
             errors.append(f"{key} must not be empty")
     sprint_id = str(candidate.get("sprint_id") or "")
     if not ID_FORMAT.fullmatch(sprint_id):
-        errors.append("sprint_id must be 3-80 uppercase letters, digits, or hyphens")
+        errors.append("sprint_id must start with JID- and use uppercase letters, digits, or hyphens")
     if ID_IN_TITLE.search(str(candidate.get("title") or "")):
         errors.append("title must not repeat a JID identifier")
 
@@ -192,7 +200,11 @@ def validate_portfolio(config: dict[str, Any], portfolio: Any) -> list[str]:
                 errors.append(f"duplicate candidate priority/rank: {priority} R{rank}")
             priority_ranks.add(key)
 
-    minimum = int(config.get("minimum_ready_candidates") or 10)
+    try:
+        minimum = phase0_minimum(config)
+    except BoardError as exc:
+        errors.append(str(exc))
+        minimum = PHASE0_MIN_READY_CANDIDATES
     if ready_count < minimum:
         errors.append(
             f"Phase 0 portfolio has {ready_count} valid Ready candidates; at least {minimum} are required"
@@ -275,6 +287,7 @@ def project_items(config: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def doctor(config: dict[str, Any]) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
+    phase0_minimum(config)
     run_gh(["auth", "status"])
     view = project_view(config)
     if view.get("title") != config.get("project_title"):
@@ -333,7 +346,7 @@ def attach_next_action(config: dict[str, Any], result: dict[str, Any]) -> dict[s
         **result,
         "next_action": "phase0",
         "phase0_prompt": "docs/pm/prompts/phase_0.md",
-        "minimum_ready_candidates": int(config.get("minimum_ready_candidates") or 10),
+        "minimum_ready_candidates": phase0_minimum(config),
     }
 
 
