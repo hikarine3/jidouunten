@@ -8,15 +8,16 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 38 | `src/data/vehicles.json` の全レコード（現行37 + 過去1） |
-| 既定表示 | 37 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 73 | `src/data/vehicles.json` の全レコード（現行72 + 過去1） |
+| 既定表示 | 72 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
 | 今回追加（Suzuki） | 3 | e VITARA X 2WD / Z 2WD / Z 4WD。日本向け現行価格・発売資料・安全装備表で確認 |
 | 今回追加（Renault） | 4 | ARKANAのesprit Alpine / techno、FULL HYBRID E-TECH / MILD HYBRID。価格表・機能説明・装備資料で確認 |
 | 今回追加（BMW） | 9 | 3シリーズ通常カタログのSedan G20 5単位 / Touring G21 4単位。2026年7月以降生産の装備・価格表で確認 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
-| 対象外 | 0 | 今回の候補から対象外と断定したものはない |
+| Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
 未確認候補群の調査が終わるまで、サイト全体の国内候補を「網羅」と主張しない。Honda LEGEND（2021、Level 3）は過去車両のため現行母集団の外にあり、公開データには含むが既定一覧には表示しない。
 
@@ -36,6 +37,12 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | BMW | 3シリーズ セダン G20 318i / 320i / 320d xDrive / 330e M Sport、M340i xDrive | 掲載（通常カタログ5単位） | 2相当 | 2026-09-07 |
 | BMW | 3シリーズ ツーリング G21 318i / 320i / 320d xDrive M Sport、M340i xDrive | 掲載（通常カタログ4単位） | 2相当 | 2026-09-07 |
 | MINI | Countryman C SELECT / C / D / S ALL4 SELECT / S ALL4 / JOHN COOPER WORKS COUNTRYMAN ALL4 / E / SE ALL4 | 掲載（通常8単位） | 2相当 | 2026-09-07 |
+| Mazda | CX-80 XD系 / XD-HYBRID系 / PHEV系 | 掲載（8単位） | 2相当 | 2026-09-08 |
+| Mazda | CX-60 25S / XD / XD-HYBRID / PHEV系 | 掲載（11単位） | 2相当 | 2026-09-08 |
+| Mazda | 新型CX-5 S / G標準 / G EX Package / L | 掲載（4単位） | 2相当 | 2026-09-08 |
+| Mazda | MAZDA3 Fastback 25S / 25L / X Touring（各6EC-AT / 6MT）、Sedan 25L | 掲載（7単位） | 2相当 | 2026-09-08 |
+| Mazda | CX-30 20G / 20 Air Edition / 25L / 25 Air Edition | 掲載（4単位） | 2相当 | 2026-09-08 |
+| Mazda | MX-30 ROTARY-EV Natural Monotone | 掲載（1単位） | 2相当 | 2026-09-08 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQを根拠にModel 3 / Model Yを登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -58,18 +65,26 @@ MINI Countrymanは、2026年7月以降生産の日本向け装備・価格表か
 | 候補 | 未確認の理由 | 次回確認先 |
 |---|---|---|
 | Tesla Model S / Model X | 日本向け公式サポート情報は確認できるが、現行カタログのモデル年・グレード・注文可否を一次情報で確認できない | Tesla Japanの現行デザインスタジオ・日本向けカタログ |
-| Toyota / Lexusの現行Toyota Safety Sense搭載車 | モデル年・グレード・装備の組合せを一次情報で未棚卸し | 各ブランド日本公式カタログ・取扱説明書 |
+| Toyota / Lexusの現行Toyota Safety Sense / Lexus Safety System+搭載車 | Toyota 20モデル、Lexus 12モデルをモデル候補まで確認。販売単位ごとの標準／オプション、仕様期、価格、取説の照合は未完 | 各ブランド日本公式カタログ・主要装備表・取扱説明書 |
 | Mercedes-Benzの現行運転支援搭載車 | 日本仕様の販売単位と監視条件を未確認 | Mercedes-Benz Japan公式モデルページ・取扱説明書 |
 | BMWの3シリーズ以外の現行Driving Assistant搭載車 | 日本仕様のグレード別装備を未確認 | BMW Japan公式モデルページ・取扱説明書 |
 | Volvo EX30 2026年モデル4グレード | 公式ラインナップには残るが、2027年モデルへの切替後の新規受注／在庫販売区分を未確認 | Volvo Cars Japan公式ラインナップ・販売店注文条件 |
 | VolvoのEX30以外の現行Pilot Assist搭載車 | 日本仕様のモデル年・必要装備を未確認 | Volvo Cars Japan公式モデルページ・取扱説明書 |
 | Volkswagenの現行IQ.DRIVE搭載車 | 日本仕様のモデル年・販売状態を未確認 | Volkswagen Japan公式モデルページ・取扱説明書 |
 | Hyundaiの現行HDA搭載車 | 日本向け販売単位・現行掲載を未確認 | Hyundai Mobility Japan公式モデルページ |
-| Mazda / Mitsubishi / Suzuki / Daihatsuの一次確認候補 | 縦横支援を確認済みのモデルがあるが、現行仕様期・全グレード・価格適用日の販売単位展開を継続中 | 各社日本公式グレード表・装備表・取扱説明書 |
+| Mitsubishi / Suzuki / Daihatsuの一次確認候補 | 縦横支援を確認済みのモデルがあるが、現行仕様期・全グレード・価格適用日の販売単位展開を継続中（e VITARA 3単位は掲載済み） | 各社日本公式グレード表・装備表・取扱説明書 |
 | BMW限定車 / Mモデル・MINIの一次確認候補 | BMW通常3シリーズ9単位とMINI Countryman通常8単位は掲載済み。BMW限定車・M3、MINI Countryman Shadow Edition / Slate Blueは通常単位と分けて確認待ち | 各社日本公式装備価格表・取扱説明書 |
 | Audi / Mercedes-Benz / Porsche等 | モデル単位の支援機能は確認できるが、グレード別の標準／オプションと販売状態の確認が未完 | 各社日本公式装備価格表・コンフィギュレーター |
 
 この台帳の未確認ブランド／モデル群を確認するまでは、サイト全体の国内候補を「網羅」と主張しない。L1のみ、発売予定、過去車両、Level 4サービスは別区分として追加調査する。
+
+### Toyota / Lexusの次回販売単位化候補（2026-09-08確認）
+
+Toyotaの日本向け現行ラインアップと公式安全・主要装備資料から、レーダークルーズコントロール（全車速追従）とLTAの同時設定候補として、アクア、ヤリス、ヤリス クロス、カローラ、カローラ スポーツ、カローラ ツーリング、プリウス、シエンタ、ノア、ヴォクシー、アルファード、ヴェルファイア、クラウン、bZ4X、GRヤリス、RAV4、ハリアー、カローラ クロス、ランドクルーザー250、MIRAIの20モデルを抽出した。Lexus公式のLexus Safety System+対応車種比較では、LX、GX、RX、RZ、NX、UX、LBX、LS、ES、IS、LM、LCの12モデルにレーダークルーズコントロール（全車速追従）とLTAの設定がある。
+
+これはモデル候補の棚卸しであり、公開可能な販売単位32件ではない。比較表の「設定あり」はメーカーオプションを含み得るため、グレード・パワートレーン・駆動方式ごとの標準／オプション、現行販売状態、価格、仕様期、作動条件を個別資料で照合するまで公開データへ追加しない。Toyota Roomy / Raize / Hilux / Land Cruiser 70 / GR86は両機能の現行販売単位を確定できず、クラウン スポーツ／エステート、GRカローラ、ランドクルーザー300も資料一式が不足するため保留する。
+
+公式母集団入口: https://toyota.jp/carlineup/ 、https://toyota.jp/safety/scene/highway/index2.html 、https://lexus.jp/models/ 、https://lexus.jp/safety/compare/ 、https://lexus.jp/safety/highway1/ 。確認日2026-09-08。
 
 ## 一次確認済み・公開レコード化待ち
 
@@ -78,7 +93,7 @@ MINI Countrymanは、2026年7月以降生産の日本向け装備・価格表か
 
 | メーカー | 確認済み候補 | 残作業 |
 |---|---|---|
-| Mazda | CX-80、CX-60、新型CX-5、MAZDA3、CX-30、MX-30 ROTARY-EV | 全グレード表記を販売単位へ展開し、CTS/MRCCの仕様期を固定 |
+| Mazda | 掲載済み35単位（CX-80 8、CX-60 11、新型CX-5 4、MAZDA3 7、CX-30 4、MX-30 Natural Monotone 1） | MAZDA3 FASTBACK 15C / 15S・SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EVグレードはMRCCとCTSの同時支援を確定できず対象外。ROTARY-EV以外の限定仕様は別途確認 |
 | Mitsubishi | OUTLANDER PHEV、ECLIPSE CROSS、eKクロス、eKクロス EV、eKスペース、デリカミニ | MI-PILOTの標準／メーカーオプションとグレード別価格を固定 |
 | Suzuki | FRONX、SOLIO/BANDIT、SWIFT CVT、SPACIA系（e VITARA 3単位は掲載済み） | ACC＋車線中央維持の対象グレードとパッケージを販売単位へ展開 |
 | Daihatsu | MOVE、MOVE CANBUS、TANTO系、TAFT、ROCKY | Smart Cruise Packを含む標準／オプション差を販売単位へ展開 |
@@ -97,8 +112,24 @@ MINI Countrymanの限定仕様は通常カタログ8単位へ混在させない�
 | Daihatsu Atrai | 対象外 | 商用車であり、今回の乗用車母集団外 |
 | Daihatsu Thor / Mira e:S | 証拠不足 | ACCとLKCの同時作動を確認できない |
 | Mazda MX-30 EV | 現行掲載未確認 | 現行ラインアップ掲載を確認できず、ROTARY-EVと混ぜない |
+| Mazda MX-30 ROTARY-EV（ROTARY-EVグレード） | 対象外 | 2026年7月主要諸元・装備表でMRCCは標準だがCTSは「—」。縦横同時支援を確定できないため、Natural Monotoneのみ公開 |
 | Toyota Roomy / Raize / Hilux / Land Cruiser 70 / GR86 | 証拠不足 | LTA＋全車速ACCの現行グレード根拠が不足 |
 | Hyundai IONIQ 5 | 監視条件の証拠不足 | HDA2等の装備は確認したが、運転者責任・常時監視の日本向け明文が未確認 |
+
+## Mazdaの根拠（今回追加、内部保持）
+
+確認日は2026-09-08。以下はすべてMazda Japanの現行モデル／グレード・価格／安全ページと主要諸元・装備表で、販売単位、MRCC（縦方向）とCTS（横方向）、運転者監視・即時介入、標準／メーカーオプション、価格を照合した。販売単位導入日と価格適用日は資料に明記がないためnullまたは不明で保持し、推測していない。
+
+| 対象 | 現行ページ | グレード・価格 | 主要諸元・装備表 | セーフティ |
+|---|---|---|---|---|
+| CX-80 | https://www.mazda.co.jp/cars/passenger/cx-80/ | https://www.mazda.co.jp/cars/passenger/cx-80/grade/ | https://www.mazda.co.jp/content/dam/mazda/official/mazda-co-jp/cars/cx-80/common/pdf/cx-80_specification_202603.pdf | https://www.mazda.co.jp/cars/passenger/cx-80/safety/ |
+| CX-60 | https://www.mazda.co.jp/cars/passenger/cx-60/ | https://www.mazda.co.jp/cars/passenger/cx-60/grade/ | https://www.mazda.co.jp/content/dam/mazda/official/mazda-co-jp/cars/cx-60/common/pdf/cx-60_specification_202603.pdf | https://www.mazda.co.jp/cars/passenger/cx-60/safety/ |
+| 新型CX-5 | https://www.mazda.co.jp/cars/passenger/cx-5/ | https://www.mazda.co.jp/cars/passenger/cx-5/grade/ | https://www.mazda.co.jp/content/dam/mazda/official/mazda-co-jp/cars/cx-5/common/pdf/cx-5_specification_202605.pdf | https://www.mazda.co.jp/cars/passenger/cx-5/safety/ |
+| MAZDA3 | https://www.mazda.co.jp/cars/passenger/mazda3/ | https://www.mazda.co.jp/cars/passenger/mazda3/grade/ | https://www.mazda.co.jp/content/dam/mazda/official/mazda-co-jp/cars/mazda3/common/pdf/mazda3_specification_202607.pdf | https://www.mazda.co.jp/cars/passenger/mazda3/safety/ |
+| CX-30 | https://www.mazda.co.jp/cars/passenger/cx-30/ | https://www.mazda.co.jp/cars/passenger/cx-30/grade/ | https://www.mazda.co.jp/content/dam/mazda/official/mazda-co-jp/cars/cx-30/common/pdf/cx-30_specification_202607.pdf | https://www.mazda.co.jp/cars/passenger/cx-30/safety/ |
+| MX-30 ROTARY-EV | https://www.mazda.co.jp/cars/passenger/mx-30/ | https://www.mazda.co.jp/cars/passenger/mx-30/grade/ | https://www.mazda.co.jp/content/dam/mazda/official/mazda-co-jp/cars/mx-30/common/pdf/mx-30_specification_202607.pdf | https://www.mazda.co.jp/cars/passenger/mx-30/safety/ |
+
+CX-80 8単位とCX-60 11単位はMRCC・CTS・ドライバー・モニタリングを標準装備として確認した。新型CX-5はS、G標準、G EX Package、Lの4単位を掲載した。G標準は基本CTSでハンズオフ不可、G EX PackageとLはドライバー・モニタリング連動CTS、車線変更アシスト、高速道路・自動車専用道路の渋滞時ハンズオフアシストを備える。MAZDA3はFastback 25S / 25L / X Touringを6EC-ATと6MTに分け、Sedan 25Lと合わせて7単位とした。6EC-ATは全車速追従機能付MRCC、6MTは通常MRCCとして区別した。CX-30は20G / 20 Air Edition / 25L / 25 Air Editionを掲載した（20GのCTS等はメーカーオプション、他3単位は標準）。MX-30はNatural MonotoneだけがCTS標準で、ROTARY-EVグレードは装備表でCTS「—」のため対象外とした。全掲載単位で運転者の常時監視と必要時の即時介入を明記し、CX-5 G EX Package / L以外はハンズオフ不可とした。道路条件・速度上限が公式資料で確定できない場合は不明のまま保持した。
 
 ## Teslaの根拠（内部保持）
 

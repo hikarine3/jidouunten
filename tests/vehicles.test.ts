@@ -42,8 +42,39 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(38);
+    expect(vehicles).toHaveLength(73);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
+  });
+
+  it('Mazda日本向け現行6車種は35販売単位を公式装備表付きで保持する', () => {
+    const mazda = vehicles.filter((vehicle) => vehicle.maker === 'Mazda');
+    expect(mazda).toHaveLength(35);
+    expect(mazda.filter((vehicle) => vehicle.model === 'CX-80')).toHaveLength(8);
+    expect(mazda.filter((vehicle) => vehicle.model === 'CX-60')).toHaveLength(11);
+    expect(mazda.filter((vehicle) => vehicle.model === '新型 CX-5')).toHaveLength(4);
+    expect(mazda.filter((vehicle) => vehicle.model === 'MAZDA3 FASTBACK')).toHaveLength(6);
+    expect(mazda.filter((vehicle) => vehicle.model === 'MAZDA3 SEDAN')).toHaveLength(1);
+    expect(mazda.filter((vehicle) => vehicle.model === 'CX-30')).toHaveLength(4);
+    expect(mazda.filter((vehicle) => vehicle.model === 'MX-30 ROTARY-EV')).toHaveLength(1);
+    expect(mazda.every((vehicle) => vehicle.currentCatalogListed && vehicle.modelYear === null && vehicle.salesUnitIntroducedAt === null && vehicle.priceEffectiveAt === null)).toBe(true);
+    expect(mazda.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance' && vehicle.driverMonitoring === 'required' && vehicle.handsOff !== 'unknown')).toBe(true);
+    expect(mazda.every((vehicle) => vehicle.requiredPackage?.includes('MRCC') && vehicle.requiredPackage.includes('CTS'))).toBe(true);
+    expect(mazda.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'マツダ株式会社' && source.url.includes('mazda.co.jp') && source.accessedAt === '2026-09-08'))).toBe(true);
+    expect(mazda.every((vehicle) => vehicle.sources.some((source) => source.supports.some((support) => support.includes('円'))))).toBe(true);
+    const handsOnManualModels = new Set(['MAZDA3 FASTBACK', 'MAZDA3 SEDAN', 'CX-30', 'MX-30 ROTARY-EV']);
+    expect(mazda.filter((vehicle) => handsOnManualModels.has(vehicle.model))).toHaveLength(12);
+    expect(mazda.filter((vehicle) => handsOnManualModels.has(vehicle.model)).every((vehicle) => vehicle.sources.some((source) => source.title.includes('取扱説明書') && source.supports.some((support) => support.includes('手を放す'))))).toBe(true);
+    expect(mazda.find((vehicle) => vehicle.model === '新型 CX-5' && vehicle.grade === 'G')?.handsOff).toBe('not_allowed');
+    expect(mazda.find((vehicle) => vehicle.id === 'jp-mazda-cx-5-g-ex-package')?.capabilities).toEqual(expect.arrayContaining(['hands_off_highway', 'lane_change_support']));
+    expect(mazda.find((vehicle) => vehicle.model === '新型 CX-5' && vehicle.grade === 'L')?.capabilities).toEqual(expect.arrayContaining(['hands_off_highway', 'lane_change_support']));
+    expect(mazda.find((vehicle) => vehicle.model === '新型 CX-5' && vehicle.grade === 'S')?.handsOff).toBe('not_allowed');
+    expect(mazda.find((vehicle) => vehicle.model === 'CX-30' && vehicle.grade === '20G')?.requiredPackage).toContain('メーカーオプション');
+    expect(mazda.find((vehicle) => vehicle.model === 'CX-30' && vehicle.grade === '20G')?.capabilities).toContain('driver_monitoring');
+    expect(mazda.find((vehicle) => vehicle.model === 'CX-30' && vehicle.grade === '20G')?.sources.flatMap((source) => source.supports)).toContain('EX Package 148,500円（CTS・ドライバー・モニタリングを含む）');
+    expect(mazda.find((vehicle) => vehicle.id === 'jp-mazda-mazda3-fastback-25s-6ec-at')?.capabilities).not.toContain('driver_monitoring');
+    expect(mazda.find((vehicle) => vehicle.id === 'jp-mazda-mazda3-fastback-25s-6ec-at')?.requiredPackage).toContain('全車速追従機能付');
+    expect(mazda.find((vehicle) => vehicle.id === 'jp-mazda-mazda3-fastback-25s-6mt')?.requiredPackage).not.toContain('全車速追従機能付');
+    expect(mazda.some((vehicle) => vehicle.id === 'jp-mazda-mx-30-rotary-ev-rotary-ev')).toBe(false);
   });
 
   it('現行カタログ確認済みTesla 2モデルは日本向け根拠付きのLevel 2相当として扱う', () => {
