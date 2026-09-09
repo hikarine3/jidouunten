@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, filterVehicleList, validateVehicle, vehicleReferenceLabel, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, filterVehicleList, isDefaultListedVehicle, validateVehicle, vehicleReferenceLabel, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, grade: '標準',
@@ -33,6 +33,17 @@ describe('vehicle data contract and filters', () => {
     expect(filterVehicleList(list, { availability: 'used_only' }).map((v) => v.id)).toEqual(['c']);
     expect(filterVehicleList(list, {}).map((v) => v.id)).toEqual(['a', 'b']);
     expect(filterVehicleList([makeVehicle({ id: 'mainline', odd: { ...makeVehicle().odd, roadTypes: ['高速道路の本線'] } })], { road: '高速道路' }).map((v) => v.id)).toEqual(['mainline']);
+  });
+
+  it('uses one default-list predicate for filtering and top-page counts', () => {
+    const list = [
+      makeVehicle({ id: 'orderable' }),
+      makeVehicle({ id: 'catalog-review', availability: 'unknown', currentCatalogListed: true }),
+      makeVehicle({ id: 'not-listed', availability: 'unknown', currentCatalogListed: false }),
+      makeVehicle({ id: 'past', availability: 'unavailable', currentCatalogListed: false }),
+    ];
+    expect(list.filter(isDefaultListedVehicle).map((vehicle) => vehicle.id)).toEqual(['orderable', 'catalog-review']);
+    expect(filterVehicleList(list, {}).map((vehicle) => vehicle.id)).toEqual(['orderable', 'catalog-review']);
   });
 
   it('normalizes detailed ODD road labels for the shared filter', () => {

@@ -5,7 +5,7 @@ const { vehicle, selectable = false, checked = false } = Astro.props as { vehicl
 ---
 <article class="vehicle-card">
   <div class="vehicle-card-body">
-    <div class="eyebrow">LEVEL {vehicle.automationLevel} · {levelLabels[vehicle.automationLevel]}</div>
+    <div class:list={['vehicle-level-tag', vehicle.automationLevel >= 3 ? 'is-automated' : 'is-assistance']}>LEVEL {vehicle.automationLevel}<span>{levelLabels[vehicle.automationLevel]}</span></div>
     <h3><a href={`/cars/${vehicle.id}/`}>{vehicle.maker} {vehicle.model}</a></h3>
     <div class="maker">{vehicleReferenceLabel(vehicle)}　{vehicle.grade}</div>
     <div class="meta">

@@ -1,21 +1,66 @@
 ---
 import VehicleCard from './VehicleCard.astro';
-import { availabilityLabels, canonicalRoadType, handsOffLabels, roadFilterLabels, vehicles } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, handsOffLabels, isDefaultListedVehicle, levelIds, levelLabels, levelShort, roadFilterLabels, vehicles } from '../data/loader';
 
 const { action = '/cars/' } = Astro.props as { action?: string };
 const roads = [...new Set(vehicles.flatMap((vehicle) => vehicle.odd.roadTypes.map(canonicalRoadType)))].sort();
 const roadOptions = roads.length ? roads : [...roadFilterLabels];
-const defaultCount = vehicles.filter((vehicle) => vehicle.availability === 'new_order_available' || (vehicle.availability === 'unknown' && vehicle.currentCatalogListed === true)).length;
+const defaultVehicles = vehicles.filter(isDefaultListedVehicle);
+const defaultCount = defaultVehicles.length;
+const makerCount = new Set(defaultVehicles.map((vehicle) => vehicle.maker)).size;
+const handsOffCount = defaultVehicles.filter((vehicle) => vehicle.handsOff === 'allowed_in_conditions').length;
+const levelOverview = levelIds.map((level) => {
+  const listedCount = defaultVehicles.filter((vehicle) => vehicle.automationLevel === level).length;
+  const totalCount = vehicles.filter((vehicle) => vehicle.automationLevel === level).length;
+  return {
+    level,
+    label: levelLabels[level],
+    description: levelShort[level],
+    listedCount,
+    totalCount,
+    countLabel: listedCount ? `${listedCount}件` : totalCount ? `過去例 ${totalCount}件` : '0件',
+    availabilityShortcut: listedCount ? '' : totalCount ? 'all' : '',
+  };
+});
 ---
 <section class="list-top">
   <div class="wrap">
-    <div class="eyebrow">VEHICLE CATALOG / JAPAN</div>
-    <div class="list-heading">
-      <div>
-        <h1>条件から、車を探す。</h1>
-        <p>自動化レベル、作動する道路、ハンズオフ、販売状態で候補を絞り込めます。</p>
+    <div class="catalog-command">
+      <div class="catalog-summary">
+        <div class="eyebrow">VEHICLE CATALOG / JAPAN</div>
+        <h1><strong class="catalog-count">{defaultCount}</strong><span>販売単位を<br />レベルから選ぶ。</span></h1>
+        <div class="catalog-proof" aria-label={`掲載規模: ${makerCount}メーカー、条件内ハンズオフ${handsOffCount}件`}>
+          <span><strong>{makerCount}</strong> メーカー横断</span>
+          <span><strong>{handsOffCount}</strong> 条件内ハンズオフ</span>
+        </div>
       </div>
-      <p class="list-heading-note">車名ではなく、メーカー明示モデル年または世代・グレード単位で掲載。レベルは優劣ではなく、運転の役割と条件の分類です。</p>
+      <div class="level-deck">
+        <div class="level-deck-head">
+          <div>
+            <span class="level-deck-title">LEVEL MAP</span>
+            <p>Level 2までは運転支援。Level 3から自動運転。</p>
+          </div>
+          <a href="/levels/">違いを確認 <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="level-rail" role="group" aria-label="自動化レベルで絞り込む">
+          <button type="button" class="level-shortcut is-all" data-level-shortcut="" data-availability-shortcut="" aria-pressed="true">
+            <span class="level-index">ALL</span><strong>すべて</strong><span class="level-count">{defaultCount}件</span>
+          </button>
+          {levelOverview.map(({ level, label, description, totalCount, countLabel, availabilityShortcut }) => (
+            <button
+              type="button"
+              class:list={['level-shortcut', level >= 3 && 'is-automated']}
+              data-level-shortcut={String(level)}
+              data-availability-shortcut={availabilityShortcut}
+              aria-label={`Level ${level} ${label}、${description}、${countLabel}`}
+              aria-pressed="false"
+              disabled={totalCount === 0}
+            >
+              <span class="level-index">L{level}</span><strong>{label}</strong><span class="level-count">{countLabel}</span>
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -31,7 +76,7 @@ const defaultCount = vehicles.filter((vehicle) => vehicle.availability === 'new_
   </form>
   <div class="notice list-notice" data-level2-notice hidden><strong>Level 2：常時監視が必要です。</strong><br />ハンズオフ可能な条件があっても、運転者は周囲を監視し、いつでも引き継げる状態を保ちます。</div>
   <div class="results-bar">
-    <h2><span data-selected-label>カタログ掲載確認</span> <span class="subtle" data-result-count>{defaultCount}件</span></h2>
+    <h2><span data-selected-label>カタログ掲載確認</span> <span class="subtle" data-result-count aria-live="polite">{defaultCount}件</span></h2>
     <span class="subtle results-help">URLに条件を保存できます</span>
     <div class="compare-toolbar" data-compare-toolbar>
       <span class="subtle" data-compare-count>0台選択中（最大2台）</span>
@@ -49,6 +94,7 @@ const defaultCount = vehicles.filter((vehicle) => vehicle.availability === 'new_
   const compareForm = document.querySelector('#compare-list-form');
   const shells = [...document.querySelectorAll('[data-vehicle-shell]')];
   const compareInputs = [...document.querySelectorAll('#compare-list-form input[name="ids"]')];
+  const levelShortcuts = [...document.querySelectorAll('[data-level-shortcut]')];
   let lastTrackedSearch = '';
   const updateCompare = () => {
     const selected = compareInputs.filter((input) => input.checked).map((input) => input.value);
@@ -60,6 +106,7 @@ const defaultCount = vehicles.filter((vehicle) => vehicle.availability === 'new_
       link.href = selected.length ? `/compare/?${selected.map((id) => `ids=${encodeURIComponent(id)}`).join('&')}` : '/compare/';
       link.setAttribute('aria-disabled', selected.length === 2 ? 'false' : 'true');
     }
+    document.querySelector('[data-compare-toolbar]')?.toggleAttribute('data-active', selected.length > 0);
   };
   const applyFilters = (trackInteraction = false) => {
     const params = new URLSearchParams(location.search);
@@ -81,6 +128,7 @@ const defaultCount = vehicles.filter((vehicle) => vehicle.availability === 'new_
     const resultCount = document.querySelector('[data-result-count]'); if (resultCount) resultCount.textContent = `${count}件`;
     const empty = document.querySelector('[data-empty]'); if (empty) empty.hidden = count !== 0;
     const notice = document.querySelector('[data-level2-notice]'); if (notice) notice.hidden = level !== '2';
+    levelShortcuts.forEach((button) => button.setAttribute('aria-pressed', button.dataset.levelShortcut === level ? 'true' : 'false'));
     if (trackInteraction && location.search !== lastTrackedSearch) { window.jidouuntenTrack?.('filter_results', { filter_name: 'vehicle_filters', filter_value: `${level || 'all'}|${road || 'all'}|${handsOff || 'all'}|${availability || 'default'}`, result_count: count }); lastTrackedSearch = location.search; }
     updateCompare();
   };
@@ -94,6 +142,16 @@ const defaultCount = vehicles.filter((vehicle) => vehicle.availability === 'new_
   form?.querySelector('select[name="level"]')?.addEventListener('change', (event) => {
     window.jidouuntenTrack?.('select_level', { level: event.target.value || 'all' });
   });
+  levelShortcuts.forEach((button) => button.addEventListener('click', () => {
+    if (button.disabled) return;
+    const level = button.dataset.levelShortcut || '';
+    const levelSelect = form?.querySelector('select[name="level"]');
+    const availabilitySelect = form?.querySelector('select[name="availability"]');
+    if (levelSelect) levelSelect.value = level;
+    if (availabilitySelect) availabilitySelect.value = button.dataset.availabilityShortcut || '';
+    window.jidouuntenTrack?.('select_level', { level: level || 'all', source: 'level_map' });
+    form?.requestSubmit();
+  }));
   compareInputs.forEach((input) => input.addEventListener('change', updateCompare));
   compareForm?.addEventListener('submit', (event) => {
     const selected = compareInputs.filter((input) => input.checked);

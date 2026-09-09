@@ -149,6 +149,12 @@ export function filterVehicles(input: {
   return filterVehicleList(vehicles, input);
 }
 
+/** 一覧の既定表示とトップ集計で共有する「現行カタログ掲載確認」の判定。 */
+export function isDefaultListedVehicle(vehicle: Pick<Vehicle, 'availability' | 'currentCatalogListed'>) {
+  return vehicle.availability === 'new_order_available'
+    || (vehicle.availability === 'unknown' && vehicle.currentCatalogListed === true);
+}
+
 export function filterVehicleList(list: Vehicle[], input: {
   level?: string | number;
   road?: string;
@@ -160,7 +166,7 @@ export function filterVehicleList(list: Vehicle[], input: {
   return list.filter((vehicle) => {
     // Unknown order status remains visible as a review candidate, but is never
     // presented as orderable. Explicitly excluded records can opt out.
-    if (!hasAvailabilityFilter && vehicle.availability !== 'new_order_available' && !(vehicle.availability === 'unknown' && vehicle.currentCatalogListed === true)) return false;
+    if (!hasAvailabilityFilter && !isDefaultListedVehicle(vehicle)) return false;
     if (level !== undefined && vehicle.automationLevel !== level) return false;
     if (input.road && !vehicle.odd.roadTypes.some((road) => canonicalRoadType(road) === input.road)) return false;
     if (input.handsOff && vehicle.handsOff !== input.handsOff) return false;
