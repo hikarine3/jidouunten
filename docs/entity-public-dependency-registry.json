@@ -315,15 +315,15 @@
       "surfaces": [
         {"url": "/", "locale": "ja", "output_path": "dist/index.html", "markers": ["価格が安い順", "価格要確認"]},
         {"url": "/cars/", "locale": "ja", "output_path": "dist/cars/index.html", "markers": ["価格が安い順", "価格要確認"]},
-        {"url": "/cars/jp-volvo-ex30-my2027-plus-p5-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-plus-p5-electric/index.html", "markers": ["Volvo", "EX30", "約479万円"]},
-        {"url": "/cars/jp-mazda-cx-5-s/", "locale": "ja", "output_path": "dist/cars/jp-mazda-cx-5-s/index.html", "markers": ["Mazda", "CX-5", "約330〜354万円"]},
+        {"url": "/cars/jp-volvo-ex30-my2027-plus-p5-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-plus-p5-electric/index.html", "markers": ["Volvo", "EX30", "4,790,000円"]},
+        {"url": "/cars/jp-mazda-cx-5-s/", "locale": "ja", "output_path": "dist/cars/jp-mazda-cx-5-s/index.html", "markers": ["Mazda", "CX-5", "3,300,000〜3,536,500円"]},
         {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["参考価格", "車両本体の公式掲載価格"]}
       ],
       "required_render_selectors": [
         {"url": "/", "selector": "[data-vehicle-shell]:has(input[value=\"jp-volvo-ex30-my2027-plus-p5-electric\"])", "markers": ["Volvo", "EX30", "約479万円"]},
         {"url": "/", "selector": "[data-vehicle-shell]:has(input[value=\"jp-mazda-cx-5-s\"])", "markers": ["Mazda", "CX-5", "約330〜354万円"]},
-        {"url": "/cars/jp-volvo-ex30-my2027-plus-p5-electric/", "selector": "main", "markers": ["Volvo", "EX30", "約479万円"]},
-        {"url": "/compare/?ids=jp-volvo-ex30-my2027-plus-p5-electric&ids=jp-mazda-cx-5-s", "selector": "[data-compare-result]", "markers": ["参考価格", "約479万円", "約330〜354万円"]}
+        {"url": "/cars/jp-volvo-ex30-my2027-plus-p5-electric/", "selector": "main", "markers": ["Volvo", "EX30", "4,790,000円"]},
+        {"url": "/compare/?ids=jp-volvo-ex30-my2027-plus-p5-electric&ids=jp-mazda-cx-5-s", "selector": "[data-compare-result]", "markers": ["参考価格", "4,790,000円", "3,300,000〜3,536,500円"]}
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
