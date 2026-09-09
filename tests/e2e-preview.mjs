@@ -29,6 +29,8 @@ const visibleCards = () => page.locator('[data-vehicle-shell]:not([hidden])').co
 const events = () => page.evaluate(() => window.dataLayer || []);
 
 try {
+  const rootHtml = await (await fetch(`${base}/`)).text();
+  assert.equal(rootHtml.includes('\0'), false, '公開HTMLにNUL制御文字を含めない');
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
