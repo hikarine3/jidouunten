@@ -70,6 +70,9 @@ try {
   await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://jidouunten.jp/og.png', 'OG画像は絶対URL');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け76販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け72販売単位/, '古い固定件数を残さない');
+  assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
   assert.match(await page.locator('footer').innerText(), /自動運転\.jp[\s\S]*車を探す[\s\S]*レベルの定義[\s\S]*比較する[\s\S]*プライバシー[\s\S]*1st Class/, '共通フッターに主要導線と運営元');
   assert.equal(await page.locator('[data-vehicle-shell][data-availability="unavailable"]:visible').count(), 0, '過去車両は既定非表示');
