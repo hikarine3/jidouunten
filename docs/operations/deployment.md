@@ -1,6 +1,6 @@
 # Cloudflare Pages公開運用
 
-更新: 2026-09-07
+更新: 2026-09-10
 
 ## 配信方式
 
@@ -18,7 +18,21 @@ Direct UploadからGit integrationへの同一project内切替は不可。
 
 仕様: [Cloudflare Direct Upload](https://developers.cloudflare.com/pages/get-started/direct-upload/)
 
-## 手動配信
+## 継続承認と配信gate
+
+2026-09-10のオーナー指示「監査PASSしたらどんどんdeployしてよ」を、このPJの継続承認として扱う。
+次の全条件を満たすexact candidateは、変更ごとの追加確認を待たず `main` へpushし、既存Pages projectへ配信する。
+
+- worktreeがcleanで、候補commitと対象Issueを固定済み
+- `npm test`、`npm run check`、実IDbuild、実ブラウザE2EがPASS
+- desktop/mobileの一覧・主要操作・非対象を確認済み
+- 実装者と別contextの独立監査が `VERDICT: PASS`
+- Production target `jidouunten` と直前正常deployment、rollback先を固定済み
+
+監査後のsource変更、gate失敗、target不一致、rollback不明は停止する。DNS、Secret、課金、削除、別targetは
+この継続承認に含めず、都度確認する。
+
+## 配信手順
 
 1. `npm ci`、`npm test`、`npm run check`を実行する。
 2. `.env.example`と計測運用に従い公開IDを設定して `npm run build`。

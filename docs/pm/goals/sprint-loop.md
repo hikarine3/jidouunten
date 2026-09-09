@@ -38,7 +38,7 @@ GitHubの状態を、このファイルや別のtodo/queue JSONへ複製しま�
 | 内部改善上限 | docs・manifest・checkerだけを価値Sprintにしない。active Issueのfailureを閉じる最小範囲に限定 |
 | 配信物 | Astro static buildの `dist/`、Cloudflare Pages project `jidouunten`、本体 `https://jidouunten.jp` |
 | rollback | Cloudflare Pagesの直前正常deploymentへ戻す。DNS所有権レコードは削除しない |
-| release authority | `human`。このrepoには候補SHA束縛の自律Phase 7 runnerがないため、push/deployは対象変更ごとの明示承認が必要 |
+| release authority | `standing human authorization`。2026-09-10のオーナー継続承認により、exact candidateのPhase 5全QA・Phase 6独立監査がPASSした場合は、変更ごとの再確認なしでpush/deployする |
 
 ## Phase運用
 
@@ -49,7 +49,7 @@ Phase 0〜7の意味は `docs/pm/github-work-management.md` を使います。�
 - Phase 4: repo `CLAUDE.md` のroutingに従い、通常の範囲固定実装はLunaを使う。
 - Phase 5: unit/check/buildに加え、一覧・詳細・比較・主要遷移を実ブラウザで確認する。
 - Phase 6: 実装者とは別contextで、事実・権利・計測・rollbackをrisk比例で一度確認する。
-- Phase 7: exact commit、Production target、直前正常deploymentを固定し、明示承認後だけpush/deployする。
+- Phase 7: exact commit、Production target、直前正常deploymentを固定し、上記継続承認と全gateを満たす候補だけpush/deployする。
   immutable URLと本体URLの両方をsmokeし、Release statusを先、Statusを最後に更新する。
 
 モデル名・effortの正本はrepo `CLAUDE.md` と `../vpshikaku/docs/model-routing.md` であり、ここへ表を複製しません。
@@ -76,5 +76,5 @@ Phase 0〜7の意味は `docs/pm/github-work-management.md` を使います。�
 ## Short `/goal` paste
 
 ```text
-/goal docs/pm/goals/sprint-loop.md を読み、GitHub Project `jidouunten Delivery` のIn progressを継続し、なければStatus=ReadyをWork priority、同順位はRank順に消費する。Readyがある間はPhase 0を再実行しない。activeもReadyも0件ならPhase 0を行い、価値gateを通る重複なしのReady候補10件以上を全件事前検証してProjectへ登録するまで完了扱いにしない。通常実装はrepoのmodel routingで低コストagentへ範囲固定し、親は採択・統合・高risk判断だけを行う。Phase 5まで件数付きQAと実ブラウザ確認、Phase 6で独立レビューを行う。push/deploy/DNS/課金は対象ごとの人間承認まで実行しない。GitHub取得失敗をReady 0件扱いせず、本書の終端・停止条件まで継続する。
+/goal docs/pm/goals/sprint-loop.md を読み、GitHub Project `jidouunten Delivery` のIn progressを継続し、なければStatus=ReadyをWork priority、同順位はRank順に消費する。Readyがある間はPhase 0を再実行しない。activeもReadyも0件ならPhase 0を行い、価値gateを通る重複なしのReady候補10件以上を全件事前検証してProjectへ登録するまで完了扱いにしない。通常実装はrepoのmodel routingで低コストagentへ範囲固定し、親は採択・統合・高risk判断だけを行う。Phase 5まで件数付きQAと実ブラウザ確認、Phase 6で独立レビューを行う。2026-09-10のオーナー継続承認により全gate PASSのexact candidateは再確認なしでpush/deployし、DNS/Secret/課金/削除/別targetは都度承認まで実行しない。GitHub取得失敗をReady 0件扱いせず、本書の終端・停止条件まで継続する。
 ```
