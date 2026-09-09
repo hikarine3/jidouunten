@@ -1,8 +1,9 @@
 ---
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
-const { title = '自動運転.jp｜自動運転レベルから、次の一台を。', description = '自動運転レベルと作動条件から、日本で選べる車を探して比較できます。' } = Astro.props;
+const { title = '自動運転.jp｜同じLevel 2でも、できることは違う。', description = '日本向けの運転支援車を、自動化レベル、ハンズオフ、機能、発売・導入時期から探して比較できます。' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, 'https://jidouunten.jp').toString();
+const socialImage = 'https://jidouunten.jp/og.png';
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -21,9 +22,19 @@ const structuredData = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="自動運転.jp" />
+    <meta property="og:locale" content="ja_JP" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="同じLevel 2でも、できることは違う。日本向け72販売単位のハンズオフ条件を比較する自動運転.jp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
     <title>{title}</title>
   </head>
@@ -41,8 +52,9 @@ const structuredData = {
     <main><slot /></main>
     <footer class="footer">
       <div class="wrap footer-inner">
-        <span>© {new Date().getFullYear()} jidouunten.jp</span>
-        <span><a href="/privacy/">プライバシーと計測設定</a>　·　<a href="/levels/">レベルの定義</a></span>
+        <div><a class="footer-brand" href="/">自動運転.jp</a><span>日本向けの運転支援車を、機能と条件で比較。</span></div>
+        <nav aria-label="フッターナビゲーション"><a href="/">車を探す</a><a href="/levels/">レベルの定義</a><a href="/compare/">比較する</a><a href="/privacy/">プライバシー</a></nav>
+        <a class="footer-copy" href="https://1stclass.co.jp/">© {new Date().getFullYear()} 1st Class</a>
       </div>
     </footer>
     <Analytics />

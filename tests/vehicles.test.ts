@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, filterVehicleList, isDefaultListedVehicle, validateVehicle, vehicleReferenceLabel, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, filterVehicleList, isDefaultListedVehicle, sortVehicleList, validateVehicle, vehicleReferenceLabel, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, grade: '標準',
   requiredPackage: null, automationLevel: 2, category: 'driver_assistance', availability: 'new_order_available',
   availabilityCheckedAt: '2026-09-01', odd: { roadTypes: ['高速道路'], speedKph: { max: 100 }, trafficConditions: [], weather: [], geoRestriction: [], driverConditions: ['着座'], manufacturerSummary: '要約' },
-  driverMonitoring: 'required', handsOff: 'allowed_in_conditions', capabilities: ['lane'], limitations: ['監視'],
+  driverMonitoring: 'required', handsOff: 'allowed_in_conditions', capabilities: ['lane_centering'], limitations: ['監視'],
   sources: [{ url: 'https://example.com', publisher: '公式', title: '資料', accessedAt: '2026-09-01', supports: ['level'] }], factStatus: 'verified', lastReviewedAt: '2026-09-01',
   currentCatalogListed: true,
   ...overrides,
@@ -19,7 +19,28 @@ describe('vehicle data contract and filters', () => {
     expect(validateVehicle({ ...makeVehicle(), catalogAsOf: undefined })).toBe(false);
     expect(validateVehicle({ ...makeVehicle(), catalogAsOf: '2026-2' })).toBe(false);
     expect(validateVehicle({ ...makeVehicle(), salesUnitIntroducedAt: '2026-02-31' })).toBe(false);
+    expect(validateVehicle({ ...makeVehicle(), capabilities: ['raw_unknown_id'] })).toBe(false);
     expect(validateVehicle({ ...makeVehicle(), modelYear: null })).toBe(true);
+  });
+
+  it('filters makers and defined capabilities together', () => {
+    const list = [
+      makeVehicle({ id: 'tesla-match', maker: 'Tesla', capabilities: ['lane_centering', 'lane_change_support'] }),
+      makeVehicle({ id: 'tesla-other', maker: 'Tesla', capabilities: ['lane_centering'] }),
+      makeVehicle({ id: 'other', maker: 'Honda', capabilities: ['lane_change_support'] }),
+    ];
+    expect(filterVehicleList(list, { maker: 'Tesla', capability: 'lane_change_support' }).map((vehicle) => vehicle.id)).toEqual(['tesla-match']);
+  });
+
+  it('sorts by confirmed introduction date and leaves unknown dates last', () => {
+    const list = [
+      makeVehicle({ id: 'unknown-b', maker: 'B', salesUnitIntroducedAt: null }),
+      makeVehicle({ id: 'older', maker: 'C', salesUnitIntroducedAt: '2025-01' }),
+      makeVehicle({ id: 'newer', maker: 'D', salesUnitIntroducedAt: '2026-07-13' }),
+      makeVehicle({ id: 'unknown-a', maker: 'A', salesUnitIntroducedAt: null }),
+    ];
+    expect(sortVehicleList(list).map((vehicle) => vehicle.id)).toEqual(['newer', 'older', 'unknown-a', 'unknown-b']);
+    expect(sortVehicleList(list, 'maker_asc').map((vehicle) => vehicle.id)).toEqual(['unknown-a', 'unknown-b', 'older', 'newer']);
   });
 
   it('filters by level, road, hands-off and availability together', () => {
@@ -31,6 +52,7 @@ describe('vehicle data contract and filters', () => {
     ];
     expect(filterVehicleList(list, { level: 2, road: '高速道路', handsOff: 'allowed_in_conditions', availability: 'new_order_available' }).map((v) => v.id)).toEqual(['a']);
     expect(filterVehicleList(list, { availability: 'used_only' }).map((v) => v.id)).toEqual(['c']);
+    expect(filterVehicleList(list, { availability: 'all' }).map((v) => v.id)).toEqual(['a', 'b', 'c', 'hidden']);
     expect(filterVehicleList(list, {}).map((v) => v.id)).toEqual(['a', 'b']);
     expect(filterVehicleList([makeVehicle({ id: 'mainline', odd: { ...makeVehicle().odd, roadTypes: ['高速道路の本線'] } })], { road: '高速道路' }).map((v) => v.id)).toEqual(['mainline']);
   });

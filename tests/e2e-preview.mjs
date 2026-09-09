@@ -33,10 +33,20 @@ try {
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   assert.equal(await visibleCards(), 72, '既定カタログは現行確認72件');
-  assert.match(await page.locator('.catalog-command').innerText(), /72[\s\S]*販売単位[\s\S]*10[\s\S]*メーカー横断[\s\S]*24[\s\S]*条件内ハンズオフ/, 'トップ操作盤にデータ由来の掲載規模');
-  assert.equal(await page.locator('[data-level-shortcut]').count(), 6, 'ALLとLevel 1〜5を常時表示');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*72[\s\S]*10[\s\S]*条件内可[\s\S]*24[\s\S]*不可[\s\S]*41[\s\S]*未確認[\s\S]*7/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="3"]').innerText(), /L3[\s\S]*条件付自動運転[\s\S]*過去例 1件/, 'Level 3の過去例を現行車と区別');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 2, 'Tesla Model 3 / Model Yを既定一覧に表示');
+  await page.locator('[data-maker-shortcut="Tesla"]').click();
+  assert.equal(new URL(page.url()).searchParams.get('maker'), 'Tesla', 'Teslaクイック絞り込みをURLへ保存');
+  assert.equal(await visibleCards(), 2, 'Teslaクイック絞り込みは2件');
+  await page.locator('[data-reset-shortcut]').click();
+  await page.locator('[data-hands-off-shortcut="allowed_in_conditions"]').click();
+  assert.equal(await visibleCards(), 24, '条件内ハンズオフは24件');
+  await page.locator('[data-reset-shortcut]').click();
+  await page.locator('[data-capability-shortcut="lane_change_support"]').click();
+  assert.equal(await visibleCards(), 13, '車線変更支援は13件');
+  await page.locator('[data-reset-shortcut]').click();
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo EX30' }).count(), 3, 'Volvo EX30の3販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Suzuki e VITARA' }).count(), 3, 'Suzuki e VITARAの3販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Suzuki e VITARA' }).locator('.maker').first().innerText(), '現行仕様　X 2WD', 'e VITARAは現行仕様として表示');
@@ -53,6 +63,9 @@ try {
   await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla Model 3' }).scrollIntoViewIfNeeded();
   await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
+  assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://jidouunten.jp/og.png', 'OG画像は絶対URL');
+  assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
+  assert.match(await page.locator('footer').innerText(), /自動運転\.jp[\s\S]*車を探す[\s\S]*レベルの定義[\s\S]*比較する[\s\S]*プライバシー[\s\S]*1st Class/, '共通フッターに主要導線と運営元');
   assert.equal(await page.locator('[data-vehicle-shell][data-availability="unavailable"]:visible').count(), 0, '過去車両は既定非表示');
   assert.equal(await page.locator('[data-consent]').count(), 0, 'Analytics同意バナーを表示しない');
   assert.equal(await page.locator('script[src*="/gtm.js?id="]').count(), 1, 'サイト自身のGTM bootstrapを1回だけ通常読み込み');
@@ -71,8 +84,8 @@ try {
   const mobilePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await mobilePage.goto(`${base}/`);
   const mobileFirstCard = await mobilePage.locator('[data-vehicle-shell]:not([hidden])').first().boundingBox();
-  assert.ok(mobileFirstCard && mobileFirstCard.y <= 450, `モバイル初期カード上端が450px以内 (${mobileFirstCard?.y ?? 'none'}px)`);
   await mobilePage.screenshot({ path: `${qaDir}/mobile-home.png`, fullPage: false });
+  assert.ok(mobileFirstCard && mobileFirstCard.y <= 450, `モバイル初期カード上端が450px以内 (${mobileFirstCard?.y ?? 'none'}px)`);
   await mobilePage.close();
   for (const width of [390, 520, 768, 1280]) {
     const widthPage = width === 1280 ? page : await browser.newPage({ viewport: { width, height: 844 } });
@@ -86,6 +99,14 @@ try {
   assert.equal(await visibleCards(), 9, 'トップのLevel 2・高速・ハンズオフ条件は9件');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'トップのLevel 2注意表示');
   assert.equal(new URL(page.url()).pathname, '/', 'トップの深いリンクはトップに留まる');
+
+  await page.goto(`${base}/?capability=lane_change_support&maker=Mazda`);
+  assert.equal(await visibleCards(), 2, 'メーカーと能力をAND条件で絞り込む');
+  assert.equal(await page.locator('select[name="capability"]').inputValue(), 'lane_change_support', '能力条件をURLから復元');
+
+  await page.goto(`${base}/?sort=maker_asc`);
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').first().innerText(), /^LEVEL 2[\s\S]*BMW/, 'メーカー名順へ切替');
+  assert.equal(await page.locator('[data-sort-label]').innerText(), 'メーカー名順', '現在の並び順を明示');
 
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
   assert.equal(await visibleCards(), 9, 'Level 2・高速・ハンズオフ条件は9件');
@@ -158,6 +179,9 @@ try {
 
   await page.goto(`${base}/cars/jp-tesla-model-3-2026-premium/`);
   assert.match(await page.locator('main').innerText(), /Tesla[\s\S]*Model 3/);
+  assert.doesNotMatch(await page.locator('main').innerText(), /adaptive_cruise_control|lane_centering|hands_off_highway|lane_change_support/, '内部capability IDを公開しない');
+  assert.match(await page.locator('main').innerText(), /確認できた機能[\s\S]*追従走行（ACC）[\s\S]*車線中央維持/, '機能IDを平易な日本語で説明');
+  assert.match(await page.locator('main').innerText(), /カタログ掲載中[\s\S]*現在の注文可否は販売店で確認/, '未確認の販売状態を事実どおり説明');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '根拠URL・確認日は通常UIに出さない');
   await page.screenshot({ path: `${qaDir}/desktop-tesla-detail.png`, fullPage: false });
 

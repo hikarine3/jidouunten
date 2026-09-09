@@ -11,6 +11,18 @@ export type Availability =
 export type HandsOff = 'allowed_in_conditions' | 'not_allowed' | 'unknown';
 export type DriverMonitoring = 'required' | 'takeover_ready' | 'not_required_in_odd' | 'unknown';
 
+export const capabilityDefinitions = {
+  adaptive_cruise_control: { label: '追従走行（ACC）', description: '先行車との車間を保つよう速度を調整します。' },
+  lane_centering: { label: '車線中央維持', description: '車線の中央付近を走るようハンドル操作を支援します。' },
+  traffic_jam_assist: { label: '渋滞時運転支援', description: '渋滞時の追従走行と車線維持を支援します。運転者の常時監視が必要です。' },
+  hands_off_highway: { label: '条件内ハンズオフ', description: '条件を満たす区間でハンドルから手を離せます。運転者の常時監視が必要です。' },
+  lane_change_support: { label: '車線変更支援', description: '運転者の確認や操作を前提に、車線変更を支援します。' },
+  driver_monitoring: { label: '運転者監視', description: 'カメラなどで運転者の状態を確認します。' },
+  traffic_jam_pilot: { label: '渋滞時自動運転', description: '定められた条件内ではシステムが運転し、引継ぎ要求時に運転者が対応します。' },
+} as const;
+
+export type CapabilityId = keyof typeof capabilityDefinitions;
+
 export interface Odd {
   roadTypes: string[];
   speedKph: { min?: number; max?: number; condition?: string };
@@ -96,13 +108,17 @@ export const availabilityLabels: Record<Availability, string> = {
   trial_or_research: '実証・研究',
   announced: '発表済み・提供前',
   unavailable: '現在利用不可',
-  unknown: '受注状況は要確認',
+  unknown: 'カタログ掲載中',
+};
+
+export const availabilityNotes: Partial<Record<Availability, string>> = {
+  unknown: '現在の注文可否は販売店で確認してください。',
 };
 
 export const handsOffLabels: Record<HandsOff, string> = {
-  allowed_in_conditions: '条件内で可',
-  not_allowed: '不可',
-  unknown: '不明',
+  allowed_in_conditions: 'ハンズオフ：条件内で可',
+  not_allowed: 'ハンズオフ：不可',
+  unknown: 'ハンズオフ：未確認',
 };
 
 export const monitoringLabels: Record<DriverMonitoring, string> = {
@@ -142,6 +158,8 @@ export function displayDate(date: string) {
 
 export function filterVehicles(input: {
   level?: string | number;
+  maker?: string;
+  capability?: string;
   road?: string;
   handsOff?: string;
   availability?: string;
@@ -157,20 +175,23 @@ export function isDefaultListedVehicle(vehicle: Pick<Vehicle, 'availability' | '
 
 export function filterVehicleList(list: Vehicle[], input: {
   level?: string | number;
+  maker?: string;
+  capability?: string;
   road?: string;
   handsOff?: string;
   availability?: string;
 }) {
   const level = input.level === undefined || input.level === '' ? undefined : Number(input.level);
-  const hasAvailabilityFilter = Boolean(input.availability);
   return list.filter((vehicle) => {
     // Unknown order status remains visible as a review candidate, but is never
     // presented as orderable. Explicitly excluded records can opt out.
-    if (!hasAvailabilityFilter && !isDefaultListedVehicle(vehicle)) return false;
+    if (!input.availability && !isDefaultListedVehicle(vehicle)) return false;
     if (level !== undefined && vehicle.automationLevel !== level) return false;
+    if (input.maker && vehicle.maker !== input.maker) return false;
+    if (input.capability && !vehicle.capabilities.includes(input.capability)) return false;
     if (input.road && !vehicle.odd.roadTypes.some((road) => canonicalRoadType(road) === input.road)) return false;
     if (input.handsOff && vehicle.handsOff !== input.handsOff) return false;
-    if (input.availability && vehicle.availability !== input.availability) return false;
+    if (input.availability && input.availability !== 'all' && vehicle.availability !== input.availability) return false;
     return true;
   });
 }
@@ -223,8 +244,35 @@ export function validateVehicle(value: unknown): value is Vehicle {
     && validDate(candidate.availabilityCheckedAt) && validDate(candidate.lastReviewedAt)
     && Boolean(validOdd)
     && Array.isArray(candidate.capabilities)
+    && candidate.capabilities.every((capability) => typeof capability === 'string' && capability in capabilityDefinitions)
     && Array.isArray(candidate.limitations)
     && validSources;
+}
+
+export function capabilityDefinition(id: string) {
+  return capabilityDefinitions[id as CapabilityId];
+}
+
+export function displayIntroducedAt(value: string | null) {
+  if (!value) return '発売・導入時期 未確認';
+  const [year, month, day] = value.split('-').map(Number);
+  return day ? `発売・導入 ${year}年${month}月${day}日` : `発売・導入 ${year}年${month}月`;
+}
+
+export type VehicleSort = 'introduced_desc' | 'maker_asc';
+
+/** 発売・導入日はsalesUnitIntroducedAtだけを使い、未確認は必ず末尾に置く。 */
+export function sortVehicleList(list: Vehicle[], sort: VehicleSort = 'introduced_desc') {
+  const text = (vehicle: Vehicle) => [vehicle.maker, vehicle.model, vehicle.grade, vehicle.id].join('\u0000');
+  return [...list].sort((a, b) => {
+    if (sort === 'introduced_desc') {
+      if (a.salesUnitIntroducedAt && !b.salesUnitIntroducedAt) return -1;
+      if (!a.salesUnitIntroducedAt && b.salesUnitIntroducedAt) return 1;
+      const byDate = (b.salesUnitIntroducedAt ?? '').localeCompare(a.salesUnitIntroducedAt ?? '');
+      if (byDate) return byDate;
+    }
+    return text(a).localeCompare(text(b), 'ja');
+  });
 }
 
 export function listFact(value: string | string[] | undefined) {
