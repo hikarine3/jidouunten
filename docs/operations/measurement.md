@@ -46,11 +46,15 @@ window.dataLayer.push({
   manufacturer: "maker-a",
   link_url: "https://example.invalid/official",
   link_domain: "example.invalid",
+  link_type: "product",
+  placement: "vehicle_detail",
 });
 ```
 
 `filter_results` は、初期表示や同じ値の再選択ではなく、利用者の操作で結果集合が変わった時だけ送る。
 `view_vehicle` は詳細画面表示時に1回、`outbound_manufacturer` は公式リンク遷移直前に送る。
+`link_type` は `product` / `archive`、`placement` は `vehicle_detail` / `comparison` とし、
+メーカー公式の商品情報と過去資料を区別する。見積・試乗導線は実装時に別種別を追加する。
 
 ## GTM設定
 
@@ -63,7 +67,7 @@ python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish
 ```
 
 公開version 7にはGoogle tag、5個のCustom Event trigger、対応する5個のネイティブGA4 Event tag、
-12個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
+14個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
 構成だったため停止・除去した。API取得した公開版で、ネイティブevent tag 5個（pause 0）、HTML tag 0個、
 正しい測定ID6箇所、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
 workspaceに差分がなければpublishしない。

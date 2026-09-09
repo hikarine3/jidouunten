@@ -29,7 +29,7 @@ EVENT_PARAMETERS = {
     "filter_results": ("filter_name", "filter_value", "result_count"),
     "compare_vehicles": ("vehicle_ids", "vehicle_count"),
     "view_vehicle": ("vehicle_id", "model_year", "grade"),
-    "outbound_manufacturer": ("vehicle_id", "manufacturer", "link_url", "link_domain"),
+    "outbound_manufacturer": ("vehicle_id", "manufacturer", "link_url", "link_domain", "link_type", "placement"),
 }
 
 

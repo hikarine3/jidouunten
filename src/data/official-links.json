@@ -1,0 +1,22 @@
+[
+  { "maker": "Honda", "model": "ACCORD", "url": "https://www.honda.co.jp/ACCORD/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Nissan", "model": "日産アリア", "url": "https://www3.nissan.co.jp/vehicles/new/ariya.html", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Nissan", "model": "セレナ", "url": "https://www3.nissan.co.jp/vehicles/new/serena/specifications/luxion.html", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "SUBARU", "model": "レヴォーグ レイバック", "url": "https://www.subaru.jp/levorg-layback/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Honda", "model": "LEGEND", "url": "https://www.honda.co.jp/auto-archive/legend/4door/2022/hondasensing-elite/function/", "kind": "archive", "checkedAt": "2026-09-10" },
+  { "maker": "Tesla", "model": "Model 3", "url": "https://www.tesla.com/ja_jp/model3", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Tesla", "model": "Model Y", "url": "https://www.tesla.com/ja_JP/modely", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Volvo", "model": "EX30", "url": "https://www.volvocars.com/jp/l/ex30/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Suzuki", "model": "e VITARA", "url": "https://www.suzuki.co.jp/car/evitara/detail/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Renault", "model": "ARKANA", "url": "https://www.renault.jp/car_lineup/arkana/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "BMW", "model": "3シリーズ セダン", "url": "https://www.bmw.co.jp/ja/all-models/3-series/bmw-3-series-sedan/bmw-3-series-sedan.html", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "BMW", "model": "3シリーズ ツーリング", "url": "https://www.bmw.co.jp/ja/all-models/3-series/3-series-touring/bmw-3-series-touring.html", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "MINI", "model": "Countryman", "url": "https://www.mini.jp/ja_JP/home/range/new-mini-countryman.html", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Mazda", "model": "CX-80", "url": "https://www.mazda.co.jp/cars/passenger/cx-80/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Mazda", "model": "CX-60", "url": "https://www.mazda.co.jp/cars/passenger/cx-60/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Mazda", "model": "新型 CX-5", "url": "https://www.mazda.co.jp/cars/passenger/cx-5/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Mazda", "model": "MAZDA3 FASTBACK", "url": "https://www.mazda.co.jp/cars/passenger/mazda3/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Mazda", "model": "MAZDA3 SEDAN", "url": "https://www.mazda.co.jp/cars/passenger/mazda3/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Mazda", "model": "CX-30", "url": "https://www.mazda.co.jp/cars/passenger/cx-30/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Mazda", "model": "MX-30 ROTARY-EV", "url": "https://www.mazda.co.jp/cars/passenger/mx-30/", "kind": "product", "checkedAt": "2026-09-10" }
+]

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayVehiclePrice, filterVehicleList, isDefaultListedVehicle, levelCaveat, sortVehicleList, validateVehicle, vehiclePriceMin, vehicleReferenceLabel, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayVehiclePrice, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehiclePriceMin, vehicleReferenceLabel, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -99,6 +99,14 @@ describe('vehicle data contract and filters', () => {
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
     expect(vehicles.find(({ id }) => id === 'jp-nissan-serena-2026-e-power-luxion')?.price?.optionalPackages[0].amountJpy).toBe(49_500);
     expect(vehicles.find(({ id }) => id === 'jp-subaru-levorg-layback-2023-limited-ex')?.price?.kind).toBe('range');
+  });
+
+  it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
+    expect(officialLinks).toHaveLength(20);
+    expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
+    expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
+    expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
+    expect(new Set(officialLinks.map(({ maker, model }) => `${maker}\u0000${model}`)).size).toBe(officialLinks.length);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {

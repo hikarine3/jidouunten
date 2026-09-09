@@ -108,6 +108,10 @@ market + maker + model + model_year + generation + grade + required_package + fe
 
 ## 根拠と鮮度
 
+メーカー公式への公開導線は `src/data/official-links.json` を正本とし、`maker + model` で販売単位へ解決する。
+`kind=product` は現行の商品情報、`kind=archive` は過去資料を表す。根拠URL群 `sources` とは用途を分離し、
+全販売単位で解決できること、URLの到達性、販売状態に反する購入表現がないことを公開前に検査する。
+
 - レベル、販売状態、機能、ODDはメーカー公式、取扱説明書、国土交通省などの一次情報で確認する。
 - メーカーがレベルを明記しない運転支援は、公式の前後・左右制御と常時監視の説明を
   国土交通省定義に照合した「サイト分類」と明示する。メーカーがLevel 2認証を得たとは記述しない。

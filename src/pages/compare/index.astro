@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { availabilityLabels, availabilityNotes, displayVehiclePrice, handsOffLabels, levelLabels, monitoringLabels, vehicleReferenceLabel, vehicles } from '../../data/loader';
+import { availabilityLabels, availabilityNotes, displayVehiclePrice, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleReferenceLabel, vehicles } from '../../data/loader';
 
 const publicCatalog = vehicles.map((vehicle) => ({
   id: vehicle.id,
@@ -15,6 +15,10 @@ const publicCatalog = vehicles.map((vehicle) => ({
   odd: vehicle.odd,
   referenceLabel: vehicleReferenceLabel(vehicle),
   priceLabel: displayVehiclePrice(vehicle),
+  officialLink: (() => {
+    const link = officialLinkFor(vehicle);
+    return link ? { url: link.url, kind: link.kind } : undefined;
+  })(),
 }));
 ---
 <Layout title="2台を比較する｜自動運転.jp" description="自動運転レベルと作動条件、必要装備を2台で比較できます。">
@@ -52,7 +56,11 @@ const publicCatalog = vehicles.map((vehicle) => ({
       if (selected.length !== 2) return;
       const headings = selected.map((v) => `<th>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</th>`).join('');
       const cells = (fn) => selected.map((v) => `<td>${fn(v)}</td>`).join('');
-      result.innerHTML = `<div class="cards" style="margin-bottom:28px;">${selected.map((v) => `<article class="vehicle-card"><div class="vehicle-card-body"><div class="eyebrow">LEVEL ${v.automationLevel} · ${escapeHtml(levelLabels[v.automationLevel])}</div><h3>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</h3><div class="maker">${escapeHtml(v.referenceLabel)}　${escapeHtml(v.grade)}</div></div></article>`).join('')}</div><div style="overflow-x:auto;"><table class="compare-table"><thead><tr><th>比較項目</th>${headings}</tr></thead><tbody><tr><th>参考価格<small>車両本体の公式掲載価格</small></th>${cells((v) => escapeHtml(v.priceLabel))}</tr><tr><th>自動化レベル</th>${cells((v) => `<strong>Level ${v.automationLevel}</strong><br />${escapeHtml(levelLabels[v.automationLevel])}`)}</tr><tr><th>道路</th>${cells((v) => escapeHtml(fact(v.odd.roadTypes)))}</tr><tr><th>速度</th>${cells((v) => escapeHtml(v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明')))}</tr><tr><th>ハンズオフ</th>${cells((v) => escapeHtml(handsOffLabels[v.handsOff]))}</tr><tr><th>運転者監視</th>${cells((v) => escapeHtml(monitoringLabels[v.driverMonitoring]))}</tr><tr><th>必要パッケージ</th>${cells((v) => escapeHtml(v.requiredPackage || '不明'))}</tr><tr><th>販売・利用状態</th>${cells((v) => `${escapeHtml(availabilityLabels[v.availability])}${availabilityNotes[v.availability] ? `<small>${escapeHtml(availabilityNotes[v.availability])}</small>` : ''}`)}</tr></tbody></table></div>`;
+      result.innerHTML = `<div class="cards" style="margin-bottom:28px;">${selected.map((v) => `<article class="vehicle-card"><div class="vehicle-card-body"><div class="eyebrow">LEVEL ${v.automationLevel} · ${escapeHtml(levelLabels[v.automationLevel])}</div><h3>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</h3><div class="maker">${escapeHtml(v.referenceLabel)}　${escapeHtml(v.grade)}</div></div></article>`).join('')}</div><div style="overflow-x:auto;"><table class="compare-table"><thead><tr><th>比較項目</th>${headings}</tr></thead><tbody><tr><th>参考価格<small>車両本体の公式掲載価格</small></th>${cells((v) => escapeHtml(v.priceLabel))}</tr><tr><th>自動化レベル</th>${cells((v) => `<strong>Level ${v.automationLevel}</strong><br />${escapeHtml(levelLabels[v.automationLevel])}`)}</tr><tr><th>道路</th>${cells((v) => escapeHtml(fact(v.odd.roadTypes)))}</tr><tr><th>速度</th>${cells((v) => escapeHtml(v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明')))}</tr><tr><th>ハンズオフ</th>${cells((v) => escapeHtml(handsOffLabels[v.handsOff]))}</tr><tr><th>運転者監視</th>${cells((v) => escapeHtml(monitoringLabels[v.driverMonitoring]))}</tr><tr><th>必要パッケージ</th>${cells((v) => escapeHtml(v.requiredPackage || '不明'))}</tr><tr><th>販売・利用状態</th>${cells((v) => `${escapeHtml(availabilityLabels[v.availability])}${availabilityNotes[v.availability] ? `<small>${escapeHtml(availabilityNotes[v.availability])}</small>` : ''}`)}</tr><tr><th>公式サイト<small>最新仕様を確認</small></th>${cells((v) => v.officialLink ? `<a class="button small text" href="${escapeHtml(v.officialLink.url)}" target="_blank" rel="noopener noreferrer" data-official-link data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}" data-link-kind="${escapeHtml(v.officialLink.kind)}">${v.officialLink.kind === 'archive' ? '過去資料を開く' : '公式サイトを開く'} ↗</a>` : 'リンク未確認')}</tr></tbody></table></div>`;
+      result.querySelectorAll('[data-official-link]').forEach((link) => link.addEventListener('click', () => {
+        const url = new URL(link.href);
+        window.jidouuntenTrack?.('outbound_manufacturer', { vehicle_id: link.dataset.vehicleId, manufacturer: link.dataset.manufacturer, link_url: link.href, link_domain: url.hostname, link_type: link.dataset.linkKind, placement: 'comparison' });
+      }));
       sendCompare(selected);
     };
     window.addEventListener('popstate', renderCompare); renderCompare();

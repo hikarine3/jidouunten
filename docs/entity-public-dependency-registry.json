@@ -519,6 +519,31 @@
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
+    },
+    "manufacturer-official-links:jp-current": {
+      "entity_id": "manufacturer-official-links:jp-current",
+      "entity_type": "manufacturer_official_links",
+      "source_of_truth": [
+        "src/data/official-links.json",
+        "src/data/vehicles.json"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro"
+      ],
+      "surfaces": [
+        {"url":"/cars/jp-honda-accord-2025-ehev-sensing360plus/","locale":"ja","output_path":"dist/cars/jp-honda-accord-2025-ehev-sensing360plus/index.html","markers":["メーカー公式サイトで仕様を確認","https://www.honda.co.jp/ACCORD/"]},
+        {"url":"/cars/jp-honda-legend-2021-honda-sensing-elite/","locale":"ja","output_path":"dist/cars/jp-honda-legend-2021-honda-sensing-elite/index.html","markers":["メーカー公式の過去資料で確認","https://www.honda.co.jp/auto-archive/legend/"]},
+        {"url":"/compare/","locale":"ja","output_path":"dist/compare/index.html","markers":["公式サイト","outbound_manufacturer","placement"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/cars/jp-honda-accord-2025-ehev-sensing360plus/","selector":"[data-official-link]","markers":["公式サイトを開く"]},
+        {"url":"/cars/jp-honda-legend-2021-honda-sensing-elite/","selector":".official-next","markers":["メーカー公式の過去資料で確認","現行車の見積・注文ページではなく"]},
+        {"url":"/compare/?ids=jp-tesla-model-3-2026-premium&ids=jp-tesla-model-y-2026-premium","selector":"[data-compare-result]","markers":["公式サイトを開く"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
     }
   }
 }

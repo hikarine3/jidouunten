@@ -62,6 +62,14 @@ export interface VehiclePrice {
   taxIncluded: 'included' | 'excluded' | 'unknown';
 }
 
+export interface OfficialLink {
+  maker: string;
+  model: string;
+  url: string;
+  kind: 'product' | 'archive';
+  checkedAt: string;
+}
+
 export interface Vehicle {
   id: string;
   market: string;
@@ -102,6 +110,14 @@ const raw = Object.values(modules)[0];
 export const vehicles: Vehicle[] = Array.isArray(raw)
   ? (raw as Vehicle[])
   : ((raw as { vehicles?: Vehicle[] } | undefined)?.vehicles ?? []);
+
+const officialLinkModules = import.meta.glob('./official-links.json', { eager: true, import: 'default' }) as Record<string, unknown>;
+const officialLinkRaw = Object.values(officialLinkModules)[0];
+export const officialLinks: OfficialLink[] = Array.isArray(officialLinkRaw) ? officialLinkRaw as OfficialLink[] : [];
+
+export function officialLinkFor(vehicle: Pick<Vehicle, 'maker' | 'model'>) {
+  return officialLinks.find((link) => link.maker === vehicle.maker && link.model === vehicle.model);
+}
 
 export const levelLabels: Record<number, string> = {
   0: '運転自動化なし',
