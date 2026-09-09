@@ -55,7 +55,7 @@ try {
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('[data-vehicle-shell][data-availability="unavailable"]:visible').count(), 0, '過去車両は既定非表示');
   assert.equal(await page.locator('[data-consent]').count(), 0, 'Analytics同意バナーを表示しない');
-  assert.equal(await page.locator('script[src*="googletagmanager"]').count(), 1, 'GTMを通常読み込み');
+  assert.equal(await page.locator('script[src*="/gtm.js?id="]').count(), 1, 'サイト自身のGTM bootstrapを1回だけ通常読み込み');
   const levelMapPage = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   await levelMapPage.goto(`${base}/`);
   await levelMapPage.locator('[data-level-shortcut="3"]').click();
@@ -95,6 +95,10 @@ try {
   await page.waitForTimeout(1000);
   assert.ok(analyticsRequests.some((url) => url.includes('googletagmanager')), 'GTM通信');
   if (process.env.EXPECT_GA_COLLECT === '1') {
+    const deadline = Date.now() + 5000;
+    while (!analyticsResponses.some(({ url }) => /collect|google-analytics/i.test(url)) && Date.now() < deadline) {
+      await page.waitForTimeout(250);
+    }
     const collectResponses = analyticsResponses.filter(({ url }) => /collect|google-analytics/i.test(url));
     assert.ok(collectResponses.length > 0, 'GA collect通信');
     assert.ok(collectResponses.some(({ url }) => decodeURIComponent(url).includes('G-Q58GM7BVB6')), 'GA collectが正しいMeasurement ID宛て');
