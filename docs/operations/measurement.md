@@ -66,11 +66,14 @@ python3 scripts/setup_measurement.py --create-container
 python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish
 ```
 
-公開version 7にはGoogle tag、5個のCustom Event trigger、対応する5個のネイティブGA4 Event tag、
+公開version 8にはGoogle tag、5個のCustom Event trigger、対応する5個のネイティブGA4 Event tag、
 14個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
 構成だったため停止・除去した。API取得した公開版で、ネイティブevent tag 5個（pause 0）、HTML tag 0個、
 正しい測定ID6箇所、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
 workspaceに差分がなければpublishしない。
+
+2026-09-10にversion 8を公開し、`outbound_manufacturer`へ `link_type` と `placement` を追加した。
+既存5イベントの構成は維持し、追加変更はdataLayer variable 2件と同イベントtag 1件の更新だけである。
 
 ## 読み込み方針
 
