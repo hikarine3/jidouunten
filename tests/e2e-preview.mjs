@@ -192,6 +192,7 @@ try {
   await page.goto(`${base}/compare/?ids=jp-tesla-model-3-2026-premium&ids=jp-tesla-model-y-2026-premium`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.match(await page.locator('[data-compare-result]').innerText(), /Model 3[\s\S]*Model Y/);
+  assert.equal((await page.locator('[data-compare-result]').getByText('現在の注文可否は販売店で確認してください。', { exact: true }).count()), 2, '比較でもカタログ掲載中の注文可否を明確化');
 
   await page.goto(`${base}/cars/jp-volvo-ex30-my2027-plus-p5-electric/`);
   assert.match(await page.locator('main').innerText(), /JP \/ 2027年モデル[\s\S]*Volvo[\s\S]*EX30[\s\S]*Plus P5 Electric/);
