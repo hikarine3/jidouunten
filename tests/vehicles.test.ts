@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, filterVehicleList, isDefaultListedVehicle, sortVehicleList, validateVehicle, vehicleReferenceLabel, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayVehiclePrice, filterVehicleList, isDefaultListedVehicle, levelCaveat, sortVehicleList, validateVehicle, vehiclePriceMin, vehicleReferenceLabel, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
-  id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, grade: '標準',
+  id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
   requiredPackage: null, automationLevel: 2, category: 'driver_assistance', availability: 'new_order_available',
   availabilityCheckedAt: '2026-09-01', odd: { roadTypes: ['高速道路'], speedKph: { max: 100 }, trafficConditions: [], weather: [], geoRestriction: [], driverConditions: ['着座'], manufacturerSummary: '要約' },
   driverMonitoring: 'required', handsOff: 'allowed_in_conditions', capabilities: ['lane_centering'], limitations: ['監視'],
@@ -43,6 +43,17 @@ describe('vehicle data contract and filters', () => {
     expect(sortVehicleList(list, 'maker_asc').map((vehicle) => vehicle.id)).toEqual(['unknown-a', 'unknown-b', 'older', 'newer']);
   });
 
+  it('価格が安い順は車両本体の最小額を使い、未確認を末尾に置く', () => {
+    const exact = makeVehicle({ id: 'exact', price: { kind: 'exact', currency: 'JPY', amounts: [{ amountJpy: 4_790_000, qualifier: null, sourceUrl: 'https://example.com' }], maxJpy: 4_790_000, optionalPackages: [], basis: 'vehicle_body', taxIncluded: 'unknown' } });
+    const multi = makeVehicle({ id: 'multi', price: { kind: 'exact', currency: 'JPY', amounts: [{ amountJpy: 3_300_000, qualifier: '2WD', sourceUrl: 'https://example.com' }, { amountJpy: 3_536_500, qualifier: '4WD', sourceUrl: 'https://example.com' }], maxJpy: 3_536_500, optionalPackages: [], basis: 'unknown', taxIncluded: 'unknown' } });
+    const unknown = makeVehicle({ id: 'unknown', price: null });
+    expect(sortVehicleList([exact, unknown, multi], 'price_asc').map(({ id }) => id)).toEqual(['multi', 'exact', 'unknown']);
+    expect(vehiclePriceMin(multi)).toBe(3_300_000);
+    expect(displayVehiclePrice(exact, true)).toBe('約479万円');
+    expect(displayVehiclePrice(multi, true)).toBe('約330〜354万円');
+    expect(displayVehiclePrice(unknown, true)).toBe('価格要確認');
+  });
+
   it('filters by level, road, hands-off and availability together', () => {
     const list = [
       makeVehicle({ id: 'a' }),
@@ -75,8 +86,25 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(73);
+    expect(vehicles).toHaveLength(77);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
+  });
+
+  it('現行候補76件は全件の公式金額を保持する', () => {
+    const current = vehicles.filter(isDefaultListedVehicle);
+    expect(current).toHaveLength(76);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(76);
+    expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
+    expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
+    expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
+    expect(vehicles.find(({ id }) => id === 'jp-nissan-serena-2026-e-power-luxion')?.price?.optionalPackages[0].amountJpy).toBe(49_500);
+    expect(vehicles.find(({ id }) => id === 'jp-subaru-levorg-layback-2023-limited-ex')?.price?.kind).toBe('range');
+  });
+
+  it('Level 4とLevel 5を限定条件の有無で分ける', () => {
+    expect(levelCaveat(4)).toContain('限定されたエリア');
+    expect(levelCaveat(5)).toContain('走行エリアや天候などを限定せず');
+    expect(levelCaveat(4)).not.toBe(levelCaveat(5));
   });
 
   it('Mazda日本向け現行6車種は35販売単位を公式装備表付きで保持する', () => {
@@ -110,12 +138,21 @@ describe('vehicle data contract and filters', () => {
     expect(mazda.some((vehicle) => vehicle.id === 'jp-mazda-mx-30-rotary-ev-rotary-ev')).toBe(false);
   });
 
-  it('現行カタログ確認済みTesla 2モデルは日本向け根拠付きのLevel 2相当として扱う', () => {
+  it('現行カタログ確認済みTesla 2モデル6販売仕様をLevel 2相当として扱う', () => {
     const tesla = vehicles.filter((vehicle) => vehicle.maker === 'Tesla');
-    expect(tesla.map((vehicle) => vehicle.model).sort()).toEqual(['Model 3', 'Model Y']);
-    expect(tesla).toHaveLength(2);
+    expect([...new Set(tesla.map((vehicle) => vehicle.model))].sort()).toEqual(['Model 3', 'Model Y']);
+    expect(tesla).toHaveLength(6);
+    expect(tesla.map((vehicle) => vehicle.grade).sort()).toEqual([
+      'L',
+      'Performance',
+      'Premium RWD',
+      'Premium RWD',
+      'Premium ロングレンジAWD',
+      'Premium ロングレンジAWD',
+    ].sort());
     expect(tesla.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance')).toBe(true);
-    expect(tesla.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'Tesla Japan' && source.accessedAt === '2026-09-07'))).toBe(true);
+    expect(tesla.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.tesla.com/ja_JP/support/incentives' && source.accessedAt === '2026-09-10'))).toBe(true);
+    expect(tesla.every((vehicle) => vehicle.price?.kind === 'range' && vehicle.price.amounts[0].amountJpy >= 5_313_000)).toBe(true);
     expect(tesla.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
     expect(tesla.every((vehicle) => vehicleReferenceLabel(vehicle) === '現行仕様')).toBe(true);
   });
@@ -153,9 +190,10 @@ describe('vehicle data contract and filters', () => {
     ]);
     expect(evitara).toHaveLength(3);
     expect(evitara.every((vehicle) => vehicle.modelYear === null && vehicle.generation === null && vehicle.catalogAsOf === null && vehicle.salesUnitIntroducedAt === '2026-01-16' && vehicle.priceEffectiveAt === null)).toBe(true);
-    expect(evitara.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance' && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'unknown')).toBe(true);
+    expect(evitara.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance' && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed')).toBe(true);
     expect(evitara.every((vehicle) => vehicle.requiredPackage?.includes('全車標準装備') && vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,driver_monitoring')).toBe(true);
     expect(evitara.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.suzuki.co.jp/release/a/2025/0916/index.html' && source.accessedAt === '2026-09-07'))).toBe(true);
+    expect(evitara.every((vehicle) => vehicle.sources.some((source) => source.url.includes('evitara_26MC_DSBS2-4.pdf') && source.accessedAt === '2026-09-10'))).toBe(true);
   });
 
   it('Renault ARKANAの4販売単位をACC・車線中央支援付きとして保持する', () => {
@@ -170,11 +208,12 @@ describe('vehicle data contract and filters', () => {
     expect(arkana.every((vehicle) => vehicle.modelYear === null && vehicle.generation === null && vehicle.salesUnitIntroducedAt === null && vehicle.priceEffectiveAt === null)).toBe(true);
     expect(arkana.filter((vehicle) => vehicle.grade.startsWith('esprit Alpine')).every((vehicle) => vehicle.catalogAsOf === '2025-07')).toBe(true);
     expect(arkana.filter((vehicle) => vehicle.grade.startsWith('techno')).every((vehicle) => vehicle.catalogAsOf === '2025-09')).toBe(true);
-    expect(arkana.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance' && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'unknown')).toBe(true);
+    expect(arkana.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance' && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed')).toBe(true);
     expect(arkana.every((vehicle) => vehicle.odd.speedKph.min === 0 && vehicle.odd.speedKph.max === 160 && vehicle.odd.speedKph.condition?.includes('ACC単体はおおむね0〜170km/h') === true)).toBe(true);
     expect(arkana.every((vehicle) => vehicle.requiredPackage?.includes('ACC（ストップ＆ゴー機能付）') && vehicle.requiredPackage.includes('レーンセンタリングアシスト') && vehicle.requiredPackage.includes('標準装備'))).toBe(true);
     expect(arkana.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist')).toBe(true);
     expect(arkana.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://dcms.renault.jp/car_lineup/pricelist.php' && source.accessedAt === '2026-09-07'))).toBe(true);
+    expect(arkana.every((vehicle) => vehicle.sources.some((source) => source.url.includes('user-manual.renault.com') && source.accessedAt === '2026-09-10'))).toBe(true);
   });
 
   it('BMW 3シリーズの通常カタログ9販売単位を世代・形状別に保持する', () => {

@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 73 | `src/data/vehicles.json` の全レコード（現行72 + 過去1） |
-| 既定表示 | 72 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 77 | `src/data/vehicles.json` の全レコード（現行76 + 過去1） |
+| 既定表示 | 76 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -30,7 +30,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Nissan | 日産アリア（現行仕様）B6 / B6 e-4ORCE / B9 / B9 e-4ORCE | 掲載（4単位） | 2 | 2026-09-07 |
 | Nissan | セレナ C28 e-POWER LUXION | 掲載 | 2 | 2026-09-07 |
 | SUBARU | レヴォーグ レイバック（現行仕様）Limited EX | 掲載 | 2 | 2026-09-07 |
-| Tesla | Model 3 Premium（現行仕様） / Model Y Premium（現行仕様） | 掲載（2単位） | 2相当 | 2026-09-07 |
+| Tesla | Model 3 Premium RWD / Premium ロングレンジAWD / Performance、Model Y Premium RWD / Premium ロングレンジAWD / L | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 掲載（3単位） | 2相当 | 2026-09-07 |
 | Suzuki | e VITARA X 2WD / Z 2WD / Z 4WD（現行仕様） | 掲載（3単位） | 2相当 | 2026-09-07 |
 | Renault | ARKANA esprit Alpine FULL HYBRID E-TECH / MILD HYBRID、techno FULL HYBRID E-TECH / MILD HYBRID | 掲載（4単位） | 2相当 | 2026-09-07 |
@@ -44,13 +44,13 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Mazda | CX-30 20G / 20 Air Edition / 25L / 25 Air Edition | 掲載（4単位） | 2相当 | 2026-09-08 |
 | Mazda | MX-30 ROTARY-EV Natural Monotone | 掲載（1単位） | 2相当 | 2026-09-08 |
 
-Teslaは日本向け公式のModel別情報とサポートFAQを根拠にModel 3 / Model Yを登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
+Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
 Volvo EX30は、日本向け2027年モデルの2026年第29週生産分以降の諸元・価格表で3グレードとPilot Assist、全車速追従ACC、ドライバーモニタリングを確認した。Pilot Assistは速度・車間と操舵を支援する一方、取扱説明書が運転者に両手保持と即時介入を求めるため、Level 2相当の運転支援として登録した。税込車両本体価格は479万〜629万円で、価格適用時点は2026年7月、確認日は2026-09-07。価格根拠は内部保持し、価格表示機能はIssue #16で一貫した価格契約を実装してから公開する。
 
-Suzuki e VITARAは、現行価格ページと2025年9月16日付の日本発売資料でX 2WD / Z 2WD / Z 4WDの3販売単位、発売日2026-01-16、価格399万3000円 / 448万8000円 / 492万8000円を確認した。安全装備ページと主要装備表で、全車標準のACC（全車速追従・停止保持）、ACC作動中の車線維持支援、ドライバーモニタリングシステムを確認し、Level 2相当として登録した。車線維持支援の数値速度範囲とハンズオフ可否は公式情報で確認できないため、速度条件とhandsOffは不明としている。価格適用開始日は公式情報で確認できないため `priceEffectiveAt=null` とした。
+Suzuki e VITARAは、現行価格ページと2025年9月16日付の日本発売資料でX 2WD / Z 2WD / Z 4WDの3販売単位、発売日2026-01-16、価格399万3000円 / 448万8000円 / 492万8000円を確認した。公式取扱説明書で車線維持支援中もステアリング保持が必要で、操作がないと警告後に機能を一時停止するため、全3単位のhandsOffを`not_allowed`と確定した。価格適用開始日は公式情報で確認できないため `priceEffectiveAt=null` とした。
 
-Renault ARKANAは、現行価格表でesprit AlpineとtechnoのFULL HYBRID E-TECH / MILD HYBRIDを4販売単位として確認した。価格は順に514万9000円、474万9000円、484万円、444万円で、価格の適用開始日は公式資料から確認できないため `priceEffectiveAt=null` とした。2025年7月のesprit Alpine資料と2025年9月のtechno資料をカタログ適用時点として保持し、資料年をモデル年にはしない。公式機能説明・装備資料でACC（ストップ＆ゴー機能付）とレーンセンタリングアシストの標準装備を確認し、国土交通省のLevel 2定義に照合してLevel 2相当と分類した。ACCはおおむね0〜170km/h、レーンセンタリングアシストは先行車ありでおおむね0〜160km/h、先行車なしでおおむね60〜160km/hと記載されるが、車線・先行車認識等の条件がある。運転者は常に監視し直ちに操作する必要があり、ハンズオフ可否は公式情報で確認できないため `unknown` とした。
+Renault ARKANAは、現行価格表でesprit AlpineとtechnoのFULL HYBRID E-TECH / MILD HYBRIDを4販売単位として確認した。価格は順に514万9000円、474万9000円、484万円、444万円で、価格の適用開始日は公式資料から確認できないため `priceEffectiveAt=null` とした。2025年7月のesprit Alpine資料と2025年9月のtechno資料をカタログ適用時点として保持し、資料年をモデル年にはしない。公式機能説明・装備資料でACC（ストップ＆ゴー機能付）とレーンセンタリングアシストの標準装備を確認し、国土交通省のLevel 2定義に照合してLevel 2相当と分類した。ACCはおおむね0〜170km/h、レーンセンタリングアシストは先行車ありでおおむね0〜160km/h、先行車なしでおおむね60〜160km/hと記載されるが、車線・先行車認識等の条件がある。公式取扱説明書は常にハンドルを握ることを求め、反応がない場合は警告後にレーンセンタリングを解除するため、全4単位のhandsOffを`not_allowed`と確定した。
 
 BMW 3シリーズは、2026年7月以降生産の日本向け装備・価格表から通常カタログのセダンG20 5単位とツーリングG21 4単位を登録した。メーカー希望小売価格はセダン688万〜992万円、ツーリング716万〜1027万円で、同資料の適用月を `catalogAsOf` と `priceEffectiveAt` に保持した。全9単位でドライビング・アシスト・プロフェッショナルを標準装備し、ACCとステアリング＆レーン・コントロール・アシストをLevel 2相当と分類した。速度域は現行資料がオーナーズ・ハンドブック参照としているため数値を転用せず不明とした。高速道路渋滞時は条件付きハンズオフに対応するが、通常支援は少なくとも片手保持、運転者の常時注意と即時操作責任が必要。Edition Shadow、M3、50周年限定車は別販売単位として受注・在庫状況の確認待ちに残し、BMW全仕様の網羅とは扱わない。
 
@@ -137,6 +137,7 @@ CX-80 8単位とCX-60 11単位はMRCC・CTS・ドライバー・モニタリン�
 |---|---|---|---|
 | Model 3の日本向け現行ページ、オートパイロットは同一車線の操舵・加速・ブレーキを支援しドライバー監視が必要 | Tesla Japan | https://www.tesla.com/ja_jp/model3 | 2026-09-07 |
 | Model Yの日本向け現行ページ、ドライバー監視下のドライビングアシスト | Tesla Japan | https://www.tesla.com/ja_JP/modely | 2026-09-07 |
+| Model 3 / Model Y各3販売仕様の公式ベースプライス（2026年6月26日現在） | Tesla Japan | https://www.tesla.com/ja_JP/support/incentives | 2026-09-10 |
 | Model S / Xの日本向け車両情報・オートパイロット導線 | Tesla Japan | https://www.tesla.com/ja_jp/support/meet-your-tesla/model-s / https://www.tesla.com/ja_jp/support/meet-your-tesla/model-x | 2026-09-07 |
 | Teslaの機能は完全自動運転ではなく、常に注意し直ちに運転を代われる準備が必要 | Tesla Japan | https://www.tesla.com/ja_jp/support/meet-your-future-tesla-faq | 2026-09-07 |
 

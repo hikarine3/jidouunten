@@ -34,14 +34,14 @@ try {
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 72, '既定カタログは現行確認72件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*72[\s\S]*10[\s\S]*条件内可[\s\S]*24[\s\S]*不可[\s\S]*41[\s\S]*未確認[\s\S]*7/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await visibleCards(), 76, '既定カタログは現行確認76件');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*76[\s\S]*10[\s\S]*条件内可[\s\S]*24[\s\S]*不可[\s\S]*52[\s\S]*未確認[\s\S]*0/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="3"]').innerText(), /L3[\s\S]*条件付自動運転[\s\S]*過去例 1件/, 'Level 3の過去例を現行車と区別');
-  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 2, 'Tesla Model 3 / Model Yを既定一覧に表示');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, 'Tesla Model 3 / Model Yの6販売仕様を既定一覧に表示');
   await page.locator('[data-maker-shortcut="Tesla"]').click();
   assert.equal(new URL(page.url()).searchParams.get('maker'), 'Tesla', 'Teslaクイック絞り込みをURLへ保存');
-  assert.equal(await visibleCards(), 2, 'Teslaクイック絞り込みは2件');
+  assert.equal(await visibleCards(), 6, 'Teslaクイック絞り込みは6件');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="allowed_in_conditions"]').click();
   assert.equal(await visibleCards(), 24, '条件内ハンズオフは24件');
@@ -58,11 +58,15 @@ try {
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BMW 3シリーズ' }).count(), 9, 'BMW 3シリーズ通常カタログの9販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BMW 3シリーズ セダン' }).locator('.maker').first().innerText(), 'G20　318i M Sport', 'BMWセダンは資料年ではなくG20世代を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BMW 3シリーズ ツーリング' }).locator('.maker').first().innerText(), 'G21　318i M Sport', 'BMWツーリングは資料年ではなくG21世代を表示');
-  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla Model 3' }).locator('.maker').first().innerText(), '現行仕様　Premium（日本向けページ掲載）', 'Teslaは資料年ではなく現行仕様を表示');
+  assert.deepEqual((await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla Model 3' }).locator('.maker').allTextContents()).sort(), [
+    '現行仕様　Performance',
+    '現行仕様　Premium RWD',
+    '現行仕様　Premium ロングレンジAWD',
+  ].sort(), 'Tesla Model 3は資料年ではなく3つの現行販売仕様を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan セレナ' }).locator('.maker').first().innerText(), 'C28　e-POWER LUXION', 'Serenaは世代呼称を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo EX30' }).locator('.maker').first().innerText(), '2027年モデル　Plus P5 Electric', 'Volvoはメーカー明示モデル年を表示');
   await page.screenshot({ path: `${qaDir}/desktop-home.png`, fullPage: false });
-  await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla Model 3' }).scrollIntoViewIfNeeded();
+  await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla Model 3' }).first().scrollIntoViewIfNeeded();
   await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://jidouunten.jp/og.png', 'OG画像は絶対URL');
@@ -81,7 +85,7 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 72, 'Level 2現行72件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 76, 'Level 2現行76件へ復帰');
   await levelMapPage.close();
   const mobilePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await mobilePage.goto(`${base}/`);
@@ -109,6 +113,10 @@ try {
   await page.goto(`${base}/?sort=maker_asc`);
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').first().innerText(), /^LEVEL 2[\s\S]*BMW/, 'メーカー名順へ切替');
   assert.equal(await page.locator('[data-sort-label]').innerText(), 'メーカー名順', '現在の並び順を明示');
+
+  await page.goto(`${base}/?sort=price_asc`);
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').first().innerText(), /Mazda[\s\S]*CX-30[\s\S]*20G[\s\S]*約297万円/, '価格順は公式掲載の最小金額が安い販売単位から');
+  assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
   assert.equal(await visibleCards(), 9, 'Level 2・高速・ハンズオフ条件は9件');
@@ -140,13 +148,13 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 72, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 76, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  assert.equal(await visibleCards(), 72, 'リセット後に既定72件');
+  assert.equal(await visibleCards(), 76, 'リセット後に既定76件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -167,7 +175,7 @@ try {
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '一覧選択が比較画面へ反映');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 73, 'すべての状態で過去車両を含む73件');
+  assert.equal(await visibleCards(), 77, 'すべての状態で過去車両を含む77件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
@@ -185,6 +193,7 @@ try {
 
   await page.goto(`${base}/cars/jp-tesla-model-3-2026-premium/`);
   assert.match(await page.locator('main').innerText(), /Tesla[\s\S]*Model 3/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*5,313,000円〜/, 'Tesla詳細に公式掲載価格');
   assert.doesNotMatch(await page.locator('main').innerText(), /adaptive_cruise_control|lane_centering|hands_off_highway|lane_change_support/, '内部capability IDを公開しない');
   assert.match(await page.locator('main').innerText(), /確認できた機能[\s\S]*追従走行（ACC）[\s\S]*車線中央維持/, '機能IDを平易な日本語で説明');
   assert.match(await page.locator('main').innerText(), /注文可否：未確認[\s\S]*メーカー公式サイトへの掲載は確認済み[\s\S]*新車で注文できるかは未確認/, '公式掲載と注文可否を分けて説明');
@@ -202,6 +211,7 @@ try {
 
   await page.goto(`${base}/cars/jp-volvo-ex30-my2027-plus-p5-electric/`);
   assert.match(await page.locator('main').innerText(), /JP \/ 2027年モデル[\s\S]*Volvo[\s\S]*EX30[\s\S]*Plus P5 Electric/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,790,000円/, 'Volvo詳細に公式掲載価格');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, 'Volvoでも内部根拠を通常UIに出さない');
   assert.doesNotMatch(await page.locator('main').innerText(), /2026-07|volvocars\.com|sources|accessedAt/, 'Volvo詳細に内部根拠URL・確認日を表示しない');
   await page.screenshot({ path: `${qaDir}/desktop-volvo-ex30-detail.png`, fullPage: false });
@@ -219,12 +229,14 @@ try {
 
   await page.goto(`${base}/cars/jp-mini-countryman-u25-c-select/`);
   assert.match(await page.locator('main').innerText(), /JP \/ 第3世代[\s\S]*MINI[\s\S]*Countryman[\s\S]*C SELECT/);
-  assert.doesNotMatch(await page.locator('main').innerText(), /2026-07|4,800,000|5,180,000|5,260,000|5,530,000|5,920,000|6,830,000|6,040,000|6,780,000|mini\.jp|sources|accessedAt/, 'MINI詳細に内部価格・根拠URL・確認日を表示しない');
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,800,000円/, 'MINI詳細に公式掲載価格');
+  assert.doesNotMatch(await page.locator('main').innerText(), /2026-07|mini\.jp|sources|accessedAt/, 'MINI詳細に内部根拠URL・確認日を表示しない');
   assert.doesNotMatch(await page.content(), /catalogAsOf|salesUnitIntroducedAt|priceEffectiveAt|availabilityCheckedAt|lastReviewedAt|accessedAt|\"sources\"|MINI_COUNTRYMAN_EPL_2607|mini\.jp/, 'MINI詳細HTMLへ内部時点・根拠URLを配信しない');
   await page.goto(`${base}/compare/?ids=jp-mini-countryman-u25-c-select&ids=jp-mini-countryman-u25-se-all4`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.match(await page.locator('[data-compare-result]').innerText(), /C SELECT[\s\S]*SE ALL4/);
-  assert.doesNotMatch(await page.locator('[data-compare-result]').innerText(), /2026-07|4,800,000|6,780,000|mini\.jp|sources|accessedAt/, 'MINI比較に内部価格・根拠URL・確認日を表示しない');
+  assert.match(await page.locator('[data-compare-result]').innerText(), /参考価格[\s\S]*4,800,000円[\s\S]*6,780,000円/, 'MINI比較に公式掲載価格');
+  assert.doesNotMatch(await page.locator('[data-compare-result]').innerText(), /2026-07|mini\.jp|sources|accessedAt/, 'MINI比較に内部根拠URL・確認日を表示しない');
   assert.doesNotMatch(await page.content(), /catalogAsOf|salesUnitIntroducedAt|priceEffectiveAt|availabilityCheckedAt|lastReviewedAt|accessedAt|\"sources\"|MINI_COUNTRYMAN_EPL_2607|mini\.jp/, 'MINI比較HTMLへ内部時点・根拠URLを配信しない');
 
   await page.goto(`${base}/cars/jp-suzuki-e-vitara-2026-x-2wd/`);
@@ -252,13 +264,15 @@ try {
   await page.goto(`${base}/cars/jp-mazda-cx-80-xd-drive-edition/`);
   assert.match(await page.locator('main').innerText(), /JP \/ 現行仕様[\s\S]*Mazda[\s\S]*CX-80[\s\S]*XD Drive Edition/);
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, 'Mazda詳細に内部根拠を表示しない');
-  assert.doesNotMatch(await page.locator('main').innerText(), /2026-03|4,781,700|mazda\.co\.jp|sources|accessedAt/, 'Mazda詳細に内部価格・根拠URL・確認日を表示しない');
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,781,700円/, 'Mazda詳細に公式掲載価格');
+  assert.doesNotMatch(await page.locator('main').innerText(), /2026-03|mazda\.co\.jp|sources|accessedAt/, 'Mazda詳細に内部根拠URL・確認日を表示しない');
   await page.goto(`${base}/cars/jp-mazda-mazda3-fastback-25s-6mt/`);
   assert.match(await page.locator('main').innerText(), /MAZDA3 FASTBACK[\s\S]*25S（6MT）[\s\S]*MRCC・CTS/);
   assert.doesNotMatch(await page.locator('main').innerText(), /全車速追従機能付/, 'MAZDA3 6MTを全車速追従仕様として表示しない');
   await page.goto(`${base}/cars/jp-mazda-cx-5-g-ex-package/`);
   assert.match(await page.locator('main').innerText(), /新型 CX-5[\s\S]*G（EX Package）[\s\S]*ハンズオフアシスト/);
-  assert.doesNotMatch(await page.locator('main').innerText(), /2026-05|3,520,000|mazda\.co\.jp|sources|accessedAt/, 'CX-5 EX Package詳細に内部価格・根拠URL・確認日を表示しない');
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*3,520,000〜3,756,500円/, 'CX-5 EX Package詳細に公式掲載価格');
+  assert.doesNotMatch(await page.locator('main').innerText(), /2026-05|mazda\.co\.jp|sources|accessedAt/, 'CX-5 EX Package詳細に内部根拠URL・確認日を表示しない');
   await page.goto(`${base}/compare/?ids=jp-mazda-cx-80-xd-drive-edition&ids=jp-mazda-cx-30-25l`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.match(await page.locator('[data-compare-result]').innerText(), /CX-80[\s\S]*XD Drive Edition[\s\S]*CX-30[\s\S]*25L/);
@@ -268,7 +282,8 @@ try {
   await page.goto(`${base}/cars/jp-bmw-3-series-g20-sedan-318i-m-sport/`);
   assert.match(await page.locator('main').innerText(), /JP \/ G20[\s\S]*BMW[\s\S]*3シリーズ セダン[\s\S]*318i M Sport/);
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, 'BMW詳細に内部根拠を表示しない');
-  assert.doesNotMatch(await page.locator('main').innerText(), /2026-07|6,880,000|bmw\.co\.jp|sources|accessedAt/, 'BMW詳細に内部価格・根拠URL・確認日を表示しない');
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*6,880,000円/, 'BMW詳細に公式掲載価格');
+  assert.doesNotMatch(await page.locator('main').innerText(), /2026-07|bmw\.co\.jp|sources|accessedAt/, 'BMW詳細に内部根拠URL・確認日を表示しない');
 
   await page.goto(`${base}/cars/jp-bmw-3-series-g21-touring-m340i-xdrive/`);
   assert.match(await page.locator('main').innerText(), /JP \/ G21[\s\S]*BMW[\s\S]*3シリーズ ツーリング[\s\S]*M340i xDrive/);
@@ -276,8 +291,15 @@ try {
   await page.goto(`${base}/compare/?ids=jp-bmw-3-series-g20-sedan-318i-m-sport&ids=jp-bmw-3-series-g21-touring-m340i-xdrive`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.match(await page.locator('[data-compare-result]').innerText(), /G20[\s\S]*318i M Sport[\s\S]*G21[\s\S]*M340i xDrive/);
-  assert.doesNotMatch(await page.locator('[data-compare-result]').innerText(), /2026-07|6,880,000|10,270,000|bmw\.co\.jp|sources|accessedAt/, 'BMW比較に内部価格・根拠URL・確認日を表示しない');
+  assert.match(await page.locator('[data-compare-result]').innerText(), /参考価格[\s\S]*6,880,000円[\s\S]*10,270,000円/, 'BMW比較に公式掲載価格');
+  assert.doesNotMatch(await page.locator('[data-compare-result]').innerText(), /2026-07|bmw\.co\.jp|sources|accessedAt/, 'BMW比較に内部根拠URL・確認日を表示しない');
   assert.doesNotMatch(await page.content(), /catalogAsOf|salesUnitIntroducedAt|priceEffectiveAt|availabilityCheckedAt|lastReviewedAt|accessedAt|\"sources\"|bmw\.co\.jp/, 'BMW比較HTMLへ内部時点・根拠URLを配信しない');
+
+  await page.goto(`${base}/levels/`);
+  const levelsText = await page.locator('main').innerText();
+  assert.match(levelsText, /Level 4と5の違い[\s\S]*LEVEL 4[\s\S]*条件の中で完結[\s\S]*LEVEL 5[\s\S]*条件を限定しない/, 'Level 4と5を作動条件の有無で明確に区別');
+  assert.match(levelsText, /限定されたエリア[\s\S]*条件外を自力で走れるとは限りません/, 'Level 4は限定条件内で完結すると説明');
+  assert.match(levelsText, /走行エリアや天候などを限定せず[\s\S]*人が運転できる道路・状況全般/, 'Level 5は条件を限定しないと説明');
 
   await page.goto(`${base}/privacy/`);
   assert.equal(await page.locator('[data-consent]').count(), 0, 'privacyページにも同意バナーなし');

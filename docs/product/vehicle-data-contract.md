@@ -43,6 +43,7 @@ market + maker + model + model_year + generation + grade + required_package + fe
 | `catalogAsOf` | `YYYY-MM`/null | 現行カタログ・公式ラインアップの適用時点。確認日とは別 |
 | `salesUnitIntroducedAt` | `YYYY-MM-DD` または `YYYY-MM`/null | 当該販売単位の発売・導入時点。資料年から推定しない |
 | `priceEffectiveAt` | `YYYY-MM-DD` または `YYYY-MM`/null | 掲載価格の適用時点。価格確認日とは別 |
+| `price` | object/null | 公式金額、駆動方式などの条件、税区分、任意オプションを分離して保持。金額を確認できない場合はnull |
 | `requiredPackage` | string/null | 標準、オプション、必要契約を明示 |
 | `automationLevel` | 0–5 | 一次情報で確認。メーカー認証とサイト分類を区別 |
 | `category` | `driver_assistance` / `automated_driving` | Level 0–2 / 3–5に対応 |
@@ -68,8 +69,8 @@ market + maker + model + model_year + generation + grade + required_package + fe
 - `unavailable`: 日本で現在利用不可
 - `unknown`: 一次情報で確認できない
 
-一覧の既定は現行カタログに掲載を確認できた候補。受注未確認は `unknown` として
-「受注状況は要確認」を必ず表示し、新車注文可能とは断定しない。
+一覧の既定はメーカー公式サイトに掲載を確認できた候補。注文可否の未確認は `unknown` として
+「注文可否：未確認」を表示し、新車注文可能とは断定しない。
 `used_only`、実証・サービス・発表段階は別の選択肢に分離する。
 現行掲載を確認できないunknownは既定表示に入れない。対象年式は表示するが、
 根拠URL・確認日・最終確認日は内部のデータ正本と棚卸し台帳で管理し、通常UIには表示しない。
@@ -96,6 +97,14 @@ market + maker + model + model_year + generation + grade + required_package + fe
 - `manufacturerSummary`: 公式説明の短い要約（転載ではなく自作文）
 
 値がないことと、条件がないことを区別する。未確認は `unknown` とする。
+
+## 価格
+
+- `price.kind` は、公式に構成別金額を確認できた `exact` と、「○円〜」の下限だけが明示された `range` を分ける。
+- 価格順は車両本体の最小公式金額で並べ、価格未確認は末尾に置く。任意オプションは加算しない。
+- 「〜」の上限、税込・税別、価格適用日は公式に明示された場合だけ保持する。取得日から推定しない。
+- 補助金適用後、ローン月額、塗装・パッケージ込みの見積総額を車両本体価格として保持しない。
+- 一覧は万円単位の概算、詳細・比較は公式金額を表示する。根拠URL・確認日は内部正本に保持し、通常UIを管理情報で埋めない。
 
 ## 根拠と鮮度
 

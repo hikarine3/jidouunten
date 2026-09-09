@@ -42,6 +42,26 @@ export interface VehicleSource {
   type?: string;
 }
 
+export interface VehiclePriceAmount {
+  amountJpy: number;
+  qualifier: string | null;
+  sourceUrl: string;
+}
+
+export interface VehicleOptionalPackagePrice extends VehiclePriceAmount {
+  label: string;
+}
+
+export interface VehiclePrice {
+  kind: 'exact' | 'range';
+  currency: 'JPY';
+  amounts: VehiclePriceAmount[];
+  maxJpy: number | null;
+  optionalPackages: VehicleOptionalPackagePrice[];
+  basis: 'vehicle_body' | 'msrp' | 'price_list' | 'unknown';
+  taxIncluded: 'included' | 'excluded' | 'unknown';
+}
+
 export interface Vehicle {
   id: string;
   market: string;
@@ -53,6 +73,7 @@ export interface Vehicle {
   catalogAsOf: string | null;
   salesUnitIntroducedAt: string | null;
   priceEffectiveAt: string | null;
+  price: VehiclePrice | null;
   grade: string;
   requiredPackage: string | null;
   /** True only when the current Japanese catalog listing was checked. */
@@ -96,8 +117,8 @@ export const levelShort: Record<number, string> = {
   1: '前後または左右を支援',
   2: '前後と左右を同時に支援',
   3: '条件内ではシステムが運転',
-  4: '限定領域内でシステムが対応',
-  5: '条件限定のない自動運転',
+  4: '限定エリアなら無人で走れる',
+  5: '場所や天候を限定せず自動運転',
 };
 
 export const availabilityLabels: Record<Availability, string> = {
@@ -211,6 +232,18 @@ export function validateVehicle(value: unknown): value is Vehicle {
     && typeof candidate.odd.manufacturerSummary === 'string';
   const validDate = (date: unknown) => typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(Date.parse(date));
   const validSources = Array.isArray(candidate.sources) && candidate.sources.length > 0 && candidate.sources.every((source) => source && typeof source === 'object' && typeof source.url === 'string' && /^https?:\/\//.test(source.url) && typeof source.publisher === 'string' && typeof source.title === 'string' && validDate(source.accessedAt) && Array.isArray(source.supports));
+  const validPriceAmount = (amount: unknown) => Boolean(amount && typeof amount === 'object'
+    && Number.isInteger((amount as VehiclePriceAmount).amountJpy) && (amount as VehiclePriceAmount).amountJpy > 0
+    && ((amount as VehiclePriceAmount).qualifier === null || typeof (amount as VehiclePriceAmount).qualifier === 'string')
+    && typeof (amount as VehiclePriceAmount).sourceUrl === 'string' && /^https?:\/\//.test((amount as VehiclePriceAmount).sourceUrl));
+  const validPrice = candidate.price === null || Boolean(candidate.price && typeof candidate.price === 'object'
+    && ['exact', 'range'].includes(candidate.price.kind)
+    && candidate.price.currency === 'JPY'
+    && Array.isArray(candidate.price.amounts) && candidate.price.amounts.length > 0 && candidate.price.amounts.every(validPriceAmount)
+    && (candidate.price.maxJpy === null || (Number.isInteger(candidate.price.maxJpy) && candidate.price.maxJpy > 0))
+    && Array.isArray(candidate.price.optionalPackages) && candidate.price.optionalPackages.every((item) => validPriceAmount(item) && typeof item.label === 'string')
+    && ['vehicle_body', 'msrp', 'price_list', 'unknown'].includes(candidate.price.basis)
+    && ['included', 'excluded', 'unknown'].includes(candidate.price.taxIncluded));
   const validMonth = (date: unknown) => typeof date === 'string' && /^\d{4}-(0[1-9]|1[0-2])$/.test(date);
   const validMonthOrDate = (date: unknown) => {
     if (validMonth(date)) return true;
@@ -235,6 +268,7 @@ export function validateVehicle(value: unknown): value is Vehicle {
     && hasOwn('catalogAsOf') && validNullable(candidate.catalogAsOf, validMonth)
     && hasOwn('salesUnitIntroducedAt') && validNullable(candidate.salesUnitIntroducedAt, validMonthOrDate)
     && hasOwn('priceEffectiveAt') && validNullable(candidate.priceEffectiveAt, validMonthOrDate)
+    && hasOwn('price') && validPrice
     && typeof candidate.grade === 'string'
     && (typeof candidate.requiredPackage === 'string' || candidate.requiredPackage === null)
     && typeof candidate.currentCatalogListed === 'boolean'
@@ -259,12 +293,41 @@ export function displayIntroducedAt(value: string | null) {
   return day ? `発売・導入 ${year}年${month}月${day}日` : `発売・導入 ${year}年${month}月`;
 }
 
-export type VehicleSort = 'introduced_desc' | 'maker_asc';
+export type VehicleSort = 'introduced_desc' | 'price_asc' | 'maker_asc';
+
+export function vehiclePriceMin(vehicle: Pick<Vehicle, 'price'>) {
+  if (!vehicle.price?.amounts.length) return null;
+  return Math.min(...vehicle.price.amounts.map(({ amountJpy }) => amountJpy));
+}
+
+export function displayVehiclePrice(vehicle: Pick<Vehicle, 'price'>, compact = false) {
+  const price = vehicle.price;
+  if (!price) return compact ? '価格要確認' : '公式価格未確認';
+  const values = price.amounts.map(({ amountJpy }) => amountJpy);
+  const min = Math.min(...values);
+  const max = price.maxJpy ?? Math.max(...values);
+  if (compact) {
+    const minMan = price.kind === 'range' ? Math.floor(min / 10_000) : Math.round(min / 10_000);
+    if (price.kind === 'range') return `約${minMan}万円〜`;
+    const maxMan = Math.round(max / 10_000);
+    return minMan === maxMan ? `約${minMan}万円` : `約${minMan}〜${maxMan}万円`;
+  }
+  const yen = new Intl.NumberFormat('ja-JP');
+  if (price.kind === 'range') return `${yen.format(min)}円〜`;
+  return min === max ? `${yen.format(min)}円` : `${yen.format(min)}〜${yen.format(max)}円`;
+}
 
 /** 発売・導入日はsalesUnitIntroducedAtだけを使い、未確認は必ず末尾に置く。 */
 export function sortVehicleList(list: Vehicle[], sort: VehicleSort = 'introduced_desc') {
   const text = (vehicle: Vehicle) => [vehicle.maker, vehicle.model, vehicle.grade, vehicle.id].join('\u0000');
   return [...list].sort((a, b) => {
+    if (sort === 'price_asc') {
+      const aPrice = vehiclePriceMin(a);
+      const bPrice = vehiclePriceMin(b);
+      if (aPrice !== null && bPrice === null) return -1;
+      if (aPrice === null && bPrice !== null) return 1;
+      if (aPrice !== null && bPrice !== null && aPrice !== bPrice) return aPrice - bPrice;
+    }
     if (sort === 'introduced_desc') {
       if (a.salesUnitIntroducedAt && !b.salesUnitIntroducedAt) return -1;
       if (!a.salesUnitIntroducedAt && b.salesUnitIntroducedAt) return 1;
@@ -283,7 +346,8 @@ export function listFact(value: string | string[] | undefined) {
 export function levelCaveat(level: number) {
   if (level === 2) return 'Level 2は運転支援。システム作動中も、運転者が周囲を常時監視します。';
   if (level === 3) return 'Level 3はODD内でシステムが運転しますが、引継ぎ要求には運転者が対応します。';
-  if (level >= 4) return 'Level 4以上は限定領域のサービス・実証が中心で、購入車一覧とは区別しています。';
+  if (level === 4) return 'Level 4は、限定されたエリア・ルート・天候などの条件内で、システムが運転を完結します。条件外を自力で走れるとは限りません。';
+  if (level === 5) return 'Level 5は、走行エリアや天候などを限定せず、人が運転できるあらゆる場面でシステムが運転する分類です。現時点で日本の一般向け購入候補は掲載していません。';
   if (level === 1) return 'Level 1は前後または左右の一方を支援。運転の主体は常に運転者です。';
   return 'レベルは優劣の点数ではなく、運転の役割と条件を表します。';
 }

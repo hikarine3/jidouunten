@@ -1,6 +1,6 @@
 ---
 import VehicleCard from './VehicleCard.astro';
-import { availabilityLabels, canonicalRoadType, capabilityDefinitions, handsOffLabels, isDefaultListedVehicle, levelIds, levelLabels, levelShort, roadFilterLabels, sortVehicleList, vehicles } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, capabilityDefinitions, handsOffLabels, isDefaultListedVehicle, levelIds, levelLabels, levelShort, roadFilterLabels, sortVehicleList, vehiclePriceMin, vehicles } from '../data/loader';
 
 const { action = '/cars/' } = Astro.props as { action?: string };
 const defaultVehicles = vehicles.filter(isDefaultListedVehicle);
@@ -56,7 +56,7 @@ const levelOverview = levelIds.map((level) => {
         <label>ハンズオフ<select name="handsOff"><option value="">すべて</option>{Object.entries(handsOffLabels).map(([key, label]) => <option value={key}>{label}</option>)}</select></label>
         <label>主な道路<select name="road"><option value="">すべて</option>{roadOptions.map((road) => <option value={road}>{road}</option>)}</select></label>
         <label>販売・利用状態<select name="availability"><option value="">公式サイト掲載あり（既定）</option><option value="all">すべての状態</option>{Object.entries(availabilityLabels).map(([key, label]) => <option value={key}>{label}</option>)}</select></label>
-        <label>並び順<select name="sort"><option value="introduced_desc">発売・導入が新しい順（既定）</option><option value="maker_asc">メーカー名順</option></select></label>
+        <label>並び順<select name="sort"><option value="introduced_desc">発売・導入が新しい順（既定）</option><option value="price_asc">価格が安い順</option><option value="maker_asc">メーカー名順</option></select></label>
       </div>
       <p class="sort-note">発売・導入時期が未確認の車は末尾に表示します。</p>
       <div class="filter-actions"><button class="button alt" type="submit">この条件で探す</button><a class="button text" href={action}>リセット</a></div>
@@ -64,7 +64,7 @@ const levelOverview = levelIds.map((level) => {
   </details></form>
   <div class="notice list-notice" data-level2-notice hidden><strong>Level 2は運転支援です。</strong> ハンズオフ可能な条件があっても、運転者は周囲を常時監視します。</div>
   <div class="results-bar"><h2><span data-selected-label>公式サイト掲載あり</span> <span class="subtle" data-result-count aria-live="polite">{defaultCount}件</span></h2><span class="subtle results-help" data-sort-label>発売・導入が新しい順 · 時期不明は末尾</span><div class="compare-toolbar" data-compare-toolbar><span class="subtle" data-compare-count>0台選択中（最大2台）</span><a class="button small alt" data-compare-link href="/compare/" aria-disabled="true">選択した車両を比較</a></div></div>
-  <form class="compare-list" method="get" action="/compare/" id="compare-list-form"><div class="cards" data-results>{sortedVehicles.map((vehicle, index) => <div data-vehicle-shell hidden={!isDefaultListedVehicle(vehicle)} data-level={vehicle.automationLevel} data-maker={vehicle.maker} data-capabilities={vehicle.capabilities.join('|')} data-road={vehicle.odd.roadTypes.map(canonicalRoadType).join('|')} data-hands-off={vehicle.handsOff} data-availability={vehicle.availability} data-current-catalog={String(vehicle.currentCatalogListed === true)} data-introduced-at={vehicle.salesUnitIntroducedAt ?? ''} data-stable-key={`${vehicle.maker}::${vehicle.model}::${vehicle.grade}::${vehicle.id}`} data-original-index={index}><VehicleCard vehicle={vehicle} selectable /></div>)}</div></form>
+  <form class="compare-list" method="get" action="/compare/" id="compare-list-form"><div class="cards" data-results>{sortedVehicles.map((vehicle, index) => <div data-vehicle-shell hidden={!isDefaultListedVehicle(vehicle)} data-level={vehicle.automationLevel} data-maker={vehicle.maker} data-capabilities={vehicle.capabilities.join('|')} data-road={vehicle.odd.roadTypes.map(canonicalRoadType).join('|')} data-hands-off={vehicle.handsOff} data-availability={vehicle.availability} data-current-catalog={String(vehicle.currentCatalogListed === true)} data-introduced-at={vehicle.salesUnitIntroducedAt ?? ''} data-price-min={vehiclePriceMin(vehicle) ?? ''} data-stable-key={`${vehicle.maker}::${vehicle.model}::${vehicle.grade}::${vehicle.id}`} data-original-index={index}><VehicleCard vehicle={vehicle} selectable /></div>)}</div></form>
   <div class="empty" data-empty hidden><h2>条件に合う候補はまだありません</h2><p>条件をゆるめるか、公式サイト掲載ありの候補に戻してお試しください。</p><a class="button text" href={action}>条件をリセット</a></div>
 </div></section>
 
@@ -92,6 +92,7 @@ const levelOverview = levelIds.map((level) => {
     const values = { maker: params.get('maker') || '', level: params.get('level') || '', capability: params.get('capability') || '', road: params.get('road') || '', handsOff: params.get('handsOff') || '', availability: params.get('availability') || '', sort: params.get('sort') || 'introduced_desc' };
     form?.querySelectorAll('select').forEach((select) => { select.value = values[select.name] || (select.name === 'sort' ? 'introduced_desc' : ''); });
     [...shells].sort((a, b) => {
+      if (values.sort === 'price_asc') { const aPrice = Number(a.dataset.priceMin || Number.POSITIVE_INFINITY); const bPrice = Number(b.dataset.priceMin || Number.POSITIVE_INFINITY); if (aPrice !== bPrice) return aPrice - bPrice; }
       if (values.sort === 'introduced_desc') { if (a.dataset.introducedAt && !b.dataset.introducedAt) return -1; if (!a.dataset.introducedAt && b.dataset.introducedAt) return 1; const dateOrder = (b.dataset.introducedAt || '').localeCompare(a.dataset.introducedAt || ''); if (dateOrder) return dateOrder; }
       return (a.dataset.stableKey || '').localeCompare(b.dataset.stableKey || '', 'ja');
     }).forEach((shell) => results?.append(shell));
@@ -109,7 +110,7 @@ const levelOverview = levelIds.map((level) => {
     const label = document.querySelector('[data-selected-label]'); if (label) label.textContent = selection.join(' · ') || '公式サイト掲載あり';
     const summary = document.querySelector('[data-filter-summary]'); if (summary) summary.textContent = selection.join(' · ') || 'すべての車';
     const resultCount = document.querySelector('[data-result-count]'); if (resultCount) resultCount.textContent = `${count}件`;
-    const sortLabel = document.querySelector('[data-sort-label]'); if (sortLabel) sortLabel.textContent = values.sort === 'maker_asc' ? 'メーカー名順' : '発売・導入が新しい順 · 時期不明は末尾';
+    const sortLabel = document.querySelector('[data-sort-label]'); if (sortLabel) sortLabel.textContent = values.sort === 'maker_asc' ? 'メーカー名順' : values.sort === 'price_asc' ? '価格が安い順 · 価格要確認は末尾' : '発売・導入が新しい順 · 時期不明は末尾';
     const empty = document.querySelector('[data-empty]'); if (empty) empty.hidden = count !== 0;
     const notice = document.querySelector('[data-level2-notice]'); if (notice) notice.hidden = values.level !== '2' && !values.handsOff && !values.capability;
     levelShortcuts.forEach((button) => button.setAttribute('aria-pressed', button.dataset.levelShortcut === values.level ? 'true' : 'false'));
