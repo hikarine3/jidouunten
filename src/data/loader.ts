@@ -108,11 +108,11 @@ export const availabilityLabels: Record<Availability, string> = {
   trial_or_research: '実証・研究',
   announced: '発表済み・提供前',
   unavailable: '現在利用不可',
-  unknown: 'カタログ掲載中',
+  unknown: '注文可否：未確認',
 };
 
 export const availabilityNotes: Partial<Record<Availability, string>> = {
-  unknown: '現在の注文可否は販売店で確認してください。',
+  unknown: 'メーカー公式サイトへの掲載は確認済みです。新車で注文できるかは未確認です。',
 };
 
 export const handsOffLabels: Record<HandsOff, string> = {

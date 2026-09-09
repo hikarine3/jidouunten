@@ -183,7 +183,7 @@ try {
   assert.match(await page.locator('main').innerText(), /Tesla[\s\S]*Model 3/);
   assert.doesNotMatch(await page.locator('main').innerText(), /adaptive_cruise_control|lane_centering|hands_off_highway|lane_change_support/, '内部capability IDを公開しない');
   assert.match(await page.locator('main').innerText(), /確認できた機能[\s\S]*追従走行（ACC）[\s\S]*車線中央維持/, '機能IDを平易な日本語で説明');
-  assert.match(await page.locator('main').innerText(), /カタログ掲載中[\s\S]*現在の注文可否は販売店で確認/, '未確認の販売状態を事実どおり説明');
+  assert.match(await page.locator('main').innerText(), /注文可否：未確認[\s\S]*メーカー公式サイトへの掲載は確認済み[\s\S]*新車で注文できるかは未確認/, '公式掲載と注文可否を分けて説明');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '根拠URL・確認日は通常UIに出さない');
   await page.screenshot({ path: `${qaDir}/desktop-tesla-detail.png`, fullPage: false });
 
@@ -194,7 +194,7 @@ try {
   await page.goto(`${base}/compare/?ids=jp-tesla-model-3-2026-premium&ids=jp-tesla-model-y-2026-premium`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.match(await page.locator('[data-compare-result]').innerText(), /Model 3[\s\S]*Model Y/);
-  assert.equal((await page.locator('[data-compare-result]').getByText('現在の注文可否は販売店で確認してください。', { exact: true }).count()), 2, '比較でもカタログ掲載中の注文可否を明確化');
+  assert.equal((await page.locator('[data-compare-result]').getByText('メーカー公式サイトへの掲載は確認済みです。新車で注文できるかは未確認です。', { exact: true }).count()), 2, '比較でも公式掲載と注文可否を分けて説明');
 
   await page.goto(`${base}/cars/jp-volvo-ex30-my2027-plus-p5-electric/`);
   assert.match(await page.locator('main').innerText(), /JP \/ 2027年モデル[\s\S]*Volvo[\s\S]*EX30[\s\S]*Plus P5 Electric/);

@@ -671,7 +671,7 @@
     "driverMonitoring": "required",
     "handsOff": "not_allowed",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring", "lane_change_support"],
-    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "受注状況は販売店で要確認"],
+    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/ex30/", "title": "ラインナップ・主要諸元｜EX30", "accessedAt": "2026-09-07", "supports": ["2027年モデルの日本向け現行3グレード", "Plus P5 Electricの車両本体価格4,790,000円"], "type": "manufacturer"},
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://azure-eu-assets.contentstack.com/v3/assets/blt84e01a6904dbd2e8/blt65613ad142855bdf/6a466a78035de07c64d4cca5/MY27_EX30_Ver2_W29%E4%BB%A5%E9%99%8D.pdf", "title": "VOLVO EX30 2027年モデル 諸元＆価格表（2026年第29週生産分以降）", "accessedAt": "2026-09-07", "supports": ["日本仕様のPlus P5 Electric", "Pilot Assist・全車速追従機能付ACC・ドライバーモニタリングカメラ付DACを標準装備", "内容は2026年7月現在"], "type": "manufacturer"},
@@ -712,7 +712,7 @@
     "driverMonitoring": "required",
     "handsOff": "not_allowed",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring", "lane_change_support"],
-    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "受注状況は販売店で要確認"],
+    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/ex30/", "title": "ラインナップ・主要諸元｜EX30", "accessedAt": "2026-09-07", "supports": ["2027年モデルの日本向け現行3グレード", "Ultra P5 Long Range Electricの車両本体価格5,790,000円"], "type": "manufacturer"},
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://azure-eu-assets.contentstack.com/v3/assets/blt84e01a6904dbd2e8/blt65613ad142855bdf/6a466a78035de07c64d4cca5/MY27_EX30_Ver2_W29%E4%BB%A5%E9%99%8D.pdf", "title": "VOLVO EX30 2027年モデル 諸元＆価格表（2026年第29週生産分以降）", "accessedAt": "2026-09-07", "supports": ["日本仕様のUltra P5 Long Range Electric", "Pilot Assist・全車速追従機能付ACC・ドライバーモニタリングカメラ付DACを標準装備", "内容は2026年7月現在"], "type": "manufacturer"},
@@ -753,7 +753,7 @@
     "driverMonitoring": "required",
     "handsOff": "not_allowed",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring", "lane_change_support"],
-    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "受注状況は販売店で要確認"],
+    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/ex30/", "title": "ラインナップ・主要諸元｜EX30", "accessedAt": "2026-09-07", "supports": ["2027年モデルの日本向け現行3グレード", "Ultra P8 AWD Electricの車両本体価格6,290,000円"], "type": "manufacturer"},
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://azure-eu-assets.contentstack.com/v3/assets/blt84e01a6904dbd2e8/blt65613ad142855bdf/6a466a78035de07c64d4cca5/MY27_EX30_Ver2_W29%E4%BB%A5%E9%99%8D.pdf", "title": "VOLVO EX30 2027年モデル 諸元＆価格表（2026年第29週生産分以降）", "accessedAt": "2026-09-07", "supports": ["日本仕様のUltra P8 AWD Electric", "Pilot Assist・全車速追従機能付ACC・ドライバーモニタリングカメラ付DACを標準装備", "内容は2026年7月現在"], "type": "manufacturer"},
@@ -794,7 +794,7 @@
     "driverMonitoring": "required",
     "handsOff": "unknown",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring"],
-    "limitations": ["運転支援を目的とし、機能に頼った運転はできない", "車線維持支援はACC作動中かつ車線または先行車検知時", "ハンズオフ可否は公式情報で明記を確認できない", "道路・天候・認識状況により作動しない場合がある", "受注状況は販売店で要確認"],
+    "limitations": ["運転支援を目的とし、機能に頼った運転はできない", "車線維持支援はACC作動中かつ車線または先行車検知時", "ハンズオフ可否は公式情報で明記を確認できない", "道路・天候・認識状況により作動しない場合がある", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "スズキ株式会社", "url": "https://www.suzuki.co.jp/car/evitara/detail/", "title": "e VITARA 価格・オンライン見積り｜スズキ", "accessedAt": "2026-09-07", "supports": ["現行3販売単位 X 2WD / Z 2WD / Z 4WD", "X 2WDのメーカー希望小売価格3,993,000円"], "type": "manufacturer"},
       {"publisher": "スズキ株式会社", "url": "https://www.suzuki.co.jp/release/a/2025/0916/index.html", "title": "スズキ、バッテリーEVの新型「e ビターラ」を日本で発売", "accessedAt": "2026-09-07", "supports": ["e VITARAを2026年1月16日より日本で発売", "X 2WD / Z 2WD / Z 4WDの3販売単位と価格"], "type": "manufacturer"},
@@ -836,7 +836,7 @@
     "driverMonitoring": "required",
     "handsOff": "unknown",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring"],
-    "limitations": ["運転支援を目的とし、機能に頼った運転はできない", "車線維持支援はACC作動中かつ車線または先行車検知時", "ハンズオフ可否は公式情報で明記を確認できない", "道路・天候・認識状況により作動しない場合がある", "受注状況は販売店で要確認"],
+    "limitations": ["運転支援を目的とし、機能に頼った運転はできない", "車線維持支援はACC作動中かつ車線または先行車検知時", "ハンズオフ可否は公式情報で明記を確認できない", "道路・天候・認識状況により作動しない場合がある", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "スズキ株式会社", "url": "https://www.suzuki.co.jp/car/evitara/detail/", "title": "e VITARA 価格・オンライン見積り｜スズキ", "accessedAt": "2026-09-07", "supports": ["現行3販売単位 X 2WD / Z 2WD / Z 4WD", "Z 2WDのメーカー希望小売価格4,488,000円"], "type": "manufacturer"},
       {"publisher": "スズキ株式会社", "url": "https://www.suzuki.co.jp/release/a/2025/0916/index.html", "title": "スズキ、バッテリーEVの新型「e ビターラ」を日本で発売", "accessedAt": "2026-09-07", "supports": ["e VITARAを2026年1月16日より日本で発売", "X 2WD / Z 2WD / Z 4WDの3販売単位と価格"], "type": "manufacturer"},
@@ -878,7 +878,7 @@
     "driverMonitoring": "required",
     "handsOff": "unknown",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring"],
-    "limitations": ["運転支援を目的とし、機能に頼った運転はできない", "車線維持支援はACC作動中かつ車線または先行車検知時", "ハンズオフ可否は公式情報で明記を確認できない", "道路・天候・認識状況により作動しない場合がある", "受注状況は販売店で要確認"],
+    "limitations": ["運転支援を目的とし、機能に頼った運転はできない", "車線維持支援はACC作動中かつ車線または先行車検知時", "ハンズオフ可否は公式情報で明記を確認できない", "道路・天候・認識状況により作動しない場合がある", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "スズキ株式会社", "url": "https://www.suzuki.co.jp/car/evitara/detail/", "title": "e VITARA 価格・オンライン見積り｜スズキ", "accessedAt": "2026-09-07", "supports": ["現行3販売単位 X 2WD / Z 2WD / Z 4WD", "Z 4WDのメーカー希望小売価格4,928,000円"], "type": "manufacturer"},
       {"publisher": "スズキ株式会社", "url": "https://www.suzuki.co.jp/release/a/2025/0916/index.html", "title": "スズキ、バッテリーEVの新型「e ビターラ」を日本で発売", "accessedAt": "2026-09-07", "supports": ["e VITARAを2026年1月16日より日本で発売", "X 2WD / Z 2WD / Z 4WDの3販売単位と価格"], "type": "manufacturer"},
@@ -920,7 +920,7 @@
     "driverMonitoring": "required",
     "handsOff": "unknown",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist"],
-    "limitations": ["自動運転ではなく運転支援のため運転者の監視・即時操作が必要", "レーンセンタリングアシストは車線・先行車の認識やACC作動などの条件を満たす必要がある", "天候・路面・道路形状・認識状況により作動しない場合がある", "ハンズオフ可否は公式情報で確認できない", "受注状況は販売店で要確認"],
+    "limitations": ["自動運転ではなく運転支援のため運転者の監視・即時操作が必要", "レーンセンタリングアシストは車線・先行車の認識やACC作動などの条件を満たす必要がある", "天候・路面・道路形状・認識状況により作動しない場合がある", "ハンズオフ可否は公式情報で確認できない", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ルノー・ジャポン", "url": "https://dcms.renault.jp/car_lineup/pricelist.php", "title": "ルノー公式価格表", "accessedAt": "2026-09-07", "supports": ["現行ARKANA esprit Alpine FULL HYBRID E-TECH", "公式価格表掲載価格5,149,000円"], "type": "manufacturer"},
       {"publisher": "ルノー・ジャポン", "url": "https://www.renault.jp/car_lineup/arkana/", "title": "ARKANA｜ルノー公式サイト", "accessedAt": "2026-09-07", "supports": ["ハイウェイ＆トラフィックジャムアシストのACC・レーンセンタリングアシストと作動条件・注意事項"], "type": "manufacturer"},
@@ -961,7 +961,7 @@
     "driverMonitoring": "required",
     "handsOff": "unknown",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist"],
-    "limitations": ["自動運転ではなく運転支援のため運転者の監視・即時操作が必要", "レーンセンタリングアシストは車線・先行車の認識やACC作動などの条件を満たす必要がある", "天候・路面・道路形状・認識状況により作動しない場合がある", "ハンズオフ可否は公式情報で確認できない", "受注状況は販売店で要確認"],
+    "limitations": ["自動運転ではなく運転支援のため運転者の監視・即時操作が必要", "レーンセンタリングアシストは車線・先行車の認識やACC作動などの条件を満たす必要がある", "天候・路面・道路形状・認識状況により作動しない場合がある", "ハンズオフ可否は公式情報で確認できない", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ルノー・ジャポン", "url": "https://dcms.renault.jp/car_lineup/pricelist.php", "title": "ルノー公式価格表", "accessedAt": "2026-09-07", "supports": ["現行ARKANA esprit Alpine MILD HYBRID", "公式価格表掲載価格4,749,000円"], "type": "manufacturer"},
       {"publisher": "ルノー・ジャポン", "url": "https://www.renault.jp/car_lineup/arkana/", "title": "ARKANA｜ルノー公式サイト", "accessedAt": "2026-09-07", "supports": ["ハイウェイ＆トラフィックジャムアシストのACC・レーンセンタリングアシストと作動条件・注意事項"], "type": "manufacturer"},
@@ -1002,7 +1002,7 @@
     "driverMonitoring": "required",
     "handsOff": "unknown",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist"],
-    "limitations": ["自動運転ではなく運転支援のため運転者の監視・即時操作が必要", "レーンセンタリングアシストは車線・先行車の認識やACC作動などの条件を満たす必要がある", "天候・路面・道路形状・認識状況により作動しない場合がある", "ハンズオフ可否は公式情報で確認できない", "受注状況は販売店で要確認"],
+    "limitations": ["自動運転ではなく運転支援のため運転者の監視・即時操作が必要", "レーンセンタリングアシストは車線・先行車の認識やACC作動などの条件を満たす必要がある", "天候・路面・道路形状・認識状況により作動しない場合がある", "ハンズオフ可否は公式情報で確認できない", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ルノー・ジャポン", "url": "https://dcms.renault.jp/car_lineup/pricelist.php", "title": "ルノー公式価格表", "accessedAt": "2026-09-07", "supports": ["現行ARKANA techno FULL HYBRID E-TECH", "公式価格表掲載価格4,840,000円"], "type": "manufacturer"},
       {"publisher": "ルノー・ジャポン", "url": "https://www.renault.jp/car_lineup/arkana/", "title": "ARKANA｜ルノー公式サイト", "accessedAt": "2026-09-07", "supports": ["ハイウェイ＆トラフィックジャムアシストのACC・レーンセンタリングアシストと作動条件・注意事項"], "type": "manufacturer"},
@@ -1043,7 +1043,7 @@
     "driverMonitoring": "required",
     "handsOff": "unknown",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist"],
-    "limitations": ["自動運転ではなく運転支援のため運転者の監視・即時操作が必要", "レーンセンタリングアシストは車線・先行車の認識やACC作動などの条件を満たす必要がある", "天候・路面・道路形状・認識状況により作動しない場合がある", "ハンズオフ可否は公式情報で確認できない", "受注状況は販売店で要確認"],
+    "limitations": ["自動運転ではなく運転支援のため運転者の監視・即時操作が必要", "レーンセンタリングアシストは車線・先行車の認識やACC作動などの条件を満たす必要がある", "天候・路面・道路形状・認識状況により作動しない場合がある", "ハンズオフ可否は公式情報で確認できない", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ルノー・ジャポン", "url": "https://dcms.renault.jp/car_lineup/pricelist.php", "title": "ルノー公式価格表", "accessedAt": "2026-09-07", "supports": ["現行ARKANA techno MILD HYBRID", "公式価格表掲載価格4,440,000円"], "type": "manufacturer"},
       {"publisher": "ルノー・ジャポン", "url": "https://www.renault.jp/car_lineup/arkana/", "title": "ARKANA｜ルノー公式サイト", "accessedAt": "2026-09-07", "supports": ["ハイウェイ＆トラフィックジャムアシストのACC・レーンセンタリングアシストと作動条件・注意事項"], "type": "manufacturer"},
@@ -1112,7 +1112,7 @@
       "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
       "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
       "作動速度の数値範囲は現行公開資料で未確認",
-      "受注状況は販売店で要確認"
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"
     ],
     "sources": [
       {
@@ -1224,7 +1224,7 @@
       "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
       "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
       "作動速度の数値範囲は現行公開資料で未確認",
-      "受注状況は販売店で要確認"
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"
     ],
     "sources": [
       {
@@ -1336,7 +1336,7 @@
       "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
       "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
       "作動速度の数値範囲は現行公開資料で未確認",
-      "受注状況は販売店で要確認"
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"
     ],
     "sources": [
       {
@@ -1448,7 +1448,7 @@
       "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
       "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
       "作動速度の数値範囲は現行公開資料で未確認",
-      "受注状況は販売店で要確認"
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"
     ],
     "sources": [
       {
@@ -1560,7 +1560,7 @@
       "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
       "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
       "作動速度の数値範囲は現行公開資料で未確認",
-      "受注状況は販売店で要確認"
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"
     ],
     "sources": [
       {
@@ -1672,7 +1672,7 @@
       "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
       "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
       "作動速度の数値範囲は現行公開資料で未確認",
-      "受注状況は販売店で要確認"
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"
     ],
     "sources": [
       {
@@ -1784,7 +1784,7 @@
       "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
       "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
       "作動速度の数値範囲は現行公開資料で未確認",
-      "受注状況は販売店で要確認"
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"
     ],
     "sources": [
       {
@@ -1896,7 +1896,7 @@
       "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
       "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
       "作動速度の数値範囲は現行公開資料で未確認",
-      "受注状況は販売店で要確認"
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"
     ],
     "sources": [
       {
@@ -2008,7 +2008,7 @@
       "通常のACC・ステアリング支援は少なくとも片手をステアリングに添える必要がある",
       "ハンズオフは高速道路の渋滞時かつ一定条件下に限られる",
       "作動速度の数値範囲は現行公開資料で未確認",
-      "受注状況は販売店で要確認"
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"
     ],
     "sources": [
       {
@@ -2092,7 +2092,7 @@
     "driverMonitoring": "required",
     "handsOff": "not_allowed",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist"],
-    "limitations": ["自動運転ではなく運転支援", "ドライビング・アシスタント・プロフェッショナルの標準装備記載がなく、条件付きハンズオフには非対応", "通常支援の対象道路と数値速度は現行公開資料で未確認", "運転者は常時監視し必要時に操作する", "受注状況は販売店で要確認"],
+    "limitations": ["自動運転ではなく運転支援", "ドライビング・アシスタント・プロフェッショナルの標準装備記載がなく、条件付きハンズオフには非対応", "通常支援の対象道路と数値速度は現行公開資料で未確認", "運転者は常時監視し必要時に操作する", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/content/dam/MINI/marketJP/mini_jp/home/catalog/MINI_COUNTRYMAN_EPL_2607_seisankaitei.pdf.asset.1786065168368.pdf", "title": "MINI COUNTRYMAN 装備・価格表（2026年7月以降生産）", "accessedAt": "2026-09-07", "supports": ["C SELECTのメーカー希望小売価格4,800,000円", "ドライビング・アシスタント・プラス標準装備", "C SELECT欄にドライビング・アシスタント・プロフェッショナルの標準装備記載なし", "2026年7月以降生産仕様"], "type": "manufacturer"},
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20260303_Add_MINI_Countryman_C_Select_detail.html", "title": "MINI COUNTRYMAN C SELECTを追加", "accessedAt": "2026-09-07", "supports": ["C SELECTを2026年3月3日に販売開始"], "type": "manufacturer"},
@@ -2135,7 +2135,7 @@
     "driverMonitoring": "required",
     "handsOff": "allowed_in_conditions",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway"],
-    "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "受注状況は販売店で要確認"],
+    "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/content/dam/MINI/marketJP/mini_jp/home/catalog/MINI_COUNTRYMAN_EPL_2607_seisankaitei.pdf.asset.1786065168368.pdf", "title": "MINI COUNTRYMAN 装備・価格表（2026年7月以降生産）", "accessedAt": "2026-09-07", "supports": ["Cのメーカー希望小売価格5,180,000円", "ドライビング・アシスタント・プラス標準装備", "ドライビング・アシスタント・プロフェッショナル標準装備", "高速道路渋滞時ハンズオフの条件", "2026年7月以降生産仕様"], "type": "manufacturer"},
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20260303_The_MINI_Countryman_C_Select_MINI_Countryman_C_and_MINI_Countryman_S_ALL4_feature_a_48V_mild_hybrid_system_detail.html", "title": "MINI COUNTRYMAN C SELECT、C、S ALL4に48Vマイルド・ハイブリッド・システムを搭載", "accessedAt": "2026-09-07", "supports": ["Cを2026年3月3日から48Vマイルド・ハイブリッド仕様で販売開始"], "type": "manufacturer"},
@@ -2168,7 +2168,7 @@
     "availabilityCheckedAt": "2026-09-07",
     "odd": {"roadTypes": ["不明"], "speedKph": {"min": null, "max": null, "condition": "ハンズオフは高速道路の渋滞時0〜約60km/h。通常支援の数値速度は公式資料で未確認"}, "trafficConditions": ["先行車への追従", "車線内走行支援", "高速道路の渋滞時（ハンズオフは0〜約60km/h）"], "weather": ["道路・気象・車線認識などの条件により作動しない場合がある"], "geoRestriction": ["通常支援の対象道路は現行公開資料で未確認", "ハンズオフは高速道路の渋滞時かつ一定条件下"], "driverConditions": ["前方と周囲を常に確認", "必要時に直ちにブレーキ・アクセル・操舵を行う", "運転操作を引き継げる状態を保つ"], "manufacturerSummary": "ドライビング・アシスタント・プラスが車速・車間と車線内の走行を支援し、ドライビング・アシスタント・プロフェッショナルが高速道路渋滞時の条件付きハンズオフを追加する。"},
     "driverMonitoring": "required", "handsOff": "allowed_in_conditions", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway"],
-    "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "受注状況は販売店で要確認"],
+    "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/content/dam/MINI/marketJP/mini_jp/home/catalog/MINI_COUNTRYMAN_EPL_2607_seisankaitei.pdf.asset.1786065168368.pdf", "title": "MINI COUNTRYMAN 装備・価格表（2026年7月以降生産）", "accessedAt": "2026-09-07", "supports": ["Dのメーカー希望小売価格5,260,000円", "ドライビング・アシスタント・プラス標準装備", "ドライビング・アシスタント・プロフェッショナル標準装備", "高速道路渋滞時ハンズオフの条件", "2026年7月以降生産仕様"], "type": "manufacturer"},
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20231121_The_new_MINI_Countryman_is_launched_detail.html", "title": "新型 MINI Countryman 誕生", "accessedAt": "2026-09-07", "supports": ["Dを含む第3世代Countrymanを2023年11月21日に発表・予約開始", "ハンズオフ機能付き渋滞運転支援の説明"], "type": "manufacturer"},
@@ -2183,7 +2183,7 @@
     "market": "JP", "maker": "MINI", "model": "Countryman", "modelYear": null, "generation": "第3世代", "catalogAsOf": "2026-07", "salesUnitIntroducedAt": "2026-07-13", "priceEffectiveAt": "2026-07", "grade": "S ALL4 SELECT",
     "requiredPackage": "ドライビング・アシスタント・プラス（標準装備）", "featureVersion": "第3世代 / 2026年7月以降生産 / 48Vマイルド・ハイブリッド", "currentCatalogListed": true, "automationLevel": 2, "category": "driver_assistance", "availability": "unknown", "availabilityCheckedAt": "2026-09-07",
     "odd": {"roadTypes": ["不明"], "speedKph": {"min": null, "max": null, "condition": "通常支援の数値速度は公式資料で未確認"}, "trafficConditions": ["先行車への追従", "車線内走行支援"], "weather": ["道路・気象・車線認識などの条件により作動しない場合がある"], "geoRestriction": ["通常支援の対象道路は現行公開資料で未確認"], "driverConditions": ["前方と周囲を常に確認", "必要時に直ちにブレーキ・アクセル・操舵を行う"], "manufacturerSummary": "ドライビング・アシスタント・プラスが車速・車間と車線内の走行を支援する。S ALL4 SELECTはドライビング・アシスタント・プロフェッショナルの標準装備記載がなく、条件付きハンズオフには対応しない。"},
-    "driverMonitoring": "required", "handsOff": "not_allowed", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist"], "limitations": ["自動運転ではなく運転支援", "ドライビング・アシスタント・プロフェッショナルの標準装備記載がなく、条件付きハンズオフには非対応", "通常支援の対象道路と数値速度は現行公開資料で未確認", "運転者は常時監視し必要時に操作する", "受注状況は販売店で要確認"],
+    "driverMonitoring": "required", "handsOff": "not_allowed", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist"], "limitations": ["自動運転ではなく運転支援", "ドライビング・アシスタント・プロフェッショナルの標準装備記載がなく、条件付きハンズオフには非対応", "通常支援の対象道路と数値速度は現行公開資料で未確認", "運転者は常時監視し必要時に操作する", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/content/dam/MINI/marketJP/mini_jp/home/catalog/MINI_COUNTRYMAN_EPL_2607_seisankaitei.pdf.asset.1786065168368.pdf", "title": "MINI COUNTRYMAN 装備・価格表（2026年7月以降生産）", "accessedAt": "2026-09-07", "supports": ["S ALL4 SELECTのメーカー希望小売価格5,530,000円", "ドライビング・アシスタント・プラス標準装備", "S ALL4 SELECT欄にドライビング・アシスタント・プロフェッショナルの標準装備記載なし", "2026年7月以降生産仕様"], "type": "manufacturer"},
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20260713_add_mini_countryman_s_all4_select.html", "title": "MINI COUNTRYMAN S ALL4 SELECTを追加", "accessedAt": "2026-09-07", "supports": ["S ALL4 SELECTを2026年7月13日に販売開始", "48Vマイルド・ハイブリッドとドライビング・アシスタント・プラス"], "type": "manufacturer"},
@@ -2198,7 +2198,7 @@
     "market": "JP", "maker": "MINI", "model": "Countryman", "modelYear": null, "generation": "第3世代", "catalogAsOf": "2026-07", "salesUnitIntroducedAt": "2026-03-03", "priceEffectiveAt": "2026-07", "grade": "S ALL4",
     "requiredPackage": "ドライビング・アシスタント・プロフェッショナル（標準装備。プラスの機能を含む）", "featureVersion": "第3世代 / 2026年7月以降生産 / 48Vマイルド・ハイブリッド", "currentCatalogListed": true, "automationLevel": 2, "category": "driver_assistance", "availability": "unknown", "availabilityCheckedAt": "2026-09-07",
     "odd": {"roadTypes": ["不明"], "speedKph": {"min": null, "max": null, "condition": "ハンズオフは高速道路の渋滞時0〜約60km/h。通常支援の数値速度は公式資料で未確認"}, "trafficConditions": ["先行車への追従", "車線内走行支援", "高速道路の渋滞時（ハンズオフは0〜約60km/h）"], "weather": ["道路・気象・車線認識などの条件により作動しない場合がある"], "geoRestriction": ["通常支援の対象道路は現行公開資料で未確認", "ハンズオフは高速道路の渋滞時かつ一定条件下"], "driverConditions": ["前方と周囲を常に確認", "必要時に直ちにブレーキ・アクセル・操舵を行う", "運転操作を引き継げる状態を保つ"], "manufacturerSummary": "ドライビング・アシスタント・プラスが車速・車間と車線内の走行を支援し、ドライビング・アシスタント・プロフェッショナルが高速道路渋滞時の条件付きハンズオフを追加する。"},
-    "driverMonitoring": "required", "handsOff": "allowed_in_conditions", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway"], "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "受注状況は販売店で要確認"],
+    "driverMonitoring": "required", "handsOff": "allowed_in_conditions", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway"], "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/content/dam/MINI/marketJP/mini_jp/home/catalog/MINI_COUNTRYMAN_EPL_2607_seisankaitei.pdf.asset.1786065168368.pdf", "title": "MINI COUNTRYMAN 装備・価格表（2026年7月以降生産）", "accessedAt": "2026-09-07", "supports": ["S ALL4のメーカー希望小売価格5,920,000円", "ドライビング・アシスタント・プラス標準装備", "ドライビング・アシスタント・プロフェッショナル標準装備", "高速道路渋滞時ハンズオフの条件", "2026年7月以降生産仕様"], "type": "manufacturer"},
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20260303_The_MINI_Countryman_C_Select_MINI_Countryman_C_and_MINI_Countryman_S_ALL4_feature_a_48V_mild_hybrid_system_detail.html", "title": "MINI COUNTRYMAN C SELECT、C、S ALL4に48Vマイルド・ハイブリッド・システムを搭載", "accessedAt": "2026-09-07", "supports": ["S ALL4を2026年3月3日から48Vマイルド・ハイブリッド仕様で販売開始"], "type": "manufacturer"},
@@ -2214,7 +2214,7 @@
     "market": "JP", "maker": "MINI", "model": "Countryman", "modelYear": null, "generation": "第3世代", "catalogAsOf": "2026-07", "salesUnitIntroducedAt": "2023-11-21", "priceEffectiveAt": "2026-07", "grade": "JOHN COOPER WORKS COUNTRYMAN ALL4",
     "requiredPackage": "ドライビング・アシスタント・プロフェッショナル（標準装備。プラスの機能を含む）", "featureVersion": "第3世代 / 2026年7月以降生産", "currentCatalogListed": true, "automationLevel": 2, "category": "driver_assistance", "availability": "unknown", "availabilityCheckedAt": "2026-09-07",
     "odd": {"roadTypes": ["不明"], "speedKph": {"min": null, "max": null, "condition": "ハンズオフは高速道路の渋滞時0〜約60km/h。通常支援の数値速度は公式資料で未確認"}, "trafficConditions": ["先行車への追従", "車線内走行支援", "高速道路の渋滞時（ハンズオフは0〜約60km/h）"], "weather": ["道路・気象・車線認識などの条件により作動しない場合がある"], "geoRestriction": ["通常支援の対象道路は現行公開資料で未確認", "ハンズオフは高速道路の渋滞時かつ一定条件下"], "driverConditions": ["前方と周囲を常に確認", "必要時に直ちにブレーキ・アクセル・操舵を行う", "運転操作を引き継げる状態を保つ"], "manufacturerSummary": "ドライビング・アシスタント・プラスが車速・車間と車線内の走行を支援し、ドライビング・アシスタント・プロフェッショナルが高速道路渋滞時の条件付きハンズオフを追加する。"},
-    "driverMonitoring": "required", "handsOff": "allowed_in_conditions", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway"], "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "受注状況は販売店で要確認"],
+    "driverMonitoring": "required", "handsOff": "allowed_in_conditions", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway"], "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/content/dam/MINI/marketJP/mini_jp/home/catalog/MINI_COUNTRYMAN_EPL_2607_seisankaitei.pdf.asset.1786065168368.pdf", "title": "MINI COUNTRYMAN 装備・価格表（2026年7月以降生産）", "accessedAt": "2026-09-07", "supports": ["JOHN COOPER WORKS COUNTRYMAN ALL4のメーカー希望小売価格6,830,000円", "ドライビング・アシスタント・プラス標準装備", "ドライビング・アシスタント・プロフェッショナル標準装備", "高速道路渋滞時ハンズオフの条件", "2026年7月以降生産仕様"], "type": "manufacturer"},
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20231121_The_new_MINI_Countryman_is_launched_detail.html", "title": "新型 MINI Countryman 誕生", "accessedAt": "2026-09-07", "supports": ["JOHN COOPER WORKS COUNTRYMANを含む第3世代Countrymanを2023年11月21日に発表・予約開始", "ハンズオフ機能付き渋滞運転支援の説明"], "type": "manufacturer"},
@@ -2229,7 +2229,7 @@
     "market": "JP", "maker": "MINI", "model": "Countryman", "modelYear": null, "generation": "第3世代", "catalogAsOf": "2026-07", "salesUnitIntroducedAt": "2024-03-01", "priceEffectiveAt": "2026-07", "grade": "E",
     "requiredPackage": "ドライビング・アシスタント・プロフェッショナル（標準装備。プラスの機能を含む）", "featureVersion": "第3世代 / 2026年7月以降生産 / 電気自動車", "currentCatalogListed": true, "automationLevel": 2, "category": "driver_assistance", "availability": "unknown", "availabilityCheckedAt": "2026-09-07",
     "odd": {"roadTypes": ["不明"], "speedKph": {"min": null, "max": null, "condition": "ハンズオフは高速道路の渋滞時0〜約60km/h。通常支援の数値速度は公式資料で未確認"}, "trafficConditions": ["先行車への追従", "車線内走行支援", "高速道路の渋滞時（ハンズオフは0〜約60km/h）"], "weather": ["道路・気象・車線認識などの条件により作動しない場合がある"], "geoRestriction": ["通常支援の対象道路は現行公開資料で未確認", "ハンズオフは高速道路の渋滞時かつ一定条件下"], "driverConditions": ["前方と周囲を常に確認", "必要時に直ちにブレーキ・アクセル・操舵を行う", "運転操作を引き継げる状態を保つ"], "manufacturerSummary": "ドライビング・アシスタント・プラスが車速・車間と車線内の走行を支援し、ドライビング・アシスタント・プロフェッショナルが高速道路渋滞時の条件付きハンズオフを追加する。"},
-    "driverMonitoring": "required", "handsOff": "allowed_in_conditions", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway"], "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "受注状況は販売店で要確認"],
+    "driverMonitoring": "required", "handsOff": "allowed_in_conditions", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway"], "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/content/dam/MINI/marketJP/mini_jp/home/catalog/MINI_COUNTRYMAN_EPL_2607_seisankaitei.pdf.asset.1786065168368.pdf", "title": "MINI COUNTRYMAN 装備・価格表（2026年7月以降生産）", "accessedAt": "2026-09-07", "supports": ["Eのメーカー希望小売価格6,040,000円", "ドライビング・アシスタント・プラス標準装備", "ドライビング・アシスタント・プロフェッショナル標準装備", "高速道路渋滞時ハンズオフの条件", "2026年7月以降生産仕様"], "type": "manufacturer"},
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20240301_the_new_mini_countryman_electric_car_is_born_detail.html", "title": "新型 MINI Countryman の電気自動車が誕生", "accessedAt": "2026-09-07", "supports": ["Eを2024年3月1日に販売開始", "Eの運転支援機能の説明"], "type": "manufacturer"},
@@ -2244,7 +2244,7 @@
     "market": "JP", "maker": "MINI", "model": "Countryman", "modelYear": null, "generation": "第3世代", "catalogAsOf": "2026-07", "salesUnitIntroducedAt": "2024-03-01", "priceEffectiveAt": "2026-07", "grade": "SE ALL4",
     "requiredPackage": "ドライビング・アシスタント・プロフェッショナル（標準装備。プラスの機能を含む）", "featureVersion": "第3世代 / 2026年7月以降生産 / 電気自動車", "currentCatalogListed": true, "automationLevel": 2, "category": "driver_assistance", "availability": "unknown", "availabilityCheckedAt": "2026-09-07",
     "odd": {"roadTypes": ["不明"], "speedKph": {"min": null, "max": null, "condition": "ハンズオフは高速道路の渋滞時0〜約60km/h。通常支援の数値速度は公式資料で未確認"}, "trafficConditions": ["先行車への追従", "車線内走行支援", "高速道路の渋滞時（ハンズオフは0〜約60km/h）"], "weather": ["道路・気象・車線認識などの条件により作動しない場合がある"], "geoRestriction": ["通常支援の対象道路は現行公開資料で未確認", "ハンズオフは高速道路の渋滞時かつ一定条件下"], "driverConditions": ["前方と周囲を常に確認", "必要時に直ちにブレーキ・アクセル・操舵を行う", "運転操作を引き継げる状態を保つ"], "manufacturerSummary": "ドライビング・アシスタント・プラスが車速・車間と車線内の走行を支援し、ドライビング・アシスタント・プロフェッショナルが高速道路渋滞時の条件付きハンズオフを追加する。"},
-    "driverMonitoring": "required", "handsOff": "allowed_in_conditions", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway"], "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "受注状況は販売店で要確認"],
+    "driverMonitoring": "required", "handsOff": "allowed_in_conditions", "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway"], "limitations": ["自動運転ではなく運転支援", "ハンズオフは高速道路の渋滞時0〜約60km/hかつ一定条件下", "運転者は前方・周囲を常時監視し必要時に操作する", "メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],
     "sources": [
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/content/dam/MINI/marketJP/mini_jp/home/catalog/MINI_COUNTRYMAN_EPL_2607_seisankaitei.pdf.asset.1786065168368.pdf", "title": "MINI COUNTRYMAN 装備・価格表（2026年7月以降生産）", "accessedAt": "2026-09-07", "supports": ["SE ALL4のメーカー希望小売価格6,780,000円", "ドライビング・アシスタント・プラス標準装備", "ドライビング・アシスタント・プロフェッショナル標準装備", "高速道路渋滞時ハンズオフの条件", "2026年7月以降生産仕様"], "type": "manufacturer"},
       {"publisher": "ビー・エム・ダブリュー株式会社 / MINI Japan", "url": "https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20240301_the_new_mini_countryman_electric_car_is_born_detail.html", "title": "新型 MINI Countryman の電気自動車が誕生", "accessedAt": "2026-09-07", "supports": ["SE ALL4を2024年3月1日に販売開始", "SE ALL4の運転支援機能の説明"], "type": "manufacturer"},

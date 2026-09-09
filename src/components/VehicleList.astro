@@ -40,7 +40,7 @@ const levelOverview = levelIds.map((level) => {
       <div class="hands-off-map" role="group" aria-label="Level 2のハンズオフ条件で絞り込む">
         {handsOffDistribution.map(({ value, label, count }) => <button type="button" data-hands-off-shortcut={value} style={`--share:${count / defaultCount}`}><span>{label}</span><strong>{count}</strong></button>)}
       </div>
-      <div class="quick-filters" aria-label="注目条件ですぐに絞り込む"><button type="button" data-capability-shortcut="lane_change_support"><span>車線変更支援</span><strong>{laneChangeCount}</strong></button><button type="button" data-maker-shortcut="Tesla"><span>Tesla</span><strong>{teslaCount}</strong></button><small>L2・現行カタログの集計</small></div>
+      <div class="quick-filters" aria-label="注目条件ですぐに絞り込む"><button type="button" data-capability-shortcut="lane_change_support"><span>車線変更支援</span><strong>{laneChangeCount}</strong></button><button type="button" data-maker-shortcut="Tesla"><span>Tesla</span><strong>{teslaCount}</strong></button><small>Level 2・メーカー公式サイトに掲載を確認した候補</small></div>
     </div>
   </div>
 </div></section>
@@ -55,7 +55,7 @@ const levelOverview = levelIds.map((level) => {
         <label>できること<select name="capability"><option value="">すべて</option>{capabilityOptions.map(([id, definition]) => <option value={id}>{definition.label}</option>)}</select></label>
         <label>ハンズオフ<select name="handsOff"><option value="">すべて</option>{Object.entries(handsOffLabels).map(([key, label]) => <option value={key}>{label}</option>)}</select></label>
         <label>主な道路<select name="road"><option value="">すべて</option>{roadOptions.map((road) => <option value={road}>{road}</option>)}</select></label>
-        <label>販売・利用状態<select name="availability"><option value="">現行カタログ（既定）</option><option value="all">すべての状態</option>{Object.entries(availabilityLabels).map(([key, label]) => <option value={key}>{label}</option>)}</select></label>
+        <label>販売・利用状態<select name="availability"><option value="">公式サイト掲載あり（既定）</option><option value="all">すべての状態</option>{Object.entries(availabilityLabels).map(([key, label]) => <option value={key}>{label}</option>)}</select></label>
         <label>並び順<select name="sort"><option value="introduced_desc">発売・導入が新しい順（既定）</option><option value="maker_asc">メーカー名順</option></select></label>
       </div>
       <p class="sort-note">発売・導入時期が未確認の車は末尾に表示します。</p>
@@ -63,9 +63,9 @@ const levelOverview = levelIds.map((level) => {
     </div>
   </details></form>
   <div class="notice list-notice" data-level2-notice hidden><strong>Level 2は運転支援です。</strong> ハンズオフ可能な条件があっても、運転者は周囲を常時監視します。</div>
-  <div class="results-bar"><h2><span data-selected-label>現行カタログ</span> <span class="subtle" data-result-count aria-live="polite">{defaultCount}件</span></h2><span class="subtle results-help" data-sort-label>発売・導入が新しい順 · 時期不明は末尾</span><div class="compare-toolbar" data-compare-toolbar><span class="subtle" data-compare-count>0台選択中（最大2台）</span><a class="button small alt" data-compare-link href="/compare/" aria-disabled="true">選択した車両を比較</a></div></div>
+  <div class="results-bar"><h2><span data-selected-label>公式サイト掲載あり</span> <span class="subtle" data-result-count aria-live="polite">{defaultCount}件</span></h2><span class="subtle results-help" data-sort-label>発売・導入が新しい順 · 時期不明は末尾</span><div class="compare-toolbar" data-compare-toolbar><span class="subtle" data-compare-count>0台選択中（最大2台）</span><a class="button small alt" data-compare-link href="/compare/" aria-disabled="true">選択した車両を比較</a></div></div>
   <form class="compare-list" method="get" action="/compare/" id="compare-list-form"><div class="cards" data-results>{sortedVehicles.map((vehicle, index) => <div data-vehicle-shell hidden={!isDefaultListedVehicle(vehicle)} data-level={vehicle.automationLevel} data-maker={vehicle.maker} data-capabilities={vehicle.capabilities.join('|')} data-road={vehicle.odd.roadTypes.map(canonicalRoadType).join('|')} data-hands-off={vehicle.handsOff} data-availability={vehicle.availability} data-current-catalog={String(vehicle.currentCatalogListed === true)} data-introduced-at={vehicle.salesUnitIntroducedAt ?? ''} data-stable-key={`${vehicle.maker}::${vehicle.model}::${vehicle.grade}::${vehicle.id}`} data-original-index={index}><VehicleCard vehicle={vehicle} selectable /></div>)}</div></form>
-  <div class="empty" data-empty hidden><h2>条件に合う候補はまだありません</h2><p>条件をゆるめるか、現行カタログに戻してお試しください。</p><a class="button text" href={action}>条件をリセット</a></div>
+  <div class="empty" data-empty hidden><h2>条件に合う候補はまだありません</h2><p>条件をゆるめるか、公式サイト掲載ありの候補に戻してお試しください。</p><a class="button text" href={action}>条件をリセット</a></div>
 </div></section>
 
 <script define:vars={{ action }}>
@@ -104,7 +104,7 @@ const levelOverview = levelIds.map((level) => {
     const capabilityText = values.capability ? form?.querySelector('select[name="capability"] option:checked')?.textContent : '';
     const handsOffText = values.handsOff ? form?.querySelector('select[name="handsOff"] option:checked')?.textContent : '';
     const selection = [values.maker, values.level && `Level ${values.level}`, capabilityText, handsOffText].filter(Boolean);
-    const label = document.querySelector('[data-selected-label]'); if (label) label.textContent = selection.join(' · ') || '現行カタログ';
+    const label = document.querySelector('[data-selected-label]'); if (label) label.textContent = selection.join(' · ') || '公式サイト掲載あり';
     const summary = document.querySelector('[data-filter-summary]'); if (summary) summary.textContent = selection.join(' · ') || 'すべての車';
     const resultCount = document.querySelector('[data-result-count]'); if (resultCount) resultCount.textContent = `${count}件`;
     const sortLabel = document.querySelector('[data-sort-label]'); if (sortLabel) sortLabel.textContent = values.sort === 'maker_asc' ? 'メーカー名順' : '発売・導入が新しい順 · 時期不明は末尾';

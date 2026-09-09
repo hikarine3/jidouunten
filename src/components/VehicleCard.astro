@@ -14,7 +14,7 @@ const visibleCapabilities = [...vehicle.capabilities]
     <h3><a href={`/cars/${vehicle.id}/`}>{vehicle.maker} {vehicle.model}</a></h3>
     <div class="maker">{vehicleReferenceLabel(vehicle)}　{vehicle.grade}</div>
     <div class="meta">
-      <span class="pill lime">{availabilityLabels[vehicle.availability]}</span>
+      <span class:list={['pill', vehicle.availability === 'new_order_available' && 'lime']}>{availabilityLabels[vehicle.availability]}</span>
       <span class="pill">{handsOffLabels[vehicle.handsOff]}</span>
     </div>
     <div class="capability-chips" aria-label="確認できた主な機能">
