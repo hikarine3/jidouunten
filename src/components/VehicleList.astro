@@ -103,7 +103,9 @@ const levelOverview = levelIds.map((level) => {
     });
     const capabilityText = values.capability ? form?.querySelector('select[name="capability"] option:checked')?.textContent : '';
     const handsOffText = values.handsOff ? form?.querySelector('select[name="handsOff"] option:checked')?.textContent : '';
-    const selection = [values.maker, values.level && `Level ${values.level}`, capabilityText, handsOffText].filter(Boolean);
+    const roadText = values.road ? form?.querySelector('select[name="road"] option:checked')?.textContent : '';
+    const availabilityText = values.availability ? form?.querySelector('select[name="availability"] option:checked')?.textContent : '';
+    const selection = [values.maker, values.level && `Level ${values.level}`, capabilityText, handsOffText, roadText, availabilityText].filter(Boolean);
     const label = document.querySelector('[data-selected-label]'); if (label) label.textContent = selection.join(' · ') || '公式サイト掲載あり';
     const summary = document.querySelector('[data-filter-summary]'); if (summary) summary.textContent = selection.join(' · ') || 'すべての車';
     const resultCount = document.querySelector('[data-result-count]'); if (resultCount) resultCount.textContent = `${count}件`;

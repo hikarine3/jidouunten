@@ -168,6 +168,10 @@ try {
 
   await page.goto(`${base}/cars/?availability=all`);
   assert.equal(await visibleCards(), 73, 'すべての状態で過去車両を含む73件');
+  assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
+  await page.goto(`${base}/cars/?availability=unavailable`);
+  assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
+  assert.equal(await page.locator('[data-selected-label]').innerText(), '現在利用不可', '販売状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/compare/?ids=jp-honda-accord-2025-ehev-sensing360plus&ids=jp-subaru-levorg-layback-2023-limited-ex`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '比較対象は2台');
