@@ -25,7 +25,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Honda VEZEL / 後発対策） | 2 | e:HEV ZのFF/4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
-| 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定 |
+| 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定。Advanced Driveの0〜約40km/hとLCAの約85〜130km/h、T-Connect／コネクティッドナビ契約・地図条件も単位ごとに保持 |
 | 今回追加（Toyota シエンタ / 後発対策） | 18 | Z/G/Xのハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗りを公式グレードJSONの全組み合わせで登録。価格214万6,100円〜339万7,900円、全車速ACC・LTA・手保持条件を販売単位へ固定 |
 | 今回追加（Lexus LM / 後発対策） | 2 | LM500h EXECUTIVE（4人）/ version L（6人）のAWD。Advanced Drive・LCA・ドライバーモニター・全車速追従ACCを標準装備として確認し、価格1,520万〜2,030万円、渋滞時0〜約40km/hの条件付きハンズオフを販売単位へ固定 |
 | 今回追加（Lexus UX300h / 後発対策） | 6 | Shining Essence / version L / F SPORTの2WD・AWD。全車速追従ACC・LTA・ドライバー異常時対応システム標準、価格521万〜575.7万円、ステアリング保持が必要なハンズオフ不可、2027年2月生産終了予定を販売単位へ固定 |
@@ -230,8 +230,9 @@ S-Xは設定なしとしている。新車注文可否・発売日は公式ペ�
 
 ノアのS-Z/S-GはAdvanced Drive等セットの対象条件（高速道路本線の渋滞時・約40km/h以下等）では
 ハンズオフが可能だが、運転者の前方監視と必要時の操作が必要なため `allowed_in_conditions` とした。
-汎用LTAの手保持要求とAdvanced Driveの条件付きハンズオフを混同しない。S-XはAdvanced Drive設定がなく
-`not_allowed` とした。価格は任意オプションを車両本体へ加算せず、追加パッケージとして別表示する。
+LCA（レーンチェンジアシスト）は別の速度域（約85〜130km/h）で作動するため、Advanced Driveの渋滞時支援と同じ機能として扱わない。
+また、非PlusディスプレイオーディオではT-Connect／コネクティッドナビ契約終了後に地図情報が使えず、Plusは継続使用できる場合があるが地図更新は停止するため、契約・地図条件を必要パッケージと制限事項へ明記した。
+汎用LTAの手保持要求とAdvanced Driveの条件付きハンズオフを混同しない。S-XはAdvanced Drive設定がなく、渋滞時支援の0〜約40km/hを適用せず速度範囲を未確認として `not_allowed` とした。価格は任意オプションを車両本体へ加算せず、追加パッケージとして別表示する。
 
 ## Toyota プリウス / Lexus NXの根拠（内部保持）
 

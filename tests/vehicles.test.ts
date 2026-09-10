@@ -314,9 +314,12 @@ describe('vehicle data contract and filters', () => {
     expect(advanced).toHaveLength(5);
     expect(advanced.every((vehicle) => vehicle.capabilities.includes('lane_change_support') && vehicle.capabilities.includes('driver_monitoring'))).toBe(true);
     expect(advanced.map((vehicle) => vehicle.price?.optionalPackages[0].amountJpy).sort((a, b) => a! - b!)).toEqual([78_100, 78_100, 78_100, 122_100, 122_100]);
+    expect(advanced.every((vehicle) => vehicle.odd.speedKph.min === 0 && vehicle.odd.speedKph.max === 130 && vehicle.odd.speedKph.condition?.includes('約40km/h') && vehicle.odd.speedKph.condition?.includes('約85〜130km/h'))).toBe(true);
+    expect(advanced.every((vehicle) => vehicle.requiredPackage?.includes('T-Connect／コネクティッドナビ契約') && vehicle.limitations.some((limitation) => limitation.includes('地図更新は停止')))).toBe(true);
+    expect(advanced.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/noah/safety/' && source.supports.some((support) => support.includes('約85〜130km/h'))))).toBe(true);
     const sx = noah.filter((vehicle) => vehicle.grade.includes('S-X'));
     expect(sx).toHaveLength(3);
-    expect(sx.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.price?.optionalPackages.length === 0 && !vehicle.capabilities.includes('lane_change_support'))).toBe(true);
+    expect(sx.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.price?.optionalPackages.length === 0 && !vehicle.capabilities.includes('lane_change_support') && vehicle.odd.speedKph.min === null && vehicle.odd.speedKph.max === null && vehicle.odd.speedKph.condition?.includes('0〜約40km/h条件は適用しない'))).toBe(true);
     expect(noah.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.availability === 'unknown' && vehicle.salesUnitIntroducedAt === null && vehicle.sources.some((source) => source.url.endsWith('noah_spec_202609.pdf')))).toBe(true);
     const noahSz = noah.find((vehicle) => vehicle.id === 'jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive');
     expect(noahSz?.price?.optionalPackages[0].amountJpy).toBe(122_100);

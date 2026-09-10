@@ -269,7 +269,8 @@ try {
   await page.goto(`${base}/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/`);
   assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*ノア[\s\S]*HYBRID S-Z 2WD/);
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,056,800円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'ノアの条件付きハンズオフを表示');
-  assert.match(await page.locator('main').innerText(), /追加パッケージ[\s\S]*122,100円[\s\S]*必要パッケージ[\s\S]*Toyota Teammate アドバンスト ドライブ/, 'ノアS-Zの追加価格と必要パッケージを表示');
+  assert.match(await page.locator('main').innerText(), /追加パッケージ[\s\S]*122,100円[\s\S]*必要パッケージ[\s\S]*Toyota Teammate アドバンスト ドライブ[\s\S]*T-Connect[\s\S]*コネクティッドナビ契約/, 'ノアS-Zの追加価格・契約条件と必要パッケージを表示');
+  assert.match(await page.locator('main').innerText(), /Advanced Drive[\s\S]*0〜約40km\/h[\s\S]*LCA[\s\S]*約85〜130km\/h/, 'ノアS-ZはAdvanced DriveとLCAの速度域を分けて表示');
   assert.doesNotMatch(await page.locator('main').innerText(), /121,000円/, 'ノアS-ZにAdvanced Parkの価格を誤表示しない');
   assert.doesNotMatch(await page.locator('main').innerText(), /noah_spec_202609|sources|accessedAt/, 'ノア詳細に内部根拠を表示しない');
 
@@ -332,7 +333,8 @@ try {
 
   await page.goto(`${base}/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/`);
   assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*ノア[\s\S]*HYBRID S-Z 2WD（7人乗り）/);
-  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,056,800円[\s\S]*追加パッケージ[\s\S]*122,100円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'ノアS-Zの車両価格・追加パッケージ・条件付きハンズオフを表示');
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,056,800円[\s\S]*追加パッケージ[\s\S]*122,100円[\s\S]*ハンズオフ[\s\S]*条件内で可[\s\S]*T-Connect[\s\S]*コネクティッドナビ契約/, 'ノアS-Zの車両価格・追加パッケージ・契約条件を表示');
+  assert.match(await page.locator('main').innerText(), /Advanced Drive[\s\S]*0〜約40km\/h[\s\S]*LCA[\s\S]*約85〜130km\/h/, 'ノアS-Z詳細でAdvanced DriveとLCAの速度域を分ける');
   assert.match(await page.locator('main').innerText(), /LCA|車線変更支援/);
   assert.doesNotMatch(await page.locator('main').innerText(), /noah_spec_202609|sources|accessedAt|allowed_in_conditions/, 'ノア詳細に内部根拠や内部enumを表示しない');
 
