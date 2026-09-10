@@ -1342,7 +1342,7 @@
         {"url":"/cars/jp-toyota-voxy-2026-sg-e-four-7seater/","selector":"main","markers":["ヴォクシー","S-G E-Four（7人乗り）","4,004,000円","Level 2","ハンズオフ：条件内で可","参考総額"]},
         {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-8seater/","selector":"main","markers":["ヴォクシー","S-G 2WD（8人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可","参考総額"]},
         {"url":"/cars/jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater/","selector":"main","markers":["ヴォクシー","S-G マルチユーティリティ（2WD・5人乗り）","4,120,600円","Level 2","ハンズオフ：条件内で可","参考総額"]},
-        {"url":"/compare/?ids=jp-toyota-voxy-2026-sz-2wd-7seater&ids=jp-toyota-voxy-2026-sg-2wd-7seater","selector":"[data-compare-result]","markers":["ヴォクシー","S-Z 2WD（7人乗り）","S-G 2WD（7人乗り）"]}
+        {"url":"/compare/?ids=jp-toyota-voxy-2026-sz-2wd-7seater&ids=jp-toyota-voxy-2026-sg-2wd-7seater","selector":"[data-compare-result]","markers":["ヴォクシー","S-Z 2WD（7人乗り）","S-G 2WD（7人乗り）","参考総額"]}
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
