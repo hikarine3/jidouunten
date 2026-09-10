@@ -1,5 +1,17 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 販売単位カバー拡張（アルファード / VEZEL）本番実測
+
+- exact source commit: `d9361b989b6c7e2468b421ebc4207dfe2b6584f2`
+- Immutable deployment: https://cff5e52f.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 現行一覧を94→100販売単位へ拡張（全データ101件、過去1件を含む）。アルファードはZ/G HEVの2WD・E-Four、7/8人乗り4単位、VEZELはe:HEV ZのFF/4WD 2単位を追加した。
+- 追加単位は価格、ACC/LTAまたはHonda SENSING、道路・速度条件、ハンズオフ不可、公式一次情報を同じ正本へ結び付けた。注文可否を一次情報で固定できないため、両車種ともCTAを推測追加していない。
+- 独立監査PASS: `npm test`（Vitest31/31、価格101/101、現行100/100、公式導線32モデル、Python16/16）、`npm run check`（0 errors / 0 warnings）、実ID build107ページ、ローカルE2E1/1。
+- 本番E2E: `BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs` はGA collect HTTP 204、1/1 PASS。GTM `GTM-PV9QVMJV`、`GTM-TEST`なし。
+- 本番smoke: トップ、一覧、アルファード詳細、VEZEL詳細、両車比較、sitemap-0、robotsはすべてHTTP200。新規IDのsitemap掲載、アルファード価格6,399,800円、VEZEL価格3,268,100円、ハンズオフ不可を確認した。
+- 日本語IDNの `/cars/?level=2&availability=all` は本体へpath/queryを維持した301。
+
 ## 2026-09-10 購入・試乗アクションの本番実測
 
 - source commit: `06471c0a5afc776300c299c0c22c9bdfc2ca220c`（アプリ実装 `fa36371ac1125948ccb403eccd73de7c848f2b5e`、計測正本更新を含む）
