@@ -87,14 +87,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(108);
+    expect(vehicles).toHaveLength(114);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補107件は全件の公式金額を保持する', () => {
+  it('現行候補113件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(107);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(107);
+    expect(current).toHaveLength(113);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(113);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -104,7 +104,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(33);
+    expect(officialLinks).toHaveLength(34);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -200,6 +200,30 @@ describe('vehicle data contract and filters', () => {
     expect(vellfire.every((vehicle) => vehicle.automationLevel === 2 && vehicle.handsOff === 'allowed_in_conditions' && vehicle.driverMonitoring === 'required')).toBe(true);
     expect(vellfire.every((vehicle) => vehicle.odd.speedKph.max === 40 && vehicle.capabilities.includes('lane_change_support'))).toBe(true);
     expect(vellfire.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('vellfire_spec_202606.pdf')))).toBe(true);
+  });
+
+  it('Toyota ヴォクシーは駆動方式・定員・パッケージ別の6販売単位を価格付きで保持する', () => {
+    const voxy = vehicles.filter((vehicle) => vehicle.model === 'ヴォクシー');
+    expect(voxy).toHaveLength(6);
+    expect(voxy.map((vehicle) => vehicle.grade).sort()).toEqual([
+      'S-Z 2WD（7人乗り）',
+      'S-Z E-Four（7人乗り）',
+      'S-G 2WD（7人乗り）',
+      'S-G E-Four（7人乗り）',
+      'S-G 2WD（8人乗り）',
+      'S-G マルチユーティリティ（2WD・5人乗り）',
+    ].sort());
+    expect(voxy.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      3_751_000, 3_751_000, 4_004_000, 4_120_600, 4_127_200, 4_380_200,
+    ]);
+    expect(voxy.every((vehicle) => vehicle.currentCatalogListed && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'allowed_in_conditions')).toBe(true);
+    expect(voxy.every((vehicle) => vehicle.odd.speedKph.max === 130 && vehicle.capabilities.includes('lane_change_support'))).toBe(true);
+    expect(voxy.find((vehicle) => vehicle.grade.startsWith('S-Z'))?.price?.optionalPackages[0].amountJpy).toBe(122_100);
+    expect(voxy.filter((vehicle) => vehicle.grade.startsWith('S-G')).every((vehicle) => vehicle.price?.optionalPackages[0].amountJpy === 78_100)).toBe(true);
+    expect(voxy.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('voxy_spec_202609.pdf')))).toBe(true);
+    const multiUtility = voxy.find((vehicle) => vehicle.grade.includes('マルチユーティリティ'))!;
+    expect(multiUtility.sources.some((source) => source.url.includes('/ucar/catalog/brand-TOYOTA/car-VOXY/'))).toBe(true);
+    expect(multiUtility.sources.some((source) => source.url.endsWith('/noah_voxy_special1.pdf') && source.supports.some((support) => support.includes('78,100円')))).toBe(true);
   });
 
   it('Honda VEZEL e:HEV ZはFF/4WDを分け、支援速度と価格を保持する', () => {

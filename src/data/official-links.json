@@ -31,5 +31,6 @@
   { "maker": "Toyota", "model": "ハリアー", "url": "https://toyota.jp/harrier/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Toyota", "model": "アルファード", "url": "https://toyota.jp/alphard/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Honda", "model": "VEZEL", "url": "https://www.honda.co.jp/VEZEL/", "kind": "product", "checkedAt": "2026-09-10" },
-  { "maker": "Toyota", "model": "ヴェルファイア", "url": "https://toyota.jp/vellfire/", "kind": "product", "checkedAt": "2026-09-10" }
+  { "maker": "Toyota", "model": "ヴェルファイア", "url": "https://toyota.jp/vellfire/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Toyota", "model": "ヴォクシー", "url": "https://toyota.jp/voxy/", "kind": "product", "checkedAt": "2026-09-10" }
 ]

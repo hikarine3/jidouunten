@@ -1008,6 +1008,47 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:toyota-voxy-2026": {
+      "entity_id": "vehicle:toyota-voxy-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": [
+        "src/data/vehicles.json",
+        "src/data/official-links.json",
+        "docs/research/vehicle-inventory-20260907.md"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleList.astro",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","ヴォクシー","LEVEL 2"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","ヴォクシー","LEVEL 2"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sz-2wd-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sz-2wd-7seater/index.html","markers":["Toyota","ヴォクシー","S-Z 2WD（7人乗り）","4,127,200円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sz-e-four-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sz-e-four-7seater/index.html","markers":["Toyota","ヴォクシー","S-Z E-Four（7人乗り）","4,380,200円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-2wd-7seater/index.html","markers":["Toyota","ヴォクシー","S-G 2WD（7人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-e-four-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-e-four-7seater/index.html","markers":["Toyota","ヴォクシー","S-G E-Four（7人乗り）","4,004,000円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-8seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-2wd-8seater/index.html","markers":["Toyota","ヴォクシー","S-G 2WD（8人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater/index.html","markers":["Toyota","ヴォクシー","S-G マルチユーティリティ（2WD・5人乗り）","4,120,600円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/compare/?ids=jp-toyota-voxy-2026-sz-2wd-7seater&ids=jp-toyota-voxy-2026-sg-2wd-7seater","locale":"ja","output_path":"dist/compare/index.html","markers":["ヴォクシー","S-Z 2WD（7人乗り）","S-G 2WD（7人乗り）"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-toyota-voxy-2026-sz-2wd-7seater","jp-toyota-voxy-2026-sz-e-four-7seater","jp-toyota-voxy-2026-sg-2wd-7seater","jp-toyota-voxy-2026-sg-e-four-7seater","jp-toyota-voxy-2026-sg-2wd-8seater","jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-voxy-2026-sz-2wd-7seater\"])","markers":["Toyota","ヴォクシー","S-Z 2WD（7人乗り）"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sz-2wd-7seater/","selector":"main","markers":["ヴォクシー","S-Z 2WD（7人乗り）","4,127,200円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sz-e-four-7seater/","selector":"main","markers":["ヴォクシー","S-Z E-Four（7人乗り）","4,380,200円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-7seater/","selector":"main","markers":["ヴォクシー","S-G 2WD（7人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-e-four-7seater/","selector":"main","markers":["ヴォクシー","S-G E-Four（7人乗り）","4,004,000円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-8seater/","selector":"main","markers":["ヴォクシー","S-G 2WD（8人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater/","selector":"main","markers":["ヴォクシー","S-G マルチユーティリティ（2WD・5人乗り）","4,120,600円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/compare/?ids=jp-toyota-voxy-2026-sz-2wd-7seater&ids=jp-toyota-voxy-2026-sg-2wd-7seater","selector":"[data-compare-result]","markers":["ヴォクシー","S-Z 2WD（7人乗り）","S-G 2WD（7人乗り）"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "manufacturer-official-links:jp-current": {
       "entity_id": "manufacturer-official-links:jp-current",
       "entity_type": "manufacturer_official_links",

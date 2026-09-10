@@ -1,6 +1,6 @@
 ---
 import type { Vehicle } from '../data/loader';
-import { availabilityLabels, canonicalRoadType, capabilityDefinition, displayIntroducedAt, displayVehiclePrice, handsOffLabels, levelLabels, monitoringLabels, vehicleReferenceLabel } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, capabilityDefinition, displayIntroducedAt, displayOptionalPackagePrices, displayVehiclePrice, handsOffLabels, levelLabels, monitoringLabels, vehicleReferenceLabel } from '../data/loader';
 const { vehicle, selectable = false, checked = false } = Astro.props as { vehicle: Vehicle; selectable?: boolean; checked?: boolean };
 const capabilityPriority = ['hands_off_highway', 'lane_change_support', 'traffic_jam_pilot', 'traffic_jam_assist', 'driver_monitoring', 'adaptive_cruise_control', 'lane_centering'];
 const visibleCapabilities = [...vehicle.capabilities]
@@ -14,6 +14,7 @@ const visibleCapabilities = [...vehicle.capabilities]
     <h3><a href={`/cars/${vehicle.id}/`}>{vehicle.maker} {vehicle.model}</a></h3>
     <div class="maker">{vehicleReferenceLabel(vehicle)}　{vehicle.grade}</div>
     <div class:list={['vehicle-price', !vehicle.price && 'is-unknown']}>{displayVehiclePrice(vehicle, true)}<small>車両本体の公式掲載価格</small></div>
+    {displayOptionalPackagePrices(vehicle) && <div class="vehicle-option"><span>条件付き支援パッケージ</span><strong>{displayOptionalPackagePrices(vehicle)}</strong><small>車両本体とは別。装着時のみ条件内で可</small></div>}
     <div class="meta">
       <span class:list={['pill', vehicle.availability === 'new_order_available' && 'lime']}>{availabilityLabels[vehicle.availability]}</span>
       <span class="pill">{handsOffLabels[vehicle.handsOff]}</span>

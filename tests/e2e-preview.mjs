@@ -34,8 +34,8 @@ try {
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 107, '既定カタログは現行確認107件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*107[\s\S]*条件内可[\s\S]*36[\s\S]*不可[\s\S]*70[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*24/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await visibleCards(), 113, '既定カタログは現行確認113件');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*113[\s\S]*条件内可[\s\S]*42[\s\S]*不可[\s\S]*70[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*30/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="3"]').innerText(), /L3[\s\S]*条件付自動運転[\s\S]*過去例 1件/, 'Level 3の過去例を現行車と区別');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, 'Tesla Model 3 / Model Yの6販売仕様を既定一覧に表示');
@@ -54,10 +54,10 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '検索条件を削除すると再開バーを隠す');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="allowed_in_conditions"]').click();
-  assert.equal(await visibleCards(), 36, '条件内ハンズオフは36件');
+  assert.equal(await visibleCards(), 42, '条件内ハンズオフは42件');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-capability-shortcut="lane_change_support"]').click();
-  assert.equal(await visibleCards(), 24, '車線変更支援は24件');
+  assert.equal(await visibleCards(), 30, '車線変更支援は30件');
   await page.locator('[data-reset-shortcut]').click();
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo EX30' }).count(), 3, 'Volvo EX30の3販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Suzuki e VITARA' }).count(), 3, 'Suzuki e VITARAの3販売単位を既定一覧に表示');
@@ -68,6 +68,8 @@ try {
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota アルファード' }).count(), 4, 'アルファードは乗車定員・駆動方式別の4販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Honda VEZEL' }).count(), 2, 'VEZELはFF/4WDの2販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヴェルファイア' }).count(), 7, 'ヴェルファイアは電動化・駆動方式別の7販売単位を既定一覧に表示');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヴォクシー' }).count(), 6, 'ヴォクシーは駆動方式・定員別の6販売単位を既定一覧に表示');
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヴォクシー' }).filter({ hasText: 'S-G 2WD（7人乗り）' }).innerText(), /条件付き支援パッケージ[\s\S]*\+78,100円[\s\S]*装着時のみ条件内で可/, 'ヴォクシー一覧カードにオプション必要条件と追加価格を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BMW 3シリーズ' }).count(), 9, 'BMW 3シリーズ通常カタログの9販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BMW 3シリーズ セダン' }).locator('.maker').first().innerText(), 'G20　318i M Sport', 'BMWセダンは資料年ではなくG20世代を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BMW 3シリーズ ツーリング' }).locator('.maker').first().innerText(), 'G21　318i M Sport', 'BMWツーリングは資料年ではなくG21世代を表示');
@@ -83,7 +85,7 @@ try {
   await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://jidouunten.jp/og.png', 'OG画像は絶対URL');
-  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け107販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け113販売単位/, 'トップのdescription件数は公開データから生成');
   assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け100販売単位/, '古い固定件数を残さない');
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
@@ -101,7 +103,7 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 107, 'Level 2現行107件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 113, 'Level 2現行113件へ復帰');
   await levelMapPage.close();
   await page.goto(`${base}/levels/`);
   const level3Link = page.locator('.level-3 a');
@@ -125,7 +127,7 @@ try {
   }
 
   await page.goto(`${base}/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 27, 'トップのLevel 2・高速・ハンズオフ条件は27件（MINI 6単位とヴェルファイア7単位を含む）');
+  assert.equal(await visibleCards(), 33, 'トップのLevel 2・高速・ハンズオフ条件は33件（MINI 6単位、ヴェルファイア7単位、ヴォクシー6単位を含む）');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'トップのLevel 2注意表示');
   assert.equal(new URL(page.url()).pathname, '/', 'トップの深いリンクはトップに留まる');
 
@@ -142,7 +144,7 @@ try {
   assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 27, 'Level 2・高速・ハンズオフ条件は27件（MINI 6単位とヴェルファイア7単位を含む）');
+  assert.equal(await visibleCards(), 33, 'Level 2・高速・ハンズオフ条件は33件（MINI 6単位、ヴェルファイア7単位、ヴォクシー6単位を含む）');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '深いリンクのlevel復元');
   assert.equal(await page.locator('#vehicle-filters').getAttribute('action'), '/cars/', '旧一覧は現在のルートで送信');
@@ -171,13 +173,13 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 107, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 113, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  assert.equal(await visibleCards(), 107, 'リセット後に既定107件');
+  assert.equal(await visibleCards(), 113, 'リセット後に既定113件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -208,7 +210,7 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '比較保存を削除すると再開バーを隠す');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 108, 'すべての状態で過去車両を含む108件');
+  assert.equal(await visibleCards(), 114, 'すべての状態で過去車両を含む114件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
@@ -261,6 +263,20 @@ try {
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,056,800円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'ノアの条件付きハンズオフを表示');
   assert.match(await page.locator('main').innerText(), /必要パッケージ[\s\S]*121,000円|Toyota Teammate アドバンスト ドライブ/, 'ノアの必要パッケージを表示');
   assert.doesNotMatch(await page.locator('main').innerText(), /noah_spec_202609|sources|accessedAt/, 'ノア詳細に内部根拠を表示しない');
+
+  await page.goto(`${base}/cars/jp-toyota-voxy-2026-sz-2wd-7seater/`);
+  assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*ヴォクシー[\s\S]*S-Z 2WD（7人乗り）/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,127,200円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'ヴォクシーS-Zの価格と条件付きハンズオフを表示');
+  assert.match(await page.locator('main').innerText(), /追加パッケージ[\s\S]*122,100円/, 'ヴォクシーS-Zの追加パッケージ価格を表示');
+  assert.match(await page.locator('main').innerText(), /アドバンスト ドライブ（渋滞時支援）[\s\S]*0〜約40km\/h[\s\S]*LCAは約85〜130km\/h/, 'ヴォクシーの支援速度差を表示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /voxy_spec_202609|sources|accessedAt/, 'ヴォクシー詳細に内部根拠を表示しない');
+
+  await page.goto(`${base}/compare/?ids=jp-toyota-voxy-2026-sz-2wd-7seater&ids=jp-toyota-voxy-2026-sg-2wd-8seater`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  const voxyCompare = await page.locator('[data-compare-result]').innerText();
+  assert.match(voxyCompare, /ヴォクシー[\s\S]*S-Z 2WD（7人乗り）[\s\S]*S-G 2WD（8人乗り）/);
+  assert.match(voxyCompare, /122,100円[\s\S]*78,100円/, 'ヴォクシー比較にグレード別追加パッケージ価格');
+  assert.doesNotMatch(voxyCompare, /voxy_spec_202609|sources|accessedAt/, 'ヴォクシー比較に内部根拠を表示しない');
 
   await page.goto(`${base}/cars/jp-lexus-rz-2026-rz500e-version-l-awd/`);
   assert.match(await page.locator('main').innerText(), /Lexus[\s\S]*RZ[\s\S]*RZ500e/);
