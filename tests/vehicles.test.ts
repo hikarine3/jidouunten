@@ -87,14 +87,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(114);
+    expect(vehicles).toHaveLength(132);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補113件は全件の公式金額を保持する', () => {
+  it('現行候補131件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(113);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(113);
+    expect(current).toHaveLength(131);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(131);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -104,7 +104,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(34);
+    expect(officialLinks).toHaveLength(35);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -224,6 +224,35 @@ describe('vehicle data contract and filters', () => {
     const multiUtility = voxy.find((vehicle) => vehicle.grade.includes('マルチユーティリティ'))!;
     expect(multiUtility.sources.some((source) => source.url.includes('/ucar/catalog/brand-TOYOTA/car-VOXY/'))).toBe(true);
     expect(multiUtility.sources.some((source) => source.url.endsWith('/noah_voxy_special1.pdf') && source.supports.some((support) => support.includes('78,100円')))).toBe(true);
+  });
+
+  it('Toyota シエンタは動力・駆動方式・定員を網羅した18販売単位として価格と手保持条件を固定する', () => {
+    const sienta = vehicles.filter((vehicle) => vehicle.model === 'シエンタ');
+    expect(sienta).toHaveLength(18);
+    expect(sienta.map((vehicle) => vehicle.grade).sort()).toEqual([
+      'Z（ハイブリッド車・2WD・7人乗り）', 'Z（ハイブリッド車・E-Four・7人乗り）',
+      'Z（ハイブリッド車・2WD・5人乗り）', 'Z（ハイブリッド車・E-Four・5人乗り）',
+      'Z（ガソリン車・2WD・7人乗り）', 'Z（ガソリン車・2WD・5人乗り）',
+      'G（ハイブリッド車・2WD・7人乗り）', 'G（ハイブリッド車・E-Four・7人乗り）',
+      'G（ハイブリッド車・2WD・5人乗り）', 'G（ハイブリッド車・E-Four・5人乗り）',
+      'G（ガソリン車・2WD・7人乗り）', 'G（ガソリン車・2WD・5人乗り）',
+      'X（ハイブリッド車・2WD・7人乗り）', 'X（ハイブリッド車・E-Four・7人乗り）',
+      'X（ハイブリッド車・2WD・5人乗り）', 'X（ハイブリッド車・E-Four・5人乗り）',
+      'X（ガソリン車・2WD・7人乗り）', 'X（ガソリン車・2WD・5人乗り）',
+    ].sort());
+    expect(sienta.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      2_146_100, 2_185_700, 2_487_100, 2_504_700, 2_526_700, 2_544_300,
+      2_719_200, 2_758_800, 2_763_200, 2_802_800, 2_833_600, 2_874_300,
+      3_048_100, 3_088_800, 3_142_700, 3_183_400, 3_357_200, 3_397_900,
+    ]);
+    expect(sienta.every((vehicle) => vehicle.currentCatalogListed && vehicle.modelYear === null && vehicle.catalogAsOf === '2026-08' && vehicle.priceEffectiveAt === '2026-08')).toBe(true);
+    expect(sienta.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed')).toBe(true);
+    expect(sienta.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist')).toBe(true);
+    expect(sienta.every((vehicle) => vehicle.odd.speedKph.min === 0 && vehicle.odd.speedKph.max === null)).toBe(true);
+    expect(sienta.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/sienta/grade/'))).toBe(true);
+    expect(sienta.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/sienta/safety/'))).toBe(true);
+    expect(sienta.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('sienta_spec_202608.pdf')))).toBe(true);
+    expect(sienta.every((vehicle) => !vehicle.capabilities.includes('hands_off_highway') && !vehicle.capabilities.includes('lane_change_support') && !vehicle.capabilities.includes('driver_monitoring'))).toBe(true);
   });
 
   it('Honda VEZEL e:HEV ZはFF/4WDを分け、支援速度と価格を保持する', () => {

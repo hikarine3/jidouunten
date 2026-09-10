@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 114 | `src/data/vehicles.json` の全レコード（現行113 + 過去1） |
-| 既定表示 | 113 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 132 | `src/data/vehicles.json` の全レコード（現行131 + 過去1） |
+| 既定表示 | 131 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -25,6 +25,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Honda VEZEL / 後発対策） | 2 | e:HEV ZのFF/4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
+| 今回追加（Toyota シエンタ / 後発対策） | 18 | Z/G/Xのハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗りを公式グレードJSONの全組み合わせで登録。価格214万6,100円〜339万7,900円、全車速ACC・LTA・手保持条件を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -64,6 +65,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Honda | VEZEL e:HEV Z FF / 4WD | 掲載（2単位） | 2相当 | 2026-09-10 |
 | Toyota | ヴェルファイア Executive Lounge PHEV E-Four（6人）、Executive Lounge HEV 2WD/E-Four（7人）、Z Premier HEV 2WD/E-Four、Z Premier ターボガソリン 2WD/4WD（7人） | 掲載（7単位） | 2相当 | 2026-09-10 |
 | Toyota | ヴォクシー S-Z/S-G 2WD・E-Four（7人）、S-G 2WD（8人）、S-G マルチユーティリティ（2WD・5人） | 掲載（6単位） | 2相当 | 2026-09-10 |
+| Toyota | シエンタ Z/G/X ハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗り | 掲載（18単位） | 2相当 | 2026-09-10 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。2026-09-10確認時点で両モデルの日本向け公式商品ページに「今すぐ注文」導線が表示され、公式FAQも注文後の手続きと注文可能なトリム・納車予定時期をDesign Studioで確認する流れを案内しているため、6販売単位の`availability`を`new_order_available`へ更新した。ただし注文後の在庫・納車時期・ソフトウェア提供条件は個別確認が必要。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -348,6 +350,20 @@ ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し
 | トラフィックジャムアシストの渋滞時支援 | 本田技研工業 | https://www.honda.co.jp/ownersmanual/webom/jpn/vezel/2026/details/136265090-222537.html | 2026-09-10 |
 
 2単位はACC（縦方向）とLKAS／トラフィックジャムアシスト（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。Hondaの取扱説明書は運転者の常時監視とステアリング保持を求めるためhandsOffは`not_allowed`。価格は車両本体の税込参考価格で、注文可否や適用日を推測していない。
+
+## Toyota シエンタの根拠（後発対策トランシェ）
+
+確認日は2026-09-10。トヨタ公式の現行グレードJSON（`grades15.json`）で、Z/G/Xそれぞれのハイブリッド車・ガソリン車、2WD/E-Four、5人乗り/7人乗りの18組み合わせと価格を確認した。価格は214万6,100円〜339万7,900円（税込、2026年8月現在のメーカー希望小売価格・参考価格）で、同じシエンタでも動力・駆動方式・定員を一覧と比較のキーにした。資料の発行月をモデル年へ置き換えず、`modelYear=null`、`catalogAsOf=2026-08`、`priceEffectiveAt=2026-08`、販売単位の導入日は未確認のためnullとしている。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| Z/G/Xのハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗り18販売単位と税込価格 | トヨタ自動車 | https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades15.json | 2026-09-10 |
+| シエンタ現行グレードへの導線と価格表示 | トヨタ自動車 | https://toyota.jp/sienta/grade/ | 2026-09-10 |
+| 全車速追従レーダークルーズコントロール、LTAによる高速道路クルージング支援 | トヨタ自動車 | https://toyota.jp/sienta/safety/ | 2026-09-10 |
+| LTA・全車速追従ACCの装備区分、2026年8月現在の税込参考価格 | トヨタ自動車 | https://toyota.jp/pages/contents/sienta/003_p_001/pdf/sienta_spec_202608.pdf | 2026-09-10 |
+| LTAはステアリング保持が必要で、手を放すと停止。LDAは約50km/h以上（LTA支援中は50km/h未満でも警報） | トヨタ自動車 | https://toyota.jp/sienta/safety/ | 2026-09-10 |
+
+18単位は全車速ACC（縦方向）とLTA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。公式安全ページは「ドライバーはステアリングを持ち続ける必要があり、手を放すとLTAが停止」と明記するため、全単位を`handsOff=not_allowed`、`driverMonitoring=required`とした。ドライバー異常時対応システムは無操作時の減速停車・救護支援であり、運転者を監視するカメラ機能の根拠とは別なので、`driver_monitoring`能力は付与していない。LCA、条件付きハンズオフ、独立したドライバーモニターの販売単位別設定も公式資料で確認できないため、能力差を推測していない。公式掲載は確認できるが、18単位ごとの新車注文可否は明文で固定できないため`availability=unknown`とし、注文CTAは表示しない。
 
 ## Volvo EX30の根拠（内部保持）
 
