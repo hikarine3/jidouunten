@@ -748,6 +748,266 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:toyota-vellfire-2026": {
+      "entity_id": "vehicle:toyota-vellfire-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": [
+        "src/data/vehicles.json",
+        "src/data/official-links.json",
+        "docs/research/vehicle-inventory-20260907.md"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleList.astro",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {
+          "url": "/",
+          "locale": "ja",
+          "output_path": "dist/index.html",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "LEVEL 2"
+          ]
+        },
+        {
+          "url": "/cars/",
+          "locale": "ja",
+          "output_path": "dist/cars/index.html",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "LEVEL 2"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-executive-lounge-phev-e-four-6seater/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-toyota-vellfire-2026-executive-lounge-phev-e-four-6seater/index.html",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Executive Lounge（プラグインハイブリッド車・E-Four）",
+            "10,899,900円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-executive-lounge-hev-2wd-7seater/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-toyota-vellfire-2026-executive-lounge-hev-2wd-7seater/index.html",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Executive Lounge（ハイブリッド車・2WD）",
+            "8,849,500円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-executive-lounge-hev-e-four-7seater/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-toyota-vellfire-2026-executive-lounge-hev-e-four-7seater/index.html",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Executive Lounge（ハイブリッド車・E-Four）",
+            "9,069,500円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-z-premier-hev-2wd-7seater/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-toyota-vellfire-2026-z-premier-hev-2wd-7seater/index.html",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Z Premier（ハイブリッド車・2WD）",
+            "7,099,400円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-z-premier-hev-e-four-7seater/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-toyota-vellfire-2026-z-premier-hev-e-four-7seater/index.html",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Z Premier（ハイブリッド車・E-Four）",
+            "7,319,400円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-z-premier-turbo-gas-2wd-7seater/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-toyota-vellfire-2026-z-premier-turbo-gas-2wd-7seater/index.html",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Z Premier（ターボガソリン車・2WD）",
+            "6,749,600円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-z-premier-turbo-gas-4wd-7seater/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-toyota-vellfire-2026-z-premier-turbo-gas-4wd-7seater/index.html",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Z Premier（ターボガソリン車・4WD）",
+            "6,947,600円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/compare/?ids=jp-toyota-vellfire-2026-executive-lounge-hev-2wd-7seater&ids=jp-toyota-vellfire-2026-z-premier-hev-2wd-7seater",
+          "locale": "ja",
+          "output_path": "dist/compare/index.html",
+          "markers": [
+            "ヴェルファイア",
+            "Executive Lounge（ハイブリッド車・2WD）",
+            "Z Premier（ハイブリッド車・2WD）"
+          ]
+        },
+        {
+          "url": "/sitemap-0.xml",
+          "locale": "ja",
+          "output_path": "dist/sitemap-0.xml",
+          "markers": [
+            "jp-toyota-vellfire-2026-executive-lounge-phev-e-four-6seater",
+            "jp-toyota-vellfire-2026-executive-lounge-hev-2wd-7seater",
+            "jp-toyota-vellfire-2026-executive-lounge-hev-e-four-7seater",
+            "jp-toyota-vellfire-2026-z-premier-hev-2wd-7seater",
+            "jp-toyota-vellfire-2026-z-premier-hev-e-four-7seater",
+            "jp-toyota-vellfire-2026-z-premier-turbo-gas-2wd-7seater",
+            "jp-toyota-vellfire-2026-z-premier-turbo-gas-4wd-7seater"
+          ]
+        }
+      ],
+      "required_render_selectors": [
+        {
+          "url": "/",
+          "selector": "[data-vehicle-shell]:has(input[value=\"jp-toyota-vellfire-2026-executive-lounge-phev-e-four-6seater\"])",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Executive Lounge（プラグインハイブリッド車・E-Four）"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-executive-lounge-phev-e-four-6seater/",
+          "selector": "main",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Executive Lounge（プラグインハイブリッド車・E-Four）",
+            "10,899,900円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-executive-lounge-hev-2wd-7seater/",
+          "selector": "main",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Executive Lounge（ハイブリッド車・2WD）",
+            "8,849,500円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-executive-lounge-hev-e-four-7seater/",
+          "selector": "main",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Executive Lounge（ハイブリッド車・E-Four）",
+            "9,069,500円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-z-premier-hev-2wd-7seater/",
+          "selector": "main",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Z Premier（ハイブリッド車・2WD）",
+            "7,099,400円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-z-premier-hev-e-four-7seater/",
+          "selector": "main",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Z Premier（ハイブリッド車・E-Four）",
+            "7,319,400円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-z-premier-turbo-gas-2wd-7seater/",
+          "selector": "main",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Z Premier（ターボガソリン車・2WD）",
+            "6,749,600円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-toyota-vellfire-2026-z-premier-turbo-gas-4wd-7seater/",
+          "selector": "main",
+          "markers": [
+            "Toyota",
+            "ヴェルファイア",
+            "Z Premier（ターボガソリン車・4WD）",
+            "6,947,600円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/compare/",
+          "selector": "[data-compare-result]",
+          "markers": [
+            "ヴェルファイア",
+            "Executive Lounge（ハイブリッド車・2WD）",
+            "Z Premier（ハイブリッド車・2WD）"
+          ]
+        }
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "manufacturer-official-links:jp-current": {
       "entity_id": "manufacturer-official-links:jp-current",
       "entity_type": "manufacturer_official_links",

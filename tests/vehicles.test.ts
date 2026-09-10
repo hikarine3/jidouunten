@@ -87,14 +87,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(101);
+    expect(vehicles).toHaveLength(108);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補100件は全件の公式金額を保持する', () => {
+  it('現行候補107件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(100);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(100);
+    expect(current).toHaveLength(107);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(107);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -104,7 +104,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(32);
+    expect(officialLinks).toHaveLength(33);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -180,6 +180,26 @@ describe('vehicle data contract and filters', () => {
     expect(alphard.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => a! - b!)).toEqual([5_599_000, 5_819_000, 6_399_800, 6_619_800]);
     expect(alphard.every((vehicle) => vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed' && vehicle.capabilities.includes('lane_centering'))).toBe(true);
     expect(alphard.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('alphard_spec_202606.pdf')))).toBe(true);
+  });
+
+  it('Toyota ヴェルファイアは電動化・駆動方式・定員別の7販売単位を条件付きハンズオフ付きで保持する', () => {
+    const vellfire = vehicles.filter((vehicle) => vehicle.model === 'ヴェルファイア');
+    expect(vellfire).toHaveLength(7);
+    expect(vellfire.map((vehicle) => vehicle.grade).sort()).toEqual([
+      'Executive Lounge（プラグインハイブリッド車・E-Four）',
+      'Executive Lounge（ハイブリッド車・2WD）',
+      'Executive Lounge（ハイブリッド車・E-Four）',
+      'Z Premier（ハイブリッド車・2WD）',
+      'Z Premier（ハイブリッド車・E-Four）',
+      'Z Premier（ターボガソリン車・2WD）',
+      'Z Premier（ターボガソリン車・4WD）',
+    ].sort());
+    expect(vellfire.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      6_749_600, 6_947_600, 7_099_400, 7_319_400, 8_849_500, 9_069_500, 10_899_900,
+    ]);
+    expect(vellfire.every((vehicle) => vehicle.automationLevel === 2 && vehicle.handsOff === 'allowed_in_conditions' && vehicle.driverMonitoring === 'required')).toBe(true);
+    expect(vellfire.every((vehicle) => vehicle.odd.speedKph.max === 40 && vehicle.capabilities.includes('lane_change_support'))).toBe(true);
+    expect(vellfire.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('vellfire_spec_202606.pdf')))).toBe(true);
   });
 
   it('Honda VEZEL e:HEV ZはFF/4WDを分け、支援速度と価格を保持する', () => {

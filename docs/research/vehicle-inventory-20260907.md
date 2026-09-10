@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 101 | `src/data/vehicles.json` の全レコード（現行100 + 過去1） |
-| 既定表示 | 100 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 108 | `src/data/vehicles.json` の全レコード（現行107 + 過去1） |
+| 既定表示 | 107 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -23,6 +23,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota ハリアー / 後発対策） | 6 | G・Z・Z“Leather Package”の2WD/E-Four。2026年8月価格、ACC・LTA・停止保持・ハンドル保持要求を販売単位へ固定し、根拠がないLCA・ドライバーモニターは付与しない |
 | 今回追加（Toyota アルファード / 後発対策） | 4 | Z/G HEVの2WD/E-Four・7/8人乗り。2026年6月価格、ACC・LTA・ステアリング保持要求を販売単位へ固定 |
 | 今回追加（Honda VEZEL / 後発対策） | 2 | e:HEV ZのFF/4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
+| 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -60,6 +61,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | ハリアー G（2WD/E-Four） / Z（2WD/E-Four） / Z“Leather Package”（2WD/E-Four） | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Toyota | アルファード Z HEV 2WD / E-Four（7人乗り）、G HEV 2WD / E-Four（8人乗り） | 掲載（4単位） | 2相当 | 2026-09-10 |
 | Honda | VEZEL e:HEV Z FF / 4WD | 掲載（2単位） | 2相当 | 2026-09-10 |
+| Toyota | ヴェルファイア Executive Lounge PHEV E-Four（6人）、Executive Lounge HEV 2WD/E-Four（7人）、Z Premier HEV 2WD/E-Four、Z Premier ターボガソリン 2WD/4WD（7人） | 掲載（7単位） | 2相当 | 2026-09-10 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。2026-09-10確認時点で両モデルの日本向け公式商品ページに「今すぐ注文」導線が表示され、公式FAQも注文後の手続きと注文可能なトリム・納車予定時期をDesign Studioで確認する流れを案内しているため、6販売単位の`availability`を`new_order_available`へ更新した。ただし注文後の在庫・納車時期・ソフトウェア提供条件は個別確認が必要。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -302,6 +304,19 @@ ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し
 | 全車速追従ACCの停止保持・先行車追従 | トヨタ自動車 | https://manual.toyota.jp/alphard/3084/hev/ja_JP/contents/vhch04se050412.php | 2026-09-10 |
 
 4単位はACC（縦方向）とLTA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。LTAはステアリング保持が必要なためhandsOffは`not_allowed`、新車注文可否は未確認のまま保持する。
+
+## Toyota ヴェルファイアの根拠（後発対策トランシェ）
+
+確認日は2026-09-10。トヨタ公式の2026年6月価格・グレードJSONと主要装備一覧から、Executive LoungeのPHEV E-Four（6人）・HEV 2WD/E-Four（7人）、Z PremierのHEV 2WD/E-Four・ターボガソリン2WD/4WD（7人）を7販売単位へ分離した。価格・電動化方式・駆動方式・乗車定員を比較軸として保持し、同じLevel 2でも選択理由が残るようにした。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| 2026年6月の7グレードと税込価格（674万9,600円〜1,089万9,900円） | トヨタ自動車 | https://toyota.jp/vellfire/grade/ | 2026-09-10 |
+| Executive Lounge / Z PremierのPHEV・HEV・ターボガソリン、駆動方式・乗車定員 | トヨタ自動車 | https://toyota.jp/pages/contents/vellfire/003_p_001/pdf/vellfire_spec_202606.pdf | 2026-09-10 |
+| 全車速追従ACC、LTA、LCA、アドバンスト ドライブ（渋滞時支援）、ドライバーモニターカメラ | トヨタ自動車 | https://toyota.jp/vellfire/safety/ | 2026-09-10 |
+| アドバンスト ドライブの高速道路・自動車専用道路本線、渋滞時0〜約40km/h、運転者の状況確認 | トヨタ自動車 | https://manual.toyota.jp/vellfire/3085/hev/ja_JP/contents/vhch04se050415.php | 2026-09-10 |
+
+主要装備一覧では7販売単位にACC・LTA・LCA・アドバンスト ドライブ・ドライバーモニターカメラが標準装備として示されるため、全単位を `handsOff=allowed_in_conditions`、`driverMonitoring=required` とした。アドバンスト ドライブは高速道路・自動車専用道路の渋滞時0〜約40km/hに限る条件付き支援であり、通常のACC/LTAの作動条件とは区別する。新車注文可否は販売単位へ明文で固定できないため `availability=unknown` とした。
 
 ## Honda VEZELの根拠（後発対策トランシェ）
 
