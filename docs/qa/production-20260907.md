@@ -1,5 +1,17 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 後発対策トランシェ（確認済み追加パッケージ込み参考総額）本番実測
+
+- exact release commit: `84b6c93e632505dcda1abdbc15a9fb9ee81b5a53`（実装 `a27de8b`、算出不可の比較分類修正 `dc0bdc6`、依存レジストリ閉包を含む）。
+- Immutable deployment: https://106e44cd.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 車両本体価格が単一のexact値で、確認済み追加パッケージ価格がある販売単位だけに「参考総額（本体＋確認済み追加パッケージ）」を詳細と比較へ表示。諸費用・他オプションは含めず、価格レンジ／追加価格未確認は「算出不可」として推測しない。
+- ノアS-Z 2WD（7人乗り）は4,056,800円＋122,100円＝4,178,900円。S-Xとの比較では算出不可側をunknown扱いにし、「確認済みの差分」件数へ加算しない。ヴォクシー6単位、セレナ、CX-30にも同じ計算規則を適用した。
+- `npm test`（Vitest37/37、価格147/147・現行146/146、公式導線37モデル/36 URL、Python16/16）、`npm run check`（0 errors / 0 warnings / 既知hint5）、実ID build153ページを確認。
+- 参考総額を表示する詳細13件＋比較2件のrequired selector 15/15・85 markersを実ブラウザ（390px）で確認、横overflow 0。算出可能な14 HTML（詳細13＋比較）とregistryの表示依存を一致させた。
+- `BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs` はE2E1/1、GA collect HTTP204。トップ、一覧、ノア詳細2件、比較、sitemap-index、sitemap-0、robotsはHTTP200。`https://xn--hhrp90iveiimb.jp/cars/?level=2` は本体へpath/queryを維持した301。
+- Astra価値監査・Platoリリース監査はexact SHAでPASS。公開HTMLの実GTM `GTM-PV9QVMJV`、GTM-TEST、内部根拠キー・根拠URL・確認日・spec PDF名の漏洩チェックは合格。直前正常deploymentは https://3ee94155.jidouunten.pages.dev（rollback候補）。
+
 ## 2026-09-10 後発対策トランシェ（Toyota ノア現行HEV 8販売単位）本番実測
 
 - exact public app commit: `07405fca3b13a063a1404c31a900d3a9cb6cb635`

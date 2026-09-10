@@ -34,6 +34,9 @@
 
 ## 最新の本番反映（2026-09-10）
 
+- 後発対策として「参考総額（本体＋確認済み追加パッケージ）」を詳細・比較へ追加。単一のexact本体価格と確認済み追加価格だけを合算し、諸費用・他オプションは除外、レンジ／未確認価格は算出不可のまま表示する。ノアS-Z 2WD（7人乗り）は4,178,900円、S-Xとの比較では算出不可側をunknownとして差分件数から除外。セレナ、CX-30、ヴォクシー6単位にも同じ規則を適用し、13詳細＋2比較の依存selectorをregistryへ登録した。
+- exact release `84b6c93e632505dcda1abdbc15a9fb9ee81b5a53`（実装 `a27de8b`、比較分類修正 `dc0bdc6`）、Immutable `https://106e44cd.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。全147販売単位（現行146件）、build153、Vitest37/Python16、価格・公式導線チェッカー、Astro check 0 errors、独立Astra/Plato監査、ローカル／本番E2E各1/1、GA collect HTTP204、registry required selector15/15・85 markersがPASS。直前rollbackは `https://3ee94155.jidouunten.pages.dev`。
+
 - Toyota ノア現行HEV 8販売単位（S-Z/S-G/S-X、2WD/E-Four、7/8人）を本番反映。S-Z 122,100円／S-G 78,100円のAdvanced Drive等セット、S-Xの設定なしを含む価格・能力差を実装した。Advanced Driveは0〜約40km/h、LCAは約85〜130km/h、T-Connect／コネクティッドナビ契約・地図更新条件を分離表示し、S-XのACC・LTA速度範囲は未確認としている。8単位とも新車注文可否は未確認のまま保持する。
 - exact public app commit `07405fca3b13a063a1404c31a900d3a9cb6cb635`、docs commit `5681f4d74036cd16cb270a6e1a5aa6b4643a9999`、Immutable `https://3ee94155.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。全147販売単位（現行146件）、build153、Vitest36/Python16、独立価値監査・リリース監査、ローカル／本番E2E各1/1、GA collect HTTP204、registry静的13/13・required selector12/12がPASS。直前rollbackは `https://d4b6c8e1.jidouunten.pages.dev`。
 
