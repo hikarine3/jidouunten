@@ -2,11 +2,17 @@
 
 ## 2026-09-10 後発対策トランシェ（Toyota ノア現行HEV 8販売単位）本番実測
 
-- exact release commit: （検証後に記録）
+- exact public app commit: `07405fca3b13a063a1404c31a900d3a9cb6cb635`
+- follow-up docs commit: `5681f4d74036cd16cb270a6e1a5aa6b4643a9999`
+- Immutable deployment: https://3ee94155.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
 - 全147販売単位（現行146件）へ更新。ノアをS-Z／S-G／S-X、2WD／E-Four、7/8人の8単位で追加・訂正した。
-- S-Zのアドバンスト ドライブ等セット122,100円、S-G 78,100円、S-Xは設定なしを車両本体価格と分離して表示。S-Z/S-Gは渋滞時0〜約40km/hの条件付きハンズオフ、S-Xはステアリング保持必須として比較できる。
+- S-Zのアドバンスト ドライブ等セット122,100円、S-G 78,100円、S-Xは設定なしを車両本体価格と分離して表示。S-Z/S-GはAdvanced Driveを渋滞時0〜約40km/h、LCAを約85〜130km/hとして分離し、T-Connect／コネクティッドナビ契約・地図更新条件も表示した。S-Xはステアリング保持必須、速度範囲は未確認として比較できる。
 - 新車注文可否は8単位とも未確認のまま、公式商品ページへの導線だけを表示。内部根拠URL・確認日は通常UIへ出していない。
-- 検証項目（一覧8/8、詳細8/8、S-Z/S-X比較、sitemap8/8、390px、GTM/GA、独立監査、Cloudflare Pages）はリリース時に追記する。
+- `npm test`（Vitest36/36、価格147/147・現行146/146、公式導線37モデル/36 URL、Python16/16）、`npm run check`（0 errors / 0 warnings / 既知hint5）、実ID build153ページを確認。
+- 一覧8/8、詳細8/8、S-Z/S-X比較、sitemap8/8、390px横overflow 0、内部enum・根拠URL漏洩0、GTM実ID153 HTML、local/production E2E各1/1、GA collect HTTP204を確認。
+- 公開依存レジストリは静的13/13、required selector 12/12。ノア公式URL（価格JSON・価格ページ・装備PDF・安全ページ・取扱説明書・MLIT）6/6 HTTP200。トップ、一覧、代表詳細2件、比較、sitemap-index、sitemap-0、robotsは本番HTTP200、日本語ドメインのpath/queryは本体へ301。
+- 独立価値監査（Astra）・リリース監査（Plato）はexact SHAでともにPASS。直前正常deploymentは https://d4b6c8e1.jidouunten.pages.dev、rollback候補は同URL（親アプリコミット `1eb9b9c3acf6b83156d2d06664bbed3c24db9282`）。
 
 ## 2026-09-10 後発対策トランシェ（Lexus UX300h 6販売単位）本番実測
 

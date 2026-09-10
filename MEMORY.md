@@ -34,14 +34,15 @@
 
 ## 最新の本番反映（2026-09-10）
 
-- 次回反映候補はToyota ノア現行HEV 8販売単位（S-Z/S-G/S-X、2WD/E-Four、7/8人）。S-Z 122,100円／S-G 78,100円のAdvanced Drive等セット、S-Xの設定なしを含む価格・能力差を実装中。現行146件、全147件へ更新予定。新車注文可否は未確認のまま保持する。
+- Toyota ノア現行HEV 8販売単位（S-Z/S-G/S-X、2WD/E-Four、7/8人）を本番反映。S-Z 122,100円／S-G 78,100円のAdvanced Drive等セット、S-Xの設定なしを含む価格・能力差を実装した。Advanced Driveは0〜約40km/h、LCAは約85〜130km/h、T-Connect／コネクティッドナビ契約・地図更新条件を分離表示し、S-XのACC・LTA速度範囲は未確認としている。8単位とも新車注文可否は未確認のまま保持する。
+- exact public app commit `07405fca3b13a063a1404c31a900d3a9cb6cb635`、docs commit `5681f4d74036cd16cb270a6e1a5aa6b4643a9999`、Immutable `https://3ee94155.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。全147販売単位（現行146件）、build153、Vitest36/Python16、独立価値監査・リリース監査、ローカル／本番E2E各1/1、GA collect HTTP204、registry静的13/13・required selector12/12がPASS。直前rollbackは `https://d4b6c8e1.jidouunten.pages.dev`。
 
 - 後発対策としてLexus UX300hをShining Essence／version L／F SPORTの2WD・AWD、6販売単位で追加。価格は521万〜575万7,000円、全車5人乗り。ACC・LTA標準、ステアリングを手放すとLTAの支援が停止するためハンズオフ不可、LCA・独立ドライバーモニターは未付与。2027年2月生産終了予定、受注可否・納期は未確認としてLMとの同一Lexus比較を可能にした。
 - exact release `1eb9b9c3acf6b83156d2d06664bbed3c24db9282`、Immutable `https://d4b6c8e1.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。全140販売単位（現行139件）、build146、Vitest36/Python16、独立価値監査・リリース監査、ローカル／本番E2E各1/1、GA collect HTTP204がPASS。UX registryは静的10面/50 marker、ブラウザ8 selector/32 marker。
 
 - 後発対策としてLexus LMをLM500h EXECUTIVE（4人乗り・AWD）／version L（6人乗り・AWD）の2販売単位で追加。価格は1,520万〜2,030万円、LCA・ドライバーモニター・Advanced Driveを標準として、渋滞時0〜約40km/hの条件付きハンズオフを比較可能にした。Advanced DriveはG-Link契約が必要（初度登録から3年間無料、その後有料）と表示する。
 - exact release `4304ef9232ed2e44f8ab1c294590ca594185d39c`、Immutable `https://a050909d.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。全134販売単位（現行133件）、build140、Vitest35/Python16、独立価値監査・リリース監査、ローカル／本番E2E各1/1、GA collect HTTP204がPASS（UX追加前の履歴）。
-- 後発の模倣対策は車名や記事数ではなく、販売単位キー、同一モデル内の価格・駆動・定員・ODD・機能差・継続利用条件、一次情報の確認履歴、意味のある差分と再訪導線を蓄積する方針。ノア8単位でS-Z/S-Gの条件付きハンズオフとS-Xの手保持要求を同一モデル内に固定する。次は未掲載主要モデルの母集団分母と、注文可否・試乗導線の追加確認へ進む。UX300hは本番反映済み。
+- 後発の模倣対策は車名や記事数ではなく、販売単位キー、同一モデル内の価格・駆動・定員・ODD・機能差・継続利用条件、一次情報の確認履歴、意味のある差分と再訪導線を蓄積する方針。ノア8単位でS-Z/S-Gの条件付きハンズオフとS-Xの手保持要求を同一モデル内に固定した。次は未掲載主要モデルの母集団分母と、注文可否・試乗導線の追加確認へ進む。UX300hは本番反映済み。
 
 ## 次のdelivery
 
