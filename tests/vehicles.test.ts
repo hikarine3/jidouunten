@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehiclePriceMin, vehicleReferenceLabel, vehicleReferenceTotal, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehiclePriceMin, vehicleReferenceLabel, vehicleReferenceTotal, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -106,6 +106,8 @@ describe('vehicle data contract and filters', () => {
     const priceChanged = { ...reviewOnly, price: { ...base.price!, amounts: [{ ...base.price!.amounts[0], amountJpy: 4_100_000, sourceUrl: 'https://example.com/new' }], maxJpy: 4_100_000 } };
     expect(vehicleDecisionFingerprint(reviewOnly)).toBe(vehicleDecisionFingerprint(base));
     expect(vehicleDecisionFingerprint(priceChanged)).not.toBe(vehicleDecisionFingerprint(base));
+    expect(vehicleDecisionSignals(reviewOnly)).toEqual(vehicleDecisionSignals(base));
+    expect(vehicleDecisionSignals(priceChanged).price).not.toBe(vehicleDecisionSignals(base).price);
   });
 
   it('validates every supplied catalog record before release', () => {

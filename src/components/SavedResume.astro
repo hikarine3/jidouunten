@@ -1,9 +1,10 @@
 ---
-import { vehicleDecisionFingerprint, vehicleReferenceLabel, vehicles } from '../data/loader';
+import { vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleReferenceLabel, vehicles } from '../data/loader';
 
 const resumeCatalog = vehicles.map((vehicle) => ({
   id: vehicle.id,
   fingerprint: vehicleDecisionFingerprint(vehicle),
+  signals: vehicleDecisionSignals(vehicle),
   label: `${vehicle.maker} ${vehicle.model} · ${vehicleReferenceLabel(vehicle)} · ${vehicle.grade}`,
 }));
 const resumeCatalogJson = JSON.stringify(resumeCatalog).replace(/</g, '\\u003c');
@@ -32,20 +33,28 @@ const resumeCatalogJson = JSON.stringify(resumeCatalog).replace(/</g, '\\u003c')
   const snapshotDelta = (item) => {
     const entries = item?.snapshot?.entries;
     if (!Array.isArray(entries) || entries.length === 0) return null;
-    const current = new Map(catalog.map((vehicle) => [vehicle.id, vehicle.fingerprint]));
+    const current = new Map(catalog.map((vehicle) => [vehicle.id, vehicle]));
     let changed = 0;
     let removed = 0;
-    entries.forEach(({ id, fingerprint }) => {
+    const categories = new Set();
+    const categoryLabels = { price: '価格', capability: 'できること', odd: '作動条件', package: '必要装備', availability: '販売状態', identity: '車両仕様' };
+    entries.forEach(({ id, fingerprint, signals }) => {
       if (!current.has(id)) removed += 1;
-      else if (current.get(id) !== fingerprint) changed += 1;
+      else if (current.get(id).fingerprint !== fingerprint) {
+        changed += 1;
+        Object.keys(categoryLabels).forEach((category) => {
+          if (signals?.[category] && current.get(id).signals?.[category] !== signals[category]) categories.add(categoryLabels[category]);
+        });
+        if (!signals) categories.add('判断材料');
+      }
     });
-    return { changed, removed };
+    return { changed, removed, categories: [...categories] };
   };
   const deltaLabel = (item) => {
     const delta = snapshotDelta(item);
     if (!delta || (!delta.changed && !delta.removed)) return '';
     const parts = [];
-    if (delta.changed) parts.push(`判断材料の変更 ${delta.changed}件`);
+    if (delta.changed) parts.push(`判断材料の変更 ${delta.changed}件${delta.categories.length ? `（${delta.categories.join('・')}）` : ''}`);
     if (delta.removed) parts.push(`掲載終了・非公開 ${delta.removed}件`);
     return `<small class="saved-resume-delta" data-saved-resume-delta>${escapeHtml(parts.join(' / '))}</small>`;
   };

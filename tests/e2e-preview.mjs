@@ -49,10 +49,11 @@ try {
     const key = 'jidouunten:saved-resume:v1';
     const state = JSON.parse(localStorage.getItem(key));
     state.search.snapshot.entries[0].fingerprint = '00000000';
+    state.search.snapshot.entries[0].signals.price = '00000000';
     localStorage.setItem(key, JSON.stringify(state));
   });
   await page.reload();
-  assert.match(await page.locator('[data-saved-resume]').innerText(), /判断材料の変更 1件/, '保存時点から意味のある判断材料が変わったことを表示');
+  assert.match(await page.locator('[data-saved-resume]').innerText(), /判断材料の変更 1件（価格）/, '保存時点から価格という意味のある判断材料が変わったことを表示');
   await page.goto(`${base}/cars/jp-tesla-model-3-2026-premium/`);
   await page.goto(`${base}/`);
   await page.locator('[data-saved-resume-open="search"]').click();
@@ -217,6 +218,7 @@ try {
   await page.locator('[data-save-compare]').click();
   assert.match(await page.locator('[data-save-compare-note]').innerText(), /比較を保存しました/, '比較を保存したことを通知');
   assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('jidouunten:saved-resume:v1')).compare.snapshot.entries.length), 2, '比較保存に2台分の判断材料snapshotを保持');
+  assert.equal(await page.evaluate(() => Object.keys(JSON.parse(localStorage.getItem('jidouunten:saved-resume:v1')).compare.snapshot.entries[0].signals).length), 6, '比較保存に6カテゴリの判断材料signalsを保持');
   await page.goto(`${base}/`);
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), true, '比較保存も共通の再開バーに表示');
   assert.match(await page.locator('[data-saved-resume]').innerText(), /比較:/, '保存した比較の種別を表示');

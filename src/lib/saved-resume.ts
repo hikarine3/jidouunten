@@ -11,7 +11,16 @@ export interface SavedResumeItem {
 }
 
 export interface SavedResumeSnapshot {
-  entries: Array<{ id: string; fingerprint: string }>;
+  entries: Array<{ id: string; fingerprint: string; signals?: SavedResumeSignals }>;
+}
+
+export interface SavedResumeSignals {
+  identity: string;
+  capability: string;
+  odd: string;
+  package: string;
+  availability: string;
+  price: string;
 }
 
 export interface SavedResumeState {
@@ -43,7 +52,12 @@ function normalizeSnapshot(value: unknown): SavedResumeSnapshot | undefined {
     if (typeof candidate.id !== 'string' || !/^[a-z0-9-]+$/.test(candidate.id) || seen.has(candidate.id)) return undefined;
     if (typeof candidate.fingerprint !== 'string' || !/^[0-9a-f]{8}$/.test(candidate.fingerprint)) return undefined;
     seen.add(candidate.id);
-    normalized.push({ id: candidate.id, fingerprint: candidate.fingerprint });
+    const rawSignals = (entry as { signals?: unknown }).signals;
+    const signalKeys = ['identity', 'capability', 'odd', 'package', 'availability', 'price'] as const;
+    const signals = rawSignals && typeof rawSignals === 'object' && signalKeys.every((key) => typeof (rawSignals as Record<string, unknown>)[key] === 'string' && /^[0-9a-f]{8}$/.test((rawSignals as Record<string, unknown>)[key] as string))
+      ? signalKeys.reduce((result, key) => ({ ...result, [key]: (rawSignals as Record<string, string>)[key] }), {} as SavedResumeSignals)
+      : undefined;
+    normalized.push({ id: candidate.id, fingerprint: candidate.fingerprint, ...(signals ? { signals } : {}) });
   }
   return { entries: normalized };
 }

@@ -42,7 +42,8 @@ describe('saved resume URL and browser storage contract', () => {
 
   it('保存時点の判断材料snapshotを保持し、不正なfingerprintは受け付けない', () => {
     const fake = storage();
-    const snapshot = { entries: [{ id: 'car-a', fingerprint: 'a1b2c3d4' }, { id: 'car-b', fingerprint: '0000ffff' }] };
+    const signals = { identity: '11111111', capability: '22222222', odd: '33333333', package: '44444444', availability: '55555555', price: '66666666' };
+    const snapshot = { entries: [{ id: 'car-a', fingerprint: 'a1b2c3d4', signals }, { id: 'car-b', fingerprint: '0000ffff', signals }] };
     expect(updateSavedResume(fake, 'compare', '/compare/?ids=car-a&ids=car-b', 'A × B', '2026-09-10T00:00:00.000Z', snapshot)).toBe(true);
     expect(readSavedResumeState(fake)?.compare?.snapshot).toEqual(snapshot);
     expect(updateSavedResume(fake, 'compare', '/compare/?ids=car-a&ids=car-b', 'A × B', '2026-09-10T00:00:00.000Z', { entries: [{ id: 'car-a', fingerprint: 'bad' }] })).toBe(true);

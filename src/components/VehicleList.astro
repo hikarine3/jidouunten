@@ -1,6 +1,6 @@
 ---
 import VehicleCard from './VehicleCard.astro';
-import { availabilityLabels, canonicalRoadType, capabilityDefinitions, handsOffLabels, isDefaultListedVehicle, levelIds, levelLabels, levelShort, roadFilterLabels, sortVehicleList, vehicleDecisionFingerprint, vehiclePriceMin, vehicles } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, capabilityDefinitions, handsOffLabels, isDefaultListedVehicle, levelIds, levelLabels, levelShort, roadFilterLabels, sortVehicleList, vehicleDecisionFingerprint, vehicleDecisionSignals, vehiclePriceMin, vehicles } from '../data/loader';
 
 const { action = '/cars/' } = Astro.props as { action?: string };
 const defaultVehicles = vehicles.filter(isDefaultListedVehicle);
@@ -64,7 +64,7 @@ const levelOverview = levelIds.map((level) => {
   </details></form>
   <div class="notice list-notice" data-level2-notice hidden><strong>Level 2は運転支援です。</strong> ハンズオフ可能な条件があっても、運転者は周囲を常時監視します。</div>
   <div class="results-bar"><h2><span data-selected-label>公式サイト掲載あり</span> <span class="subtle" data-result-count aria-live="polite">{defaultCount}件</span></h2><span class="subtle results-help" data-sort-label>発売・導入が新しい順 · 時期不明は末尾</span><div class="results-actions"><button class="button small text" type="button" data-save-search>この条件を保存</button><div class="compare-toolbar" data-compare-toolbar><span class="subtle" data-compare-count>0台選択中（最大2台）</span><a class="button small alt" data-compare-link href="/compare/" aria-disabled="true">選択した車両を比較</a></div></div></div>
-  <form class="compare-list" method="get" action="/compare/" id="compare-list-form"><div class="cards" data-results>{sortedVehicles.map((vehicle, index) => <div data-vehicle-shell hidden={!isDefaultListedVehicle(vehicle)} data-level={vehicle.automationLevel} data-maker={vehicle.maker} data-capabilities={vehicle.capabilities.join('|')} data-road={vehicle.odd.roadTypes.map(canonicalRoadType).join('|')} data-hands-off={vehicle.handsOff} data-availability={vehicle.availability} data-current-catalog={String(vehicle.currentCatalogListed === true)} data-introduced-at={vehicle.salesUnitIntroducedAt ?? ''} data-price-min={vehiclePriceMin(vehicle) ?? ''} data-decision-fingerprint={vehicleDecisionFingerprint(vehicle)} data-stable-key={`${vehicle.maker}::${vehicle.model}::${vehicle.grade}::${vehicle.id}`} data-original-index={index}><VehicleCard vehicle={vehicle} selectable /></div>)}</div></form>
+  <form class="compare-list" method="get" action="/compare/" id="compare-list-form"><div class="cards" data-results>{sortedVehicles.map((vehicle, index) => <div data-vehicle-shell hidden={!isDefaultListedVehicle(vehicle)} data-level={vehicle.automationLevel} data-maker={vehicle.maker} data-capabilities={vehicle.capabilities.join('|')} data-road={vehicle.odd.roadTypes.map(canonicalRoadType).join('|')} data-hands-off={vehicle.handsOff} data-availability={vehicle.availability} data-current-catalog={String(vehicle.currentCatalogListed === true)} data-introduced-at={vehicle.salesUnitIntroducedAt ?? ''} data-price-min={vehiclePriceMin(vehicle) ?? ''} data-decision-fingerprint={vehicleDecisionFingerprint(vehicle)} data-decision-signals={JSON.stringify(vehicleDecisionSignals(vehicle))} data-stable-key={`${vehicle.maker}::${vehicle.model}::${vehicle.grade}::${vehicle.id}`} data-original-index={index}><VehicleCard vehicle={vehicle} selectable /></div>)}</div></form>
   <div class="empty" data-empty hidden><h2>条件に合う候補はまだありません</h2><p>条件をゆるめるか、公式サイト掲載ありの候補に戻してお試しください。</p><a class="button text" href={action}>条件をリセット</a></div>
 </div></section>
 
@@ -132,7 +132,7 @@ const levelOverview = levelIds.map((level) => {
   saveSearchButton?.addEventListener('click', () => {
     const label = document.querySelector('[data-selected-label]')?.textContent?.trim() || '保存した検索';
     const href = `${location.pathname}${location.search}`;
-    const entries = shells.filter((shell) => !shell.hidden).map((shell) => ({ id: shell.querySelector('input[name="ids"]')?.value, fingerprint: shell.dataset.decisionFingerprint })).filter((entry) => entry.id && entry.fingerprint);
+    const entries = shells.filter((shell) => !shell.hidden).map((shell) => { let signals; try { signals = JSON.parse(shell.dataset.decisionSignals || 'null'); } catch { signals = undefined; } return { id: shell.querySelector('input[name="ids"]')?.value, fingerprint: shell.dataset.decisionFingerprint, signals }; }).filter((entry) => entry.id && entry.fingerprint);
     const saved = window.jidouuntenSave?.('search', href, label, { entries });
     if (saved) {
       const original = saveSearchButton.textContent;
