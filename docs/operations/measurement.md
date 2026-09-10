@@ -1,5 +1,14 @@
 # 計測・検索登録
 
+## 2026-09-10 購入・試乗アクションの計測確認
+
+`fa36371ac1125948ccb403eccd73de7c848f2b5e` のTesla Model 3 / Model Y詳細・比較に、一次情報で確認した「今すぐ注文」「試乗を予約する」導線を追加した。
+遷移直前に `outbound_purchase_action` を1回だけ送信し、購入判断の出口を `outbound_manufacturer`（単なる公式情報遷移）と分離する。
+送信項目は `vehicle_id`、`manufacturer`、`action_type`、`link_url`、`link_domain`、`placement` の6項目で、個人情報・自由入力・保存本文は含めない。
+
+公開GTM APIのread-only取得で、`GTM-PV9QVMJV` の **version 9** を確認した。Google tag 1個、Custom Event trigger 6個、ネイティブGA4 Event tag 6個（すべて pause 0）、dataLayer variable 15個、正しい測定ID `G-Q58GM7BVB6`、compiler error 0、HTML tag 0である。新イベント専用trigger/tagも公開版で有効になっている。
+`python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish` の公開receiptは `public_id=GTM-PV9QVMJV`、version 9。アプリの独立監査では詳細アクション6/6（各2）、比較アクション4/4、イベントpayload、Tesla公式ドメイン、390px表示、GA collect HTTP 204を確認した。
+
 ## 2026-09-10 比較差分トランシェの計測確認
 
 `dac0501228b7651c810c769398302db6c0aad60b` を実IDでビルドし、
@@ -34,7 +43,7 @@ localStorageのみを使い、保存本文・検索query・車両ID・表示名�
 | サービス | resource | 状態 |
 |---|---|---|
 | Google Analytics 4 | account `1st` / property `jidouunten.jp` (`552960231`) / web stream `https://jidouunten.jp` / `G-Q58GM7BVB6` | 日本時間・JPY、拡張計測有効 |
-| Google Tag Manager | web container `jidouunten.jp` / `GTM-PV9QVMJV` | version 7公開済み |
+| Google Tag Manager | web container `jidouunten.jp` / `GTM-PV9QVMJV` | version 9公開済み |
 | Google Search Console | domain property `sc-domain:jidouunten.jp` | DNS TXT確認済み、sitemap取得成功 |
 | Bing Webmaster Tools | `https://jidouunten.jp/` | DNS CNAME確認済み、sitemap送信済み・処理中 |
 
@@ -76,12 +85,22 @@ window.dataLayer.push({
   link_type: "product",
   placement: "vehicle_detail",
 });
+window.dataLayer.push({
+  event: "outbound_purchase_action",
+  vehicle_id: "vehicle-a",
+  manufacturer: "maker-a",
+  action_type: "order",
+  link_url: "https://example.invalid/official-order",
+  link_domain: "example.invalid",
+  placement: "vehicle_detail",
+});
 ```
 
 `filter_results` は、初期表示や同じ値の再選択ではなく、利用者の操作で結果集合が変わった時だけ送る。
 `view_vehicle` は詳細画面表示時に1回、`outbound_manufacturer` は公式リンク遷移直前に送る。
 `link_type` は `product` / `archive`、`placement` は `vehicle_detail` / `comparison` とし、
-メーカー公式の商品情報と過去資料を区別する。見積・試乗導線は実装時に別種別を追加する。
+メーカー公式の商品情報と過去資料を区別する。`outbound_purchase_action` の `action_type` は
+`order` / `test_drive` / `dealer` / `catalog` のいずれかとし、確認済みのアクションだけを表示・送信する。
 
 ## GTM設定
 
@@ -93,14 +112,15 @@ python3 scripts/setup_measurement.py --create-container
 python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish
 ```
 
-公開version 8にはGoogle tag、5個のCustom Event trigger、対応する5個のネイティブGA4 Event tag、
-14個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
-構成だったため停止・除去した。API取得した公開版で、ネイティブevent tag 5個（pause 0）、HTML tag 0個、
-正しい測定ID6箇所、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
+公開version 9にはGoogle tag、6個のCustom Event trigger、対応する6個のネイティブGA4 Event tag、
+15個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
+構成だったため停止・除去した。API取得した公開版で、ネイティブevent tag 6個（pause 0）、HTML tag 0個、
+6個すべて正しい測定ID `G-Q58GM7BVB6`、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
 workspaceに差分がなければpublishしない。
 
-2026-09-10にversion 8を公開し、`outbound_manufacturer`へ `link_type` と `placement` を追加した。
-既存5イベントの構成は維持し、追加変更はdataLayer variable 2件と同イベントtag 1件の更新だけである。
+2026-09-10にversion 8で `outbound_manufacturer` の分類項目を反映した後、version 9で
+`outbound_purchase_action` のtrigger、GA4 Event tag、`action_type`等の変数を追加した。公開版の
+6イベント構成は、ページ表示・一覧操作・比較・詳細表示・公式情報遷移・購入/試乗アクションを各1契約で扱う。
 
 ## 読み込み方針
 
@@ -114,8 +134,8 @@ GTM/GA4は通常読み込みとし、初回表示を遮る同意・拒否バナ�
 2. GTM scriptが1つだけ追加され、IDが `GTM-PV9QVMJV` であることを確認する。
 3. ブラウザのnetworkで `G-Q58GM7BVB6` 宛ての`collect`を確認し、別にGA4 Realtimeまたは
    DebugViewで受信を確認する。
-4. 5操作を各1回実施し、イベント名と上記parameterを確認する。
-5. 自動離脱クリックと `outbound_manufacturer` を混同せず、独自KPIは後者で集計する。
+4. 6操作を各1回実施し、イベント名と上記parameterを確認する（購入・試乗アクションを含む）。
+5. 自動離脱クリックと `outbound_manufacturer` / `outbound_purchase_action` を混同せず、公式情報遷移と購入判断アクションを別KPIで集計する。
 6. GSCとBingへ `/sitemap-index.xml` を送信し、取得成功を確認する。
 
 GA4/GSCはresource作成直後にデータがないのが正常。公開・実イベント受信前に「計測正常」とは判定しない。
@@ -144,5 +164,5 @@ version 7の継続ループとは判定しない。現行公開版にはイベ�
 
 ## 未完了境界
 
-- GA4で5イベントそれぞれのparameterを個別に受信確認。
+- GA4で6イベントそれぞれのparameterを個別に受信確認。
 - GSC/Bingで検出URL数が反映されるまでの非同期処理確認。
