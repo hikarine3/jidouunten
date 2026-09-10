@@ -1,5 +1,16 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 後発対策トランシェ（ヴェルファイア7販売単位）本番実測
+
+- exact release commit: `a9627e5abf291b9586d1cde1654776addf726f18`（アプリ・データ実装 `806da5af42e5cdb02d96fe5a1632cf178bf4962e`、比較監査URL修正を含む）
+- Immutable deployment: https://a7a6acd6.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- ヴェルファイアをPHEV・HEV・ターボガソリン、2WD・E-Four/4WD、6・7人乗りの7販売単位で追加。価格は674万9,600円〜1,089万9,900円、全単位をLevel 2・条件内ハンズオフ（渋滞時支援0〜約40km/h）・運転者監視必須として表示した。注文可否は未確認のままCTAを推測表示していない。
+- 一覧7件、詳細7/7、比較（代表2単位）、sitemap掲載7/7、主要URLは本体でHTTP200。Level 2・高速道路・条件内ハンズオフ絞り込みを本番E2Eで確認した。
+- 独立監査は実装者と別の2コンテキストでPASS。registryのVellfire生成surface 11/11、required selector 9/9を確認し、比較URLのids欠落 blockerを修正済み。
+- `npm test`（Vitest32/32、Python16/16、価格108/108、公式導線108/108）、`npm run check`（0 errors / 0 warnings）、実ID build114ページ、`BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs`（E2E1/1、GA collect HTTP204）を確認した。
+- 本番主要URLの内部根拠キー・根拠URL・`GTM-TEST`漏洩は0件。実GTM `GTM-PV9QVMJV` を配信HTMLで確認した。
+
 ## 2026-09-10 比較意思決定・オプション価格・用途フィルター改善の本番実測
 
 - exact source commit: `86dd42a7f9c3d564114bf384b2d1649c3087b354`
