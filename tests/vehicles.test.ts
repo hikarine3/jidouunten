@@ -121,14 +121,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(147);
+    expect(vehicles).toHaveLength(154);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補146件は全件の公式金額を保持する', () => {
+  it('現行候補153件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(146);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(146);
+    expect(current).toHaveLength(153);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(153);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -138,7 +138,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(37);
+    expect(officialLinks).toHaveLength(38);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -147,9 +147,11 @@ describe('vehicle data contract and filters', () => {
     expect(teslaActions.map(({ kind }) => kind).sort()).toEqual(['order', 'order', 'test_drive', 'test_drive']);
     expect(teslaActions.every(({ url, checkedAt }) => url.startsWith('https://www.tesla.com/') && checkedAt === '2026-09-10')).toBe(true);
     const toyotaEstimateLinks = officialLinks.filter(({ maker }) => maker === 'Toyota').flatMap((link) => (link.actions ?? []).filter(({ kind }) => kind === 'estimate'));
-    expect(toyotaEstimateLinks).toHaveLength(10);
-    expect(toyotaEstimateLinks.every(({ label, url, checkedAt }) => label === '公式で見積り' && url.startsWith('https://toyota.jp/service/estimate/grades?car_name_en=') && checkedAt === '2026-09-10')).toBe(true);
-    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'CROWN CROSSOVER', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'bZ4X'].sort());
+    expect(toyotaEstimateLinks).toHaveLength(11);
+    expect(toyotaEstimateLinks.every(({ label, url }) => label === '公式で見積り' && url.startsWith('https://toyota.jp/service/estimate/grades?car_name_en='))).toBe(true);
+    expect(toyotaEstimateLinks.filter(({ url }) => !url.includes('COROLLA%20CROSS')).every(({ checkedAt }) => checkedAt === '2026-09-10')).toBe(true);
+    expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
+    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'COROLLA CROSS', 'CROWN CROSSOVER', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'bZ4X'].sort());
     const expandedActionModels = new Map([
       ['Honda\u0000ACCORD', ['dealer', 'test_drive', 'estimate', 'catalog']],
       ['Honda\u0000VEZEL', ['dealer', 'test_drive', 'estimate', 'catalog']],
@@ -164,7 +166,7 @@ describe('vehicle data contract and filters', () => {
       expect(actions.every(({ checkedAt }) => checkedAt === '2026-09-11')).toBe(true);
       expect(actions.every(({ url }) => url.startsWith('https://'))).toBe(true);
     }
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(38);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(39);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {
@@ -306,6 +308,22 @@ describe('vehicle data contract and filters', () => {
     expect(sienta.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/sienta/safety/'))).toBe(true);
     expect(sienta.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('sienta_spec_202608.pdf')))).toBe(true);
     expect(sienta.every((vehicle) => !vehicle.capabilities.includes('hands_off_highway') && !vehicle.capabilities.includes('lane_change_support') && !vehicle.capabilities.includes('driver_monitoring'))).toBe(true);
+  });
+
+  it('Toyota カローラ クロスは7グレードを価格・駆動方式・車線変更補助つきで保持する', () => {
+    const corollaCross = vehicles.filter((vehicle) => vehicle.model === 'カローラ クロス');
+    expect(corollaCross).toHaveLength(7);
+    expect(corollaCross.map((vehicle) => vehicle.grade).sort()).toEqual([
+      'Z（2WD）', 'Z（E-Four）', 'S（2WD）', 'S（E-Four）', 'GR SPORT', 'Z“Adventure”（2WD）', 'Z“Adventure”（E-Four）',
+    ].sort());
+    expect(corollaCross.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([2_981_000, 3_239_500, 3_613_500, 3_663_000, 3_872_000, 3_921_500, 4_077_700]);
+    expect(corollaCross.every((vehicle) => vehicle.currentCatalogListed && vehicle.modelYear === null && vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === '2026-07')).toBe(true);
+    expect(corollaCross.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(corollaCross.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist,lane_change_support')).toBe(true);
+    expect(corollaCross.every((vehicle) => vehicle.odd.speedKph.min === null && vehicle.odd.speedKph.max === null && vehicle.odd.driverConditions.includes('ステアリングを常に保持'))).toBe(true);
+    expect(corollaCross.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('grades61.json')))).toBe(true);
+    expect(corollaCross.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/corollacross/safety/'))).toBe(true);
+    expect(corollaCross.every((vehicle) => vehicle.sources.some((source) => source.url.includes('/corollacross/2607/hev/')))).toBe(true);
   });
 
   it('Lexus LMは4人/6人仕様をAdvanced Drive付きの条件付きハンズオフとして保持する', () => {

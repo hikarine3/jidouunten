@@ -1475,6 +1475,33 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:toyota-corolla-cross-2026": {
+      "entity_id": "vehicle:toyota-corolla-cross-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+      "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","カローラ クロス","LEVEL 2","日本向け153販売単位"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","カローラ クロス","LEVEL 2"]},
+        {"url":"/cars/jp-toyota-corolla-cross-2026-z-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-z-2wd/index.html","markers":["カローラ クロス","Z（2WD）","3,613,500円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-corolla-cross-2026-z-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-z-e-four/index.html","markers":["カローラ クロス","Z（E-Four）","3,872,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-corolla-cross-2026-s-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-s-2wd/index.html","markers":["カローラ クロス","S（2WD）","2,981,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-corolla-cross-2026-s-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-s-e-four/index.html","markers":["カローラ クロス","S（E-Four）","3,239,500円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-corolla-cross-2026-gr-sport-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-gr-sport-e-four/index.html","markers":["カローラ クロス","GR SPORT","4,077,700円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-corolla-cross-2026-z-adventure-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-z-adventure-2wd/index.html","markers":["カローラ クロス","Z“Adventure”（2WD）","3,663,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-corolla-cross-2026-z-adventure-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-z-adventure-e-four/index.html","markers":["カローラ クロス","Z“Adventure”（E-Four）","3,921,500円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-toyota-corolla-cross-2026-z-2wd&ids=jp-toyota-corolla-cross-2026-s-e-four","locale":"ja","output_path":"dist/compare/index.html","markers":["カローラ クロス","Z（2WD）","S（E-Four）","3,613,500円","3,239,500円"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-toyota-corolla-cross-2026-z-2wd","jp-toyota-corolla-cross-2026-z-adventure-e-four"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-corolla-cross-2026-z-2wd\"])","markers":["Toyota","カローラ クロス","Z（2WD）"]},
+        {"url":"/cars/jp-toyota-corolla-cross-2026-z-2wd/","selector":"main","markers":["カローラ クロス","Z（2WD）","3,613,500円","Level 2","ハンズオフ：不可","ステアリングを常に保持"]},
+        {"url":"/cars/jp-toyota-corolla-cross-2026-gr-sport-e-four/","selector":"main","markers":["カローラ クロス","GR SPORT","4,077,700円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-toyota-corolla-cross-2026-z-2wd&ids=jp-toyota-corolla-cross-2026-s-e-four","selector":"[data-compare-result]","markers":["カローラ クロス","Z（2WD）","S（E-Four）","車線変更支援"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "manufacturer-official-links:jp-current": {
       "entity_id": "manufacturer-official-links:jp-current",
       "entity_type": "manufacturer_official_links",

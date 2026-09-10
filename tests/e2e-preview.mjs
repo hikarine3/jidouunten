@@ -34,8 +34,8 @@ try {
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 146, '既定カタログは現行確認146件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*146[\s\S]*条件内可[\s\S]*48[\s\S]*不可[\s\S]*97[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*37/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await visibleCards(), 153, '既定カタログは現行確認153件');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*153[\s\S]*条件内可[\s\S]*48[\s\S]*不可[\s\S]*104[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*44/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="3"]').innerText(), /L3[\s\S]*条件付自動運転[\s\S]*過去例 1件/, 'Level 3の過去例を現行車と区別');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, 'Tesla Model 3 / Model Yの6販売仕様を既定一覧に表示');
@@ -69,7 +69,7 @@ try {
   assert.equal(await visibleCards(), 48, '条件内ハンズオフは48件');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-capability-shortcut="lane_change_support"]').click();
-  assert.equal(await visibleCards(), 37, '車線変更支援は37件');
+  assert.equal(await visibleCards(), 44, '車線変更支援は44件');
   await page.locator('[data-reset-shortcut]').click();
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo EX30' }).count(), 3, 'Volvo EX30の3販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Suzuki e VITARA' }).count(), 3, 'Suzuki e VITARAの3販売単位を既定一覧に表示');
@@ -81,6 +81,8 @@ try {
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Honda VEZEL' }).count(), 2, 'VEZELはFF/4WDの2販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヴェルファイア' }).count(), 7, 'ヴェルファイアは電動化・駆動方式別の7販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヴォクシー' }).count(), 6, 'ヴォクシーは駆動方式・定員別の6販売単位を既定一覧に表示');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota カローラ クロス' }).count(), 7, 'カローラ クロスはグレード・駆動方式別の7販売単位を既定一覧に表示');
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota カローラ クロス' }).filter({ hasText: 'S（2WD）' }).innerText(), /約298万円[\s\S]*ハンズオフ：不可[\s\S]*車線変更支援/, 'カローラ クロスSは価格・手保持・車線変更時の補助を表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヴォクシー' }).filter({ hasText: 'S-G 2WD（7人乗り）' }).innerText(), /条件付き支援パッケージ[\s\S]*\+78,100円[\s\S]*装着時のみ条件内で可/, 'ヴォクシー一覧カードにオプション必要条件と追加価格を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ノア' }).count(), 8, 'ノアはS-Z/S-G/S-Xと駆動方式・定員別の8販売単位を既定一覧に表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ノア' }).filter({ hasText: 'HYBRID S-G 2WD（7人乗り）' }).innerText(), /約370万円[\s\S]*条件付き支援パッケージ[\s\S]*\+78,100円[\s\S]*装着時のみ条件内で可/, 'ノア一覧カードにグレード別オプション価格を表示');
@@ -105,7 +107,7 @@ try {
   await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://jidouunten.jp/og.png', 'OG画像は絶対URL');
-  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け146販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け153販売単位/, 'トップのdescription件数は公開データから生成');
   assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け139販売単位/, '古い固定件数を残さない');
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
@@ -123,7 +125,7 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 146, 'Level 2現行146件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 153, 'Level 2現行153件へ復帰');
   await levelMapPage.close();
   await page.goto(`${base}/levels/`);
   const level3Link = page.locator('.level-3 a');
@@ -164,7 +166,7 @@ try {
   assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
   await page.goto(`${base}/?budget=under_300`);
-  assert.equal(await visibleCards(), 13, '本体価格の開始値が300万円未満の候補へ絞り込む');
+  assert.equal(await visibleCards(), 14, '本体価格の開始値が300万円未満の候補へ絞り込む');
   assert.equal(await page.locator('select[name="budget"]').inputValue(), 'under_300', '価格帯条件をURLから復元');
   assert.match(await page.locator('[data-selected-label]').innerText(), /〜300万円/, '価格帯を結果見出しへ明示');
 
@@ -198,13 +200,13 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 146, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 153, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  assert.equal(await visibleCards(), 146, 'リセット後に既定146件');
+  assert.equal(await visibleCards(), 153, 'リセット後に既定153件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -237,7 +239,7 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '比較保存を削除すると再開バーを隠す');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 147, 'すべての状態で過去車両を含む147件');
+  assert.equal(await visibleCards(), 154, 'すべての状態で過去車両を含む154件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
@@ -320,6 +322,21 @@ try {
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*3,183,400円[\s\S]*ハンズオフ[\s\S]*不可/, 'シエンタの公式価格と手保持条件を表示');
   assert.match(await page.locator('main').innerText(), /全車速追従ACC[\s\S]*LTA[\s\S]*ステアリングを持ち続ける/, 'シエンタの能力差と手保持条件を日本語で表示');
   assert.doesNotMatch(await page.locator('main').innerText(), /sienta_spec_202608|sources|accessedAt/, 'シエンタ詳細に内部根拠を表示しない');
+
+  await page.goto(`${base}/cars/jp-toyota-corolla-cross-2026-z-2wd/`);
+  assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*カローラ クロス[\s\S]*Z（2WD）/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*3,613,500円[\s\S]*ハンズオフ[\s\S]*不可[\s\S]*ステアリングを常に保持/, 'カローラ クロスZの公式価格と手保持条件を表示');
+  assert.match(await page.locator('main').innerText(), /確認できた機能[\s\S]*追従走行（ACC）[\s\S]*車線中央維持[\s\S]*渋滞時運転支援[\s\S]*車線変更支援/, 'カローラ クロスの能力差を平易な日本語で表示');
+  assert.equal(await page.locator('[data-purchase-action][data-action-type="estimate"]').getAttribute('href'), 'https://toyota.jp/service/estimate/grades?car_name_en=COROLLA%20CROSS', 'カローラ クロスの公式見積りURL');
+  assert.doesNotMatch(await page.locator('main').innerText(), /grades61\.json|sources|accessedAt|not_allowed/, 'カローラ クロス詳細に内部根拠や内部enumを表示しない');
+
+  await page.goto(`${base}/compare/?ids=jp-toyota-corolla-cross-2026-z-2wd&ids=jp-toyota-corolla-cross-2026-s-e-four`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  const corollaCompare = await page.locator('[data-compare-result]').innerText();
+  assert.match(corollaCompare, /カローラ クロス[\s\S]*Z（2WD）[\s\S]*S（E-Four）/);
+  assert.match(corollaCompare, /3,613,500円[\s\S]*3,239,500円[\s\S]*車線変更支援/, 'カローラ クロス比較にグレード・駆動方式別価格と能力差');
+  assert.equal(await page.locator('[data-compare-result] [data-action-type="estimate"]').count(), 2, 'カローラ クロス比較に両車の公式見積り導線');
+  assert.doesNotMatch(corollaCompare, /grades61\.json|sources|accessedAt|not_allowed/, 'カローラ クロス比較に内部根拠や内部enumを表示しない');
 
   await page.goto(`${base}/compare/?ids=jp-toyota-sienta-2026-z-hev-2wd-7seater&ids=jp-toyota-sienta-2026-x-gas-2wd-5seater`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
