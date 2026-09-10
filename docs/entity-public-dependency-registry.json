@@ -996,7 +996,7 @@
           ]
         },
         {
-          "url": "/compare/",
+          "url": "/compare/?ids=jp-toyota-vellfire-2026-executive-lounge-hev-2wd-7seater&ids=jp-toyota-vellfire-2026-z-premier-hev-2wd-7seater",
           "selector": "[data-compare-result]",
           "markers": [
             "ヴェルファイア",
