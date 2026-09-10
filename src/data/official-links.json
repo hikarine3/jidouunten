@@ -24,7 +24,7 @@
   { "maker": "Toyota", "model": "プリウス", "url": "https://toyota.jp/prius/", "kind": "product", "checkedAt": "2026-09-10", "actions": [{ "kind": "estimate", "label": "公式で見積り", "url": "https://toyota.jp/service/estimate/grades?car_name_en=PRIUS", "checkedAt": "2026-09-10" }] },
   { "maker": "Lexus", "model": "NX", "url": "https://lexus.jp/models/nx/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Toyota", "model": "クラウン（クロスオーバー）", "url": "https://toyota.jp/crowncrossover/", "kind": "product", "checkedAt": "2026-09-10", "actions": [{ "kind": "estimate", "label": "公式で見積り", "url": "https://toyota.jp/service/estimate/grades?car_name_en=CROWN+CROSSOVER", "checkedAt": "2026-09-10" }] },
-  { "maker": "Toyota", "model": "bZ4X", "url": "https://toyota.jp/bz4x/", "kind": "product", "checkedAt": "2026-09-10", "actions": [{ "kind": "estimate", "label": "公式で見積り", "url": "https://toyota.jp/service/estimate/grades?car_name_en=BZ4X", "checkedAt": "2026-09-10" }] },
+  { "maker": "Toyota", "model": "bZ4X", "url": "https://toyota.jp/bz4x/", "kind": "product", "checkedAt": "2026-09-10", "actions": [{ "kind": "estimate", "label": "公式で見積り", "url": "https://toyota.jp/service/estimate/grades?car_name_en=bZ4X", "checkedAt": "2026-09-10" }] },
   { "maker": "Lexus", "model": "LBX", "url": "https://lexus.jp/models/lbx/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Lexus", "model": "RX", "url": "https://lexus.jp/models/rx/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Toyota", "model": "RAV4", "url": "https://toyota.jp/rav4/", "kind": "product", "checkedAt": "2026-09-10", "actions": [{ "kind": "estimate", "label": "公式で見積り", "url": "https://toyota.jp/service/estimate/grades?car_name_en=RAV4", "checkedAt": "2026-09-10" }] },
