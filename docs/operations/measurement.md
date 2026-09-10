@@ -1,5 +1,12 @@
 # 計測・検索登録
 
+## 2026-09-10 比較差分トランシェの計測確認
+
+`dac0501228b7651c810c769398302db6c0aad60b` を実IDでビルドし、
+`https://5b59d5a7.jidouunten.pages.dev` と本体へ配信した。比較画面の差分強調・同値行切り替えは表示上の補助機能であり、
+新しい個人情報や保存本文を送信しない。既存の `compare_vehicles` と公式遷移 `outbound_manufacturer` の契約を維持し、
+production E2EでGA collect HTTP 204を確認した。
+
 ## 2026-09-10 Tesla受注可否トランシェの計測確認
 
 `1dff8d69803c7ff98a036f141730b1b6b82d4796` を実IDでビルドし、

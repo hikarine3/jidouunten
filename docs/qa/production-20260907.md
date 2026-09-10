@@ -1,5 +1,16 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 比較差分トランシェの本番実測
+
+- exact commit: `dac0501228b7651c810c769398302db6c0aad60b`
+- Immutable deployment: https://5b59d5a7.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/compare/?ids=jp-tesla-model-3-2026-premium&ids=jp-tesla-model-y-2026-premium
+- Tesla Model 3 Premium × Model Y Premiumで、価格・Level・道路・速度・ハンズオフ・運転者監視・必要パッケージ・販売状態を同じ軸で比較。既知差分を強調し、未確認は優劣から除外した。
+- 比較で「確認できた機能」を日本語ラベル（追従走行（ACC）・車線中央維持・運転者監視）として表示。同値行は「同じ項目を隠す／すべての項目を表示」で切り替え可能。
+- 独立監査PASS: 差分1行、同値9行、未確認2行、同値行0→9再表示、機能ラベル3/3、XSS拒否、390px横overflowなし。
+- `npm test`（Vitest 29/29、Python 16/16、価格95/95、公式導線95/95）、`npm run check`（0 errors / 0 warnings）、build 101 pages、production E2E 1/1、GA collect HTTP 204。
+- 公開比較HTMLに内部metadata/source URL、`GTM-TEST`は残っていない。公式リンク2/2はTesla公式、`noopener noreferrer`付き。
+
 ## 2026-09-10 Tesla受注可否トランシェの本番実測
 
 - exact commit: `1dff8d69803c7ff98a036f141730b1b6b82d4796`
