@@ -218,6 +218,7 @@ try {
   await page.goto(`${base}/cars/jp-lexus-rz-2026-rz500e-version-l-awd/`);
   assert.match(await page.locator('main').innerText(), /Lexus[\s\S]*RZ[\s\S]*RZ500e/);
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*8,500,000円[\s\S]*ハンズオフ[\s\S]*未確認/, 'RZの未確認条件を明示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /rz\/features|sources|accessedAt/, 'RZ詳細に内部根拠を表示しない');
 
   await page.goto(`${base}/cars/jp-toyota-prius-2026-z-2wd/`);
   assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*プリウス[\s\S]*Z（2WD）/);
@@ -226,7 +227,7 @@ try {
   await page.goto(`${base}/cars/jp-lexus-nx-2026-nx350h-version-l-2wd/`);
   assert.match(await page.locator('main').innerText(), /Lexus[\s\S]*NX[\s\S]*NX350h/);
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*6,376,000円[\s\S]*ハンズオフ[\s\S]*不可/, 'NXの公式価格と手保持条件を表示');
-  assert.doesNotMatch(await page.locator('main').innerText(), /rz\/features|sources|accessedAt/, 'RZ詳細に内部根拠を表示しない');
+  assert.doesNotMatch(await page.locator('main').innerText(), /nx\/features|sources|accessedAt/, 'NX詳細に内部根拠を表示しない');
 
   await page.goto(`${base}/cars/jp-tesla-model-y-2026-premium/`);
   assert.match(await page.locator('main').innerText(), /Tesla[\s\S]*Model Y/);

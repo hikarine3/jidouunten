@@ -193,8 +193,10 @@ describe('vehicle data contract and filters', () => {
     expect(prius?.handsOff).toBe('not_allowed');
     expect(prius?.driverMonitoring).toBe('required');
     expect(prius?.capabilities).toEqual(expect.arrayContaining(['adaptive_cruise_control', 'lane_centering', 'traffic_jam_assist']));
+    expect(prius?.capabilities).not.toContain('driver_monitoring');
     expect(prius?.availability).toBe('unknown');
     expect(prius?.sources.some((source) => source.url === 'https://toyota.jp/prius/safety/')).toBe(true);
+    expect(prius?.sources.some((source) => source.url === 'https://manual.toyota.jp/prius/3066/hev/ja_JP/contents/vhch04se050404.php')).toBe(true);
 
     const nx = vehicles.find((vehicle) => vehicle.id === 'jp-lexus-nx-2026-nx350h-version-l-2wd');
     expect(nx?.price?.amounts[0].amountJpy).toBe(6_376_000);
@@ -202,6 +204,7 @@ describe('vehicle data contract and filters', () => {
     expect(nx?.driverMonitoring).toBe('required');
     expect(nx?.availability).toBe('unknown');
     expect(nx?.sources.some((source) => source.url === 'https://lexus.jp/models/nx/features/safety/')).toBe(true);
+    expect(nx?.sources.some((source) => source.url === 'https://manual.lexus.jp/nx/3050/hev/ja_JP/contents/reb1668054515740.php#yaw1609986159221')).toBe(true);
   });
 
   it('時系列フィールドは公式モデル年・世代・適用時点を混同しない', () => {

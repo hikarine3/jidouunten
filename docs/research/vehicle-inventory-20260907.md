@@ -215,11 +215,11 @@ Advanced Driveの条件付きハンズオフを混同しない。RZは販売単�
 | プリウス日本向け現行商品ページ、安全運転支援装置が運転支援である旨 | トヨタ自動車 | https://toyota.jp/prius/ | 2026-09-10 |
 | プリウス Z（2WD）3,998,500円、2026年7月現在の参考価格、WEB見積り・販売店導線 | トヨタ自動車 | https://toyota.jp/prius/grade/ | 2026-09-10 |
 | プリウス Toyota Safety Sense、全車速追従レーダークルーズコントロール、LTA、ステアリング保持条件 | トヨタ自動車 | https://toyota.jp/prius/safety/ | 2026-09-10 |
-| プリウス LTAの作動条件、高速道路・自動車専用道路、手放し継続時の警告・解除 | トヨタ自動車 | https://manual.toyota.jp/prius/2301/hev/ja_JP/contents/vhch04se050404.php | 2026-09-10 |
+| プリウス HEV 2026.07～ LTAの作動条件、高速道路・自動車専用道路、手放し継続時の警告・解除 | トヨタ自動車 | https://manual.toyota.jp/prius/3066/hev/ja_JP/contents/vhch04se050404.php | 2026-09-10 |
 | NX日本向け現行ラインアップとNX350h “version L” | Lexus | https://lexus.jp/models/nx/ | 2026-09-10 |
 | NX350h “version L” 2WD（FF）6,376,000円、見積りシミュレーション | Lexus | https://lexus.jp/models/nx/features/price_grade/ | 2026-09-10 |
 | NX Lexus Safety System＋、全車速追従レーダークルーズコントロール・LTA、ステアリング保持条件 | Lexus | https://lexus.jp/models/nx/features/safety/ | 2026-09-10 |
-| NX LTAの作動条件、高速道路・自動車専用道路、手放し継続時の警告・解除 | Lexus | https://manual.lexus.jp/nx/2109/cv/ja_JP/contents/ssz1624532638078.php | 2026-09-10 |
+| NX350h LTAの作動条件、高速道路・自動車専用道路、手放し継続時の警告・解除 | Lexus | https://manual.lexus.jp/nx/3050/hev/ja_JP/contents/reb1668054515740.php#yaw1609986159221 | 2026-09-10 |
 
 プリウスはToyota公式安全ページに「ステアリングを持ち続ける必要」が明記されているため `handsOff=not_allowed` とした。NXもLexus公式安全ページ・取扱説明書の同様の注意から `handsOff=not_allowed`、運転者監視を `required` とした。速度の数値範囲や販売単位別の注文可否は、確認できたページで固定できないため未確認のままにし、資料発行年をモデル年へ流用していない。プリウスのみ公式ページが2026年7月仕様を明示するため `modelYear=2026`、`catalogAsOf=2026-07`、`salesUnitIntroducedAt=2026-07`、`priceEffectiveAt=2026-07` とした。NXは適用時点を公式ページで固定できないためnullとした。
 
