@@ -1,5 +1,17 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 保存・再開導線の本番実測
+
+- exact commit: `be9a9824b24287d1fb07e8d4d5eaa9e5ac6935e6`
+- Immutable deployment: https://2eef602d.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 一覧の検索条件1件・比較中の2台1件を同一ブラウザへ保存し、全ページ共通バーから再開・削除できる機能を反映。
+- 本体とimmutableのトップで `GTM-PV9QVMJV` と保存バーを確認し、`GTM-TEST` が残っていないことを確認。
+- `npm test`（Vitest 29/29、Python 16/16、価格95/95、公式導線）、`npm run check`（0 errors）、build 101 pages、独立監査PASS。
+- `BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs` は保存・復元・削除、既存一覧/比較、GA collect HTTP 204を含め1/1 PASS。
+- 本体のトップ、一覧、比較、Harrier詳細・比較は200。存在しないパスは404。日本語IDNの `/cars/?level=2&availability=all` は本体URLへpath/queryを維持した301。
+- 監査はexact SHAでPASS。外部URL・未知path/query・不正比較ID・HTML注入を拒否し、390pxで横overflowなしを確認。
+
 ## 2026-09-10 後発対策トランシェの本番実測
 
 - exact commit: `93f27ed5b43bb60cb4a8ed346dcbba88c8114753`

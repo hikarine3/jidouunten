@@ -1,5 +1,12 @@
 # 計測・検索登録
 
+## 2026-09-10 保存・再開導線の計測確認
+
+`be9a9824b24287d1fb07e8d4d5eaa9e5ac6935e6` を実IDでビルドし、
+`https://2eef602d.jidouunten.pages.dev` と `https://jidouunten.jp/` へ配信した。保存・再開機能は
+localStorageのみを使い、保存本文・検索query・車両ID・表示名をGAへ送信しない。既存GTM/GAの
+初期page_view・一覧/比較イベントに回帰はなく、production E2EでGA collect HTTP 204を確認した。
+
 ## 2026-09-10 本番再確認
 
 ハリアー6販売単位を含む `93f27ed5b43bb60cb4a8ed346dcbba88c8114753` を、実IDでビルドした
