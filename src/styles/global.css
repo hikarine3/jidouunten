@@ -201,8 +201,16 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .saved-resume-copy span:last-child { color: #bdcad1; font-size: .72rem; }
 .saved-resume-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; min-width: 0; }
 .saved-resume-item { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; padding: 4px 5px 4px 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; background: rgba(255,255,255,.06); font-size: .72rem; }
-.saved-resume-item > span { overflow: hidden; max-width: 240px; text-overflow: ellipsis; white-space: nowrap; }
+.saved-resume-item > .saved-resume-content { display: grid; gap: 1px; min-width: 0; max-width: 260px; }
+.saved-resume-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .saved-resume-delta { display: block; color: var(--lime); font-size: .68rem; font-weight: 700; }
+.saved-resume-changes { margin-top: 4px; color: #dce9eb; font-size: .68rem; }
+.saved-resume-changes summary { color: var(--lime); cursor: pointer; font-weight: 800; }
+.saved-resume-changes ul { display: grid; gap: 3px; margin: 5px 0 0; padding-left: 16px; }
+.saved-resume-changes li { color: #bdcad1; }
+.saved-resume-changes a { color: white; font-weight: 700; }
+.saved-resume-changes a:hover, .saved-resume-changes a:focus-visible { color: var(--lime); }
+.saved-resume-changes small { display: block; color: #9fb1b8; font-size: .62rem; }
 .saved-resume .button.text { border-color: rgba(255,255,255,.2); color: white; }
 .saved-resume .button.text:hover, .saved-resume .button.text:focus-visible { border-color: var(--lime); color: var(--lime); }
 .saved-resume .button.alt { color: var(--ink); }

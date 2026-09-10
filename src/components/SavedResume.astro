@@ -37,18 +37,24 @@ const resumeCatalogJson = JSON.stringify(resumeCatalog).replace(/</g, '\\u003c')
     let changed = 0;
     let removed = 0;
     const categories = new Set();
+    const changedEntries = [];
     const categoryLabels = { price: '価格', capability: 'できること', odd: '作動条件', package: '必要装備', availability: '販売状態', identity: '車両仕様' };
     entries.forEach(({ id, fingerprint, signals }) => {
       if (!current.has(id)) removed += 1;
       else if (current.get(id).fingerprint !== fingerprint) {
         changed += 1;
+        const entryCategories = [];
         Object.keys(categoryLabels).forEach((category) => {
-          if (signals?.[category] && current.get(id).signals?.[category] !== signals[category]) categories.add(categoryLabels[category]);
+          if (signals?.[category] && current.get(id).signals?.[category] !== signals[category]) {
+            categories.add(categoryLabels[category]);
+            entryCategories.push(categoryLabels[category]);
+          }
         });
-        if (!signals) categories.add('判断材料');
+        if (!signals) { categories.add('判断材料'); entryCategories.push('判断材料'); }
+        changedEntries.push({ id, label: current.get(id).label, categories: entryCategories });
       }
     });
-    return { changed, removed, categories: [...categories] };
+    return { changed, removed, categories: [...categories], changedEntries };
   };
   const deltaLabel = (item) => {
     const delta = snapshotDelta(item);
@@ -56,7 +62,10 @@ const resumeCatalogJson = JSON.stringify(resumeCatalog).replace(/</g, '\\u003c')
     const parts = [];
     if (delta.changed) parts.push(`判断材料の変更 ${delta.changed}件${delta.categories.length ? `（${delta.categories.join('・')}）` : ''}`);
     if (delta.removed) parts.push(`掲載終了・非公開 ${delta.removed}件`);
-    return `<small class="saved-resume-delta" data-saved-resume-delta>${escapeHtml(parts.join(' / '))}</small>`;
+    const changedLinks = delta.changedEntries?.length
+      ? `<details class="saved-resume-changes" data-saved-resume-changes><summary>変更を確認</summary><ul>${delta.changedEntries.slice(0, 20).map((entry) => `<li><a href="/cars/${encodeURIComponent(entry.id)}/" data-saved-resume-changed-link>${escapeHtml(entry.label)}</a>${entry.categories?.length ? `<small>${escapeHtml(entry.categories.join('・'))}</small>` : ''}</li>`).join('')}</ul></details>`
+      : '';
+    return `<small class="saved-resume-delta" data-saved-resume-delta>${escapeHtml(parts.join(' / '))}</small>${changedLinks}`;
   };
   const render = () => {
     const state = read();
@@ -66,7 +75,7 @@ const resumeCatalogJson = JSON.stringify(resumeCatalog).replace(/</g, '\\u003c')
     actions.innerHTML = ['search', 'compare'].filter((kind) => state[kind]).map((kind) => {
       const item = state[kind];
       const title = kind === 'search' ? '検索条件' : '比較';
-      return `<span class="saved-resume-item"><span>${title}: ${escapeHtml(item.label)}${deltaLabel(item)}</span><a class="button small alt" href="${escapeHtml(item.href)}" data-saved-resume-open="${kind}">再開</a><button class="button small text" type="button" data-saved-resume-delete="${kind}">削除</button></span>`;
+      return `<span class="saved-resume-item"><span class="saved-resume-content"><span class="saved-resume-label">${title}: ${escapeHtml(item.label)}</span>${deltaLabel(item)}</span><a class="button small alt" href="${escapeHtml(item.href)}" data-saved-resume-open="${kind}">再開</a><button class="button small text" type="button" data-saved-resume-delete="${kind}">削除</button></span>`;
     }).join('');
     actions.querySelectorAll('[data-saved-resume-delete]').forEach((button) => button.addEventListener('click', () => {
       if (!deleteSavedResume(window.localStorage, button.dataset.savedResumeDelete) && note) note.textContent = 'このブラウザでは保存を利用できません。';

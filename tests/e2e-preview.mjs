@@ -45,15 +45,18 @@ try {
   await page.locator('[data-save-search]').click();
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), true, '検索条件を保存すると共通の再開バーを表示');
   assert.match(await page.locator('[data-saved-resume]').innerText(), /検索条件:[\s\S]*Tesla/, '保存した検索のラベルを表示');
-  await page.evaluate(() => {
+  const changedResumeId = await page.evaluate(() => {
     const key = 'jidouunten:saved-resume:v1';
     const state = JSON.parse(localStorage.getItem(key));
     state.search.snapshot.entries[0].fingerprint = '00000000';
     state.search.snapshot.entries[0].signals.price = '00000000';
     localStorage.setItem(key, JSON.stringify(state));
+    return state.search.snapshot.entries[0].id;
   });
   await page.reload();
   assert.match(await page.locator('[data-saved-resume]').innerText(), /判断材料の変更 1件（価格）/, '保存時点から価格という意味のある判断材料が変わったことを表示');
+  assert.equal(await page.locator('[data-saved-resume-changes]').count(), 1, '意味のある変更には確認導線を表示');
+  assert.equal(await page.locator('[data-saved-resume-changed-link]').first().getAttribute('href'), `/cars/${changedResumeId}/`, '変更車両の詳細へ直接戻れる');
   await page.goto(`${base}/cars/jp-tesla-model-3-2026-premium/`);
   await page.goto(`${base}/`);
   await page.locator('[data-saved-resume-open="search"]').click();
