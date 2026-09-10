@@ -9,6 +9,13 @@
 - app exact `805b910034c48a15ecc338e5468471f3417c377c`、docs `05ff21b0de89f012681991a0bcf08ed1f5982ee0`、immutable `https://b07e61a0.jidouunten.pages.dev`、Production `https://jidouunten.jp/`、deployment `b07e61a0-1cef-465c-a126-bdeab9d1c73c`。
 - Vitest40/40、価格147/147、公式導線37モデル/38 actions、Python16/16、Astro check 0 errors/0 warnings/7 hints、実ID build153、保存URL復元、E2E本番/immutable各1/1・GA collect204、主要URL200、IDN path/query301、未知URL404、390px overflow0、独立Luna監査PASS。直前rollback `https://218ed369.jidouunten.pages.dev`。
 
+## 2026-09-11 後発対策・Toyota カローラ クロス（実装・本番反映済み）
+
+- Toyota カローラ クロスをZ／S／GR SPORT／Z“Adventure”の2WD・E-Four 7販売単位へ追加。公式掲載価格は298万1,000円〜407万7,700円（税込、2026年7月基準）。ACC・LTA・渋滞時運転支援・車線変更時の補助を同じ比較キーへ固定し、ステアリング保持を必要条件、Level 2相当、注文可否は`unknown`として表示する。
+- 一覧ではメーカー・価格帯・車線変更支援で絞り込み、詳細では価格・ODD・保持条件・平易な機能名・Toyota公式見積り出口、比較では7単位の価格／駆動差を確認できる。確認日・出典URL・内部enumは通常UIへ出さない。
+- exact release `5471da3`、immutable `https://6e1e9bad.jidouunten.pages.dev`、Production `https://jidouunten.jp/`、deployment `6e1e9bad`。push済み。ローカルVitest41/41、価格154/154、公式導線38モデル/39 actions、Python16/16、Astro check 0 errors/0 warnings/7 hints、実IDbuild160ページ、Chrome E2E1/1、主要immutable/本体URL200、未知URL404、IDN path/query301を確認。GA collect endpointはHTTP204を確認。直前rollback `https://b07e61a0.jidouunten.pages.dev`。
+- 根拠は[トヨタ公式グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades61.json)、[安全性能](https://toyota.jp/corollacross/safety/)、[取扱説明書](https://manual.toyota.jp/corollacross/2607/hev/ja_JP/contents/vhch04se050409.php)。
+
 ## 2026-09-11 保存差分から変更車両へ戻る導線（実装・本番反映済み）
 
 - 保存した検索・比較で意味ある変更を検出したとき、カテゴリ（価格・できること・作動条件・必要装備・販売状態・車両仕様）と対象販売単位の詳細リンクを「変更を確認」から開けるようにした。掲載終了は別表示、確認日・出典URLだけの更新は通知しない。
