@@ -1,0 +1,45 @@
+<aside class="saved-resume" data-saved-resume hidden aria-live="polite">
+  <div class="wrap saved-resume-inner">
+    <div class="saved-resume-copy"><span class="eyebrow">PICK UP WHERE YOU LEFT OFF</span><strong>保存した続き</strong><span data-saved-resume-note>同じブラウザに保存しています。端末間では同期しません。</span></div>
+    <div class="saved-resume-actions" data-saved-resume-actions></div>
+  </div>
+</aside>
+
+<script>
+  // @ts-nocheck
+  import { deleteSavedResume, readSavedResumeState, updateSavedResume, type SavedResumeKind } from '../lib/saved-resume';
+  const shell = document.querySelector('[data-saved-resume]');
+  const actions = shell?.querySelector('[data-saved-resume-actions]');
+  const note = shell?.querySelector('[data-saved-resume-note]');
+  const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+  const read = () => readSavedResumeState(window.localStorage);
+  const render = () => {
+    const state = read();
+    if (!shell || !actions) return state;
+    if (!state || (!state.search && !state.compare)) { shell.hidden = true; actions.innerHTML = ''; return state; }
+    shell.hidden = false;
+    actions.innerHTML = (['search', 'compare'] as SavedResumeKind[]).filter((kind) => state[kind]).map((kind) => {
+      const item = state[kind];
+      const title = kind === 'search' ? '検索条件' : '比較';
+      return `<span class="saved-resume-item"><span>${title}: ${escapeHtml(item.label)}</span><a class="button small alt" href="${escapeHtml(item.href)}" data-saved-resume-open="${kind}">再開</a><button class="button small text" type="button" data-saved-resume-delete="${kind}">削除</button></span>`;
+    }).join('');
+    actions.querySelectorAll('[data-saved-resume-delete]').forEach((button) => button.addEventListener('click', () => {
+      if (!deleteSavedResume(window.localStorage, button.dataset.savedResumeDelete as SavedResumeKind) && note) note.textContent = 'このブラウザでは保存を利用できません。';
+      render();
+    }));
+    return state;
+  };
+  window.jidouuntenSave = (kind: SavedResumeKind, href: string, label: string) => {
+    const ok = updateSavedResume(window.localStorage, kind, href, label);
+    if (!ok) {
+      if (note) note.textContent = '保存できません。URLをブックマークして続きから再開できます。';
+      if (actions) actions.innerHTML = '';
+      shell?.removeAttribute('hidden');
+      return false;
+    }
+    render();
+    return ok;
+  };
+  window.jidouuntenSavedResumeRender = render;
+  render();
+</script>

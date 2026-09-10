@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
+import SavedResume from '../components/SavedResume.astro';
 const { title = '自動運転.jp｜同じLevel 2でも、できることは違う。', description = '日本向けの運転支援車を、自動化レベル、ハンズオフ、機能、発売・導入時期から探して比較できます。' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, 'https://jidouunten.jp').toString();
 const socialImage = 'https://jidouunten.jp/og.png';
@@ -49,6 +50,7 @@ const structuredData = {
         </nav>
       </div>
     </header>
+    <SavedResume />
     <main><slot /></main>
     <footer class="footer">
       <div class="wrap footer-inner">

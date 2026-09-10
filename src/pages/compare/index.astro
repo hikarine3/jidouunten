@@ -28,6 +28,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
       {vehicles.map((vehicle) => <label class="check-card"><input type="checkbox" name="ids" value={vehicle.id} /> <span><strong>{vehicle.maker} {vehicle.model}</strong><br /><small class="subtle">Level {vehicle.automationLevel} · {vehicleReferenceLabel(vehicle)} · {vehicle.grade}</small></span></label>)}
       <div style="grid-column: 1 / -1; display:flex; justify-content:flex-end;"><button class="button alt" type="submit">選択した車両を比較</button></div>
     </form>
+    <div class="compare-result-actions"><button class="button small text" type="button" data-save-compare hidden>この比較を保存</button><span class="subtle" data-save-compare-note aria-live="polite"></span></div>
     <div class="empty" data-compare-empty><h2>比較する車両を一覧から選んでください。</h2><p>車両一覧の「比較に追加」から2台を選ぶと、条件を横並びで確認できます。</p><a class="button text" href="/">車を探す</a></div>
     <div data-compare-result hidden></div>
   </div></section>
@@ -52,6 +53,8 @@ const publicCatalog = vehicles.map((vehicle) => ({
       checkboxes.forEach((input) => { input.disabled = !input.checked && ids.length >= 2; input.addEventListener('change', () => { const checked = checkboxes.filter((item) => item.checked).length; checkboxes.forEach((item) => { item.disabled = !item.checked && checked >= 2; }); }); });
       const empty = document.querySelector('[data-compare-empty]'); const result = document.querySelector('[data-compare-result]');
       if (!empty || !result) return;
+      const saveButton = document.querySelector('[data-save-compare]');
+      if (saveButton) saveButton.hidden = selected.length !== 2;
       empty.hidden = selected.length === 2; result.hidden = selected.length !== 2;
       if (selected.length !== 2) return;
       const headings = selected.map((v) => `<th>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</th>`).join('');
@@ -63,6 +66,22 @@ const publicCatalog = vehicles.map((vehicle) => ({
       }));
       sendCompare(selected);
     };
+    document.querySelector('[data-save-compare]')?.addEventListener('click', (event) => {
+      const params = new URLSearchParams(location.search);
+      const ids = [...new Set(params.getAll('ids'))].slice(0, 2);
+      if (ids.length !== 2) return;
+      const selected = ids.map((id) => catalog.find((vehicle) => vehicle.id === id)).filter(Boolean);
+      if (selected.length !== 2) return;
+      const button = event.currentTarget;
+      const label = `${selected[0].maker} ${selected[0].model} × ${selected[1].maker} ${selected[1].model}`;
+      const href = `/compare/?${ids.map((id) => `ids=${encodeURIComponent(id)}`).join('&')}`;
+      if (window.jidouuntenSave?.('compare', href, label)) {
+        const note = document.querySelector('[data-save-compare-note]');
+        if (note) note.textContent = '比較を保存しました';
+        button.textContent = '保存しました';
+        window.setTimeout(() => { button.textContent = 'この比較を保存'; if (note) note.textContent = ''; }, 1800);
+      }
+    });
     window.addEventListener('popstate', renderCompare); renderCompare();
   </script>
 </Layout>

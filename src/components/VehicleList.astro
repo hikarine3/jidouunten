@@ -63,7 +63,7 @@ const levelOverview = levelIds.map((level) => {
     </div>
   </details></form>
   <div class="notice list-notice" data-level2-notice hidden><strong>Level 2は運転支援です。</strong> ハンズオフ可能な条件があっても、運転者は周囲を常時監視します。</div>
-  <div class="results-bar"><h2><span data-selected-label>公式サイト掲載あり</span> <span class="subtle" data-result-count aria-live="polite">{defaultCount}件</span></h2><span class="subtle results-help" data-sort-label>発売・導入が新しい順 · 時期不明は末尾</span><div class="compare-toolbar" data-compare-toolbar><span class="subtle" data-compare-count>0台選択中（最大2台）</span><a class="button small alt" data-compare-link href="/compare/" aria-disabled="true">選択した車両を比較</a></div></div>
+  <div class="results-bar"><h2><span data-selected-label>公式サイト掲載あり</span> <span class="subtle" data-result-count aria-live="polite">{defaultCount}件</span></h2><span class="subtle results-help" data-sort-label>発売・導入が新しい順 · 時期不明は末尾</span><div class="results-actions"><button class="button small text" type="button" data-save-search>この条件を保存</button><div class="compare-toolbar" data-compare-toolbar><span class="subtle" data-compare-count>0台選択中（最大2台）</span><a class="button small alt" data-compare-link href="/compare/" aria-disabled="true">選択した車両を比較</a></div></div></div>
   <form class="compare-list" method="get" action="/compare/" id="compare-list-form"><div class="cards" data-results>{sortedVehicles.map((vehicle, index) => <div data-vehicle-shell hidden={!isDefaultListedVehicle(vehicle)} data-level={vehicle.automationLevel} data-maker={vehicle.maker} data-capabilities={vehicle.capabilities.join('|')} data-road={vehicle.odd.roadTypes.map(canonicalRoadType).join('|')} data-hands-off={vehicle.handsOff} data-availability={vehicle.availability} data-current-catalog={String(vehicle.currentCatalogListed === true)} data-introduced-at={vehicle.salesUnitIntroducedAt ?? ''} data-price-min={vehiclePriceMin(vehicle) ?? ''} data-stable-key={`${vehicle.maker}::${vehicle.model}::${vehicle.grade}::${vehicle.id}`} data-original-index={index}><VehicleCard vehicle={vehicle} selectable /></div>)}</div></form>
   <div class="empty" data-empty hidden><h2>条件に合う候補はまだありません</h2><p>条件をゆるめるか、公式サイト掲載ありの候補に戻してお試しください。</p><a class="button text" href={action}>条件をリセット</a></div>
 </div></section>
@@ -74,6 +74,7 @@ const levelOverview = levelIds.map((level) => {
   const filterPanel = form?.querySelector('details');
   const results = document.querySelector('[data-results]');
   const compareForm = document.querySelector('#compare-list-form');
+  const saveSearchButton = document.querySelector('[data-save-search]');
   const shells = [...document.querySelectorAll('[data-vehicle-shell]')];
   const compareInputs = [...document.querySelectorAll('#compare-list-form input[name="ids"]')];
   const levelShortcuts = [...document.querySelectorAll('[data-level-shortcut]')];
@@ -128,6 +129,16 @@ const levelOverview = levelIds.map((level) => {
   compareInputs.forEach((input) => input.addEventListener('change', updateCompare));
   compareForm?.addEventListener('submit', (event) => { if (compareInputs.filter((input) => input.checked).length !== 2) event.preventDefault(); });
   document.querySelector('[data-compare-link]')?.addEventListener('click', (event) => { if (compareInputs.filter((input) => input.checked).length !== 2) event.preventDefault(); });
+  saveSearchButton?.addEventListener('click', () => {
+    const label = document.querySelector('[data-selected-label]')?.textContent?.trim() || '保存した検索';
+    const href = `${location.pathname}${location.search}`;
+    const saved = window.jidouuntenSave?.('search', href, label);
+    if (saved) {
+      const original = saveSearchButton.textContent;
+      saveSearchButton.textContent = '保存しました';
+      window.setTimeout(() => { saveSearchButton.textContent = original; }, 1800);
+    }
+  });
   window.addEventListener('popstate', () => applyFilters(false));
   applyFilters(false);
 </script>

@@ -42,6 +42,16 @@ try {
   await page.locator('[data-maker-shortcut="Tesla"]').click();
   assert.equal(new URL(page.url()).searchParams.get('maker'), 'Tesla', 'Teslaクイック絞り込みをURLへ保存');
   assert.equal(await visibleCards(), 6, 'Teslaクイック絞り込みは6件');
+  await page.locator('[data-save-search]').click();
+  assert.equal(await page.locator('[data-saved-resume]').isVisible(), true, '検索条件を保存すると共通の再開バーを表示');
+  assert.match(await page.locator('[data-saved-resume]').innerText(), /検索条件:[\s\S]*Tesla/, '保存した検索のラベルを表示');
+  await page.goto(`${base}/cars/jp-tesla-model-3-2026-premium/`);
+  await page.goto(`${base}/`);
+  await page.locator('[data-saved-resume-open="search"]').click();
+  await page.waitForURL((url) => url.pathname === '/' && url.searchParams.get('maker') === 'Tesla');
+  assert.equal(await visibleCards(), 6, '再開リンクで保存したTesla条件を復元');
+  await page.locator('[data-saved-resume-delete="search"]').click();
+  assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '検索条件を削除すると再開バーを隠す');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="allowed_in_conditions"]').click();
   assert.equal(await visibleCards(), 29, '条件内ハンズオフは29件');
@@ -176,6 +186,16 @@ try {
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.equal(new URL(page.url()).pathname, '/compare/', '一覧から比較へ遷移');
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '一覧選択が比較画面へ反映');
+  await page.locator('[data-save-compare]').click();
+  assert.match(await page.locator('[data-save-compare-note]').innerText(), /比較を保存しました/, '比較を保存したことを通知');
+  await page.goto(`${base}/`);
+  assert.equal(await page.locator('[data-saved-resume]').isVisible(), true, '比較保存も共通の再開バーに表示');
+  assert.match(await page.locator('[data-saved-resume]').innerText(), /比較:/, '保存した比較の種別を表示');
+  await page.locator('[data-saved-resume-open="compare"]').click();
+  await page.waitForURL((url) => url.pathname === '/compare/' && url.searchParams.getAll('ids').length === 2);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  await page.locator('[data-saved-resume-delete="compare"]').click();
+  assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '比較保存を削除すると再開バーを隠す');
 
   await page.goto(`${base}/cars/?availability=all`);
   assert.equal(await visibleCards(), 95, 'すべての状態で過去車両を含む95件');
