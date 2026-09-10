@@ -13,7 +13,7 @@
 
 - Toyota カローラ クロスをZ／S／GR SPORT／Z“Adventure”の2WD・E-Four 7販売単位へ追加。公式掲載価格は298万1,000円〜407万7,700円（税込、2026年7月基準）。ACC・LTA・渋滞時運転支援・車線変更時の補助を同じ比較キーへ固定し、ステアリング保持を必要条件、Level 2相当、注文可否は`unknown`として表示する。
 - 一覧ではメーカー・価格帯・車線変更支援で絞り込み、詳細では価格・ODD・保持条件・平易な機能名・Toyota公式見積り出口、比較では7単位の価格／駆動差を確認できる。確認日・出典URL・内部enumは通常UIへ出さない。
-- exact release `5471da3`、immutable `https://6e1e9bad.jidouunten.pages.dev`、Production `https://jidouunten.jp/`、deployment `6e1e9bad`。push済み。ローカルVitest41/41、価格154/154、公式導線38モデル/39 actions、Python16/16、Astro check 0 errors/0 warnings/7 hints、実IDbuild160ページ、Chrome E2E1/1、主要immutable/本体URL200、未知URL404、IDN path/query301を確認。GA collect endpointはHTTP204を確認。直前rollback `https://b07e61a0.jidouunten.pages.dev`。
+- exact release `5471da3`、immutable `https://6e1e9bad.jidouunten.pages.dev`、Production `https://jidouunten.jp/`、deployment `6e1e9bad`。push済み。ローカルVitest41/41、価格154/154、公式導線38モデル/39 actions、Python16/16、Astro check 0 errors/0 warnings/7 hints、実IDbuild160ページ、実ブラウザE2Eは本番・immutable各1/1（GA collect 204）を確認。主要immutable/本体URL200、未知URL404、IDN path/query301も確認。直前rollback `https://b07e61a0.jidouunten.pages.dev`。
 - 根拠は[トヨタ公式グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades61.json)、[安全性能](https://toyota.jp/corollacross/safety/)、[取扱説明書](https://manual.toyota.jp/corollacross/2607/hev/ja_JP/contents/vhch04se050409.php)。
 
 ## 2026-09-11 保存差分から変更車両へ戻る導線（実装・本番反映済み）
