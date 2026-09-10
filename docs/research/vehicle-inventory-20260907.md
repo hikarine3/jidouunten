@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 89 | `src/data/vehicles.json` の全レコード（現行88 + 過去1） |
-| 既定表示 | 88 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 95 | `src/data/vehicles.json` の全レコード（現行94 + 過去1） |
+| 既定表示 | 94 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -20,6 +20,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota / Lexus / 後発対策） | 3 | クラウン（クロスオーバー）CROSSOVER RS “THE LIMITED-MATTE METAL” 4WD、LBX “Bespoke Build” 2WD、RX500h “F SPORT Performance” AWD。渋滞時支援・車線変更・監視条件と公式価格を販売単位へ固定 |
 | 今回追加（Toyota bZ4X） | 1 | bZ4X Z（FWD）。全車速ACC・LTA・LCAと渋滞時支援の条件、公式価格を販売単位へ固定 |
 | 今回追加（Toyota RAV4 / 後発対策） | 4 | Z HEV E-Four / Z PHEV E-Four / Adventure HEV E-Four / GR SPORT PHEV E-Four。公式価格、ACC・LTA、グレード別のAdvanced Drive・LCA・ドライバーモニターの標準／オプション差を販売単位へ固定 |
+| 今回追加（Toyota ハリアー / 後発対策） | 6 | G・Z・Z“Leather Package”の2WD/E-Four。2026年8月価格、ACC・LTA・停止保持・ハンドル保持要求を販売単位へ固定し、根拠がないLCA・ドライバーモニターは付与しない |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -54,6 +55,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Lexus | RX500h “F SPORT Performance” AWD | 掲載 | 2相当 | 2026-09-10 |
 | Toyota | bZ4X Z（FWD） | 掲載 | 2相当 | 2026-09-10 |
 | Toyota | RAV4 Z（ハイブリッド車 E-Four） / Z（プラグインハイブリッド車 E-Four） / Adventure（ハイブリッド車 E-Four） / GR SPORT（プラグインハイブリッド車 E-Four） | 掲載（4単位） | 2相当 | 2026-09-10 |
+| Toyota | ハリアー G（2WD/E-Four） / Z（2WD/E-Four） / Z“Leather Package”（2WD/E-Four） | 掲載（6単位） | 2相当 | 2026-09-10 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -267,6 +269,20 @@ Advanced Driveの条件付きハンズオフを混同しない。RZは販売単�
 | RAV4 PHEV 2026.02～のLTA・全車速追従レーダークルーズ作動条件 | トヨタ自動車 | https://manual.toyota.jp/rav4/3098/phev/ja_JP/contents/vhch05se050405.php / https://manual.toyota.jp/rav4/3098/phev/ja_JP/contents/vhch05se050412.php | 2026-09-10 |
 
 ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し、オプション価格が販売単位に固定できるまで「掲載価格に含めない」と明記した。Adventureだけはドライバーモニター標準を反映したが、LCA・Advanced Driveはオプションのためハンズオフ可能車とは数えていない。全4単位はACC（縦方向）とLTA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。新車注文可否は公式商品ページの掲載以上に販売単位へ固定できないため `availability=unknown` としている。
+
+## Toyota ハリアーの根拠（後発対策トランシェ）
+
+確認日は2026-09-10。ハリアー現行HEVの価格・グレードJSONと2026年8月主要装備表から、G・Z・Z“Leather Package”の2WD/E-Fourを6販売単位として登録した。公式安全ページと現行取扱説明書で全車速追従ACC、LTA、停止保持・再発進条件、ハンドル保持要求を確認し、同じLevel 2でも価格と駆動方式を分けて比較できるようにした。LCA、Advanced Drive、独立したドライバーモニターの販売単位別標準／オプション記載は確認できないため、能力を推測して付与していない。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| ハリアー G（2WD）4,396,700円、G（E-Four）4,616,700円、Z（2WD）4,866,400円、Z（E-Four）5,086,400円、Z“Leather Package”（2WD）5,186,500円、同（E-Four）5,406,500円（税込、2026年8月価格基準） | トヨタ自動車 | https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades34.json | 2026-09-10 |
+| ハリアーのLTA・LDA・全車速追従レーダークルーズコントロール標準装備 | トヨタ自動車 | https://toyota.jp/pages/contents/harrier/004_p_001/pdf/harrier_spec_202608.pdf | 2026-09-10 |
+| LTAの車線中央支援、ACCの停止保持・先行車追従、ハンドル保持要求 | トヨタ自動車 | https://toyota.jp/harrier/safety/ | 2026-09-10 |
+| HARRIER HEV 2026.08～のLTA作動条件、渋滞時支援、無操作時の警告 | トヨタ自動車 | https://manual.toyota.jp/harrier/2608/hev/ja_JP/contents/vhch04se050404.php | 2026-09-10 |
+| HARRIER HEV 2026.08～の全車速追従ACC、停止保持・再発進条件 | トヨタ自動車 | https://manual.toyota.jp/harrier/2608/hev/ja_JP/contents/vhch04se050409.php | 2026-09-10 |
+
+6単位はACC（縦方向）とLTA（横方向）の同時支援を国土交通省のLevel 2定義へ照合してサイト上はLevel 2相当とした。公式安全ページが「安全性の観点からドライバーはステアリングを持ち続ける必要」と明記するため、handsOffは`not_allowed`。公式商品ページへの掲載は確認済みだが、販売単位ごとの新車注文可否を明文で固定できないためavailabilityは`unknown`のまま保持する。
 
 ## Volvo EX30の根拠（内部保持）
 

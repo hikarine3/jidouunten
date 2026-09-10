@@ -87,14 +87,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(89);
+    expect(vehicles).toHaveLength(95);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補88件は全件の公式金額を保持する', () => {
+  it('現行候補94件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(88);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(88);
+    expect(current).toHaveLength(94);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(94);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -103,7 +103,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(29);
+    expect(officialLinks).toHaveLength(30);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -259,6 +259,18 @@ describe('vehicle data contract and filters', () => {
     expect(rav4.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/rav4/grade/'))).toBe(true);
     expect(rav4.filter((vehicle) => vehicle.featureVersion.includes(' RAV4 HEV ')).every((vehicle) => vehicle.sources.some((source) => source.url.includes('manual.toyota.jp/rav4/3097/hev')))).toBe(true);
     expect(rav4.filter((vehicle) => vehicle.featureVersion.includes('PHEV')).every((vehicle) => vehicle.sources.some((source) => source.url.includes('manual.toyota.jp/rav4/3098/phev')))).toBe(true);
+  });
+
+  it('Toyota ハリアーはHEVの6グレードを価格・支援機能付きで販売単位化する', () => {
+    const harrier = vehicles.filter((vehicle) => vehicle.model === 'ハリアー');
+    expect(harrier).toHaveLength(6);
+    expect(harrier.every((vehicle) => vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed')).toBe(true);
+    expect(harrier.every((vehicle) => vehicle.currentCatalogListed && vehicle.catalogAsOf === '2026-08')).toBe(true);
+    expect(harrier.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([4_396_700, 4_616_700, 4_866_400, 5_086_400, 5_186_500, 5_406_500]);
+    expect(harrier.every((vehicle) => vehicle.capabilities.includes('adaptive_cruise_control') && vehicle.capabilities.includes('lane_centering') && vehicle.capabilities.includes('traffic_jam_assist'))).toBe(true);
+    expect(harrier.every((vehicle) => vehicle.driverMonitoring === 'unknown' && !vehicle.capabilities.includes('lane_change_support'))).toBe(true);
+    expect(harrier.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('grades34.json')))).toBe(true);
+    expect(harrier.every((vehicle) => vehicle.sources.some((source) => source.url.includes('manual.toyota.jp/harrier/2608/hev')))).toBe(true);
   });
 
   it('時系列フィールドは公式モデル年・世代・適用時点を混同しない', () => {
