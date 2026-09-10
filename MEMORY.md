@@ -1,6 +1,6 @@
 # MEMORY
 
-更新: 2026-09-07
+更新: 2026-09-10
 
 ## 長期決定
 
@@ -32,6 +32,13 @@
 - GTM `GTM-PV9QVMJV`、GA4 `G-Q58GM7BVB6`。1stclass側GSC/Bing所有権確認済み。
 - 公開・計測検証の証拠は `docs/operations/` とGitHub Issueに記録。
 
+## 最新の本番反映（2026-09-10）
+
+- 後発対策としてToyota シエンタを18販売単位（Z/G/X × HEV/ガソリン × 2WD/E-Four × 5/7人）で追加。
+- exact release `f25d91773d90383d3ef5967815a84fbcf829326f`、Immutable `https://e5b923fb.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。
+- 全132販売単位（現行131件）。シエンタ価格は214万6,100円〜339万7,900円。独立価値監査・リリース監査、Vitest34/Python16、build138、ローカル／本番E2E各1/1がPASS。
+- 後発の模倣対策は車名や記事数ではなく、販売単位キー、同一モデル内の価格・駆動・定員・ODD・機能差、一次情報の確認履歴、意味のある差分と再訪導線を蓄積する方針。次候補はLexus UX/LM等を公式構成再照合後に追加する。
+
 ## 次のdelivery
 
 [GitHub Project `jidouunten Delivery`](https://github.com/users/hikarine3/projects/5) の最上位Ready Issueを
@@ -41,7 +48,7 @@
 
 ## 実装・データ・routing
 
-- Astro 7.3.1。公式根拠付き9販売単位（3メーカー・5車種）、現行カタログ掲載8件と過去Level 3例1件。
+- Astro 7.3.1。公式根拠付き132販売単位（現行131、過去Level 3例1件）を同一データ契約で生成。
 - カタログ掲載は新規受注可能の保証ではない。受注可否未確認はunknownとして表示。
 - vpshikakuの現行CLAUDEモデル割当と共通contractを直接参照。Luna=実装/データ/限定レビュー、Sol=調査/外部計測設定、親=採択/統合/公開。
 - 別ブラウザprofileに誤作成した同名測定resourceは未削除。本番GTMの送信先から除外済み。詳細はignored `.cache/measurement-mistakes.json`。

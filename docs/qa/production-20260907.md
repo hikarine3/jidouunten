@@ -1,5 +1,18 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 後発対策トランシェ（Toyota シエンタ18販売単位）本番実測
+
+- exact release commit: `f25d91773d90383d3ef5967815a84fbcf829326f`
+- Immutable deployment: https://e5b923fb.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 全132販売単位（現行131件）へ更新。Toyota シエンタをZ/G/X、ハイブリッド／ガソリン、2WD／E-Four、5／7人乗りの18組み合わせで追加し、公式価格214万6,100円〜339万7,900円を一覧・詳細・比較へ反映した。
+- 全車速追従ACC・LTAは標準装備として表示し、ステアリング保持が必要なためハンズオフ不可。LCA・ドライバーモニター・個別の新車注文可否は根拠がないため付与せず、CTAも表示していない。
+- 一覧18/18、詳細18/18、代表比較、sitemap掲載18/18を確認。価格順ではシエンタX（ガソリン・2WD・5人乗り）が約215万円で先頭となり、5/7人・HEV/ガソリン・2WD/E-Fourで絞り込める。
+- 独立の価値監査・リリース監査はともにPASS。公開依存レジストリ22 surface、required selector 20件、生成HTML marker 135/135を確認した。
+- `npm test`（Vitest34/34、Python16/16、全132/132価格・現行131/131公式価格）、`npm run check`（0 errors / 0 warnings、既知hint5）、実ID build138ページ、ローカル／本番E2E各1/1を確認した。GA collectはHTTP204。
+- 本番smokeはトップ、一覧、シエンタ詳細、シエンタ比較、Level 2絞り込み、sitemap-index、sitemap-0、robotsをHTTP200で確認。`https://xn--hhrp90iveiimb.jp/cars/?level=2` は本体へpath/queryを維持した301。
+- 公開HTMLに実GTM `GTM-PV9QVMJV` を確認し、`GTM-TEST`、内部根拠キー、根拠URL、`accessedAt`、spec PDF名の漏洩は0件。
+
 ## 2026-09-10 後発対策トランシェ（ヴォクシー6販売単位・オプション差分）本番実測
 
 - exact release commit: `8ff0c03ec5b50ad4f728787a26bbb49c262da324`
