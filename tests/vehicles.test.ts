@@ -87,14 +87,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(132);
+    expect(vehicles).toHaveLength(134);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補131件は全件の公式金額を保持する', () => {
+  it('現行候補133件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(131);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(131);
+    expect(current).toHaveLength(133);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(133);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -104,7 +104,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(35);
+    expect(officialLinks).toHaveLength(36);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -253,6 +253,24 @@ describe('vehicle data contract and filters', () => {
     expect(sienta.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/sienta/safety/'))).toBe(true);
     expect(sienta.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('sienta_spec_202608.pdf')))).toBe(true);
     expect(sienta.every((vehicle) => !vehicle.capabilities.includes('hands_off_highway') && !vehicle.capabilities.includes('lane_change_support') && !vehicle.capabilities.includes('driver_monitoring'))).toBe(true);
+  });
+
+  it('Lexus LMは4人/6人仕様をAdvanced Drive付きの条件付きハンズオフとして保持する', () => {
+    const lm = vehicles.filter((vehicle) => vehicle.model === 'LM');
+    expect(lm).toHaveLength(2);
+    expect(lm.map((vehicle) => vehicle.grade).sort()).toEqual(['LM500h EXECUTIVE（4人乗り）', 'LM500h version L（6人乗り）'].sort());
+    expect(lm.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([15_200_000, 20_300_000]);
+    expect(lm.every((vehicle) => vehicle.currentCatalogListed && vehicle.modelYear === null && vehicle.catalogAsOf === '2026-03' && vehicle.priceEffectiveAt === null)).toBe(true);
+    expect(lm.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'allowed_in_conditions')).toBe(true);
+    expect(lm.every((vehicle) => vehicle.odd.speedKph.min === 0 && vehicle.odd.speedKph.max === 40)).toBe(true);
+    expect(lm.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist,hands_off_highway,driver_monitoring,lane_change_support')).toBe(true);
+    expect(lm.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://lexus.jp/models/lm/features/price_package/'))).toBe(true);
+    expect(lm.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://lexus.jp/models/lm/features/safety/'))).toBe(true);
+    expect(lm.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/lm/pdf/equipmentlist.pdf')))).toBe(true);
+    expect(lm.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/lm/pdf/specificationslist.pdf')))).toBe(true);
+    expect(lm.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('vhch04se050415.php') && source.supports.some((support) => support.includes('ハンドルから手を離す'))))).toBe(true);
+    expect(lm.every((vehicle) => vehicle.requiredPackage?.includes('G-Link契約') && vehicle.limitations.some((limitation) => limitation.includes('G-Link契約')))).toBe(true);
+    expect(lm.every((vehicle) => !vehicle.classificationRationale?.includes('allowed_in_conditions'))).toBe(true);
   });
 
   it('Honda VEZEL e:HEV ZはFF/4WDを分け、支援速度と価格を保持する', () => {

@@ -5465,4 +5465,313 @@
   "factStatus": "verified",
   "lastReviewedAt": "2026-09-10"
 }
+  ,
+  {
+    "id": "jp-lexus-lm-2026-lm500h-executive-awd-4seater",
+    "market": "JP",
+    "maker": "Lexus",
+    "model": "LM",
+    "modelYear": null,
+    "generation": null,
+    "catalogAsOf": "2026-03",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": null,
+    "price": {
+      "kind": "exact",
+      "currency": "JPY",
+      "amounts": [
+        {
+          "amountJpy": 20300000,
+          "qualifier": "LM500h EXECUTIVE（4人乗り）",
+          "sourceUrl": "https://lexus.jp/models/lm/features/price_package/"
+        }
+      ],
+      "maxJpy": 20300000,
+      "optionalPackages": [],
+      "basis": "msrp",
+      "taxIncluded": "included"
+    },
+    "grade": "LM500h EXECUTIVE（4人乗り）",
+    "requiredPackage": "Lexus Safety System ＋（全車速追従レーダークルーズ・LTA・LCA・ドライバーモニター）＋Lexus Teammate Advanced Drive（渋滞時支援）標準。利用にはG-Link契約が必要（初度登録から3年間無料、その後有料）",
+    "featureVersion": "Lexus Safety System ＋ / Lexus Teammate LM 2026年3月仕様",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-10",
+    "odd": {
+      "roadTypes": [
+        "高速道路",
+        "自動車専用道路"
+      ],
+      "speedKph": {
+        "min": 0,
+        "max": 40,
+        "condition": "Advanced Drive（渋滞時支援）は高速道路・自動車専用道路の本線で渋滞時0〜約40km/h。渋滞解消時や条件外では運転者が操作する。"
+      },
+      "trafficConditions": [
+        "先行車への追従",
+        "渋滞時の停止保持・再発進",
+        "車線内走行支援",
+        "渋滞時の条件付きハンズオフ",
+        "高速道路の車線変更支援"
+      ],
+      "weather": [
+        "天候・路面・車線認識・周囲状況により作動が制限または中断される場合がある"
+      ],
+      "geoRestriction": [
+        "一部を除く高速道路・自動車専用道路の本線",
+        "Advanced Driveは対象区間・道路状態・通信・地図などの条件下"
+      ],
+      "driverConditions": [
+        "前方と周囲を常に確認",
+        "ドライバーモニターの監視を受け、必要時に直ちに操作",
+        "システム使用中も運転者が状況確認と安全確保の責任を持つ"
+      ],
+      "manufacturerSummary": "全車速追従レーダークルーズとLTAが速度・車間・車線維持を支援し、LCAが車線変更を支援する。Advanced Drive（渋滞時支援）は高速道路・自動車専用道路の渋滞時に、運転者監視のもとで条件付きハンズオフに対応する。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway",
+      "driver_monitoring",
+      "lane_change_support"
+    ],
+    "limitations": [
+      "自動運転ではなく運転支援。運転者の常時監視・操作が必要",
+      "Advanced Driveのハンズオフは高速道路・自動車専用道路の渋滞時0〜約40km/hかつ一定条件下",
+      "対象区間・通信・地図・周囲状況などの条件が必要。渋滞解消や車線変更時は運転者が操作する",
+      "Advanced Driveの利用にはG-Link契約が必要。基本利用料は初度登録日から3年間無料で、その後は有料",
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるか、納期は未確認"
+    ],
+    "sources": [
+      {
+        "publisher": "Lexus",
+        "url": "https://lexus.jp/models/lm/features/price_package/",
+        "title": "LM 価格・パッケージ｜Lexus公式",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "LM500h EXECUTIVE（4人乗り・AWD）20,300,000円（税込）",
+          "現行価格ページのパッケージ・乗車定員・駆動方式"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "Lexus",
+        "url": "https://lexus.jp/models/lm/features/safety/",
+        "title": "LM 安全装備｜Lexus公式",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "全車速追従レーダークルーズコントロール・LTA・LCA",
+          "Lexus Teammate Advanced Drive（渋滞時支援）の標準装備",
+          "ドライバーモニター連携"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "Lexus",
+        "url": "https://lexus.jp/models/lm/pdf/equipmentlist.pdf",
+        "title": "LM500h 主要装備一覧表｜Lexus公式",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "EXECUTIVE（4人乗り）とversion L（6人乗り）の両方でAdvanced Drive・LTA・LCA・ドライバーモニター連携・全車速追従レーダークルーズが標準装備",
+          "Advanced Driveの利用にはG-Link契約が必要（初度登録日から3年間無料、その後有料）"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "Lexus",
+        "url": "https://lexus.jp/models/lm/pdf/specificationslist.pdf",
+        "title": "LM500h 主要諸元表・環境仕様書｜Lexus公式",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "LM500h EXECUTIVE AWD・4人乗り、version L AWD・6人乗りの主要諸元",
+          "2026年3月現在の仕様"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "Lexus",
+        "url": "https://manual.lexus.jp/lm/3004/hev/ja_JP/contents/vhch04se050415.php",
+        "title": "アドバンスト ドライブ（渋滞時支援）｜LM取扱説明書",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "一部を除く高速道路・自動車専用道路の本線で車線維持・加減速・停車・発進を支援",
+          "渋滞時は約40km/h以下などの条件下で作動し、作動中はハンドルから手を離すことが可能",
+          "運転者による状況確認と安全確保が必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "Lexus公式の全車速追従レーダークルーズ（縦方向）とLTA/LCA（横方向）を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。Advanced Driveは渋滞時の条件付き支援で、運転者の状況確認・常時監視が必要なためハンズオフは条件内で可とした。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-10"
+  },
+  {
+    "id": "jp-lexus-lm-2026-lm500h-version-l-awd-6seater",
+    "market": "JP",
+    "maker": "Lexus",
+    "model": "LM",
+    "modelYear": null,
+    "generation": null,
+    "catalogAsOf": "2026-03",
+    "salesUnitIntroducedAt": null,
+    "priceEffectiveAt": null,
+    "price": {
+      "kind": "exact",
+      "currency": "JPY",
+      "amounts": [
+        {
+          "amountJpy": 15200000,
+          "qualifier": "LM500h version L（6人乗り）",
+          "sourceUrl": "https://lexus.jp/models/lm/features/price_package/"
+        }
+      ],
+      "maxJpy": 15200000,
+      "optionalPackages": [],
+      "basis": "msrp",
+      "taxIncluded": "included"
+    },
+    "grade": "LM500h version L（6人乗り）",
+    "requiredPackage": "Lexus Safety System ＋（全車速追従レーダークルーズ・LTA・LCA・ドライバーモニター）＋Lexus Teammate Advanced Drive（渋滞時支援）標準。利用にはG-Link契約が必要（初度登録から3年間無料、その後有料）",
+    "featureVersion": "Lexus Safety System ＋ / Lexus Teammate LM 2026年3月仕様",
+    "currentCatalogListed": true,
+    "automationLevel": 2,
+    "category": "driver_assistance",
+    "availability": "unknown",
+    "availabilityCheckedAt": "2026-09-10",
+    "odd": {
+      "roadTypes": [
+        "高速道路",
+        "自動車専用道路"
+      ],
+      "speedKph": {
+        "min": 0,
+        "max": 40,
+        "condition": "Advanced Drive（渋滞時支援）は高速道路・自動車専用道路の本線で渋滞時0〜約40km/h。渋滞解消時や条件外では運転者が操作する。"
+      },
+      "trafficConditions": [
+        "先行車への追従",
+        "渋滞時の停止保持・再発進",
+        "車線内走行支援",
+        "渋滞時の条件付きハンズオフ",
+        "高速道路の車線変更支援"
+      ],
+      "weather": [
+        "天候・路面・車線認識・周囲状況により作動が制限または中断される場合がある"
+      ],
+      "geoRestriction": [
+        "一部を除く高速道路・自動車専用道路の本線",
+        "Advanced Driveは対象区間・道路状態・通信・地図などの条件下"
+      ],
+      "driverConditions": [
+        "前方と周囲を常に確認",
+        "ドライバーモニターの監視を受け、必要時に直ちに操作",
+        "システム使用中も運転者が状況確認と安全確保の責任を持つ"
+      ],
+      "manufacturerSummary": "全車速追従レーダークルーズとLTAが速度・車間・車線維持を支援し、LCAが車線変更を支援する。Advanced Drive（渋滞時支援）は高速道路・自動車専用道路の渋滞時に、運転者監視のもとで条件付きハンズオフに対応する。"
+    },
+    "driverMonitoring": "required",
+    "handsOff": "allowed_in_conditions",
+    "capabilities": [
+      "adaptive_cruise_control",
+      "lane_centering",
+      "traffic_jam_assist",
+      "hands_off_highway",
+      "driver_monitoring",
+      "lane_change_support"
+    ],
+    "limitations": [
+      "自動運転ではなく運転支援。運転者の常時監視・操作が必要",
+      "Advanced Driveのハンズオフは高速道路・自動車専用道路の渋滞時0〜約40km/hかつ一定条件下",
+      "対象区間・通信・地図・周囲状況などの条件が必要。渋滞解消や車線変更時は運転者が操作する",
+      "Advanced Driveの利用にはG-Link契約が必要。基本利用料は初度登録日から3年間無料で、その後は有料",
+      "メーカー公式サイトへの掲載は確認済み。新車で注文できるか、納期は未確認"
+    ],
+    "sources": [
+      {
+        "publisher": "Lexus",
+        "url": "https://lexus.jp/models/lm/features/price_package/",
+        "title": "LM 価格・パッケージ｜Lexus公式",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "LM500h version L（6人乗り・AWD）15,200,000円（税込）",
+          "現行価格ページのパッケージ・乗車定員・駆動方式"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "Lexus",
+        "url": "https://lexus.jp/models/lm/features/safety/",
+        "title": "LM 安全装備｜Lexus公式",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "全車速追従レーダークルーズコントロール・LTA・LCA",
+          "Lexus Teammate Advanced Drive（渋滞時支援）の標準装備",
+          "ドライバーモニター連携"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "Lexus",
+        "url": "https://lexus.jp/models/lm/pdf/equipmentlist.pdf",
+        "title": "LM500h 主要装備一覧表｜Lexus公式",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "EXECUTIVE（4人乗り）とversion L（6人乗り）の両方でAdvanced Drive・LTA・LCA・ドライバーモニター連携・全車速追従レーダークルーズが標準装備",
+          "Advanced Driveの利用にはG-Link契約が必要（初度登録日から3年間無料、その後有料）"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "Lexus",
+        "url": "https://lexus.jp/models/lm/pdf/specificationslist.pdf",
+        "title": "LM500h 主要諸元表・環境仕様書｜Lexus公式",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "LM500h EXECUTIVE AWD・4人乗り、version L AWD・6人乗りの主要諸元",
+          "2026年3月現在の仕様"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "Lexus",
+        "url": "https://manual.lexus.jp/lm/3004/hev/ja_JP/contents/vhch04se050415.php",
+        "title": "アドバンスト ドライブ（渋滞時支援）｜LM取扱説明書",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "一部を除く高速道路・自動車専用道路の本線で車線維持・加減速・停車・発進を支援",
+          "渋滞時は約40km/h以下などの条件下で作動し、作動中はハンドルから手を離すことが可能",
+          "運転者による状況確認と安全確保が必要"
+        ],
+        "type": "manufacturer"
+      },
+      {
+        "publisher": "国土交通省",
+        "url": "https://www.mlit.go.jp/common/001343740.pdf",
+        "title": "自動走行の実現に向けた取組報告と方針 Version 4.0（表1）",
+        "accessedAt": "2026-09-10",
+        "supports": [
+          "運転者が主体で前後・左右を支援するLevel 2の定義"
+        ],
+        "type": "mlit"
+      }
+    ],
+    "classificationRationale": "Lexus公式の全車速追従レーダークルーズ（縦方向）とLTA/LCA（横方向）を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。Advanced Driveは渋滞時の条件付き支援で、運転者の状況確認・常時監視が必要なためハンズオフは条件内で可とした。",
+    "factStatus": "verified",
+    "lastReviewedAt": "2026-09-10"
+  }
 ]

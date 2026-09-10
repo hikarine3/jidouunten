@@ -1114,6 +1114,39 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:lexus-lm-2026": {
+      "entity_id": "vehicle:lexus-lm-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": [
+        "src/data/vehicles.json",
+        "src/data/official-links.json",
+        "docs/research/vehicle-inventory-20260907.md"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleList.astro",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Lexus","LM","LEVEL 2"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Lexus","LM","LEVEL 2"]},
+        {"url":"/cars/jp-lexus-lm-2026-lm500h-executive-awd-4seater/","locale":"ja","output_path":"dist/cars/jp-lexus-lm-2026-lm500h-executive-awd-4seater/index.html","markers":["Lexus","LM","LM500h EXECUTIVE（4人乗り）","20,300,000円","Level 2","ハンズオフ：条件内で可","G-Link契約"]},
+        {"url":"/cars/jp-lexus-lm-2026-lm500h-version-l-awd-6seater/","locale":"ja","output_path":"dist/cars/jp-lexus-lm-2026-lm500h-version-l-awd-6seater/index.html","markers":["Lexus","LM","LM500h version L（6人乗り）","15,200,000円","Level 2","ハンズオフ：条件内で可","G-Link契約"]},
+        {"url":"/compare/?ids=jp-lexus-lm-2026-lm500h-executive-awd-4seater&ids=jp-lexus-lm-2026-lm500h-version-l-awd-6seater","locale":"ja","output_path":"dist/compare/index.html","markers":["LM","LM500h EXECUTIVE（4人乗り）","LM500h version L（6人乗り）"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-lexus-lm-2026-lm500h-executive-awd-4seater","jp-lexus-lm-2026-lm500h-version-l-awd-6seater"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-lexus-lm-2026-lm500h-executive-awd-4seater\"])","markers":["Lexus","LM","LM500h EXECUTIVE（4人乗り）"]},
+        {"url":"/cars/jp-lexus-lm-2026-lm500h-executive-awd-4seater/","selector":"main","markers":["LM","LM500h EXECUTIVE（4人乗り）","20,300,000円","Level 2","ハンズオフ：条件内で可","G-Link契約"]},
+        {"url":"/cars/jp-lexus-lm-2026-lm500h-version-l-awd-6seater/","selector":"main","markers":["LM","LM500h version L（6人乗り）","15,200,000円","Level 2","ハンズオフ：条件内で可","G-Link契約"]},
+        {"url":"/compare/?ids=jp-lexus-lm-2026-lm500h-executive-awd-4seater&ids=jp-lexus-lm-2026-lm500h-version-l-awd-6seater","selector":"[data-compare-result]","markers":["LM","LM500h EXECUTIVE（4人乗り）","LM500h version L（6人乗り）"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "manufacturer-official-links:jp-current": {
       "entity_id": "manufacturer-official-links:jp-current",
       "entity_type": "manufacturer_official_links",

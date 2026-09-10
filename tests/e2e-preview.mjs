@@ -34,8 +34,8 @@ try {
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 131, '既定カタログは現行確認131件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*131[\s\S]*条件内可[\s\S]*42[\s\S]*不可[\s\S]*88[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*30/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await visibleCards(), 133, '既定カタログは現行確認133件');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*133[\s\S]*条件内可[\s\S]*44[\s\S]*不可[\s\S]*88[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*32/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="3"]').innerText(), /L3[\s\S]*条件付自動運転[\s\S]*過去例 1件/, 'Level 3の過去例を現行車と区別');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, 'Tesla Model 3 / Model Yの6販売仕様を既定一覧に表示');
@@ -54,10 +54,10 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '検索条件を削除すると再開バーを隠す');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="allowed_in_conditions"]').click();
-  assert.equal(await visibleCards(), 42, '条件内ハンズオフは42件');
+  assert.equal(await visibleCards(), 44, '条件内ハンズオフは44件');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-capability-shortcut="lane_change_support"]').click();
-  assert.equal(await visibleCards(), 30, '車線変更支援は30件');
+  assert.equal(await visibleCards(), 32, '車線変更支援は32件');
   await page.locator('[data-reset-shortcut]').click();
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo EX30' }).count(), 3, 'Volvo EX30の3販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Suzuki e VITARA' }).count(), 3, 'Suzuki e VITARAの3販売単位を既定一覧に表示');
@@ -72,6 +72,7 @@ try {
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヴォクシー' }).filter({ hasText: 'S-G 2WD（7人乗り）' }).innerText(), /条件付き支援パッケージ[\s\S]*\+78,100円[\s\S]*装着時のみ条件内で可/, 'ヴォクシー一覧カードにオプション必要条件と追加価格を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota シエンタ' }).count(), 18, 'シエンタは動力・駆動方式・定員別の18販売単位を既定一覧に表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota シエンタ' }).filter({ hasText: 'Z（ハイブリッド車・2WD・7人乗り）' }).innerText(), /約318万円[\s\S]*ハンズオフ：不可/, 'シエンタ一覧カードに価格とハンズオフ不可を表示');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Lexus LM' }).count(), 2, 'Lexus LMの4人/6人2販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BMW 3シリーズ' }).count(), 9, 'BMW 3シリーズ通常カタログの9販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BMW 3シリーズ セダン' }).locator('.maker').first().innerText(), 'G20　318i M Sport', 'BMWセダンは資料年ではなくG20世代を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BMW 3シリーズ ツーリング' }).locator('.maker').first().innerText(), 'G21　318i M Sport', 'BMWツーリングは資料年ではなくG21世代を表示');
@@ -87,7 +88,7 @@ try {
   await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://jidouunten.jp/og.png', 'OG画像は絶対URL');
-  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け131販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け133販売単位/, 'トップのdescription件数は公開データから生成');
   assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け113販売単位/, '古い固定件数を残さない');
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
@@ -105,7 +106,7 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 131, 'Level 2現行131件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 133, 'Level 2現行133件へ復帰');
   await levelMapPage.close();
   await page.goto(`${base}/levels/`);
   const level3Link = page.locator('.level-3 a');
@@ -129,7 +130,7 @@ try {
   }
 
   await page.goto(`${base}/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 33, 'トップのLevel 2・高速・ハンズオフ条件は33件（MINI 6単位、ヴェルファイア7単位、ヴォクシー6単位を含む）');
+  assert.equal(await visibleCards(), 35, 'トップのLevel 2・高速・ハンズオフ条件は35件（MINI 6単位、ヴェルファイア7単位、ヴォクシー6単位、LM2単位を含む）');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'トップのLevel 2注意表示');
   assert.equal(new URL(page.url()).pathname, '/', 'トップの深いリンクはトップに留まる');
 
@@ -146,7 +147,7 @@ try {
   assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 33, 'Level 2・高速・ハンズオフ条件は33件（MINI 6単位、ヴェルファイア7単位、ヴォクシー6単位を含む）');
+  assert.equal(await visibleCards(), 35, 'Level 2・高速・ハンズオフ条件は35件（MINI 6単位、ヴェルファイア7単位、ヴォクシー6単位、LM2単位を含む）');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '深いリンクのlevel復元');
   assert.equal(await page.locator('#vehicle-filters').getAttribute('action'), '/cars/', '旧一覧は現在のルートで送信');
@@ -175,13 +176,13 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 131, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 133, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  assert.equal(await visibleCards(), 131, 'リセット後に既定131件');
+  assert.equal(await visibleCards(), 133, 'リセット後に既定133件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -212,7 +213,7 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '比較保存を削除すると再開バーを隠す');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 132, 'すべての状態で過去車両を含む132件');
+  assert.equal(await visibleCards(), 134, 'すべての状態で過去車両を含む134件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
@@ -285,6 +286,23 @@ try {
   assert.match(sientaCompare, /シエンタ[\s\S]*Z（ハイブリッド車・2WD・7人乗り）[\s\S]*X（ガソリン車・2WD・5人乗り）/);
   assert.match(sientaCompare, /3,183,400円[\s\S]*2,146,100円/, 'シエンタ比較に動力・定員別価格');
   assert.doesNotMatch(sientaCompare, /sienta_spec_202608|sources|accessedAt/, 'シエンタ比較に内部根拠を表示しない');
+
+  await page.goto(`${base}/cars/jp-lexus-lm-2026-lm500h-executive-awd-4seater/`);
+  assert.match(await page.locator('main').innerText(), /Lexus[\s\S]*LM[\s\S]*LM500h EXECUTIVE（4人乗り）/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*20,300,000円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'LM EXECUTIVEの価格と条件付きハンズオフを表示');
+  assert.match(await page.locator('main').innerText(), /LCA[\s\S]*Advanced Drive|車線変更支援[\s\S]*渋滞時運転支援/, 'LMの車線変更・渋滞時支援を表示');
+  assert.match(await page.locator('main').innerText(), /0〜約40km\/h[\s\S]*ドライバーモニター/, 'LMの作動速度と監視条件を表示');
+  assert.match(await page.locator('main').innerText(), /G-Link契約[\s\S]*3年間無料[\s\S]*その後有料/, 'LMのG-Link契約条件を表示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /equipmentlist\.pdf|specificationslist\.pdf|sources|accessedAt|allowed_in_conditions/, 'LM詳細に内部根拠や内部enumを表示しない');
+
+  await page.goto(`${base}/compare/?ids=jp-lexus-lm-2026-lm500h-executive-awd-4seater&ids=jp-lexus-lm-2026-lm500h-version-l-awd-6seater`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  const lmCompare = await page.locator('[data-compare-result]').innerText();
+  assert.match(lmCompare, /LM[\s\S]*LM500h EXECUTIVE（4人乗り）[\s\S]*LM500h version L（6人乗り）/);
+  assert.match(lmCompare, /20,300,000円[\s\S]*15,200,000円/, 'LM比較に4人/6人の価格差');
+  assert.match(lmCompare, /条件内ハンズオフ|車線変更支援/, 'LM比較に能力差を表示');
+  assert.match(lmCompare, /G-Link契約[\s\S]*3年間無料[\s\S]*その後有料/, 'LM比較にG-Link契約条件を表示');
+  assert.doesNotMatch(lmCompare, /equipmentlist\.pdf|specificationslist\.pdf|sources|accessedAt|allowed_in_conditions/, 'LM比較に内部根拠や内部enumを表示しない');
 
   await page.goto(`${base}/compare/?ids=jp-toyota-voxy-2026-sz-2wd-7seater&ids=jp-toyota-voxy-2026-sg-2wd-8seater`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });

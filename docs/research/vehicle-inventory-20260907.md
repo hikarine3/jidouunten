@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 132 | `src/data/vehicles.json` の全レコード（現行131 + 過去1） |
-| 既定表示 | 131 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 134 | `src/data/vehicles.json` の全レコード（現行133 + 過去1） |
+| 既定表示 | 133 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -26,6 +26,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota シエンタ / 後発対策） | 18 | Z/G/Xのハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗りを公式グレードJSONの全組み合わせで登録。価格214万6,100円〜339万7,900円、全車速ACC・LTA・手保持条件を販売単位へ固定 |
+| 今回追加（Lexus LM / 後発対策） | 2 | LM500h EXECUTIVE（4人）/ version L（6人）のAWD。Advanced Drive・LCA・ドライバーモニター・全車速追従ACCを標準装備として確認し、価格1,520万〜2,030万円、渋滞時0〜約40km/hの条件付きハンズオフを販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -66,6 +67,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | ヴェルファイア Executive Lounge PHEV E-Four（6人）、Executive Lounge HEV 2WD/E-Four（7人）、Z Premier HEV 2WD/E-Four、Z Premier ターボガソリン 2WD/4WD（7人） | 掲載（7単位） | 2相当 | 2026-09-10 |
 | Toyota | ヴォクシー S-Z/S-G 2WD・E-Four（7人）、S-G 2WD（8人）、S-G マルチユーティリティ（2WD・5人） | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Toyota | シエンタ Z/G/X ハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗り | 掲載（18単位） | 2相当 | 2026-09-10 |
+| Lexus | LM500h EXECUTIVE AWD（4人乗り） / version L AWD（6人乗り） | 掲載（2単位） | 2相当 | 2026-09-10 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。2026-09-10確認時点で両モデルの日本向け公式商品ページに「今すぐ注文」導線が表示され、公式FAQも注文後の手続きと注文可能なトリム・納車予定時期をDesign Studioで確認する流れを案内しているため、6販売単位の`availability`を`new_order_available`へ更新した。ただし注文後の在庫・納車時期・ソフトウェア提供条件は個別確認が必要。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -364,6 +366,20 @@ ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し
 | LTAはステアリング保持が必要で、手を放すと停止。LDAは約50km/h以上（LTA支援中は50km/h未満でも警報） | トヨタ自動車 | https://toyota.jp/sienta/safety/ | 2026-09-10 |
 
 18単位は全車速ACC（縦方向）とLTA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。公式安全ページは「ドライバーはステアリングを持ち続ける必要があり、手を放すとLTAが停止」と明記するため、全単位を`handsOff=not_allowed`、`driverMonitoring=required`とした。ドライバー異常時対応システムは無操作時の減速停車・救護支援であり、運転者を監視するカメラ機能の根拠とは別なので、`driver_monitoring`能力は付与していない。LCA、条件付きハンズオフ、独立したドライバーモニターの販売単位別設定も公式資料で確認できないため、能力差を推測していない。公式掲載は確認できるが、18単位ごとの新車注文可否は明文で固定できないため`availability=unknown`とし、注文CTAは表示しない。
+
+## Lexus LMの根拠（後発対策トランシェ）
+
+確認日は2026-09-10。Lexus公式の価格・パッケージページと主要装備一覧から、LM500h EXECUTIVE（AWD・4人乗り）とversion L（AWD・6人乗り）の2販売単位を確認した。価格は1,520万円〜2,030万円（税込）。主要装備一覧では両単位に全車速追従レーダークルーズ、LTA、LCA、ドライバーモニター連携、Lexus Teammate Advanced Drive（渋滞時支援）が標準装備として示されるため、同じLevel 2でも「条件付きハンズオフ＋車線変更支援＋定員差」を比較できるようにした。個別の新車注文可否・納期は公式掲載だけでは固定できないため`availability=unknown`とした。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| LM500h EXECUTIVE（4人乗り・AWD）20,300,000円、version L（6人乗り・AWD）15,200,000円（税込） | Lexus | https://lexus.jp/models/lm/features/price_package/ | 2026-09-10 |
+| 全車速追従レーダークルーズ、LTA、LCA、Advanced Drive（渋滞時支援）、ドライバーモニター連携の標準装備 | Lexus | https://lexus.jp/models/lm/features/safety/ | 2026-09-10 |
+| EXECUTIVE（4人）/ version L（6人）の両単位でAdvanced Drive・LTA・LCA・全車速追従レーダークルーズ・ドライバーモニター連携が標準。Advanced Driveの利用にはG-Link契約が必要（初度登録から3年間無料、その後有料） | Lexus | https://lexus.jp/models/lm/pdf/equipmentlist.pdf | 2026-09-10 |
+| AWD、4人/6人乗り、2026年3月現在の主要諸元 | Lexus | https://lexus.jp/models/lm/pdf/specificationslist.pdf | 2026-09-10 |
+| 一部を除く高速道路・自動車専用道路本線で車線維持・加減速・停車・発進を支援。渋滞時は約40km/h以下などの条件で作動し、作動中はハンドルから手を離せるが、運転者の状況確認と安全確保が必要 | Lexus | https://manual.lexus.jp/lm/3004/hev/ja_JP/contents/vhch04se050415.php | 2026-09-10 |
+
+2単位はACC（縦方向）とLTA/LCA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。Advanced Driveは渋滞時の条件付き支援で、運転者監視のもとハンドルから手を離せるため、サイト上のハンズオフ表示は「条件内で可」、ドライバーモニターは必須とした。対象道路は一部を除く高速道路・自動車専用道路本線、速度上限は約40km/h（渋滞時）として表示し、渋滞解消・車線変更・条件外では運転者操作が必要と明記した。Advanced Driveの利用にはG-Link契約が必要で、初度登録から3年間は基本利用料無料、その後は有料となる。価格ページへの掲載は確認済みだが、新車注文可否と納期は未確認のままCTAを表示しない。高価格帯の4人/6人・LCA標準・条件付きハンズオフという差分は、価格だけでなく「どの条件で任せられるか」を比較する後発耐性になる。
 
 ## Volvo EX30の根拠（内部保持）
 
