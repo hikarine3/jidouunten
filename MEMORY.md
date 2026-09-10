@@ -2,6 +2,13 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 保存差分から変更車両へ戻る導線（実装・本番反映済み）
+
+- 保存した検索・比較で意味ある変更を検出したとき、カテゴリ（価格・できること・作動条件・必要装備・販売状態・車両仕様）と対象販売単位の詳細リンクを「変更を確認」から開けるようにした。掲載終了は別表示、確認日・出典URLだけの更新は通知しない。
+- 保存本文・fingerprint・検索query・車両IDはAnalyticsへ送信せず、詳細表示は既存 `view_vehicle`、公式遷移は既存 `outbound_purchase_action` で観測する。
+- app exact `95f8bbca76b6efd4d5d3e139e09c45c23ad25931`、docs `867ed00`、immutable `https://218ed369.jidouunten.pages.dev`、Production `https://jidouunten.jp/`、deployment `218ed369-a562-4199-9a53-97426d1a97d0`。
+- Vitest39/39、価格147/147、公式導線37モデル/38 actions、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build153、保存差分→詳細href、390px overflow0、E2E本番/immutable各1/1・GA collect204、独立Luna監査PASS。直前rollback `https://befeebfc.jidouunten.pages.dev`。
+
 ## 2026-09-11 メーカー横断の公式アクション導線（実装・本番反映済み）
 
 - Honda（ACCORD／VEZEL）、Nissan（アリア／セレナ）、Lexus（LM／UX300h）へ公式見積り・試乗・販売店・カタログの24アクションを追加。アリア／セレナは車種選択ハッシュ、LM／UX300hはシリーズ指定、Hondaは車種固定の一次URLを使い、注文可否unknownへ注文CTAは付けていない。
