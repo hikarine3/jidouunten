@@ -1,5 +1,19 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 後発対策トランシェ（Lexus UX300h 6販売単位）本番実測
+
+- exact release commit: `1eb9b9c3acf6b83156d2d06664bbed3c24db9282`
+- Immutable deployment: https://d4b6c8e1.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 全140販売単位（現行139件）へ更新。Lexus UX300hをShining Essence／version L／F SPORTの2WD・AWD 6単位で追加し、価格521万〜575万7,000円、5人乗り、駆動方式・グレード差を一覧・詳細・比較へ反映した。
+- 全車速追従レーダークルーズとLTA、ドライバー異常時対応システムを標準装備として確認。LTAはステアリングを手放すと支援が停止するため、全6単位をLevel 2相当・ハンズオフ不可・運転者常時監視として表示した。LCA・独立ドライバーモニターは根拠がないため付与していない。
+- Lexus公式ページの「2027年2月生産終了予定」を制限事項へ明示し、個別の新車注文可否・納期は未確認のままCTAを表示していない。
+- 一覧6/6、詳細6/6、LMとの比較、sitemap掲載6/6を確認。UX300h依存レジストリは静的surface 10件・marker50/50、required selector 8件・marker32/32。
+- 独立価値監査（Astra）・リリース監査（Plato）は最新SHAでともにPASS。390px横overflow 0、通常UIで内部enum・根拠URL・確認日を表示していない。
+- `npm test`（Vitest36/36、Python16/16、全140/140、現行139/139公式価格、公式導線37モデル/36 URL）、`npm run check`（0 errors / 0 warnings、既知hint5）、実ID build146ページ、ローカル／本番E2E各1/1を確認した。GA collectはHTTP204。
+- 本番smokeはトップ、一覧、UX詳細6件、比較、sitemap-index、sitemap-0、robotsをHTTP200で確認。`https://xn--hhrp90iveiimb.jp/cars/?level=2` は本体へpath/queryを維持した301。
+- rollback候補は親commit `f0bdadcfc7b7506b81a4ed8f5405dbfe69c06e21`、直前Immutable `https://a050909d.jidouunten.pages.dev`。
+
 ## 2026-09-10 後発対策トランシェ（Lexus LM 2販売単位）本番実測
 
 - exact release commit: `4304ef9232ed2e44f8ab1c294590ca594185d39c`
