@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehiclePriceMin, vehicleReferenceLabel, vehicleReferenceTotal, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleMatchesPriceBand, vehiclePriceMin, vehicleReferenceLabel, vehicleReferenceTotal, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -53,6 +53,16 @@ describe('vehicle data contract and filters', () => {
     expect(displayVehiclePrice(exact, true)).toBe('約479万円');
     expect(displayVehiclePrice(multi, true)).toBe('約330〜354万円');
     expect(displayVehiclePrice(unknown, true)).toBe('価格要確認');
+  });
+
+  it('価格帯は確認済み本体価格の開始値で分類し、未確認を含めない', () => {
+    const under = makeVehicle({ id: 'under', price: { kind: 'exact', currency: 'JPY', amounts: [{ amountJpy: 2_990_000, qualifier: null, sourceUrl: 'https://example.com' }], maxJpy: 2_990_000, optionalPackages: [], basis: 'msrp', taxIncluded: 'included' } });
+    const mid = makeVehicle({ id: 'mid', price: { kind: 'range', currency: 'JPY', amounts: [{ amountJpy: 5_000_000, qualifier: null, sourceUrl: 'https://example.com' }], maxJpy: 5_600_000, optionalPackages: [], basis: 'price_list', taxIncluded: 'included' } });
+    const unknown = makeVehicle({ id: 'unknown-price', price: null });
+    expect(vehicleMatchesPriceBand(under, 'under_300')).toBe(true);
+    expect(vehicleMatchesPriceBand(mid, 'from_500_to_800')).toBe(true);
+    expect(vehicleMatchesPriceBand(unknown, 'under_300')).toBe(false);
+    expect(filterVehicleList([under, mid, unknown], { budget: 'under_300' }).map((vehicle) => vehicle.id)).toEqual(['under']);
   });
 
   it('確認済み追加パッケージだけを参考総額へ合算し、レンジや未確認は合算しない', () => {

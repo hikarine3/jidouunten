@@ -30,7 +30,7 @@ export interface SavedResumeState {
 }
 
 const ALLOWED_PATHS = new Set(['/', '/cars/', '/compare/']);
-const SEARCH_KEYS = new Set(['maker', 'level', 'capability', 'handsOff', 'road', 'availability', 'sort']);
+const SEARCH_KEYS = new Set(['maker', 'level', 'capability', 'handsOff', 'road', 'availability', 'budget', 'sort']);
 
 export function emptySavedResumeState(): SavedResumeState {
   return { version: 1, search: null, compare: null };

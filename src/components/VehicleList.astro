@@ -1,6 +1,6 @@
 ---
 import VehicleCard from './VehicleCard.astro';
-import { availabilityLabels, canonicalRoadType, capabilityDefinitions, handsOffLabels, isDefaultListedVehicle, levelIds, levelLabels, levelShort, roadFilterLabels, sortVehicleList, vehicleDecisionFingerprint, vehicleDecisionSignals, vehiclePriceMin, vehicles } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, capabilityDefinitions, handsOffLabels, isDefaultListedVehicle, levelIds, levelLabels, levelShort, priceBandLabels, roadFilterLabels, sortVehicleList, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleMatchesPriceBand, vehiclePriceMin, vehicles } from '../data/loader';
 
 const { action = '/cars/' } = Astro.props as { action?: string };
 const defaultVehicles = vehicles.filter(isDefaultListedVehicle);
@@ -10,6 +10,7 @@ const makers = [...new Set(defaultVehicles.map((vehicle) => vehicle.maker))].sor
 const roads = [...new Set(vehicles.flatMap((vehicle) => vehicle.odd.roadTypes.map(canonicalRoadType)))].sort();
 const roadOptions = roads.length ? roads : [...roadFilterLabels];
 const capabilityOptions = Object.entries(capabilityDefinitions).filter(([id]) => vehicles.some((vehicle) => vehicle.capabilities.includes(id)));
+const priceBandOptions = Object.entries(priceBandLabels).map(([value, label]) => ({ value, label }));
 const handsOffDistribution = [
   { value: 'allowed_in_conditions', label: '条件内可', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'allowed_in_conditions').length },
   { value: 'not_allowed', label: '不可', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'not_allowed').length },
@@ -56,9 +57,10 @@ const levelOverview = levelIds.map((level) => {
         <label>ハンズオフ<select name="handsOff"><option value="">すべて</option>{Object.entries(handsOffLabels).map(([key, label]) => <option value={key}>{label}</option>)}</select></label>
         <label>主な道路<select name="road"><option value="">すべて</option>{roadOptions.map((road) => <option value={road}>{road}</option>)}</select></label>
         <label>販売・利用状態<select name="availability"><option value="">公式サイト掲載あり（既定）</option><option value="all">すべての状態</option>{Object.entries(availabilityLabels).map(([key, label]) => <option value={key}>{label}</option>)}</select></label>
+        <label>本体価格帯<select name="budget"><option value="">すべて</option>{priceBandOptions.map(({ value, label }) => <option value={value}>{label}</option>)}</select></label>
         <label>並び順<select name="sort"><option value="introduced_desc">発売・導入が新しい順（既定）</option><option value="price_asc">価格が安い順</option><option value="maker_asc">メーカー名順</option></select></label>
       </div>
-      <p class="sort-note">発売・導入時期が未確認の車は末尾に表示します。</p>
+      <p class="sort-note">発売・導入時期が未確認の車は末尾に表示します。価格帯は車両本体価格の開始値で分類し、価格未確認は含めません。</p>
       <div class="filter-actions"><button class="button alt" type="submit">この条件で探す</button><a class="button text" href={action}>リセット</a></div>
     </div>
   </details></form>
@@ -90,7 +92,7 @@ const levelOverview = levelIds.map((level) => {
   };
   const applyFilters = (trackInteraction = false) => {
     const params = new URLSearchParams(location.search);
-    const values = { maker: params.get('maker') || '', level: params.get('level') || '', capability: params.get('capability') || '', road: params.get('road') || '', handsOff: params.get('handsOff') || '', availability: params.get('availability') || '', sort: params.get('sort') || 'introduced_desc' };
+    const values = { maker: params.get('maker') || '', level: params.get('level') || '', capability: params.get('capability') || '', road: params.get('road') || '', handsOff: params.get('handsOff') || '', availability: params.get('availability') || '', budget: params.get('budget') || '', sort: params.get('sort') || 'introduced_desc' };
     form?.querySelectorAll('select').forEach((select) => { select.value = values[select.name] || (select.name === 'sort' ? 'introduced_desc' : ''); });
     [...shells].sort((a, b) => {
       if (values.sort === 'price_asc') { const aPrice = Number(a.dataset.priceMin || Number.POSITIVE_INFINITY); const bPrice = Number(b.dataset.priceMin || Number.POSITIVE_INFINITY); if (aPrice !== bPrice) return aPrice - bPrice; }
@@ -100,14 +102,18 @@ const levelOverview = levelIds.map((level) => {
     let count = 0;
     shells.forEach((shell) => {
       const defaultAvailable = shell.dataset.availability === 'new_order_available' || (shell.dataset.availability === 'unknown' && shell.dataset.currentCatalog === 'true');
-      const show = (!values.maker || shell.dataset.maker === values.maker) && (!values.level || shell.dataset.level === values.level) && (!values.capability || (shell.dataset.capabilities || '').split('|').includes(values.capability)) && (!values.road || (shell.dataset.road || '').split('|').includes(values.road)) && (!values.handsOff || shell.dataset.handsOff === values.handsOff) && (values.availability && values.availability !== 'all' ? shell.dataset.availability === values.availability : values.availability === 'all' ? true : defaultAvailable);
+      const price = Number(shell.dataset.priceMin || '');
+      const hasPrice = Number.isFinite(price) && price > 0;
+      const budgetMatch = !values.budget || (hasPrice && ((values.budget === 'under_300' && price < 3000000) || (values.budget === 'from_300_to_500' && price >= 3000000 && price < 5000000) || (values.budget === 'from_500_to_800' && price >= 5000000 && price < 8000000) || (values.budget === 'over_800' && price >= 8000000)));
+      const show = (!values.maker || shell.dataset.maker === values.maker) && (!values.level || shell.dataset.level === values.level) && (!values.capability || (shell.dataset.capabilities || '').split('|').includes(values.capability)) && (!values.road || (shell.dataset.road || '').split('|').includes(values.road)) && (!values.handsOff || shell.dataset.handsOff === values.handsOff) && (values.availability && values.availability !== 'all' ? shell.dataset.availability === values.availability : values.availability === 'all' ? true : defaultAvailable) && budgetMatch;
       shell.hidden = !show; const compareInput = shell.querySelector('input[name="ids"]'); if (!show && compareInput) compareInput.checked = false; if (show) count += 1;
     });
     const capabilityText = values.capability ? form?.querySelector('select[name="capability"] option:checked')?.textContent : '';
     const handsOffText = values.handsOff ? form?.querySelector('select[name="handsOff"] option:checked')?.textContent : '';
     const roadText = values.road ? form?.querySelector('select[name="road"] option:checked')?.textContent : '';
     const availabilityText = values.availability ? form?.querySelector('select[name="availability"] option:checked')?.textContent : '';
-    const selection = [values.maker, values.level && `Level ${values.level}`, capabilityText, handsOffText, roadText, availabilityText].filter(Boolean);
+    const budgetText = values.budget ? form?.querySelector('select[name="budget"] option:checked')?.textContent : '';
+    const selection = [values.maker, values.level && `Level ${values.level}`, capabilityText, handsOffText, roadText, budgetText, availabilityText].filter(Boolean);
     const label = document.querySelector('[data-selected-label]'); if (label) label.textContent = selection.join(' · ') || '公式サイト掲載あり';
     const summary = document.querySelector('[data-filter-summary]'); if (summary) summary.textContent = selection.join(' · ') || 'すべての車';
     const resultCount = document.querySelector('[data-result-count]'); if (resultCount) resultCount.textContent = `${count}件`;
@@ -115,7 +121,7 @@ const levelOverview = levelIds.map((level) => {
     const empty = document.querySelector('[data-empty]'); if (empty) empty.hidden = count !== 0;
     const notice = document.querySelector('[data-level2-notice]'); if (notice) notice.hidden = values.level !== '2' && !values.handsOff && !values.capability;
     levelShortcuts.forEach((button) => button.setAttribute('aria-pressed', button.dataset.levelShortcut === values.level ? 'true' : 'false'));
-    if (trackInteraction && location.search !== lastTrackedSearch) { window.jidouuntenTrack?.('filter_results', { filter_name: 'vehicle_filters', filter_value: `${values.maker || 'all'}|${values.level || 'all'}|${values.capability || 'all'}|${values.road || 'all'}|${values.handsOff || 'all'}|${values.availability || 'default'}|${values.sort}`, result_count: count }); lastTrackedSearch = location.search; }
+    if (trackInteraction && location.search !== lastTrackedSearch) { window.jidouuntenTrack?.('filter_results', { filter_name: 'vehicle_filters', filter_value: `${values.maker || 'all'}|${values.level || 'all'}|${values.capability || 'all'}|${values.road || 'all'}|${values.handsOff || 'all'}|${values.budget || 'all'}|${values.availability || 'default'}|${values.sort}`, result_count: count }); lastTrackedSearch = location.search; }
     updateCompare();
   };
   const submitValues = (values = {}, clear = false) => { if (clear) form?.querySelectorAll('select').forEach((select) => { select.value = select.name === 'sort' ? 'introduced_desc' : ''; }); Object.entries(values).forEach(([name, value]) => { const select = form?.querySelector(`select[name="${name}"]`); if (select) select.value = value; }); form?.requestSubmit(); };

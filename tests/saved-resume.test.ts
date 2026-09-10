@@ -13,6 +13,7 @@ describe('saved resume URL and browser storage contract', () => {
   it('normalizes only supported search URLs and omits the default sort', () => {
     expect(normalizeSavedHref('search', '/?maker=Tesla&sort=introduced_desc')).toBe('/?maker=Tesla');
     expect(normalizeSavedHref('search', '/cars/?level=2&availability=all')).toBe('/cars/?level=2&availability=all');
+    expect(normalizeSavedHref('search', '/?budget=under_300&sort=price_asc')).toBe('/?budget=under_300&sort=price_asc');
     expect(normalizeSavedHref('search', '/?maker=Tesla&unknown=x')).toBeNull();
     expect(normalizeSavedHref('search', 'https://evil.example/?maker=Tesla')).toBeNull();
     expect(normalizeSavedHref('search', '/detail/foo')).toBeNull();

@@ -163,6 +163,11 @@ try {
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').first().innerText(), /Toyota[\s\S]*シエンタ[\s\S]*X（ガソリン車・2WD・5人乗り）[\s\S]*約215万円/, '価格順は公式掲載の最小金額が安い販売単位から');
   assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
+  await page.goto(`${base}/?budget=under_300`);
+  assert.equal(await visibleCards(), 13, '本体価格の開始値が300万円未満の候補へ絞り込む');
+  assert.equal(await page.locator('select[name="budget"]').inputValue(), 'under_300', '価格帯条件をURLから復元');
+  assert.match(await page.locator('[data-selected-label]').innerText(), /〜300万円/, '価格帯を結果見出しへ明示');
+
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
   assert.equal(await visibleCards(), 39, 'Level 2・高速・ハンズオフ条件は39件（MINI 6単位、ヴェルファイア7単位、ヴォクシー6単位、ノア5単位、LM2単位を含む）');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');

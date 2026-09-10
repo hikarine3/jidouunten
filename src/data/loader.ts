@@ -179,6 +179,16 @@ export const levelIds = [1, 2, 3, 4, 5] as const;
 
 export const roadFilterLabels = ['高速道路', '自動車専用道路', '一般道'] as const;
 
+/** 本体価格の開始値で候補を比較するための、利用者向け価格帯。 */
+export const priceBandLabels = {
+  under_300: '〜300万円',
+  from_300_to_500: '300〜500万円',
+  from_500_to_800: '500〜800万円',
+  over_800: '800万円〜',
+} as const;
+
+export type PriceBand = keyof typeof priceBandLabels;
+
 /** ODDの詳細表記を、一覧フィルター用の利用者向け道路区分へ正規化する。 */
 export function canonicalRoadType(value: string) {
   if (value.includes('高速道路')) return '高速道路';
@@ -210,6 +220,7 @@ export function filterVehicles(input: {
   road?: string;
   handsOff?: string;
   availability?: string;
+  budget?: string;
 }) {
   return filterVehicleList(vehicles, input);
 }
@@ -227,6 +238,7 @@ export function filterVehicleList(list: Vehicle[], input: {
   road?: string;
   handsOff?: string;
   availability?: string;
+  budget?: string;
 }) {
   const level = input.level === undefined || input.level === '' ? undefined : Number(input.level);
   return list.filter((vehicle) => {
@@ -239,6 +251,7 @@ export function filterVehicleList(list: Vehicle[], input: {
     if (input.road && !vehicle.odd.roadTypes.some((road) => canonicalRoadType(road) === input.road)) return false;
     if (input.handsOff && vehicle.handsOff !== input.handsOff) return false;
     if (input.availability && input.availability !== 'all' && vehicle.availability !== input.availability) return false;
+    if (input.budget && !vehicleMatchesPriceBand(vehicle, input.budget)) return false;
     return true;
   });
 }
@@ -325,6 +338,17 @@ export type VehicleSort = 'introduced_desc' | 'price_asc' | 'maker_asc';
 export function vehiclePriceMin(vehicle: Pick<Vehicle, 'price'>) {
   if (!vehicle.price?.amounts.length) return null;
   return Math.min(...vehicle.price.amounts.map(({ amountJpy }) => amountJpy));
+}
+
+/** 価格帯は車両本体価格の確認済み開始値で判定し、未確認価格は含めない。 */
+export function vehicleMatchesPriceBand(vehicle: Pick<Vehicle, 'price'>, band: string) {
+  const price = vehiclePriceMin(vehicle);
+  if (price === null) return false;
+  if (band === 'under_300') return price < 3_000_000;
+  if (band === 'from_300_to_500') return price >= 3_000_000 && price < 5_000_000;
+  if (band === 'from_500_to_800') return price >= 5_000_000 && price < 8_000_000;
+  if (band === 'over_800') return price >= 8_000_000;
+  return false;
 }
 
 export function displayVehiclePrice(vehicle: Pick<Vehicle, 'price'>, compact = false) {
