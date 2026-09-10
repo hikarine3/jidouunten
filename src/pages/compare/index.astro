@@ -73,7 +73,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
         .replace(/[\s　]/g, '');
       const isUnknown = (value) => {
         const text = String(value ?? '').trim();
-        return !text || text === '不明' || text.includes('不明') || text.includes('未確認') || text === '価格要確認' || text === '公式価格未確認' || text === '標準装備 / 不明';
+        return !text || text === '不明' || text.includes('不明') || text.includes('未確認') || text === '価格要確認' || text === '公式価格未確認' || text === '標準装備 / 不明' || text.includes('算出不可');
       };
       const stateFor = (values) => {
         if (values.some(isUnknown)) return 'unknown';
