@@ -1,5 +1,17 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 Tesla受注可否トランシェの本番実測
+
+- exact commit: `1dff8d69803c7ff98a036f141730b1b6b82d4796`
+- Immutable deployment: https://271972c3.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Tesla Model 3 / Model Yの6販売単位を、公式商品ページの「今すぐ注文」導線に基づき `新車注文可` と表示。納期・在庫・ソフトウェア条件は個別確認と明示。
+- 本体とimmutableのトップ、注文可フィルタ、Tesla詳細で `GTM-PV9QVMJV` を確認し、`GTM-TEST` は残っていない。
+- `npm test`（Vitest 29/29、Python 16/16、価格95/95、公式導線95/95）、`npm run check`（0 errors / 0 warnings）、build 101 pages、独立監査PASS。
+- `BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs` は新車注文可フィルタ6件、詳細・比較、GA collect HTTP 204を含め1/1 PASS。
+- 本体・immutableのTesla詳細、sitemap-index、robotsは200。存在しないパスは404。日本語IDNの `/cars/?level=2&availability=all` は本体URLへpath/queryを維持した301。
+- registryのTesla生成surface 10/10、Chrome 390px詳細6/6で横overflowなし。旧注文可否未確認文言・内部metadata/source URLは公開HTMLに残していない。
+
 ## 2026-09-10 保存・再開導線の本番実測
 
 - exact commit: `be9a9824b24287d1fb07e8d4d5eaa9e5ac6935e6`
