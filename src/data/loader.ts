@@ -72,7 +72,7 @@ export interface OfficialLink {
 }
 
 export interface OfficialAction {
-  kind: 'order' | 'test_drive' | 'dealer' | 'catalog';
+  kind: 'order' | 'test_drive' | 'dealer' | 'catalog' | 'estimate';
   label: string;
   url: string;
   checkedAt: string;

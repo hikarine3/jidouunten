@@ -122,6 +122,9 @@ describe('vehicle data contract and filters', () => {
     const teslaActions = officialLinks.filter(({ maker }) => maker === 'Tesla').flatMap((link) => link.actions ?? []);
     expect(teslaActions.map(({ kind }) => kind).sort()).toEqual(['order', 'order', 'test_drive', 'test_drive']);
     expect(teslaActions.every(({ url, checkedAt }) => url.startsWith('https://www.tesla.com/') && checkedAt === '2026-09-10')).toBe(true);
+    const toyotaEstimateLinks = officialLinks.filter(({ maker }) => maker === 'Toyota').flatMap((link) => (link.actions ?? []).filter(({ kind }) => kind === 'estimate'));
+    expect(toyotaEstimateLinks).toHaveLength(10);
+    expect(toyotaEstimateLinks.every(({ label, url, checkedAt }) => label === '公式で見積り' && url.startsWith('https://toyota.jp/service/estimate/grades?car_name_en=') && checkedAt === '2026-09-10')).toBe(true);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {

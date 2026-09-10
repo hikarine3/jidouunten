@@ -1495,7 +1495,17 @@
       "required_render_selectors": [
         {"url":"/cars/jp-honda-accord-2025-ehev-sensing360plus/","selector":"[data-official-link]","markers":["公式サイトを開く"]},
         {"url":"/cars/jp-honda-legend-2021-honda-sensing-elite/","selector":".official-next","markers":["メーカー公式の過去資料で確認","現行車の見積・注文ページではなく"]},
-        {"url":"/compare/?ids=jp-tesla-model-3-2026-premium&ids=jp-tesla-model-y-2026-premium","selector":"[data-compare-result]","markers":["公式サイトを開く"]}
+        {"url":"/compare/?ids=jp-tesla-model-3-2026-premium&ids=jp-tesla-model-y-2026-premium","selector":"[data-compare-result]","markers":["公式サイトを開く"]},
+        {"url":"/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sz-2wd-7seater/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
+        {"url":"/cars/jp-toyota-sienta-2026-z-hev-2wd-7seater/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
+        {"url":"/cars/jp-toyota-alphard-2026-z-hev-2wd-7seater/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
+        {"url":"/cars/jp-toyota-vellfire-2026-executive-lounge-phev-e-four-6seater/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
+        {"url":"/cars/jp-toyota-harrier-2026-z-2wd/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
+        {"url":"/cars/jp-toyota-rav4-2026-z-phev-e-four/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
+        {"url":"/cars/jp-toyota-prius-2026-z-2wd/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
+        {"url":"/cars/jp-toyota-bz4x-2026-z-fwd-advanced-drive/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
+        {"url":"/cars/jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd/","selector":"[data-purchase-action]","markers":["公式で見積り"]}
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"

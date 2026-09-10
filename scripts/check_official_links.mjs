@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 /** @typedef {{ maker: string, model: string, currentCatalogListed: boolean, availability: string, id: string }} Vehicle */
-/** @typedef {{ kind: 'order' | 'test_drive' | 'dealer' | 'catalog', label: string, url: string, checkedAt: string }} OfficialAction */
+/** @typedef {{ kind: 'order' | 'test_drive' | 'dealer' | 'catalog' | 'estimate', label: string, url: string, checkedAt: string }} OfficialAction */
 /** @typedef {{ maker: string, model: string, url: string, kind: 'product' | 'archive', checkedAt: string, actions?: OfficialAction[] }} OfficialLink */
 /** @type {Vehicle[]} */
 const vehicles = JSON.parse(fs.readFileSync(new URL('../src/data/vehicles.json', import.meta.url), 'utf8'));
@@ -19,7 +19,7 @@ for (const link of links) {
   assert.match(link.checkedAt, /^\d{4}-\d{2}-\d{2}$/, `${key(link)}: checkedAtが不正`);
   assert.ok(!link.actions || Array.isArray(link.actions), `${key(link)}: actionsが配列ではない`);
   for (const action of link.actions || []) {
-    assert.ok(['order', 'test_drive', 'dealer', 'catalog'].includes(action.kind), `${key(link)}: action kindが不正`);
+    assert.ok(['order', 'test_drive', 'dealer', 'catalog', 'estimate'].includes(action.kind), `${key(link)}: action kindが不正`);
     assert.ok(action.label, `${key(link)}: action labelが空`);
     assert.match(action.url, /^https:\/\//, `${key(link)}: action URLが不正`);
     assert.match(action.checkedAt, /^\d{4}-\d{2}-\d{2}$/, `${key(link)}: action checkedAtが不正`);

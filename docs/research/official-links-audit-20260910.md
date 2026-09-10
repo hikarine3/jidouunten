@@ -14,6 +14,14 @@
 公開UIでは確認日を表示せず、詳細と比較の判断材料の後にのみ配置する。注文可否が未確認の車両では
 「新車注文できることを示すリンクではない」と明記する。過去車両には見積・注文の表現を使わない。
 
+## Toyota公式見積り導線（2026-09-10）
+
+Toyotaの現行10モデル（ノア、プリウス、クラウン（クロスオーバー）、bZ4X、RAV4、ハリアー、アルファード、ヴェルファイア、ヴォクシー、シエンタ）について、車種をURLパラメータで固定できる公式見積りページを確認した。各URLは `car_name_en` を含むモデル単位の導線として `src/data/official-links.json` に保持し、10/10件が確認日にHTTP 200を返し、本文にも対象モデル識別子を含んでいた。
+
+表示は「公式で見積り」という検討用アクションに限定し、注文可否・納期の根拠とは扱わない。購入・試乗CTAとは別グループに分け、注文可否が `unknown` の販売単位でも見積りだけを安全に利用できるようにした。比較画面からのクリックも販売単位ID・メーカー・アクション種別・配置を `outbound_purchase_action` として計測する。
+
+参照URLの例: [ノアの公式見積り](https://toyota.jp/service/estimate/grades?car_name_en=noah)、[Toyota見積りモデル選択](https://toyota.jp/service/estimate/plan)。
+
 ## 回帰gate
 
 `npm test` の `scripts/check_official_links.mjs` で、モデルキー重複、HTTPS、種別、全販売単位への解決、

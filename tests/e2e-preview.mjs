@@ -271,6 +271,14 @@ try {
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,056,800円[\s\S]*参考総額[\s\S]*4,178,900円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'ノアの参考総額と条件付きハンズオフを表示');
   assert.match(await page.locator('main').innerText(), /追加パッケージ[\s\S]*122,100円[\s\S]*必要パッケージ[\s\S]*Toyota Teammate アドバンスト ドライブ[\s\S]*T-Connect[\s\S]*コネクティッドナビ契約/, 'ノアS-Zの追加価格・契約条件と必要パッケージを表示');
   assert.match(await page.locator('main').innerText(), /Advanced Drive[\s\S]*0〜約40km\/h[\s\S]*LCA[\s\S]*約85〜130km\/h/, 'ノアS-ZはAdvanced DriveとLCAの速度域を分けて表示');
+  assert.match(await page.locator('main').innerText(), /公式の検討・購入導線[\s\S]*検討用[\s\S]*公式で見積り/, '注文可否未確認でもToyotaの公式見積り導線を表示');
+  const noahEstimate = page.locator('[data-purchase-action][data-action-type="estimate"]');
+  assert.equal(await noahEstimate.getAttribute('href'), 'https://toyota.jp/service/estimate/grades?car_name_en=noah', 'ノアのモデル別見積りURL');
+  await noahEstimate.evaluate((link) => link.addEventListener('click', (event) => event.preventDefault(), { once: true, capture: true }));
+  await noahEstimate.click();
+  const noahEstimateEvent = (await events()).filter((event) => event.event === 'outbound_purchase_action').at(-1);
+  assert.deepEqual({ vehicle_id: noahEstimateEvent.vehicle_id, action_type: noahEstimateEvent.action_type, placement: noahEstimateEvent.placement }, { vehicle_id: 'jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive', action_type: 'estimate', placement: 'vehicle_detail' }, '見積りアクションを購入導線イベントで計測');
+  assert.equal(await page.locator('[data-purchase-action][data-action-type="order"]').count(), 0, '注文可否未確認のノアに注文CTAを表示しない');
   assert.doesNotMatch(await page.locator('main').innerText(), /121,000円/, 'ノアS-ZにAdvanced Parkの価格を誤表示しない');
   assert.doesNotMatch(await page.locator('main').innerText(), /noah_spec_202609|sources|accessedAt/, 'ノア詳細に内部根拠を表示しない');
 
@@ -292,6 +300,9 @@ try {
   const sientaCompare = await page.locator('[data-compare-result]').innerText();
   assert.match(sientaCompare, /シエンタ[\s\S]*Z（ハイブリッド車・2WD・7人乗り）[\s\S]*X（ガソリン車・2WD・5人乗り）/);
   assert.match(sientaCompare, /3,183,400円[\s\S]*2,146,100円/, 'シエンタ比較に動力・定員別価格');
+  assert.equal(await page.locator('[data-compare-result] [data-action-type="estimate"]').count(), 2, 'Toyota比較に両車の公式見積り導線');
+  assert.match(sientaCompare, /公式の検討用導線[\s\S]*公式で見積り/, '比較でも注文可否と分離した見積り導線を表示');
+  assert.equal(await page.locator('[data-compare-result] [data-action-type="order"]').count(), 0, '注文可否未確認のToyota比較に注文CTAを表示しない');
   assert.doesNotMatch(sientaCompare, /sienta_spec_202608|sources|accessedAt/, 'シエンタ比較に内部根拠を表示しない');
 
   await page.goto(`${base}/cars/jp-lexus-lm-2026-lm500h-executive-awd-4seater/`);

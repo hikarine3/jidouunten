@@ -98,6 +98,10 @@ const publicCatalog = vehicles.map((vehicle) => ({
       const referenceTotalRows = selected.some((v) => v.referenceTotalLabel)
         ? row('参考総額<small>本体＋確認済み追加パッケージ</small>', (v) => v.referenceTotalLabel || '算出不可（本体価格または追加価格を合算できません）', 'reference-total')
         : '';
+      const actionLinks = (v, kinds, buttonClass) => {
+        const actions = (v.officialLink?.actions || []).filter((action) => kinds.includes(action.kind));
+        return actions.length ? `<div class="purchase-action-list">${actions.map((action) => `<a class="button small ${buttonClass}" href="${escapeHtml(action.url)}" target="_blank" rel="noopener noreferrer" data-purchase-action data-action-type="${escapeHtml(action.kind)}" data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}">${escapeHtml(action.label)} ↗</a>`).join('')}</div>` : '次アクション未確認';
+      };
       const comparisonRows = [
         row('参考価格<small>車両本体の公式掲載価格</small>', (v) => v.priceLabel, 'price'),
         optionalPackageRows,
@@ -110,7 +114,8 @@ const publicCatalog = vehicles.map((vehicle) => ({
         row('必要パッケージ', (v) => v.requiredPackage || '不明', 'required-package'),
         row('販売・利用状態', (v) => availabilityLabels[v.availability], 'availability', (v) => availabilityNotes[v.availability] ? `<small>${escapeHtml(availabilityNotes[v.availability])}</small>` : ''),
         `<tr class="compare-row compare-row-unknown" data-compare-row="official"><th>公式サイト<small>最新仕様を確認</small></th>${selected.map((v) => `<td>${v.officialLink ? `<a class="button small text" href="${escapeHtml(v.officialLink.url)}" target="_blank" rel="noopener noreferrer" data-official-link data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}" data-link-kind="${escapeHtml(v.officialLink.kind)}">${v.officialLink.kind === 'archive' ? '過去資料を開く' : '公式サイトを開く'} ↗</a>` : 'リンク未確認'}</td>`).join('')}</tr>`,
-        `<tr class="compare-row compare-row-unknown" data-compare-row="purchase-actions"><th>公式の次アクション<small>購入・試乗</small></th>${selected.map((v) => `<td>${v.officialLink?.actions?.length ? `<div class="purchase-action-list">${v.officialLink.actions.map((action) => `<a class="button small alt" href="${escapeHtml(action.url)}" target="_blank" rel="noopener noreferrer" data-purchase-action data-action-type="${escapeHtml(action.kind)}" data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}">${escapeHtml(action.label)} ↗</a>`).join('')}</div>` : '次アクション未確認'}</td>`).join('')}</tr>`,
+        `<tr class="compare-row compare-row-unknown" data-compare-row="purchase-actions"><th>公式の購入・試乗<small>注文・試乗</small></th>${selected.map((v) => `<td>${actionLinks(v, ['order', 'test_drive'], 'alt')}</td>`).join('')}</tr>`,
+        `<tr class="compare-row compare-row-unknown" data-compare-row="consideration-actions"><th>公式の検討用導線<small>見積り・販売店・カタログ</small></th>${selected.map((v) => `<td>${actionLinks(v, ['estimate', 'dealer', 'catalog'], 'text')}<small>注文できることを示すリンクではありません。</small></td>`).join('')}</tr>`,
       ].join('');
       const diffCount = selected.length === 2 ? [
         selected.map((v) => v.priceLabel),
