@@ -703,6 +703,51 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:toyota-alphard-2026": {
+      "entity_id": "vehicle:toyota-alphard-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+      "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","アルファード","LEVEL 2"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","アルファード","LEVEL 2"]},
+        {"url":"/cars/jp-toyota-alphard-2026-z-hev-2wd-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-alphard-2026-z-hev-2wd-7seater/index.html","markers":["Toyota","アルファード","Z HEV 2WD（7人乗り）","6,399,800円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-alphard-2026-z-hev-e-four-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-alphard-2026-z-hev-e-four-7seater/index.html","markers":["Toyota","アルファード","Z HEV E-Four（7人乗り）","6,619,800円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-alphard-2026-g-hev-2wd-8seater/","locale":"ja","output_path":"dist/cars/jp-toyota-alphard-2026-g-hev-2wd-8seater/index.html","markers":["Toyota","アルファード","G HEV 2WD（8人乗り）","5,599,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-alphard-2026-g-hev-e-four-8seater/","locale":"ja","output_path":"dist/cars/jp-toyota-alphard-2026-g-hev-e-four-8seater/index.html","markers":["Toyota","アルファード","G HEV E-Four（8人乗り）","5,819,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-toyota-alphard-2026-g-hev-2wd-8seater&ids=jp-toyota-alphard-2026-z-hev-2wd-7seater","locale":"ja","output_path":"dist/compare/index.html","markers":["アルファード","G HEV 2WD（8人乗り）","Z HEV 2WD（7人乗り）"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-toyota-alphard-2026-z-hev-2wd-7seater","jp-toyota-alphard-2026-z-hev-e-four-7seater","jp-toyota-alphard-2026-g-hev-2wd-8seater","jp-toyota-alphard-2026-g-hev-e-four-8seater"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-alphard-2026-z-hev-2wd-7seater\"])" ,"markers":["Toyota","アルファード","Z HEV 2WD（7人乗り）"]},
+        {"url":"/cars/jp-toyota-alphard-2026-z-hev-2wd-7seater/","selector":"main","markers":["アルファード","6,399,800円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-alphard-2026-g-hev-2wd-8seater/","selector":"main","markers":["アルファード","5,599,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-toyota-alphard-2026-g-hev-2wd-8seater&ids=jp-toyota-alphard-2026-z-hev-2wd-7seater","selector":"[data-compare-result]","markers":["アルファード","G HEV 2WD（8人乗り）","Z HEV 2WD（7人乗り）","5,599,000円","6,399,800円"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
+    "vehicle:honda-vezel-2026": {
+      "entity_id": "vehicle:honda-vezel-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+      "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Honda","VEZEL","LEVEL 2"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Honda","VEZEL","LEVEL 2"]},
+        {"url":"/cars/jp-honda-vezel-2026-ehev-z-ff/","locale":"ja","output_path":"dist/cars/jp-honda-vezel-2026-ehev-z-ff/index.html","markers":["Honda","VEZEL","e:HEV Z（FF）","3,268,100円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-honda-vezel-2026-ehev-z-4wd/","locale":"ja","output_path":"dist/cars/jp-honda-vezel-2026-ehev-z-4wd/index.html","markers":["Honda","VEZEL","e:HEV Z（4WD）","3,488,100円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-honda-vezel-2026-ehev-z-ff&ids=jp-honda-vezel-2026-ehev-z-4wd","locale":"ja","output_path":"dist/compare/index.html","markers":["VEZEL","e:HEV Z（FF）","e:HEV Z（4WD）"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-honda-vezel-2026-ehev-z-ff","jp-honda-vezel-2026-ehev-z-4wd"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-honda-vezel-2026-ehev-z-ff\"])" ,"markers":["Honda","VEZEL","e:HEV Z（FF）"]},
+        {"url":"/cars/jp-honda-vezel-2026-ehev-z-ff/","selector":"main","markers":["VEZEL","3,268,100円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-honda-vezel-2026-ehev-z-ff&ids=jp-honda-vezel-2026-ehev-z-4wd","selector":"[data-compare-result]","markers":["VEZEL","e:HEV Z（FF）","e:HEV Z（4WD）","3,268,100円","3,488,100円"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "manufacturer-official-links:jp-current": {
       "entity_id": "manufacturer-official-links:jp-current",
       "entity_type": "manufacturer_official_links",

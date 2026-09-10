@@ -87,14 +87,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(95);
+    expect(vehicles).toHaveLength(101);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補94件は全件の公式金額を保持する', () => {
+  it('現行候補100件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(94);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(94);
+    expect(current).toHaveLength(100);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(100);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -103,7 +103,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(30);
+    expect(officialLinks).toHaveLength(32);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -168,6 +168,26 @@ describe('vehicle data contract and filters', () => {
     expect(tesla.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
     expect(tesla.every((vehicle) => vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-10')).toBe(true);
     expect(tesla.every((vehicle) => vehicleReferenceLabel(vehicle) === '現行仕様')).toBe(true);
+  });
+
+  it('Toyota アルファードは乗車定員・駆動方式別の4販売単位を価格付きで保持する', () => {
+    const alphard = vehicles.filter((vehicle) => vehicle.model === 'アルファード');
+    expect(alphard).toHaveLength(4);
+    expect(alphard.map((vehicle) => vehicle.grade).sort()).toEqual([
+      'G HEV 2WD（8人乗り）', 'G HEV E-Four（8人乗り）', 'Z HEV 2WD（7人乗り）', 'Z HEV E-Four（7人乗り）',
+    ].sort());
+    expect(alphard.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => a! - b!)).toEqual([5_599_000, 5_819_000, 6_399_800, 6_619_800]);
+    expect(alphard.every((vehicle) => vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed' && vehicle.capabilities.includes('lane_centering'))).toBe(true);
+    expect(alphard.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('alphard_spec_202606.pdf')))).toBe(true);
+  });
+
+  it('Honda VEZEL e:HEV ZはFF/4WDを分け、支援速度と価格を保持する', () => {
+    const vezel = vehicles.filter((vehicle) => vehicle.model === 'VEZEL');
+    expect(vezel).toHaveLength(2);
+    expect(vezel.map((vehicle) => vehicle.grade).sort()).toEqual(['e:HEV Z（4WD）', 'e:HEV Z（FF）'].sort());
+    expect(vezel.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => a! - b!)).toEqual([3_268_100, 3_488_100]);
+    expect(vezel.every((vehicle) => vehicle.modelYear === '2026' && vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed' && vehicle.odd.speedKph.max === 120)).toBe(true);
+    expect(vezel.every((vehicle) => vehicle.sources.some((source) => source.url.includes('/ownersmanual/webom/jpn/vezel/2026/')))).toBe(true);
   });
 
   it('Toyota ノアとLexus RZは販売単位を分け、ハンズオフ条件の不確実性を保持する', () => {

@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 95 | `src/data/vehicles.json` の全レコード（現行94 + 過去1） |
-| 既定表示 | 94 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 101 | `src/data/vehicles.json` の全レコード（現行100 + 過去1） |
+| 既定表示 | 100 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -21,6 +21,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota bZ4X） | 1 | bZ4X Z（FWD）。全車速ACC・LTA・LCAと渋滞時支援の条件、公式価格を販売単位へ固定 |
 | 今回追加（Toyota RAV4 / 後発対策） | 4 | Z HEV E-Four / Z PHEV E-Four / Adventure HEV E-Four / GR SPORT PHEV E-Four。公式価格、ACC・LTA、グレード別のAdvanced Drive・LCA・ドライバーモニターの標準／オプション差を販売単位へ固定 |
 | 今回追加（Toyota ハリアー / 後発対策） | 6 | G・Z・Z“Leather Package”の2WD/E-Four。2026年8月価格、ACC・LTA・停止保持・ハンドル保持要求を販売単位へ固定し、根拠がないLCA・ドライバーモニターは付与しない |
+| 今回追加（Toyota アルファード / 後発対策） | 4 | Z/G HEVの2WD/E-Four・7/8人乗り。2026年6月価格、ACC・LTA・ステアリング保持要求を販売単位へ固定 |
+| 今回追加（Honda VEZEL / 後発対策） | 2 | e:HEV ZのFF/4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -56,6 +58,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | bZ4X Z（FWD） | 掲載 | 2相当 | 2026-09-10 |
 | Toyota | RAV4 Z（ハイブリッド車 E-Four） / Z（プラグインハイブリッド車 E-Four） / Adventure（ハイブリッド車 E-Four） / GR SPORT（プラグインハイブリッド車 E-Four） | 掲載（4単位） | 2相当 | 2026-09-10 |
 | Toyota | ハリアー G（2WD/E-Four） / Z（2WD/E-Four） / Z“Leather Package”（2WD/E-Four） | 掲載（6単位） | 2相当 | 2026-09-10 |
+| Toyota | アルファード Z HEV 2WD / E-Four（7人乗り）、G HEV 2WD / E-Four（8人乗り） | 掲載（4単位） | 2相当 | 2026-09-10 |
+| Honda | VEZEL e:HEV Z FF / 4WD | 掲載（2単位） | 2相当 | 2026-09-10 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。2026-09-10確認時点で両モデルの日本向け公式商品ページに「今すぐ注文」導線が表示され、公式FAQも注文後の手続きと注文可能なトリム・納車予定時期をDesign Studioで確認する流れを案内しているため、6販売単位の`availability`を`new_order_available`へ更新した。ただし注文後の在庫・納車時期・ソフトウェア提供条件は個別確認が必要。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -284,6 +288,34 @@ ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し
 | HARRIER HEV 2026.08～の全車速追従ACC、停止保持・再発進条件 | トヨタ自動車 | https://manual.toyota.jp/harrier/2608/hev/ja_JP/contents/vhch04se050409.php | 2026-09-10 |
 
 6単位はACC（縦方向）とLTA（横方向）の同時支援を国土交通省のLevel 2定義へ照合してサイト上はLevel 2相当とした。公式安全ページが「安全性の観点からドライバーはステアリングを持ち続ける必要」と明記するため、handsOffは`not_allowed`。公式商品ページへの掲載は確認済みだが、販売単位ごとの新車注文可否を明文で固定できないためavailabilityは`unknown`のまま保持する。
+
+## Toyota アルファードの根拠（後発対策トランシェ）
+
+確認日は2026-09-10。アルファードHEVの価格・グレード表から、Z/Gの駆動方式と乗車定員を販売単位へ分離した。同じLevel 2でも価格・人数・駆動方式で候補を絞れるようにし、ACCとLTAは全単位で共通、ステアリング保持要求も共通として比較する。公式商品ページへの掲載は確認できるが、販売単位ごとの新車注文可否は明文で固定できないため`availability=unknown`とした。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| Z HEV 2WD（7人乗り）6,399,800円、Z HEV E-Four（7人乗り）6,619,800円、G HEV 2WD（8人乗り）5,599,000円、G HEV E-Four（8人乗り）5,819,000円（税込、2026年6月価格基準） | トヨタ自動車 | https://toyota.jp/alphard/grade/ | 2026-09-10 |
+| アルファード現行商品・安全性能、全車速追従ACC・LTA標準装備とステアリング保持要求 | トヨタ自動車 | https://toyota.jp/alphard/ / https://toyota.jp/alphard/safety/ | 2026-09-10 |
+| HEV各販売単位の主要諸元・装備 | トヨタ自動車 | https://toyota.jp/pages/contents/alphard/004_p_001/pdf/alphard_spec_202606.pdf | 2026-09-10 |
+| LTAの車線維持支援・高速道路／自動車専用道路の作動条件と保持要求 | トヨタ自動車 | https://manual.toyota.jp/alphard/3084/hev/ja_JP/contents/vhch04se050405.php | 2026-09-10 |
+| 全車速追従ACCの停止保持・先行車追従 | トヨタ自動車 | https://manual.toyota.jp/alphard/3084/hev/ja_JP/contents/vhch04se050412.php | 2026-09-10 |
+
+4単位はACC（縦方向）とLTA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。LTAはステアリング保持が必要なためhandsOffは`not_allowed`、新車注文可否は未確認のまま保持する。
+
+## Honda VEZELの根拠（後発対策トランシェ）
+
+確認日は2026-09-10。Honda公式のe:HEV ZページでFF/4WDの価格とHonda SENSING装備を確認し、駆動方式を別販売単位にした。ACCは停車追従、トラフィックジャムアシストは約0〜65km/h、LKASは約65〜120km/hの条件付き支援として、単に「Level 2」と表示するだけでは分からない作動範囲を保持する。新車注文可否を販売単位へ固定できないため`availability=unknown`とした。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| e:HEV Z FF 3,268,100円、e:HEV Z 4WD 3,488,100円（税込）と標準Honda SENSING | 本田技研工業 | https://www.honda.co.jp/VEZEL/webcatalog/type/ehev_z/ | 2026-09-10 |
+| VEZEL現行商品・装備一覧、Honda SENSINGが運転支援で運転者の監視を前提とする旨 | 本田技研工業 | https://www.honda.co.jp/VEZEL/ / https://www.honda.co.jp/VEZEL/common/pdf/vezel_equipment_list.pdf / https://www.honda.co.jp/VEZEL/webcatalog/performance/ | 2026-09-10 |
+| ACCの停車追従・再発進条件 | 本田技研工業 | https://www.honda.co.jp/ownersmanual/webom/jpn/vezel/2026/details/136265090-85520.html | 2026-09-10 |
+| LKASの車線中央維持、約65〜120km/h、ステアリング保持と操作責任 | 本田技研工業 | https://www.honda.co.jp/ownersmanual/webom/jpn/vezelehev/2026/details/136262090-86768.html | 2026-09-10 |
+| トラフィックジャムアシストの渋滞時支援 | 本田技研工業 | https://www.honda.co.jp/ownersmanual/webom/jpn/vezel/2026/details/136265090-222537.html | 2026-09-10 |
+
+2単位はACC（縦方向）とLKAS／トラフィックジャムアシスト（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。Hondaの取扱説明書は運転者の常時監視とステアリング保持を求めるためhandsOffは`not_allowed`。価格は車両本体の税込参考価格で、注文可否や適用日を推測していない。
 
 ## Volvo EX30の根拠（内部保持）
 
