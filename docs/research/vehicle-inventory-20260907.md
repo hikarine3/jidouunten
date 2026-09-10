@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 134 | `src/data/vehicles.json` の全レコード（現行133 + 過去1） |
-| 既定表示 | 133 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 140 | `src/data/vehicles.json` の全レコード（現行139 + 過去1） |
+| 既定表示 | 139 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -27,6 +27,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota シエンタ / 後発対策） | 18 | Z/G/Xのハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗りを公式グレードJSONの全組み合わせで登録。価格214万6,100円〜339万7,900円、全車速ACC・LTA・手保持条件を販売単位へ固定 |
 | 今回追加（Lexus LM / 後発対策） | 2 | LM500h EXECUTIVE（4人）/ version L（6人）のAWD。Advanced Drive・LCA・ドライバーモニター・全車速追従ACCを標準装備として確認し、価格1,520万〜2,030万円、渋滞時0〜約40km/hの条件付きハンズオフを販売単位へ固定 |
+| 今回追加（Lexus UX300h / 後発対策） | 6 | Shining Essence / version L / F SPORTの2WD・AWD。全車速追従ACC・LTA・ドライバー異常時対応システム標準、価格521万〜575.7万円、ステアリング保持が必要なハンズオフ不可、2027年2月生産終了予定を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -68,6 +69,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | ヴォクシー S-Z/S-G 2WD・E-Four（7人）、S-G 2WD（8人）、S-G マルチユーティリティ（2WD・5人） | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Toyota | シエンタ Z/G/X ハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗り | 掲載（18単位） | 2相当 | 2026-09-10 |
 | Lexus | LM500h EXECUTIVE AWD（4人乗り） / version L AWD（6人乗り） | 掲載（2単位） | 2相当 | 2026-09-10 |
+| Lexus | UX300h “Shining Essence” / “version L” / “F SPORT” 2WD・AWD | 掲載（6単位） | 2相当 | 2026-09-10 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。2026-09-10確認時点で両モデルの日本向け公式商品ページに「今すぐ注文」導線が表示され、公式FAQも注文後の手続きと注文可能なトリム・納車予定時期をDesign Studioで確認する流れを案内しているため、6販売単位の`availability`を`new_order_available`へ更新した。ただし注文後の在庫・納車時期・ソフトウェア提供条件は個別確認が必要。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -380,6 +382,21 @@ ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し
 | 一部を除く高速道路・自動車専用道路本線で車線維持・加減速・停車・発進を支援。渋滞時は約40km/h以下などの条件で作動し、作動中はハンドルから手を離せるが、運転者の状況確認と安全確保が必要 | Lexus | https://manual.lexus.jp/lm/3004/hev/ja_JP/contents/vhch04se050415.php | 2026-09-10 |
 
 2単位はACC（縦方向）とLTA/LCA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。Advanced Driveは渋滞時の条件付き支援で、運転者監視のもとハンドルから手を離せるため、サイト上のハンズオフ表示は「条件内で可」、ドライバーモニターは必須とした。対象道路は一部を除く高速道路・自動車専用道路本線、速度上限は約40km/h（渋滞時）として表示し、渋滞解消・車線変更・条件外では運転者操作が必要と明記した。Advanced Driveの利用にはG-Link契約が必要で、初度登録から3年間は基本利用料無料、その後は有料となる。価格ページへの掲載は確認済みだが、新車注文可否と納期は未確認のままCTAを表示しない。高価格帯の4人/6人・LCA標準・条件付きハンズオフという差分は、価格だけでなく「どの条件で任せられるか」を比較する後発耐性になる。
+
+## Lexus UX300hの根拠（同一ブランド差分トランシェ）
+
+確認日は2026-09-10。Lexus公式の価格ページでShining Essence、version L、F SPORTの2WD・AWDを6販売単位として確認した。価格は521万円〜575万7,000円（税込）、全単位5人乗り。全車速追従レーダークルーズ、LTA、ドライバー異常時対応システムは主要装備表で標準と確認できるが、LTAはステアリング保持が必要で、ハンズオフでは停止する。したがって6単位ともLevel 2相当・`handsOff=not_allowed`・`driverMonitoring=required`とし、LCAや独立したドライバーモニター機能は根拠がないため付与していない。公式商品ページには2027年2月生産終了予定とあるが、個別の新車注文可否・納期は固定できないため`availability=unknown`とした。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| UX300h Shining Essence / version L / F SPORTの2WD・AWD、価格521万〜575万7,000円、5人乗り | Lexus | https://lexus.jp/models/ux/features/price_package/ | 2026-09-10 |
+| UX300h現行掲載と2027年2月生産終了予定 | Lexus | https://lexus.jp/models/ux/ | 2026-09-10 |
+| 全車速追従レーダークルーズ、LTA、ドライバー異常時対応システム | Lexus | https://lexus.jp/models/ux/features/safety/ | 2026-09-10 |
+| 6グレードでACC・LTA・ドライバー異常時対応システム標準 | Lexus | https://lexus.jp/models/ux/pdf/equipmentlist.pdf | 2026-09-10 |
+| UX300h 5人乗り・2WD/E-Fourの主要諸元 | Lexus | https://lexus.jp/models/ux/pdf/specificationslist.pdf | 2026-09-10 |
+| 高速道路・自動車専用道路でのLTA条件、ステアリング保持、ハンズオフ時の停止 | Lexus | https://manual.lexus.jp/ux/2312/hev/ja_JP/contents/vhch04se050404.php | 2026-09-10 |
+
+LMと同じLexusでも、UX300hはハンズオフ不可・LCAなし・521万〜575.7万円、LMは条件付きハンズオフ・LCA標準・1,520万〜2,030万円となる。この同一ブランド内の「価格だけではない能力差」を、2WD/AWD・グレード・定員・作動条件とともに比較できることが後発耐性になる。
 
 ## Volvo EX30の根拠（内部保持）
 

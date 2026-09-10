@@ -87,14 +87,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(134);
+    expect(vehicles).toHaveLength(140);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補133件は全件の公式金額を保持する', () => {
+  it('現行候補139件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(133);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(133);
+    expect(current).toHaveLength(139);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(139);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -104,7 +104,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(36);
+    expect(officialLinks).toHaveLength(37);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -271,6 +271,28 @@ describe('vehicle data contract and filters', () => {
     expect(lm.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('vhch04se050415.php') && source.supports.some((support) => support.includes('ハンドルから手を離す'))))).toBe(true);
     expect(lm.every((vehicle) => vehicle.requiredPackage?.includes('G-Link契約') && vehicle.limitations.some((limitation) => limitation.includes('G-Link契約')))).toBe(true);
     expect(lm.every((vehicle) => !vehicle.classificationRationale?.includes('allowed_in_conditions'))).toBe(true);
+  });
+
+  it('Lexus UX300hは6販売単位を価格・駆動方式別のステアリング保持Level 2として保持する', () => {
+    const ux = vehicles.filter((vehicle) => vehicle.model === 'UX300h');
+    expect(ux).toHaveLength(6);
+    expect(ux.map((vehicle) => vehicle.grade).sort()).toEqual([
+      'UX300h “Shining Essence” 2WD', 'UX300h “Shining Essence” AWD',
+      'UX300h “version L” 2WD', 'UX300h “version L” AWD',
+      'UX300h “F SPORT” 2WD', 'UX300h “F SPORT” AWD',
+    ].sort());
+    expect(ux.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([5_210_000, 5_341_000, 5_475_000, 5_492_000, 5_606_000, 5_757_000]);
+    expect(ux.every((vehicle) => vehicle.currentCatalogListed && vehicle.modelYear === null && vehicle.catalogAsOf === null && vehicle.priceEffectiveAt === null)).toBe(true);
+    expect(ux.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed')).toBe(true);
+    expect(ux.every((vehicle) => vehicle.odd.speedKph.min === null && vehicle.odd.speedKph.max === null)).toBe(true);
+    expect(ux.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist')).toBe(true);
+    expect(ux.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://lexus.jp/models/ux/features/price_package/'))).toBe(true);
+    expect(ux.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://lexus.jp/models/ux/features/safety/'))).toBe(true);
+    expect(ux.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/ux/pdf/equipmentlist.pdf')))).toBe(true);
+    expect(ux.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/ux/pdf/specificationslist.pdf')))).toBe(true);
+    expect(ux.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('vhch04se050404.php') && source.supports.some((support) => support.includes('ステアリング保持'))))).toBe(true);
+    expect(ux.every((vehicle) => vehicle.limitations.some((limitation) => limitation.includes('2027年2月生産終了予定')))).toBe(true);
+    expect(ux.every((vehicle) => !vehicle.capabilities.includes('hands_off_highway') && !vehicle.capabilities.includes('lane_change_support') && !vehicle.capabilities.includes('driver_monitoring'))).toBe(true);
   });
 
   it('Honda VEZEL e:HEV ZはFF/4WDを分け、支援速度と価格を保持する', () => {
