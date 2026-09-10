@@ -125,6 +125,7 @@ describe('vehicle data contract and filters', () => {
     const toyotaEstimateLinks = officialLinks.filter(({ maker }) => maker === 'Toyota').flatMap((link) => (link.actions ?? []).filter(({ kind }) => kind === 'estimate'));
     expect(toyotaEstimateLinks).toHaveLength(10);
     expect(toyotaEstimateLinks.every(({ label, url, checkedAt }) => label === '公式で見積り' && url.startsWith('https://toyota.jp/service/estimate/grades?car_name_en=') && checkedAt === '2026-09-10')).toBe(true);
+    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'BZ4X', 'CROWN CROSSOVER', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY'].sort());
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {

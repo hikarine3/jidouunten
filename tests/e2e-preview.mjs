@@ -273,7 +273,7 @@ try {
   assert.match(await page.locator('main').innerText(), /Advanced Drive[\s\S]*0〜約40km\/h[\s\S]*LCA[\s\S]*約85〜130km\/h/, 'ノアS-ZはAdvanced DriveとLCAの速度域を分けて表示');
   assert.match(await page.locator('main').innerText(), /公式の検討・購入導線[\s\S]*検討用[\s\S]*公式で見積り/, '注文可否未確認でもToyotaの公式見積り導線を表示');
   const noahEstimate = page.locator('[data-purchase-action][data-action-type="estimate"]');
-  assert.equal(await noahEstimate.getAttribute('href'), 'https://toyota.jp/service/estimate/grades?car_name_en=noah', 'ノアのモデル別見積りURL');
+  assert.equal(await noahEstimate.getAttribute('href'), 'https://toyota.jp/service/estimate/grades?car_name_en=NOAH', 'ノアのモデル別見積りURL');
   await noahEstimate.evaluate((link) => link.addEventListener('click', (event) => event.preventDefault(), { once: true, capture: true }));
   await noahEstimate.click();
   const noahEstimateEvent = (await events()).filter((event) => event.event === 'outbound_purchase_action').at(-1);
