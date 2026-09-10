@@ -1168,6 +1168,10 @@
         {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-lexus-ux-2026-ux300h-shining-essence-2wd\"])" ,"markers":["Lexus","UX300h","Shining Essence” 2WD"]},
         {"url":"/cars/jp-lexus-ux-2026-ux300h-shining-essence-2wd/","selector":"main","markers":["UX300h","5,210,000円","Level 2","ハンズオフ：不可","ステアリング"]},
         {"url":"/cars/jp-lexus-ux-2026-ux300h-version-l-awd/","selector":"main","markers":["UX300h","5,757,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-lexus-ux-2026-ux300h-shining-essence-awd/","selector":"main","markers":["UX300h","5,475,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-lexus-ux-2026-ux300h-version-l-2wd/","selector":"main","markers":["UX300h","5,492,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-lexus-ux-2026-ux300h-f-sport-2wd/","selector":"main","markers":["UX300h","5,341,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-lexus-ux-2026-ux300h-f-sport-awd/","selector":"main","markers":["UX300h","5,606,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/compare/?ids=jp-lexus-ux-2026-ux300h-shining-essence-2wd&ids=jp-lexus-lm-2026-lm500h-version-l-awd-6seater","selector":"[data-compare-result]","markers":["UX300h","LM500h version L","5,210,000円","15,200,000円"]}
       ],
       "historical_markers": [],
