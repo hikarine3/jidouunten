@@ -1,5 +1,18 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 後発対策トランシェ（Toyota公式見積り出口10モデル）本番実測
+
+- exact app release commit: `0448c1bddd54dbfc3236b08df7c7cd87a967299d`（公式見積り導線 `1f5fb50`、case-sensitive URL修正、registry閉包を含む）。
+- Immutable deployment: https://6b4375a4.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Toyotaのノア、プリウス、クラウン（クロスオーバー）、bZ4X、RAV4、ハリアー、アルファード、ヴェルファイア、ヴォクシー、シエンタへ、公式見積りの車種固定URLを追加。`car_name_en` は公式hrefの値（`NOAH`等、クラウンは`CROWN+CROSSOVER`、bZ4Xは`bZ4X`）を保持した。
+- 外部公式画面は実ブラウザで10/10件がHTTP200、エラー表示なし、グレード一覧・価格・選択UIまで到達。詳細56/56、比較2リンクに反映し、注文可否未確認のToyotaには注文CTAを出していない。
+- 詳細・比較で「購入・試乗」と「検討用」を分離し、見積りは注文可を示さないと明記。クリックは販売単位ID・メーカー・`estimate`・配置つき `outbound_purchase_action` で計測した。Teslaの注文/試乗4リンクは回帰なし。
+- `npm test`（Vitest37/37、価格147/147・現行146/146、公式導線37モデル/14アクション、Python16/16）、`npm run check`（0 errors / 0 warnings / 既知hint5）、実ID build153ページを確認。
+- `BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs` は1/1、GA collect HTTP204。本体・immutableとも主要URL（トップ、一覧、ノア詳細、Toyota比較、sitemap、robots）HTTP200。日本語IDNの `/cars/?level=2` は本体へpath/queryを維持した301。
+- 依存registryはmanufacturer-official-linksのsurface14/14、required selector14/14（比較の見積りselector含む）、静的marker39、ブラウザrender14/14。390px横overflow0、内部根拠・GTM-TEST漏洩0、リンクはHTTPSかつ `toyota.jp` / `www.tesla.com` のみ。
+- Astra価値監査・Platoリリース監査はexact SHAでPASS。直前正常deployment（rollback候補）は https://106e44cd.jidouunten.pages.dev（source `84b6c93`）。専用entity checkerはrepoにないため、静的JSON＋Playwrightで代替検証した。
+
 ## 2026-09-10 後発対策トランシェ（確認済み追加パッケージ込み参考総額）本番実測
 
 - exact release commit: `84b6c93e632505dcda1abdbc15a9fb9ee81b5a53`（実装 `a27de8b`、算出不可の比較分類修正 `dc0bdc6`、依存レジストリ閉包を含む）。

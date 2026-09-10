@@ -34,6 +34,9 @@
 
 ## 最新の本番反映（2026-09-10）
 
+- 後発対策としてToyota主要10モデル（ノア、プリウス、クラウン（クロスオーバー）、bZ4X、RAV4、ハリアー、アルファード、ヴェルファイア、ヴォクシー、シエンタ）へ、公式hrefと同じcase-sensitiveな車種固定見積りURLを追加した。詳細・比較では注文/試乗と検討用見積りを分離し、注文可否未確認の車両にも安全に予算検討へ進める。`outbound_purchase_action` は販売単位ID・メーカー・`estimate`・配置を保持する。bZ4Xは `bZ4X`、クラウンは `CROWN+CROSSOVER` を使用し、小文字化によるToyotaエラーを防いだ。
+- exact app release `0448c1bddd54dbfc3236b08df7c7cd87a967299d`、Immutable `https://6b4375a4.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。全147販売単位（現行146件）、build153、Vitest37/Python16、価格・公式導線checker、Astro check 0 errors、Toyota見積りブラウザ10/10、詳細56/56・比較2、registry14/14、独立Astra/Plato監査、local/production E2E各1/1、GA collect HTTP204、主要URL200、IDN path/query301がPASS。直前rollbackは `https://106e44cd.jidouunten.pages.dev`。
+
 - 後発対策として「参考総額（本体＋確認済み追加パッケージ）」を詳細・比較へ追加。単一のexact本体価格と確認済み追加価格だけを合算し、諸費用・他オプションは除外、レンジ／未確認価格は算出不可のまま表示する。ノアS-Z 2WD（7人乗り）は4,178,900円、S-Xとの比較では算出不可側をunknownとして差分件数から除外。セレナ、CX-30、ヴォクシー6単位にも同じ規則を適用し、13詳細＋2比較の依存selectorをregistryへ登録した。
 - exact release `84b6c93e632505dcda1abdbc15a9fb9ee81b5a53`（実装 `a27de8b`、比較分類修正 `dc0bdc6`）、Immutable `https://106e44cd.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。全147販売単位（現行146件）、build153、Vitest37/Python16、価格・公式導線チェッカー、Astro check 0 errors、独立Astra/Plato監査、ローカル／本番E2E各1/1、GA collect HTTP204、registry required selector15/15・85 markersがPASS。直前rollbackは `https://3ee94155.jidouunten.pages.dev`。
 
