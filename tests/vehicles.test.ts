@@ -87,14 +87,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(140);
+    expect(vehicles).toHaveLength(147);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補139件は全件の公式金額を保持する', () => {
+  it('現行候補146件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(139);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(139);
+    expect(current).toHaveLength(146);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(146);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -304,16 +304,22 @@ describe('vehicle data contract and filters', () => {
     expect(vezel.every((vehicle) => vehicle.sources.some((source) => source.url.includes('/ownersmanual/webom/jpn/vezel/2026/')))).toBe(true);
   });
 
-  it('Toyota ノアとLexus RZは販売単位を分け、ハンズオフ条件の不確実性を保持する', () => {
-    const noah = vehicles.find((vehicle) => vehicle.id === 'jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive');
-    expect(noah?.price?.amounts[0].amountJpy).toBe(4_056_800);
-    expect(noah?.price?.optionalPackages[0].amountJpy).toBe(121_000);
-    expect(noah?.handsOff).toBe('allowed_in_conditions');
-    expect(noah?.capabilities).toContain('hands_off_highway');
-    expect(noah?.driverMonitoring).toBe('required');
-    expect(noah?.salesUnitIntroducedAt).toBeNull();
-    expect(noah?.availability).toBe('unknown');
-    expect(noah?.sources.some((source) => source.url.endsWith('noah_spec_202609.pdf'))).toBe(true);
+  it('Toyota ノア現行HEV全8販売単位を価格・定員・能力差つきで保持する', () => {
+    const noah = vehicles.filter((vehicle) => vehicle.model === 'ノア');
+    expect(noah).toHaveLength(8);
+    expect(noah.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => a! - b!)).toEqual([
+      3_261_500, 3_261_500, 3_514_500, 3_700_400, 3_700_400, 3_953_400, 4_056_800, 4_309_800,
+    ]);
+    const advanced = noah.filter((vehicle) => vehicle.handsOff === 'allowed_in_conditions');
+    expect(advanced).toHaveLength(5);
+    expect(advanced.every((vehicle) => vehicle.capabilities.includes('lane_change_support') && vehicle.capabilities.includes('driver_monitoring'))).toBe(true);
+    expect(advanced.map((vehicle) => vehicle.price?.optionalPackages[0].amountJpy).sort((a, b) => a! - b!)).toEqual([78_100, 78_100, 78_100, 122_100, 122_100]);
+    const sx = noah.filter((vehicle) => vehicle.grade.includes('S-X'));
+    expect(sx).toHaveLength(3);
+    expect(sx.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.price?.optionalPackages.length === 0 && !vehicle.capabilities.includes('lane_change_support'))).toBe(true);
+    expect(noah.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.availability === 'unknown' && vehicle.salesUnitIntroducedAt === null && vehicle.sources.some((source) => source.url.endsWith('noah_spec_202609.pdf')))).toBe(true);
+    const noahSz = noah.find((vehicle) => vehicle.id === 'jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive');
+    expect(noahSz?.price?.optionalPackages[0].amountJpy).toBe(122_100);
 
     const rz = vehicles.find((vehicle) => vehicle.id === 'jp-lexus-rz-2026-rz500e-version-l-awd');
     expect(rz?.price?.amounts[0].amountJpy).toBe(8_500_000);

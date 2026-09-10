@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 140 | `src/data/vehicles.json` の全レコード（現行139 + 過去1） |
-| 既定表示 | 139 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 147 | `src/data/vehicles.json` の全レコード（現行146 + 過去1） |
+| 既定表示 | 146 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -25,6 +25,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Honda VEZEL / 後発対策） | 2 | e:HEV ZのFF/4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
+| 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定 |
 | 今回追加（Toyota シエンタ / 後発対策） | 18 | Z/G/Xのハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗りを公式グレードJSONの全組み合わせで登録。価格214万6,100円〜339万7,900円、全車速ACC・LTA・手保持条件を販売単位へ固定 |
 | 今回追加（Lexus LM / 後発対策） | 2 | LM500h EXECUTIVE（4人）/ version L（6人）のAWD。Advanced Drive・LCA・ドライバーモニター・全車速追従ACCを標準装備として確認し、価格1,520万〜2,030万円、渋滞時0〜約40km/hの条件付きハンズオフを販売単位へ固定 |
 | 今回追加（Lexus UX300h / 後発対策） | 6 | Shining Essence / version L / F SPORTの2WD・AWD。全車速追従ACC・LTA・ドライバー異常時対応システム標準、価格521万〜575.7万円、ステアリング保持が必要なハンズオフ不可、2027年2月生産終了予定を販売単位へ固定 |
@@ -67,6 +68,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Honda | VEZEL e:HEV Z FF / 4WD | 掲載（2単位） | 2相当 | 2026-09-10 |
 | Toyota | ヴェルファイア Executive Lounge PHEV E-Four（6人）、Executive Lounge HEV 2WD/E-Four（7人）、Z Premier HEV 2WD/E-Four、Z Premier ターボガソリン 2WD/4WD（7人） | 掲載（7単位） | 2相当 | 2026-09-10 |
 | Toyota | ヴォクシー S-Z/S-G 2WD・E-Four（7人）、S-G 2WD（8人）、S-G マルチユーティリティ（2WD・5人） | 掲載（6単位） | 2相当 | 2026-09-10 |
+| Toyota | ノア HYBRID S-Z/S-G/S-X 2WD・E-Four（7人）、S-G/S-X 2WD（8人） | 掲載（8単位） | 2相当 | 2026-09-10 |
 | Toyota | シエンタ Z/G/X ハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗り | 掲載（18単位） | 2相当 | 2026-09-10 |
 | Lexus | LM500h EXECUTIVE AWD（4人乗り） / version L AWD（6人乗り） | 掲載（2単位） | 2相当 | 2026-09-10 |
 | Lexus | UX300h “Shining Essence” / “version L” / “F SPORT” 2WD・AWD | 掲載（6単位） | 2相当 | 2026-09-10 |
@@ -210,26 +212,26 @@ CX-80 8単位とCX-60 11単位はMRCC・CTS・ドライバー・モニタリン�
 
 ## Toyota ノア / Lexus RZの根拠（内部保持）
 
-確認日は2026-09-10。今回追加するのは、公式の現行商品ページで販売単位名と価格を確認でき、
-前後・左右の運転支援を一次情報へ結び付けられた2単位だけとした。新車注文可否・発売日は公式ページで
-販売単位に固定できないため `unknown` / null のまま保持し、推測していない。
+確認日は2026-09-10。ノアは公式の現行グレードJSONで確認できるHEV 8販売単位へ展開した。
+S-Z／S-Gはアドバンスト ドライブ等セット、LCA、ドライバーモニターカメラの有無と価格を分け、
+S-Xは設定なしとしている。新車注文可否・発売日は公式ページで販売単位に固定できないため、8単位とも
+`unknown` / null のまま保持し、推測していない。RZは引き続き1単位で、ハンズオフ条件は未確認のままとした。
 
 | 対象事実 | 発行元 | URL | 確認日 |
 |---|---|---|---|
-| ノア HYBRID S-Z 2WD（7人乗り）4,056,800円（税込） | トヨタ自動車 | https://toyota.jp/noah/specification/ | 2026-09-10 |
-| ノアのToyota Teammate アドバンスト ドライブ（渋滞時支援）121,000円（税込）、S-Z設定、ドライバーモニターカメラ | トヨタ自動車 | https://toyota.jp/pages/contents/noah/004_p_001/pdf/noah_spec_202609.pdf | 2026-09-10 |
+| ノア現行HEV 8単位（S-Z/S-G/S-X、2WD/E-Four、7/8人）の名称・税込価格 | トヨタ自動車 | https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades16.json | 2026-09-10 |
+| ノアのアドバンスト ドライブ等セット：S-Z 122,100円／S-G 78,100円（税込）、LCA・ドライバーモニターカメラを含む設定、S-Xは設定なし | トヨタ自動車 | https://toyota.jp/pages/contents/noah/004_p_001/pdf/noah_spec_202609.pdf | 2026-09-10 |
 | ノアのレーダークルーズコントロール、LTA、対象道路・速度・ステアリング保持条件 | トヨタ自動車 | https://toyota.jp/noah/safety/ | 2026-09-10 |
-| ノアのアドバンスト ドライブ作動条件、運転者監視、手放し継続時の制限 | トヨタ自動車 | https://manual.toyota.jp/noah/2201/cv/ja_JP/contents/vhch04se050415.php | 2026-09-10 |
+| ノアHEVのアドバンスト ドライブ作動条件、運転者監視、手放し継続時の制限 | トヨタ自動車 | https://manual.toyota.jp/noah/2509/hev/ja_JP/contents/vhch04se050415.php | 2026-09-10 |
 | RZ500e “version L” AWD 8,500,000円（税込） | Lexus | https://lexus.jp/models/rz/features/price_package/ | 2026-09-10 |
 | RZ現行ラインアップとRZ500e “version L”の掲載 | Lexus | https://lexus.jp/models/rz/ | 2026-09-10 |
 | RZのLexus Safety System＋、全車速追従機能付DRCC・LTA、ドライバーモニター連携 | Lexus | https://lexus.jp/models/rz/features/safety/ | 2026-09-10 |
 | RZのLTA作動条件・運転者監視・操作責任 | Lexus | https://manual.lexus.jp/rz/3079/bev/ja_JP/contents/owx1740487964005.php | 2026-09-10 |
 
-ノアはAdvanced Driveの対象条件（高速道路本線の渋滞時・約40km/h以下等）ではハンズオフが可能だが、
-運転者の前方監視と必要時の操作が必要なため `allowed_in_conditions` とした。汎用LTAの手保持要求と
-Advanced Driveの条件付きハンズオフを混同しない。RZは販売単位に固定したハンズオフ・ドライバーモニター
-条件を今回の資料だけでは断定せず未確認とした。価格は任意オプションを車両本体へ加算せず、ノアの必要装備
-として別表示する。
+ノアのS-Z/S-GはAdvanced Drive等セットの対象条件（高速道路本線の渋滞時・約40km/h以下等）では
+ハンズオフが可能だが、運転者の前方監視と必要時の操作が必要なため `allowed_in_conditions` とした。
+汎用LTAの手保持要求とAdvanced Driveの条件付きハンズオフを混同しない。S-XはAdvanced Drive設定がなく
+`not_allowed` とした。価格は任意オプションを車両本体へ加算せず、追加パッケージとして別表示する。
 
 ## Toyota プリウス / Lexus NXの根拠（内部保持）
 
