@@ -86,14 +86,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(84);
+    expect(vehicles).toHaveLength(85);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補83件は全件の公式金額を保持する', () => {
+  it('現行候補84件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(83);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(83);
+    expect(current).toHaveLength(84);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(84);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -102,7 +102,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(27);
+    expect(officialLinks).toHaveLength(28);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -230,6 +230,17 @@ describe('vehicle data contract and filters', () => {
     expect(rx?.odd.speedKph).toMatchObject({ min: 0, max: 40 });
     expect(rx?.capabilities).toEqual(expect.arrayContaining(['traffic_jam_assist', 'hands_off_highway', 'driver_monitoring', 'lane_change_support']));
     expect(rx?.sources.some((source) => source.url === 'https://lexus.jp/models/rx/pdf/rx_safety.pdf')).toBe(true);
+  });
+
+  it('Toyota bZ4X Zは価格・渋滞時支援・監視条件を販売単位へ固定する', () => {
+    const bz4x = vehicles.find((vehicle) => vehicle.id === 'jp-toyota-bz4x-2026-z-fwd-advanced-drive');
+    expect(bz4x?.price?.amounts[0].amountJpy).toBe(5_500_000);
+    expect(bz4x?.handsOff).toBe('allowed_in_conditions');
+    expect(bz4x?.driverMonitoring).toBe('required');
+    expect(bz4x?.odd.speedKph).toMatchObject({ min: 0, max: 40 });
+    expect(bz4x?.capabilities).toEqual(expect.arrayContaining(['adaptive_cruise_control', 'lane_centering', 'traffic_jam_assist', 'hands_off_highway', 'driver_monitoring', 'lane_change_support']));
+    expect(bz4x?.sources.some((source) => source.url === 'https://toyota.jp/bz4x/safety/')).toBe(true);
+    expect(bz4x?.sources.some((source) => source.url.includes('manual.toyota.jp/bz4x'))).toBe(true);
   });
 
   it('時系列フィールドは公式モデル年・世代・適用時点を混同しない', () => {

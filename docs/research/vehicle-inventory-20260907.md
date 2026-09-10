@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 84 | `src/data/vehicles.json` の全レコード（現行83 + 過去1） |
-| 既定表示 | 83 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 85 | `src/data/vehicles.json` の全レコード（現行84 + 過去1） |
+| 既定表示 | 84 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -18,6 +18,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（BMW） | 9 | 3シリーズ通常カタログのSedan G20 5単位 / Touring G21 4単位。2026年7月以降生産の装備・価格表で確認 |
 | 今回追加（Toyota / Lexus） | 2 | プリウス Z（2WD）とNX350h “version L” 2WD。現行商品・価格・安全・取扱説明書を販売単位へ固定 |
 | 今回追加（Toyota / Lexus / 後発対策） | 3 | クラウン（クロスオーバー）CROSSOVER RS “THE LIMITED-MATTE METAL” 4WD、LBX “Bespoke Build” 2WD、RX500h “F SPORT Performance” AWD。渋滞時支援・車線変更・監視条件と公式価格を販売単位へ固定 |
+| 今回追加（Toyota bZ4X） | 1 | bZ4X Z（FWD）。全車速ACC・LTA・LCAと渋滞時支援の条件、公式価格を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -50,6 +51,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | クラウン（クロスオーバー）CROSSOVER RS “THE LIMITED-MATTE METAL” 4WD | 掲載 | 2相当 | 2026-09-10 |
 | Lexus | LBX “Bespoke Build” 2WD（FF） | 掲載 | 2相当 | 2026-09-10 |
 | Lexus | RX500h “F SPORT Performance” AWD | 掲載 | 2相当 | 2026-09-10 |
+| Toyota | bZ4X Z（FWD） | 掲載 | 2相当 | 2026-09-10 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -236,6 +238,9 @@ Advanced Driveの条件付きハンズオフを混同しない。RZは販売単�
 | クラウン（クロスオーバー）CROSSOVER RS “THE LIMITED-MATTE METAL” 4WD 7,590,000円（税込、2026年9月現在） | トヨタ自動車 | https://toyota.jp/info/crowncrossover/special/ | 2026-09-10 |
 | クラウンの全車速追従レーダークルーズ、LTA、LCA、ドライバーモニター、Advanced Drive（渋滞時支援）のRS標準装備 | トヨタ自動車 | https://toyota.jp/crowncrossover/safety/ | 2026-09-10 |
 | クラウン 2026.09～のAdvanced Drive（0〜約40km/h、監視下の渋滞時支援） | トヨタ自動車 | https://manual.toyota.jp/crowncrossover/3143/hev/ja_JP/contents/vhch04se050415.php | 2026-09-10 |
+| bZ4X Z（FWD）5,500,000円（税込） | トヨタ自動車 | https://toyota.jp/bz4x/specification/index.html | 2026-09-10 |
+| bZ4Xの全車速追従レーダークルーズ、LTA、ZのLCA・Advanced Drive標準装備 | トヨタ自動車 | https://toyota.jp/bz4x/safety/ | 2026-09-10 |
+| bZ4X 2026.07～のLTA/LCA作動条件とステアリング保持責任 | トヨタ自動車 | https://manual.toyota.jp/bz4x/2607/bev/ja_JP/contents/vhch05se040405.php | 2026-09-10 |
 | LBX “Bespoke Build” 2WD 5,500,000円（税込、’26年5月現在） | Lexus | https://lexus.jp/models/lbx/features/price_package/ | 2026-09-10 |
 | LBXの全車速追従レーダークルーズ、LTA、Advanced Drive、Bespoke BuildのLCA・ドライバーモニター標準装備 | Lexus | https://lexus.jp/models/lbx/features/safety/ | 2026-09-10 |
 | LBX 2026.05～のLTA作動条件とステアリング保持責任 | Lexus | https://manual.lexus.jp/lbx/3091/cv/ja_JP/contents/vhch04se050405.php | 2026-09-10 |
