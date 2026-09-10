@@ -1,5 +1,16 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 購入・試乗アクションの本番実測
+
+- source commit: `06471c0a5afc776300c299c0c22c9bdfc2ca220c`（アプリ実装 `fa36371ac1125948ccb403eccd73de7c848f2b5e`、計測正本更新を含む）
+- Immutable deployment: https://d8f9a9b8.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Tesla Model 3 / Model Yの公式商品ページで一次確認した「今すぐ注文」「試乗を予約する」を、対象6販売単位の詳細画面と2台比較へ表示。詳細は6/6（各2アクション）、比較は4/4のリンクを確認した。その他メーカーには未確認の導線を表示していない。
+- 本体・immutableの詳細/比較で、購入・試乗クリック前の `outbound_purchase_action` payload（6項目）を確認。`GTM-PV9QVMJV`、`GTM-TEST`なし、GA collect HTTP 204。
+- `BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs` は1/1 PASS。トップ、注文可フィルタ、Tesla詳細、比較、sitemap-index、robotsは200。存在しないパスは404。
+- 日本語IDNの `/cars/?level=2&availability=all` は `https://jidouunten.jp/cars/?level=2&availability=all` へpath/queryを維持した301。
+- 独立監査はsource commit `06471c0` でPASS。GTM live version 9（6 trigger / 6 GA4 Event tag / 15 dataLayer variable）と運用正本の整合も確認済み。
+
 ## 2026-09-10 比較差分トランシェの本番実測
 
 - exact commit: `dac0501228b7651c810c769398302db6c0aad60b`
