@@ -268,7 +268,7 @@ try {
 
   await page.goto(`${base}/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/`);
   assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*ノア[\s\S]*HYBRID S-Z 2WD/);
-  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,056,800円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'ノアの条件付きハンズオフを表示');
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,056,800円[\s\S]*参考総額[\s\S]*4,178,900円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'ノアの参考総額と条件付きハンズオフを表示');
   assert.match(await page.locator('main').innerText(), /追加パッケージ[\s\S]*122,100円[\s\S]*必要パッケージ[\s\S]*Toyota Teammate アドバンスト ドライブ[\s\S]*T-Connect[\s\S]*コネクティッドナビ契約/, 'ノアS-Zの追加価格・契約条件と必要パッケージを表示');
   assert.match(await page.locator('main').innerText(), /Advanced Drive[\s\S]*0〜約40km\/h[\s\S]*LCA[\s\S]*約85〜130km\/h/, 'ノアS-ZはAdvanced DriveとLCAの速度域を分けて表示');
   assert.doesNotMatch(await page.locator('main').innerText(), /121,000円/, 'ノアS-ZにAdvanced Parkの価格を誤表示しない');
@@ -347,7 +347,7 @@ try {
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   const noahCompare = await page.locator('[data-compare-result]').innerText();
   assert.match(noahCompare, /ノア[\s\S]*HYBRID S-Z 2WD（7人乗り）[\s\S]*HYBRID S-X 2WD（7人乗り）/);
-  assert.match(noahCompare, /4,056,800円[\s\S]*3,261,500円[\s\S]*122,100円[\s\S]*ハンズオフ：条件内で可[\s\S]*ハンズオフ：不可/, 'ノア比較にS-Z/S-Xの価格・能力差');
+  assert.match(noahCompare, /4,056,800円[\s\S]*3,261,500円[\s\S]*122,100円[\s\S]*参考総額[\s\S]*4,178,900円[\s\S]*算出不可[\s\S]*ハンズオフ：条件内で可[\s\S]*ハンズオフ：不可/, 'ノア比較にS-Z/S-Xの参考総額・価格・能力差');
   assert.doesNotMatch(noahCompare, /noah_spec_202609|sources|accessedAt|allowed_in_conditions|not_allowed/, 'ノア比較に内部根拠や内部enumを表示しない');
 
   await page.goto(`${base}/cars/jp-lexus-rz-2026-rz500e-version-l-awd/`);

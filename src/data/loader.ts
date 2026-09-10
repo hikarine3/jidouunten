@@ -352,6 +352,21 @@ export function displayOptionalPackagePrices(vehicle: Pick<Vehicle, 'price'>) {
   return packages.map(({ label, amountJpy }) => `${label} +${yen.format(amountJpy)}円`).join(' / ');
 }
 
+/**
+ * 本体価格と、価格が確認できた追加パッケージだけを合算した参考総額。
+ * 本体価格がレンジ、複数候補、または追加パッケージ未確認の場合は推測せずnullを返す。
+ */
+export function vehicleReferenceTotal(vehicle: Pick<Vehicle, 'price'>) {
+  const price = vehicle.price;
+  if (!price || price.kind !== 'exact' || price.amounts.length !== 1 || price.optionalPackages.length === 0) return null;
+  return price.amounts[0].amountJpy + price.optionalPackages.reduce((total, packagePrice) => total + packagePrice.amountJpy, 0);
+}
+
+export function displayVehicleReferenceTotal(vehicle: Pick<Vehicle, 'price'>) {
+  const total = vehicleReferenceTotal(vehicle);
+  return total === null ? null : `${new Intl.NumberFormat('ja-JP').format(total)}円`;
+}
+
 /** 発売・導入日はsalesUnitIntroducedAtだけを使い、未確認は必ず末尾に置く。 */
 export function sortVehicleList(list: Vehicle[], sort: VehicleSort = 'introduced_desc') {
   const text = (vehicle: Vehicle) => [vehicle.maker, vehicle.model, vehicle.grade, vehicle.id].join('\u0000');

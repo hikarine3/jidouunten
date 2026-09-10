@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayOptionalPackagePrices, displayVehiclePrice, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehiclePriceMin, vehicleReferenceLabel, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehiclePriceMin, vehicleReferenceLabel, vehicleReferenceTotal, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -53,6 +53,16 @@ describe('vehicle data contract and filters', () => {
     expect(displayVehiclePrice(exact, true)).toBe('約479万円');
     expect(displayVehiclePrice(multi, true)).toBe('約330〜354万円');
     expect(displayVehiclePrice(unknown, true)).toBe('価格要確認');
+  });
+
+  it('確認済み追加パッケージだけを参考総額へ合算し、レンジや未確認は合算しない', () => {
+    const exact = makeVehicle({ price: { kind: 'exact', currency: 'JPY', amounts: [{ amountJpy: 4_056_800, qualifier: 'S-Z', sourceUrl: 'https://example.com' }], maxJpy: 4_056_800, optionalPackages: [{ amountJpy: 122_100, qualifier: 'S-Z', sourceUrl: 'https://example.com', label: 'Advanced Drive' }], basis: 'msrp', taxIncluded: 'included' } });
+    const range = makeVehicle({ price: { kind: 'range', currency: 'JPY', amounts: [{ amountJpy: 4_056_800, qualifier: 'S-Z', sourceUrl: 'https://example.com' }], maxJpy: 4_300_000, optionalPackages: [{ amountJpy: 122_100, qualifier: 'S-Z', sourceUrl: 'https://example.com', label: 'Advanced Drive' }], basis: 'msrp', taxIncluded: 'included' } });
+    const noPackage = makeVehicle({ price: { kind: 'exact', currency: 'JPY', amounts: [{ amountJpy: 4_056_800, qualifier: 'S-Z', sourceUrl: 'https://example.com' }], maxJpy: 4_056_800, optionalPackages: [], basis: 'msrp', taxIncluded: 'included' } });
+    expect(vehicleReferenceTotal(exact)).toBe(4_178_900);
+    expect(displayVehicleReferenceTotal(exact)).toBe('4,178,900円');
+    expect(vehicleReferenceTotal(range)).toBeNull();
+    expect(vehicleReferenceTotal(noPackage)).toBeNull();
   });
 
   it('filters by level, road, hands-off and availability together', () => {
@@ -323,6 +333,7 @@ describe('vehicle data contract and filters', () => {
     expect(noah.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.availability === 'unknown' && vehicle.salesUnitIntroducedAt === null && vehicle.sources.some((source) => source.url.endsWith('noah_spec_202609.pdf')))).toBe(true);
     const noahSz = noah.find((vehicle) => vehicle.id === 'jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive');
     expect(noahSz?.price?.optionalPackages[0].amountJpy).toBe(122_100);
+    expect(displayVehicleReferenceTotal(noahSz!)).toBe('4,178,900円');
 
     const rz = vehicles.find((vehicle) => vehicle.id === 'jp-lexus-rz-2026-rz500e-version-l-awd');
     expect(rz?.price?.amounts[0].amountJpy).toBe(8_500_000);
