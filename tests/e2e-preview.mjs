@@ -260,6 +260,13 @@ try {
   await detailOfficial.click();
   const detailOutbound = (await events()).filter((event) => event.event === 'outbound_manufacturer').at(-1);
   assert.deepEqual({ vehicle_id: detailOutbound.vehicle_id, manufacturer: detailOutbound.manufacturer, link_type: detailOutbound.link_type, placement: detailOutbound.placement }, { vehicle_id: 'jp-honda-accord-2025-ehev-sensing360plus', manufacturer: 'Honda', link_type: 'product', placement: 'vehicle_detail' }, '詳細の公式遷移イベント');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 4, 'Honda ACCORD詳細に見積り・試乗・販売店・カタログ導線');
+  assert.deepEqual(await page.locator('[data-purchase-action]').evaluateAll((links) => links.map((link) => ({ kind: link.dataset.actionType, href: link.getAttribute('href') }))), [
+    { kind: 'test_drive', href: 'https://www.honda.co.jp/democar/accord/?from=car_action_link' },
+    { kind: 'dealer', href: 'https://www.honda.co.jp/dealerlocator/auto/accord/?from=car_action_link' },
+    { kind: 'estimate', href: 'https://www.honda.co.jp/CYBERMALL/accord/estimate/?from=car_action_link' },
+    { kind: 'catalog', href: 'https://www.honda.co.jp/ACCORD/catalog/?from=car_action_link' },
+  ], 'Honda ACCORDの公式アクションURLを保持');
 
   await page.goto(`${base}/cars/jp-tesla-model-3-2026-premium/`);
   assert.match(await page.locator('main').innerText(), /Tesla[\s\S]*Model 3/);
@@ -337,6 +344,13 @@ try {
   assert.match(await page.locator('main').innerText(), /Lexus[\s\S]*UX300h[\s\S]*Shining Essence[\s\S]*2WD/);
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*5,210,000円[\s\S]*ハンズオフ[\s\S]*不可/, 'UX300hの価格とハンズオフ不可を表示');
   assert.match(await page.locator('main').innerText(), /ステアリングを常に保持[\s\S]*2027年2月生産終了予定/, 'UX300hの保持条件と生産終了予定を表示');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 4, 'Lexus UX300h詳細に見積り・試乗・販売店・カタログ導線');
+  assert.deepEqual(await page.locator('[data-purchase-action]').evaluateAll((links) => links.map((link) => ({ kind: link.dataset.actionType, href: link.getAttribute('href') }))), [
+    { kind: 'test_drive', href: 'https://lexus.jp/request/trial/service/dealerselect?seriesCode=UX' },
+    { kind: 'dealer', href: 'https://lexus.jp/dealership/' },
+    { kind: 'estimate', href: 'https://lexus.jp/request/estimate_sim/version?car_name_en=UX300h' },
+    { kind: 'catalog', href: 'https://lexus.jp/models/ux/pdf/ux_catalog.pdf' },
+  ], 'Lexus UX300hの公式アクションURLを保持');
   assert.doesNotMatch(await page.locator('main').innerText(), /equipmentlist\.pdf|specificationslist\.pdf|sources|accessedAt|not_allowed/, 'UX300h詳細に内部根拠や内部enumを表示しない');
 
   await page.goto(`${base}/compare/?ids=jp-lexus-ux-2026-ux300h-shining-essence-2wd&ids=jp-lexus-lm-2026-lm500h-version-l-awd-6seater`);
@@ -471,6 +485,13 @@ try {
   assert.match(await page.locator('main').innerText(), /JP \/ 現行仕様[\s\S]*Tesla[\s\S]*Model 3/);
   await page.goto(`${base}/cars/jp-nissan-serena-2026-e-power-luxion/`);
   assert.match(await page.locator('main').innerText(), /JP \/ C28[\s\S]*Nissan[\s\S]*セレナ/);
+  assert.equal(await page.locator('[data-purchase-action]').count(), 4, '日産セレナ詳細に見積り・試乗・販売店・カタログ導線');
+  assert.deepEqual(await page.locator('[data-purchase-action]').evaluateAll((links) => links.map((link) => ({ kind: link.dataset.actionType, href: link.getAttribute('href') }))), [
+    { kind: 'test_drive', href: 'https://www3.nissan.co.jp/carsindealers.html#/search!modelName=%E3%82%BB%E3%83%AC%E3%83%8A' },
+    { kind: 'dealer', href: 'https://www3.nissan.co.jp/dealers.html' },
+    { kind: 'estimate', href: 'https://www3.nissan.co.jp/vehicles/new/serena/sim.html' },
+    { kind: 'catalog', href: 'https://www.nissan.co.jp/CATALOG/SERENA/' },
+  ], '日産セレナの公式アクションURLを保持');
 
   await page.goto(`${base}/compare/?ids=jp-volvo-ex30-my2027-plus-p5-electric&ids=jp-volvo-ex30-my2027-ultra-p8-awd-electric`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });

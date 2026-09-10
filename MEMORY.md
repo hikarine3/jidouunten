@@ -1,6 +1,12 @@
 # MEMORY
 
-更新: 2026-09-10
+更新: 2026-09-11
+
+## 2026-09-11 メーカー横断の公式アクション導線（実装・検証済み、公開前）
+
+- Honda（ACCORD／VEZEL）、Nissan（アリア／セレナ）、Lexus（LM／UX300h）へ公式見積り・試乗・販売店・カタログの24アクションを追加。アリア／セレナは車種選択ハッシュ、LM／UX300hはシリーズ指定、Hondaは車種固定の一次URLを使い、注文可否unknownへ注文CTAは付けていない。
+- `npm test`（39/39、公式導線37モデル/38アクション）、`npm run check`（0 errors / 0 warnings / hint6）、実ID build153、ローカルE2E1/1（ACCORD・セレナ・UX300hの各4導線、GA collect204）を確認。外部URLはブラウザ22/24遷移HTTP200、Lexus PDF2件はダウンロード開始＋curl HTTP200。
+- 公開前のため本番反映・immutable URL・rollbackは未確定。次は独立監査PASS後にmainへpush、Cloudflare Pagesへdeployし、本番smokeで確認する。後発対策のKPIは導線数ではなく比較後の公式遷移率と再訪後のアクション率。
 
 ## 長期決定
 

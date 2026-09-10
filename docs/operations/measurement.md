@@ -9,6 +9,12 @@
 公開GTM APIのread-only取得で、`GTM-PV9QVMJV` の **version 9** を確認した。Google tag 1個、Custom Event trigger 6個、ネイティブGA4 Event tag 6個（すべて pause 0）、dataLayer variable 15個、正しい測定ID `G-Q58GM7BVB6`、compiler error 0、HTML tag 0である。新イベント専用trigger/tagも公開版で有効になっている。
 `python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish` の公開receiptは `public_id=GTM-PV9QVMJV`、version 9。アプリの独立監査では詳細アクション6/6（各2）、比較アクション4/4、イベントpayload、Tesla公式ドメイン、390px表示、GA collect HTTP 204を確認した。
 
+## 2026-09-11 メーカー横断アクション導線の計測確認
+
+公式導線の正本へHonda（ACCORD／VEZEL）、Nissan（アリア／セレナ）、Lexus（LM／UX300h）の24アクションを追加し、既存の `outbound_purchase_action` 契約をそのまま再利用する。詳細・比較で販売単位ID、メーカー、`action_type`、配置を保持し、保存本文や車種IDを別イベントへ送信しない。日産・Lexusのシリーズ選択画面も、ラベルに選択操作が必要なことを示して過大な個別対応と見せない。
+
+アクションは購入・試乗（`order` / `test_drive`）と検討用（`estimate` / `dealer` / `catalog`）へ分離する。新車注文可否が `unknown` の車両へ注文CTAを追加しない。24 URLは22件のブラウザHTTP 200遷移、LexusカタログPDF 2件のダウンロード開始とHTTP 200を確認し、イベントの送信先は既存GTM/GA4の同意後計測だけに限定する。
+
 ## 2026-09-10 比較差分トランシェの計測確認
 
 `dac0501228b7651c810c769398302db6c0aad60b` を実IDでビルドし、

@@ -140,6 +140,21 @@ describe('vehicle data contract and filters', () => {
     expect(toyotaEstimateLinks).toHaveLength(10);
     expect(toyotaEstimateLinks.every(({ label, url, checkedAt }) => label === '公式で見積り' && url.startsWith('https://toyota.jp/service/estimate/grades?car_name_en=') && checkedAt === '2026-09-10')).toBe(true);
     expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'CROWN CROSSOVER', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'bZ4X'].sort());
+    const expandedActionModels = new Map([
+      ['Honda\u0000ACCORD', ['dealer', 'test_drive', 'estimate', 'catalog']],
+      ['Honda\u0000VEZEL', ['dealer', 'test_drive', 'estimate', 'catalog']],
+      ['Nissan\u0000日産アリア', ['dealer', 'test_drive', 'estimate', 'catalog']],
+      ['Nissan\u0000セレナ', ['dealer', 'test_drive', 'estimate', 'catalog']],
+      ['Lexus\u0000LM', ['dealer', 'test_drive', 'estimate', 'catalog']],
+      ['Lexus\u0000UX300h', ['dealer', 'test_drive', 'estimate', 'catalog']],
+    ]);
+    for (const [modelKey, kinds] of expandedActionModels) {
+      const actions = officialLinks.find((link) => `${link.maker}\u0000${link.model}` === modelKey)?.actions ?? [];
+      expect(actions.map(({ kind }) => kind)).toEqual(kinds);
+      expect(actions.every(({ checkedAt }) => checkedAt === '2026-09-11')).toBe(true);
+      expect(actions.every(({ url }) => url.startsWith('https://'))).toBe(true);
+    }
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(38);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {
