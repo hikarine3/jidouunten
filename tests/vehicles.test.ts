@@ -258,7 +258,7 @@ describe('vehicle data contract and filters', () => {
     expect(rav4.filter((vehicle) => vehicle.requiredPackage?.includes('メーカーオプション'))).toHaveLength(4);
     expect(rav4.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/rav4/grade/'))).toBe(true);
     expect(rav4.filter((vehicle) => vehicle.featureVersion.includes(' RAV4 HEV ')).every((vehicle) => vehicle.sources.some((source) => source.url.includes('manual.toyota.jp/rav4/3097/hev')))).toBe(true);
-    expect(rav4.filter((vehicle) => vehicle.featureVersion.includes('PHEV')).every((vehicle) => vehicle.sources.some((source) => source.url.includes('manual.toyota.jp/rav4/2210/phev')))).toBe(true);
+    expect(rav4.filter((vehicle) => vehicle.featureVersion.includes('PHEV')).every((vehicle) => vehicle.sources.some((source) => source.url.includes('manual.toyota.jp/rav4/3098/phev')))).toBe(true);
   });
 
   it('時系列フィールドは公式モデル年・世代・適用時点を混同しない', () => {

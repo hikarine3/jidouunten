@@ -264,7 +264,7 @@ Advanced Driveの条件付きハンズオフを混同しない。RZは販売単�
 | 全車速追従レーダークルーズとLTA、Z/GR SPORTのLCA・Advanced Drive・ドライバーモニターはメーカーオプション、Adventureはドライバーモニター標準 | トヨタ自動車 | https://toyota.jp/rav4/safety/ | 2026-09-10 |
 | RAV4 HEV 2025.12～のLTA作動条件・ステアリング保持責任 | トヨタ自動車 | https://manual.toyota.jp/rav4/3097/hev/ja_JP/contents/vhch04se050405.php | 2026-09-10 |
 | RAV4 HEV 2025.12～のLCA作動条件 | トヨタ自動車 | https://manual.toyota.jp/rav4/3097/hev/ja_JP/contents/vhch04se050406.php | 2026-09-10 |
-| RAV4 PHEVのLTA・全車速追従レーダークルーズ作動条件 | トヨタ自動車 | https://manual.toyota.jp/rav4/2210/phev/ja_JP/contents/vhch05se050403.php / https://manual.toyota.jp/rav4/2210/phev/ja_JP/contents/vhch05se050405.php | 2026-09-10 |
+| RAV4 PHEV 2026.02～のLTA・全車速追従レーダークルーズ作動条件 | トヨタ自動車 | https://manual.toyota.jp/rav4/3098/phev/ja_JP/contents/vhch05se050405.php / https://manual.toyota.jp/rav4/3098/phev/ja_JP/contents/vhch05se050412.php | 2026-09-10 |
 
 ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し、オプション価格が販売単位に固定できるまで「掲載価格に含めない」と明記した。Adventureだけはドライバーモニター標準を反映したが、LCA・Advanced Driveはオプションのためハンズオフ可能車とは数えていない。全4単位はACC（縦方向）とLTA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。新車注文可否は公式商品ページの掲載以上に販売単位へ固定できないため `availability=unknown` としている。
 

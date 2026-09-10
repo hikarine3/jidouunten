@@ -45,6 +45,7 @@ market + maker + model + model_year + generation + grade + required_package + fe
 | `priceEffectiveAt` | `YYYY-MM-DD` または `YYYY-MM`/null | 掲載価格の適用時点。価格確認日とは別 |
 | `price` | object/null | 公式金額、駆動方式などの条件、税区分、任意オプションを分離して保持。金額を確認できない場合はnull |
 | `requiredPackage` | string/null | 標準、オプション、必要契約を明示 |
+| `featureVersion` | string | 同じグレードでも機能版・仕様期が異なる販売単位を区別する正本キーの一部 |
 | `automationLevel` | 0–5 | 一次情報で確認。メーカー認証とサイト分類を区別 |
 | `category` | `driver_assistance` / `automated_driving` | Level 0–2 / 3–5に対応 |
 | `availability` | 下記enum | 販売・利用状態 |
