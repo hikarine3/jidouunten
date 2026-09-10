@@ -1,12 +1,16 @@
 # 初回公開の実測証拠
 
-## 2026-09-11 メーカー横断の公式アクション導線（公開前QA）
+## 2026-09-11 メーカー横断の公式アクション導線（本番実測）
 
+- exact app release commit: `c2725a994ee222a1634a9b15d786babd4a3342c2`。
+- Immutable deployment: https://befeebfc.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
 - `src/data/official-links.json`へHonda（ACCORD／VEZEL）、Nissan（アリア／セレナ）、Lexus（LM／UX300h）の24アクションを追加。車種・シリーズ選択を含む一次URLを公式ページの可視リンクから取得し、推測URLは採用していない。
 - 外部URLは実ブラウザで22/24件がHTTP 200遷移、LexusカタログPDF 2/24件はブラウザのダウンロード開始を確認し、curl追跡で2/2 HTTP 200。日産アリア／セレナの見積りは公式モデル画面へリダイレクト後もタイトルと対象車種を確認した。
 - `npm test`（Vitest39/39、価格147/147、公式導線37モデル/38アクション、Python16/16）、`npm run check`（22ファイル、0 errors / 0 warnings / 既知hint6）、実ID build153ページを確認。ローカルE2Eは1/1シナリオ（GA collect HTTP204）で、ACCORD・セレナ・UX300hの詳細に各4導線、URLとアクション種別を確認した。
 - 公開HTMLへ内部根拠URL・確認日・保存本文を表示せず、注文可否unknownの車両へ注文CTAを追加していない。registryのmanufacturer-official-linksへ6詳細surfaceと6 purchase selectorを追加した。
-- 残りは本番公開後のimmutable smokeと、メーカー別の公式遷移率・比較後アクション率の観測。リンク到達性を送客成果と同一視しない。
+- immutable／本体E2Eは各1/1（本体GA collect HTTP204）。本番smokeは主要9 URLをimmutable 9/9 HTTP200、本体の主要URL 9/9 HTTP200、未知URL404、日本語ドメインのpath/query 301で確認した。直前rollback候補は https://aa729982.jidouunten.pages.dev（source `6d76577`）。
+- 独立Lunaリリース監査はexact SHAでPASS。Hondaのcurl 403はbot制限であり、ブラウザ8/8 HTTP200を採用した。残りはメーカー別の公式遷移率・比較後アクション率の観測で、リンク到達性を送客成果と同一視しない。
 
 ## 2026-09-11 後発対策トランシェ（保存判断材料の差分再訪）本番実測
 

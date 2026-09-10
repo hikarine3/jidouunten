@@ -15,6 +15,8 @@
 
 アクションは購入・試乗（`order` / `test_drive`）と検討用（`estimate` / `dealer` / `catalog`）へ分離する。新車注文可否が `unknown` の車両へ注文CTAを追加しない。24 URLは22件のブラウザHTTP 200遷移、LexusカタログPDF 2件のダウンロード開始とHTTP 200を確認し、イベントの送信先は既存GTM/GA4の同意後計測だけに限定する。
 
+exact release `c2725a994ee222a1634a9b15d786babd4a3342c2` を `https://befeebfc.jidouunten.pages.dev` と `https://jidouunten.jp/` へ配信し、immutable／本体E2E各1/1、GA collect HTTP 204を確認した。今後のKPIは24件を置いたことではなく、メーカー別の比較後公式遷移率・アクション完了率・再訪後のアクション率で観測する。
+
 ## 2026-09-10 比較差分トランシェの計測確認
 
 `dac0501228b7651c810c769398302db6c0aad60b` を実IDでビルドし、
