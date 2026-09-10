@@ -34,10 +34,9 @@
 
 ## 最新の本番反映（2026-09-10）
 
-- 後発対策としてToyota シエンタを18販売単位（Z/G/X × HEV/ガソリン × 2WD/E-Four × 5/7人）で追加。
-- exact release `f25d91773d90383d3ef5967815a84fbcf829326f`、Immutable `https://e5b923fb.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。
-- 全132販売単位（現行131件）。シエンタ価格は214万6,100円〜339万7,900円。独立価値監査・リリース監査、Vitest34/Python16、build138、ローカル／本番E2E各1/1がPASS。
-- 後発の模倣対策は車名や記事数ではなく、販売単位キー、同一モデル内の価格・駆動・定員・ODD・機能差、一次情報の確認履歴、意味のある差分と再訪導線を蓄積する方針。次候補はLexus UX/LM等を公式構成再照合後に追加する。
+- 後発対策としてLexus LMをLM500h EXECUTIVE（4人乗り・AWD）／version L（6人乗り・AWD）の2販売単位で追加。価格は1,520万〜2,030万円、LCA・ドライバーモニター・Advanced Driveを標準として、渋滞時0〜約40km/hの条件付きハンズオフを比較可能にした。Advanced DriveはG-Link契約が必要（初度登録から3年間無料、その後有料）と表示する。
+- exact release `4304ef9232ed2e44f8ab1c294590ca594185d39c`、Immutable `https://a050909d.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。全134販売単位（現行133件）、build140、Vitest35/Python16、独立価値監査・リリース監査、ローカル／本番E2E各1/1、GA collect HTTP204がPASS。
+- 後発の模倣対策は車名や記事数ではなく、販売単位キー、同一モデル内の価格・駆動・定員・ODD・機能差・継続利用条件、一次情報の確認履歴、意味のある差分と再訪導線を蓄積する方針。次の独立トランシェはLexus UX300h 6販売単位（2WD/AWD×Shining Essence/version L/F SPORT、490.3万〜575.7万円、ACC+LTA・ハンズオフ不可）を一次再確認後に判断する。
 
 ## 次のdelivery
 

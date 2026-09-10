@@ -1,5 +1,19 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 後発対策トランシェ（Lexus LM 2販売単位）本番実測
+
+- exact release commit: `4304ef9232ed2e44f8ab1c294590ca594185d39c`
+- Immutable deployment: https://a050909d.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 全134販売単位（現行133件）へ更新。Lexus LM500h EXECUTIVE（4人乗り・AWD）20,300,000円、version L（6人乗り・AWD）15,200,000円を追加し、価格・定員・駆動方式・能力差を一覧・詳細・比較へ反映した。
+- 両単位で全車速追従レーダークルーズ、LTA、LCA、ドライバーモニター、Advanced Drive（渋滞時支援）を確認。高速道路・自動車専用道路本線の渋滞時0〜約40km/hなどの条件内でハンズオフ可、運転者監視・即時操作責任が必要と表示した。
+- Advanced Driveの利用にはG-Link契約が必要で、初度登録から3年間は基本利用料無料、その後は有料となる条件を詳細・比較へ明示した。新車の注文可否・納期は一次情報で確定できないため未確認のままにした。
+- 一覧2/2、詳細2/2、代表比較、sitemap掲載2/2を確認。分類根拠は日本語表示とし、内部enum・根拠URL・確認日・PDF名は通常の可視本文へ出していない。
+- 独立価値監査（Astra）・リリース監査（Plato）は exact SHA でともにPASS。公開依存レジストリは静的25/25 marker、required selector 4/4・複合marker18/18、390px横overflow 0を確認した。
+- `npm test`（Vitest35/35、Python16/16、全134/134価格・現行133/133公式価格、公式導線36モデル/35 URL）、`npm run check`（0 errors / 0 warnings、既知hint5）、実ID build140ページ、ローカル／本番E2E各1/1を確認した。GA collectはHTTP204。
+- 本番smokeはトップ、一覧、LM詳細2件、LM比較、Level 2絞り込み、sitemap-index、sitemap-0、robotsをHTTP200で確認。`https://xn--hhrp90iveiimb.jp/cars/?level=2` は本体へpath/queryを維持した301。
+- rollback候補は親commit `5c2a5bde321afb46039e59387d3ac5f29fcba131`、直前Immutable `https://e5b923fb.jidouunten.pages.dev`。
+
 ## 2026-09-10 後発対策トランシェ（Toyota シエンタ18販売単位）本番実測
 
 - exact release commit: `f25d91773d90383d3ef5967815a84fbcf829326f`
