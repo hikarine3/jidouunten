@@ -18,5 +18,7 @@
   { "maker": "Mazda", "model": "MAZDA3 FASTBACK", "url": "https://www.mazda.co.jp/cars/passenger/mazda3/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Mazda", "model": "MAZDA3 SEDAN", "url": "https://www.mazda.co.jp/cars/passenger/mazda3/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Mazda", "model": "CX-30", "url": "https://www.mazda.co.jp/cars/passenger/cx-30/", "kind": "product", "checkedAt": "2026-09-10" },
-  { "maker": "Mazda", "model": "MX-30 ROTARY-EV", "url": "https://www.mazda.co.jp/cars/passenger/mx-30/", "kind": "product", "checkedAt": "2026-09-10" }
+  { "maker": "Mazda", "model": "MX-30 ROTARY-EV", "url": "https://www.mazda.co.jp/cars/passenger/mx-30/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Toyota", "model": "ノア", "url": "https://toyota.jp/noah/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Lexus", "model": "RZ", "url": "https://lexus.jp/models/rz/", "kind": "product", "checkedAt": "2026-09-10" }
 ]

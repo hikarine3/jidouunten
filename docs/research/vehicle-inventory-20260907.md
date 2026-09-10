@@ -180,6 +180,27 @@ CX-80 8単位とCX-60 11単位はMRCC・CTS・ドライバー・モニタリン�
 | D / S ALL4 / JOHN COOPER WORKSを含む第3世代を2023年11月21日に発表・予約開始 | ビー・エム・ダブリュー株式会社 / MINI Japan | https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20231121_The_new_MINI_Countryman_is_launched_detail.html | 2026-09-07 |
 | E / SE ALL4を2024年3月1日から販売開始 | ビー・エム・ダブリュー株式会社 / MINI Japan | https://www.mini.jp/ja_JP/home/news_events/articles/press_release/20240301_the_new_mini_countryman_electric_car_is_born_detail.html | 2026-09-07 |
 
+## Toyota ノア / Lexus RZの根拠（内部保持）
+
+確認日は2026-09-10。今回追加するのは、公式の現行商品ページで販売単位名と価格を確認でき、
+前後・左右の運転支援を一次情報へ結び付けられた2単位だけとした。新車注文可否・発売日は公式ページで
+販売単位に固定できないため `unknown` / null のまま保持し、推測していない。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| ノア HYBRID S-Z 2WD（7人乗り）4,056,800円（税込） | トヨタ自動車 | https://toyota.jp/noah/specification/ | 2026-09-10 |
+| ノアのToyota Teammate アドバンスト ドライブ（渋滞時支援）121,000円（税込）、S-Z設定、ドライバーモニターカメラ | トヨタ自動車 | https://toyota.jp/pages/contents/noah/004_p_001/pdf/noah_spec_202609.pdf | 2026-09-10 |
+| ノアのレーダークルーズコントロール、LTA、対象道路・速度・ステアリング保持条件 | トヨタ自動車 | https://toyota.jp/noah/safety/ | 2026-09-10 |
+| ノアのアドバンスト ドライブ作動条件、運転者監視、手放し継続時の制限 | トヨタ自動車 | https://manual.toyota.jp/noah/2201/cv/ja_JP/contents/vhch04se050415.php | 2026-09-10 |
+| RZ500e “version L” AWD 8,500,000円（税込） | Lexus | https://lexus.jp/models/rz/features/price_package/ | 2026-09-10 |
+| RZ現行ラインアップとRZ500e “version L”の掲載 | Lexus | https://lexus.jp/models/rz/ | 2026-09-10 |
+| RZのLexus Safety System＋、全車速追従機能付DRCC・LTA、ドライバーモニター連携 | Lexus | https://lexus.jp/models/rz/features/safety/ | 2026-09-10 |
+| RZのLTA作動条件・運転者監視・操作責任 | Lexus | https://manual.lexus.jp/rz/3079/bev/ja_JP/contents/owx1740487964005.php | 2026-09-10 |
+
+ノアはAdvanced Driveのステアリング保持要求があるためハンズオフ不可、RZは販売単位に固定した
+ハンズオフ・ドライバーモニター条件を今回の資料だけでは断定せず未確認とした。価格は任意オプションを
+車両本体へ加算せず、ノアの必要装備として別表示する。
+
 ## Volvo EX30の根拠（内部保持）
 
 | 対象事実 | 発行元 | URL | 確認日 |
