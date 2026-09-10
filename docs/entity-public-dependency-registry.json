@@ -644,6 +644,34 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:toyota-rav4-2026": {
+      "entity_id": "vehicle:toyota-rav4-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+      "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","RAV4","LEVEL 2"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","RAV4","LEVEL 2"]},
+        {"url":"/cars/jp-toyota-rav4-2026-z-phev-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-rav4-2026-z-phev-e-four/index.html","markers":["Toyota","RAV4","6,000,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-rav4-2026-z-hev-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-rav4-2026-z-hev-e-four/index.html","markers":["Toyota","RAV4","4,900,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-rav4-2026-adventure-hev-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-rav4-2026-adventure-hev-e-four/index.html","markers":["Toyota","RAV4","4,500,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-rav4-2026-gr-sport-phev-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-rav4-2026-gr-sport-phev-e-four/index.html","markers":["Toyota","RAV4","6,300,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/","locale":"ja","output_path":"dist/compare/index.html","markers":["RAV4"]},
+        {"url":"/compare/?ids=jp-toyota-rav4-2026-z-hev-e-four&ids=jp-toyota-rav4-2026-adventure-hev-e-four","locale":"ja","output_path":"dist/compare/index.html","markers":["RAV4","Z（ハイブリッド車 E-Four）","Adventure（ハイブリッド車 E-Four）"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-toyota-rav4-2026-z-phev-e-four","jp-toyota-rav4-2026-z-hev-e-four","jp-toyota-rav4-2026-adventure-hev-e-four","jp-toyota-rav4-2026-gr-sport-phev-e-four"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-rav4-2026-z-phev-e-four\"])" ,"markers":["Toyota","RAV4","Z（プラグインハイブリッド車 E-Four）"]},
+        {"url":"/cars/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-rav4-2026-z-phev-e-four\"])" ,"markers":["Toyota","RAV4","約600万円"]},
+        {"url":"/cars/jp-toyota-rav4-2026-z-phev-e-four/","selector":"main","markers":["Toyota","RAV4","6,000,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-rav4-2026-z-hev-e-four/","selector":"main","markers":["Toyota","RAV4","4,900,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-rav4-2026-adventure-hev-e-four/","selector":"main","markers":["Toyota","RAV4","4,500,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-rav4-2026-gr-sport-phev-e-four/","selector":"main","markers":["Toyota","RAV4","6,300,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-toyota-rav4-2026-z-hev-e-four&ids=jp-toyota-rav4-2026-adventure-hev-e-four","selector":"[data-compare-result]","markers":["RAV4","Z（ハイブリッド車 E-Four）","Adventure（ハイブリッド車 E-Four）","4,900,000円","4,500,000円"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "manufacturer-official-links:jp-current": {
       "entity_id": "manufacturer-official-links:jp-current",
       "entity_type": "manufacturer_official_links",

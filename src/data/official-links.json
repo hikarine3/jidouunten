@@ -26,5 +26,6 @@
   { "maker": "Toyota", "model": "クラウン（クロスオーバー）", "url": "https://toyota.jp/crowncrossover/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Toyota", "model": "bZ4X", "url": "https://toyota.jp/bz4x/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Lexus", "model": "LBX", "url": "https://lexus.jp/models/lbx/", "kind": "product", "checkedAt": "2026-09-10" },
-  { "maker": "Lexus", "model": "RX", "url": "https://lexus.jp/models/rx/", "kind": "product", "checkedAt": "2026-09-10" }
+  { "maker": "Lexus", "model": "RX", "url": "https://lexus.jp/models/rx/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Toyota", "model": "RAV4", "url": "https://toyota.jp/rav4/", "kind": "product", "checkedAt": "2026-09-10" }
 ]

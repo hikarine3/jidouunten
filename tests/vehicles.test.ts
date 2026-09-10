@@ -3,7 +3,7 @@ import { canonicalRoadType, displayVehiclePrice, filterVehicleList, isDefaultLis
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
-  requiredPackage: null, automationLevel: 2, category: 'driver_assistance', availability: 'new_order_available',
+  requiredPackage: null, featureVersion: 'test', automationLevel: 2, category: 'driver_assistance', availability: 'new_order_available',
   availabilityCheckedAt: '2026-09-01', odd: { roadTypes: ['高速道路'], speedKph: { max: 100 }, trafficConditions: [], weather: [], geoRestriction: [], driverConditions: ['着座'], manufacturerSummary: '要約' },
   driverMonitoring: 'required', handsOff: 'allowed_in_conditions', capabilities: ['lane_centering'], limitations: ['監視'],
   sources: [{ url: 'https://example.com', publisher: '公式', title: '資料', accessedAt: '2026-09-01', supports: ['level'] }], factStatus: 'verified', lastReviewedAt: '2026-09-01',
@@ -19,6 +19,7 @@ describe('vehicle data contract and filters', () => {
     expect(validateVehicle({ ...makeVehicle(), catalogAsOf: undefined })).toBe(false);
     expect(validateVehicle({ ...makeVehicle(), catalogAsOf: '2026-2' })).toBe(false);
     expect(validateVehicle({ ...makeVehicle(), salesUnitIntroducedAt: '2026-02-31' })).toBe(false);
+    expect(validateVehicle({ ...makeVehicle(), featureVersion: undefined })).toBe(false);
     expect(validateVehicle({ ...makeVehicle(), capabilities: ['raw_unknown_id'] })).toBe(false);
     expect(validateVehicle({ ...makeVehicle(), modelYear: null })).toBe(true);
   });
@@ -86,14 +87,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(85);
+    expect(vehicles).toHaveLength(89);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補84件は全件の公式金額を保持する', () => {
+  it('現行候補88件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(84);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(84);
+    expect(current).toHaveLength(88);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(88);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -102,7 +103,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(28);
+    expect(officialLinks).toHaveLength(29);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -241,6 +242,23 @@ describe('vehicle data contract and filters', () => {
     expect(bz4x?.capabilities).toEqual(expect.arrayContaining(['adaptive_cruise_control', 'lane_centering', 'traffic_jam_assist', 'hands_off_highway', 'driver_monitoring', 'lane_change_support']));
     expect(bz4x?.sources.some((source) => source.url === 'https://toyota.jp/bz4x/safety/')).toBe(true);
     expect(bz4x?.sources.some((source) => source.url.includes('manual.toyota.jp/bz4x'))).toBe(true);
+  });
+
+  it('Toyota RAV4はHEV/PHEV・グレード別の価格とオプション差を販売単位へ固定する', () => {
+    const rav4 = vehicles.filter((vehicle) => vehicle.model === 'RAV4');
+    expect(rav4).toHaveLength(4);
+    expect(rav4.every((vehicle) => vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed')).toBe(true);
+    expect(rav4.every((vehicle) => vehicle.price?.kind === 'exact' && vehicle.catalogAsOf === '2026-02' && vehicle.priceEffectiveAt === '2026-02')).toBe(true);
+    expect(rav4.find((vehicle) => vehicle.id === 'jp-toyota-rav4-2026-z-phev-e-four')?.price?.amounts[0].amountJpy).toBe(6_000_000);
+    expect(rav4.find((vehicle) => vehicle.id === 'jp-toyota-rav4-2026-z-hev-e-four')?.price?.amounts[0].amountJpy).toBe(4_900_000);
+    expect(rav4.find((vehicle) => vehicle.id === 'jp-toyota-rav4-2026-adventure-hev-e-four')?.price?.amounts[0].amountJpy).toBe(4_500_000);
+    expect(rav4.find((vehicle) => vehicle.id === 'jp-toyota-rav4-2026-gr-sport-phev-e-four')?.price?.amounts[0].amountJpy).toBe(6_300_000);
+    expect(rav4.filter((vehicle) => vehicle.driverMonitoring === 'required')).toHaveLength(1);
+    expect(rav4.find((vehicle) => vehicle.grade.startsWith('Adventure'))?.capabilities).toContain('driver_monitoring');
+    expect(rav4.filter((vehicle) => vehicle.requiredPackage?.includes('メーカーオプション'))).toHaveLength(4);
+    expect(rav4.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/rav4/grade/'))).toBe(true);
+    expect(rav4.filter((vehicle) => vehicle.featureVersion.includes(' RAV4 HEV ')).every((vehicle) => vehicle.sources.some((source) => source.url.includes('manual.toyota.jp/rav4/3097/hev')))).toBe(true);
+    expect(rav4.filter((vehicle) => vehicle.featureVersion.includes('PHEV')).every((vehicle) => vehicle.sources.some((source) => source.url.includes('manual.toyota.jp/rav4/2210/phev')))).toBe(true);
   });
 
   it('時系列フィールドは公式モデル年・世代・適用時点を混同しない', () => {

@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 85 | `src/data/vehicles.json` の全レコード（現行84 + 過去1） |
-| 既定表示 | 84 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 89 | `src/data/vehicles.json` の全レコード（現行88 + 過去1） |
+| 既定表示 | 88 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -19,6 +19,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota / Lexus） | 2 | プリウス Z（2WD）とNX350h “version L” 2WD。現行商品・価格・安全・取扱説明書を販売単位へ固定 |
 | 今回追加（Toyota / Lexus / 後発対策） | 3 | クラウン（クロスオーバー）CROSSOVER RS “THE LIMITED-MATTE METAL” 4WD、LBX “Bespoke Build” 2WD、RX500h “F SPORT Performance” AWD。渋滞時支援・車線変更・監視条件と公式価格を販売単位へ固定 |
 | 今回追加（Toyota bZ4X） | 1 | bZ4X Z（FWD）。全車速ACC・LTA・LCAと渋滞時支援の条件、公式価格を販売単位へ固定 |
+| 今回追加（Toyota RAV4 / 後発対策） | 4 | Z HEV E-Four / Z PHEV E-Four / Adventure HEV E-Four / GR SPORT PHEV E-Four。公式価格、ACC・LTA、グレード別のAdvanced Drive・LCA・ドライバーモニターの標準／オプション差を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -52,6 +53,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Lexus | LBX “Bespoke Build” 2WD（FF） | 掲載 | 2相当 | 2026-09-10 |
 | Lexus | RX500h “F SPORT Performance” AWD | 掲載 | 2相当 | 2026-09-10 |
 | Toyota | bZ4X Z（FWD） | 掲載 | 2相当 | 2026-09-10 |
+| Toyota | RAV4 Z（ハイブリッド車 E-Four） / Z（プラグインハイブリッド車 E-Four） / Adventure（ハイブリッド車 E-Four） / GR SPORT（プラグインハイブリッド車 E-Four） | 掲載（4単位） | 2相当 | 2026-09-10 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -250,6 +252,21 @@ Advanced Driveの条件付きハンズオフを混同しない。RZは販売単�
 | RX500hのLTA作動条件とステアリング保持責任 | Lexus | https://manual.lexus.jp/rx/2212/hev/ja_JP/contents/vhch04se050405.php | 2026-09-10 |
 
 クラウン、LBX、RXは全車速追従ACCとLTAの同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。Advanced Driveは一部高速道路・自動車専用道路の渋滞時に限る条件付き支援で、運転者の常時監視と必要時の操作が必要。LCAは車線変更を自動化する機能ではなく、道路・速度・周辺車両などの条件がある。価格はオプションや諸費用を加算しない車両本体の税込参考価格として保持する。
+
+## Toyota RAV4の根拠（後発対策トランシェ）
+
+確認日は2026-09-10。RAV4は同じLevel 2でも、パワートレーン・グレードごとにAdvanced Drive、LCA、ドライバーモニターの標準／オプションが異なるため、ベース価格と能力差を4販売単位へ分離した。ベース車両にオプションを混ぜず、ハンズオフはすべて `not_allowed` としている。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| RAV4 Z（PHEV E-Four）6,000,000円、Z（HEV E-Four）4,900,000円、Adventure（HEV E-Four）4,500,000円、GR SPORT（PHEV E-Four）6,300,000円 | トヨタ自動車 | https://toyota.jp/rav4/grade/ | 2026-09-10 |
+| RAV4現行商品・グレードの公式掲載 | トヨタ自動車 | https://toyota.jp/rav4/ | 2026-09-10 |
+| 全車速追従レーダークルーズとLTA、Z/GR SPORTのLCA・Advanced Drive・ドライバーモニターはメーカーオプション、Adventureはドライバーモニター標準 | トヨタ自動車 | https://toyota.jp/rav4/safety/ | 2026-09-10 |
+| RAV4 HEV 2025.12～のLTA作動条件・ステアリング保持責任 | トヨタ自動車 | https://manual.toyota.jp/rav4/3097/hev/ja_JP/contents/vhch04se050405.php | 2026-09-10 |
+| RAV4 HEV 2025.12～のLCA作動条件 | トヨタ自動車 | https://manual.toyota.jp/rav4/3097/hev/ja_JP/contents/vhch04se050406.php | 2026-09-10 |
+| RAV4 PHEVのLTA・全車速追従レーダークルーズ作動条件 | トヨタ自動車 | https://manual.toyota.jp/rav4/2210/phev/ja_JP/contents/vhch05se050403.php / https://manual.toyota.jp/rav4/2210/phev/ja_JP/contents/vhch05se050405.php | 2026-09-10 |
+
+ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し、オプション価格が販売単位に固定できるまで「掲載価格に含めない」と明記した。Adventureだけはドライバーモニター標準を反映したが、LCA・Advanced Driveはオプションのためハンズオフ可能車とは数えていない。全4単位はACC（縦方向）とLTA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。新車注文可否は公式商品ページの掲載以上に販売単位へ固定できないため `availability=unknown` としている。
 
 ## Volvo EX30の根拠（内部保持）
 

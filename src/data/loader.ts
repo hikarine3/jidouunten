@@ -84,6 +84,8 @@ export interface Vehicle {
   price: VehiclePrice | null;
   grade: string;
   requiredPackage: string | null;
+  /** Manufacturer feature/package revision used to keep materially different sales units distinct. */
+  featureVersion: string;
   /** True only when the current Japanese catalog listing was checked. */
   currentCatalogListed: boolean;
   automationLevel: 0 | 1 | 2 | 3 | 4 | 5;
@@ -287,6 +289,7 @@ export function validateVehicle(value: unknown): value is Vehicle {
     && hasOwn('price') && validPrice
     && typeof candidate.grade === 'string'
     && (typeof candidate.requiredPackage === 'string' || candidate.requiredPackage === null)
+    && typeof candidate.featureVersion === 'string'
     && typeof candidate.currentCatalogListed === 'boolean'
     && Number.isInteger(numericLevel) && numericLevel >= 0 && numericLevel <= 5
     && (candidate.category === 'driver_assistance' || candidate.category === 'automated_driving') && levelMatchesCategory
