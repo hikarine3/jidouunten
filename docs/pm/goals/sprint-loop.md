@@ -40,6 +40,16 @@ GitHubの状態を、このファイルや別のtodo/queue JSONへ複製しま�
 | rollback | Cloudflare Pagesの直前正常deploymentへ戻す。DNS所有権レコードは削除しない |
 | release authority | `standing human authorization`。2026-09-10のオーナー継続承認により、exact candidateのPhase 5全QA・Phase 6独立監査がPASSした場合は、変更ごとの再確認なしでpush/deployする |
 
+## 後発への堀（価値基準）
+
+後発対策は、記事数や登録件数の競争ではなく、購入判断に再利用できるデータと更新履歴で作る。
+
+- `market + maker + model + model_year + generation + grade + required_package + feature_version` の販売単位を崩さず、Level・ODD・機能・価格・販売状態・公式導線を同じ正本から比較できるようにする。
+- 価格・機能・販売状態の変更は、単なる確認日の更新と区別した意味のある差分（機能追加/削除、条件変更、価格帯変更、受注状態変更）として記録する。
+- 保存した条件・比較から再訪して差分を確認できる導線を、#18のログインなしMVPから段階的に実装する。更新通知は意味のある差分だけを対象にし、通知数をKPIにしない。
+- 口コミは空箱を作らず、利用量と審査・通報運用が成立してから追加する。ニュースはデータ差分や検索流入の補助であり、第一価値を置き換えない。
+- 競合・市場調査は、未掲載母集団・主要モデルカバー率・データ鮮度の欠損を発見するために使い、調査記事そのものを成果と数えない。
+
 ## Phase運用
 
 Phase 0〜7の意味は `docs/pm/github-work-management.md` を使います。各Issueで、公開surface、利用者成果、
