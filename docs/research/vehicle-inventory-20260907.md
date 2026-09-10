@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 81 | `src/data/vehicles.json` の全レコード（現行80 + 過去1） |
-| 既定表示 | 80 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 84 | `src/data/vehicles.json` の全レコード（現行83 + 過去1） |
+| 既定表示 | 83 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -17,6 +17,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Renault） | 4 | ARKANAのesprit Alpine / techno、FULL HYBRID E-TECH / MILD HYBRID。価格表・機能説明・装備資料で確認 |
 | 今回追加（BMW） | 9 | 3シリーズ通常カタログのSedan G20 5単位 / Touring G21 4単位。2026年7月以降生産の装備・価格表で確認 |
 | 今回追加（Toyota / Lexus） | 2 | プリウス Z（2WD）とNX350h “version L” 2WD。現行商品・価格・安全・取扱説明書を販売単位へ固定 |
+| 今回追加（Toyota / Lexus / 後発対策） | 3 | クラウン（クロスオーバー）CROSSOVER RS “THE LIMITED-MATTE METAL” 4WD、LBX “Bespoke Build” 2WD、RX500h “F SPORT Performance” AWD。渋滞時支援・車線変更・監視条件と公式価格を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -46,6 +47,9 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Mazda | MX-30 ROTARY-EV Natural Monotone | 掲載（1単位） | 2相当 | 2026-09-08 |
 | Toyota | プリウス 2026 Z（2WD） | 掲載 | 2相当 | 2026-09-10 |
 | Lexus | NX350h “version L” 2WD | 掲載 | 2相当 | 2026-09-10 |
+| Toyota | クラウン（クロスオーバー）CROSSOVER RS “THE LIMITED-MATTE METAL” 4WD | 掲載 | 2相当 | 2026-09-10 |
+| Lexus | LBX “Bespoke Build” 2WD（FF） | 掲載 | 2相当 | 2026-09-10 |
+| Lexus | RX500h “F SPORT Performance” AWD | 掲載 | 2相当 | 2026-09-10 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -222,6 +226,25 @@ Advanced Driveの条件付きハンズオフを混同しない。RZは販売単�
 | NX350h LTAの作動条件、高速道路・自動車専用道路、手放し継続時の警告・解除 | Lexus | https://manual.lexus.jp/nx/3050/hev/ja_JP/contents/reb1668054515740.php#yaw1609986159221 | 2026-09-10 |
 
 プリウスはToyota公式安全ページに「ステアリングを持ち続ける必要」が明記されているため `handsOff=not_allowed` とした。NXもLexus公式安全ページ・取扱説明書の同様の注意から `handsOff=not_allowed`、運転者監視を `required` とした。速度の数値範囲や販売単位別の注文可否は、確認できたページで固定できないため未確認のままにし、資料発行年をモデル年へ流用していない。プリウスのみ公式ページが2026年7月仕様を明示するため `modelYear=2026`、`catalogAsOf=2026-07`、`salesUnitIntroducedAt=2026-07`、`priceEffectiveAt=2026-07` とした。NXは適用時点を公式ページで固定できないためnullとした。
+
+## Toyota クラウン（クロスオーバー） / Lexus LBX・RXの根拠（後発対策トランシェ）
+
+確認日は2026-09-10。後発サービスが「Level 2」というラベルだけを模倣しても比較価値が残るよう、渋滞時にどこまで支援するか、車線変更支援、ドライバーモニター、車両本体価格を同じ販売単位へ結び付けた。いずれも公式商品ページの掲載は確認できるが、販売単位ごとの新車注文可否を明文で固定できないため `availability=unknown` とした。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| クラウン（クロスオーバー）CROSSOVER RS “THE LIMITED-MATTE METAL” 4WD 7,590,000円（税込、2026年9月現在） | トヨタ自動車 | https://toyota.jp/info/crowncrossover/special/ | 2026-09-10 |
+| クラウンの全車速追従レーダークルーズ、LTA、LCA、ドライバーモニター、Advanced Drive（渋滞時支援）のRS標準装備 | トヨタ自動車 | https://toyota.jp/crowncrossover/safety/ | 2026-09-10 |
+| クラウン 2026.09～のAdvanced Drive（0〜約40km/h、監視下の渋滞時支援） | トヨタ自動車 | https://manual.toyota.jp/crowncrossover/3143/hev/ja_JP/contents/vhch04se050415.php | 2026-09-10 |
+| LBX “Bespoke Build” 2WD 5,500,000円（税込、’26年5月現在） | Lexus | https://lexus.jp/models/lbx/features/price_package/ | 2026-09-10 |
+| LBXの全車速追従レーダークルーズ、LTA、Advanced Drive、Bespoke BuildのLCA・ドライバーモニター標準装備 | Lexus | https://lexus.jp/models/lbx/features/safety/ | 2026-09-10 |
+| LBX 2026.05～のLTA作動条件とステアリング保持責任 | Lexus | https://manual.lexus.jp/lbx/3091/cv/ja_JP/contents/vhch04se050405.php | 2026-09-10 |
+| RX500h “F SPORT Performance” AWD 9,030,000円（税込） | Lexus | https://lexus.jp/models/rx/features/price_package/ | 2026-09-10 |
+| RXの全車速追従レーダークルーズ、LTA、LCA、ドライバーモニター、Advanced Drive（渋滞時支援）全車標準 | Lexus | https://lexus.jp/models/rx/features/safety/ | 2026-09-10 |
+| RXのLCA作動範囲（約70〜130km/h）とドライバーモニター、Advanced Drive 0〜40km/h | Lexus | https://lexus.jp/models/rx/pdf/rx_safety.pdf | 2026-09-10 |
+| RX500hのLTA作動条件とステアリング保持責任 | Lexus | https://manual.lexus.jp/rx/2212/hev/ja_JP/contents/vhch04se050405.php | 2026-09-10 |
+
+クラウン、LBX、RXは全車速追従ACCとLTAの同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。Advanced Driveは一部高速道路・自動車専用道路の渋滞時に限る条件付き支援で、運転者の常時監視と必要時の操作が必要。LCAは車線変更を自動化する機能ではなく、道路・速度・周辺車両などの条件がある。価格はオプションや諸費用を加算しない車両本体の税込参考価格として保持する。
 
 ## Volvo EX30の根拠（内部保持）
 

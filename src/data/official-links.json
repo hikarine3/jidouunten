@@ -22,5 +22,8 @@
   { "maker": "Toyota", "model": "ノア", "url": "https://toyota.jp/noah/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Lexus", "model": "RZ", "url": "https://lexus.jp/models/rz/", "kind": "product", "checkedAt": "2026-09-10" },
   { "maker": "Toyota", "model": "プリウス", "url": "https://toyota.jp/prius/", "kind": "product", "checkedAt": "2026-09-10" },
-  { "maker": "Lexus", "model": "NX", "url": "https://lexus.jp/models/nx/", "kind": "product", "checkedAt": "2026-09-10" }
+  { "maker": "Lexus", "model": "NX", "url": "https://lexus.jp/models/nx/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Toyota", "model": "クラウン（クロスオーバー）", "url": "https://toyota.jp/crowncrossover/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Lexus", "model": "LBX", "url": "https://lexus.jp/models/lbx/", "kind": "product", "checkedAt": "2026-09-10" },
+  { "maker": "Lexus", "model": "RX", "url": "https://lexus.jp/models/rx/", "kind": "product", "checkedAt": "2026-09-10" }
 ]

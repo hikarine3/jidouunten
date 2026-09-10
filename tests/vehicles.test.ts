@@ -86,14 +86,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(81);
+    expect(vehicles).toHaveLength(84);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補80件は全件の公式金額を保持する', () => {
+  it('現行候補83件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(80);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(80);
+    expect(current).toHaveLength(83);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(83);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -102,7 +102,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(24);
+    expect(officialLinks).toHaveLength(27);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -205,6 +205,31 @@ describe('vehicle data contract and filters', () => {
     expect(nx?.availability).toBe('unknown');
     expect(nx?.sources.some((source) => source.url === 'https://lexus.jp/models/nx/features/safety/')).toBe(true);
     expect(nx?.sources.some((source) => source.url === 'https://manual.lexus.jp/nx/3050/hev/ja_JP/contents/reb1668054515740.php#yaw1609986159221')).toBe(true);
+  });
+
+  it('Toyota クラウンとLexus LBX/RXは渋滞時支援・車線変更・監視条件を販売単位へ固定する', () => {
+    const crown = vehicles.find((vehicle) => vehicle.id === 'jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd');
+    expect(crown?.price?.amounts[0].amountJpy).toBe(7_590_000);
+    expect(crown?.handsOff).toBe('allowed_in_conditions');
+    expect(crown?.driverMonitoring).toBe('required');
+    expect(crown?.odd.speedKph).toMatchObject({ min: 0, max: 40 });
+    expect(crown?.capabilities).toEqual(expect.arrayContaining(['traffic_jam_assist', 'hands_off_highway', 'driver_monitoring', 'lane_change_support']));
+    expect(crown?.sources.some((source) => source.url === 'https://manual.toyota.jp/crowncrossover/3143/hev/ja_JP/contents/vhch04se050415.php')).toBe(true);
+
+    const lbx = vehicles.find((vehicle) => vehicle.id === 'jp-lexus-lbx-2026-bespoke-build-2wd');
+    expect(lbx?.price?.amounts[0].amountJpy).toBe(5_500_000);
+    expect(lbx?.handsOff).toBe('allowed_in_conditions');
+    expect(lbx?.driverMonitoring).toBe('required');
+    expect(lbx?.capabilities).toEqual(expect.arrayContaining(['traffic_jam_assist', 'hands_off_highway', 'driver_monitoring', 'lane_change_support']));
+    expect(lbx?.sources.some((source) => source.url === 'https://lexus.jp/models/lbx/features/safety/')).toBe(true);
+
+    const rx = vehicles.find((vehicle) => vehicle.id === 'jp-lexus-rx-2026-rx500h-f-sport-performance-awd');
+    expect(rx?.price?.amounts[0].amountJpy).toBe(9_030_000);
+    expect(rx?.handsOff).toBe('allowed_in_conditions');
+    expect(rx?.driverMonitoring).toBe('required');
+    expect(rx?.odd.speedKph).toMatchObject({ min: 0, max: 40 });
+    expect(rx?.capabilities).toEqual(expect.arrayContaining(['traffic_jam_assist', 'hands_off_highway', 'driver_monitoring', 'lane_change_support']));
+    expect(rx?.sources.some((source) => source.url === 'https://lexus.jp/models/rx/pdf/rx_safety.pdf')).toBe(true);
   });
 
   it('時系列フィールドは公式モデル年・世代・適用時点を混同しない', () => {

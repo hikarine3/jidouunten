@@ -34,8 +34,8 @@ try {
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 80, '既定カタログは現行確認80件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*80[\s\S]*条件内可[\s\S]*25[\s\S]*不可[\s\S]*54[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*13/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await visibleCards(), 83, '既定カタログは現行確認83件');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*83[\s\S]*条件内可[\s\S]*28[\s\S]*不可[\s\S]*54[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*16/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="3"]').innerText(), /L3[\s\S]*条件付自動運転[\s\S]*過去例 1件/, 'Level 3の過去例を現行車と区別');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, 'Tesla Model 3 / Model Yの6販売仕様を既定一覧に表示');
@@ -44,10 +44,10 @@ try {
   assert.equal(await visibleCards(), 6, 'Teslaクイック絞り込みは6件');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="allowed_in_conditions"]').click();
-  assert.equal(await visibleCards(), 25, '条件内ハンズオフは25件');
+  assert.equal(await visibleCards(), 28, '条件内ハンズオフは28件');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-capability-shortcut="lane_change_support"]').click();
-  assert.equal(await visibleCards(), 13, '車線変更支援は13件');
+  assert.equal(await visibleCards(), 16, '車線変更支援は16件');
   await page.locator('[data-reset-shortcut]').click();
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo EX30' }).count(), 3, 'Volvo EX30の3販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Suzuki e VITARA' }).count(), 3, 'Suzuki e VITARAの3販売単位を既定一覧に表示');
@@ -70,7 +70,7 @@ try {
   await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://jidouunten.jp/og.png', 'OG画像は絶対URL');
-  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け80販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け83販売単位/, 'トップのdescription件数は公開データから生成');
   assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け78販売単位/, '古い固定件数を残さない');
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
@@ -88,7 +88,7 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 80, 'Level 2現行80件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 83, 'Level 2現行83件へ復帰');
   await levelMapPage.close();
   const mobilePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await mobilePage.goto(`${base}/`);
@@ -105,7 +105,7 @@ try {
   }
 
   await page.goto(`${base}/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 10, 'トップのLevel 2・高速・ハンズオフ条件は10件');
+  assert.equal(await visibleCards(), 13, 'トップのLevel 2・高速・ハンズオフ条件は13件');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'トップのLevel 2注意表示');
   assert.equal(new URL(page.url()).pathname, '/', 'トップの深いリンクはトップに留まる');
 
@@ -122,7 +122,7 @@ try {
   assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 10, 'Level 2・高速・ハンズオフ条件は10件');
+  assert.equal(await visibleCards(), 13, 'Level 2・高速・ハンズオフ条件は13件');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '深いリンクのlevel復元');
   assert.equal(await page.locator('#vehicle-filters').getAttribute('action'), '/cars/', '旧一覧は現在のルートで送信');
@@ -151,13 +151,13 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 80, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 83, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  assert.equal(await visibleCards(), 80, 'リセット後に既定80件');
+  assert.equal(await visibleCards(), 83, 'リセット後に既定83件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -178,7 +178,7 @@ try {
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '一覧選択が比較画面へ反映');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 81, 'すべての状態で過去車両を含む81件');
+  assert.equal(await visibleCards(), 84, 'すべての状態で過去車両を含む84件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
@@ -228,6 +228,22 @@ try {
   assert.match(await page.locator('main').innerText(), /Lexus[\s\S]*NX[\s\S]*NX350h/);
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*6,376,000円[\s\S]*ハンズオフ[\s\S]*不可/, 'NXの公式価格と手保持条件を表示');
   assert.doesNotMatch(await page.locator('main').innerText(), /nx\/features|sources|accessedAt/, 'NX詳細に内部根拠を表示しない');
+
+  await page.goto(`${base}/cars/jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd/`);
+  assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*クラウン（クロスオーバー）[\s\S]*THE LIMITED-MATTE METAL/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*7,590,000円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'クラウンの条件付きハンズオフと価格を表示');
+  assert.match(await page.locator('main').innerText(), /渋滞時支援[\s\S]*0〜約40km\/h|車線変更支援/, 'クラウンの能力差を表示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /crowncrossover\/safety|sources|accessedAt/, 'クラウン詳細に内部根拠を表示しない');
+
+  await page.goto(`${base}/cars/jp-lexus-lbx-2026-bespoke-build-2wd/`);
+  assert.match(await page.locator('main').innerText(), /Lexus[\s\S]*LBX[\s\S]*Bespoke Build/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*5,500,000円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'LBXの条件付きハンズオフと価格を表示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /models\/lbx|sources|accessedAt/, 'LBX詳細に内部根拠を表示しない');
+
+  await page.goto(`${base}/cars/jp-lexus-rx-2026-rx500h-f-sport-performance-awd/`);
+  assert.match(await page.locator('main').innerText(), /Lexus[\s\S]*RX[\s\S]*RX500h[\s\S]*F SPORT Performance/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*9,030,000円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'RXの条件付きハンズオフと価格を表示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /models\/rx|sources|accessedAt/, 'RX詳細に内部根拠を表示しない');
 
   await page.goto(`${base}/cars/jp-tesla-model-y-2026-premium/`);
   assert.match(await page.locator('main').innerText(), /Tesla[\s\S]*Model Y/);
