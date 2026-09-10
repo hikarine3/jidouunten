@@ -30,6 +30,7 @@ EVENT_PARAMETERS = {
     "compare_vehicles": ("vehicle_ids", "vehicle_count"),
     "view_vehicle": ("vehicle_id", "model_year", "grade"),
     "outbound_manufacturer": ("vehicle_id", "manufacturer", "link_url", "link_domain", "link_type", "placement"),
+    "outbound_purchase_action": ("vehicle_id", "manufacturer", "action_type", "link_url", "link_domain", "placement"),
 }
 
 
@@ -264,7 +265,7 @@ def publish(svc, workspace, changed):
         path=workspace["path"],
         body={
             "name": "jidouunten.jp initial GA4 measurement",
-            "notes": "Google tag and five selector decision events",
+            "notes": "Google tag and selector/purchase decision events",
         },
     ).execute()
     version = result.get("containerVersion", {})

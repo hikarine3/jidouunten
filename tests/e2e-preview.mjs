@@ -230,6 +230,13 @@ try {
   assert.doesNotMatch(await page.locator('main').innerText(), /adaptive_cruise_control|lane_centering|hands_off_highway|lane_change_support/, '内部capability IDを公開しない');
   assert.match(await page.locator('main').innerText(), /確認できた機能[\s\S]*追従走行（ACC）[\s\S]*車線中央維持/, '機能IDを平易な日本語で説明');
   assert.match(await page.locator('main').innerText(), /新車注文可[\s\S]*注文後の納車時期・在庫・ソフトウェア提供条件は個別確認が必要/, 'Tesla公式の注文導線と個別確認事項を表示');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 2, 'Tesla詳細に注文・試乗の公式次アクションを表示');
+  assert.deepEqual(await page.locator('[data-purchase-action]').allTextContents(), ['今すぐ注文 ↗', '試乗を予約する ↗'], '次アクションの日本語ラベル');
+  const detailPurchase = page.locator('[data-purchase-action]').first();
+  await detailPurchase.evaluate((link) => link.addEventListener('click', (event) => event.preventDefault(), { once: true, capture: true }));
+  await detailPurchase.click();
+  const detailPurchaseEvent = (await events()).filter((event) => event.event === 'outbound_purchase_action').at(-1);
+  assert.deepEqual({ vehicle_id: detailPurchaseEvent.vehicle_id, action_type: detailPurchaseEvent.action_type, placement: detailPurchaseEvent.placement }, { vehicle_id: 'jp-tesla-model-3-2026-premium', action_type: 'order', placement: 'vehicle_detail' }, '詳細の購入アクション計測');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '根拠URL・確認日は通常UIに出さない');
   await page.screenshot({ path: `${qaDir}/desktop-tesla-detail.png`, fullPage: false });
 
@@ -294,6 +301,12 @@ try {
   await page.getByRole('button', { name: 'すべての項目を表示' }).click();
   assert.equal(await page.locator('.compare-table .compare-row-same:visible').count(), sameRowCount, '同値項目を1操作で再表示');
   assert.match(await page.locator('[data-compare-result]').innerText(), /確認できた機能[\s\S]*確認済み/, '比較で機能を平易な日本語で表示');
+  assert.equal(await page.locator('[data-compare-result] [data-purchase-action]').count(), 4, '比較でも2台の注文・試乗アクションを表示');
+  const comparePurchase = page.locator('[data-compare-result] [data-purchase-action]').first();
+  await comparePurchase.evaluate((link) => link.addEventListener('click', (event) => event.preventDefault(), { once: true, capture: true }));
+  await comparePurchase.click();
+  const comparePurchaseEvent = (await events()).filter((event) => event.event === 'outbound_purchase_action').at(-1);
+  assert.deepEqual({ vehicle_id: comparePurchaseEvent.vehicle_id, action_type: comparePurchaseEvent.action_type, placement: comparePurchaseEvent.placement }, { vehicle_id: 'jp-tesla-model-3-2026-premium', action_type: 'order', placement: 'comparison' }, '比較の購入アクション計測');
   assert.equal(await page.locator('[data-compare-result] [data-official-link]').count(), 2, '比較後に2台それぞれの公式確認出口');
   const compareOfficial = page.locator('[data-compare-result] [data-official-link]').first();
   await compareOfficial.evaluate((link) => link.addEventListener('click', (event) => event.preventDefault(), { once: true, capture: true }));

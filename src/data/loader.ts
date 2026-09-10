@@ -68,6 +68,14 @@ export interface OfficialLink {
   url: string;
   kind: 'product' | 'archive';
   checkedAt: string;
+  actions?: OfficialAction[];
+}
+
+export interface OfficialAction {
+  kind: 'order' | 'test_drive' | 'dealer' | 'catalog';
+  label: string;
+  url: string;
+  checkedAt: string;
 }
 
 export interface Vehicle {

@@ -157,6 +157,10 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .official-next { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-color: rgba(149, 214, 0, .65); background: linear-gradient(135deg, var(--white), #f5faea); }
 .official-next h2 { margin-bottom: 8px; }
 .official-next p:last-child { margin: 0; color: var(--muted); max-width: 620px; }
+.purchase-actions { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-color: rgba(20, 70, 90, .2); background: linear-gradient(135deg, #f7fbfc, #eef7f8); }
+.purchase-actions h2 { margin-bottom: 8px; }
+.purchase-actions p:last-child { margin: 0; color: var(--muted); max-width: 620px; }
+.purchase-action-list { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
 .fact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .fact { background: var(--white); padding: 13px 15px; }
 .fact dt { color: var(--muted); font-size: .74rem; font-weight: 700; }
@@ -268,7 +272,8 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
   .fact-grid { grid-template-columns: 1fr; }
   .compare-table { display: block; overflow-x: auto; white-space: normal; min-width: 640px; }
   .detail-section { padding: 18px; }
-  .official-next { align-items: stretch; flex-direction: column; }
+  .official-next, .purchase-actions { align-items: stretch; flex-direction: column; }
+  .purchase-action-list { justify-content: flex-start; }
 }
 
 /* Catalog command deck v2: the data distribution is the visual centerpiece. */

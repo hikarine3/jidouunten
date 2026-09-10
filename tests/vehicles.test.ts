@@ -108,6 +108,9 @@ describe('vehicle data contract and filters', () => {
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
     expect(new Set(officialLinks.map(({ maker, model }) => `${maker}\u0000${model}`)).size).toBe(officialLinks.length);
+    const teslaActions = officialLinks.filter(({ maker }) => maker === 'Tesla').flatMap((link) => link.actions ?? []);
+    expect(teslaActions.map(({ kind }) => kind).sort()).toEqual(['order', 'order', 'test_drive', 'test_drive']);
+    expect(teslaActions.every(({ url, checkedAt }) => url.startsWith('https://www.tesla.com/') && checkedAt === '2026-09-10')).toBe(true);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {

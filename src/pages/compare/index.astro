@@ -18,7 +18,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
   priceLabel: displayVehiclePrice(vehicle),
   officialLink: (() => {
     const link = officialLinkFor(vehicle);
-    return link ? { url: link.url, kind: link.kind } : undefined;
+    return link ? { url: link.url, kind: link.kind, actions: link.actions?.map(({ kind, label, url }) => ({ kind, label, url })) } : undefined;
   })(),
 }));
 ---
@@ -95,6 +95,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
         row('必要パッケージ', (v) => v.requiredPackage || '不明', 'required-package'),
         row('販売・利用状態', (v) => availabilityLabels[v.availability], 'availability', (v) => availabilityNotes[v.availability] ? `<small>${escapeHtml(availabilityNotes[v.availability])}</small>` : ''),
         `<tr class="compare-row compare-row-unknown" data-compare-row="official"><th>公式サイト<small>最新仕様を確認</small></th>${selected.map((v) => `<td>${v.officialLink ? `<a class="button small text" href="${escapeHtml(v.officialLink.url)}" target="_blank" rel="noopener noreferrer" data-official-link data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}" data-link-kind="${escapeHtml(v.officialLink.kind)}">${v.officialLink.kind === 'archive' ? '過去資料を開く' : '公式サイトを開く'} ↗</a>` : 'リンク未確認'}</td>`).join('')}</tr>`,
+        `<tr class="compare-row compare-row-unknown" data-compare-row="purchase-actions"><th>公式の次アクション<small>購入・試乗</small></th>${selected.map((v) => `<td>${v.officialLink?.actions?.length ? `<div class="purchase-action-list">${v.officialLink.actions.map((action) => `<a class="button small alt" href="${escapeHtml(action.url)}" target="_blank" rel="noopener noreferrer" data-purchase-action data-action-type="${escapeHtml(action.kind)}" data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}">${escapeHtml(action.label)} ↗</a>`).join('')}</div>` : '次アクション未確認'}</td>`).join('')}</tr>`,
       ].join('');
       const diffCount = selected.length === 2 ? [
         selected.map((v) => v.priceLabel),
@@ -117,6 +118,10 @@ const publicCatalog = vehicles.map((vehicle) => ({
       result.querySelectorAll('[data-official-link]').forEach((link) => link.addEventListener('click', () => {
         const url = new URL(link.href);
         window.jidouuntenTrack?.('outbound_manufacturer', { vehicle_id: link.dataset.vehicleId, manufacturer: link.dataset.manufacturer, link_url: link.href, link_domain: url.hostname, link_type: link.dataset.linkKind, placement: 'comparison' });
+      }));
+      result.querySelectorAll('[data-purchase-action]').forEach((link) => link.addEventListener('click', () => {
+        const url = new URL(link.href);
+        window.jidouuntenTrack?.('outbound_purchase_action', { vehicle_id: link.dataset.vehicleId, manufacturer: link.dataset.manufacturer, action_type: link.dataset.actionType, link_url: link.href, link_domain: url.hostname, placement: 'comparison' });
       }));
       sendCompare(selected);
     };
