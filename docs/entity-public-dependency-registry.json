@@ -285,7 +285,7 @@
         {"url": "/", "locale": "ja", "output_path": "dist/index.html", "markers": ["Tesla", "Model 3", "現行仕様", "Volvo", "2027年モデル"]},
         {"url": "/cars/", "locale": "ja", "output_path": "dist/cars/index.html", "markers": ["Nissan", "セレナ", "C28", "SUBARU", "現行仕様"]},
         {"url": "/cars/jp-tesla-model-3-2026-premium/", "locale": "ja", "output_path": "dist/cars/jp-tesla-model-3-2026-premium/index.html", "markers": ["Tesla", "Model 3", "現行仕様"]},
-        {"url": "/cars/jp-nissan-serena-2026-e-power-luxion/", "locale": "ja", "output_path": "dist/cars/jp-nissan-serena-2026-e-power-luxion/index.html", "markers": ["Nissan", "セレナ", "C28"]},
+        {"url": "/cars/jp-nissan-serena-2026-e-power-luxion/", "locale": "ja", "output_path": "dist/cars/jp-nissan-serena-2026-e-power-luxion/index.html", "markers": ["Nissan", "セレナ", "C28", "参考総額"]},
         {"url": "/cars/jp-volvo-ex30-my2027-plus-p5-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-plus-p5-electric/index.html", "markers": ["Volvo", "EX30", "2027年モデル"]},
         {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["現行仕様", "C28", "2027年モデル"]},
         {"url": "/sitemap-0.xml", "locale": "ja", "output_path": "dist/sitemap-0.xml", "markers": ["jp-tesla-model-3-2026-premium", "jp-nissan-serena-2026-e-power-luxion", "jp-volvo-ex30-my2027-plus-p5-electric"]}
@@ -293,6 +293,7 @@
       "required_render_selectors": [
         {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Tesla", "Model 3", "現行仕様"]},
         {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Nissan", "セレナ", "C28"]},
+        {"url": "/cars/jp-nissan-serena-2026-e-power-luxion/", "selector": "main", "markers": ["Nissan", "セレナ", "C28", "参考総額"]},
         {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "2027年モデル"]}
       ],
       "historical_markers": [],
@@ -366,7 +367,7 @@
         {"url":"/cars/jp-mazda-mazda3-fastback-x-touring-6ec-at/","locale":"ja","output_path":"dist/cars/jp-mazda-mazda3-fastback-x-touring-6ec-at/index.html","markers":["Mazda","MAZDA3 FASTBACK","X Touring（6EC-AT）","Level 2"]},
         {"url":"/cars/jp-mazda-mazda3-fastback-x-touring-6mt/","locale":"ja","output_path":"dist/cars/jp-mazda-mazda3-fastback-x-touring-6mt/index.html","markers":["Mazda","MAZDA3 FASTBACK","X Touring（6MT）","Level 2"]},
         {"url":"/cars/jp-mazda-mazda3-sedan-25l/","locale":"ja","output_path":"dist/cars/jp-mazda-mazda3-sedan-25l/index.html","markers":["Mazda","MAZDA3 SEDAN","25L","Level 2"]},
-        {"url":"/cars/jp-mazda-cx-30-20g/","locale":"ja","output_path":"dist/cars/jp-mazda-cx-30-20g/index.html","markers":["Mazda","CX-30","20G","Level 2"]},
+        {"url":"/cars/jp-mazda-cx-30-20g/","locale":"ja","output_path":"dist/cars/jp-mazda-cx-30-20g/index.html","markers":["Mazda","CX-30","20G","Level 2","参考総額"]},
         {"url":"/cars/jp-mazda-cx-30-20-air-edition/","locale":"ja","output_path":"dist/cars/jp-mazda-cx-30-20-air-edition/index.html","markers":["Mazda","CX-30","20 Air Edition","Level 2"]},
         {"url":"/cars/jp-mazda-cx-30-25l/","locale":"ja","output_path":"dist/cars/jp-mazda-cx-30-25l/index.html","markers":["Mazda","CX-30","25L","Level 2"]},
         {"url":"/cars/jp-mazda-cx-30-25-air-edition/","locale":"ja","output_path":"dist/cars/jp-mazda-cx-30-25-air-edition/index.html","markers":["Mazda","CX-30","25 Air Edition","Level 2"]},
@@ -497,7 +498,7 @@
         {"url":"/compare/","selector":"label.check-card:has(input[value=\"jp-mazda-mazda3-sedan-25l\"])","markers":["Mazda","MAZDA3 SEDAN","25L"]},
         {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-mazda-cx-30-20g\"])","markers":["Mazda","CX-30","20G"]},
         {"url":"/cars/","selector":"[data-vehicle-shell]:has(input[value=\"jp-mazda-cx-30-20g\"])","markers":["Mazda","CX-30","20G"]},
-        {"url":"/cars/jp-mazda-cx-30-20g/","selector":"main","markers":["Mazda","CX-30","20G","Level 2"]},
+        {"url":"/cars/jp-mazda-cx-30-20g/","selector":"main","markers":["Mazda","CX-30","20G","Level 2","参考総額"]},
         {"url":"/compare/","selector":"label.check-card:has(input[value=\"jp-mazda-cx-30-20g\"])","markers":["Mazda","CX-30","20G"]},
         {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-mazda-cx-30-20-air-edition\"])","markers":["Mazda","CX-30","20 Air Edition"]},
         {"url":"/cars/","selector":"[data-vehicle-shell]:has(input[value=\"jp-mazda-cx-30-20-air-edition\"])","markers":["Mazda","CX-30","20 Air Edition"]},
@@ -575,7 +576,8 @@
             "HYBRID S-Z 2WD（7人乗り）",
             "4,056,800円",
             "Level 2",
-            "ハンズオフ：条件内で可"
+            "ハンズオフ：条件内で可",
+            "参考総額"
           ]
         },
         {
@@ -588,7 +590,8 @@
             "HYBRID S-Z E-Four（7人乗り）",
             "4,309,800円",
             "Level 2",
-            "ハンズオフ：条件内で可"
+            "ハンズオフ：条件内で可",
+            "参考総額"
           ]
         },
         {
@@ -601,7 +604,8 @@
             "HYBRID S-G 2WD（7人乗り）",
             "3,700,400円",
             "Level 2",
-            "ハンズオフ：条件内で可"
+            "ハンズオフ：条件内で可",
+            "参考総額"
           ]
         },
         {
@@ -614,7 +618,8 @@
             "HYBRID S-G E-Four（7人乗り）",
             "3,953,400円",
             "Level 2",
-            "ハンズオフ：条件内で可"
+            "ハンズオフ：条件内で可",
+            "参考総額"
           ]
         },
         {
@@ -627,7 +632,8 @@
             "HYBRID S-G 2WD（8人乗り）",
             "3,700,400円",
             "Level 2",
-            "ハンズオフ：条件内で可"
+            "ハンズオフ：条件内で可",
+            "参考総額"
           ]
         },
         {
@@ -689,7 +695,8 @@
             "ノア",
             "HYBRID S-Z",
             "HYBRID S-X",
-            "RZ500e"
+            "RZ500e",
+            "参考総額"
           ]
         },
         {
@@ -736,7 +743,8 @@
             "ノア",
             "4,056,800円",
             "Level 2",
-            "ハンズオフ：条件内で可"
+            "ハンズオフ：条件内で可",
+            "参考総額"
           ]
         },
         {
@@ -747,7 +755,8 @@
             "ノア",
             "4,309,800円",
             "Level 2",
-            "ハンズオフ：条件内で可"
+            "ハンズオフ：条件内で可",
+            "参考総額"
           ]
         },
         {
@@ -758,7 +767,8 @@
             "ノア",
             "3,700,400円",
             "Level 2",
-            "ハンズオフ：条件内で可"
+            "ハンズオフ：条件内で可",
+            "参考総額"
           ]
         },
         {
@@ -769,7 +779,8 @@
             "ノア",
             "3,953,400円",
             "Level 2",
-            "ハンズオフ：条件内で可"
+            "ハンズオフ：条件内で可",
+            "参考総額"
           ]
         },
         {
@@ -780,7 +791,8 @@
             "ノア",
             "3,700,400円",
             "Level 2",
-            "ハンズオフ：条件内で可"
+            "ハンズオフ：条件内で可",
+            "参考総額"
           ]
         },
         {
@@ -834,7 +846,8 @@
             "HYBRID S-Z 2WD（7人乗り）",
             "HYBRID S-X 2WD（7人乗り）",
             "4,056,800円",
-            "3,261,500円"
+            "3,261,500円",
+            "参考総額"
           ]
         }
       ],
@@ -1312,23 +1325,23 @@
       "surfaces": [
         {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","ヴォクシー","LEVEL 2"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","ヴォクシー","LEVEL 2"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sz-2wd-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sz-2wd-7seater/index.html","markers":["Toyota","ヴォクシー","S-Z 2WD（7人乗り）","4,127,200円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sz-e-four-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sz-e-four-7seater/index.html","markers":["Toyota","ヴォクシー","S-Z E-Four（7人乗り）","4,380,200円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-2wd-7seater/index.html","markers":["Toyota","ヴォクシー","S-G 2WD（7人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sg-e-four-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-e-four-7seater/index.html","markers":["Toyota","ヴォクシー","S-G E-Four（7人乗り）","4,004,000円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-8seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-2wd-8seater/index.html","markers":["Toyota","ヴォクシー","S-G 2WD（8人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater/index.html","markers":["Toyota","ヴォクシー","S-G マルチユーティリティ（2WD・5人乗り）","4,120,600円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/compare/?ids=jp-toyota-voxy-2026-sz-2wd-7seater&ids=jp-toyota-voxy-2026-sg-2wd-7seater","locale":"ja","output_path":"dist/compare/index.html","markers":["ヴォクシー","S-Z 2WD（7人乗り）","S-G 2WD（7人乗り）"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sz-2wd-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sz-2wd-7seater/index.html","markers":["Toyota","ヴォクシー","S-Z 2WD（7人乗り）","4,127,200円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sz-e-four-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sz-e-four-7seater/index.html","markers":["Toyota","ヴォクシー","S-Z E-Four（7人乗り）","4,380,200円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-2wd-7seater/index.html","markers":["Toyota","ヴォクシー","S-G 2WD（7人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-e-four-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-e-four-7seater/index.html","markers":["Toyota","ヴォクシー","S-G E-Four（7人乗り）","4,004,000円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-8seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-2wd-8seater/index.html","markers":["Toyota","ヴォクシー","S-G 2WD（8人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater/index.html","markers":["Toyota","ヴォクシー","S-G マルチユーティリティ（2WD・5人乗り）","4,120,600円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/compare/?ids=jp-toyota-voxy-2026-sz-2wd-7seater&ids=jp-toyota-voxy-2026-sg-2wd-7seater","locale":"ja","output_path":"dist/compare/index.html","markers":["ヴォクシー","S-Z 2WD（7人乗り）","S-G 2WD（7人乗り）","参考総額"]},
         {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-toyota-voxy-2026-sz-2wd-7seater","jp-toyota-voxy-2026-sz-e-four-7seater","jp-toyota-voxy-2026-sg-2wd-7seater","jp-toyota-voxy-2026-sg-e-four-7seater","jp-toyota-voxy-2026-sg-2wd-8seater","jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater"]}
       ],
       "required_render_selectors": [
         {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-voxy-2026-sz-2wd-7seater\"])","markers":["Toyota","ヴォクシー","S-Z 2WD（7人乗り）"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sz-2wd-7seater/","selector":"main","markers":["ヴォクシー","S-Z 2WD（7人乗り）","4,127,200円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sz-e-four-7seater/","selector":"main","markers":["ヴォクシー","S-Z E-Four（7人乗り）","4,380,200円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-7seater/","selector":"main","markers":["ヴォクシー","S-G 2WD（7人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sg-e-four-7seater/","selector":"main","markers":["ヴォクシー","S-G E-Four（7人乗り）","4,004,000円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-8seater/","selector":"main","markers":["ヴォクシー","S-G 2WD（8人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可"]},
-        {"url":"/cars/jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater/","selector":"main","markers":["ヴォクシー","S-G マルチユーティリティ（2WD・5人乗り）","4,120,600円","Level 2","ハンズオフ：条件内で可"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sz-2wd-7seater/","selector":"main","markers":["ヴォクシー","S-Z 2WD（7人乗り）","4,127,200円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sz-e-four-7seater/","selector":"main","markers":["ヴォクシー","S-Z E-Four（7人乗り）","4,380,200円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-7seater/","selector":"main","markers":["ヴォクシー","S-G 2WD（7人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-e-four-7seater/","selector":"main","markers":["ヴォクシー","S-G E-Four（7人乗り）","4,004,000円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-2wd-8seater/","selector":"main","markers":["ヴォクシー","S-G 2WD（8人乗り）","3,751,000円","Level 2","ハンズオフ：条件内で可","参考総額"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sg-multi-utility-2wd-5seater/","selector":"main","markers":["ヴォクシー","S-G マルチユーティリティ（2WD・5人乗り）","4,120,600円","Level 2","ハンズオフ：条件内で可","参考総額"]},
         {"url":"/compare/?ids=jp-toyota-voxy-2026-sz-2wd-7seater&ids=jp-toyota-voxy-2026-sg-2wd-7seater","selector":"[data-compare-result]","markers":["ヴォクシー","S-Z 2WD（7人乗り）","S-G 2WD（7人乗り）"]}
       ],
       "historical_markers": [],
