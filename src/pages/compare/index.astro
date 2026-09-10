@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { availabilityLabels, availabilityNotes, displayVehiclePrice, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleReferenceLabel, vehicles } from '../../data/loader';
+import { availabilityLabels, availabilityNotes, capabilityDefinition, displayVehiclePrice, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleReferenceLabel, vehicles } from '../../data/loader';
 
 const publicCatalog = vehicles.map((vehicle) => ({
   id: vehicle.id,
@@ -13,6 +13,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
   handsOff: vehicle.handsOff,
   driverMonitoring: vehicle.driverMonitoring,
   odd: vehicle.odd,
+  capabilities: vehicle.capabilities.map((id) => capabilityDefinition(id).label),
   referenceLabel: vehicleReferenceLabel(vehicle),
   priceLabel: displayVehiclePrice(vehicle),
   officialLink: (() => {
@@ -59,7 +60,60 @@ const publicCatalog = vehicles.map((vehicle) => ({
       if (selected.length !== 2) return;
       const headings = selected.map((v) => `<th>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</th>`).join('');
       const cells = (fn) => selected.map((v) => `<td>${fn(v)}</td>`).join('');
-      result.innerHTML = `<div class="cards" style="margin-bottom:28px;">${selected.map((v) => `<article class="vehicle-card"><div class="vehicle-card-body"><div class="eyebrow">LEVEL ${v.automationLevel} · ${escapeHtml(levelLabels[v.automationLevel])}</div><h3>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</h3><div class="maker">${escapeHtml(v.referenceLabel)}　${escapeHtml(v.grade)}</div></div></article>`).join('')}</div><div style="overflow-x:auto;"><table class="compare-table"><thead><tr><th>比較項目</th>${headings}</tr></thead><tbody><tr><th>参考価格<small>車両本体の公式掲載価格</small></th>${cells((v) => escapeHtml(v.priceLabel))}</tr><tr><th>自動化レベル</th>${cells((v) => `<strong>Level ${v.automationLevel}</strong><br />${escapeHtml(levelLabels[v.automationLevel])}`)}</tr><tr><th>道路</th>${cells((v) => escapeHtml(fact(v.odd.roadTypes)))}</tr><tr><th>速度</th>${cells((v) => escapeHtml(v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明')))}</tr><tr><th>ハンズオフ</th>${cells((v) => escapeHtml(handsOffLabels[v.handsOff]))}</tr><tr><th>運転者監視</th>${cells((v) => escapeHtml(monitoringLabels[v.driverMonitoring]))}</tr><tr><th>必要パッケージ</th>${cells((v) => escapeHtml(v.requiredPackage || '不明'))}</tr><tr><th>販売・利用状態</th>${cells((v) => `${escapeHtml(availabilityLabels[v.availability])}${availabilityNotes[v.availability] ? `<small>${escapeHtml(availabilityNotes[v.availability])}</small>` : ''}`)}</tr><tr><th>公式サイト<small>最新仕様を確認</small></th>${cells((v) => v.officialLink ? `<a class="button small text" href="${escapeHtml(v.officialLink.url)}" target="_blank" rel="noopener noreferrer" data-official-link data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}" data-link-kind="${escapeHtml(v.officialLink.kind)}">${v.officialLink.kind === 'archive' ? '過去資料を開く' : '公式サイトを開く'} ↗</a>` : 'リンク未確認')}</tr></tbody></table></div>`;
+      const normalize = (value) => String(value ?? '不明')
+        .replace(/高速道路の本線/g, '高速道路')
+        .replace(/自動車専用道路の本線/g, '自動車専用道路')
+        .replace(/[\s　]/g, '');
+      const isUnknown = (value) => {
+        const text = String(value ?? '').trim();
+        return !text || text === '不明' || text.includes('未確認') || text === '価格要確認' || text === '公式価格未確認' || text === '標準装備 / 不明';
+      };
+      const stateFor = (values) => {
+        if (values.some(isUnknown)) return 'unknown';
+        return new Set(values.map(normalize)).size > 1 ? 'diff' : 'same';
+      };
+      const row = (label, valueFn, key, noteFn) => {
+        const values = selected.map(valueFn);
+        const state = stateFor(values);
+        const note = noteFn ? noteFn : () => '';
+        const marker = state === 'diff' ? '<span class="compare-diff-badge">差分</span>' : '';
+        return `<tr class="compare-row compare-row-${state}" data-compare-row="${key}"><th>${label}${marker}</th>${selected.map((v, index) => `<td>${escapeHtml(values[index])}${note(v)}</td>`).join('')}</tr>`;
+      };
+      const capabilityLabels = [...new Set(selected.flatMap((v) => v.capabilities))].sort((a, b) => a.localeCompare(b, 'ja'));
+      const capabilityRows = capabilityLabels.map((label) => {
+        const allConfirmed = selected.every((v) => v.capabilities.includes(label));
+        const state = allConfirmed ? 'same' : 'unknown';
+        return `<tr class="compare-row compare-row-${state}" data-compare-row="capability-${escapeHtml(label)}"><th>確認できた機能<small>${escapeHtml(label)}</small></th>${selected.map((v) => `<td>${v.capabilities.includes(label) ? '<strong>確認済み</strong>' : '未確認'}</td>`).join('')}</tr>`;
+      }).join('');
+      const comparisonRows = [
+        row('参考価格<small>車両本体の公式掲載価格</small>', (v) => v.priceLabel, 'price'),
+        row('自動化レベル', (v) => `Level ${v.automationLevel} · ${levelLabels[v.automationLevel]}`, 'level'),
+        row('道路', (v) => fact(v.odd.roadTypes), 'road'),
+        row('速度', (v) => v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明'), 'speed'),
+        row('ハンズオフ', (v) => handsOffLabels[v.handsOff], 'hands-off'),
+        row('運転者監視', (v) => monitoringLabels[v.driverMonitoring], 'driver-monitoring'),
+        row('必要パッケージ', (v) => v.requiredPackage || '不明', 'required-package'),
+        row('販売・利用状態', (v) => availabilityLabels[v.availability], 'availability', (v) => availabilityNotes[v.availability] ? `<small>${escapeHtml(availabilityNotes[v.availability])}</small>` : ''),
+        `<tr class="compare-row compare-row-unknown" data-compare-row="official"><th>公式サイト<small>最新仕様を確認</small></th>${selected.map((v) => `<td>${v.officialLink ? `<a class="button small text" href="${escapeHtml(v.officialLink.url)}" target="_blank" rel="noopener noreferrer" data-official-link data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}" data-link-kind="${escapeHtml(v.officialLink.kind)}">${v.officialLink.kind === 'archive' ? '過去資料を開く' : '公式サイトを開く'} ↗</a>` : 'リンク未確認'}</td>`).join('')}</tr>`,
+      ].join('');
+      const diffCount = selected.length === 2 ? [
+        selected.map((v) => v.priceLabel),
+        selected.map((v) => `Level ${v.automationLevel} · ${levelLabels[v.automationLevel]}`),
+        selected.map((v) => fact(v.odd.roadTypes)),
+        selected.map((v) => v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明')),
+        selected.map((v) => handsOffLabels[v.handsOff]),
+        selected.map((v) => monitoringLabels[v.driverMonitoring]),
+        selected.map((v) => v.requiredPackage || '不明'),
+        selected.map((v) => availabilityLabels[v.availability]),
+      ].filter((values) => stateFor(values) === 'diff').length : 0;
+      result.innerHTML = `<div class="compare-diff-summary"><strong data-compare-diff-count="${diffCount}">確認済みの差分 ${diffCount}項目</strong><span>「未確認」は優劣ではなく、根拠不足の表示です。</span><button type="button" class="button small text" data-toggle-same>同じ項目を隠す</button></div><div class="cards" style="margin-bottom:28px;">${selected.map((v) => `<article class="vehicle-card"><div class="vehicle-card-body"><div class="eyebrow">LEVEL ${v.automationLevel} · ${escapeHtml(levelLabels[v.automationLevel])}</div><h3>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</h3><div class="maker">${escapeHtml(v.referenceLabel)}　${escapeHtml(v.grade)}</div></div></article>`).join('')}</div><div style="overflow-x:auto;"><table class="compare-table" data-hide-same="false"><thead><tr><th>比較項目</th>${headings}</tr></thead><tbody>${comparisonRows}${capabilityRows}</tbody></table></div>`;
+      result.querySelector('[data-toggle-same]')?.addEventListener('click', (event) => {
+        const table = result.querySelector('.compare-table');
+        if (!table) return;
+        const hideSame = table.dataset.hideSame !== 'true';
+        table.dataset.hideSame = String(hideSame);
+        event.currentTarget.textContent = hideSame ? 'すべての項目を表示' : '同じ項目を隠す';
+      });
       result.querySelectorAll('[data-official-link]').forEach((link) => link.addEventListener('click', () => {
         const url = new URL(link.href);
         window.jidouuntenTrack?.('outbound_manufacturer', { vehicle_id: link.dataset.vehicleId, manufacturer: link.dataset.manufacturer, link_url: link.href, link_domain: url.hostname, link_type: link.dataset.linkKind, placement: 'comparison' });

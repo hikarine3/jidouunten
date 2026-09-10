@@ -283,6 +283,17 @@ try {
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.match(await page.locator('[data-compare-result]').innerText(), /Model 3[\s\S]*Model Y/);
   assert.equal((await page.locator('[data-compare-result]').getByText('新車注文可', { exact: true }).count()), 2, '比較でもTeslaの注文可状態を表示');
+  assert.match(await page.locator('[data-compare-diff-count]').getAttribute('data-compare-diff-count').catch(() => ''), /./, '比較の確認済み差分件数を保持');
+  assert.ok(await page.locator('.compare-row-diff').count() > 0, '比較で意味のある既知差分を強調');
+  assert.ok(await page.locator('.compare-row-unknown').count() > 0, '比較で未確認項目を優劣から分離');
+  const sameRows = page.locator('.compare-table .compare-row-same');
+  const sameRowCount = await sameRows.count();
+  assert.ok(sameRowCount > 0, '同値項目を識別');
+  await page.getByRole('button', { name: '同じ項目を隠す' }).click();
+  assert.equal(await page.locator('.compare-table .compare-row-same:visible').count(), 0, '同値項目を隠せる');
+  await page.getByRole('button', { name: 'すべての項目を表示' }).click();
+  assert.equal(await page.locator('.compare-table .compare-row-same:visible').count(), sameRowCount, '同値項目を1操作で再表示');
+  assert.match(await page.locator('[data-compare-result]').innerText(), /確認できた機能[\s\S]*確認済み/, '比較で機能を平易な日本語で表示');
   assert.equal(await page.locator('[data-compare-result] [data-official-link]').count(), 2, '比較後に2台それぞれの公式確認出口');
   const compareOfficial = page.locator('[data-compare-result] [data-official-link]').first();
   await compareOfficial.evaluate((link) => link.addEventListener('click', (event) => event.preventDefault(), { once: true, capture: true }));
