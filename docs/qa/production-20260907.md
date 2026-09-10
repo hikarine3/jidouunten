@@ -1,5 +1,17 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 後発対策トランシェの本番実測
+
+- exact commit: `93f27ed5b43bb60cb4a8ed346dcbba88c8114753`
+- Immutable deployment: https://ac1e8140.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- ハリアーHEV 6販売単位（G/Z/Z“Leather Package”の2WD・E-Four）を本体・一覧・詳細・比較・sitemapへ反映。
+- 本体とimmutableのトップで `GTM-PV9QVMJV` を確認し、`GTM-TEST` が残っていないことを確認。
+- 本体HTTPS、ハリアー6詳細、比較、sitemap-index、sitemap-0、robotsは200。存在しないパスは404。
+- 日本語IDNの `/cars/?level=2&availability=all` は本体URLへpath/queryを維持した301。
+- `BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs` はGA collect 204、E2E 1/1。
+- 独立監査はexact SHAでPASS。ハリアー公式価格6/6、取説2608/hev、公開レジストリ9/9、sitemap6/6を確認。
+
 実施日: 2026-09-07 JST。初回release `c11c646`、道路フィルター修正 `72c36b4`。
 
 ## 配信

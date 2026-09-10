@@ -1,5 +1,11 @@
 # 計測・検索登録
 
+## 2026-09-10 本番再確認
+
+ハリアー6販売単位を含む `93f27ed5b43bb60cb4a8ed346dcbba88c8114753` を、実IDでビルドした
+`https://ac1e8140.jidouunten.pages.dev` と `https://jidouunten.jp/` へ配信した。両方で
+`GTM-PV9QVMJV` を確認し、`GTM-TEST` は含まれない。production E2EはGA collect HTTP 204、1/1 scenario。
+
 更新: 2026-09-07
 
 ## 専用resource
