@@ -32,18 +32,18 @@
           "url": "/cars/jp-tesla-model-3-2026-premium/",
           "locale": "ja",
           "output_path": "dist/cars/jp-tesla-model-3-2026-premium/index.html",
-          "markers": ["Tesla", "Model 3", "Premium RWD", "5,313,000円〜", "Level 2", "常時監視が必要"]
+          "markers": ["Tesla", "Model 3", "Premium RWD", "5,313,000円〜", "Level 2", "新車注文可", "常時監視が必要"]
         },
-        {"url": "/cars/jp-tesla-model-3-2026-premium-long-range-awd/", "locale": "ja", "output_path": "dist/cars/jp-tesla-model-3-2026-premium-long-range-awd/index.html", "markers": ["Tesla", "Model 3", "Premium ロングレンジAWD", "6,219,000円〜", "Level 2"]},
-        {"url": "/cars/jp-tesla-model-3-2026-performance/", "locale": "ja", "output_path": "dist/cars/jp-tesla-model-3-2026-performance/index.html", "markers": ["Tesla", "Model 3", "Performance", "7,259,000円〜", "Level 2"]},
+        {"url": "/cars/jp-tesla-model-3-2026-premium-long-range-awd/", "locale": "ja", "output_path": "dist/cars/jp-tesla-model-3-2026-premium-long-range-awd/index.html", "markers": ["Tesla", "Model 3", "Premium ロングレンジAWD", "6,219,000円〜", "Level 2", "新車注文可"]},
+        {"url": "/cars/jp-tesla-model-3-2026-performance/", "locale": "ja", "output_path": "dist/cars/jp-tesla-model-3-2026-performance/index.html", "markers": ["Tesla", "Model 3", "Performance", "7,259,000円〜", "Level 2", "新車注文可"]},
         {
           "url": "/cars/jp-tesla-model-y-2026-premium/",
           "locale": "ja",
           "output_path": "dist/cars/jp-tesla-model-y-2026-premium/index.html",
-          "markers": ["Tesla", "Model Y", "Premium RWD", "5,587,000円〜", "Level 2", "常時監視が必要"]
+          "markers": ["Tesla", "Model Y", "Premium RWD", "5,587,000円〜", "Level 2", "新車注文可", "常時監視が必要"]
         },
-        {"url": "/cars/jp-tesla-model-y-2026-premium-long-range-awd/", "locale": "ja", "output_path": "dist/cars/jp-tesla-model-y-2026-premium-long-range-awd/index.html", "markers": ["Tesla", "Model Y", "Premium ロングレンジAWD", "6,476,000円〜", "Level 2"]},
-        {"url": "/cars/jp-tesla-model-y-2026-l/", "locale": "ja", "output_path": "dist/cars/jp-tesla-model-y-2026-l/index.html", "markers": ["Tesla", "Model Y", "L", "7,490,000円〜", "Level 2"]},
+        {"url": "/cars/jp-tesla-model-y-2026-premium-long-range-awd/", "locale": "ja", "output_path": "dist/cars/jp-tesla-model-y-2026-premium-long-range-awd/index.html", "markers": ["Tesla", "Model Y", "Premium ロングレンジAWD", "6,476,000円〜", "Level 2", "新車注文可"]},
+        {"url": "/cars/jp-tesla-model-y-2026-l/", "locale": "ja", "output_path": "dist/cars/jp-tesla-model-y-2026-l/index.html", "markers": ["Tesla", "Model Y", "L", "7,490,000円〜", "Level 2", "新車注文可"]},
         {
           "url": "/compare/",
           "locale": "ja",
@@ -71,17 +71,17 @@
         {
           "url": "/cars/jp-tesla-model-3-2026-premium/",
           "selector": "main",
-          "markers": ["Tesla", "Model 3", "Premium RWD", "5,313,000円〜", "Level 2", "常時監視が必要"]
+          "markers": ["Tesla", "Model 3", "Premium RWD", "5,313,000円〜", "Level 2", "新車注文可", "常時監視が必要"]
         },
-        {"url": "/cars/jp-tesla-model-3-2026-premium-long-range-awd/", "selector": "main", "markers": ["Tesla", "Model 3", "Premium ロングレンジAWD", "6,219,000円〜"]},
-        {"url": "/cars/jp-tesla-model-3-2026-performance/", "selector": "main", "markers": ["Tesla", "Model 3", "Performance", "7,259,000円〜"]},
+        {"url": "/cars/jp-tesla-model-3-2026-premium-long-range-awd/", "selector": "main", "markers": ["Tesla", "Model 3", "Premium ロングレンジAWD", "6,219,000円〜", "新車注文可"]},
+        {"url": "/cars/jp-tesla-model-3-2026-performance/", "selector": "main", "markers": ["Tesla", "Model 3", "Performance", "7,259,000円〜", "新車注文可"]},
         {
           "url": "/cars/jp-tesla-model-y-2026-premium/",
           "selector": "main",
-          "markers": ["Tesla", "Model Y", "Premium RWD", "5,587,000円〜", "Level 2", "常時監視が必要"]
+          "markers": ["Tesla", "Model Y", "Premium RWD", "5,587,000円〜", "Level 2", "新車注文可", "常時監視が必要"]
         },
-        {"url": "/cars/jp-tesla-model-y-2026-premium-long-range-awd/", "selector": "main", "markers": ["Tesla", "Model Y", "Premium ロングレンジAWD", "6,476,000円〜"]},
-        {"url": "/cars/jp-tesla-model-y-2026-l/", "selector": "main", "markers": ["Tesla", "Model Y", "L", "7,490,000円〜"]}
+        {"url": "/cars/jp-tesla-model-y-2026-premium-long-range-awd/", "selector": "main", "markers": ["Tesla", "Model Y", "Premium ロングレンジAWD", "6,476,000円〜", "新車注文可"]},
+        {"url": "/cars/jp-tesla-model-y-2026-l/", "selector": "main", "markers": ["Tesla", "Model Y", "L", "7,490,000円〜", "新車注文可"]}
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"

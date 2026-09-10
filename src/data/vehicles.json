@@ -619,8 +619,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-07",
+    "availability": "new_order_available",
+    "availabilityCheckedAt": "2026-09-10",
     "odd": {
       "roadTypes": [
         "公道（対象道路は公式情報で未特定）"
@@ -655,7 +655,7 @@
     "limitations": [
       "FSD等の名称だけで自動運転Level 3以上とは判定しない",
       "ドライバーの監視と即時の引継ぎが必要",
-      "注文可否・ソフトウェア提供条件は要確認",
+      "注文後の納車時期・在庫・ソフトウェア提供条件は個別確認が必要",
       "対象道路・速度の数値範囲は公式情報で未確認"
     ],
     "sources": [
@@ -674,7 +674,7 @@
         "publisher": "Tesla Japan",
         "url": "https://www.tesla.com/ja_jp/model3",
         "title": "Model 3 – スポーツEVセダン｜Teslaジャパン",
-        "accessedAt": "2026-09-07",
+        "accessedAt": "2026-09-10",
         "supports": [
           "日本向けModel 3 掲載",
           "今すぐ注文・試乗導線",
@@ -739,8 +739,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-07",
+    "availability": "new_order_available",
+    "availabilityCheckedAt": "2026-09-10",
     "odd": {
       "roadTypes": [
         "公道（対象道路は公式情報で未特定）"
@@ -775,7 +775,7 @@
     "limitations": [
       "FSD等の名称だけで自動運転Level 3以上とは判定しない",
       "ドライバーの監視と即時の引継ぎが必要",
-      "注文可否・ソフトウェア提供条件は要確認",
+      "注文後の納車時期・在庫・ソフトウェア提供条件は個別確認が必要",
       "対象道路・速度の数値範囲は公式情報で未確認"
     ],
     "sources": [
@@ -794,7 +794,7 @@
         "publisher": "Tesla Japan",
         "url": "https://www.tesla.com/ja_jp/model3",
         "title": "Model 3 – スポーツEVセダン｜Teslaジャパン",
-        "accessedAt": "2026-09-07",
+        "accessedAt": "2026-09-10",
         "supports": [
           "日本向けModel 3 掲載",
           "今すぐ注文・試乗導線",
@@ -859,8 +859,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-07",
+    "availability": "new_order_available",
+    "availabilityCheckedAt": "2026-09-10",
     "odd": {
       "roadTypes": [
         "公道（対象道路は公式情報で未特定）"
@@ -895,7 +895,7 @@
     "limitations": [
       "FSD等の名称だけで自動運転Level 3以上とは判定しない",
       "ドライバーの監視と即時の引継ぎが必要",
-      "注文可否・ソフトウェア提供条件は要確認",
+      "注文後の納車時期・在庫・ソフトウェア提供条件は個別確認が必要",
       "対象道路・速度の数値範囲は公式情報で未確認"
     ],
     "sources": [
@@ -914,7 +914,7 @@
         "publisher": "Tesla Japan",
         "url": "https://www.tesla.com/ja_jp/model3",
         "title": "Model 3 – スポーツEVセダン｜Teslaジャパン",
-        "accessedAt": "2026-09-07",
+        "accessedAt": "2026-09-10",
         "supports": [
           "日本向けModel 3 掲載",
           "今すぐ注文・試乗導線",
@@ -979,8 +979,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-07",
+    "availability": "new_order_available",
+    "availabilityCheckedAt": "2026-09-10",
     "odd": {
       "roadTypes": [
         "公道（対象道路は公式情報で未特定）"
@@ -1015,7 +1015,7 @@
     "limitations": [
       "FSD等の名称だけで自動運転Level 3以上とは判定しない",
       "ドライバーの監視と即時の引継ぎが必要",
-      "注文可否・ソフトウェア提供条件は要確認",
+      "注文後の納車時期・在庫・ソフトウェア提供条件は個別確認が必要",
       "対象道路・速度の数値範囲は公式情報で未確認"
     ],
     "sources": [
@@ -1034,7 +1034,7 @@
         "publisher": "Tesla Japan",
         "url": "https://www.tesla.com/ja_JP/modely",
         "title": "Model Y – ミッドサイズSUVの電気自動車｜Teslaジャパン",
-        "accessedAt": "2026-09-07",
+        "accessedAt": "2026-09-10",
         "supports": [
           "日本向けModel Y 掲載",
           "今すぐ注文・試乗導線",
@@ -1100,8 +1100,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-07",
+    "availability": "new_order_available",
+    "availabilityCheckedAt": "2026-09-10",
     "odd": {
       "roadTypes": [
         "公道（対象道路は公式情報で未特定）"
@@ -1136,7 +1136,7 @@
     "limitations": [
       "FSD等の名称だけで自動運転Level 3以上とは判定しない",
       "ドライバーの監視と即時の引継ぎが必要",
-      "注文可否・ソフトウェア提供条件は要確認",
+      "注文後の納車時期・在庫・ソフトウェア提供条件は個別確認が必要",
       "対象道路・速度の数値範囲は公式情報で未確認"
     ],
     "sources": [
@@ -1155,7 +1155,7 @@
         "publisher": "Tesla Japan",
         "url": "https://www.tesla.com/ja_JP/modely",
         "title": "Model Y – ミッドサイズSUVの電気自動車｜Teslaジャパン",
-        "accessedAt": "2026-09-07",
+        "accessedAt": "2026-09-10",
         "supports": [
           "日本向けModel Y 掲載",
           "今すぐ注文・試乗導線",
@@ -1221,8 +1221,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-07",
+    "availability": "new_order_available",
+    "availabilityCheckedAt": "2026-09-10",
     "odd": {
       "roadTypes": [
         "公道（対象道路は公式情報で未特定）"
@@ -1257,7 +1257,7 @@
     "limitations": [
       "FSD等の名称だけで自動運転Level 3以上とは判定しない",
       "ドライバーの監視と即時の引継ぎが必要",
-      "注文可否・ソフトウェア提供条件は要確認",
+      "注文後の納車時期・在庫・ソフトウェア提供条件は個別確認が必要",
       "対象道路・速度の数値範囲は公式情報で未確認"
     ],
     "sources": [
@@ -1276,7 +1276,7 @@
         "publisher": "Tesla Japan",
         "url": "https://www.tesla.com/ja_JP/modely",
         "title": "Model Y – ミッドサイズSUVの電気自動車｜Teslaジャパン",
-        "accessedAt": "2026-09-07",
+        "accessedAt": "2026-09-10",
         "supports": [
           "日本向けModel Y 掲載",
           "今すぐ注文・試乗導線",

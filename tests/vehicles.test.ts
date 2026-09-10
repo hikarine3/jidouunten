@@ -163,6 +163,7 @@ describe('vehicle data contract and filters', () => {
     expect(tesla.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.tesla.com/ja_JP/support/incentives' && source.accessedAt === '2026-09-10'))).toBe(true);
     expect(tesla.every((vehicle) => vehicle.price?.kind === 'range' && vehicle.price.amounts[0].amountJpy >= 5_313_000)).toBe(true);
     expect(tesla.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
+    expect(tesla.every((vehicle) => vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-10')).toBe(true);
     expect(tesla.every((vehicle) => vehicleReferenceLabel(vehicle) === '現行仕様')).toBe(true);
   });
 

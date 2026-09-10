@@ -203,6 +203,10 @@ try {
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), '現在利用不可', '販売状態選択時の結果見出しを正しく表示');
+  await page.goto(`${base}/cars/?availability=new_order_available`);
+  assert.equal(await visibleCards(), 6, '新車注文可は公式注文導線を確認できたTesla 6件');
+  assert.equal(await page.locator('[data-selected-label]').innerText(), '新車注文可', '新車注文可の結果見出しを正しく表示');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, '新車注文可フィルタはTesla 6件に絞り込む');
   await page.goto(`${base}/compare/?ids=jp-honda-accord-2025-ehev-sensing360plus&ids=jp-subaru-levorg-layback-2023-limited-ex`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '比較対象は2台');
@@ -225,7 +229,7 @@ try {
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*5,313,000円〜/, 'Tesla詳細に公式掲載価格');
   assert.doesNotMatch(await page.locator('main').innerText(), /adaptive_cruise_control|lane_centering|hands_off_highway|lane_change_support/, '内部capability IDを公開しない');
   assert.match(await page.locator('main').innerText(), /確認できた機能[\s\S]*追従走行（ACC）[\s\S]*車線中央維持/, '機能IDを平易な日本語で説明');
-  assert.match(await page.locator('main').innerText(), /注文可否：未確認[\s\S]*メーカー公式サイトへの掲載は確認済み[\s\S]*新車で注文できるかは未確認/, '公式掲載と注文可否を分けて説明');
+  assert.match(await page.locator('main').innerText(), /新車注文可[\s\S]*注文後の納車時期・在庫・ソフトウェア提供条件は個別確認が必要/, 'Tesla公式の注文導線と個別確認事項を表示');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '根拠URL・確認日は通常UIに出さない');
   await page.screenshot({ path: `${qaDir}/desktop-tesla-detail.png`, fullPage: false });
 
@@ -278,7 +282,7 @@ try {
   await page.goto(`${base}/compare/?ids=jp-tesla-model-3-2026-premium&ids=jp-tesla-model-y-2026-premium`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.match(await page.locator('[data-compare-result]').innerText(), /Model 3[\s\S]*Model Y/);
-  assert.equal((await page.locator('[data-compare-result]').getByText('メーカー公式サイトへの掲載は確認済みです。新車で注文できるかは未確認です。', { exact: true }).count()), 2, '比較でも公式掲載と注文可否を分けて説明');
+  assert.equal((await page.locator('[data-compare-result]').getByText('新車注文可', { exact: true }).count()), 2, '比較でもTeslaの注文可状態を表示');
   assert.equal(await page.locator('[data-compare-result] [data-official-link]').count(), 2, '比較後に2台それぞれの公式確認出口');
   const compareOfficial = page.locator('[data-compare-result] [data-official-link]').first();
   await compareOfficial.evaluate((link) => link.addEventListener('click', (event) => event.preventDefault(), { once: true, capture: true }));
