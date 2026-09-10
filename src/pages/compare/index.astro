@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { availabilityLabels, availabilityNotes, capabilityDefinition, displayVehiclePrice, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleReferenceLabel, vehicles } from '../../data/loader';
+import { availabilityLabels, availabilityNotes, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleReferenceLabel, vehicles } from '../../data/loader';
 
 const publicCatalog = vehicles.map((vehicle) => ({
   id: vehicle.id,
@@ -16,6 +16,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
   capabilities: vehicle.capabilities.map((id) => capabilityDefinition(id).label),
   referenceLabel: vehicleReferenceLabel(vehicle),
   priceLabel: displayVehiclePrice(vehicle),
+  optionalPackageLabel: displayOptionalPackagePrices(vehicle),
   officialLink: (() => {
     const link = officialLinkFor(vehicle);
     return link ? { url: link.url, kind: link.kind, actions: link.actions?.map(({ kind, label, url }) => ({ kind, label, url })) } : undefined;
@@ -25,10 +26,11 @@ const publicCatalog = vehicles.map((vehicle) => ({
 <Layout title="2台を比較する｜自動運転.jp" description="自動運転レベルと作動条件、必要装備を2台で比較できます。">
   <section class="page-intro"><div class="wrap"><div class="eyebrow">COMPARE CONDITIONS</div><h1>2台の違いを、同じ軸で。</h1><p class="hero-copy">レベルの数字だけでなく、道路・速度・監視・ハンズオフ・必要装備を並べます。不明な項目は「不明」と表示します。</p></div></section>
   <section class="section" style="padding-top: 10px;"><div class="wrap">
-    <form class="compare-select" method="get" action="/compare/">
+    <form class="compare-select" method="get" action="/compare/" data-compare-select>
       {vehicles.map((vehicle) => <label class="check-card"><input type="checkbox" name="ids" value={vehicle.id} /> <span><strong>{vehicle.maker} {vehicle.model}</strong><br /><small class="subtle">Level {vehicle.automationLevel} · {vehicleReferenceLabel(vehicle)} · {vehicle.grade}</small></span></label>)}
       <div style="grid-column: 1 / -1; display:flex; justify-content:flex-end;"><button class="button alt" type="submit">選択した車両を比較</button></div>
     </form>
+    <div class="compare-change" data-compare-change-wrap hidden><button class="button small text" type="button" data-compare-change>比較する車両を変更</button></div>
     <div class="compare-result-actions"><button class="button small text" type="button" data-save-compare hidden>この比較を保存</button><span class="subtle" data-save-compare-note aria-live="polite"></span></div>
     <div class="empty" data-compare-empty><h2>比較する車両を一覧から選んでください。</h2><p>車両一覧の「比較に追加」から2台を選ぶと、条件を横並びで確認できます。</p><a class="button text" href="/">車を探す</a></div>
     <div data-compare-result hidden></div>
@@ -54,8 +56,12 @@ const publicCatalog = vehicles.map((vehicle) => ({
       checkboxes.forEach((input) => { input.disabled = !input.checked && ids.length >= 2; input.addEventListener('change', () => { const checked = checkboxes.filter((item) => item.checked).length; checkboxes.forEach((item) => { item.disabled = !item.checked && checked >= 2; }); }); });
       const empty = document.querySelector('[data-compare-empty]'); const result = document.querySelector('[data-compare-result]');
       if (!empty || !result) return;
+      const selectForm = document.querySelector('[data-compare-select]');
+      const changeWrap = document.querySelector('[data-compare-change-wrap]');
       const saveButton = document.querySelector('[data-save-compare]');
       if (saveButton) saveButton.hidden = selected.length !== 2;
+      if (selectForm) selectForm.hidden = selected.length === 2;
+      if (changeWrap) changeWrap.hidden = selected.length !== 2;
       empty.hidden = selected.length === 2; result.hidden = selected.length !== 2;
       if (selected.length !== 2) return;
       const headings = selected.map((v) => `<th>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</th>`).join('');
@@ -66,7 +72,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
         .replace(/[\s　]/g, '');
       const isUnknown = (value) => {
         const text = String(value ?? '').trim();
-        return !text || text === '不明' || text.includes('未確認') || text === '価格要確認' || text === '公式価格未確認' || text === '標準装備 / 不明';
+        return !text || text === '不明' || text.includes('不明') || text.includes('未確認') || text === '価格要確認' || text === '公式価格未確認' || text === '標準装備 / 不明';
       };
       const stateFor = (values) => {
         if (values.some(isUnknown)) return 'unknown';
@@ -85,8 +91,12 @@ const publicCatalog = vehicles.map((vehicle) => ({
         const state = allConfirmed ? 'same' : 'unknown';
         return `<tr class="compare-row compare-row-${state}" data-compare-row="capability-${escapeHtml(label)}"><th>確認できた機能<small>${escapeHtml(label)}</small></th>${selected.map((v) => `<td>${v.capabilities.includes(label) ? '<strong>確認済み</strong>' : '未確認'}</td>`).join('')}</tr>`;
       }).join('');
+      const optionalPackageRows = selected.some((v) => v.optionalPackageLabel)
+        ? row('追加パッケージ<small>車両本体価格とは別</small>', (v) => v.optionalPackageLabel || '追加価格は未確認', 'optional-package')
+        : '';
       const comparisonRows = [
         row('参考価格<small>車両本体の公式掲載価格</small>', (v) => v.priceLabel, 'price'),
+        optionalPackageRows,
         row('自動化レベル', (v) => `Level ${v.automationLevel} · ${levelLabels[v.automationLevel]}`, 'level'),
         row('道路', (v) => fact(v.odd.roadTypes), 'road'),
         row('速度', (v) => v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明'), 'speed'),
@@ -99,6 +109,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
       ].join('');
       const diffCount = selected.length === 2 ? [
         selected.map((v) => v.priceLabel),
+        selected.map((v) => v.optionalPackageLabel || '追加価格は未確認'),
         selected.map((v) => `Level ${v.automationLevel} · ${levelLabels[v.automationLevel]}`),
         selected.map((v) => fact(v.odd.roadTypes)),
         selected.map((v) => v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明')),
@@ -140,6 +151,13 @@ const publicCatalog = vehicles.map((vehicle) => ({
         button.textContent = '保存しました';
         window.setTimeout(() => { button.textContent = 'この比較を保存'; if (note) note.textContent = ''; }, 1800);
       }
+    });
+    document.querySelector('[data-compare-change]')?.addEventListener('click', () => {
+      const selectForm = document.querySelector('[data-compare-select]');
+      const changeWrap = document.querySelector('[data-compare-change-wrap]');
+      if (selectForm) selectForm.hidden = false;
+      if (changeWrap) changeWrap.hidden = true;
+      selectForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     window.addEventListener('popstate', renderCompare); renderCompare();
   </script>

@@ -184,6 +184,8 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .compare-diff-summary span { flex: 1; color: var(--muted); font-size: .72rem; }
 .compare-diff-badge { display: inline-block; margin-left: 6px; padding: 2px 6px; border-radius: 999px; color: #315200; background: var(--lime); font-size: .61rem; font-weight: 900; white-space: nowrap; }
 .compare-select { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 26px 0; }
+.compare-change { display: flex; justify-content: flex-end; margin: 8px 0 18px; }
+.compare-select[hidden], .compare-change[hidden] { display: none; }
 .check-card { display: flex; gap: 10px; align-items: center; border: 1px solid var(--line); background: var(--white); border-radius: 11px; padding: 13px; cursor: pointer; }
 .check-card:has(input:checked) { outline: 2px solid var(--lime-deep); }
 .compare-result-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-height: 32px; margin: -12px 0 18px; }

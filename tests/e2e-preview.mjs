@@ -102,6 +102,13 @@ try {
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
   assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 100, 'Level 2現行100件へ復帰');
   await levelMapPage.close();
+  await page.goto(`${base}/levels/`);
+  const level3Link = page.locator('.level-3 a');
+  assert.match(await level3Link.getAttribute('href'), /level=3&availability=all/, 'Level 3は過去例を含む一覧へ遷移');
+  await level3Link.click();
+  await page.waitForURL((url) => url.pathname === '/cars/' && url.searchParams.get('level') === '3' && url.searchParams.get('availability') === 'all');
+  assert.equal(await visibleCards(), 1, 'Level 3導線は過去例1件へ到達');
+  await page.goto(`${base}/`);
   const mobilePage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await mobilePage.goto(`${base}/`);
   const mobileFirstCard = await mobilePage.locator('[data-vehicle-shell]:not([hidden])').first().boundingBox();
@@ -117,7 +124,7 @@ try {
   }
 
   await page.goto(`${base}/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 14, 'トップのLevel 2・高速・ハンズオフ条件は14件');
+  assert.equal(await visibleCards(), 20, 'トップのLevel 2・高速・ハンズオフ条件は20件（MINI 6単位を含む）');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'トップのLevel 2注意表示');
   assert.equal(new URL(page.url()).pathname, '/', 'トップの深いリンクはトップに留まる');
 
@@ -134,7 +141,7 @@ try {
   assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 14, 'Level 2・高速・ハンズオフ条件は14件');
+  assert.equal(await visibleCards(), 20, 'Level 2・高速・ハンズオフ条件は20件（MINI 6単位を含む）');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '深いリンクのlevel復元');
   assert.equal(await page.locator('#vehicle-filters').getAttribute('action'), '/cars/', '旧一覧は現在のルートで送信');
@@ -211,6 +218,12 @@ try {
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, '新車注文可フィルタはTesla 6件に絞り込む');
   await page.goto(`${base}/compare/?ids=jp-honda-accord-2025-ehev-sensing360plus&ids=jp-subaru-levorg-layback-2023-limited-ex`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  assert.equal(await page.locator('[data-compare-select]').isVisible(), false, '比較URLは選択フォームを畳み結果を先に見せる');
+  assert.equal(await page.locator('[data-compare-change]').isVisible(), true, '比較フォームを開く変更導線を表示');
+  const directCompareResult = await page.locator('[data-compare-result]').boundingBox();
+  assert.ok(directCompareResult && directCompareResult.y < 1800, `比較結果が早く表示される (${directCompareResult?.y ?? 'none'}px)`);
+  await page.locator('[data-compare-change]').click();
+  assert.equal(await page.locator('[data-compare-select]').isVisible(), true, '比較変更ボタンで選択フォームを再表示');
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '比較対象は2台');
   const compareText = await page.locator('[data-compare-result]').innerText();
   assert.match(compareText, /e:HEV Honda SENSING 360＋/);
@@ -323,6 +336,11 @@ try {
   assert.match(crownRxCompare, /ハンズオフ：条件内で可/);
   assert.equal(await page.locator('[data-compare-result] [data-official-link]').count(), 2, 'クラウンとRXの比較に公式確認出口');
   assert.doesNotMatch(crownRxCompare, /crowncrossover\/safety|models\/rx|sources|accessedAt/, 'クラウンとRX比較に内部根拠を表示しない');
+  await page.goto(`${base}/compare/?ids=jp-toyota-harrier-2026-g-2wd&ids=jp-tesla-model-3-2026-premium`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  const unknownMonitoringRow = page.locator('[data-compare-row="driver-monitoring"]');
+  assert.equal(await unknownMonitoringRow.getAttribute('class').then((value) => value.includes('compare-row-unknown')), true, '監視条件不明は既知の差分扱いしない');
+  assert.equal(await unknownMonitoringRow.getAttribute('class').then((value) => value.includes('compare-row-diff')), false, '監視条件不明を差分バッジで強調しない');
 
   await page.goto(`${base}/cars/jp-honda-legend-2021-honda-sensing-elite/`);
   assert.match(await page.locator('.official-next').innerText(), /メーカー公式の過去資料で確認[\s\S]*現行車の見積・注文ページではなく/);
@@ -391,12 +409,18 @@ try {
   await page.goto(`${base}/cars/jp-mazda-cx-5-g-ex-package/`);
   assert.match(await page.locator('main').innerText(), /新型 CX-5[\s\S]*G（EX Package）[\s\S]*ハンズオフアシスト/);
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*3,520,000〜3,756,500円/, 'CX-5 EX Package詳細に公式掲載価格');
+  assert.match(await page.locator('main').innerText(), /追加パッケージ[\s\S]*EX Package \+227,700円/, 'CX-5 EX Package詳細に追加価格');
   assert.doesNotMatch(await page.locator('main').innerText(), /2026-05|mazda\.co\.jp|sources|accessedAt/, 'CX-5 EX Package詳細に内部根拠URL・確認日を表示しない');
   await page.goto(`${base}/compare/?ids=jp-mazda-cx-80-xd-drive-edition&ids=jp-mazda-cx-30-25l`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.match(await page.locator('[data-compare-result]').innerText(), /CX-80[\s\S]*XD Drive Edition[\s\S]*CX-30[\s\S]*25L/);
   assert.doesNotMatch(await page.locator('[data-compare-result]').innerText(), /2026-03|2026-07|mazda\.co\.jp|sources|accessedAt/, 'Mazda比較に内部時点・価格・根拠URL・確認日を表示しない');
   assert.doesNotMatch(await page.content(), /catalogAsOf|salesUnitIntroducedAt|priceEffectiveAt|availabilityCheckedAt|lastReviewedAt|accessedAt|checkedAt|\"sources\"|cx-5_specification_202605/, 'Mazda比較HTMLへ内部時点・根拠資料URLを配信しない');
+  await page.goto(`${base}/compare/?ids=jp-mazda-cx-5-g&ids=jp-mazda-cx-5-g-ex-package`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  const cx5PackageCompare = page.locator('[data-compare-result]');
+  assert.match(await cx5PackageCompare.innerText(), /追加パッケージ[\s\S]*EX Package \+227,700円/, '比較にオプション価格を表示');
+  assert.equal(await cx5PackageCompare.locator('[data-compare-row="optional-package"]').getAttribute('class').then((value) => value.includes('compare-row-unknown')), true, '片側未確認の追加価格は差分扱いしない');
 
   await page.goto(`${base}/cars/jp-bmw-3-series-g20-sedan-318i-m-sport/`);
   assert.match(await page.locator('main').innerText(), /JP \/ G20[\s\S]*BMW[\s\S]*3シリーズ セダン[\s\S]*318i M Sport/);

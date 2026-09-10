@@ -344,6 +344,14 @@ export function displayVehiclePrice(vehicle: Pick<Vehicle, 'price'>, compact = f
   return min === max ? `${yen.format(min)}円` : `${yen.format(min)}〜${yen.format(max)}円`;
 }
 
+/** 確認できたメーカーオプション価格だけを表示し、車両本体価格と混同しない。 */
+export function displayOptionalPackagePrices(vehicle: Pick<Vehicle, 'price'>) {
+  const packages = vehicle.price?.optionalPackages ?? [];
+  if (!packages.length) return null;
+  const yen = new Intl.NumberFormat('ja-JP');
+  return packages.map(({ label, amountJpy }) => `${label} +${yen.format(amountJpy)}円`).join(' / ');
+}
+
 /** 発売・導入日はsalesUnitIntroducedAtだけを使い、未確認は必ず末尾に置く。 */
 export function sortVehicleList(list: Vehicle[], sort: VehicleSort = 'introduced_desc') {
   const text = (vehicle: Vehicle) => [vehicle.maker, vehicle.model, vehicle.grade, vehicle.id].join('\u0000');
