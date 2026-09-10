@@ -1490,7 +1490,18 @@
       "surfaces": [
         {"url":"/cars/jp-honda-accord-2025-ehev-sensing360plus/","locale":"ja","output_path":"dist/cars/jp-honda-accord-2025-ehev-sensing360plus/index.html","markers":["メーカー公式サイトで仕様を確認","https://www.honda.co.jp/ACCORD/"]},
         {"url":"/cars/jp-honda-legend-2021-honda-sensing-elite/","locale":"ja","output_path":"dist/cars/jp-honda-legend-2021-honda-sensing-elite/index.html","markers":["メーカー公式の過去資料で確認","https://www.honda.co.jp/auto-archive/legend/"]},
-        {"url":"/compare/","locale":"ja","output_path":"dist/compare/index.html","markers":["公式サイト","outbound_manufacturer","placement"]}
+        {"url":"/compare/","locale":"ja","output_path":"dist/compare/index.html","markers":["公式サイト","outbound_manufacturer","placement"]},
+        {"url":"/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/","locale":"ja","output_path":"dist/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/index.html","markers":["公式の検討・購入導線","公式で見積り","https://toyota.jp/service/estimate/grades?car_name_en=NOAH"]},
+        {"url":"/cars/jp-toyota-voxy-2026-sz-2wd-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-voxy-2026-sz-2wd-7seater/index.html","markers":["公式の検討・購入導線","公式で見積り","https://toyota.jp/service/estimate/grades?car_name_en=VOXY"]},
+        {"url":"/cars/jp-toyota-sienta-2026-z-hev-2wd-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-sienta-2026-z-hev-2wd-7seater/index.html","markers":["公式の検討・購入導線","公式で見積り","https://toyota.jp/service/estimate/grades?car_name_en=SIENTA"]},
+        {"url":"/cars/jp-toyota-alphard-2026-z-hev-2wd-7seater/","locale":"ja","output_path":"dist/cars/jp-toyota-alphard-2026-z-hev-2wd-7seater/index.html","markers":["公式の検討・購入導線","公式で見積り","https://toyota.jp/service/estimate/grades?car_name_en=ALPHARD"]},
+        {"url":"/cars/jp-toyota-vellfire-2026-executive-lounge-phev-e-four-6seater/","locale":"ja","output_path":"dist/cars/jp-toyota-vellfire-2026-executive-lounge-phev-e-four-6seater/index.html","markers":["公式の検討・購入導線","公式で見積り","https://toyota.jp/service/estimate/grades?car_name_en=VELLFIRE"]},
+        {"url":"/cars/jp-toyota-harrier-2026-z-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-harrier-2026-z-2wd/index.html","markers":["公式の検討・購入導線","公式で見積り","https://toyota.jp/service/estimate/grades?car_name_en=HARRIER"]},
+        {"url":"/cars/jp-toyota-rav4-2026-z-phev-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-rav4-2026-z-phev-e-four/index.html","markers":["公式の検討・購入導線","公式で見積り","https://toyota.jp/service/estimate/grades?car_name_en=RAV4"]},
+        {"url":"/cars/jp-toyota-prius-2026-z-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-prius-2026-z-2wd/index.html","markers":["公式の検討・購入導線","公式で見積り","https://toyota.jp/service/estimate/grades?car_name_en=PRIUS"]},
+        {"url":"/cars/jp-toyota-bz4x-2026-z-fwd-advanced-drive/","locale":"ja","output_path":"dist/cars/jp-toyota-bz4x-2026-z-fwd-advanced-drive/index.html","markers":["公式の検討・購入導線","公式で見積り","https://toyota.jp/service/estimate/grades?car_name_en=BZ4X"]},
+        {"url":"/cars/jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd/","locale":"ja","output_path":"dist/cars/jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd/index.html","markers":["公式の検討・購入導線","公式で見積り","https://toyota.jp/service/estimate/grades?car_name_en=CROWN+CROSSOVER"]},
+        {"url":"/compare/?ids=jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive&ids=jp-toyota-sienta-2026-z-hev-2wd-7seater","locale":"ja","output_path":"dist/compare/index.html","markers":["公式の検討用導線","公式で見積り","data-action-type=\"estimate\""]}
       ],
       "required_render_selectors": [
         {"url":"/cars/jp-honda-accord-2025-ehev-sensing360plus/","selector":"[data-official-link]","markers":["公式サイトを開く"]},
@@ -1505,7 +1516,8 @@
         {"url":"/cars/jp-toyota-rav4-2026-z-phev-e-four/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
         {"url":"/cars/jp-toyota-prius-2026-z-2wd/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
         {"url":"/cars/jp-toyota-bz4x-2026-z-fwd-advanced-drive/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
-        {"url":"/cars/jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd/","selector":"[data-purchase-action]","markers":["公式で見積り"]}
+        {"url":"/cars/jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd/","selector":"[data-purchase-action]","markers":["公式で見積り"]},
+        {"url":"/compare/?ids=jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive&ids=jp-toyota-sienta-2026-z-hev-2wd-7seater","selector":"[data-compare-result]","markers":["公式の検討用導線","公式で見積り","data-action-type=\"estimate\""]}
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
