@@ -539,7 +539,7 @@
       "surfaces": [
         {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","ノア","Lexus","RZ","LEVEL 2"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","ノア","Lexus","RZ","LEVEL 2"]},
-        {"url":"/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/","locale":"ja","output_path":"dist/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/index.html","markers":["Toyota","ノア","HYBRID S-Z 2WD","4,056,800円","Level 2"]},
+        {"url":"/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/","locale":"ja","output_path":"dist/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/index.html","markers":["Toyota","ノア","HYBRID S-Z 2WD","4,056,800円","Level 2","ハンズオフ：条件内で可"]},
         {"url":"/cars/jp-lexus-rz-2026-rz500e-version-l-awd/","locale":"ja","output_path":"dist/cars/jp-lexus-rz-2026-rz500e-version-l-awd/index.html","markers":["Lexus","RZ","RZ500e","8,500,000円","Level 2"]},
         {"url":"/compare/","locale":"ja","output_path":"dist/compare/index.html","markers":["ノア","RZ500e"]},
         {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive","jp-lexus-rz-2026-rz500e-version-l-awd"]}
@@ -547,7 +547,7 @@
       "required_render_selectors": [
         {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive\"])","markers":["Toyota","ノア","HYBRID S-Z 2WD"]},
         {"url":"/cars/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive\"])","markers":["Toyota","ノア","HYBRID S-Z 2WD"]},
-        {"url":"/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/","selector":"main","markers":["Toyota","ノア","4,056,800円","Level 2"]},
+        {"url":"/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/","selector":"main","markers":["Toyota","ノア","4,056,800円","Level 2","ハンズオフ：条件内で可"]},
         {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-lexus-rz-2026-rz500e-version-l-awd\"])","markers":["Lexus","RZ","RZ500e"]},
         {"url":"/cars/","selector":"[data-vehicle-shell]:has(input[value=\"jp-lexus-rz-2026-rz500e-version-l-awd\"])","markers":["Lexus","RZ","RZ500e"]},
         {"url":"/cars/jp-lexus-rz-2026-rz500e-version-l-awd/","selector":"main","markers":["Lexus","RZ","8,500,000円","Level 2"]},

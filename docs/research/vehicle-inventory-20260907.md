@@ -197,9 +197,11 @@ CX-80 8単位とCX-60 11単位はMRCC・CTS・ドライバー・モニタリン�
 | RZのLexus Safety System＋、全車速追従機能付DRCC・LTA、ドライバーモニター連携 | Lexus | https://lexus.jp/models/rz/features/safety/ | 2026-09-10 |
 | RZのLTA作動条件・運転者監視・操作責任 | Lexus | https://manual.lexus.jp/rz/3079/bev/ja_JP/contents/owx1740487964005.php | 2026-09-10 |
 
-ノアはAdvanced Driveのステアリング保持要求があるためハンズオフ不可、RZは販売単位に固定した
-ハンズオフ・ドライバーモニター条件を今回の資料だけでは断定せず未確認とした。価格は任意オプションを
-車両本体へ加算せず、ノアの必要装備として別表示する。
+ノアはAdvanced Driveの対象条件（高速道路本線の渋滞時・約40km/h以下等）ではハンズオフが可能だが、
+運転者の前方監視と必要時の操作が必要なため `allowed_in_conditions` とした。汎用LTAの手保持要求と
+Advanced Driveの条件付きハンズオフを混同しない。RZは販売単位に固定したハンズオフ・ドライバーモニター
+条件を今回の資料だけでは断定せず未確認とした。価格は任意オプションを車両本体へ加算せず、ノアの必要装備
+として別表示する。
 
 ## Volvo EX30の根拠（内部保持）
 

@@ -165,6 +165,24 @@ describe('vehicle data contract and filters', () => {
     expect(tesla.every((vehicle) => vehicleReferenceLabel(vehicle) === '現行仕様')).toBe(true);
   });
 
+  it('Toyota ノアとLexus RZは販売単位を分け、ハンズオフ条件の不確実性を保持する', () => {
+    const noah = vehicles.find((vehicle) => vehicle.id === 'jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive');
+    expect(noah?.price?.amounts[0].amountJpy).toBe(4_056_800);
+    expect(noah?.price?.optionalPackages[0].amountJpy).toBe(121_000);
+    expect(noah?.handsOff).toBe('allowed_in_conditions');
+    expect(noah?.capabilities).toContain('hands_off_highway');
+    expect(noah?.driverMonitoring).toBe('required');
+    expect(noah?.salesUnitIntroducedAt).toBeNull();
+    expect(noah?.availability).toBe('unknown');
+    expect(noah?.sources.some((source) => source.url.endsWith('noah_spec_202609.pdf'))).toBe(true);
+
+    const rz = vehicles.find((vehicle) => vehicle.id === 'jp-lexus-rz-2026-rz500e-version-l-awd');
+    expect(rz?.price?.amounts[0].amountJpy).toBe(8_500_000);
+    expect(rz?.handsOff).toBe('unknown');
+    expect(rz?.driverMonitoring).toBe('unknown');
+    expect(rz?.availability).toBe('unknown');
+  });
+
   it('時系列フィールドは公式モデル年・世代・適用時点を混同しない', () => {
     const ariya = vehicles.filter((vehicle) => vehicle.model === '日産アリア');
     expect(ariya).toHaveLength(4);

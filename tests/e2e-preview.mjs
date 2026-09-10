@@ -35,7 +35,7 @@ try {
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   assert.equal(await visibleCards(), 78, '既定カタログは現行確認78件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*78[\s\S]*条件内可[\s\S]*24[\s\S]*不可[\s\S]*53[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*13/, 'トップ操作盤に能力差の実データ分布');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*78[\s\S]*条件内可[\s\S]*25[\s\S]*不可[\s\S]*52[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*13/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="3"]').innerText(), /L3[\s\S]*条件付自動運転[\s\S]*過去例 1件/, 'Level 3の過去例を現行車と区別');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, 'Tesla Model 3 / Model Yの6販売仕様を既定一覧に表示');
@@ -44,7 +44,7 @@ try {
   assert.equal(await visibleCards(), 6, 'Teslaクイック絞り込みは6件');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="allowed_in_conditions"]').click();
-  assert.equal(await visibleCards(), 24, '条件内ハンズオフは24件');
+  assert.equal(await visibleCards(), 25, '条件内ハンズオフは25件');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-capability-shortcut="lane_change_support"]').click();
   assert.equal(await visibleCards(), 13, '車線変更支援は13件');
@@ -105,7 +105,7 @@ try {
   }
 
   await page.goto(`${base}/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 9, 'トップのLevel 2・高速・ハンズオフ条件は9件');
+  assert.equal(await visibleCards(), 10, 'トップのLevel 2・高速・ハンズオフ条件は10件');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'トップのLevel 2注意表示');
   assert.equal(new URL(page.url()).pathname, '/', 'トップの深いリンクはトップに留まる');
 
@@ -122,7 +122,7 @@ try {
   assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 9, 'Level 2・高速・ハンズオフ条件は9件');
+  assert.equal(await visibleCards(), 10, 'Level 2・高速・ハンズオフ条件は10件');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '深いリンクのlevel復元');
   assert.equal(await page.locator('#vehicle-filters').getAttribute('action'), '/cars/', '旧一覧は現在のルートで送信');
@@ -208,6 +208,17 @@ try {
   assert.match(await page.locator('main').innerText(), /注文可否：未確認[\s\S]*メーカー公式サイトへの掲載は確認済み[\s\S]*新車で注文できるかは未確認/, '公式掲載と注文可否を分けて説明');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '根拠URL・確認日は通常UIに出さない');
   await page.screenshot({ path: `${qaDir}/desktop-tesla-detail.png`, fullPage: false });
+
+  await page.goto(`${base}/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/`);
+  assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*ノア[\s\S]*HYBRID S-Z 2WD/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,056,800円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'ノアの条件付きハンズオフを表示');
+  assert.match(await page.locator('main').innerText(), /必要パッケージ[\s\S]*121,000円|Toyota Teammate アドバンスト ドライブ/, 'ノアの必要パッケージを表示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /noah_spec_202609|sources|accessedAt/, 'ノア詳細に内部根拠を表示しない');
+
+  await page.goto(`${base}/cars/jp-lexus-rz-2026-rz500e-version-l-awd/`);
+  assert.match(await page.locator('main').innerText(), /Lexus[\s\S]*RZ[\s\S]*RZ500e/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*8,500,000円[\s\S]*ハンズオフ[\s\S]*未確認/, 'RZの未確認条件を明示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /rz\/features|sources|accessedAt/, 'RZ詳細に内部根拠を表示しない');
 
   await page.goto(`${base}/cars/jp-tesla-model-y-2026-premium/`);
   assert.match(await page.locator('main').innerText(), /Tesla[\s\S]*Model Y/);
