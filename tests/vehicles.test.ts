@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehiclePriceMin, vehicleReferenceLabel, vehicleReferenceTotal, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehiclePriceMin, vehicleReferenceLabel, vehicleReferenceTotal, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -94,6 +94,18 @@ describe('vehicle data contract and filters', () => {
     expect(canonicalRoadType('高速道路の本線')).toBe('高速道路');
     expect(canonicalRoadType('自動車専用道路の本線')).toBe('自動車専用道路');
     expect(canonicalRoadType('一般道')).toBe('一般道');
+  });
+
+  it('fingerprintは確認日・出典URLの更新を無視し、判断材料の差分だけを検出する', () => {
+    const base = makeVehicle({
+      price: { kind: 'exact', currency: 'JPY', amounts: [{ amountJpy: 4_000_000, qualifier: '標準', sourceUrl: 'https://example.com/old' }], maxJpy: 4_000_000, optionalPackages: [], basis: 'msrp', taxIncluded: 'included' },
+      sources: [{ url: 'https://example.com/old', publisher: '公式', title: '旧資料', accessedAt: '2026-09-01', supports: ['price'] }],
+      lastReviewedAt: '2026-09-01',
+    });
+    const reviewOnly = { ...base, sources: [{ ...base.sources[0], url: 'https://example.com/new', title: '新資料', accessedAt: '2026-09-10' }], lastReviewedAt: '2026-09-10' };
+    const priceChanged = { ...reviewOnly, price: { ...base.price!, amounts: [{ ...base.price!.amounts[0], amountJpy: 4_100_000, sourceUrl: 'https://example.com/new' }], maxJpy: 4_100_000 } };
+    expect(vehicleDecisionFingerprint(reviewOnly)).toBe(vehicleDecisionFingerprint(base));
+    expect(vehicleDecisionFingerprint(priceChanged)).not.toBe(vehicleDecisionFingerprint(base));
   });
 
   it('validates every supplied catalog record before release', () => {

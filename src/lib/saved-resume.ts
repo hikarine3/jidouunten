@@ -6,6 +6,12 @@ export interface SavedResumeItem {
   href: string;
   label: string;
   savedAt: string;
+  /** 購入判断に意味のある公開データだけを保存時点で固定する。 */
+  snapshot?: SavedResumeSnapshot;
+}
+
+export interface SavedResumeSnapshot {
+  entries: Array<{ id: string; fingerprint: string }>;
 }
 
 export interface SavedResumeState {
@@ -23,6 +29,23 @@ export function emptySavedResumeState(): SavedResumeState {
 
 function isDate(value: unknown) {
   return typeof value === 'string' && !Number.isNaN(Date.parse(value));
+}
+
+function normalizeSnapshot(value: unknown): SavedResumeSnapshot | undefined {
+  if (!value || typeof value !== 'object') return undefined;
+  const entries = (value as { entries?: unknown }).entries;
+  if (!Array.isArray(entries) || entries.length > 200) return undefined;
+  const normalized: SavedResumeSnapshot['entries'] = [];
+  const seen = new Set<string>();
+  for (const entry of entries) {
+    if (!entry || typeof entry !== 'object') return undefined;
+    const candidate = entry as { id?: unknown; fingerprint?: unknown };
+    if (typeof candidate.id !== 'string' || !/^[a-z0-9-]+$/.test(candidate.id) || seen.has(candidate.id)) return undefined;
+    if (typeof candidate.fingerprint !== 'string' || !/^[0-9a-f]{8}$/.test(candidate.fingerprint)) return undefined;
+    seen.add(candidate.id);
+    normalized.push({ id: candidate.id, fingerprint: candidate.fingerprint });
+  }
+  return { entries: normalized };
 }
 
 /** 保存対象は自サイトの既存一覧・比較URLだけに限定し、外部URLや未知のqueryを受け付けない。 */
@@ -65,7 +88,8 @@ export function readSavedResumeState(storage: Pick<Storage, 'getItem'> | null | 
       if (!item || typeof item !== 'object') continue;
       const href = normalizeSavedHref(kind, item.href);
       if (href && typeof item.label === 'string' && item.label.length <= 120 && isDate(item.savedAt)) {
-        state[kind] = { href, label: item.label, savedAt: item.savedAt };
+        const snapshot = normalizeSnapshot(item.snapshot);
+        state[kind] = snapshot ? { href, label: item.label, savedAt: item.savedAt, snapshot } : { href, label: item.label, savedAt: item.savedAt };
       }
     }
     return state;
@@ -84,11 +108,17 @@ export function writeSavedResumeState(storage: Pick<Storage, 'setItem'> | null |
   }
 }
 
-export function updateSavedResume(storage: Pick<Storage, 'getItem' | 'setItem'> | null | undefined, kind: SavedResumeKind, href: unknown, label: unknown, savedAt = new Date().toISOString()) {
+export function updateSavedResume(storage: Pick<Storage, 'getItem' | 'setItem'> | null | undefined, kind: SavedResumeKind, href: unknown, label: unknown, savedAt = new Date().toISOString(), snapshot?: unknown) {
   const normalized = normalizeSavedHref(kind, href);
   const state = readSavedResumeState(storage);
   if (!normalized || !state || !isDate(savedAt)) return false;
-  state[kind] = { href: normalized, label: typeof label === 'string' && label.trim() ? label.trim().slice(0, 120) : kind === 'search' ? '保存した検索' : '保存した比較', savedAt };
+  const normalizedSnapshot = normalizeSnapshot(snapshot);
+  state[kind] = {
+    href: normalized,
+    label: typeof label === 'string' && label.trim() ? label.trim().slice(0, 120) : kind === 'search' ? '保存した検索' : '保存した比較',
+    savedAt,
+    ...(normalizedSnapshot ? { snapshot: normalizedSnapshot } : {}),
+  };
   return writeSavedResumeState(storage, state);
 }
 

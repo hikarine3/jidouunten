@@ -40,6 +40,15 @@ describe('saved resume URL and browser storage contract', () => {
     expect(readSavedResumeState(fake)).toEqual(emptySavedResumeState());
   });
 
+  it('保存時点の判断材料snapshotを保持し、不正なfingerprintは受け付けない', () => {
+    const fake = storage();
+    const snapshot = { entries: [{ id: 'car-a', fingerprint: 'a1b2c3d4' }, { id: 'car-b', fingerprint: '0000ffff' }] };
+    expect(updateSavedResume(fake, 'compare', '/compare/?ids=car-a&ids=car-b', 'A × B', '2026-09-10T00:00:00.000Z', snapshot)).toBe(true);
+    expect(readSavedResumeState(fake)?.compare?.snapshot).toEqual(snapshot);
+    expect(updateSavedResume(fake, 'compare', '/compare/?ids=car-a&ids=car-b', 'A × B', '2026-09-10T00:00:00.000Z', { entries: [{ id: 'car-a', fingerprint: 'bad' }] })).toBe(true);
+    expect(readSavedResumeState(fake)?.compare?.snapshot).toBeUndefined();
+  });
+
   it('drops malformed or obsolete data and survives storage exceptions', () => {
     const fake = storage();
     fake.setItem(SAVED_RESUME_STORAGE_KEY, '{"version":99,"search":{"href":"https://evil.example","label":"x","savedAt":"2026-09-10"}}');

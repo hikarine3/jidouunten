@@ -202,6 +202,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .saved-resume-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; min-width: 0; }
 .saved-resume-item { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; padding: 4px 5px 4px 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 999px; background: rgba(255,255,255,.06); font-size: .72rem; }
 .saved-resume-item > span { overflow: hidden; max-width: 240px; text-overflow: ellipsis; white-space: nowrap; }
+.saved-resume-delta { display: block; color: var(--lime); font-size: .68rem; font-weight: 700; }
 .saved-resume .button.text { border-color: rgba(255,255,255,.2); color: white; }
 .saved-resume .button.text:hover, .saved-resume .button.text:focus-visible { border-color: var(--lime); color: var(--lime); }
 .saved-resume .button.alt { color: var(--ink); }

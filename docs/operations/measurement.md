@@ -30,6 +30,13 @@ production E2Eで新車注文可フィルタ、Tesla詳細・比較、GA collect
 localStorageのみを使い、保存本文・検索query・車両ID・表示名をGAへ送信しない。既存GTM/GAの
 初期page_view・一覧/比較イベントに回帰はなく、production E2EでGA collect HTTP 204を確認した。
 
+## 2026-09-11 保存スナップショットの差分確認
+
+保存した検索条件・比較には、公開判断材料から作った8桁fingerprintを同一ブラウザのlocalStorageへ保持する。
+価格、機能、作動条件、必要装備、販売状態などの変更は再訪バーで「判断材料の変更」として示すが、
+確認日・出典URLだけの更新は差分にしない。fingerprint、保存本文、検索query、車両IDはAnalyticsへ送信せず、
+既存イベント契約を変更しない。保存→fingerprint差分表示→再開のローカルE2Eを確認した。
+
 ## 2026-09-10 本番再確認
 
 ハリアー6販売単位を含む `93f27ed5b43bb60cb4a8ed346dcbba88c8114753` を、実IDでビルドした

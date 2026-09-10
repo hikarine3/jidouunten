@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { availabilityLabels, availabilityNotes, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleReferenceLabel, vehicles } from '../../data/loader';
+import { availabilityLabels, availabilityNotes, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleDecisionFingerprint, vehicleReferenceLabel, vehicles } from '../../data/loader';
 
 const publicCatalog = vehicles.map((vehicle) => ({
   id: vehicle.id,
@@ -18,6 +18,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
   priceLabel: displayVehiclePrice(vehicle),
   optionalPackageLabel: displayOptionalPackagePrices(vehicle),
   referenceTotalLabel: displayVehicleReferenceTotal(vehicle),
+  decisionFingerprint: vehicleDecisionFingerprint(vehicle),
   officialLink: (() => {
     const link = officialLinkFor(vehicle);
     return link ? { url: link.url, kind: link.kind, actions: link.actions?.map(({ kind, label, url }) => ({ kind, label, url })) } : undefined;
@@ -156,7 +157,8 @@ const publicCatalog = vehicles.map((vehicle) => ({
       const button = event.currentTarget;
       const label = `${selected[0].maker} ${selected[0].model} × ${selected[1].maker} ${selected[1].model}`;
       const href = `/compare/?${ids.map((id) => `ids=${encodeURIComponent(id)}`).join('&')}`;
-      if (window.jidouuntenSave?.('compare', href, label)) {
+      const snapshot = { entries: selected.map((vehicle) => ({ id: vehicle.id, fingerprint: vehicle.decisionFingerprint })) };
+      if (window.jidouuntenSave?.('compare', href, label, snapshot)) {
         const note = document.querySelector('[data-save-compare-note]');
         if (note) note.textContent = '比較を保存しました';
         button.textContent = '保存しました';

@@ -367,6 +367,52 @@ export function displayVehicleReferenceTotal(vehicle: Pick<Vehicle, 'price'>) {
   return total === null ? null : `${new Intl.NumberFormat('ja-JP').format(total)}円`;
 }
 
+/**
+ * 保存した候補の再訪判定に使う、公開判断材料だけの安定 fingerprint。
+ * 確認日・出典URLは更新通知の差分に含めない。価格・能力・作動条件・
+ * 販売状態など、購入判断に意味のある値だけを正規化してハッシュ化する。
+ */
+export function vehicleDecisionFingerprint(vehicle: Pick<Vehicle, 'modelYear' | 'generation' | 'grade' | 'salesUnitIntroducedAt' | 'automationLevel' | 'handsOff' | 'driverMonitoring' | 'capabilities' | 'limitations' | 'requiredPackage' | 'featureVersion' | 'currentCatalogListed' | 'availability' | 'odd' | 'price'>) {
+  const payload = JSON.stringify({
+    modelYear: vehicle.modelYear,
+    generation: vehicle.generation,
+    grade: vehicle.grade,
+    salesUnitIntroducedAt: vehicle.salesUnitIntroducedAt,
+    automationLevel: vehicle.automationLevel,
+    handsOff: vehicle.handsOff,
+    driverMonitoring: vehicle.driverMonitoring,
+    capabilities: [...vehicle.capabilities].sort(),
+    limitations: [...vehicle.limitations].sort(),
+    requiredPackage: vehicle.requiredPackage,
+    featureVersion: vehicle.featureVersion,
+    currentCatalogListed: vehicle.currentCatalogListed,
+    availability: vehicle.availability,
+    odd: {
+      roadTypes: [...vehicle.odd.roadTypes].map(canonicalRoadType).sort(),
+      speedKph: vehicle.odd.speedKph,
+      trafficConditions: [...vehicle.odd.trafficConditions].sort(),
+      weather: Array.isArray(vehicle.odd.weather) ? [...vehicle.odd.weather].sort() : vehicle.odd.weather,
+      geoRestriction: Array.isArray(vehicle.odd.geoRestriction) ? [...vehicle.odd.geoRestriction].sort() : vehicle.odd.geoRestriction,
+      driverConditions: [...vehicle.odd.driverConditions].sort(),
+    },
+    price: vehicle.price && {
+      kind: vehicle.price.kind,
+      currency: vehicle.price.currency,
+      amounts: vehicle.price.amounts.map(({ amountJpy, qualifier }) => ({ amountJpy, qualifier })),
+      maxJpy: vehicle.price.maxJpy,
+      optionalPackages: vehicle.price.optionalPackages.map(({ label, amountJpy, qualifier }) => ({ label, amountJpy, qualifier })),
+      basis: vehicle.price.basis,
+      taxIncluded: vehicle.price.taxIncluded,
+    },
+  });
+  let hash = 2166136261;
+  for (let index = 0; index < payload.length; index += 1) {
+    hash ^= payload.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return (hash >>> 0).toString(16).padStart(8, '0');
+}
+
 /** 発売・導入日はsalesUnitIntroducedAtだけを使い、未確認は必ず末尾に置く。 */
 export function sortVehicleList(list: Vehicle[], sort: VehicleSort = 'introduced_desc') {
   const text = (vehicle: Vehicle) => [vehicle.maker, vehicle.model, vehicle.grade, vehicle.id].join('\u0000');
