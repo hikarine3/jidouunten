@@ -1,5 +1,16 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 後発対策トランシェ（ヴォクシー6販売単位・オプション差分）本番実測
+
+- exact release commit: `8ff0c03ec5b50ad4f728787a26bbb49c262da324`
+- Immutable deployment: https://27d41775.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- ヴォクシーをS-Z/S-Gの2WD・E-Four、7/8人乗り、S-GベースのMULTI UTILITY 5人乗りまで6販売単位で追加。車両本体価格は375万1,000円〜438万200円、Advanced Drive・LCA・ドライバーモニターカメラの追加パッケージはS-Z +122,100円、S-G +78,100円として分離表示した。条件付きハンズオフは装着時のみとし、6単位の注文可否は未確認のままCTAを表示していない。
+- 一覧カードで追加価格と「装着時のみ条件内で可」を表示し、詳細6/6・比較（S-Z × S-G）・sitemap掲載6/6を確認した。代表詳細の支援条件はAdvanced Drive 0〜約40km/h、LCA約85〜130km/hで、MULTI UTILITYは専用公式PDFと公式カタログで5人乗り・S-Gベースを確認した。
+- 独立監査PASS（価値監査・リリース監査）。registryはVoxyの10 surface / required selector 8件を確認し、詳細6/6、比較、一覧、sitemapへ反映した。
+- `npm test`（Vitest33/33、Python16/16、価格114/114、現行113/113、公式導線114/114）、`npm run check`（0 errors / 0 warnings、既知hint5）、実ID build120ページ、`BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs`（E2E1/1、GA collect HTTP204）を確認した。
+- 本番smokeはトップ、一覧、ヴォクシー詳細2件、ヴォクシー比較、sitemap-index、sitemap-0、robotsをHTTP200で確認。`https://自動運転.jp/cars/?level=2` は本体へpath/queryを維持した301。公開HTMLの内部根拠キー・根拠URL・`GTM-TEST`漏洩は0件。
+
 ## 2026-09-10 後発対策トランシェ（ヴェルファイア7販売単位）本番実測
 
 - exact release commit: `a9627e5abf291b9586d1cde1654776addf726f18`（アプリ・データ実装 `806da5af42e5cdb02d96fe5a1632cf178bf4962e`、比較監査URL修正を含む）

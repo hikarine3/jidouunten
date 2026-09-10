@@ -328,6 +328,7 @@ ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し
 |---|---|---|---|
 | S-Z 2WD（7人）4,127,200円、S-Z E-Four（7人）4,380,200円、S-G 2WD（7人/8人）3,751,000円、S-G E-Four（7人）4,004,000円 | トヨタ自動車 | https://toyota.jp/voxy/grade/ | 2026-09-10 |
 | S-G マルチユーティリティ（2WD・5人）4,120,600円、S-Gベースの架装 | トヨタ自動車 | https://toyota.jp/ucar/catalog/brand-TOYOTA/car-VOXY/ | 2026-09-10 |
+| MULTI UTILITY専用のS-Gベース・5人乗り仕様、Advanced Drive・LCA・ドライバーモニターカメラのセットメーカーオプション78,100円 | トヨタ自動車 | https://toyota.jp/pages/contents/request/webcatalog/voxy/noah_voxy_special1.pdf | 2026-09-10 |
 | ヴォクシー現行カタログ2026年9月、MULTI UTILITYカタログ2026年5月 | トヨタ自動車 | https://toyota.jp/request/webcatalog/voxy/?padid=from_voxy_top_bottomdoc_webcatalog | 2026-09-10 |
 | Toyota Safety SenseのACC・LTA標準、Advanced Driveの自動車専用道路・渋滞時0〜約40km/h、LCA約85〜130km/h、運転者責任 | トヨタ自動車 | https://toyota.jp/voxy/safety/ | 2026-09-10 |
 | S-ZはAdvanced Drive・LCA・ドライバーモニターカメラのセット122,100円、S-Gは同セット78,100円（メーカーオプション） | トヨタ自動車 | https://toyota.jp/pages/contents/voxy/004_p_001/pdf/voxy_spec_202609.pdf | 2026-09-10 |
