@@ -269,7 +269,8 @@ try {
   await page.goto(`${base}/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/`);
   assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*ノア[\s\S]*HYBRID S-Z 2WD/);
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,056,800円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'ノアの条件付きハンズオフを表示');
-  assert.match(await page.locator('main').innerText(), /必要パッケージ[\s\S]*121,000円|Toyota Teammate アドバンスト ドライブ/, 'ノアの必要パッケージを表示');
+  assert.match(await page.locator('main').innerText(), /追加パッケージ[\s\S]*122,100円[\s\S]*必要パッケージ[\s\S]*Toyota Teammate アドバンスト ドライブ/, 'ノアS-Zの追加価格と必要パッケージを表示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /121,000円/, 'ノアS-ZにAdvanced Parkの価格を誤表示しない');
   assert.doesNotMatch(await page.locator('main').innerText(), /noah_spec_202609|sources|accessedAt/, 'ノア詳細に内部根拠を表示しない');
 
   await page.goto(`${base}/cars/jp-toyota-voxy-2026-sz-2wd-7seater/`);
