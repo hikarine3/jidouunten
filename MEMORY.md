@@ -38,7 +38,8 @@
 
 - 保存した検索条件・比較に、販売単位ごとの公開判断材料fingerprintを保持する再訪MVPを追加。価格・機能・作動条件・必要装備・販売状態・グレード識別の差分だけを検出し、確認日・出典URLの変更は通知対象外とした。
 - 保存バーで「判断材料の変更 ○件」「掲載終了・非公開 ○件」を表示し、比較再開前に見直し対象を把握できる。保存本文・fingerprint・検索query・車両IDはAnalyticsへ送らない。
-- `npm test`（Vitest39/39、価格147/147・現行146/146、公式導線37モデル/14アクション、Python16/16）、`npm run check`（0 errors / 0 warnings / 既知hint6）、実ID build153、ローカルE2E 1/1（GA collect HTTP204）を確認。公開前の独立監査・本番E2E・deployはこのターンの残ゲート。
+- `npm test`（Vitest39/39、価格147/147・現行146/146、公式導線37モデル/14アクション、Python16/16）、`npm run check`（0 errors / 0 warnings / 既知hint6）、実ID build153、ローカルE2E 1/1（GA collect HTTP204）を確認。Astra価値監査・Lunaリリース監査はexact SHAでPASS。
+- exact release `6d7657791b63ac16597a3df40bf01c7f7c42c167` をpush・deploy済み。Immutable `https://aa729982.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。両方でE2E各1/1・GA collect HTTP204、主要7 URL 7/7 HTTP200、未知URL404、IDN path/query301、390/520/768/1280px横overflowなしを確認。直前rollbackは `https://6b4375a4.jidouunten.pages.dev`。
 
 - 後発対策としてToyota主要10モデル（ノア、プリウス、クラウン（クロスオーバー）、bZ4X、RAV4、ハリアー、アルファード、ヴェルファイア、ヴォクシー、シエンタ）へ、公式hrefと同じcase-sensitiveな車種固定見積りURLを追加した。詳細・比較では注文/試乗と検討用見積りを分離し、注文可否未確認の車両にも安全に予算検討へ進める。`outbound_purchase_action` は販売単位ID・メーカー・`estimate`・配置を保持する。bZ4Xは `bZ4X`、クラウンは `CROWN+CROSSOVER` を使用し、小文字化によるToyotaエラーを防いだ。
 - exact app release `0448c1bddd54dbfc3236b08df7c7cd87a967299d`、Immutable `https://6b4375a4.jidouunten.pages.dev`、本体 `https://jidouunten.jp/`。全147販売単位（現行146件）、build153、Vitest37/Python16、価格・公式導線checker、Astro check 0 errors、Toyota見積りブラウザ10/10、詳細56/56・比較2、registry14/14、独立Astra/Plato監査、local/production E2E各1/1、GA collect HTTP204、主要URL200、IDN path/query301がPASS。直前rollbackは `https://106e44cd.jidouunten.pages.dev`。

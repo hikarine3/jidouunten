@@ -1,5 +1,17 @@
 # 初回公開の実測証拠
 
+## 2026-09-11 後発対策トランシェ（保存判断材料の差分再訪）本番実測
+
+- exact app release commit: `6d7657791b63ac16597a3df40bf01c7f7c42c167`（保存スナップショット実装 `8be6491`、カテゴリ別差分 `6d76577`）。
+- Immutable deployment: https://aa729982.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 保存した検索条件・比較へ、販売単位ごとの公開判断材料fingerprintと6カテゴリ（車両仕様・できること・作動条件・必要装備・販売状態・価格）を保持。確認日・出典URLのみの更新は差分にせず、価格等の意味ある変更を再訪バーで「判断材料の変更」と表示する。掲載終了・非公開のIDも区別し、ログインや外部同期は行わない。
+- 一覧の保存検索と比較の保存でsnapshotを生成し、保存→離脱→再訪→カテゴリ差分表示→復元→削除を実ブラウザで確認。保存本文、fingerprint、検索query、車両IDをAnalyticsへ送らない。個人情報・内部根拠URL・確認日は通常UIへ表示しない。
+- `npm test`（Vitest39/39、価格147/147、公式導線37モデル/14アクション、Python16/16）、`npm run check`（22ファイル、0 errors / 0 warnings / 既知hint6）、実ID build153ページを確認。
+- ローカル／immutable／本体のE2Eは各1/1（本体GA collect HTTP204）。本番smokeは主要7 URLを本体・immutableとも7/7 HTTP200、未知URL404、日本語ドメインのpath/query redirectは301を確認。390/520/768/1280px横overflowなし。
+- 公開HTML153件で実GTM `GTM-PV9QVMJV` 153/153、`GTM-TEST`/`G-TEST` 0/153、内部根拠キー0/153、NUL0/153。Astra価値監査（6カテゴリ・追加検証7/7・Chrome21/21）とLunaリリース監査（E2E289 assertions）がexact SHAでPASS。
+- 直前正常deployment（rollback候補）: https://6b4375a4.jidouunten.pages.dev（source `0448c1b`）。残リスクは既知のinline script hint6と、旧保存データにはカテゴリsnapshotが無いため差分表示しない互換仕様。再訪率・再訪後比較/公式遷移率は公開後観測する。
+
 ## 2026-09-10 後発対策トランシェ（Toyota公式見積り出口10モデル）本番実測
 
 - exact app release commit: `0448c1bddd54dbfc3236b08df7c7cd87a967299d`（公式見積り導線 `1f5fb50`、case-sensitive URL修正、registry閉包を含む）。
