@@ -2,6 +2,13 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 本体価格帯フィルター（実装・本番反映済み）
+
+- 一覧に「〜300万円 / 300〜500万円 / 500〜800万円 / 800万円〜」の本体価格帯フィルターを追加。車両本体価格の確認済み開始値で分類し、価格未確認はどの帯にも含めない。保存検索URLにも条件を保持する。
+- 実データの件数は13 / 59 / 62 / 12（合計147）。300 / 500 / 800万円の境界は次帯側へ分類し、追加パッケージ・諸費用を本体価格へ混ぜていない。
+- app exact `805b910034c48a15ecc338e5468471f3417c377c`、docs `05ff21b0de89f012681991a0bcf08ed1f5982ee0`、immutable `https://b07e61a0.jidouunten.pages.dev`、Production `https://jidouunten.jp/`、deployment `b07e61a0-1cef-465c-a126-bdeab9d1c73c`。
+- Vitest40/40、価格147/147、公式導線37モデル/38 actions、Python16/16、Astro check 0 errors/0 warnings/7 hints、実ID build153、保存URL復元、E2E本番/immutable各1/1・GA collect204、主要URL200、IDN path/query301、未知URL404、390px overflow0、独立Luna監査PASS。直前rollback `https://218ed369.jidouunten.pages.dev`。
+
 ## 2026-09-11 保存差分から変更車両へ戻る導線（実装・本番反映済み）
 
 - 保存した検索・比較で意味ある変更を検出したとき、カテゴリ（価格・できること・作動条件・必要装備・販売状態・車両仕様）と対象販売単位の詳細リンクを「変更を確認」から開けるようにした。掲載終了は別表示、確認日・出典URLだけの更新は通知しない。
