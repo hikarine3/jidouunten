@@ -1,4 +1,4 @@
-# 日本向け現行候補の棚卸し（2026-09-07）
+# 日本向け現行候補の棚卸し（最終更新: 2026-09-10）
 
 Issue #17の公開候補を、販売単位（市場・メーカー・メーカー明示モデル年または世代・グレード・必要装備・機能版）で管理するための内部台帳。通常一覧には表示しない。確認日は各車両レコードの `sources[].accessedAt` と `lastReviewedAt` に保持し、カタログ適用時点・販売単位導入時点・価格適用時点とは分離する。
 
@@ -8,14 +8,15 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 77 | `src/data/vehicles.json` の全レコード（現行76 + 過去1） |
-| 既定表示 | 76 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 81 | `src/data/vehicles.json` の全レコード（現行80 + 過去1） |
+| 既定表示 | 80 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
 | 今回追加（Suzuki） | 3 | e VITARA X 2WD / Z 2WD / Z 4WD。日本向け現行価格・発売資料・安全装備表で確認 |
 | 今回追加（Renault） | 4 | ARKANAのesprit Alpine / techno、FULL HYBRID E-TECH / MILD HYBRID。価格表・機能説明・装備資料で確認 |
 | 今回追加（BMW） | 9 | 3シリーズ通常カタログのSedan G20 5単位 / Touring G21 4単位。2026年7月以降生産の装備・価格表で確認 |
+| 今回追加（Toyota / Lexus） | 2 | プリウス Z（2WD）とNX350h “version L” 2WD。現行商品・価格・安全・取扱説明書を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -43,6 +44,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Mazda | MAZDA3 Fastback 25S / 25L / X Touring（各6EC-AT / 6MT）、Sedan 25L | 掲載（7単位） | 2相当 | 2026-09-08 |
 | Mazda | CX-30 20G / 20 Air Edition / 25L / 25 Air Edition | 掲載（4単位） | 2相当 | 2026-09-08 |
 | Mazda | MX-30 ROTARY-EV Natural Monotone | 掲載（1単位） | 2相当 | 2026-09-08 |
+| Toyota | プリウス 2026 Z（2WD） | 掲載 | 2相当 | 2026-09-10 |
+| Lexus | NX350h “version L” 2WD | 掲載 | 2相当 | 2026-09-10 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -202,6 +205,23 @@ CX-80 8単位とCX-60 11単位はMRCC・CTS・ドライバー・モニタリン�
 Advanced Driveの条件付きハンズオフを混同しない。RZは販売単位に固定したハンズオフ・ドライバーモニター
 条件を今回の資料だけでは断定せず未確認とした。価格は任意オプションを車両本体へ加算せず、ノアの必要装備
 として別表示する。
+
+## Toyota プリウス / Lexus NXの根拠（内部保持）
+
+確認日は2026-09-10。Toyotaの現行プリウスから2026年7月仕様のZ（2WD）、Lexusの現行NXからNX350h “version L” 2WDを、価格・グレードページ、安全ページ、取扱説明書で販売単位化した。どちらも全車速追従ACCと車線中央維持支援の組合せを確認できるため、国土交通省の定義へ照合してサイト上はLevel 2相当とした。公式の現行掲載と見積り導線は確認できるが、販売単位ごとの新車注文可否を明文で固定できないため `availability=unknown` のまま保持する。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| プリウス日本向け現行商品ページ、安全運転支援装置が運転支援である旨 | トヨタ自動車 | https://toyota.jp/prius/ | 2026-09-10 |
+| プリウス Z（2WD）3,998,500円、2026年7月現在の参考価格、WEB見積り・販売店導線 | トヨタ自動車 | https://toyota.jp/prius/grade/ | 2026-09-10 |
+| プリウス Toyota Safety Sense、全車速追従レーダークルーズコントロール、LTA、ステアリング保持条件 | トヨタ自動車 | https://toyota.jp/prius/safety/ | 2026-09-10 |
+| プリウス LTAの作動条件、高速道路・自動車専用道路、手放し継続時の警告・解除 | トヨタ自動車 | https://manual.toyota.jp/prius/2301/hev/ja_JP/contents/vhch04se050404.php | 2026-09-10 |
+| NX日本向け現行ラインアップとNX350h “version L” | Lexus | https://lexus.jp/models/nx/ | 2026-09-10 |
+| NX350h “version L” 2WD（FF）6,376,000円、見積りシミュレーション | Lexus | https://lexus.jp/models/nx/features/price_grade/ | 2026-09-10 |
+| NX Lexus Safety System＋、全車速追従レーダークルーズコントロール・LTA、ステアリング保持条件 | Lexus | https://lexus.jp/models/nx/features/safety/ | 2026-09-10 |
+| NX LTAの作動条件、高速道路・自動車専用道路、手放し継続時の警告・解除 | Lexus | https://manual.lexus.jp/nx/2109/cv/ja_JP/contents/ssz1624532638078.php | 2026-09-10 |
+
+プリウスはToyota公式安全ページに「ステアリングを持ち続ける必要」が明記されているため `handsOff=not_allowed` とした。NXもLexus公式安全ページ・取扱説明書の同様の注意から `handsOff=not_allowed`、運転者監視を `required` とした。速度の数値範囲や販売単位別の注文可否は、確認できたページで固定できないため未確認のままにし、資料発行年をモデル年へ流用していない。プリウスのみ公式ページが2026年7月仕様を明示するため `modelYear=2026`、`catalogAsOf=2026-07`、`salesUnitIntroducedAt=2026-07`、`priceEffectiveAt=2026-07` とした。NXは適用時点を公式ページで固定できないためnullとした。
 
 ## Volvo EX30の根拠（内部保持）
 

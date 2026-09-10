@@ -86,14 +86,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(79);
+    expect(vehicles).toHaveLength(81);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補78件は全件の公式金額を保持する', () => {
+  it('現行候補80件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(78);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(78);
+    expect(current).toHaveLength(80);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(80);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -102,7 +102,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(22);
+    expect(officialLinks).toHaveLength(24);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -181,6 +181,27 @@ describe('vehicle data contract and filters', () => {
     expect(rz?.handsOff).toBe('unknown');
     expect(rz?.driverMonitoring).toBe('unknown');
     expect(rz?.availability).toBe('unknown');
+  });
+
+  it('Toyota プリウスとLexus NXの主要販売単位を価格・手保持条件付きで保持する', () => {
+    const prius = vehicles.find((vehicle) => vehicle.id === 'jp-toyota-prius-2026-z-2wd');
+    expect(prius?.modelYear).toBe('2026');
+    expect(prius?.catalogAsOf).toBe('2026-07');
+    expect(prius?.salesUnitIntroducedAt).toBe('2026-07');
+    expect(prius?.priceEffectiveAt).toBe('2026-07');
+    expect(prius?.price?.amounts[0].amountJpy).toBe(3_998_500);
+    expect(prius?.handsOff).toBe('not_allowed');
+    expect(prius?.driverMonitoring).toBe('required');
+    expect(prius?.capabilities).toEqual(expect.arrayContaining(['adaptive_cruise_control', 'lane_centering', 'traffic_jam_assist']));
+    expect(prius?.availability).toBe('unknown');
+    expect(prius?.sources.some((source) => source.url === 'https://toyota.jp/prius/safety/')).toBe(true);
+
+    const nx = vehicles.find((vehicle) => vehicle.id === 'jp-lexus-nx-2026-nx350h-version-l-2wd');
+    expect(nx?.price?.amounts[0].amountJpy).toBe(6_376_000);
+    expect(nx?.handsOff).toBe('not_allowed');
+    expect(nx?.driverMonitoring).toBe('required');
+    expect(nx?.availability).toBe('unknown');
+    expect(nx?.sources.some((source) => source.url === 'https://lexus.jp/models/nx/features/safety/')).toBe(true);
   });
 
   it('時系列フィールドは公式モデル年・世代・適用時点を混同しない', () => {
