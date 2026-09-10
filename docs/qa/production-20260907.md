@@ -1,5 +1,19 @@
 # 初回公開の実測証拠
 
+## 2026-09-10 比較意思決定・オプション価格・用途フィルター改善の本番実測
+
+- exact source commit: `86dd42a7f9c3d564114bf384b2d1649c3087b354`
+- Immutable deployment: https://bd9861e9.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 比較URLは選択フォームを折り畳み、結果を先頭へ表示。変更ボタンでフォームを再表示できることを本番E2Eで確認（390pxの比較結果 `resultY=505px`、横overflowなし）。
+- `/levels/` のLevel 3リンクは `availability=all` を付け、過去例1件へ到達するよう修正した。
+- CX-5 G（EX Package）は詳細・比較に `EX Package +227,700円` を表示。片側が未確認の追加価格は `compare-row-unknown` とし、既知の差分として強調しない。
+- ハリアーG × Tesla Model 3は、ハリアーの「監視条件は不明」を既知の差分として強調しない。MINI Countrymanの条件付きハンズオフ6販売単位は高速道路フィルターに含まれ、Level 2・高速道路・ハンズオフ条件は20件になった。
+- 独立監査PASS: `npm test`（Vitest31/31、価格101/101、現行100/100、公式導線32モデル、Python16/16）、`npm run check`（0 errors / 0 warnings）、実ID build107ページ、ローカルE2E1/1、GA collect HTTP204。
+- 本番E2E: `BASE_URL=https://jidouunten.jp EXPECT_GA_COLLECT=1 node tests/e2e-preview.mjs` は1/1 PASS。トップ、一覧、Level3、比較、CX-5/MINI詳細、sitemap、robotsを確認した。
+- 本番smoke: 上記主要URLはすべてHTTP200。実GTM `GTM-PV9QVMJV` を確認し、`GTM-TEST`・内部時点キー・根拠URLは公開HTMLに残っていない。
+- 日本語IDNの `/cars/?level=2&availability=all` は本体へpath/queryを維持した301。
+
 ## 2026-09-10 販売単位カバー拡張（アルファード / VEZEL）本番実測
 
 - exact source commit: `d9361b989b6c7e2468b421ebc4207dfe2b6584f2`
