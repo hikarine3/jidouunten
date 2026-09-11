@@ -43,6 +43,19 @@ try {
   await page.evaluate(() => localStorage.clear());
   await page.reload();
   assert.equal(await visibleCards(), 411, '既定カタログは現行確認411件');
+  const listImages = page.locator('.vehicle-card-image img');
+  const listImageSources = await listImages.evaluateAll((elements) => [...new Set(elements.map((element) => element.getAttribute('src')))]);
+  assert.deepEqual(listImageSources.sort(), ['/vehicles/tesla-model-3.webp', '/vehicles/tesla-model-y.webp', '/vehicles/toyota-prius.webp'], '一覧の登録済み参考写真は3種類');
+  assert.equal(await listImages.first().getAttribute('loading'), 'lazy', '一覧画像を遅延読み込み');
+  assert.equal(await listImages.first().getAttribute('decoding'), 'async', '一覧画像を非同期デコード');
+  assert.match(await listImages.first().getAttribute('sizes'), /33vw/, '一覧画像にレスポンシブsizesを指定');
+  const listImageBox = await listImages.first().evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    return { width: rect.width, height: rect.height, objectFit: getComputedStyle(element).objectFit };
+  });
+  assert.ok(listImageBox.height >= 88 && listImageBox.height <= 118, `一覧画像の高さをサムネイル範囲に収める: ${listImageBox.height}`);
+  assert.equal(listImageBox.objectFit, 'cover', '一覧画像はcoverでカード内に収める');
+  assert.match(await page.locator('.vehicle-card-image figcaption').first().innerText(), /Wikimedia Commons/, '一覧画像の帰属表示');
   assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*411[\s\S]*条件内可[\s\S]*68[\s\S]*不可[\s\S]*342[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*66/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="1"]').innerText(), /L1[\s\S]*28件/, 'Level 1の現行28件を表示');
