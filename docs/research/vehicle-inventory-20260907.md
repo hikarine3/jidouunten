@@ -417,8 +417,11 @@ LMと同じLexusでも、UX300hはハンズオフ不可・LCAなし・521万〜5
 
 ## Volvo EX30の根拠（内部保持）
 
+2026-09-11にVolvo Cars Japanの公式Q&Aで、オンライン上で車両選択から契約・申込金支払いまで進められる車種がEX30のみであることを確認した。この確認を3つの2027年モデル販売単位へ反映し、販売状態を`new_order_available`、確認日を`2026-09-11`へ更新した。契約後の在庫・納車時期や個別条件まではこの事実だけでは確定しないため、詳細画面では「新車注文可」と公式オンライン注文導線を示し、条件確認を促す。
+
 | 対象事実 | 発行元 | URL | 確認日 |
 |---|---|---|---|
 | 2027年モデル3グレードと税込479万〜629万円 | ボルボ・カー・ジャパン | https://www.volvocars.com/jp/l/ex30/ | 2026-09-07 |
+| EX30のみオンラインで車両選択・契約・申込金支払いまで可能 | ボルボ・カー・ジャパン | https://www.volvocars.com/jp/l/electric-qa/ | 2026-09-11 |
 | 3グレードにPilot Assist、全車速追従ACC、ドライバーモニタリングカメラ付DACを標準装備。内容は2026年7月現在 | ボルボ・カー・ジャパン | https://azure-eu-assets.contentstack.com/v3/assets/blt84e01a6904dbd2e8/blt65613ad142855bdf/6a466a78035de07c64d4cca5/MY27_EX30_Ver2_W29%E4%BB%A5%E9%99%8D.pdf | 2026-09-07 |
 | Pilot Assistは速度・車間・操舵を支援し、運転者は両手保持と即時介入が必要 | Volvo Support JP | https://www.volvocars.com/jp/support/car/ex30/24w17/article/47d2c97fd33effd3c0a8cc3718c999b7-85596e53922f2e19c0a8cc42679c08ea-8664b2fa77a7e089c0a8296870d1a409/47d2c97fd33effd3c0a8cc3718c999b7-835992c35a0096eec0a8b0971dfcc685-8664b2fa77a7e089c0a8296870d1a409/47d2c97fd33effd3c0a8cc3718c999b7-69b1d5f35a03429ac0a8b0970ac5ed2e-8664b2fa77a7e089c0a8296870d1a409/54f1934e3fd57300c0a8b0c1194a56be-69b1d5f35a03429ac0a8b0970ac5ed2e-8664b2fa77a7e089c0a8296870d1a409/ | 2026-09-07 |

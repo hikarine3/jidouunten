@@ -167,7 +167,7 @@ describe('vehicle data contract and filters', () => {
       expect(actions.every(({ checkedAt }) => checkedAt === '2026-09-11')).toBe(true);
       expect(actions.every(({ url }) => url.startsWith('https://'))).toBe(true);
     }
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(39);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(40);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {
@@ -515,6 +515,11 @@ describe('vehicle data contract and filters', () => {
     expect(ex30.every((vehicle) => vehicle.modelYear === '2027' && vehicle.automationLevel === 2)).toBe(true);
     expect(ex30.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
     expect(ex30.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'ボルボ・カー・ジャパン'))).toBe(true);
+    expect(ex30.every((vehicle) => vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-11')).toBe(true);
+    expect(ex30.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.volvocars.com/jp/l/electric-qa/' && source.accessedAt === '2026-09-11'))).toBe(true);
+    expect(officialLinks.find(({ maker, model }) => maker === 'Volvo' && model === 'EX30')?.actions).toEqual([
+      { kind: 'order', label: 'オンラインで注文', url: 'https://www.volvocars.com/jp/shop/', checkedAt: '2026-09-11' },
+    ]);
   });
 
   it('Suzuki e VITARAの3販売単位を全車標準の縦横支援として保持する', () => {
