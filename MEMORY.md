@@ -2,6 +2,13 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 BYD公式導線URL刷新（本番反映済み）
+
+- BYD DOLPHIN／ATTO 3／SEAL／SEALION 6の商品・試乗・販売店・カタログ導線を、現行BYD公式 `prod.byd.com` と公式販売店検索 `dealer.bydauto.co.jp` へ更新した。価格・能力・注文状態は変更せず、価格根拠URLと研究台帳の対応する商品／カタログURLだけ同期。
+- exact app `a716bbf`、Production `https://jidouunten.jp/`、immutable `https://19c97f88.jidouunten.pages.dev`、直前rollback `https://42ab762a.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- BYD導線は重複除外9 URL中9 URLがHTTP 200。`npm test` 69/69、価格385/385、公式導線72モデル／69 URL／131 actions、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID release／structured PASS（391 HTML、ItemList768）、registry508/508、公開HTML内部enum/source/accessedAt漏れ0、独立監査PASS、immutable／production E2E各1/1（GA collect HTTP204）、主要URL200、404、IDN path/query301。
+- 一覧のWikimedia Commons参考写真は引き続き`loading="lazy"`・`object-fit: cover`のWebPサムネイルで省スペース表示し、作者・ライセンス帰属と詳細画像を維持。
+
 ## 2026-09-12 車両データ鮮度表示（本番反映済み）
 
 - 販売状態を90日、機能・作動条件（ODD）を180日の目安で再確認する鮮度判定を追加。確認済みレコードは一覧を汚さず、要再確認・情報競合・情報未確認だけを日本語ラベルで一覧・詳細・比較に表示する。BYD ATTO 3の競合1件は「情報が競合」と表示し、内部enum・根拠URL・アクセス日時は公開HTMLへ出さない。

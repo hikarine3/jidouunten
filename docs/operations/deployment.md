@@ -2,6 +2,16 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 BYD公式導線URL刷新）
+
+- exact app release commit: `a716bbf`
+- immutable: https://19c97f88.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: BYD DOLPHIN／ATTO 3／SEAL／SEALION 6の商品・試乗・販売店・カタログ導線を、現行BYD公式 (`prod.byd.com`) と公式販売店検索 (`dealer.bydauto.co.jp`) へ更新。車両の価格・能力・注文状態は変更せず、正本の価格根拠URLと研究台帳の対応する商品／カタログURLだけ同期した。
+- 公式導線疎通: BYD重複除外9 URL中9 URLがHTTP 200（商品4、販売店1、カタログ4）。更新前の全導線監査は173 URL中163件が2xx/3xx、BYD旧ドメイン等10件はDNS／アクセス制限として分離記録。
+- QA: `npm test` 69/69（Vitest）＋Python16/16、価格385/385、公式導線72モデル／69 URL／131 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS（391 HTML、ItemList 768項目）、registry 508/508、公開HTML内部enum・source・accessedAt漏れ0、独立監査PASS、immutable／production E2E 1/1（GA collect HTTP204）、主要URL200、404、IDN path/query301。
+- 直前の正常配信・ロールバック候補: https://42ab762a.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-12 車両データ鮮度表示）
 
 - exact app release commit: `a13e287`
