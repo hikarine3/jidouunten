@@ -1,5 +1,17 @@
 # 初回公開の実測証拠
 
+## 2026-09-11 ヤリス クロス20販売単位追加（本番実測）
+
+- exact app release commit: `95b31d5`（実装 `c4b401d`）
+- Immutable deployment: https://01434fd9.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- トヨタ ヤリス クロス20販売単位を追加。全218販売単位（現行217、過去1）、価格212万6,300円〜335万5,000円、全車Level 2相当・ハンズオフ不可・ACC／車線中央維持／渋滞時支援、注文可否は未確認。
+- `npm test`: Vitest49/49、価格218/218（現行217/217、exact202／range15／未確認1）、公式導線50モデル／49 URL／63 actions、Python16/16。
+- `npm run check`: 0 errors / 0 warnings / 6 hints。実ID build224、release guard PASS。
+- ローカル・immutable・本体E2E各1/1（GA collect HTTP204）。ヤリス クロス代表詳細／比較、公式商品・見積りURL HTTP200、sitemap223 URL、主要URL HTTP200、IDN path/query 301を確認。
+- 公開面依存レジストリ静的marker339面、ヤリス required selector4/4、公開HTML内部enum・内部日付キー漏れ0件、独立候補監査PASS。
+- 直前正常deployment（rollback候補）: https://df93d984.jidouunten.pages.dev
+
 ## 2026-09-11 価格メタデータ補正（本番実測）
 
 - exact app release commit: `6483639`

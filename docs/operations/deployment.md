@@ -2,6 +2,16 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 ヤリス クロス20販売単位追加）
+
+- exact app: `95b31d5`（実装 `c4b401d`、依存レジストリmarker更新を含む）
+- immutable: https://01434fd9.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: トヨタ ヤリス クロスの現行20販売単位（Z“Adventure”／Z／G／X／U／GR SPORT、ハイブリッド・ガソリン、2WD／E-Four）を追加。全218販売単位（現行217、過去1）、価格212万6,300円〜335万5,000円、全車Level 2相当・ハンズオフ不可・ACC／車線中央維持／渋滞時支援で比較可能にした。注文可否は根拠不足のため20単位とも未確認を維持。
+- SEO／導線: ヤリス クロスの公式商品・見積り導線を追加。title／descriptionの現行217件、sitemap223 URL、既存のrobots／canonical／hreflang／OG/Twitter／WebSite＋WebPage JSON-LDを維持。
+- QA: Vitest49/49、価格218/218（現行217/217、exact202／range15／未確認1）、公式導線50モデル／49 URL／63 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build224、release guard PASS、ローカル／immutable／production E2E各1/1（GA collect HTTP204）、ヤリス クロス代表詳細・比較・公式URL／見積りURL HTTP200、registry静的marker339面・Yaris required selector4/4、公開HTML内部enum・内部日付キー漏れ0件、主要URL HTTP200、IDN path/query 301、独立候補監査PASS。
+- 直前の正常配信・ロールバック候補: https://df93d984.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 価格メタデータ補正）
 
 - exact app: `6483639`（Lexus GX550 2販売単位で、一次資料に明示のない価格適用日を推定せず`priceEffectiveAt`を未設定へ補正）

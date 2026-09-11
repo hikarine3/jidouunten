@@ -2,6 +2,13 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 ヤリス クロス20販売単位追加・本番反映
+
+- トヨタ公式のグレードJSON、2026年8月仕様表、安全ページ、取扱説明書を突き合わせ、ヤリス クロス20販売単位を追加。全218販売単位（現行217、過去1）、価格212万6,300円〜335万5,000円、全車Level 2相当・ハンズオフ不可・ACC／車線中央維持／渋滞時支援。注文可否は未確認を維持。
+- exact app `95b31d5`（実装 `c4b401d`）、Production `https://jidouunten.jp/`、immutable `https://01434fd9.jidouunten.pages.dev`。直前rollback候補は`https://df93d984.jidouunten.pages.dev`。
+- QA: Vitest49/49、価格218/218（現行217/217、exact202／range15／未確認1）、公式導線50モデル／49 URL／63 actions、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build224、release guard PASS、ローカル・immutable・本体E2E各1/1（GA collect204）、Yaris代表詳細・比較・公式URL HTTP200、sitemap223 URL、registry static marker339面・required selector4/4、公開HTML内部enum・内部日付キー漏れ0件、主要URL200、IDN path/query301、独立候補監査PASS。
+- Issue #17は候補母集団の未確認群が残るためIn progressを維持。Issue #37も公式導線・注文可否の観測継続のためOPEN/In progressを維持。全国網羅の完了宣言はしない。
+
 ## 2026-09-11 価格メタデータ補正・本番反映
 
 - Lexus GX550 2販売単位の`priceEffectiveAt`は一次資料に明示がないためnullへ補正。公開表示は価格と2026年9月のカタログ確認月に限定し、推定日付を出さない。
