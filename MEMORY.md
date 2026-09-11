@@ -32,17 +32,17 @@
 
 ## 2026-09-11 本体価格帯フィルター（実装・本番反映済み）
 
+- 一覧に「〜300万円 / 300〜500万円 / 500〜800万円 / 800万円〜」の本体価格帯フィルターを追加。車両本体価格の確認済み開始値で分類し、価格未確認はどの帯にも含めない。保存検索URLにも条件を保持する。
+- 実データの件数は13 / 59 / 62 / 12（合計147）。300 / 500 / 800万円の境界は次帯側へ分類し、追加パッケージ・諸費用を本体価格へ混ぜていない。
+- app exact `805b910034c48a15ecc338e5468471f3417c377c`、docs `05ff21b0de89f012681991a0bcf08ed1f5982ee0`、immutable `https://b07e61a0.jidouunten.pages.dev`、Production `https://jidouunten.jp/`、deployment `b07e61a0-1cef-465c-a126-bdeab9d1c73c`。
+- Vitest40/40、価格147/147、公式導線37モデル/38 actions、Python16/16、Astro check 0 errors/0 warnings/7 hints、実ID build153、保存URL復元、E2E本番/immutable各1/1・GA collect204、主要URL200、IDN path/query301、未知URL404、390px overflow0、独立Luna監査PASS。直前rollback `https://218ed369.jidouunten.pages.dev`。
+
 ## 2026-09-11 BYD現行カタログ拡張（実装・本番反映済み）
 
 - BYD DOLPHIN（Baseline／Long Range）、ATTO 3、SEAL（RWD／AWD）、SEALION 6（FWD／AWD）の7販売単位を追加。全車Level 2、価格は299万2,000円〜572万円。DOLPHIN／ATTO 3はウインカー操作を合図とする車線変更時の補助、SEALは間接的なドライバー監視、SEALION 6はACC・車線維持を比較できる。同じLevel 2内の能力差をAND絞り込み・比較で確認できる。
 - 現行仕様の販売開始日を発売順の基準に統一し、DOLPHINは2026年2月10日、ATTO 3は2023年1月31日、SEALは2025年10月30日、SEALION 6は2025年12月1日。ATTO 3の最高速度は公式資料間の不一致があるため数値を断定せず、受注可否・在庫は全7単位でunknownのまま表示する。
 - 公式商品ページ・販売店・試乗・カタログの4系統をBYD 4モデルへ追加。購入判断用の公式導線は55 actions／43モデルとなり、注文可否未確認の車両にも「確認済み」と誤認させる注文CTAは付けない。BYD公式安全説明は[BYD 安全性能](https://byd.co.jp/e-life/safety/)、各モデルの一次URLは`src/data/official-links.json`に固定。
 - exact app `681d6939540642953e88af4edd69cd29af70eb0e`、immutable `https://d45dbac4.jidouunten.pages.dev`、Production `https://jidouunten.jp/`。全165販売単位（現行164件）、sitemap-0は170 URL。Vitest43/Python16、価格165/165、公式導線checker、Astro check 0 errors、実ID build171、ローカル・immutable・本番E2E各1/1、registry331/331、独立価値監査PASS。IDN path/query301、主要URL200も確認。直前rollbackは`https://4c2f96d7.jidouunten.pages.dev`。
-
-- 一覧に「〜300万円 / 300〜500万円 / 500〜800万円 / 800万円〜」の本体価格帯フィルターを追加。車両本体価格の確認済み開始値で分類し、価格未確認はどの帯にも含めない。保存検索URLにも条件を保持する。
-- 実データの件数は13 / 59 / 62 / 12（合計147）。300 / 500 / 800万円の境界は次帯側へ分類し、追加パッケージ・諸費用を本体価格へ混ぜていない。
-- app exact `805b910034c48a15ecc338e5468471f3417c377c`、docs `05ff21b0de89f012681991a0bcf08ed1f5982ee0`、immutable `https://b07e61a0.jidouunten.pages.dev`、Production `https://jidouunten.jp/`、deployment `b07e61a0-1cef-465c-a126-bdeab9d1c73c`。
-- Vitest40/40、価格147/147、公式導線37モデル/38 actions、Python16/16、Astro check 0 errors/0 warnings/7 hints、実ID build153、保存URL復元、E2E本番/immutable各1/1・GA collect204、主要URL200、IDN path/query301、未知URL404、390px overflow0、独立Luna監査PASS。直前rollback `https://218ed369.jidouunten.pages.dev`。
 
 ## 2026-09-11 後発対策・Toyota カローラ クロス（実装・本番反映済み）
 
