@@ -188,8 +188,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-07",
+    "availability": "new_order_available",
+    "availabilityCheckedAt": "2026-09-11",
     "odd": {
       "roadTypes": ["高速道路の本線", "自動車専用道路の本線"],
       "speedKph": {"min": null, "max": null, "condition": "対象ページでプロパイロット2.0の数値速度範囲を確認できないため未確認"},
@@ -202,14 +202,14 @@
     "driverMonitoring": "required",
     "handsOff": "allowed_in_conditions",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "hands_off_highway", "lane_change_support"],
-    "limitations": ["自動運転装置ではない", "側方車両には反応しない場合がある", "NissanConnectのプロパイロットプランG契約が必要", "対象外区間ではハンドル操作が必要"],
+    "limitations": ["自動運転装置ではない", "側方車両には反応しない場合がある", "NissanConnectのプロパイロットプランG契約が必要", "対象外区間ではハンドル操作が必要", "公式ページで日産各店の注文受付を確認済み。受注後の在庫・納期・契約条件は販売店確認が必要"],
     "sources": [
       {
         "publisher": "日産自動車",
         "url": "https://www3.nissan.co.jp/vehicles/new/ariya.html",
         "title": "日産アリア Webカタログ トップ",
-        "accessedAt": "2026-09-07",
-        "supports": ["日本向けB6グレード", "B6 2WDの車両本体価格6,675,900円（消費税込み・2026年2月現在）", "プロパイロット2.0メーカーオプション", "現行ページの装備・諸元"],
+        "accessedAt": "2026-09-11",
+        "supports": ["日本向けB6グレード", "日産各店で注文できるB6、11/26より注文受付中という現行ページ記載", "B6 2WDの車両本体価格6,675,900円（消費税込み・2026年2月現在）", "プロパイロット2.0メーカーオプション", "現行ページの装備・諸元"],
         "type": "manufacturer"
       },
       {
@@ -247,7 +247,7 @@
     ],
     "classificationRationale": "日産はプロパイロット2.0を運転支援システムと説明し、車速・車間制御（縦方向）と車線内走行・車線変更支援（横方向）を示している。これを国土交通省のLevel 2定義に照合してLevel 2と分類した。日産が車両をLevel 2認証したという意味ではない。",
     "factStatus": "verified",
-    "lastReviewedAt": "2026-09-07"
+    "lastReviewedAt": "2026-09-11"
   },
   {
     "id": "jp-nissan-ariya-2026-b6-e4orce",

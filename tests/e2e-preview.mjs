@@ -287,10 +287,11 @@ try {
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), '現在利用不可', '販売状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=new_order_available`);
-  assert.equal(await visibleCards(), 15, '新車注文可は販売単位の公式注文導線を確認できたTesla 6件＋Mitsubishi 9件');
+  assert.equal(await visibleCards(), 16, '新車注文可は販売単位の公式注文導線を確認できたTesla 6件＋Mitsubishi 9件＋日産アリアB6 1件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), '新車注文可', '新車注文可の結果見出しを正しく表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, '新車注文可フィルタはTesla 6件に絞り込む');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Mitsubishi アウトランダーPHEV' }).count(), 9, '新車注文可フィルタはMitsubishi 9件を含む');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan 日産アリア' }).count(), 1, '新車注文可フィルタは日産アリアB6 1件を含む');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo' }).count(), 0, 'グレード別の注文可否未確認Volvo EX30は新車注文可に含めない');
   await page.goto(`${base}/compare/?ids=jp-honda-accord-2025-ehev-sensing360plus&ids=jp-subaru-levorg-layback-2023-limited-ex`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
@@ -337,6 +338,13 @@ try {
   assert.deepEqual({ vehicle_id: detailPurchaseEvent.vehicle_id, action_type: detailPurchaseEvent.action_type, placement: detailPurchaseEvent.placement }, { vehicle_id: 'jp-tesla-model-3-2026-premium', action_type: 'order', placement: 'vehicle_detail' }, '詳細の購入アクション計測');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '根拠URL・確認日は通常UIに出さない');
   await page.screenshot({ path: `${qaDir}/desktop-tesla-detail.png`, fullPage: false });
+
+  await page.goto(`${base}/cars/jp-nissan-ariya-2026-b6/`);
+  assert.match(await page.locator('main').innerText(), /Nissan[\s\S]*日産アリア[\s\S]*B6/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*6,675,900円[\s\S]*新車注文可/, '日産アリアB6の価格と注文受付状態を表示');
+  assert.match(await page.locator('main').innerText(), /日産各店の注文受付を確認済み[\s\S]*在庫・納期・契約条件/, '日産アリアB6の注文後確認事項を表示');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 4, '日産アリアB6に既存4種の公式次アクションを表示');
+  assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '日産アリアB6でも内部根拠を通常UIに出さない');
 
   await page.goto(`${base}/cars/jp-mitsubishi-outlander-phev-2026-m-4wd-5seater/`);
   assert.match(await page.locator('main').innerText(), /Mitsubishi[\s\S]*アウトランダーPHEV[\s\S]*M 4WD（5人乗り）/);

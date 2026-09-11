@@ -1611,6 +1611,26 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
+    "vehicle:nissan-jp-ariya-2026": {
+      "entity_id": "vehicle:nissan-jp-ariya-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+      "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Nissan","日産アリア","LEVEL 2","日本向け173販売単位"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Nissan","日産アリア","LEVEL 2"]},
+        {"url":"/cars/jp-nissan-ariya-2026-b6/","locale":"ja","output_path":"dist/cars/jp-nissan-ariya-2026-b6/index.html","markers":["日産アリア","B6","6,675,900円","Level 2","新車注文可","注文後の在庫・納車時期"]},
+        {"url":"/compare/?ids=jp-nissan-ariya-2026-b6&ids=jp-nissan-ariya-2026-b6-e4orce","locale":"ja","output_path":"dist/compare/index.html","markers":["日産アリア","B6","B6 e-4ORCE","6,675,900円","7,280,900円"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-nissan-ariya-2026-b6","jp-nissan-ariya-2026-b6-e4orce"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-nissan-ariya-2026-b6\"])","markers":["Nissan","日産アリア","B6"]},
+        {"url":"/cars/jp-nissan-ariya-2026-b6/","selector":"main","markers":["日産アリア","B6","6,675,900円","Level 2","新車注文可","注文後の在庫・納車時期"]},
+        {"url":"/compare/?ids=jp-nissan-ariya-2026-b6&ids=jp-nissan-ariya-2026-b6-e4orce","selector":"[data-compare-result]","markers":["日産アリア","B6","B6 e-4ORCE","6,675,900円","7,280,900円"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
     "vehicle:mitsubishi-jp-outlander-phev-2026": {
       "entity_id": "vehicle:mitsubishi-jp-outlander-phev-2026",
       "entity_type": "vehicle_catalog_entries",
@@ -1655,7 +1675,7 @@
       "surfaces": [
         {"url":"/cars/jp-honda-accord-2025-ehev-sensing360plus/","locale":"ja","output_path":"dist/cars/jp-honda-accord-2025-ehev-sensing360plus/index.html","markers":["メーカー公式サイトで仕様を確認","https://www.honda.co.jp/ACCORD/"]},
         {"url":"/cars/jp-honda-vezel-2026-ehev-z-ff/","locale":"ja","output_path":"dist/cars/jp-honda-vezel-2026-ehev-z-ff/index.html","markers":["メーカー公式サイトで仕様を確認","https://www.honda.co.jp/VEZEL/","展示・試乗車を探す","セルフ見積り"]},
-        {"url":"/cars/jp-nissan-ariya-2026-b6/","locale":"ja","output_path":"dist/cars/jp-nissan-ariya-2026-b6/index.html","markers":["メーカー公式サイトで仕様を確認","https://www3.nissan.co.jp/vehicles/new/ariya.html","試乗車を探す（アリアを選択）","セルフ見積り"]},
+        {"url":"/cars/jp-nissan-ariya-2026-b6/","locale":"ja","output_path":"dist/cars/jp-nissan-ariya-2026-b6/index.html","markers":["メーカー公式サイトで仕様を確認","https://www3.nissan.co.jp/vehicles/new/ariya.html","試乗車を探す（アリアを選択）","セルフ見積り","新車注文可","注文後の在庫・納車時期"]},
         {"url":"/cars/jp-nissan-serena-2026-e-power-luxion/","locale":"ja","output_path":"dist/cars/jp-nissan-serena-2026-e-power-luxion/index.html","markers":["メーカー公式サイトで仕様を確認","https://www3.nissan.co.jp/vehicles/new/serena/specifications/luxion.html","試乗車を探す（セレナを選択）","セルフ見積り"]},
         {"url":"/cars/jp-lexus-lm-2026-lm500h-executive-awd-4seater/","locale":"ja","output_path":"dist/cars/jp-lexus-lm-2026-lm500h-executive-awd-4seater/index.html","markers":["メーカー公式サイトで仕様を確認","https://lexus.jp/models/lm/","試乗予約（LM）","見積りシミュレーション（LM500h）"]},
         {"url":"/cars/jp-lexus-ux-2026-ux300h-shining-essence-2wd/","locale":"ja","output_path":"dist/cars/jp-lexus-ux-2026-ux300h-shining-essence-2wd/index.html","markers":["メーカー公式サイトで仕様を確認","https://lexus.jp/models/ux/","試乗予約（UX）","見積りシミュレーション（UX300h）"]},

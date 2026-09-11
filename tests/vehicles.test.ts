@@ -233,6 +233,16 @@ describe('vehicle data contract and filters', () => {
     expect(tesla.every((vehicle) => vehicleReferenceLabel(vehicle) === '現行仕様')).toBe(true);
   });
 
+  it('日産アリアはB6だけ注文受付を一次情報で確認し、他グレードを未確認のまま分ける', () => {
+    const ariya = vehicles.filter((vehicle) => vehicle.maker === 'Nissan' && vehicle.model === '日産アリア');
+    expect(ariya).toHaveLength(4);
+    expect(ariya.find((vehicle) => vehicle.grade === 'B6')?.availability).toBe('new_order_available');
+    expect(ariya.find((vehicle) => vehicle.grade === 'B6')?.availabilityCheckedAt).toBe('2026-09-11');
+    expect(ariya.find((vehicle) => vehicle.grade === 'B6')?.sources.some((source) => source.url === 'https://www3.nissan.co.jp/vehicles/new/ariya.html' && source.accessedAt === '2026-09-11' && source.supports.some((fact) => fact.includes('日産各店で注文できるB6')))).toBe(true);
+    expect(ariya.filter((vehicle) => vehicle.grade !== 'B6').every((vehicle) => vehicle.availability === 'unknown')).toBe(true);
+    expect(ariya.find((vehicle) => vehicle.grade === 'B6')?.limitations.at(-1)).toContain('在庫・納期・契約条件');
+  });
+
   it('Hyundai IONIQ 5はHDA/HDA2のグレード差を販売単位へ保持する', () => {
     const ioniq5 = vehicles.filter((vehicle) => vehicle.maker === 'Hyundai' && vehicle.model === 'IONIQ 5');
     expect(ioniq5).toHaveLength(4);

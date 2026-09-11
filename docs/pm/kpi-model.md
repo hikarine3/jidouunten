@@ -23,6 +23,7 @@
 | 2台比較の静的URL | 0 | `/compare/?ids=a,b` のquery paramのみ |
 | 構造化データの型 | WebPage のみ | `src/layouts/Layout.astro` |
 | 公式アクションリンク | 60 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線、BYD 4車種は試乗・販売店・カタログ導線、Mitsubishi OUTLANDER PHEVは商談・購入予約・試乗車・見積り・販売店・カタログ導線を保持。検討用導線と注文可否は分離 |
+| 新車注文可（一次情報で確認） | 16 | `src/data/vehicles.json` の販売単位。Tesla 6、Mitsubishi OUTLANDER PHEV 9、日産アリアB6 1。B6は日産現行ページの「日産各店で注文できるB6」「11/26より注文受付中」を確認し、在庫・納期・契約成立は保証しない |
 | Lighthouse production (mobile) | performance 1.00 / accessibility 1.00 | `.cache/lighthouse-production.json` |
 | KPI実測（表示・クリック・selector行動） | 未取得 | 公開初日のため観測期間0日 |
 
