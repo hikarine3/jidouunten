@@ -1,4 +1,4 @@
-# 日本向け現行候補の棚卸し（最終更新: 2026-09-11）
+# 日本向け現行候補の棚卸し（最終更新: 2026-09-12）
 
 Issue #17の公開候補を、販売単位（市場・メーカー・メーカー明示モデル年または世代・グレード・必要装備・機能版）で管理するための内部台帳。通常一覧には表示しない。確認日は各車両レコードの `sources[].accessedAt` と `lastReviewedAt` に保持し、カタログ適用時点・販売単位導入時点・価格適用時点とは分離する。
 
@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 301 | `src/data/vehicles.json` の全レコード（現行300 + 過去1） |
-| 既定表示 | 300 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 305 | `src/data/vehicles.json` の全レコード（現行304 + 過去1） |
+| 既定表示 | 304 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -25,6 +25,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota アルファード / 後発対策） | 4 | Z/G HEVの2WD/E-Four・7/8人乗り。2026年6月価格、ACC・LTA・ステアリング保持要求を販売単位へ固定 |
 | 今回追加（Honda VEZEL / 後発対策） | 2 | e:HEV ZのFF/4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
 | 今回追加（Honda ZR-V / 後発対策） | 4 | e:HEV X／e:HEV ZのFF・4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
+| 今回追加（Toyota クラウン スポーツ / 後発対策） | 4 | SPORT RS／SPORT Z（PHEV・HEV）／SPORT GのE-Four。価格532万7,300円〜777万7,000円、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・条件内ハンズオフ、GはACC・LTAのみとして能力差を販売単位へ固定 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定。Advanced Driveの0〜約40km/hとLCAの約85〜130km/h、T-Connect／コネクティッドナビ契約・地図条件も単位ごとに保持 |
@@ -83,6 +84,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Lexus | LBX “Bespoke Build” 2WD（FF） | 掲載 | 2相当 | 2026-09-10 |
 | Lexus | RX500h “F SPORT Performance” AWD | 掲載 | 2相当 | 2026-09-10 |
 | Toyota | bZ4X Z（FWD） | 掲載 | 2相当 | 2026-09-10 |
+| Toyota | クラウン スポーツ SPORT RS／SPORT Z（PHEV・HEV）／SPORT G E-Four | 掲載（現行4単位、RS/Zは条件内ハンズオフ・車線変更支援、Gはハンドル保持）／注文可否 未確認 | 2相当 | 2026-09-12 |
 | Toyota | RAV4 Z（ハイブリッド車 E-Four） / Z（プラグインハイブリッド車 E-Four） / Adventure（ハイブリッド車 E-Four） / GR SPORT（プラグインハイブリッド車 E-Four） | 掲載（4単位） | 2相当 | 2026-09-10 |
 | Toyota | ハリアー G（2WD/E-Four） / Z（2WD/E-Four） / Z“Leather Package”（2WD/E-Four） | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Toyota | アルファード Z HEV 2WD / E-Four（7人乗り）、G HEV 2WD / E-Four（8人乗り） | 掲載（4単位） | 2相当 | 2026-09-10 |
@@ -804,3 +806,19 @@ Honda公式の現行商品・タイプ一覧、e:HEV X／Zの価格ページ、�
 | 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-11 |
 
 根拠: [ZR-V商品ページ](https://www.honda.co.jp/ZR-V/)、[タイプ一覧](https://www.honda.co.jp/ZR-V/webcatalog/type/list/)、[性能・安全](https://www.honda.co.jp/ZR-V/webcatalog/performance/)、[Honda TJA説明](https://www.honda.co.jp/hondasensing/sensing/tja/)。Hondaサイトは通常curlで403となる場合があるため、一次URLの確認はブラウザUAで行った。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。
+
+## 2026-09-12 Toyota クラウン スポーツ追加トランシェ
+
+トヨタ公式のクラウン スポーツ商品・価格ページと、`grades64.json`（model id 64）の現行4エントリを照合し、SPORT RS／SPORT ZのPHEV・HEVとSPORT G HEVをE-Four・5人乗りの販売単位として追加した。メーカー希望小売価格は税込532万7,300円（SPORT G）〜777万7,000円（SPORT RS）で、KINTO月額表示は車両本体価格へ換算していない。個別の発売日・受注可否は販売単位に固定できないため、`salesUnitIntroducedAt=null`、`availability=unknown`とした。
+
+安全性能ページでSPORT RS／SPORT Zにアドバンスト ドライブ（渋滞時支援）とレーンチェンジアシストが標準装備、全車に全車速追従レーダークルーズコントロール・LTAが掲載されることを確認した。RS／Zは渋滞時0〜約40km/hの条件内ハンズオフ・運転者監視・車線変更支援を能力タグへ反映し、SPORT Gは同ページでRS／Z限定装備とされる機能を付与せず、ACC・LTA・渋滞時運転支援・ハンドル保持のみとした。全単位を国土交通省の定義に照合したサイト上のLevel 2相当として表示するが、自動運転とは表記しない。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| クラウン スポーツ現行商品ページ | トヨタ自動車株式会社 | https://toyota.jp/crownsport/ | 2026-09-12 |
+| SPORT RS／Z（PHEV・HEV）／Gの価格・駆動・定員 | トヨタ自動車株式会社 | https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades64.json | 2026-09-12 |
+| 全車速追従ACC・LTA、RS/Zのアドバンスト ドライブ・LCA、渋滞時0〜約40km/h | トヨタ自動車株式会社 | https://toyota.jp/crownsport/safety/ | 2026-09-12 |
+| 2026年9月主要諸元・装備一覧 | トヨタ自動車株式会社 | https://toyota.jp/pages/contents/crownsport/001_p_001/pdf/crownsport_spec_202609.pdf | 2026-09-12 |
+| 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
+
+根拠: [クラウン スポーツ商品ページ](https://toyota.jp/crownsport/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades64.json)、[安全性能](https://toyota.jp/crownsport/safety/)、[主要諸元・装備一覧](https://toyota.jp/pages/contents/crownsport/001_p_001/pdf/crownsport_spec_202609.pdf)。公式サイトに掲載されたグレードと、作動条件・能力差を分離している。受注可否は未確認のため新車注文可とは表示しない。
