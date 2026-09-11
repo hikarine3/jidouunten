@@ -8,6 +8,7 @@
 - exact app `a13e287`、Production `https://jidouunten.jp/`、immutable `https://42ab762a.jidouunten.pages.dev`、直前rollback `https://a612f40b.jidouunten.pages.dev`。Cloudflare Pages production/mainへ実IDで反映済み。
 - QA: 391 HTML、sitemap-0 390 URL、詳細385件、ItemList 2ページ768項目、公式導線72モデル／69 URL／131 actions、Vitest69/69、価格385/385（現行384、exact369／range15／未確認1）、鮮度checker（2026-09-12基準）確認済み384／要再確認0／競合1／未確認0、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID release／structured PASS、registry 508/508、公開HTML内部enum/source/accessedAt漏れ0、独立監査PASS、production E2E 1/1（GA collect HTTP204）、主要URL200、IDN path/query301。
 - 一覧のWikimedia Commons参考写真は従来どおり`loading="lazy"`・`object-fit: cover`のWebPサムネイルで省スペース表示し、作者・ライセンス帰属と詳細画像を維持。
+- Tesla Model S / Xは2026-09-12に日本向け公式ホーム・取扱説明書・保証・新車在庫・補助金・注文FAQを再確認したが、現行日本円価格・グレード・注文CTA・在庫車・日本仕様ADAS条件を固定できず、`未確認／掲載保留`を維持。主要URLは調査環境でHTTP 403のため検索結果で補完せず、販売開始告知・Design Studio・在庫車の一次根拠が出た時点で再確認する。
 - Issue #17（候補カバレッジ）・#37（公式導線／計測）・#25（計測観測）・#15（レビュー）は未確認母集団や観測継続が残るためIn progressを維持し、全国網羅完了とは宣言しない。
 
 ## 2026-09-12 Daihatsu タント系20販売単位追加（本番反映済み）
