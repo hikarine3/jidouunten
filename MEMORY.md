@@ -2,6 +2,15 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 日産エクストレイル14販売単位追加（本番反映済み）
+
+- 日産公式の現行商品・価格／グレード・ProPILOT説明・通常／NISMO／AUTECH装備表を突合し、エクストレイル14販売単位（2WD／e-4ORCE、2列／3列、G・X・ROCK CREEK・NISMO・AUTECH）を追加。価格は409万2,000円〜596万2,000円（税込、2026年9月確認）。全車Level 2相当（ACC＋車線内操舵）だが、ステアリング保持・常時監視が必要でハンズオフ不可。車線変更支援・自動車線変更は根拠がないため付与しない。
+- 日産公式掲載は注文可能を意味しないため、14単位とも注文可否`unknown`を維持。販売単位の正確な発売日・受注状態を推測せず、公式見積り・販売店・試乗・カタログ導線を併記する。
+- exact app `882c999edf10200447b1cf9e4fe7f1715d52898b`、Production `https://jidouunten.jp/`、immutable `https://6e16f4db.jidouunten.pages.dev`、直前rollback `https://f99e6571.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- QA: 全297販売単位（現行296）、sitemap-0 302 URL、詳細297件、ItemList 2ページ592項目、公式導線60モデル／58 URL／83 actions、Vitest58/58、価格297/297、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build303、release／structured PASS、registry 42 entities／415 surfaces／2,002 markers失敗0、独立監査2件PASS、local／immutable／production E2E各1/1（GA collect204）、主要URL200、未知URL404、IDN path/query301。
+- 既存のWikimedia Commons参考写真3モデルは詳細画像を維持しつつ、一覧ではサムネイル（デスクトップ374×140.8px、モバイル360×112px、`object-fit: cover`）で省スペース表示。作者・ライセンス帰属とセルフホストWebP方針は変更なし。
+- 根拠は[エクストレイル商品ページ](https://www3.nissan.co.jp/vehicles/new/x-trail.html)、[価格・グレード](https://www3.nissan.co.jp/vehicles/new/x-trail/specifications.html)、[ProPILOT](https://www3.nissan.co.jp/vehicles/new/x-trail/performance_safety/propilot.html)。Issue #17は未確認候補の母集団・受注状態が残るためIn progressを維持し、全国網羅完了とは宣言しない。
+
 ## 2026-09-11 SUBARU フォレスター追加／一覧サムネイル化（本番反映済み）
 
 - SUBARU公式の現行グレード一覧・2026年5月装備表・安全性能・発表資料を突合し、フォレスター7販売単位（Touring／Touring EX／SPORT EX／SPORT EX Black Selection／X-BREAK S:HEV／X-BREAK S:HEV EX／Premium S:HEV EX）を追加。価格は385万円〜464万2,000円（税込）。全車Level 2相当で、EyeSight X標準の5単位は条件内ハンズオフ・車線変更支援、非Xの2単位はハンズオン必須として同じLevel 2内の差を表示する。

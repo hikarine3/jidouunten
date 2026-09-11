@@ -2,6 +2,18 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 日産エクストレイル14販売単位追加／一覧サムネイル継続）
+
+- exact app release commit: `882c999`
+- immutable: https://6e16f4db.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 日産エクストレイルの現行14販売単位（2WD／e-4ORCE、2列／3列、G・X・ROCK CREEK・NISMO・AUTECH）を追加。価格は409万2,000円〜596万2,000円（税込、2026年9月確認）。日産公式ProPILOTの一次情報に基づき全車Level 2相当（ACC＋車線内操舵、ステアリング保持・常時監視、ハンズオフ不可）として表示し、自動車線変更・ハンズオフを付与していない。掲載は注文可能の保証ではないため14単位とも注文可否は未確認。
+- 公式根拠: [エクストレイル商品ページ](https://www3.nissan.co.jp/vehicles/new/x-trail.html)、[価格・グレード](https://www3.nissan.co.jp/vehicles/new/x-trail/specifications.html)、[ProPILOT](https://www3.nissan.co.jp/vehicles/new/x-trail/performance_safety/propilot.html)、2026年9月装備表（通常／NISMO／AUTECH）。公式商品・見積り・販売店・試乗・カタログ導線を記録。
+- SEO／公開面: 303 HTML、sitemap-0は302 URL、詳細297件、トップ／一覧ItemListは2ページ・592項目。GTM実IDは303 HTMLへ各1件、テストID0件。
+- QA: `npm test` 58/58、価格297/297（現行296/296、exact281／range15／未確認1）、公式導線60モデル／58 URL／83 actions、画像3/3、Python16/16、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build303、release guard／構造化データPASS。独立リリース監査2件ともexact `882c999`でPASS、registry 42 entities／415 surfaces／2,002 markers失敗0。ローカル／immutable／本体E2E各1/1（GA collect HTTP204）。
+- 本番smoke: immutable／本体のトップ、一覧、X-Trail詳細3種、比較、sitemap-index、sitemap-0、robotsはHTTP200、未知URLは404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301（query維持）。一覧画像は既存Wikimedia Commons参考写真をサムネイル（デスクトップ374×140.8px、モバイル360×112px、`object-fit: cover`）で維持。
+- 直前の正常配信・ロールバック候補: https://f99e6571.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 SUBARU フォレスター／一覧サムネイル改善）
 
 - exact app release commit: `02bf120`（フォレスター追加 `83ecbf7`、依存レジストリ件数同期 `ad5a076`、一覧画像のサムネイル化を含む）
