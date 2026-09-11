@@ -2,6 +2,13 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 日産アリアB6注文受付確認（実装・本番反映済み）
+
+- 日産公式の現行アリアページで「日産各店で注文できるB6」「11/26より注文受付中」を確認。B6（2WD）の参考価格6,675,900円と紐付け、B6だけを`new_order_available`、B6 e-4ORCE／B9／B9 e-4ORCEは`unknown`のまま4販売単位へ反映した。注文受付の明示は在庫・納期・契約成立を保証しないため、制限事項で販売店確認を促している。
+- 公式ページへの仕様確認、試乗車、販売店、セルフ見積り、カタログの4導線は維持し、根拠のない注文CTAは追加していない。根拠は[アリア公式](https://www3.nissan.co.jp/vehicles/new/ariya.html)と[日産工場出荷時期](https://www3.nissan.co.jp/siteinfo/product.html)。
+- exact app `c6a429b`、Production `https://jidouunten.jp/`、immutable `https://021157cb.jidouunten.pages.dev`。現行173／全174販売単位、公式導線44モデル／60 actions、sitemap-0は179 URL。
+- QA: Vitest45/45、価格174/174、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build180、ローカル・immutable・本番E2E各1/1（GA collect204）、公開面依存レジストリ648/648、独立Luna監査PASS。内部enum・source/accessedAt等の公開HTML漏れ0件、主要URL HTTP200、IDN path/query 301を確認。
+
 ## 2026-09-11 Mitsubishi OUTLANDER PHEV追加（実装・本番反映済み）
 
 - Mitsubishi Motors公式の2026年6月改良後ラインアップから、BLACK Edition／P Executive Package／P／G／M、5・7人乗りを9販売単位として追加。価格は536万9,100円〜690万1,400円（税込）。全車Level 2のMI-PILOT（ACC＋車線維持支援）として、グレード・駆動・定員・価格で比較できる。

@@ -2,7 +2,16 @@
 
 更新: 2026-09-11
 
-## 最新の配信（2026-09-11）
+## 最新の配信（2026-09-11 日産アリアB6）
+
+- exact app: `c6a429b`（日産アリアB6の注文状態確認、公開HTMLの内部enum除去）
+- immutable: https://021157cb.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 日産アリアのB6／B6 e-4ORCE／B9／B9 e-4ORCEを4販売単位で保持し、現行ページの「日産各店で注文できるB6」「11/26より注文受付中」を根拠にB6だけを新車注文可として表示。B6の参考価格は6,675,900円。残り3単位は注文可否未確認のままにし、在庫・納期・契約成立を保証しない。公式サイト・試乗・販売店・見積り・カタログの既存導線は維持し、注文確定を示すCTAは追加していない。
+- QA: Vitest45/45、価格174/174（現行173/173）、公式導線44モデル/60 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build180、ローカルE2E1/1、immutable・production E2E各1/1（GA collect HTTP204）、公開面依存レジストリ648/648、独立Luna監査PASS
+- immutable／本体でHTTP 200を確認（`/`、`/cars/`、アリアB6詳細・比較、`/levels/`、`/sitemap-index.xml`、`/sitemap-0.xml`、`/robots.txt`）。公開HTMLの内部enum・source/accessedAt等の漏れは0件。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301で維持される。`sitemap-0.xml`は179 URL。直前rollback: https://2897334d.jidouunten.pages.dev
+
+## 2026-09-11 Mitsubishi OUTLANDER PHEV
 
 - exact app: `c367aa4`（Mitsubishi OUTLANDER PHEVの現行9販売単位を追加）
 - immutable: https://2897334d.jidouunten.pages.dev
