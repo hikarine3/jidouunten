@@ -102,18 +102,47 @@
         "@astrojs/sitemap"
       ],
       "surfaces": [
-        {"url": "/", "locale": "ja", "output_path": "dist/index.html", "markers": ["Volvo", "EX30", "LEVEL 2"]},
-        {"url": "/cars/", "locale": "ja", "output_path": "dist/cars/index.html", "markers": ["Volvo", "EX30", "LEVEL 2"]},
-        {"url": "/cars/jp-volvo-ex30-my2027-plus-p5-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-plus-p5-electric/index.html", "markers": ["Volvo", "EX30", "Plus P5 Electric", "Level 2"]},
-        {"url": "/cars/jp-volvo-ex30-my2027-ultra-p5-long-range-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-ultra-p5-long-range-electric/index.html", "markers": ["Volvo", "EX30", "Ultra P5 Long Range Electric", "Level 2"]},
-        {"url": "/cars/jp-volvo-ex30-my2027-ultra-p8-awd-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-ultra-p8-awd-electric/index.html", "markers": ["Volvo", "EX30", "Ultra P8 AWD Electric", "Level 2"]},
-        {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["Volvo", "EX30", "Plus P5 Electric", "Ultra P8 AWD Electric"]},
+        {"url": "/", "locale": "ja", "output_path": "dist/index.html", "markers": ["Volvo", "EX30", "LEVEL 2", "新車注文可"]},
+        {"url": "/cars/", "locale": "ja", "output_path": "dist/cars/index.html", "markers": ["Volvo", "EX30", "LEVEL 2", "新車注文可"]},
+        {"url": "/cars/jp-volvo-ex30-my2027-plus-p5-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-plus-p5-electric/index.html", "markers": ["Volvo", "EX30", "Plus P5 Electric", "Level 2", "新車注文可"]},
+        {"url": "/cars/jp-volvo-ex30-my2027-ultra-p5-long-range-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-ultra-p5-long-range-electric/index.html", "markers": ["Volvo", "EX30", "Ultra P5 Long Range Electric", "Level 2", "新車注文可"]},
+        {"url": "/cars/jp-volvo-ex30-my2027-ultra-p8-awd-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-ultra-p8-awd-electric/index.html", "markers": ["Volvo", "EX30", "Ultra P8 AWD Electric", "Level 2", "新車注文可"]},
+        {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["Volvo", "EX30", "Plus P5 Electric", "Ultra P8 AWD Electric", "新車注文可"]},
         {"url": "/sitemap-0.xml", "locale": "ja", "output_path": "dist/sitemap-0.xml", "markers": ["jp-volvo-ex30-my2027-plus-p5-electric", "jp-volvo-ex30-my2027-ultra-p5-long-range-electric", "jp-volvo-ex30-my2027-ultra-p8-awd-electric"]}
       ],
       "required_render_selectors": [
-        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Plus P5 Electric"]},
-        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Ultra P5 Long Range Electric"]},
-        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Ultra P8 AWD Electric"]}
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Plus P5 Electric", "新車注文可"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Ultra P5 Long Range Electric", "新車注文可"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Ultra P8 AWD Electric", "新車注文可"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
+    "vehicle:subaru-jp-levorg-layback-2026": {
+      "entity_id": "vehicle:subaru-jp-levorg-layback-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": [
+        "src/data/vehicles.json",
+        "docs/research/vehicle-inventory-20260907.md"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleList.astro",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["SUBARU","レヴォーグ レイバック","LEVEL 2"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["SUBARU","レヴォーグ レイバック","LEVEL 2"]},
+        {"url":"/cars/jp-subaru-levorg-layback-2023-limited-ex/","locale":"ja","output_path":"dist/cars/jp-subaru-levorg-layback-2023-limited-ex/index.html","markers":["SUBARU","レヴォーグ レイバック","Limited EX","4,059,000円","Level 2"]},
+        {"url":"/compare/?ids=jp-honda-accord-2025-ehev-sensing360plus&ids=jp-subaru-levorg-layback-2023-limited-ex","locale":"ja","output_path":"dist/compare/index.html","markers":["レヴォーグ レイバック"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-subaru-levorg-layback-2023-limited-ex"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-subaru-levorg-layback-2023-limited-ex\"])","markers":["SUBARU","レヴォーグ レイバック"]},
+        {"url":"/cars/jp-subaru-levorg-layback-2023-limited-ex/","selector":"main","markers":["レヴォーグ レイバック","Limited EX","4,059,000円","Level 2"]}
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
@@ -1508,11 +1537,11 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Hyundai","IONIQ 5","LEVEL 2"]},
-        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Hyundai","IONIQ 5","LEVEL 2"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Hyundai","IONIQ 5","LEVEL 2","新車注文可"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Hyundai","IONIQ 5","LEVEL 2","新車注文可"]},
         {"url":"/cars/jp-hyundai-ioniq5-2025-voyage-l/","locale":"ja","output_path":"dist/cars/jp-hyundai-ioniq5-2025-voyage-l/index.html","markers":["IONIQ 5","Voyage L","4,994,000円","Level 2","ハンズオフ：不可"]},
-        {"url":"/cars/jp-hyundai-ioniq5-2025-voyage/","locale":"ja","output_path":"dist/cars/jp-hyundai-ioniq5-2025-voyage/index.html","markers":["IONIQ 5","Voyage","5,236,000円","Level 2","ハンズオフ：不可"]},
-        {"url":"/cars/jp-hyundai-ioniq5-2025-lounge/","locale":"ja","output_path":"dist/cars/jp-hyundai-ioniq5-2025-lounge/index.html","markers":["IONIQ 5","Lounge","5,742,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-voyage/","locale":"ja","output_path":"dist/cars/jp-hyundai-ioniq5-2025-voyage/index.html","markers":["IONIQ 5","Voyage","5,236,000円","Level 2","ハンズオフ：不可","新車注文可"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-lounge/","locale":"ja","output_path":"dist/cars/jp-hyundai-ioniq5-2025-lounge/index.html","markers":["IONIQ 5","Lounge","5,742,000円","Level 2","ハンズオフ：不可","新車注文可"]},
         {"url":"/cars/jp-hyundai-ioniq5-2025-lounge-awd/","locale":"ja","output_path":"dist/cars/jp-hyundai-ioniq5-2025-lounge-awd/index.html","markers":["IONIQ 5","Lounge AWD","6,138,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/compare/?ids=jp-hyundai-ioniq5-2025-voyage-l&ids=jp-hyundai-ioniq5-2025-lounge-awd","locale":"ja","output_path":"dist/compare/index.html","markers":["IONIQ 5","Voyage L","Lounge AWD","4,994,000円","6,138,000円"]},
         {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-hyundai-ioniq5-2025-voyage-l","jp-hyundai-ioniq5-2025-lounge-awd"]}
@@ -1520,7 +1549,8 @@
       "required_render_selectors": [
         {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-hyundai-ioniq5-2025-voyage-l\"])","markers":["Hyundai","IONIQ 5","Voyage L"]},
         {"url":"/cars/jp-hyundai-ioniq5-2025-voyage-l/","selector":"main","markers":["IONIQ 5","Voyage L","4,994,000円","Level 2","ハンズオフ：不可","ステアリング","試乗を申し込む","見積りシミュレーション","カタログを見る"]},
-        {"url":"/cars/jp-hyundai-ioniq5-2025-voyage/","selector":"main","markers":["IONIQ 5","Voyage","5,236,000円","車線変更支援"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-voyage/","selector":"main","markers":["IONIQ 5","Voyage","5,236,000円","車線変更支援","新車注文可"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-lounge/","selector":"main","markers":["IONIQ 5","Lounge","5,742,000円","車線変更支援","新車注文可"]},
         {"url":"/cars/jp-hyundai-ioniq5-2025-lounge-awd/","selector":"main","markers":["IONIQ 5","Lounge AWD","6,138,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/compare/?ids=jp-hyundai-ioniq5-2025-voyage-l&ids=jp-hyundai-ioniq5-2025-lounge-awd","selector":"[data-compare-result]","markers":["IONIQ 5","Voyage L","Lounge AWD","4,994,000円","6,138,000円","車線変更支援"]}
       ],

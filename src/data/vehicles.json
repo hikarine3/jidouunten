@@ -519,8 +519,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-07",
+    "availability":"unknown",
+    "availabilityCheckedAt":"2026-09-11",
     "odd": {
       "roadTypes": ["高速道路", "自動車専用道路"],
       "speedKph": {"min": null, "max": null, "condition": "現行公式安全ページは渋滞時ハンズオフを説明するが数値速度を記載していないため未確認"},
@@ -533,8 +533,9 @@
     "driverMonitoring": "required",
     "handsOff": "allowed_in_conditions",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "traffic_jam_assist", "hands_off_highway", "driver_monitoring", "lane_change_support"],
-    "limitations": ["アイサイトXは自動運転装置ではない", "3D高精度地図に登録された道路など条件を満たす必要がある", "悪天候・夜間・地図未更新などで作動しない場合がある"],
+    "limitations": ["アイサイトXは自動運転装置ではない","3D高精度地図に登録された道路など条件を満たす必要がある","悪天候・夜間・地図未更新などで作動しない場合がある","SUBARU公式で注文済み新車のレイバック1.8Lグレード工場出荷目処は確認したが、現在の受注可否・納期は販売店と仕様ごとに変動するため未確認。"],
     "sources": [
+      {"publisher":"SUBARU","url":"https://www.subaru.jp/news/delivery/","title":"工場出荷時期目処のご案内｜SUBARU公式","accessedAt":"2026-09-11","supports":["「ご注文いただきました新車」の工場出荷目処","レイバック 1.8Lグレードは2ヵ月程度（8月28日時点）"],"type":"manufacturer"},
       {"publisher": "SUBARU", "url": "https://www.subaru.jp/levorg-layback/grade/", "title": "レヴォーグ レイバック グレード一覧", "accessedAt": "2026-09-10", "supports": ["Limited EX AWDのメーカー希望小売価格4,059,000円（税込み）〜", "オプション・諸費用は別"], "type": "manufacturer"},
       {"publisher": "SUBARU", "url": "https://www.subaru.jp/levorg-layback/", "title": "レヴォーグ レイバック｜SUBARU公式サイト", "accessedAt": "2026-09-07", "supports": ["現行車種掲載", "アイサイトXの渋滞時ハンズオフ説明"], "type": "manufacturer"},
       {"publisher": "SUBARU", "url": "https://www.subaru.jp/levorg-layback/safety/", "title": "アイサイト・安全｜レヴォーグ レイバック", "accessedAt": "2026-09-07", "supports": ["ツーリングアシスト・全車速追従・車線支援", "アイサイトXの渋滞時ハンズオフとドライバー監視"], "type": "manufacturer"},
@@ -544,7 +545,7 @@
     ],
     "classificationRationale": "SUBARUの説明する全車速追従（縦方向）・ツーリングアシスト／車線支援（横方向）を国土交通省のLevel 2定義に照合して分類した。アイサイトXのメーカー認証レベルを捏造していない。",
     "factStatus": "verified",
-    "lastReviewedAt": "2026-09-07"
+    "lastReviewedAt":"2026-09-11"
   },
   {
     "id": "jp-honda-legend-2021-honda-sensing-elite",
@@ -1328,8 +1329,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-11",
+    "availability":"new_order_available",
+    "availabilityCheckedAt":"2026-09-11",
     "odd": {
       "roadTypes": ["不明"],
       "speedKph": {"min": null, "max": 150, "condition": "Pilot Assistの最低目標設定速度は30km/h、全車速追従機能付ACCの設定速度上限は150km/h。作動車速の下限は未確認"},
@@ -1342,7 +1343,7 @@
     "driverMonitoring": "required",
     "handsOff": "not_allowed",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring", "lane_change_support"],
-    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "Volvo公式Q&AでEX30モデルのオンライン契約対象を確認済み。各2027年グレードの受注・在庫条件は未確認"],
+    "limitations": ["自動運転ではなく運転支援","両手をステアリングから離せない","カメラ・車線認識や道路状況により操舵支援が中断する場合がある","Volvo公式Q&AでEX30のオンライン契約・申込金支払いを確認。選択する仕様、在庫、納車時期は個別に変動する。"],
     "sources": [
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/ex30/", "title": "ラインナップ・主要諸元｜EX30", "accessedAt": "2026-09-07", "supports": ["2027年モデルの日本向け現行3グレード", "Plus P5 Electricの車両本体価格4,790,000円"], "type": "manufacturer"},
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/electric-qa/", "title": "EX30についての質問（オンライン購入）", "accessedAt": "2026-09-11", "supports": ["オンラインで車両選択・契約・申込金支払いまで可能", "オンライン注文可能な車種はEX30のみ"], "type": "manufacturer"},
@@ -1352,7 +1353,7 @@
     ],
     "classificationRationale": "ボルボのPilot Assistは速度・車間（縦方向）と車線内の操舵（横方向）を同時に支援し、運転者へ両手保持と即時介入を求める。これを国土交通省の定義に照合し、サイト上はLevel 2相当と分類した。ボルボが車両をLevel 2認証したという意味ではない。",
     "factStatus": "verified",
-    "lastReviewedAt": "2026-09-11"
+    "lastReviewedAt":"2026-09-11"
   },
   {
     "id": "jp-volvo-ex30-my2027-ultra-p5-long-range-electric",
@@ -1371,8 +1372,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-11",
+    "availability":"new_order_available",
+    "availabilityCheckedAt":"2026-09-11",
     "odd": {
       "roadTypes": ["不明"],
       "speedKph": {"min": null, "max": 150, "condition": "Pilot Assistの最低目標設定速度は30km/h、全車速追従機能付ACCの設定速度上限は150km/h。作動車速の下限は未確認"},
@@ -1385,7 +1386,7 @@
     "driverMonitoring": "required",
     "handsOff": "not_allowed",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring", "lane_change_support"],
-    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "Volvo公式Q&AでEX30モデルのオンライン契約対象を確認済み。各2027年グレードの受注・在庫条件は未確認"],
+    "limitations": ["自動運転ではなく運転支援","両手をステアリングから離せない","カメラ・車線認識や道路状況により操舵支援が中断する場合がある","Volvo公式Q&AでEX30のオンライン契約・申込金支払いを確認。選択する仕様、在庫、納車時期は個別に変動する。"],
     "sources": [
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/ex30/", "title": "ラインナップ・主要諸元｜EX30", "accessedAt": "2026-09-07", "supports": ["2027年モデルの日本向け現行3グレード", "Ultra P5 Long Range Electricの車両本体価格5,790,000円"], "type": "manufacturer"},
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/electric-qa/", "title": "EX30についての質問（オンライン購入）", "accessedAt": "2026-09-11", "supports": ["オンラインで車両選択・契約・申込金支払いまで可能", "オンライン注文可能な車種はEX30のみ"], "type": "manufacturer"},
@@ -1395,7 +1396,7 @@
     ],
     "classificationRationale": "ボルボのPilot Assistは速度・車間（縦方向）と車線内の操舵（横方向）を同時に支援し、運転者へ両手保持と即時介入を求める。これを国土交通省の定義に照合し、サイト上はLevel 2相当と分類した。ボルボが車両をLevel 2認証したという意味ではない。",
     "factStatus": "verified",
-    "lastReviewedAt": "2026-09-11"
+    "lastReviewedAt":"2026-09-11"
   },
   {
     "id": "jp-volvo-ex30-my2027-ultra-p8-awd-electric",
@@ -1414,8 +1415,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-11",
+    "availability":"new_order_available",
+    "availabilityCheckedAt":"2026-09-11",
     "odd": {
       "roadTypes": ["不明"],
       "speedKph": {"min": null, "max": 150, "condition": "Pilot Assistの最低目標設定速度は30km/h、全車速追従機能付ACCの設定速度上限は150km/h。作動車速の下限は未確認"},
@@ -1428,7 +1429,7 @@
     "driverMonitoring": "required",
     "handsOff": "not_allowed",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring", "lane_change_support"],
-    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "Volvo公式Q&AでEX30モデルのオンライン契約対象を確認済み。各2027年グレードの受注・在庫条件は未確認"],
+    "limitations": ["自動運転ではなく運転支援","両手をステアリングから離せない","カメラ・車線認識や道路状況により操舵支援が中断する場合がある","Volvo公式Q&AでEX30のオンライン契約・申込金支払いを確認。選択する仕様、在庫、納車時期は個別に変動する。"],
     "sources": [
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/ex30/", "title": "ラインナップ・主要諸元｜EX30", "accessedAt": "2026-09-07", "supports": ["2027年モデルの日本向け現行3グレード", "Ultra P8 AWD Electricの車両本体価格6,290,000円"], "type": "manufacturer"},
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/electric-qa/", "title": "EX30についての質問（オンライン購入）", "accessedAt": "2026-09-11", "supports": ["オンラインで車両選択・契約・申込金支払いまで可能", "オンライン注文可能な車種はEX30のみ"], "type": "manufacturer"},
@@ -1438,7 +1439,7 @@
     ],
     "classificationRationale": "ボルボのPilot Assistは速度・車間（縦方向）と車線内の操舵（横方向）を同時に支援し、運転者へ両手保持と即時介入を求める。これを国土交通省の定義に照合し、サイト上はLevel 2相当と分類した。ボルボが車両をLevel 2認証したという意味ではない。",
     "factStatus": "verified",
-    "lastReviewedAt": "2026-09-11"
+    "lastReviewedAt":"2026-09-11"
   },
   {
     "id": "jp-suzuki-e-vitara-2026-x-2wd",
@@ -5507,8 +5508,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-10",
+    "availability":"unknown",
+    "availabilityCheckedAt":"2026-09-11",
     "odd": {
       "roadTypes": [
         "高速道路",
@@ -5550,14 +5551,9 @@
       "driver_monitoring",
       "lane_change_support"
     ],
-    "limitations": [
-      "自動運転ではなく運転支援。運転者の常時監視・操作が必要",
-      "Advanced Driveのハンズオフは高速道路・自動車専用道路の渋滞時0〜約40km/hかつ一定条件下",
-      "対象区間・通信・地図・周囲状況などの条件が必要。渋滞解消や車線変更時は運転者が操作する",
-      "Advanced Driveの利用にはG-Link契約が必要。基本利用料は初度登録日から3年間無料で、その後は有料",
-      "メーカー公式サイトへの掲載は確認済み。新車で注文できるか、納期は未確認"
-    ],
+    "limitations": ["自動運転ではなく運転支援。運転者の常時監視・操作が必要","Advanced Driveのハンズオフは高速道路・自動車専用道路の渋滞時0〜約40km/hかつ一定条件下","対象区間・通信・地図・周囲状況などの条件が必要。渋滞解消や車線変更時は運転者が操作する","Advanced Driveの利用にはG-Link契約が必要。基本利用料は初度登録日から3年間無料で、その後は有料","Lexus公式で注文後のLM500h工場出荷目処は確認したが、現在の受注可否・納期は販売店と仕様ごとに変動するため未確認。"],
     "sources": [
+      {"publisher":"Lexus","url":"https://lexus.jp/news/info/delivery/index.html","title":"工場出荷時期目処のご案内｜Lexus公式","accessedAt":"2026-09-11","supports":["「ご注文から納車までの流れ」を掲載","LM500h EXECUTIVEは注文後の工場出荷目処5.5〜6.0ヶ月（9月11日時点）"],"type":"manufacturer"},
       {
         "publisher": "Lexus",
         "url": "https://lexus.jp/models/lm/features/price_package/",
@@ -5628,7 +5624,7 @@
     ],
     "classificationRationale": "Lexus公式の全車速追従レーダークルーズ（縦方向）とLTA/LCA（横方向）を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。Advanced Driveは渋滞時の条件付き支援で、運転者の状況確認・常時監視が必要なためハンズオフは条件内で可とした。",
     "factStatus": "verified",
-    "lastReviewedAt": "2026-09-10"
+    "lastReviewedAt":"2026-09-11"
   },
   {
     "id": "jp-lexus-lm-2026-lm500h-version-l-awd-6seater",
@@ -5661,8 +5657,8 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "unknown",
-    "availabilityCheckedAt": "2026-09-10",
+    "availability":"unknown",
+    "availabilityCheckedAt":"2026-09-11",
     "odd": {
       "roadTypes": [
         "高速道路",
@@ -5704,14 +5700,9 @@
       "driver_monitoring",
       "lane_change_support"
     ],
-    "limitations": [
-      "自動運転ではなく運転支援。運転者の常時監視・操作が必要",
-      "Advanced Driveのハンズオフは高速道路・自動車専用道路の渋滞時0〜約40km/hかつ一定条件下",
-      "対象区間・通信・地図・周囲状況などの条件が必要。渋滞解消や車線変更時は運転者が操作する",
-      "Advanced Driveの利用にはG-Link契約が必要。基本利用料は初度登録日から3年間無料で、その後は有料",
-      "メーカー公式サイトへの掲載は確認済み。新車で注文できるか、納期は未確認"
-    ],
+    "limitations": ["自動運転ではなく運転支援。運転者の常時監視・操作が必要","Advanced Driveのハンズオフは高速道路・自動車専用道路の渋滞時0〜約40km/hかつ一定条件下","対象区間・通信・地図・周囲状況などの条件が必要。渋滞解消や車線変更時は運転者が操作する","Advanced Driveの利用にはG-Link契約が必要。基本利用料は初度登録日から3年間無料で、その後は有料","Lexus公式で注文後のLM500h工場出荷目処は確認したが、現在の受注可否・納期は販売店と仕様ごとに変動するため未確認。"],
     "sources": [
+      {"publisher":"Lexus","url":"https://lexus.jp/news/info/delivery/index.html","title":"工場出荷時期目処のご案内｜Lexus公式","accessedAt":"2026-09-11","supports":["「ご注文から納車までの流れ」を掲載","LM500h version Lは注文後の工場出荷目処5.5〜6.0ヶ月（9月11日時点）"],"type":"manufacturer"},
       {
         "publisher": "Lexus",
         "url": "https://lexus.jp/models/lm/features/price_package/",
@@ -5782,7 +5773,7 @@
     ],
     "classificationRationale": "Lexus公式の全車速追従レーダークルーズ（縦方向）とLTA/LCA（横方向）を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。Advanced Driveは渋滞時の条件付き支援で、運転者の状況確認・常時監視が必要なためハンズオフは条件内で可とした。",
     "factStatus": "verified",
-    "lastReviewedAt": "2026-09-10"
+    "lastReviewedAt":"2026-09-11"
   }
   ,
   {
@@ -5830,8 +5821,8 @@
   {"id":"jp-toyota-corolla-cross-2026-z-adventure-e-four","market":"JP","maker":"Toyota","model":"カローラ クロス","modelYear":null,"generation":null,"catalogAsOf":"2026-07","salesUnitIntroducedAt":null,"priceEffectiveAt":"2026-07","price":{"kind":"exact","currency":"JPY","amounts":[{"amountJpy":3921500,"qualifier":"Z“Adventure”（E-Four）","sourceUrl":"https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades61.json"}],"maxJpy":3921500,"optionalPackages":[],"basis":"msrp","taxIncluded":"included"},"grade":"Z“Adventure”（E-Four）","requiredPackage":"Toyota Safety Sense（レーダークルーズコントロール・LTA等）","featureVersion":"Toyota Safety Sense / カローラ クロス 2026年7月仕様","currentCatalogListed":true,"automationLevel":2,"category":"driver_assistance","availability":"unknown","availabilityCheckedAt":"2026-09-11","odd":{"roadTypes":["高速道路","自動車専用道路"],"speedKph":{"min":null,"max":null,"condition":"全車速追従ACCは高速道路・自動車専用道路で先行車に追従し、停止保持後の再発進はドライバー操作が必要。LTAは車線中央付近の操舵を支援する。"},"trafficConditions":["先行車への追従","渋滞時の停止保持・先々行車検知","車線内走行支援","車線変更時の補助（ウインカー操作時の予備加減速）"],"weather":["悪天候・逆光・濡れた路面・車線認識条件などにより作動が制限される場合がある"],"geoRestriction":["高速道路・自動車専用道路の公式記載条件下"],"driverConditions":["ステアリングを常に保持","前方と周囲を常に確認","必要時にブレーキ・アクセル・ステアリングを直ちに操作","先行車発進後の追従再開はドライバー操作"],"manufacturerSummary":"レーダークルーズコントロールが速度・車間を、LTAが車線中央付近のステアリング操作を支援する。車線変更時はウインカー操作を前提に予備加速・減速を行う。運転者の監視と操作が必要で、ハンズオフには対応しない。"},"driverMonitoring":"required","handsOff":"not_allowed","capabilities":["adaptive_cruise_control","lane_centering","traffic_jam_assist","lane_change_support"],"limitations":["自動運転ではなく運転支援。運転者の常時監視・操作が必要","安全性の観点からステアリングを持ち続ける必要があり、手を放すとLTAが停止する","ACC停止後の発進はドライバー操作が必要","天候・道路・車線認識条件により作動が制限される場合がある","メーカー公式サイトへの掲載は確認済み。新車で注文できるかは未確認"],"sources":[{"publisher":"トヨタ自動車株式会社","url":"https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades61.json","title":"カローラ クロス グレードJSON｜トヨタ公式","accessedAt":"2026-09-11","supports":["現行7グレードの名称、駆動方式、乗車定員、税込価格","Z“Adventure”（E-Four）3,921,500円"],"type":"manufacturer"},{"publisher":"トヨタ自動車株式会社","url":"https://toyota.jp/corollacross/safety/","title":"カローラ クロス 安全性能｜トヨタ公式","accessedAt":"2026-09-11","supports":["全車速追従レーダークルーズ、LTA、渋滞時の先々行車検知、車線変更時の補助","LTAは高速道路の車線中央を支援し、運転者のステアリング保持が必要"],"type":"manufacturer"},{"publisher":"トヨタ自動車株式会社","url":"https://manual.toyota.jp/corollacross/2607/hev/ja_JP/contents/vhch04se050409.php","title":"レーダークルーズコントロール｜カローラ クロス HEV 2026.07～取扱説明書","accessedAt":"2026-09-11","supports":["高速道路・自動車専用道路で使用する運転支援、先行車追従、停止保持、発進操作"],"type":"manufacturer"},{"publisher":"国土交通省","url":"https://www.mlit.go.jp/common/001343740.pdf","title":"自動走行の取組と方針 Version 4.0（表1）","accessedAt":"2026-09-11","supports":["運転者が主体で前後・左右を支援するLevel 2の定義"],"type":"mlit"}],"classificationRationale":"トヨタ公式のレーダークルーズコントロール（縦方向）とLTA（横方向）の同時支援を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。車線変更時の補助はウインカー操作を前提にした予備加減速で、自動車線変更やハンズオフを意味しない。","factStatus":"verified","lastReviewedAt":"2026-09-11"}
   ,
   {"id":"jp-hyundai-ioniq5-2025-voyage-l","market":"JP","maker":"Hyundai","model":"IONIQ 5","modelYear":"2025","generation":null,"catalogAsOf":"2026-06","salesUnitIntroducedAt":null,"priceEffectiveAt":null,"price":{"kind":"exact","currency":"JPY","amounts":[{"amountJpy":4994000,"qualifier":"Voyage L","sourceUrl":"https://www.hyundai.com/jp/ioniq5/price"}],"maxJpy":4994000,"optionalPackages":[],"basis":"msrp","taxIncluded":"included"},"grade":"Voyage L","requiredPackage":"Hyundai SmartSense（HDA・LFA2など）標準","featureVersion":"Hyundai SmartSense / The new IONIQ 5 2026年6月カタログ","currentCatalogListed":true,"automationLevel":2,"category":"driver_assistance","availability":"unknown","availabilityCheckedAt":"2026-09-11","odd":{"roadTypes":["高速道路","自動車専用道路"],"speedKph":{"min":null,"max":null,"condition":"HDAの具体的な速度範囲は日本公式の確認資料に数値記載なし"},"trafficConditions":["先行車への追従","高速道路での車線維持","渋滞時の停止・再発進"],"weather":["天候・路面・車線認識条件により作動が制限される場合がある"],"geoRestriction":["高速道路の公式記載条件下"],"driverConditions":["ステアリングを保持","前方と周囲を常に確認","必要時に直ちに操作"],"manufacturerSummary":"スマートクルーズコントロールと高速道路ドライビングアシスト（HDA）が速度・車間・車線維持を支援する。運転者の監視と操作が必要で、ハンズオフには対応しない。"},"driverMonitoring":"required","handsOff":"not_allowed","capabilities":["adaptive_cruise_control","lane_centering","traffic_jam_assist"],"limitations":["自動運転ではなく運転支援。運転者の監視・操作が必要","ステアリングのハンズオン検知があり、手を放した運転はできない","HDAは高速道路の公式記載条件下で作動する","具体的な速度範囲と新車注文可否は未確認"],"sources":[{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5/price","title":"The new IONIQ 5 価格・装備｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["Voyage Lの車両価格4,994,000円（税込）","Voyage LはHDA、他グレードはHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5","title":"The new IONIQ 5｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["現行IONIQ 5のラインアップ","ステアリング保持の感知式ハンズオンディテクト","HDAによる高速道路の速度・車間・車線維持支援"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/customer-service/notice/679","title":"2026年度インフォテインメントシステム定期アップデートのお知らせ｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["The new IONIQ 5を2025年モデル以降として掲載"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/purchase/downFile/ioniq5","title":"IONIQ 5 カタログ（2026年6月現在）","accessedAt":"2026-09-11","supports":["2026年6月時点のカタログ","Voyage LのHDA、Voyage/Lounge/Lounge AWDのHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"国土交通省","url":"https://www.mlit.go.jp/common/001343740.pdf","title":"自動走行の取組と方針 Version 4.0（表1）","accessedAt":"2026-09-11","supports":["運転者が主体で前後・左右を支援するLevel 2の定義"],"type":"mlit"}],"classificationRationale":"Hyundai公式のスマートクルーズコントロール（縦方向）とHDA/LFA（横方向）の同時支援を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。HDAの作動中も運転者の監視とステアリング保持が必要で、車両を自動運転車と判定したものではない。","factStatus":"verified","lastReviewedAt":"2026-09-11"},
-  {"id":"jp-hyundai-ioniq5-2025-voyage","market":"JP","maker":"Hyundai","model":"IONIQ 5","modelYear":"2025","generation":null,"catalogAsOf":"2026-06","salesUnitIntroducedAt":null,"priceEffectiveAt":null,"price":{"kind":"exact","currency":"JPY","amounts":[{"amountJpy":5236000,"qualifier":"Voyage","sourceUrl":"https://www.hyundai.com/jp/ioniq5/price"}],"maxJpy":5236000,"optionalPackages":[],"basis":"msrp","taxIncluded":"included"},"grade":"Voyage","requiredPackage":"Hyundai SmartSense（HDA2・車線変更アシスト付）標準","featureVersion":"Hyundai SmartSense / The new IONIQ 5 2026年6月カタログ","currentCatalogListed":true,"automationLevel":2,"category":"driver_assistance","availability":"unknown","availabilityCheckedAt":"2026-09-11","odd":{"roadTypes":["高速道路","自動車専用道路"],"speedKph":{"min":null,"max":null,"condition":"HDA2の具体的な速度範囲は日本公式の確認資料に数値記載なし"},"trafficConditions":["先行車への追従","高速道路での車線維持","渋滞時の停止・再発進","車線変更アシスト（ウインカー操作を前提）"],"weather":["天候・路面・車線認識条件により作動が制限される場合がある"],"geoRestriction":["高速道路の公式記載条件下"],"driverConditions":["ステアリングを保持","前方と周囲を常に確認","車線変更時に周囲を確認し必要時に操作"],"manufacturerSummary":"スマートクルーズコントロールとHDA2が速度・車間・車線維持を支援し、条件内で車線変更をアシストする。運転者の監視と操作が必要で、ハンズオフには対応しない。"},"driverMonitoring":"required","handsOff":"not_allowed","capabilities":["adaptive_cruise_control","lane_centering","traffic_jam_assist","lane_change_support"],"limitations":["自動運転ではなく運転支援。運転者の監視・操作が必要","ステアリングのハンズオン検知があり、手を放した運転はできない","HDA2は高速道路の公式記載条件下で作動し、車線変更はウインカー操作を前提とする","具体的な速度範囲と新車注文可否は未確認"],"sources":[{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5/price","title":"The new IONIQ 5 価格・装備｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["Voyageの車両価格5,236,000円（税込）","VoyageはHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5","title":"The new IONIQ 5｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["現行IONIQ 5のラインアップ","ステアリング保持の感知式ハンズオンディテクト","HDA2による高速道路の車線維持・車線変更アシスト"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/customer-service/notice/679","title":"2026年度インフォテインメントシステム定期アップデートのお知らせ｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["The new IONIQ 5を2025年モデル以降として掲載"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/purchase/downFile/ioniq5","title":"IONIQ 5 カタログ（2026年6月現在）","accessedAt":"2026-09-11","supports":["2026年6月時点のカタログ","VoyageのHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"国土交通省","url":"https://www.mlit.go.jp/common/001343740.pdf","title":"自動走行の取組と方針 Version 4.0（表1）","accessedAt":"2026-09-11","supports":["運転者が主体で前後・左右を支援するLevel 2の定義"],"type":"mlit"}],"classificationRationale":"Hyundai公式のスマートクルーズコントロール（縦方向）とHDA2/LFA（横方向）の同時支援を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。車線変更アシストはウインカー操作と運転者確認を前提とし、自動運転車やハンズオフとは判定していない。","factStatus":"verified","lastReviewedAt":"2026-09-11"},
-  {"id":"jp-hyundai-ioniq5-2025-lounge","market":"JP","maker":"Hyundai","model":"IONIQ 5","modelYear":"2025","generation":null,"catalogAsOf":"2026-06","salesUnitIntroducedAt":null,"priceEffectiveAt":null,"price":{"kind":"exact","currency":"JPY","amounts":[{"amountJpy":5742000,"qualifier":"Lounge","sourceUrl":"https://www.hyundai.com/jp/ioniq5/price"}],"maxJpy":5742000,"optionalPackages":[],"basis":"msrp","taxIncluded":"included"},"grade":"Lounge","requiredPackage":"Hyundai SmartSense（HDA2・車線変更アシスト付）標準","featureVersion":"Hyundai SmartSense / The new IONIQ 5 2026年6月カタログ","currentCatalogListed":true,"automationLevel":2,"category":"driver_assistance","availability":"unknown","availabilityCheckedAt":"2026-09-11","odd":{"roadTypes":["高速道路","自動車専用道路"],"speedKph":{"min":null,"max":null,"condition":"HDA2の具体的な速度範囲は日本公式の確認資料に数値記載なし"},"trafficConditions":["先行車への追従","高速道路での車線維持","渋滞時の停止・再発進","車線変更アシスト（ウインカー操作を前提）"],"weather":["天候・路面・車線認識条件により作動が制限される場合がある"],"geoRestriction":["高速道路の公式記載条件下"],"driverConditions":["ステアリングを保持","前方と周囲を常に確認","車線変更時に周囲を確認し必要時に操作"],"manufacturerSummary":"スマートクルーズコントロールとHDA2が速度・車間・車線維持を支援し、条件内で車線変更をアシストする。運転者の監視と操作が必要で、ハンズオフには対応しない。"},"driverMonitoring":"required","handsOff":"not_allowed","capabilities":["adaptive_cruise_control","lane_centering","traffic_jam_assist","lane_change_support"],"limitations":["自動運転ではなく運転支援。運転者の監視・操作が必要","ステアリングのハンズオン検知があり、手を放した運転はできない","HDA2は高速道路の公式記載条件下で作動し、車線変更はウインカー操作を前提とする","具体的な速度範囲と新車注文可否は未確認"],"sources":[{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5/price","title":"The new IONIQ 5 価格・装備｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["Loungeの車両価格5,742,000円（税込）","LoungeはHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5","title":"The new IONIQ 5｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["現行IONIQ 5のラインアップ","ステアリング保持の感知式ハンズオンディテクト","HDA2による高速道路の車線維持・車線変更アシスト"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/customer-service/notice/679","title":"2026年度インフォテインメントシステム定期アップデートのお知らせ｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["The new IONIQ 5を2025年モデル以降として掲載"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/purchase/downFile/ioniq5","title":"IONIQ 5 カタログ（2026年6月現在）","accessedAt":"2026-09-11","supports":["2026年6月時点のカタログ","LoungeのHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"国土交通省","url":"https://www.mlit.go.jp/common/001343740.pdf","title":"自動走行の取組と方針 Version 4.0（表1）","accessedAt":"2026-09-11","supports":["運転者が主体で前後・左右を支援するLevel 2の定義"],"type":"mlit"}],"classificationRationale":"Hyundai公式のスマートクルーズコントロール（縦方向）とHDA2/LFA（横方向）の同時支援を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。車線変更アシストはウインカー操作と運転者確認を前提とし、自動運転車やハンズオフとは判定していない。","factStatus":"verified","lastReviewedAt":"2026-09-11"},
+  {"id":"jp-hyundai-ioniq5-2025-voyage","market":"JP","maker":"Hyundai","model":"IONIQ 5","modelYear":"2025","generation":null,"catalogAsOf":"2026-06","salesUnitIntroducedAt":null,"priceEffectiveAt":null,"price":{"kind":"exact","currency":"JPY","amounts":[{"amountJpy":5236000,"qualifier":"Voyage","sourceUrl":"https://www.hyundai.com/jp/ioniq5/price"}],"maxJpy":5236000,"optionalPackages":[],"basis":"msrp","taxIncluded":"included"},"grade":"Voyage","requiredPackage":"Hyundai SmartSense（HDA2・車線変更アシスト付）標準","featureVersion":"Hyundai SmartSense / The new IONIQ 5 2026年6月カタログ","currentCatalogListed":true,"automationLevel":2,"category":"driver_assistance","availability":"new_order_available","availabilityCheckedAt":"2026-09-11","odd":{"roadTypes":["高速道路","自動車専用道路"],"speedKph":{"min":null,"max":null,"condition":"HDA2の具体的な速度範囲は日本公式の確認資料に数値記載なし"},"trafficConditions":["先行車への追従","高速道路での車線維持","渋滞時の停止・再発進","車線変更アシスト（ウインカー操作を前提）"],"weather":["天候・路面・車線認識条件により作動が制限される場合がある"],"geoRestriction":["高速道路の公式記載条件下"],"driverConditions":["ステアリングを保持","前方と周囲を常に確認","車線変更時に周囲を確認し必要時に操作"],"manufacturerSummary":"スマートクルーズコントロールとHDA2が速度・車間・車線維持を支援し、条件内で車線変更をアシストする。運転者の監視と操作が必要で、ハンズオフには対応しない。"},"driverMonitoring":"required","handsOff":"not_allowed","capabilities":["adaptive_cruise_control","lane_centering","traffic_jam_assist","lane_change_support"],"limitations":["自動運転ではなく運転支援。運転者の監視・操作が必要","ステアリングのハンズオン検知があり、手を放した運転はできない","HDA2は高速道路の公式記載条件下で作動し、車線変更はウインカー操作を前提とする","ヒョンデ公式の新車在庫ページでIONIQ 5 Voyageの「車両注文」導線を確認。掲載車両・色・仕様は変動し、Voyageグレード全体の常時受注を保証しない。"],"sources":[{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/stock/new","title":"新車在庫検索｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["IONIQ 5 Voyageの掲載車両に「車両注文」導線","在庫車両の仕様・販売状況を個別表示"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5/price","title":"The new IONIQ 5 価格・装備｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["Voyageの車両価格5,236,000円（税込）","VoyageはHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5","title":"The new IONIQ 5｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["現行IONIQ 5のラインアップ","ステアリング保持の感知式ハンズオンディテクト","HDA2による高速道路の車線維持・車線変更アシスト"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/customer-service/notice/679","title":"2026年度インフォテインメントシステム定期アップデートのお知らせ｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["The new IONIQ 5を2025年モデル以降として掲載"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/purchase/downFile/ioniq5","title":"IONIQ 5 カタログ（2026年6月現在）","accessedAt":"2026-09-11","supports":["2026年6月時点のカタログ","VoyageのHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"国土交通省","url":"https://www.mlit.go.jp/common/001343740.pdf","title":"自動走行の取組と方針 Version 4.0（表1）","accessedAt":"2026-09-11","supports":["運転者が主体で前後・左右を支援するLevel 2の定義"],"type":"mlit"}],"classificationRationale":"Hyundai公式のスマートクルーズコントロール（縦方向）とHDA2/LFA（横方向）の同時支援を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。車線変更アシストはウインカー操作と運転者確認を前提とし、自動運転車やハンズオフとは判定していない。","factStatus":"verified","lastReviewedAt":"2026-09-11"},
+  {"id":"jp-hyundai-ioniq5-2025-lounge","market":"JP","maker":"Hyundai","model":"IONIQ 5","modelYear":"2025","generation":null,"catalogAsOf":"2026-06","salesUnitIntroducedAt":null,"priceEffectiveAt":null,"price":{"kind":"exact","currency":"JPY","amounts":[{"amountJpy":5742000,"qualifier":"Lounge","sourceUrl":"https://www.hyundai.com/jp/ioniq5/price"}],"maxJpy":5742000,"optionalPackages":[],"basis":"msrp","taxIncluded":"included"},"grade":"Lounge","requiredPackage":"Hyundai SmartSense（HDA2・車線変更アシスト付）標準","featureVersion":"Hyundai SmartSense / The new IONIQ 5 2026年6月カタログ","currentCatalogListed":true,"automationLevel":2,"category":"driver_assistance","availability":"new_order_available","availabilityCheckedAt":"2026-09-11","odd":{"roadTypes":["高速道路","自動車専用道路"],"speedKph":{"min":null,"max":null,"condition":"HDA2の具体的な速度範囲は日本公式の確認資料に数値記載なし"},"trafficConditions":["先行車への追従","高速道路での車線維持","渋滞時の停止・再発進","車線変更アシスト（ウインカー操作を前提）"],"weather":["天候・路面・車線認識条件により作動が制限される場合がある"],"geoRestriction":["高速道路の公式記載条件下"],"driverConditions":["ステアリングを保持","前方と周囲を常に確認","車線変更時に周囲を確認し必要時に操作"],"manufacturerSummary":"スマートクルーズコントロールとHDA2が速度・車間・車線維持を支援し、条件内で車線変更をアシストする。運転者の監視と操作が必要で、ハンズオフには対応しない。"},"driverMonitoring":"required","handsOff":"not_allowed","capabilities":["adaptive_cruise_control","lane_centering","traffic_jam_assist","lane_change_support"],"limitations":["自動運転ではなく運転支援。運転者の監視・操作が必要","ステアリングのハンズオン検知があり、手を放した運転はできない","HDA2は高速道路の公式記載条件下で作動し、車線変更はウインカー操作を前提とする","ヒョンデ公式の新車在庫ページでIONIQ 5 Loungeの「車両注文」導線を確認。掲載車両・色・仕様は変動し、Loungeグレード全体の常時受注を保証しない。"],"sources":[{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/stock/new","title":"新車在庫検索｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["IONIQ 5 Loungeの掲載車両に「車両注文」導線","在庫車両の仕様・販売状況を個別表示"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5/price","title":"The new IONIQ 5 価格・装備｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["Loungeの車両価格5,742,000円（税込）","LoungeはHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5","title":"The new IONIQ 5｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["現行IONIQ 5のラインアップ","ステアリング保持の感知式ハンズオンディテクト","HDA2による高速道路の車線維持・車線変更アシスト"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/customer-service/notice/679","title":"2026年度インフォテインメントシステム定期アップデートのお知らせ｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["The new IONIQ 5を2025年モデル以降として掲載"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/purchase/downFile/ioniq5","title":"IONIQ 5 カタログ（2026年6月現在）","accessedAt":"2026-09-11","supports":["2026年6月時点のカタログ","LoungeのHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"国土交通省","url":"https://www.mlit.go.jp/common/001343740.pdf","title":"自動走行の取組と方針 Version 4.0（表1）","accessedAt":"2026-09-11","supports":["運転者が主体で前後・左右を支援するLevel 2の定義"],"type":"mlit"}],"classificationRationale":"Hyundai公式のスマートクルーズコントロール（縦方向）とHDA2/LFA（横方向）の同時支援を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。車線変更アシストはウインカー操作と運転者確認を前提とし、自動運転車やハンズオフとは判定していない。","factStatus":"verified","lastReviewedAt":"2026-09-11"},
   {"id":"jp-hyundai-ioniq5-2025-lounge-awd","market":"JP","maker":"Hyundai","model":"IONIQ 5","modelYear":"2025","generation":null,"catalogAsOf":"2026-06","salesUnitIntroducedAt":null,"priceEffectiveAt":null,"price":{"kind":"exact","currency":"JPY","amounts":[{"amountJpy":6138000,"qualifier":"Lounge AWD","sourceUrl":"https://www.hyundai.com/jp/ioniq5/price"}],"maxJpy":6138000,"optionalPackages":[],"basis":"msrp","taxIncluded":"included"},"grade":"Lounge AWD","requiredPackage":"Hyundai SmartSense（HDA2・車線変更アシスト付）標準","featureVersion":"Hyundai SmartSense / The new IONIQ 5 2026年6月カタログ","currentCatalogListed":true,"automationLevel":2,"category":"driver_assistance","availability":"unknown","availabilityCheckedAt":"2026-09-11","odd":{"roadTypes":["高速道路","自動車専用道路"],"speedKph":{"min":null,"max":null,"condition":"HDA2の具体的な速度範囲は日本公式の確認資料に数値記載なし"},"trafficConditions":["先行車への追従","高速道路での車線維持","渋滞時の停止・再発進","車線変更アシスト（ウインカー操作を前提）"],"weather":["天候・路面・車線認識条件により作動が制限される場合がある"],"geoRestriction":["高速道路の公式記載条件下"],"driverConditions":["ステアリングを保持","前方と周囲を常に確認","車線変更時に周囲を確認し必要時に操作"],"manufacturerSummary":"スマートクルーズコントロールとHDA2が速度・車間・車線維持を支援し、条件内で車線変更をアシストする。運転者の監視と操作が必要で、ハンズオフには対応しない。"},"driverMonitoring":"required","handsOff":"not_allowed","capabilities":["adaptive_cruise_control","lane_centering","traffic_jam_assist","lane_change_support"],"limitations":["自動運転ではなく運転支援。運転者の監視・操作が必要","ステアリングのハンズオン検知があり、手を放した運転はできない","HDA2は高速道路の公式記載条件下で作動し、車線変更はウインカー操作を前提とする","具体的な速度範囲と新車注文可否は未確認"],"sources":[{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5/price","title":"The new IONIQ 5 価格・装備｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["Lounge AWDの車両価格6,138,000円（税込）","Lounge AWDはHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/ioniq5","title":"The new IONIQ 5｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["現行IONIQ 5のラインアップ","ステアリング保持の感知式ハンズオンディテクト","HDA2による高速道路の車線維持・車線変更アシスト"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/customer-service/notice/679","title":"2026年度インフォテインメントシステム定期アップデートのお知らせ｜ヒョンデ公式","accessedAt":"2026-09-11","supports":["The new IONIQ 5を2025年モデル以降として掲載"],"type":"manufacturer"},{"publisher":"Hyundai Mobility Japan","url":"https://www.hyundai.com/jp/purchase/downFile/ioniq5","title":"IONIQ 5 カタログ（2026年6月現在）","accessedAt":"2026-09-11","supports":["2026年6月時点のカタログ","Lounge AWDのHDA2（車線変更アシスト付）"],"type":"manufacturer"},{"publisher":"国土交通省","url":"https://www.mlit.go.jp/common/001343740.pdf","title":"自動走行の取組と方針 Version 4.0（表1）","accessedAt":"2026-09-11","supports":["運転者が主体で前後・左右を支援するLevel 2の定義"],"type":"mlit"}],"classificationRationale":"Hyundai公式のスマートクルーズコントロール（縦方向）とHDA2/LFA（横方向）の同時支援を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。車線変更アシストはウインカー操作と運転者確認を前提とし、自動運転車やハンズオフとは判定していない。","factStatus":"verified","lastReviewedAt":"2026-09-11"}
   ,{"id":"jp-byd-dolphin-baseline","market":"JP","maker":"BYD","model":"DOLPHIN","modelYear":null,"generation":null,"catalogAsOf":"2026-02","salesUnitIntroducedAt":"2026-02-10","priceEffectiveAt":"2025-04-01","price":{"kind":"exact","currency":"JPY","amounts":[{"amountJpy":2992000,"qualifier":"Baseline","sourceUrl":"https://byd.co.jp/e-life/cars/dolphin/"}],"maxJpy":2992000,"optionalPackages":[],"basis":"msrp","taxIncluded":"included"},"grade":"Baseline","requiredPackage":"Navigation Pilot（ACC・ELKA）およびLKA/LDP/LCAを標準装備","featureVersion":"DOLPHIN Baseline / 2026年2月装備更新","currentCatalogListed":true,"automationLevel":2,"category":"driver_assistance","availability":"unknown","availabilityCheckedAt":"2026-09-11","odd":{"roadTypes":["高速道路","自動車専用道路"],"speedKph":{"min":0,"max":120,"condition":"Navigation Pilotの公式記載速度範囲。運転者の常時監視・操作が必要"},"trafficConditions":["先行車への追従","車線内走行支援"],"weather":["天候・路面・車線認識条件により作動が制限される場合がある"],"geoRestriction":["公式記載の作動条件下"],"driverConditions":["ステアリングを常に保持","前方と周囲を常に確認","必要時に直ちに操作"],"manufacturerSummary":"ACCと車線維持支援を含むNavigation Pilotを備える運転支援車。自動運転・ハンズオフではない。"},"driverMonitoring":"unknown","handsOff":"not_allowed","capabilities":["adaptive_cruise_control","lane_centering","lane_change_support"],"limitations":["自動運転ではなく運転支援","LCAは装備表記であり自動車線変更完了やハンズオフを意味しない","DAWは眠気・注意力警告であり運転者監視能力とは別","メーカー公式サイト掲載は確認済みだが新車注文可否・在庫は未確認"],"sources":[{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/e-life/cars/dolphin/","title":"BYD DOLPHIN｜BYD公式","accessedAt":"2026-09-11","supports":["現行2グレードの掲載","Baseline税込2,992,000円","Navigation Pilot（ACC・ELKA）0–120km/h","試乗予約・ディーラー導線"],"type":"manufacturer"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/news/uploads/BYD_DOLPHIN_specification.pdf","title":"BYD DOLPHIN 主要諸元・装備表","accessedAt":"2026-09-11","supports":["BaselineのACC・LKA・LCA等の装備表記"],"type":"manufacturer"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/e-life/after_support/pdf/manual_DOLPHIN.pdf","title":"BYD DOLPHIN 取扱説明書","accessedAt":"2026-09-11","supports":["Navigation Pilotは自動運転ではなく、運転者は常に車両を制御する必要がある","ステアリングから両手を離さないよう要求"],"type":"manual"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/news/2023_0920_146.html","title":"BYD DOLPHIN 日本発売発表","accessedAt":"2026-09-11","supports":["DOLPHINの2023年9月20日日本発売（初期モデル）"],"type":"manufacturer"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/e-life/news/2025_0401_1.html","title":"BYD 価格改定のお知らせ（2025年4月1日）","accessedAt":"2026-09-11","supports":["DOLPHIN Baseline 2,992,000円の新規設定","2025年4月1日価格改定"],"type":"manufacturer"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/news/2026_0210_301.html","title":"DOLPHIN装備アップデート（2026年2月10日）","accessedAt":"2026-09-11","supports":["Baseline・Long Rangeを2026年2月10日より販売開始","2026年2月10日現在の装備更新と価格"],"type":"manufacturer"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/e-life/safety/","title":"BYD 先進安全装備｜公式","accessedAt":"2026-09-11","supports":["車線変更支援はウインカー操作を合図とする公式説明"],"type":"manufacturer"}],"classificationRationale":"BYD公式のACCと車線維持支援を運転者が監視・操作する構成をLevel 2相当として分類した。BYDが自動運転車として認証したという意味ではない。","factStatus":"verified","lastReviewedAt":"2026-09-11"}
   ,{"id":"jp-byd-dolphin-long-range","market":"JP","maker":"BYD","model":"DOLPHIN","modelYear":null,"generation":null,"catalogAsOf":"2026-02","salesUnitIntroducedAt":"2026-02-10","priceEffectiveAt":"2025-04-01","price":{"kind":"exact","currency":"JPY","amounts":[{"amountJpy":3740000,"qualifier":"Long Range","sourceUrl":"https://byd.co.jp/e-life/cars/dolphin/"}],"maxJpy":3740000,"optionalPackages":[],"basis":"msrp","taxIncluded":"included"},"grade":"Long Range","requiredPackage":"Navigation Pilot（ACC・ELKA）およびLKA/LDP/LCAを標準装備","featureVersion":"DOLPHIN Long Range / 2026年2月装備更新","currentCatalogListed":true,"automationLevel":2,"category":"driver_assistance","availability":"unknown","availabilityCheckedAt":"2026-09-11","odd":{"roadTypes":["高速道路","自動車専用道路"],"speedKph":{"min":0,"max":120,"condition":"Navigation Pilotの公式記載速度範囲。運転者の常時監視・操作が必要"},"trafficConditions":["先行車への追従","車線内走行支援"],"weather":["天候・路面・車線認識条件により作動が制限される場合がある"],"geoRestriction":["公式記載の作動条件下"],"driverConditions":["ステアリングを常に保持","前方と周囲を常に確認","必要時に直ちに操作"],"manufacturerSummary":"ACCと車線維持支援を含むNavigation Pilotを備える運転支援車。自動運転・ハンズオフではない。"},"driverMonitoring":"unknown","handsOff":"not_allowed","capabilities":["adaptive_cruise_control","lane_centering","lane_change_support"],"limitations":["自動運転ではなく運転支援","LCAは装備表記であり自動車線変更完了やハンズオフを意味しない","DAWは眠気・注意力警告であり運転者監視能力とは別","メーカー公式サイト掲載は確認済みだが新車注文可否・在庫は未確認"],"sources":[{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/e-life/cars/dolphin/","title":"BYD DOLPHIN｜BYD公式","accessedAt":"2026-09-11","supports":["現行2グレードの掲載","Long Range税込3,740,000円","Navigation Pilot（ACC・ELKA）0–120km/h","試乗予約・ディーラー導線"],"type":"manufacturer"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/news/uploads/BYD_DOLPHIN_specification.pdf","title":"BYD DOLPHIN 主要諸元・装備表","accessedAt":"2026-09-11","supports":["Long RangeのACC・LKA・LCA等の装備表記"],"type":"manufacturer"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/e-life/after_support/pdf/manual_DOLPHIN.pdf","title":"BYD DOLPHIN 取扱説明書","accessedAt":"2026-09-11","supports":["Navigation Pilotは自動運転ではなく、運転者は常に車両を制御する必要がある","ステアリングから両手を離さないよう要求"],"type":"manual"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/news/2023_0920_146.html","title":"BYD DOLPHIN 日本発売発表","accessedAt":"2026-09-11","supports":["2023年9月20日の日本発売","Long Rangeの初回日本導入"],"type":"manufacturer"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/e-life/news/2025_0401_1.html","title":"BYD 価格改定のお知らせ（2025年4月1日）","accessedAt":"2026-09-11","supports":["DOLPHIN Long Range 3,740,000円","2025年4月1日価格改定"],"type":"manufacturer"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/news/2026_0210_301.html","title":"DOLPHIN装備アップデート（2026年2月10日）","accessedAt":"2026-09-11","supports":["Baseline・Long Rangeを2026年2月10日より販売開始","2026年2月10日現在の装備更新と価格"],"type":"manufacturer"},{"publisher":"BYD Auto Japan","url":"https://byd.co.jp/e-life/safety/","title":"BYD 先進安全装備｜公式","accessedAt":"2026-09-11","supports":["車線変更支援はウインカー操作を合図とする公式説明"],"type":"manufacturer"}],"classificationRationale":"BYD公式のACCと車線維持支援を運転者が監視・操作する構成をLevel 2相当として分類した。BYDが自動運転車として認証したという意味ではない。","factStatus":"verified","lastReviewedAt":"2026-09-11"}

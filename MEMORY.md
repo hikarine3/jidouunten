@@ -2,6 +2,13 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 注文状態の一次情報追加確認（監査反映）
+
+- 独立監査で、SUBARU レイバック Limited EX 1とLexus LM 2は「注文済み車両の工場出荷目処」であり現在の受付導線を直接確認できないため、注文可否を`unknown`へ戻した。Volvo EX30 2027 3とHyundai IONIQ 5 Voyage／Lounge 2のみを`new_order_available`へ更新。全189販売単位の内訳は注文可21／未確認167／現在利用不可1。
+- 根拠はVolvo EX30のオンライン契約Q&Aと、ヒョンデ新車在庫ページのVoyage／Lounge「車両注文」。SUBARU／Lexusの出荷目処根拠は各レコードに保持し、現在の受注可否未確認と明記。Voyage L／Lounge AWD、Suzuki e VITARAも`unknown`を維持。
+- `scripts/check_availability_evidence.mjs`で注文可21件すべてにメーカー一次情報の注文・出荷根拠があり、未確認167件を保持することを機械検査。registry／research／testsも判定へ同期する。自動運転タクシー領域は [JID-038](https://github.com/hikarine3/jidouunten/issues/38) の後続Sprintで実装する。
+- 次の作業: 再監査、実IDビルド、Cloudflare Pages公開。
+
 ## 2026-09-11 Toyota アクア／カローラ拡張（実装・本番反映済み）
 
 - トヨタ公式の現行価格・グレード、安全性能、取扱説明書を根拠に、アクア9単位（Z／G／X／Uの2WD・E-Four、GR SPORT 2WD）とカローラ6単位（HYBRID W×B／G／Xの2WD・E-Four）を追加。価格帯はアクア244万3,100円〜323万8,400円、カローラ238万400円〜334万2,900円。全車速追従ACC＋LTA、ステアリング保持を確認し、Level 2相当として比較可能にした。

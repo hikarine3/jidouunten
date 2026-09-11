@@ -245,12 +245,22 @@ describe('vehicle data contract and filters', () => {
     expect(ariya.find((vehicle) => vehicle.grade === 'B6')?.limitations.at(-1)).toContain('在庫・納期・契約条件');
   });
 
+  it('SUBARU レイバックは注文済み新車の工場出荷目処を確認しつつ注文可否を未確認とする', () => {
+    const layback = vehicles.find((vehicle) => vehicle.id === 'jp-subaru-levorg-layback-2023-limited-ex');
+    expect(layback?.availability).toBe('unknown');
+    expect(layback?.availabilityCheckedAt).toBe('2026-09-11');
+    expect(layback?.sources.some((source) => source.url === 'https://www.subaru.jp/news/delivery/' && source.supports.some((fact) => fact.includes('ご注文いただきました新車')))).toBe(true);
+    expect(layback?.limitations.at(-1)).toContain('現在の受注可否・納期');
+  });
+
   it('Hyundai IONIQ 5はHDA/HDA2のグレード差を販売単位へ保持する', () => {
     const ioniq5 = vehicles.filter((vehicle) => vehicle.maker === 'Hyundai' && vehicle.model === 'IONIQ 5');
     expect(ioniq5).toHaveLength(4);
     expect(ioniq5.map((vehicle) => vehicle.grade).sort()).toEqual(['Lounge', 'Lounge AWD', 'Voyage', 'Voyage L'].sort());
     expect(ioniq5.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([4_994_000, 5_236_000, 5_742_000, 6_138_000]);
-    expect(ioniq5.every((vehicle) => vehicle.modelYear === '2025' && vehicle.catalogAsOf === '2026-06' && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.availability === 'unknown')).toBe(true);
+    expect(ioniq5.every((vehicle) => vehicle.modelYear === '2025' && vehicle.catalogAsOf === '2026-06' && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
+    expect(ioniq5.filter((vehicle) => ['Voyage', 'Lounge'].includes(vehicle.grade)).every((vehicle) => vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-11' && vehicle.sources.some((source) => source.url === 'https://www.hyundai.com/jp/stock/new' && source.supports.some((fact) => fact.includes('車両注文'))))).toBe(true);
+    expect(ioniq5.filter((vehicle) => ['Voyage L', 'Lounge AWD'].includes(vehicle.grade)).every((vehicle) => vehicle.availability === 'unknown')).toBe(true);
     expect(ioniq5.find((vehicle) => vehicle.grade === 'Voyage L')?.capabilities).not.toContain('lane_change_support');
     expect(ioniq5.filter((vehicle) => vehicle.grade !== 'Voyage L').every((vehicle) => vehicle.capabilities.includes('lane_change_support'))).toBe(true);
     expect(ioniq5.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.hyundai.com/jp/purchase/downFile/ioniq5' && source.accessedAt === '2026-09-11'))).toBe(true);
@@ -412,6 +422,7 @@ describe('vehicle data contract and filters', () => {
     expect(lm.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/lm/pdf/specificationslist.pdf')))).toBe(true);
     expect(lm.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('vhch04se050415.php') && source.supports.some((support) => support.includes('ハンドルから手を離す'))))).toBe(true);
     expect(lm.every((vehicle) => vehicle.requiredPackage?.includes('G-Link契約') && vehicle.limitations.some((limitation) => limitation.includes('G-Link契約')))).toBe(true);
+    expect(lm.every((vehicle) => vehicle.availability === 'unknown' && vehicle.availabilityCheckedAt === '2026-09-11' && vehicle.sources.some((source) => source.url === 'https://lexus.jp/news/info/delivery/index.html' && source.supports.some((fact) => fact.includes('5.5〜6.0ヶ月')) && vehicle.limitations.some((limitation) => limitation.includes('現在の受注可否・納期'))))).toBe(true);
     expect(lm.every((vehicle) => !vehicle.classificationRationale?.includes('allowed_in_conditions'))).toBe(true);
   });
 
@@ -585,7 +596,7 @@ describe('vehicle data contract and filters', () => {
     expect(ex30.every((vehicle) => vehicle.modelYear === '2027' && vehicle.automationLevel === 2)).toBe(true);
     expect(ex30.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
     expect(ex30.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'ボルボ・カー・ジャパン'))).toBe(true);
-    expect(ex30.every((vehicle) => vehicle.availability === 'unknown' && vehicle.availabilityCheckedAt === '2026-09-11')).toBe(true);
+    expect(ex30.every((vehicle) => vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-11')).toBe(true);
     expect(ex30.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.volvocars.com/jp/l/electric-qa/' && source.accessedAt === '2026-09-11'))).toBe(true);
     expect(officialLinks.find(({ maker, model }) => maker === 'Volvo' && model === 'EX30')?.actions).toEqual([
       { kind: 'order', label: 'オンラインで注文', url: 'https://www.volvocars.com/jp/shop/', checkedAt: '2026-09-11' },

@@ -85,10 +85,10 @@ try {
   await page.locator('[data-saved-resume-delete="search"]').click();
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '検索条件を削除すると再開バーを隠す');
   await page.locator('[data-reset-shortcut]').click();
-  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可16', '注文可否 未確認172', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
+  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可21', '注文可否 未確認167', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
   await page.locator('[data-status-shortcut="uncertain"]').click();
   assert.equal(new URL(page.url()).searchParams.get('availability'), 'unknown', '注文可否未確認のクイック絞り込みをURLへ保存');
-  assert.equal(await visibleCards(), 172, '注文可否未確認は172販売単位');
+  assert.equal(await visibleCards(), 167, '注文可否未確認は167販売単位');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="conditional"]').click();
   assert.equal(await visibleCards(), 48, '条件内ハンズオフは48件');
@@ -295,12 +295,14 @@ try {
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), '現在利用不可', '販売状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=new_order_available`);
-  assert.equal(await visibleCards(), 16, '新車注文可は販売単位の公式注文導線を確認できたTesla 6件＋Mitsubishi 9件＋日産アリアB6 1件');
+  assert.equal(await visibleCards(), 21, '新車注文可は販売単位の公式注文・出荷目処を確認できた21件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), '新車注文可', '新車注文可の結果見出しを正しく表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, '新車注文可フィルタはTesla 6件に絞り込む');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Mitsubishi アウトランダーPHEV' }).count(), 9, '新車注文可フィルタはMitsubishi 9件を含む');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan 日産アリア' }).count(), 1, '新車注文可フィルタは日産アリアB6 1件を含む');
-  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo' }).count(), 0, 'グレード別の注文可否未確認Volvo EX30は新車注文可に含めない');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo EX30' }).count(), 3, '新車注文可フィルタはVolvo EX30 3グレードを含む');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ has: page.locator('.maker').filter({ hasText: /　Voyage$/ }) }).count(), 1, '新車注文可フィルタはIONIQ 5 Voyageを含む');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ has: page.locator('.maker').filter({ hasText: /　Lounge$/ }) }).count(), 1, '新車注文可フィルタはIONIQ 5 Loungeを含む');
   await page.goto(`${base}/compare/?ids=jp-honda-accord-2025-ehev-sensing360plus&ids=jp-subaru-levorg-layback-2023-limited-ex`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.equal(await page.locator('[data-compare-select]').isVisible(), false, '比較URLは選択フォームを畳み結果を先に見せる');
@@ -592,7 +594,7 @@ try {
   await page.goto(`${base}/cars/jp-volvo-ex30-my2027-plus-p5-electric/`);
   assert.match(await page.locator('main').innerText(), /JP \/ 2027年モデル[\s\S]*Volvo[\s\S]*EX30[\s\S]*Plus P5 Electric/);
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,790,000円/, 'Volvo詳細に公式掲載価格');
-  assert.match(await page.locator('main').innerText(), /注文可否：未確認/, 'Volvo EX30詳細はグレード別注文可否未確認を表示');
+  assert.match(await page.locator('main').innerText(), /新車注文可/, 'Volvo EX30詳細は公式オンライン契約を注文可として表示');
   assert.equal(await page.locator('[data-purchase-action][data-action-type="order"]').count(), 1, 'Volvo EX30に公式オンライン注文導線');
   assert.match(await page.locator('[data-purchase-action][data-action-type="order"]').innerText(), /オンラインで注文[\s\S]*↗/, 'Volvo EX30の注文導線ラベル');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, 'Volvoでも内部根拠を通常UIに出さない');

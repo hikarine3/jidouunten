@@ -32,6 +32,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota カローラ クロス / 後発対策） | 7 | Z / S / GR SPORT / Z“Adventure”の2WD・E-Four。価格298万1,000円〜407万7,700円、ACC・LTA・渋滞時支援・車線変更時の補助、ステアリング保持要求を販売単位へ固定 |
 | 今回追加（Toyota アクア / 後発対策） | 9 | Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD。価格244万3,100円〜323万8,400円、全車速追従ACC・LTA・ステアリング保持を販売単位へ固定 |
 | 今回追加（Toyota カローラ / 後発対策） | 6 | HYBRID W×B / G / Xの2WD・E-Four。価格238万400円〜334万2,900円、全車速追従ACC・LTA・停止保持・ステアリング保持を販売単位へ固定 |
+| 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
 | 今回追加（Mitsubishi / 後発対策） | 9 | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M × 5・7人乗り。価格536万9,100円〜690万1,400円、MI-PILOT（全車速ACC・LKA）とLCAの警告・支援、ハンドル保持、公式の商談・購入予約導線を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
@@ -47,9 +48,9 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Honda | ACCORD 2025 e:HEV | 掲載 | 2 | 2026-09-07 |
 | Nissan | 日産アリア（現行仕様）B6 / B6 e-4ORCE / B9 / B9 e-4ORCE | 掲載（4単位、B6のみ注文受付確認） | 2 | 2026-09-11 |
 | Nissan | セレナ C28 e-POWER LUXION | 掲載 | 2 | 2026-09-07 |
-| SUBARU | レヴォーグ レイバック（現行仕様）Limited EX | 掲載 | 2 | 2026-09-07 |
+| SUBARU | レヴォーグ レイバック（現行仕様）Limited EX | 注文可否 未確認（注文済み1.8Lグレードの工場出荷目処のみ確認） | 2 | 2026-09-11 |
 | Tesla | Model 3 Premium RWD / Premium ロングレンジAWD / Performance、Model Y Premium RWD / Premium ロングレンジAWD / L | 新車注文可（6単位） | 2相当 | 2026-09-10 |
-| Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 掲載（3単位） | 2相当 | 2026-09-07 |
+| Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 新車注文可（3単位、オンライン契約） | 2相当 | 2026-09-11 |
 | Suzuki | e VITARA X 2WD / Z 2WD / Z 4WD（現行仕様） | 掲載（3単位） | 2相当 | 2026-09-07 |
 | Renault | ARKANA esprit Alpine FULL HYBRID E-TECH / MILD HYBRID、techno FULL HYBRID E-TECH / MILD HYBRID | 掲載（4単位） | 2相当 | 2026-09-07 |
 | BMW | 3シリーズ セダン G20 318i / 320i / 320d xDrive / 330e M Sport、M340i xDrive | 掲載（通常カタログ5単位） | 2相当 | 2026-09-07 |
@@ -75,7 +76,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | ヴォクシー S-Z/S-G 2WD・E-Four（7人）、S-G 2WD（8人）、S-G マルチユーティリティ（2WD・5人） | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Toyota | ノア HYBRID S-Z/S-G/S-X 2WD・E-Four（7人）、S-G/S-X 2WD（8人） | 掲載（8単位） | 2相当 | 2026-09-10 |
 | Toyota | シエンタ Z/G/X ハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗り | 掲載（18単位） | 2相当 | 2026-09-10 |
-| Lexus | LM500h EXECUTIVE AWD（4人乗り） / version L AWD（6人乗り） | 掲載（2単位） | 2相当 | 2026-09-10 |
+| Lexus | LM500h EXECUTIVE AWD（4人乗り） / version L AWD（6人乗り） | 注文可否 未確認（注文後工場出荷目処のみ確認） | 2相当 | 2026-09-11 |
 | Lexus | UX300h “Shining Essence” / “version L” / “F SPORT” 2WD・AWD | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Mitsubishi | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M 4WD（5・7人乗り） | 掲載（9単位） | 2相当 | 2026-09-11 |
 | Toyota | アクア Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD | 掲載（9単位） | 2相当 | 2026-09-11 |
@@ -107,6 +108,28 @@ MINI Countrymanは、2026年7月以降生産の日本向け装備・価格表か
 |---|---|---|---|
 | 現行ページに「日産各店で注文できるB6」「11/26より注文受付中」、B6（2WD）の掲載 | 日産自動車 | https://www3.nissan.co.jp/vehicles/new/ariya.html | 2026-09-11 |
 | B6（2WD）を含む各車の注文後の工場出荷時期目処 | 日産自動車 | https://www3.nissan.co.jp/siteinfo/product.html | 2026-09-11 |
+
+## 2026-09-11 注文状態の追加確認
+
+注文可否は「公式商品ページがある」だけでは更新せず、メーカー一次情報に注文・出荷・在庫車両の注文導線がある販売単位だけを更新した。販売店ブログや検索結果スニペットは根拠に採用していない。
+
+| 販売単位 | 判定 | 一次情報と判定範囲 |
+|---|---|---|
+| SUBARU レイバック Limited EX | `unknown` | SUBARU公式で注文済み新車のレイバック1.8Lグレード（2ヵ月程度）の工場出荷目処を掲載。ただし現在の受注可否・納期は販売店確認 |
+| Volvo EX30 2027 3グレード | `new_order_available` | Volvo公式Q&AがEX30について車両選択から契約・申込金支払いまでのオンライン手順を明記。仕様・在庫・納車時期は個別変動 |
+| Lexus LM500h EXECUTIVE / version L | `unknown` | Lexus公式の「ご注文から納車までの流れ」に両グレードの注文後工場出荷目処5.5〜6.0ヶ月を掲載。ただし現在の受付導線を直接確認できず、輸送・販売店準備・受注状況で変動 |
+| Hyundai IONIQ 5 Voyage / Lounge | `new_order_available` | ヒョンデ公式新車在庫ページの掲載車両に「車両注文」ボタンを確認。在庫・色・仕様が変動し、グレード全体の常時受注を保証しない |
+| Hyundai IONIQ 5 Voyage L / Lounge AWD | `unknown` | 公式価格・装備は確認できるが、同じ新車在庫ページで該当グレードの注文導線を固定できなかったため昇格しない |
+| Suzuki e VITARA 3グレード | `unknown` | メーカー公式商品ページは現行掲載・価格まで。販売店ブログの注文記載は全国受注の根拠に採用しない |
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| レイバック1.8Lグレードの注文済み新車・工場出荷目処 | SUBARU | https://www.subaru.jp/news/delivery/ | 2026-09-11 |
+| EX30のオンライン車両選択・契約・申込金支払い、EX30のみオンライン契約可能 | ボルボ・カー・ジャパン | https://www.volvocars.com/jp/l/electric-qa/ | 2026-09-11 |
+| LM500h EXECUTIVE / version Lの注文後工場出荷目処 | Lexus | https://lexus.jp/news/info/delivery/index.html | 2026-09-11 |
+| IONIQ 5 Voyage / Lounge掲載車両の「車両注文」導線 | Hyundai Mobility Japan | https://www.hyundai.com/jp/stock/new | 2026-09-11 |
+
+この更新後の内訳は、全189販売単位（現行188、過去1）のうち`new_order_available` 21、`unknown` 167、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
 
 
 ## 未掲載・確認継続候補（内訳）
@@ -394,7 +417,7 @@ ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し
 
 ## Lexus LMの根拠（後発対策トランシェ）
 
-確認日は2026-09-10。Lexus公式の価格・パッケージページと主要装備一覧から、LM500h EXECUTIVE（AWD・4人乗り）とversion L（AWD・6人乗り）の2販売単位を確認した。価格は1,520万円〜2,030万円（税込）。主要装備一覧では両単位に全車速追従レーダークルーズ、LTA、LCA、ドライバーモニター連携、Lexus Teammate Advanced Drive（渋滞時支援）が標準装備として示されるため、同じLevel 2でも「条件付きハンズオフ＋車線変更支援＋定員差」を比較できるようにした。個別の新車注文可否・納期は公式掲載だけでは固定できないため`availability=unknown`とした。
+確認日は2026-09-11。Lexus公式の価格・パッケージページと主要装備一覧から、LM500h EXECUTIVE（AWD・4人乗り）とversion L（AWD・6人乗り）の2販売単位を確認した。価格は1,520万円〜2,030万円（税込）。主要装備一覧では両単位に全車速追従レーダークルーズ、LTA、LCA、ドライバーモニター連携、Lexus Teammate Advanced Drive（渋滞時支援）が標準装備として示されるため、同じLevel 2でも「条件付きハンズオフ＋車線変更支援＋定員差」を比較できるようにした。さらにLexus公式の「ご注文から納車までの流れ」に両グレードの注文後工場出荷目処（5.5〜6.0ヶ月）が掲載されているが、現在の注文受付導線を直接確認できないため、両単位の注文可否は`unknown`を維持する。実際の受注・納車時期は販売店、受注状況、仕様で変動するため断定しない。
 
 | 対象事実 | 発行元 | URL | 確認日 |
 |---|---|---|---|
@@ -447,7 +470,7 @@ LMと同じLexusでも、UX300hはハンズオフ不可・LCAなし・521万〜5
 
 ## Volvo EX30の根拠（内部保持）
 
-2026-09-11にVolvo Cars Japanの公式Q&Aで、オンライン上で車両選択から契約・申込金支払いまで進められる車種がEX30のみであることを確認した。ただしこのQ&Aは車種単位の説明であり、2027年モデルの3グレードそれぞれの受注・在庫条件までは示していない。そのため販売単位の`availability`は`unknown`のまま保持し、詳細画面では未確認を明示しつつ、参考として公式オンライン注文導線を提供する。
+2026-09-11にVolvo Cars Japanの公式Q&Aで、オンライン上で車両選択から契約・申込金支払いまで進められる車種がEX30のみであることを確認した。同社の2027年モデル公式ラインアップにはPlus P5、Ultra P5 Long Range、Ultra P8 AWDの3グレードが掲載されているため、3販売単位を`new_order_available`へ更新した。選択する仕様、在庫、納車時期は個別に変動するため、注文可の表示はオンライン契約導線があることを示す範囲に限定する。
 
 | 対象事実 | 発行元 | URL | 確認日 |
 |---|---|---|---|
@@ -468,7 +491,7 @@ LMと同じLexusでも、UX300hはハンズオフ不可・LCAなし・521万〜5
 | The new IONIQ 5を2025年モデル以降として掲載 | Hyundai Mobility Japan | https://www.hyundai.com/jp/customer-service/notice/679 | 2026-09-11 |
 | HDA2は高速道路で車間・速度・車線中央維持を支援し、ウインカー操作時に車線変更をアシスト | Hyundai Mobility Japan | https://www.hyundai.com/jp/ioniq5 | 2026-09-11 |
 
-4単位はスマートクルーズコントロール（縦方向）とHDA/LFA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。HDA/HDA2は高速道路の運転支援であり、ステアリング保持・前方監視・必要時の即時操作が必要なためhandsOffは`not_allowed`、driverMonitoringは`required`とした。日本公式で販売単位ごとの新車注文可否やHDAの速度数値を固定できないため、availabilityと速度範囲は`unknown`のまま保持し、価格だけで受注可能とは表示しない。
+4単位はスマートクルーズコントロール（縦方向）とHDA/LFA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。HDA/HDA2は高速道路の運転支援であり、ステアリング保持・前方監視・必要時の即時操作が必要なためhandsOffは`not_allowed`、driverMonitoringは`required`とした。2026-09-11にヒョンデ公式の新車在庫ページでVoyage／Loungeの掲載車両に「車両注文」導線を確認したため、この2販売単位のみ`new_order_available`へ更新した。掲載車両・色・仕様は変動し、Voyage L／Lounge AWDはグレード単位の注文導線を確認できないため`unknown`を維持する。HDAの速度数値は引き続き未確認で、価格だけで受注可能とは表示しない。
 
 ## BYD DOLPHIN / ATTO 3 / SEAL / SEALION 6の根拠（後発対策トランシェ）
 
