@@ -2,6 +2,14 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 三菱 eKクロス／eKクロス EV追加（本番反映済み）
+
+- 三菱公式のeKクロス／eKクロス EVの商品・グレード・装備・MI-PILOT・取扱説明書・発売資料を突合し、eKクロス8単位（G／G Premium／T／T Premium、2WD・4WD）とeKクロス EV 3単位（G／P、先進安全快適パッケージ有無）を追加。LDPのみはLevel 1、MI-PILOT（ACC＋LKA）標準またはパッケージ装着はLevel 2として分け、価格1,856,800円〜3,214,200円、EVパッケージ+110,000円、発売・価格適用日、ハンズオフ不可・常時監視必須を保持。同一車種・Level内のグレード／オプション差を比較できる。
+- 公式導線は商品・試乗・見積り・販売店・カタログを`official-links.json`へ同期。11単位とも注文可否は未確認を維持。公開詳細は[eKクロス G Premium 2WD](https://jidouunten.jp/cars/jp-mitsubishi-ek-cross-2026-g-premium-2wd/)、[eKクロス EV P・先進安全快適パッケージ](https://jidouunten.jp/cars/jp-mitsubishi-ek-cross-ev-2026-p-2wd-advanced-safety-comfort/)、比較は[eKクロス G／G Premium](https://jidouunten.jp/compare/?ids=jp-mitsubishi-ek-cross-2026-g-2wd&ids=jp-mitsubishi-ek-cross-2026-g-premium-2wd)。
+- exact release `b3fac85`（実装 `1b5bf1a`）、Production `https://jidouunten.jp/`、immutable `https://d0654d37.jidouunten.pages.dev`、直前rollback `https://19c97f88.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- QA: 402 HTML、sitemap-0 401 URL、詳細396件、トップ／一覧ItemList 2ページ790項目、公式導線74モデル／71 URL／139 actions、Vitest70/70、価格396/396（現行395、exact380／range15／未確認1）、画像3/3、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID release／structured PASS、registry 508/508、公開HTML内部enum/source/accessedAt漏れ0、独立監査PASS、ローカルE2E1/1・immutable／本体E2E各1/1（GA collect HTTP204）、主要URL200、未知URL404、IDN path/query301。
+- 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のWebPサムネイルで省スペース表示。作者・ライセンス帰属リンクと詳細の大きい画像を維持。Issue #17/#37/#25/#15は未確認母集団・受注観測・レビュー継続のためIn progressを維持。
+
 ## 2026-09-12 BYD公式導線URL刷新（本番反映済み）
 
 - BYD DOLPHIN／ATTO 3／SEAL／SEALION 6の商品・試乗・販売店・カタログ導線を、現行BYD公式 `prod.byd.com` と公式販売店検索 `dealer.bydauto.co.jp` へ更新した。価格・能力・注文状態は変更せず、価格根拠URLと研究台帳の対応する商品／カタログURLだけ同期。

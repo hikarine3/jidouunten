@@ -2,6 +2,19 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 三菱 eKクロス／eKクロス EV追加）
+
+- exact release commit: `b3fac85`（実装 `1b5bf1a`、レジストリ件数同期を含む）
+- immutable: https://d0654d37.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 三菱の現行eKクロス8販売単位（G／G Premium／T／T Premium、2WD・4WD）とeKクロス EV 3販売単位（G／P、先進安全快適パッケージ有無）を追加。LDPのみをLevel 1、MI-PILOT（ACC＋LKA）標準またはメーカーオプション装着をLevel 2として分離し、価格1,856,800円〜3,214,200円、EVパッケージ+110,000円、発売・価格適用日、ハンズオフ不可・常時監視必須を表示する。同じLevel内のグレード／パッケージ差を一覧・比較できる。
+- 公式導線: eKクロス／eKクロス EVの商品・試乗・見積り・販売店・カタログURLを`src/data/official-links.json`へ同期。注文可否は一次情報で固定できないため11単位とも未確認を維持。
+- SEO／公開面: 402 HTML、sitemap-0は401 URL、詳細396件、トップ／一覧ItemListは2ページ・790項目。GTM実IDは各HTML 1件、テスト計測ID0件。内部enum・根拠URL・確認日キーの公開HTML漏れ0件。
+- UI: 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のWebPサムネイルで省スペース表示。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホスト方針を維持。
+- QA: `npm test` 70/70（Vitest＋保存再開）＋Python16/16、価格396/396、公式導線74モデル／71 URL／139 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 508/508、独立監査PASS、ローカルE2E 1/1、immutable／本体E2EでGA collect HTTP204。
+- 本番smoke: immutable／本体のトップ、一覧、eKクロス Level 1／Level 2詳細、eKクロス EVパッケージ詳細、比較、sitemap、robotsはHTTP200。未知URL404、`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）は本体へ301（path/query維持）。
+- 直前の正常配信・ロールバック候補: https://19c97f88.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-12 BYD公式導線URL刷新）
 
 - exact app release commit: `a716bbf`
