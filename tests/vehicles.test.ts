@@ -71,6 +71,7 @@ describe('vehicle data contract and filters', () => {
     expect(vehicleImageFor({ maker: 'Toyota', model: 'プリウス' })).toMatchObject({ license: 'CC0 1.0', src: '/vehicles/toyota-prius.webp' });
     expect(vehicleImageFor({ maker: 'Tesla', model: 'Model 3' })).toMatchObject({ license: 'CC BY-SA 4.0', src: '/vehicles/tesla-model-3.webp' });
     expect(vehicleImageFor({ maker: 'Honda', model: 'ACCORD' })).toBeUndefined();
+    expect(vehicleImages.every((image) => vehicles.some((vehicle) => vehicle.maker === image.maker && vehicle.model === image.model))).toBe(true);
     expect(vehicleImages.every((image) => image.sourceUrl.startsWith('https://commons.wikimedia.org/wiki/File:') && image.licenseUrl.startsWith('https://creativecommons.org/'))).toBe(true);
   });
 
