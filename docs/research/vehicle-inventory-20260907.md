@@ -8,9 +8,9 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 365 | `src/data/vehicles.json` の全レコード（現行364 + 過去1） |
-| 既定表示 | 364 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
-| 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
+| 公開データ | 385 | `src/data/vehicles.json` の全レコード（現行384 + 過去1） |
+| 既定表示 | 384 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 掲載メーカー数 | 19 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -43,6 +43,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota アクア / 後発対策） | 9 | Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD。価格244万3,100円〜323万8,400円、全車速追従ACC・LTA・ステアリング保持を販売単位へ固定 |
 | 今回追加（Toyota カローラ / 後発対策） | 6 | HYBRID W×B / G / Xの2WD・E-Four。価格238万400円〜334万2,900円、全車速追従ACC・LTA・停止保持・ステアリング保持を販売単位へ固定 |
 | 今回追加（Lexus LX / 後発対策） | 10 | LX700h/LX600のEXECUTIVE、5/7人乗り、OVERTRAIL+ 5/7人乗り。価格1,450万〜2,100万円、全車速追従ACC・LTA、Advanced Drive渋滞時0〜40km/hの条件付き支援、運転者監視を販売単位へ固定。LCA・自動車線変更は付与せず、受注可否は未確認 |
+| 今回追加（Daihatsu タント系 / 後発対策） | 20 | タント／タント カスタム／タント ファンクロスのグレード×2WD/4WDを登録。車線逸脱抑制のみのLevel 1を8単位、ACC＋LKCのLevel 2を12単位（スマートクルーズパック標準・メーカーオプション差を別単位）として価格149万6,000円〜214万5,000円を保持。2024年10月モデル、注文可否は未確認 |
 | 今回追加（Volkswagen / Lexus / Toyota） | 9 | Volkswagen Tiguan 6単位、Lexus GX550 2単位、Toyota ランドクルーザー250 VX ガソリン4WD 1単位。価格・ACC／車線維持支援・ステアリング保持を一次資料で確認し、注文可否は未確認のまま掲載 |
 | 今回追加（Toyota ヤリス クロス） | 20 | 2026年8月公式グレードJSONのZ“Adventure”／Z／G／X／U／GR SPORT、ハイブリッド・ガソリン、2WD／E-Fourの全20販売単位。価格212万6,300円〜335万5,000円、全車速追従ACC・LTA・渋滞時支援、ステアリング保持条件を一次資料で確認し、注文可否は未確認のまま掲載 |
 | 今回追加（Toyota ヤリス） | 17 | 2026年4月公式グレードJSONのZ／G／X、ハイブリッド・ガソリン、1.5L／1.0L、CVT／6MT、2WD／4WD・E-Fourの価格比較可能な17販売単位。価格169万7,300円〜288万4,200円。1.0L CVTの2単位はACCのみでLevel 1、その他15単位はLTA併用のLevel 2、ハイブリッド6単位は渋滞時停止・発進支援を確認。U（KINTO専用）2単位は月額のみのため車両本体価格比較から保留 |
@@ -260,7 +261,7 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 | LM500h EXECUTIVE / version Lの注文後工場出荷目処 | Lexus | https://lexus.jp/news/info/delivery/index.html | 2026-09-11 |
 | IONIQ 5 Voyage / Lounge掲載車両の「車両注文」導線 | Hyundai Mobility Japan | https://www.hyundai.com/jp/stock/new | 2026-09-11 |
 
-この更新後の内訳は、全353販売単位（現行352、過去1）のうち`new_order_available` 21、`unknown` 331、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
+この更新後の内訳は、全385販売単位（現行384、過去1）のうち`new_order_available` 21、`unknown` 363、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
 
 
 ## 未掲載・確認継続候補（内訳）
@@ -902,6 +903,24 @@ Honda公式の現行商品・タイプ一覧、e:HEV X／Zの価格ページ、�
 | カスタム HYBRID XSターボ 2WD / 4WD | 2,073,500円 / 2,193,400円 | 2相当 | ACC全車速・停止保持＋車線維持支援 |
 
 根拠: [スペーシア グレード・価格](https://www.suzuki.co.jp/car/spacia/detail/)、[安全装備](https://www.suzuki.co.jp/car/spacia/safety/)、[主要装備・主要諸元PDF](https://www.suzuki.co.jp/car/spacia/detail/pdf/detail.pdf)、[2023年11月22日発売資料](https://www.suzuki.co.jp/release/a/2023/1109/)、[公式見積り](https://www.suzuki.co.jp/car/purchase/estimate/)、[試乗車検索](https://www.suzuki.co.jp/dealer/Map/getPref/car/8)、[国土交通省 Level 1/2定義](https://www.mlit.go.jp/common/001343740.pdf)。車線逸脱抑制と車線中央維持を別能力として登録したことで、同じ価格帯でもLevel 1／2の違いを一覧のチェックボックスでAND絞り込みできる。
+
+## 2026-09-12 Daihatsu タント系20販売単位追加
+
+ダイハツ公式のタント／タント カスタム／タント ファンクロスのグレード・価格ページ、性能・安全ページ、公式U-CATCHモデル履歴を照合し、グレードと2WD・4WDの差を販売単位へ分けた。税込メーカー希望小売価格は149万6,000円（タント L 2WD）〜214万5,000円（タント カスタム RS 4WD）。現行カタログ掲載は確認できたが、個別単位の現在受注可否・納期は固定できないため全20単位を `availability=unknown` とした。
+
+タント L／X、タント カスタム X、タント ファンクロスの通常仕様8単位は、車線逸脱抑制制御機能のみを確認できるためLevel 1相当とした。X／カスタム X／ファンクロスのスマートクルーズパック装着6単位は、車両本体価格とは別にパック価格55,000円を保持し、ACC（追従走行）とLKC（車線中央維持）が加わるLevel 2相当として登録した。Xターボ／カスタム RS／ファンクロス ターボの6単位は同パック標準装備のLevel 2相当である。全単位で運転者の常時監視・ステアリング保持が必要で、ハンズオフ・自動車線変更は付与していない。
+
+| 販売単位 | 価格（税込） | Level | 同じモデル内の差分 |
+|---|---:|---:|---|
+| タント L 2WD／4WD | 1,496,000円／1,622,500円 | 1相当 | 車線逸脱抑制。ACC・車線中央維持なし |
+| タント X 2WD／4WD | 1,628,000円／1,749,000円 | 1相当 | スマートクルーズパックは別売（装着時はLevel 2） |
+| タント Xターボ 2WD／4WD | 1,793,000円／1,914,000円 | 2相当 | スマートクルーズパック標準、ACC＋LKC |
+| タント カスタム X 2WD／4WD | 1,881,000円／2,002,000円 | 1相当 | スマートクルーズパックは別売（装着時はLevel 2） |
+| タント カスタム RS 2WD／4WD | 2,024,000円／2,145,000円 | 2相当 | スマートクルーズパック標準、ACC＋LKC |
+| タント ファンクロス 2WD／4WD | 1,820,500円／1,941,500円 | 1相当 | スマートクルーズパックは別売（装着時はLevel 2） |
+| タント ファンクロス ターボ 2WD／4WD | 1,963,500円／2,084,500円 | 2相当 | スマートクルーズパック標準、ACC＋LKC |
+
+根拠: [タント商品ページ](https://www.daihatsu.co.jp/lineup/tanto/)、[タント グレード・価格](https://www.daihatsu.co.jp/lineup/tanto/02_grade.htm)、[タント 性能・安全](https://www.daihatsu.co.jp/lineup/tanto/04_driving.htm)、[ファンクロス商品ページ](https://www.daihatsu.co.jp/lineup/tanto_funcross/)、[ファンクロス グレード・価格](https://www.daihatsu.co.jp/lineup/tanto_funcross/02_grade.htm)、[タントモデル履歴](https://u-catch.daihatsu.co.jp/catalog/TANTO/MODEL__201907/)、[国土交通省 Level 1/2定義](https://www.mlit.go.jp/common/001343740.pdf)。スマートクルーズパックの有無を同一車種の別販売単位にしたことで、Level 1／2と「追従走行」「車線中央維持」「車線逸脱抑制」のAND絞り込みが可能になった。
 
 ## 2026-09-12 Honda ステップ ワゴン10販売単位追加
 

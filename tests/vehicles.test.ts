@@ -152,14 +152,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(365);
+    expect(vehicles).toHaveLength(385);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
   it('現行候補364件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(364);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(364);
+    expect(current).toHaveLength(384);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(384);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -267,7 +267,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(69);
+    expect(officialLinks).toHaveLength(72);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -321,7 +321,7 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(119);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(131);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
@@ -414,6 +414,24 @@ describe('vehicle data contract and filters', () => {
     expect(spacia.filter((vehicle) => vehicle.automationLevel === 2).every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering')).toBe(true);
     expect(spacia.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.suzuki.co.jp/car/spacia/safety/'))).toBe(true);
     expect(spacia.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
+  });
+
+  it('ダイハツ タント系はグレード・駆動方式・スマートクルーズパック差を別単位で保持する', () => {
+    const tanto = vehicles.filter((vehicle) => vehicle.maker === 'Daihatsu');
+    expect(tanto).toHaveLength(20);
+    expect(tanto.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      1_496_000, 1_622_500, 1_628_000, 1_628_000, 1_749_000, 1_749_000, 1_793_000, 1_820_500, 1_820_500, 1_881_000,
+      1_881_000, 1_914_000, 1_941_500, 1_941_500, 1_963_500, 2_002_000, 2_002_000, 2_024_000, 2_084_500, 2_145_000,
+    ]);
+    expect(tanto.every((vehicle) => vehicle.currentCatalogListed && vehicle.catalogAsOf === '2026-09' && vehicle.salesUnitIntroducedAt === '2024-10' && vehicle.priceEffectiveAt === null && vehicle.automationLevel >= 1 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(tanto.filter((vehicle) => vehicle.automationLevel === 1)).toHaveLength(8);
+    expect(tanto.filter((vehicle) => vehicle.automationLevel === 2)).toHaveLength(12);
+    expect(tanto.filter((vehicle) => vehicle.price?.optionalPackages.length).length).toBe(6);
+    expect(tanto.filter((vehicle) => vehicle.capabilities.includes('lane_departure_prevention'))).toHaveLength(20);
+    expect(tanto.filter((vehicle) => vehicle.capabilities.includes('adaptive_cruise_control'))).toHaveLength(12);
+    expect(tanto.every((vehicle) => vehicle.sources.some((source) => source.url.includes('daihatsu.co.jp/lineup/tanto')))).toBe(true);
+    expect(officialLinkFor(tanto.find((vehicle) => vehicle.model === 'タント')!)?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
+    expect(officialLinkFor(tanto.find((vehicle) => vehicle.model === 'タント ファンクロス')!)?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
   });
 
   it('VW Tiguan・Lexus GX550・Toyota ランドクルーザー250の9販売単位を保持する', () => {
