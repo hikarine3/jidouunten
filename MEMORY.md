@@ -2,12 +2,13 @@
 
 更新: 2026-09-11
 
-## 2026-09-11 注文状態の一次情報追加確認（監査反映）
+## 2026-09-11 注文状態の一次情報追加確認（監査・本番反映済み）
 
 - 独立監査で、SUBARU レイバック Limited EX 1とLexus LM 2は「注文済み車両の工場出荷目処」であり現在の受付導線を直接確認できないため、注文可否を`unknown`へ戻した。Volvo EX30 2027 3とHyundai IONIQ 5 Voyage／Lounge 2のみを`new_order_available`へ更新。全189販売単位の内訳は注文可21／未確認167／現在利用不可1。
 - 根拠はVolvo EX30のオンライン契約Q&Aと、ヒョンデ新車在庫ページのVoyage／Lounge「車両注文」。SUBARU／Lexusの出荷目処根拠は各レコードに保持し、現在の受注可否未確認と明記。Voyage L／Lounge AWD、Suzuki e VITARAも`unknown`を維持。
 - `scripts/check_availability_evidence.mjs`で注文可21件すべてにメーカー一次情報の注文・出荷根拠があり、未確認167件を保持することを機械検査。registry／research／testsも判定へ同期する。自動運転タクシー領域は [JID-038](https://github.com/hikarine3/jidouunten/issues/38) の後続Sprintで実装する。
-- 次の作業: 再監査、実IDビルド、Cloudflare Pages公開。
+- exact app `d75ecee31d92809ecd6c8831106e1bfa0bfb39db`、immutable `https://9d34dc08.jidouunten.pages.dev`、Production `https://jidouunten.jp/`。実ID build195、リリースガード、ローカル／immutable／本番E2E各1/1（GA collect204）、registry321/321、公開HTML漏れ0件、主要URL200、IDN path/query301を確認して配信済み。
+- 次の作業: GitHub Issue #38の自動運転タクシー領域（体験地域・日本の進捗）を後続Sprintで設計・実装する。
 
 ## 2026-09-11 Toyota アクア／カローラ拡張（実装・本番反映済み）
 

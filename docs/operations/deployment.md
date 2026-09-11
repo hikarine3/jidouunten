@@ -2,6 +2,15 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 注文状態の一次情報更新）
+
+- exact app: `d75ecee`（メーカー一次情報を再確認し、Volvo EX30 3グレードとヒョンデ IONIQ 5 Voyage／Lounge 2グレードを新車注文可へ更新。SUBARU レイバックとLexus LMは注文後の工場出荷目処のみのため注文可否未確認を維持。注文可否チェッカー・研究台帳・依存レジストリを同期）
+- immutable: https://9d34dc08.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 全189販売単位（現行188、過去1）の注文状態を注文可21／注文可否未確認167／現在利用不可1へ更新。Volvo EX30は公式オンライン契約、ヒョンデ IONIQ 5 Voyage／Loungeは公式在庫車両の「車両注文」導線を根拠とする。各仕様・在庫・納期・契約成立は保証せず、詳細に注意書きを表示する。自動運転タクシー領域は後続Issue #38で実装予定。
+- QA: Vitest46/46、価格189/189（現行188/188）、公式導線46モデル/62 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build195、リリースガード（実ID1件/HTML・テストID0件）、ローカルE2E1/1、immutable・production E2E各1/1（GA collect HTTP204）、公開面依存レジストリ321/321、公開HTML内部enum・source/accessedAt等の漏れ0件。
+- immutable／本体で主要10 URL（`/`、`/cars/`、Volvo詳細、Hyundai詳細、SUBARU詳細、Lexus LM詳細、`/levels/`、sitemap-index、sitemap-0、robots）をHTTP200確認。`sitemap-0.xml`は194 URL。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301で維持される。直前の正常配信・ロールバック候補は https://4f0e10ee.jidouunten.pages.dev。
+
 ## 最新の配信（2026-09-11 Toyota アクア／カローラ）
 
 - exact app: `527f4f7`（Toyota アクア9／カローラ6の現行15販売単位、販売状態クイック絞り込み、公開面依存レジストリ更新）
