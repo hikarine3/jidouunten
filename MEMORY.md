@@ -2,6 +2,14 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 Honda フリード CROSSTAR 8販売単位追加（本番反映済み）
+
+- Honda公式のフリード商品・タイプ一覧／タイプJSON・性能安全・渋滞時運転支援ページを突合し、CROSSTARの通常乗用8販売単位（e:HEV／ガソリン、FF・4WD、5・6人乗り）を追加。価格は292万8,200円〜360万2,500円（税込、2026年9月確認）。Honda SENSING（ACC・車線中央維持・渋滞時運転支援）をLevel 2相当とし、ステアリング保持・常時監視が必要なハンズオフ不可として表示。30周年特別仕様・福祉車両・AIRは今回の比較から分離し、注文可否は8単位とも`unknown`を維持。
+- exact app `a919fbc69c78a64b636d483d5cde226520fc25e4`、Production `https://jidouunten.jp/`、immutable `https://0ab618f0.jidouunten.pages.dev`、直前rollback `https://6a29ce8d.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- フリード公式の商品・タイプ・性能・TJAに加え、販売店・試乗・見積り・カタログ導線を`src/data/official-links.json`へ同期。公開詳細は[FF・5人乗り](https://jidouunten.jp/cars/jp-honda-freed-2026-ehev-crosstar-ff-5/)、比較は[フリード比較](https://jidouunten.jp/compare/?ids=jp-honda-freed-2026-ehev-crosstar-ff-5%2Cjp-honda-freed-2026-crosstar-ff-5)。
+- QA: 329 HTML、車両URL324（詳細323＋トップ）、詳細323件、ItemList 2ページ644項目、公式導線64モデル／62 URL／99 actions、Vitest62/62、価格323/323（現行322/322、exact307／range15／未確認1）、画像3/3、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build・release／structured PASS（Breadcrumb329／Car323／ItemList644）、registry46 entities／457 surfaces／2,235 markers失敗0、独立リリース監査PASS、immutable／production E2E各1/1（GA collect204）、主要URL200、未知URL404、IDN path/query301。
+- Issue #17（候補カバレッジ）と#37（公式導線・計測）は未確認母集団・受注状態の観測が残るためIn progressを維持し、全国網羅完了とは宣言しない。
+
 ## 2026-09-12 Honda ステップ ワゴン10販売単位追加／一覧サムネイル縮小（本番反映済み）
 
 - Honda公式のステップ ワゴン商品・タイプ一覧／タイプJSON・性能安全ページを突合し、通常乗用10販売単位（AIR／SPADA／SPADA PREMIUM LINE、FF・4WD、e:HEVを含む）を追加。価格は334万8,400円〜426万8,000円（税込、2026年9月確認）。Honda SENSINGのACC・LKAS・トラフィックジャムアシストをLevel 2相当とし、ステアリング保持・常時監視が必要なためハンズオフ不可。30周年特別仕様・福祉車両・BLACK EDITIONは通常10単位から除外し、注文可否は一次情報不足のため全単位`unknown`を維持。

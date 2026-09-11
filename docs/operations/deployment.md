@@ -2,6 +2,18 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Honda フリード CROSSTAR 8販売単位追加）
+
+- exact app release commit: `a919fbc69c78a64b636d483d5cde226520fc25e4`
+- immutable: https://0ab618f0.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Honda フリード CROSSTARの通常乗用8販売単位（e:HEV／ガソリン、FF・4WD、5・6人乗り）を追加。価格は292万8,200円〜360万2,500円（税込、2026年9月確認）。Honda SENSING（ACC・車線中央維持・渋滞時運転支援）をLevel 2相当、ステアリング保持・常時監視が必要なハンズオフ不可として登録した。30周年特別仕様・福祉車両・AIRは今回のCROSSTAR比較から分離し、注文可否は8単位とも`unknown`を維持。
+- 公式導線: [フリード商品ページ](https://www.honda.co.jp/FREED/)、[タイプ一覧](https://www.honda.co.jp/FREED/webcatalog/type/list/)、[性能・安全](https://www.honda.co.jp/FREED/webcatalog/performance/)、販売店・試乗・見積り・カタログ。公式掲載は受注保証ではないため、購入前に販売店確認を促す。
+- SEO／公開面: 329 HTML、車両URL324（詳細323＋トップ）、詳細323件、トップ／一覧ItemListは2ページ・644項目。GTM実IDは329 HTMLへ各1件、テストID0件。
+- QA: `npm test` Vitest62/62・Python16/16、価格323/323（現行322/322、exact307／range15／未確認1）、公式導線64モデル／62 URL／99 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build329、release／structured PASS（Breadcrumb329／Car323／ItemList644）、registry46 entities／457 surfaces／2,235 markers失敗0、独立リリース監査PASS。ローカル／immutable／本体E2E各1/1（GA collect HTTP204）。
+- 本番smoke: 本体・immutableのトップ、一覧、フリード詳細、比較、sitemapはHTTP200、未知URL404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）はpath/queryを本体へ301。フリード詳細は[FF・5人乗り](https://jidouunten.jp/cars/jp-honda-freed-2026-ehev-crosstar-ff-5/)、[比較](https://jidouunten.jp/compare/?ids=jp-honda-freed-2026-ehev-crosstar-ff-5%2Cjp-honda-freed-2026-crosstar-ff-5)で確認できる。
+- 直前の正常配信・ロールバック候補: https://6a29ce8d.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-12 Honda ステップ ワゴン10販売単位追加／一覧サムネイル縮小）
 
 - exact app release commit: `594d7339bf0b32160383233c1cc0a47bcba5834a`
