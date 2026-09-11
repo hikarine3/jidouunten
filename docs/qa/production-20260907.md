@@ -1,5 +1,17 @@
 # 初回公開の実測証拠
 
+## 2026-09-11 Toyota プリウスHEV販売単位拡張（本番実測）
+
+- exact app release commit: `31a6543`（実装本体 `1e0b7b3`）
+- Immutable deployment: https://a207ad82.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 既存のプリウスHEV Z 2WDに、Z E-Four／G 2WD・E-Four／X 2WD・E-Fourを追加。全265販売単位（現行264）、プリウス6単位、価格279万6,200円〜425万1,500円。全車Level 2相当・ACC＋LTA・ステアリング保持・ハンズオフ不可。Xは「法人向け」を公開グレード名と公式Webカタログ根拠へ反映し、個別発売日は未確認（`salesUnitIntroducedAt=null`）、注文可否は`unknown`を維持。
+- `npm test`: 54/54（価格265/265、現行264/264、公式導線56モデル／76 actions、Python16/16）。
+- `npm run check`: 0 errors / 0 warnings / 6 hints。実ID build271、release guard／構造化データ検査PASS（BreadcrumbList271、Car265、ItemList2ページ528項目）。
+- ローカルE2E1/1、本番E2E1/1（GA collect HTTP204）。registry静的surface376/376、Prius required selector可視12/12・sitemap7/7、公開HTML内部enum・根拠フィールド漏れ0件、独立リリース監査PASS。
+- 本番smokeはimmutable／本体のトップ、一覧、Prius詳細（Z E-Four／X 2WD／X E-Four）、Prius比較、sitemap-index、sitemap-0（270 URL）、robotsをHTTP200、未知URL404、日本語IDNのpath/query301で確認。
+- 直前正常deployment（rollback候補）: https://e194ed52.jidouunten.pages.dev
+
 ## 2026-09-11 Lexus LX追加・構造化SEO（本番実測）
 
 - exact app release commit: `0ecae52`

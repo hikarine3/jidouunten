@@ -2,6 +2,17 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 Toyota プリウスHEV販売単位拡張）
+
+- exact app release commit: `31a6543`（実装本体 `1e0b7b3`、監査修正を含む）
+- immutable: https://a207ad82.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 既存のHEV Z 2WDに、Z E-Four／G 2WD・E-Four／X 2WD・E-Fourを追加し、プリウスを6販売単位で比較可能にした。価格は税込279万6,200円〜425万1,500円。全車Level 2相当（全車速追従ACC＋LTA、ステアリング保持・常時監視が必要、ハンズオフ不可）。Xはトヨタ公式Webカタログの法人向けグレードとして注記し、PHEV／KINTO専用Uは今回の通常HEV価格比較から分離。個別の発売日は確認できないため6単位とも未確認としている。注文可否は全6単位`unknown`。
+- SEO／公開面: 全271 HTMLにcanonical／robots／hreflang／OG/Twitter／WebSite＋WebPage。詳細265件にProduct＋Car＋BreadcrumbList、トップ／一覧に可視264件のItemList。sitemap-0は270 URL、構造化データはBreadcrumbList271／Car265／ItemList2ページ528項目。
+- QA: `npm test` 54/54、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build271、release guard PASS、ローカルE2E1/1・本番E2E1/1（GA collect HTTP204）。公開面依存registry静的376面、Prius required selector可視12/12、Prius sitemap7/7、独立リリース監査PASS。
+- 本番smoke: immutable／本体のトップ、一覧、Prius詳細3件、Prius比較、sitemap-index、sitemap-0、robotsはHTTP200、未知URLは404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）の`/cars/?level=2&sort=price_asc`を本体へ301（query維持）。外部車両写真は今回も追加せず、Wikimedia Commons再利用ポリシーは`docs/licenses/assets.md`に保持。
+- 直前の正常配信・ロールバック候補: https://e194ed52.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 Lexus LX追加・構造化SEO）
 
 - exact app release commit: `0ecae52`

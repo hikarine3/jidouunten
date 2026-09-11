@@ -2,6 +2,14 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 Toyota プリウスHEV販売単位拡張（本番反映済み）
+
+- トヨタ公式の価格・グレード／安全性能／HEV取扱説明書／国土交通省定義を突合し、既存のHEV Z 2WDにZ E-Four、G 2WD・E-Four、X 2WD・E-Fourを追加。プリウスは6販売単位、価格279万6,200円〜425万1,500円、全車Level 2相当（ACC＋LTA、ステアリング保持・常時監視、ハンズオフ不可）として比較できる。
+- Xはトヨタ公式Webカタログの法人向けグレードとして公開表示・根拠URLを固定。PHEV／KINTO専用Uは価格性質が異なるため分離。個別発売日は確認できず`salesUnitIntroducedAt=null`、カタログ／価格時点は`2026-07`、注文可否は6単位とも`unknown`。
+- exact app `31a6543`（実装本体 `1e0b7b3`）、Production `https://jidouunten.jp/`、immutable `https://a207ad82.jidouunten.pages.dev`、直前rollback `https://e194ed52.jidouunten.pages.dev`。
+- QA: 全265販売単位（現行264）、sitemap-0 270 URL、実ID build271、Vitest54/54、価格265/265、公式導線56モデル／76 actions、Python16/16、Astro check 0 errors/0 warnings/6 hints、release／structured PASS（Breadcrumb271／Car265／ItemList528）、local／production E2E各1/1（GA collect204）、registry静的376面・Prius required12/12・sitemap7/7、独立リリース監査PASS。本番主要URL200、未知URL404、IDN path/query301。
+- 外部車両写真は追加せず、Wikimedia Commons等の再利用時は作者・ライセンス・改変・商標／肖像を個別確認しAVIF/WebPセルフホストする方針を`docs/licenses/assets.md`へ保持。全国候補の母集団確認とIssue #25の観測は継続し、網羅完了とは宣言しない。
+
 ## 2026-09-11 Lexus LX追加・構造化SEO（本番反映済み）
 
 - Lexus公式の価格・安全・コンフィギュレーター・諸元を突合し、LX700h／LX600のEXECUTIVE、5人／7人、OVERTRAIL+を10販売単位へ追加。全260販売単位（現行259）、価格1,450万〜2,100万円（税込）。全車Level 2相当でACC・LTA、Advanced Drive渋滞時0〜約40km/h、運転者監視必須、条件内ハンズオフを保持。LCA・自動車線変更は付与せず、受注可否は未確認。
