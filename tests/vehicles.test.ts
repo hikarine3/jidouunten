@@ -322,7 +322,7 @@ describe('vehicle data contract and filters', () => {
     expect(freedActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://'))).toBe(true);
     const bydActions = officialLinks.filter(({ maker }) => maker === 'BYD').flatMap((link) => link.actions ?? []);
     expect(bydActions).toHaveLength(12);
-    expect(bydActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
+    expect(bydActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://'))).toBe(true);
     const mitsubishiActions = officialLinks.find(({ maker, model }) => maker === 'Mitsubishi' && model === 'アウトランダーPHEV')?.actions ?? [];
     expect(mitsubishiActions.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'estimate', 'dealer', 'catalog']);
     expect(mitsubishiActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);

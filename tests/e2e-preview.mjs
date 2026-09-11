@@ -449,6 +449,14 @@ try {
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '根拠URL・確認日は通常UIに出さない');
   await page.screenshot({ path: `${qaDir}/desktop-tesla-detail.png`, fullPage: false });
 
+  await page.goto(`${base}/cars/jp-byd-dolphin-baseline/`);
+  assert.equal(await page.locator('[data-purchase-action]').count(), 3, 'BYD DOLPHIN詳細に試乗・販売店・カタログ導線');
+  assert.deepEqual(await page.locator('[data-purchase-action]').evaluateAll((links) => links.map((link) => link.getAttribute('href'))), [
+    'https://prod.byd.com/jp/lineup/dolphin',
+    'https://dealer.bydauto.co.jp/hp/search/car/index.xhtml',
+    'https://prod.byd.com/material/byd-site/jp/lineup/dolphin/catalog/BYD_DOLPHIN_catalog_260402.pdf',
+  ], 'BYD DOLPHINの現行公式導線URLを保持');
+
   await page.goto(`${base}/cars/jp-nissan-ariya-2026-b6/`);
   assert.match(await page.locator('main').innerText(), /Nissan[\s\S]*日産アリア[\s\S]*B6/);
   assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*6,675,900円[\s\S]*新車注文可/, '日産アリアB6の価格と注文受付状態を表示');
