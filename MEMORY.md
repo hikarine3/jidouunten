@@ -2,6 +2,14 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 車両データ鮮度表示（本番反映済み）
+
+- 販売状態を90日、機能・作動条件（ODD）を180日の目安で再確認する鮮度判定を追加。確認済みレコードは一覧を汚さず、要再確認・情報競合・情報未確認だけを日本語ラベルで一覧・詳細・比較に表示する。BYD ATTO 3の競合1件は「情報が競合」と表示し、内部enum・根拠URL・アクセス日時は公開HTMLへ出さない。
+- exact app `a13e287`、Production `https://jidouunten.jp/`、immutable `https://42ab762a.jidouunten.pages.dev`、直前rollback `https://a612f40b.jidouunten.pages.dev`。Cloudflare Pages production/mainへ実IDで反映済み。
+- QA: 391 HTML、sitemap-0 390 URL、詳細385件、ItemList 2ページ768項目、公式導線72モデル／69 URL／131 actions、Vitest69/69、価格385/385（現行384、exact369／range15／未確認1）、鮮度checker（2026-09-12基準）確認済み384／要再確認0／競合1／未確認0、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID release／structured PASS、registry 508/508、公開HTML内部enum/source/accessedAt漏れ0、独立監査PASS、production E2E 1/1（GA collect HTTP204）、主要URL200、IDN path/query301。
+- 一覧のWikimedia Commons参考写真は従来どおり`loading="lazy"`・`object-fit: cover`のWebPサムネイルで省スペース表示し、作者・ライセンス帰属と詳細画像を維持。
+- Issue #17（候補カバレッジ）・#37（公式導線／計測）・#25（計測観測）・#15（レビュー）は未確認母集団や観測継続が残るためIn progressを維持し、全国網羅完了とは宣言しない。
+
 ## 2026-09-12 Daihatsu タント系20販売単位追加（本番反映済み）
 
 - ダイハツ公式のタント／タント カスタム／タント ファンクロスの商品・グレード・運転支援ページ、U-CATCHカタログ、国土交通省Level定義を突合し、グレード×2WD・4WDの20販売単位を追加。L／X系の車線逸脱抑制のみ8単位をLevel 1相当、Xターボ／カスタムRS／ファンクロス ターボとスマートクルーズパック装着を含む12単位をACC＋車線中央維持のLevel 2相当として登録した。価格は149万6,000円〜214万5,000円（税込）。スマートクルーズパックはメーカーオプション55,000円として別販売単位に分け、同じ車種・Level内の能力差を比較可能にした。注文可否は20単位とも`unknown`。

@@ -2,6 +2,17 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 車両データ鮮度表示）
+
+- exact app release commit: `a13e287`
+- immutable: https://42ab762a.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 車両データの確認状態を、一覧・詳細・比較で利用者向けの日本語として表示。販売状態は90日、機能・作動条件（ODD）は180日を目安に再確認し、確認済みの車両には余計な表示を出さない。現在はBYD ATTO 3の競合情報1販売単位だけが「情報が競合」と表示される。内部enum・根拠URL・アクセス日時は公開HTMLへ出さない。
+- UI: 一覧のWikimedia Commons参考写真は従来どおりWebPサムネイル（`loading="lazy"`・`object-fit: cover`）で省スペース表示。作者・ライセンス帰属リンクと詳細の大きい画像は維持。
+- SEO／公開面: 391 HTML、sitemap-0は390 URL、詳細385件、トップ／一覧ItemListは2ページ・768項目。GTM実IDは各HTML 1件、テスト計測ID0件。
+- QA: `npm test` 69/69（Vitest）＋Python16/16、価格385/385（現行384、exact369／range15／未確認1）、公式導線72モデル／69 URL／131 actions、画像3/3、鮮度checker（2026-09-12基準）確認済み384／要再確認0／競合1／未確認0、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 52 entities／508 surfaces／474 required selectors closure、公開HTML内部enum・source・accessedAt漏れ0、独立監査PASS、production E2E 1/1（GA collect HTTP204）、主要URL200、IDN path/query301。
+- 直前の正常配信・ロールバック候補: https://a612f40b.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-12 Daihatsu タント系20販売単位追加）
 
 - exact app release commit: `6b755d0`
