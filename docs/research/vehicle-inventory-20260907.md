@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 396 | `src/data/vehicles.json` の全レコード（現行395 + 過去1） |
-| 既定表示 | 395 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 412 | `src/data/vehicles.json` の全レコード（現行411 + 過去1） |
+| 既定表示 | 411 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 19 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
