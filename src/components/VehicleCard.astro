@@ -1,6 +1,6 @@
 ---
 import type { Vehicle } from '../data/loader';
-import { availabilityLabels, canonicalRoadType, capabilityDefinition, displayIntroducedAt, displayOptionalPackagePrices, displayVehiclePrice, handsOffLabels, levelLabels, monitoringLabels, vehicleReferenceLabel } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleTiming, handsOffLabels, levelLabels, monitoringLabels, vehicleReferenceLabel } from '../data/loader';
 const { vehicle, selectable = false, checked = false } = Astro.props as { vehicle: Vehicle; selectable?: boolean; checked?: boolean };
 const capabilityPriority = ['hands_off_highway', 'lane_change_support', 'traffic_jam_pilot', 'traffic_jam_assist', 'driver_monitoring', 'adaptive_cruise_control', 'lane_centering'];
 const visibleCapabilities = [...vehicle.capabilities]
@@ -23,7 +23,7 @@ const visibleCapabilities = [...vehicle.capabilities]
       {visibleCapabilities.map((capability) => <span>{capability.label}</span>)}
     </div>
     <div class="card-specs">
-      <span><strong>時期</strong> {displayIntroducedAt(vehicle.salesUnitIntroducedAt)}</span>
+      {displayVehicleTiming(vehicle) && <span><strong>{vehicle.salesUnitIntroducedAt ? '時期' : '確認月'}</strong> {displayVehicleTiming(vehicle)}</span>}
       <span><strong>道路</strong> {vehicle.odd.roadTypes.map(canonicalRoadType).filter((road, index, list) => list.indexOf(road) === index).join(' / ') || '不明'}</span>
       <span><strong>監視</strong> {monitoringLabels[vehicle.driverMonitoring]}</span>
     </div>

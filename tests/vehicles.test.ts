@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleMatchesPriceBand, vehiclePriceMin, vehicleReferenceLabel, vehicleReferenceTotal, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleMatchesPriceBand, vehiclePriceMin, vehicleReferenceLabel, vehicleReferenceTotal, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -43,6 +43,13 @@ describe('vehicle data contract and filters', () => {
     ];
     expect(sortVehicleList(list).map((vehicle) => vehicle.id)).toEqual(['newer', 'older', 'unknown-a', 'unknown-b']);
     expect(sortVehicleList(list, 'maker_asc').map((vehicle) => vehicle.id)).toEqual(['unknown-a', 'unknown-b', 'older', 'newer']);
+  });
+
+  it('一覧の時期表示は発売日がなければ現行カタログ確認月へフォールバックする', () => {
+    expect(displayVehicleTiming({ salesUnitIntroducedAt: '2026-07-13', catalogAsOf: '2026-09' })).toBe('発売・導入 2026年7月13日');
+    expect(displayCatalogAsOf('2026-09')).toBe('2026年9月');
+    expect(displayVehicleTiming({ salesUnitIntroducedAt: null, catalogAsOf: '2026-09' })).toBe('2026年9月');
+    expect(displayVehicleTiming({ salesUnitIntroducedAt: null, catalogAsOf: null })).toBe('');
   });
 
   it('価格が安い順は車両本体の最小額を使い、未確認を末尾に置く', () => {

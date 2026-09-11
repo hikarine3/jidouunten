@@ -34,13 +34,14 @@ const roads = [...new Set(vehicles.flatMap((vehicle) => vehicle.odd.roadTypes.ma
 const roadOptions = roads.length ? roads : [...roadFilterLabels];
 const capabilityOptions = Object.entries(capabilityDefinitions)
   .filter(([id]) => vehicles.some((vehicle) => vehicle.capabilities.includes(id)))
-  .map(([id, definition]) => ({ id, definition, count: defaultVehicles.filter((vehicle) => vehicle.capabilities.includes(id)).length }));
+  .map(([id, definition]) => ({ id, definition, count: defaultVehicles.filter((vehicle) => vehicle.capabilities.includes(id)).length }))
+  .filter(({ count }) => count > 0);
 const priceBandOptions = Object.entries(priceBandLabels).map(([value, label]) => ({ value, label }));
 const handsOffDistribution = [
   { value: handsOffPublicKeys.allowed_in_conditions, label: '条件内可', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'allowed_in_conditions').length },
   { value: handsOffPublicKeys.not_allowed, label: '不可', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'not_allowed').length },
   { value: handsOffPublicKeys.unknown, label: '未確認', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'unknown').length },
-];
+].filter(({ count }) => count > 0);
 const availabilityDistribution = [
   { value: availabilityPublicKeys.new_order_available, label: '新車注文可', count: vehicles.filter((vehicle) => vehicle.availability === 'new_order_available').length },
   { value: availabilityPublicKeys.unknown, label: '注文可否 未確認', count: vehicles.filter((vehicle) => vehicle.availability === 'unknown').length },
@@ -59,7 +60,7 @@ const guideProfiles = [
   { id: 'traffic-hands-off', title: '渋滞の負担を減らしたい', description: '高速道路の渋滞で、条件内ハンズオフに対応', count: level2Vehicles.filter((vehicle) => vehicle.handsOff === 'allowed_in_conditions' && vehicle.capabilities.includes('traffic_jam_assist') && vehicle.odd.roadTypes.some((road) => road.includes('高速道路'))).length, values: { level: '2', handsOff: handsOffPublicKeys.allowed_in_conditions, capability: [capabilityPublicKeys.traffic_jam_assist], road: '高速道路' } },
   { id: 'lane-change', title: '車線変更も支援してほしい', description: 'ウインカー操作などを前提に車線変更を支援', count: level2Vehicles.filter((vehicle) => vehicle.capabilities.includes('lane_change_support')).length, values: { level: '2', capability: [capabilityPublicKeys.lane_change_support] } },
   { id: 'under-300', title: 'まずは300万円未満で探す', description: '本体価格の開始値で候補を絞る', count: level2Vehicles.filter((vehicle) => (vehicle.price?.amounts?.[0]?.amountJpy ?? Number.POSITIVE_INFINITY) < 3_000_000).length, values: { level: '2', budget: 'under_300' } },
-];
+].filter(({ count }) => count > 0);
 ---
 <section class="list-top"><div class="wrap">
   <div class="catalog-command">

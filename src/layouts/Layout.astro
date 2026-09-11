@@ -2,17 +2,15 @@
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
 import SavedResume from '../components/SavedResume.astro';
-const { title = '自動運転.jp｜同じLevel 2でも、できることは違う。', description = '日本向けの運転支援車を、自動化レベル、ハンズオフ、機能、発売・導入時期から探して比較できます。' } = Astro.props;
+const { title = '自動運転・Level 2車種一覧｜機能・価格で比較｜自動運転.jp', description = '日本で選べる自動運転・Level 2運転支援車を、自動化レベル、ハンズオフ、機能、価格、発売・導入時期から探して比較できます。' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, 'https://jidouunten.jp').toString();
 const socialImage = 'https://jidouunten.jp/og.png';
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  '@id': canonical,
-  url: canonical,
-  name: title,
-  description,
-  isPartOf: { '@type': 'WebSite', '@id': 'https://jidouunten.jp/#website', url: 'https://jidouunten.jp', name: '自動運転.jp' },
+  '@graph': [
+    { '@type': 'WebSite', '@id': 'https://jidouunten.jp/#website', url: 'https://jidouunten.jp/', name: '自動運転.jp', inLanguage: 'ja-JP' },
+    { '@type': 'WebPage', '@id': canonical, url: canonical, name: title, description, inLanguage: 'ja-JP', isPartOf: { '@id': 'https://jidouunten.jp/#website' } },
+  ],
 };
 ---
 <!doctype html>
@@ -21,7 +19,9 @@ const structuredData = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ja-JP" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="自動運転.jp" />
     <meta property="og:locale" content="ja_JP" />

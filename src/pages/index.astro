@@ -4,6 +4,6 @@ import VehicleList from '../components/VehicleList.astro';
 import { isDefaultListedVehicle, vehicles } from '../data/loader';
 const currentVehicleCount = vehicles.filter(isDefaultListedVehicle).length;
 ---
-<Layout title="同じLevel 2でも、できることは違う。｜自動運転.jp" description={`日本向け${currentVehicleCount}販売単位を、ハンズオフ、車線変更支援、メーカー、発売・導入時期などから探して比較できます。`}>
+<Layout title="自動運転・Level 2車種一覧｜機能・価格で比較｜自動運転.jp" description={`日本で選べる自動運転・Level 2運転支援車${currentVehicleCount}販売単位を、ハンズオフ、車線変更支援、メーカー、価格、発売・導入時期から探して比較できます。`}>
   <VehicleList action="/" />
 </Layout>

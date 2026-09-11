@@ -334,6 +334,19 @@ export function displayIntroducedAt(value: string | null) {
   return day ? `発売・導入 ${year}年${month}月${day}日` : `発売・導入 ${year}年${month}月`;
 }
 
+/** 現行カタログを確認した月を、発売日と混同しない補助表示にする。 */
+export function displayCatalogAsOf(value: string | null) {
+  if (!value) return '';
+  const [year, month] = value.split('-').map(Number);
+  return `${year}年${month}月`;
+}
+
+/** 一覧カード用。発売日がなければ、確認できた現行カタログ月を表示する。 */
+export function displayVehicleTiming(vehicle: Pick<Vehicle, 'salesUnitIntroducedAt' | 'catalogAsOf'>) {
+  if (vehicle.salesUnitIntroducedAt) return displayIntroducedAt(vehicle.salesUnitIntroducedAt);
+  return displayCatalogAsOf(vehicle.catalogAsOf);
+}
+
 export type VehicleSort = 'introduced_desc' | 'price_asc' | 'maker_asc';
 
 export function vehiclePriceMin(vehicle: Pick<Vehicle, 'price'>) {
