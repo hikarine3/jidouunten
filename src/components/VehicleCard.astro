@@ -10,7 +10,7 @@ const visibleCapabilities = [...vehicle.capabilities]
   .map(capabilityDefinition);
 ---
 <article class="vehicle-card">
-  {image && <figure class="vehicle-card-image"><img src={image.src} width={image.width} height={image.height} loading="lazy" decoding="async" sizes="(max-width: 520px) 100vw, (max-width: 850px) 50vw, 33vw" alt={image.alt} /><figcaption><a href={image.sourceUrl} target="_blank" rel="noopener noreferrer">写真：Wikimedia Commons</a> / {image.author} · {image.license}</figcaption></figure>}
+  {image && <figure class="vehicle-card-image"><img src={image.src} width={image.width} height={image.height} loading="lazy" decoding="async" sizes="(max-width: 520px) 100vw, (max-width: 850px) 50vw, 33vw" alt={image.alt} /><figcaption><a href={image.sourceUrl} target="_blank" rel="noopener noreferrer">写真：Wikimedia Commons</a> / <a href={image.authorUrl} target="_blank" rel="noopener noreferrer">{image.author}</a> · <a href={image.licenseUrl} target="_blank" rel="noopener noreferrer">{image.license}</a></figcaption></figure>}
   <div class="vehicle-card-body">
     <div class:list={['vehicle-level-tag', vehicle.automationLevel >= 3 ? 'is-automated' : 'is-assistance']}>LEVEL {vehicle.automationLevel}<span>{levelLabels[vehicle.automationLevel]}</span></div>
     <h3><a href={`/cars/${vehicle.id}/`}>{vehicle.maker} {vehicle.model}</a></h3>
