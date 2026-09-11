@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 335 | `src/data/vehicles.json` の全レコード（現行334 + 過去1） |
-| 既定表示 | 334 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 340 | `src/data/vehicles.json` の全レコード（現行339 + 過去1） |
+| 既定表示 | 339 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -29,6 +29,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Honda ステップ ワゴン / 後発対策） | 10 | e:HEV AIR EX／SPADA／SPADA PREMIUM LINEとAIR EX／AIR／SPADA／SPADA PREMIUM LINEのFF・4WD。価格334万8,400円〜426万8,000円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
 | 今回追加（Honda フリード CROSSTAR / 後発対策） | 8 | e:HEV／ガソリン CROSSTARのFF・4WD、5／6人乗り。価格292万8,200円〜360万2,500円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
 | 今回追加（日産 キックス / 後発対策） | 12 | P16のG／X+／X／X シンプルパッケージ／ROCK CREEK／ROCK CREEK Utility Specを2WD・4WD（e-4ORCE）別に登録。価格299万9,700円〜430万9,800円、全車プロパイロット標準（車速30〜135km/h・車線中央付近の操舵支援）、ステアリング保持・常時監視、ハンズオフ不可を公式価格・FAQで確認 |
+| 今回追加（Honda CIVIC / 後発対策） | 5 | 2026年6月5日発売のe:HEV LX／EX／RS、ガソリンEX／RSを登録。価格394万6,800円〜465万9,600円、全車ACC＋LKASのLevel 2相当。e:HEV 3単位とガソリンEXはトラフィックジャムアシスト標準、ガソリンRSは対象外として同じLevel 2内の渋滞支援差を比較可能にした |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定。Advanced Driveの0〜約40km/hとLCAの約85〜130km/h、T-Connect／コネクティッドナビ契約・地図条件も単位ごとに保持 |
@@ -901,3 +902,30 @@ Honda公式のフリード現行商品ページ、タイプ一覧JSON、性能�
 | ROCK CREEK e-4ORCE Utility Spec | 4,309,800円 | 4WD | 4WD Utility Spec・価格上限 |
 
 根拠: [キックス商品ページ](https://www3.nissan.co.jp/vehicles/new/kicks.html)、[価格・グレード](https://www3.nissan.co.jp/vehicles/new/kicks/specifications.html)、[走行・安全](https://www3.nissan.co.jp/vehicles/new/kicks/performance_safety.html)、[P16型プロパイロットFAQ](https://faq2.nissan.co.jp/faq/show/82222?category_id=67&site_domain=default)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。公式の商品・販売店・試乗・見積り・カタログ導線は `src/data/official-links.json` に記録した。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。
+
+## 2026-09-12 Honda CIVIC 5販売単位追加
+
+Honda公式のCIVIC現行商品ページ、タイプJSON、主要装備表、性能・安全ページ、2026年6月4日発表資料を照合し、e:HEV LX／EX／RSとガソリンEX／RSの5販売単位を追加した。発表資料は2026年6月5日発売を明記しているため、5単位の`salesUnitIntroducedAt`を`2026-06-05`へ設定し、価格適用月とカタログ確認月は`2026-06`として保持した。
+
+税込メーカー希望小売価格は394万6,800円（ガソリンEX）〜465万9,600円（e:HEV RS）。全タイプでACC（縦方向）とLKAS（横方向）の同時支援を確認し、国土交通省の定義へ照合してサイト上はLevel 2相当とした。e:HEV LX／EX／RSとガソリンEXはトラフィックジャムアシスト（0〜約65km/h）を標準装備とし、ガソリンRSは主要装備表で標準対象外のため、渋滞時支援なしとして能力を分離した。全タイプで運転者の常時監視・ステアリング保持が必要で、ハンズオフ不可。車線変更支援は公式根拠がないため付与していない。
+
+| 販売単位 | 価格（税込） | 発売日 | 同じLevel 2内の差分 |
+|---|---:|---|---|
+| EX（FF） | 3,946,800円 | 2026年6月5日 | ガソリン・トラフィックジャムアシスト標準 |
+| e:HEV LX（FF） | 4,132,700円 | 2026年6月5日 | e:HEV・渋滞時支援標準 |
+| e:HEV EX（FF） | 4,448,400円 | 2026年6月5日 | e:HEV・上位装備・渋滞時支援標準 |
+| RS（FF・6MT） | 4,488,000円 | 2026年6月5日 | ガソリンRS・ACC/LKASのみ、渋滞時支援なし |
+| e:HEV RS（FF） | 4,659,600円 | 2026年6月5日 | e:HEV RS・渋滞時支援標準 |
+
+個別タイプの現在の受注可否・在庫・納期は公式ページで固定できないため、5単位とも`availability=unknown`とした。公式の商品・販売店・試乗・見積り・カタログ導線は`src/data/official-links.json`へ記録し、価格・能力差・発売日を一覧／詳細／比較へ反映する。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| CIVIC現行商品ページと価格帯 | 本田技研工業株式会社 | https://www.honda.co.jp/CIVIC/ | 2026-09-12 |
+| 5タイプの価格・駆動・トランスミッション | 本田技研工業株式会社 | https://www.honda.co.jp/CIVIC/common/data/type.json | 2026-09-12 |
+| ACC・LKAS・トラフィックジャムアシストの作動条件 | 本田技研工業株式会社 | https://www.honda.co.jp/CIVIC/webcatalog/performance/ | 2026-09-12 |
+| グレード別Honda SENSING標準装備（ガソリンRSはトラフィックジャムアシスト対象外） | 本田技研工業株式会社 | https://www.honda.co.jp/CIVIC/common/pdf/civic_equipment_list.pdf | 2026-09-12 |
+| 2026年6月5日発売と全国メーカー希望小売価格 | 本田技研工業株式会社 | https://global.honda/jp/news/2026/4260604-civic.html | 2026-09-12 |
+| 運転者主体で前後・左右を支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
+
+根拠: [CIVIC商品ページ](https://www.honda.co.jp/CIVIC/)、[タイプJSON](https://www.honda.co.jp/CIVIC/common/data/type.json)、[性能・安全](https://www.honda.co.jp/CIVIC/webcatalog/performance/)、[主要装備表](https://www.honda.co.jp/CIVIC/common/pdf/civic_equipment_list.pdf)、[Honda発表資料](https://global.honda/jp/news/2026/4260604-civic.html)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。

@@ -152,14 +152,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(335);
+    expect(vehicles).toHaveLength(340);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補334件は全件の公式金額を保持する', () => {
+  it('現行候補339件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(334);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(334);
+    expect(current).toHaveLength(339);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(339);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -254,8 +254,20 @@ describe('vehicle data contract and filters', () => {
     expect(officialLinkFor(freed[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
   });
 
+  it('Honda CIVICは2026年6月発売の5タイプを渋滞支援差付きで保持する', () => {
+    const civic = vehicles.filter((vehicle) => vehicle.model === 'CIVIC');
+    expect(civic).toHaveLength(5);
+    expect(civic.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([3_946_800, 4_132_700, 4_448_400, 4_488_000, 4_659_600]);
+    expect(civic.every((vehicle) => vehicle.currentCatalogListed && vehicle.generation === '11代目' && vehicle.catalogAsOf === '2026-06' && vehicle.priceEffectiveAt === '2026-06' && vehicle.salesUnitIntroducedAt === '2026-06-05' && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(civic.filter((vehicle) => vehicle.capabilities.includes('traffic_jam_assist'))).toHaveLength(4);
+    expect(civic.find((vehicle) => vehicle.grade === 'RS' && vehicle.price?.amounts[0].amountJpy === 4_488_000)?.capabilities).toEqual(['adaptive_cruise_control', 'lane_centering']);
+    expect(civic.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('civic_equipment_list.pdf')))).toBe(true);
+    expect(civic.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('4260604-civic.html') && source.supports.some((fact) => fact.includes('2026年6月5日発売'))))).toBe(true);
+    expect(officialLinkFor(civic[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
+  });
+
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(65);
+    expect(officialLinks).toHaveLength(66);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -305,7 +317,7 @@ describe('vehicle data contract and filters', () => {
     const crownSportActions = officialLinkFor(vehicles.find(({ model }) => model === 'クラウン スポーツ')!)?.actions ?? [];
     expect(crownSportActions.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
     expect(crownSportActions.every(({ checkedAt }) => checkedAt === '2026-09-12')).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(103);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(107);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
