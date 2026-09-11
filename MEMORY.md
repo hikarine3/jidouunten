@@ -2,6 +2,15 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 Mercedes-Benz GLC／C-Class Sedan追加（本番反映済み）
+
+- Mercedes-Benz Japanの価格表・GLC／C-Class Sedan公式ページ・MP202602装備表・安全ページを突合し、GLC 5単位＋C-Class Sedan 6単位＝11単位を追加。全276販売単位（現行275、過去1）、価格744万〜1,844万円（税込）。全車Level 2相当（ACC＋車線中央維持、ステアリング保持・常時監視、ハンズオフ不可）として、同じLevel 2内の価格・グレード差を比較できる。
+- `catalogAsOf=2026-09`を保持。価格適用日・販売単位の正確な発売日を一次情報から確定できないため、`priceEffectiveAt`／`salesUnitIntroducedAt`は未設定。公式ページ掲載は注文可能の根拠ではないため、11単位とも注文可否`unknown`を維持。
+- 公式導線はMercedesの価格表・商品ページを追加（58モデル／56 URL／76 actions）。価格11/11、公式URL7/7をHTTP200確認。既存のWikimedia Commons参考写真3件（CC0／CC BY-SA 4.0、作者・ライセンス直リンク、WebP幅1200px以下・250KB以下）は変更なし。
+- exact app `5fb3b70`（Mercedes実装 `4af6086`＋公開面依存registryの旧`264販売単位`マーカー15件を`275販売単位`へ修正）、Production `https://jidouunten.jp/`、immutable `https://b8e0e573.jidouunten.pages.dev`、直前rollback `https://dc6031c0.jidouunten.pages.dev`。
+- QA: 282 HTML、sitemap-0 281 URL、詳細276件、ItemList550項目、Vitest56/56、価格checker276/276、公式導線checker、注文根拠checker、画像checker、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build・release／structured PASS。独立リリース監査PASS、registry40 entities／391 surfaces／1,859 markers失敗0、immutable／本体E2E各1/1（GA collect204）、主要URL200、未知URL404、IDN path/query301。
+- Issue #17（候補カバレッジ）と#37（公式導線・計測）は未確認母集団・受注状態の観測が残るためIn progressを維持。現行カタログの全国網羅完了とは宣言しない。
+
 ## 2026-09-11 Wikimedia Commons参考写真パイロット（本番反映済み）
 
 - 車両一覧・詳細へToyota プリウス、Tesla Model 3、Tesla Model Yの3モデル画像を追加。参考写真であり、掲載グレード・年式やADAS性能の証明ではない。Commonsファイルページ・作者・ライセンス名を各公式URLへ直接リンクし、CC0 1.0／CC BY-SA 4.0の帰属情報を`src/data/vehicle-images.json`と`docs/licenses/assets.md`へ固定した。

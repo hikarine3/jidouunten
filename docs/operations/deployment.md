@@ -2,6 +2,18 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 Mercedes-Benz GLC／C-Class Sedan追加）
+
+- exact app release commit: `5fb3b70`（Mercedes追加 `4af6086`、依存レジストリ旧件数修正を含む）
+- immutable: https://b8e0e573.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Mercedes-Benz GLC 5販売単位、C-Class Sedan 6販売単位を追加。全276販売単位（現行275、過去1）、価格744万円〜1,844万円（税込）。全11単位をLevel 2相当（ACC＋車線中央維持、ステアリング保持・常時監視、ハンズオフ不可）として比較できる。`catalogAsOf=2026-09`、価格適用日・販売単位の正確な発売日は一次情報に明示がないため未設定、注文可否は11単位とも未確認。
+- 公式根拠: Mercedes-Benz Japanの価格表、GLC／C-Class Sedan公式ページ、MP202602装備表、安全ページ。価格11/11、公式URL7/7をHTTP200確認。公式ページ掲載は注文可能を意味しないため、販売店確認を促す表示を維持。
+- SEO／公開面: 282 HTML、sitemap-0は281 URL、詳細276件にProduct＋Car＋BreadcrumbList、トップ／一覧ItemListは550項目。公式導線は58モデル／56 URL／76 actions。
+- QA: `npm test` 56/56（価格276/276、注文可21／未確認254／現在利用不可1、画像3/3、Python16/16）、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build282、release guard／構造化データPASS。独立リリース監査はexact `5fb3b70`でPASS、immutable／本体E2E各1/1（GA collect HTTP204）。registryは40 entities／391 surfaces／1,859 markers、失敗0。
+- 本番smoke: immutable／本体のトップ、一覧、GLC詳細、C-Class詳細、比較、sitemap-index、sitemap-0、robotsはHTTP200、未知URLは404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301（query維持）。既存Wikimedia Commons参考写真3件の帰属リンク・WebP最適化を維持。
+- 直前の正常配信・ロールバック候補: https://dc6031c0.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 Wikimedia Commons参考写真パイロット）
 
 - exact app release commit: `3ac0c48`
