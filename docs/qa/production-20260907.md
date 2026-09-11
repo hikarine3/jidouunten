@@ -1,5 +1,16 @@
 # 初回公開の実測証拠
 
+## 2026-09-11 Toyota ヤリス17販売単位・Level 1対応・SEO整合（本番実測）
+
+- exact app release commit: `6f995bb`（実装 `d709dcf`）
+- Immutable deployment: https://74a72192.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- ヤリス17販売単位を公開。価格169万7,300円〜288万4,200円、Level 1が2件、Level 2が15件、渋滞時運転支援6件。Level 1クイック絞り込み、詳細・比較・公式見積り導線、sitemapへ同期。トップ／一覧のtitle・descriptionをLevel 1/2表記へ整合。
+- `npm test`: Vitest50/50、価格235/235（現行234/234、exact219／range15／未確認1）、公式導線51モデル／50 URL／64 actions、Python16/16。
+- `npm run check`: 0 errors / 0 warnings / 6 hints。実ID build241、release guard PASS。ローカル・immutable・本体E2E各1/1（GA collect HTTP204）。
+- ヤリス一次URL6件＋公式見積りURL HTTP200、主要URL（トップ、一覧、Level解説、ヤリス詳細2件、比較、sitemap、robots）HTTP200、IDN path/query 301。sitemap-0は240 URL。公開HTMLの内部enum・内部日付キー・根拠URL漏れ0件。registryのYaris/Yaris Cross required selector各4/4、独立候補監査PASS。
+- 直前正常deployment（rollback候補）: https://01434fd9.jidouunten.pages.dev
+
 ## 2026-09-11 ヤリス クロス20販売単位追加（本番実測）
 
 - exact app release commit: `95b31d5`（実装 `c4b401d`）

@@ -2,6 +2,15 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 Toyota ヤリス17販売単位・Level 1対応・SEO整合（本番反映済み）
+
+- トヨタ公式の現行ヤリス商品ページ、grades53 JSON、2026年4月仕様表、安全ページ、取扱説明書を突合し、価格比較可能な17販売単位を追加。価格は169万7,300円〜288万4,200円（税込）。1.0L CVTのG／X 2単位はACCのみのLevel 1、残り15単位はACC＋LTAのLevel 2、ハイブリッド6単位は渋滞時停止・発進支援を表示。KINTO月額のみのU 2単位は車両本体価格比較から保留し、推測価格を出していない。
+- Level 1を一覧の比較対象へ追加し、クイック絞り込み・レベル解説・詳細・比較へ反映。同じLevel 2内でもLTA／渋滞時支援の差をAND条件で絞り込める。全17単位はステアリング保持・常時監視が必要でハンズオフ不可、車線変更時の予備加減速は自動車線変更として扱わない。
+- SEOメタを実データへ整合し、トップ／一覧title・descriptionをLevel 1/2表記へ更新。canonical、robots、ja-JP hreflang、OG/Twitter、WebSite＋WebPage JSON-LD、sitemap240 URLを維持。
+- exact app `6f995bb`（実装 `d709dcf`）、Production `https://jidouunten.jp/`、immutable `https://74a72192.jidouunten.pages.dev`。直前rollback候補は`https://01434fd9.jidouunten.pages.dev`。
+- QA: Vitest50/50、価格235/235（現行234/234、exact219／range15／未確認1）、公式導線51モデル／50 URL／64 actions、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build241、release guard PASS、ローカル・immutable・本体E2E各1/1（GA collect HTTP204）、Yaris required selector4/4、公開HTML内部enum・内部日付キー・根拠URL漏れ0件、主要URL200、IDN path/query301、独立候補監査PASS。
+- Issue #17は未確認母集団が残るためIn progress、#37も注文状態・公式導線の観測継続でOPEN/In progress。全国候補の網羅完了は宣言しない。
+
 ## 2026-09-11 ヤリス クロス20販売単位追加・本番反映
 
 - トヨタ公式のグレードJSON、2026年8月仕様表、安全ページ、取扱説明書を突き合わせ、ヤリス クロス20販売単位を追加。全218販売単位（現行217、過去1）、価格212万6,300円〜335万5,000円、全車Level 2相当・ハンズオフ不可・ACC／車線中央維持／渋滞時支援。注文可否は未確認を維持。

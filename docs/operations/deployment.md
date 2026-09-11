@@ -4,6 +4,16 @@
 
 ## 最新の配信（2026-09-11 ヤリス クロス20販売単位追加）
 
+## 最新の配信（2026-09-11 Toyota ヤリス17販売単位・Level 1対応・SEO整合）
+
+- exact app: `6f995bb`（実装 `d709dcf`、SEOメタ整合を含む）
+- immutable: https://74a72192.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: ヤリスの価格比較可能な17販売単位を追加（169万7,300円〜288万4,200円）。1.0L CVTの2単位をLevel 1（ACCのみ）、その他15単位をLevel 2（ACC＋LTA）、ハイブリッド6単位を渋滞時支援として比較可能にした。Level 1の絞り込みを有効化し、KINTO月額のみのU 2単位は価格比較から保留。
+- SEO／導線: トップ・一覧のtitle／descriptionをLevel 1/2表記へ更新。canonical／robots／hreflang／OG/Twitter／WebSite＋WebPage JSON-LD、公式見積り導線、sitemap240 URLを維持。
+- QA: Vitest50/50、価格235/235（現行234/234、exact219／range15／未確認1）、公式導線51モデル／50 URL／64 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build241、release guard PASS、ローカル／immutable／production E2E各1/1（GA collect HTTP204）、Yaris source／見積りURL HTTP200、registry静的marker／required selector PASS、公開HTML内部情報漏れ0件、主要URL HTTP200、IDN path/query301、独立候補監査PASS。
+- 直前の正常配信・ロールバック候補: https://01434fd9.jidouunten.pages.dev
+
 - exact app: `95b31d5`（実装 `c4b401d`、依存レジストリmarker更新を含む）
 - immutable: https://01434fd9.jidouunten.pages.dev
 - 本体: https://jidouunten.jp/
