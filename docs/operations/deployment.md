@@ -2,6 +2,18 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Daihatsu タント系20販売単位追加）
+
+- exact app release commit: `6b755d0`
+- immutable: https://a612f40b.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: ダイハツのタント／タント カスタム／タント ファンクロスを、グレード×2WD・4WDの20販売単位で追加。L／X系の車線逸脱抑制のみ8単位をLevel 1相当、Xターボ／カスタムRS／ファンクロス ターボとスマートクルーズパック装着を含む12単位をACC＋車線中央維持のLevel 2相当として登録した。価格は149万6,000円〜214万5,000円（税込）。スマートクルーズパックはメーカーオプション55,000円として標準装着と分離し、同一車種・同一Level内の能力差を比較できる。注文可否は20単位とも`unknown`。
+- 公式根拠: [タント商品ページ](https://www.daihatsu.co.jp/lineup/tanto/)、[タント グレード・価格](https://www.daihatsu.co.jp/lineup/tanto/02_grade.htm)、[タント 運転支援](https://www.daihatsu.co.jp/lineup/tanto/04_driving.htm)、[タント ファンクロス](https://www.daihatsu.co.jp/lineup/tanto_funcross/)、[U-CATCH カタログ](https://u-catch.daihatsu.co.jp/catalog/TANTO/MODEL__201907/)、[国土交通省 Level定義](https://www.mlit.go.jp/common/001343740.pdf)。販売店・試乗・見積り・カタログ導線を3モデルへ同期。
+- SEO／公開面: 391 HTML、sitemap-0は390 URL、詳細385件、トップ／一覧ItemListは2ページ・768項目。GTM実IDは各HTML 1件、テスト計測ID0件。
+- UI: 一覧のWikimedia Commons参考写真はWebPサムネイル（デスクトップ約374×102px、モバイル約360×88px、`loading=lazy`・`object-fit: cover`）で省スペース表示。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホスト方針は維持。
+- QA: `npm test` 68/68（Vitest）＋Python16/16、価格385/385（現行384、exact369／range15／未確認1）、公式導線72モデル／69 URL／131 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 52 entities／508 surfaces／474 required selectors closure、公開HTML enum/source/accessedAt漏れ0、独立監査PASS、immutable／本体E2E各1/1（GA collect HTTP204）、主要URL200、IDN path/query301。
+- 直前の正常配信・ロールバック候補: https://0208588f.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-12 Suzuki スペーシア12販売単位追加）
 
 - exact app release commit: `18d708c`

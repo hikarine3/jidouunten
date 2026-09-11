@@ -2,6 +2,14 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 Daihatsu タント系20販売単位追加（本番反映済み）
+
+- ダイハツ公式のタント／タント カスタム／タント ファンクロスの商品・グレード・運転支援ページ、U-CATCHカタログ、国土交通省Level定義を突合し、グレード×2WD・4WDの20販売単位を追加。L／X系の車線逸脱抑制のみ8単位をLevel 1相当、Xターボ／カスタムRS／ファンクロス ターボとスマートクルーズパック装着を含む12単位をACC＋車線中央維持のLevel 2相当として登録した。価格は149万6,000円〜214万5,000円（税込）。スマートクルーズパックはメーカーオプション55,000円として別販売単位に分け、同じ車種・Level内の能力差を比較可能にした。注文可否は20単位とも`unknown`。
+- 公式導線はタント／カスタム／ファンクロスへ販売店・試乗・見積り・カタログを同期。公開詳細は[タント L 2WD](https://jidouunten.jp/cars/jp-daihatsu-l-2wd/)、[スマートクルーズパック付き X 2WD](https://jidouunten.jp/cars/jp-daihatsu-x-2wd-smart-cruise-pack/)、比較は[タント L／Xパック](https://jidouunten.jp/compare/?ids=jp-daihatsu-l-2wd&ids=jp-daihatsu-x-2wd-smart-cruise-pack)。
+- exact app `6b755d0`、Production `https://jidouunten.jp/`、immutable `https://a612f40b.jidouunten.pages.dev`、直前rollback `https://0208588f.jidouunten.pages.dev`。Cloudflare Pages production/mainへ実IDで反映済み。
+- QA: 391 HTML、sitemap-0 390 URL、詳細385件、ItemList 2ページ768項目、公式導線72モデル／69 URL／131 actions、registry 52 entities／508 surfaces／474 required selectors closure、Vitest68/68、価格385/385（現行384、exact369／range15／未確認1）、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID release／structured PASS、公開HTML enum/source/accessedAt漏れ0、独立監査PASS、immutable／production E2E各1/1（GA collect HTTP204）、主要URL200、IDN path/query301。Wikimedia Commons参考写真は一覧で約374×102px（デスクトップ）／約360×88px（モバイル）の`loading=lazy` WebPサムネイルを維持。
+- Issue #17（候補カバレッジ）と#37（公式導線・計測）は未確認母集団・受注状態の観測が残るためIn progressを維持し、全国網羅完了とは宣言しない。
+
 ## 2026-09-12 Suzuki スペーシア12販売単位追加（本番反映済み）
 
 - スズキ公式のスペーシア／スペーシア カスタムのグレード・価格、安全装備、発売資料を突合し、HYBRID G／X／X セーフティプラスパッケージ、カスタム HYBRID GS／XS／XSターボの2WD・4WDを全12販売単位で追加。価格は153万100円〜219万3,400円（税込）、発売日は2023年11月22日。G／Xは車線逸脱抑制のLevel 1相当、セーフティプラス／カスタム8単位はACC全車速追従・停止保持＋車線維持支援のLevel 2相当。ハンドル保持・常時監視が必要で、ハンズオフ・自動車線変更は付与していない。注文可否は12単位とも`unknown`。
