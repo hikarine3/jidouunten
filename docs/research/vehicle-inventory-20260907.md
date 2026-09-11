@@ -289,7 +289,7 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 | VolvoのEX30以外の現行Pilot Assist搭載車 | 日本仕様のモデル年・必要装備を未確認 | Volvo Cars Japan公式モデルページ・取扱説明書 |
 | Volkswagenの現行IQ.DRIVE搭載車 | 日本仕様のモデル年・販売状態を未確認 | Volkswagen Japan公式モデルページ・取扱説明書 |
 | Hyundaiの現行HDA搭載車 | 日本向け販売単位・現行掲載を未確認 | Hyundai Mobility Japan公式モデルページ |
-| Mitsubishi / Suzuki / Daihatsuの一次確認候補 | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、デリカミニ 12単位、eKスペース 4単位、e VITARA 3単位は掲載済み。ECLIPSE CROSS等は販売単位展開を継続中 | 各社日本公式グレード表・装備表・取扱説明書 |
+| Mitsubishi / Suzuki / Daihatsuの一次確認候補 | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、デリカミニ 12単位、eKスペース 4単位、e VITARA 3単位は掲載済み。ECLIPSE CROSSは公式ページで生産終了を確認したため現行新車カタログへの追加を保留し、残在庫・受注可否を継続確認 | 各社日本公式グレード表・装備表・取扱説明書・販売店在庫 |
 | BMW限定車 / Mモデル・MINIの一次確認候補 | BMW通常3シリーズ9単位とMINI Countryman通常8単位は掲載済み。BMW限定車・M3、MINI Countryman Shadow Edition / Slate Blueは通常単位と分けて確認待ち | 各社日本公式装備価格表・取扱説明書 |
 | Audi / Mercedes-Benz / Porsche等 | モデル単位の支援機能は確認できるが、グレード別の標準／オプションと販売状態の確認が未完 | 各社日本公式装備価格表・コンフィギュレーター |
 
@@ -319,7 +319,7 @@ Toyotaの日本向け現行ラインアップと公式安全・主要装備資�
 | メーカー | 確認済み候補 | 残作業 |
 |---|---|---|
 | Mazda | 掲載済み35単位（CX-80 8、CX-60 11、新型CX-5 4、MAZDA3 7、CX-30 4、MX-30 Natural Monotone 1） | MAZDA3 FASTBACK 15C / 15S・SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EVグレードはMRCCとCTSの同時支援を確定できず対象外。ROTARY-EV以外の限定仕様は別途確認 |
-| Mitsubishi | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、デリカミニ 12単位、eKスペース 4単位（掲載済み）、ECLIPSE CROSS | ECLIPSE CROSSはMI-PILOTの標準／メーカーオプションとグレード別価格を固定 |
+| Mitsubishi | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、デリカミニ 12単位、eKスペース 4単位（掲載済み）、ECLIPSE CROSS（生産終了・残在庫確認待ち） | 残在庫・受注可否が確認できた場合のみ、MI-PILOTの標準／メーカーオプションとグレード別価格を別区分で固定 |
 | Suzuki | FRONX、SOLIO/BANDIT、SWIFT CVT、SPACIA系（e VITARA 3単位は掲載済み） | ACC＋車線中央維持の対象グレードとパッケージを販売単位へ展開 |
 | Daihatsu | MOVE、MOVE CANBUS、TANTO系、TAFT、ROCKY | Smart Cruise Packを含む標準／オプション差を販売単位へ展開 |
 | BMW | 3シリーズ Sedan 5グレード、Touring 4グレード | 掲載済み。Edition Shadow、M3、50周年限定車は受注・在庫確認待ち |
@@ -1078,3 +1078,11 @@ Honda公式のCIVIC現行商品ページ、タイプJSON、主要装備表、性
 | eKスペース | 4 | 4（M／G） | 0 | 1,749,000〜1,945,900円 |
 
 根拠: [デリカミニ商品ページ](https://www.mitsubishi-motors.co.jp/lineup/delica_mini/)、[デリカミニ主要装備](https://www.mitsubishi-motors.co.jp/lineup/delica_mini/spec/spe_01.html)、[デリカミニMI-PILOT](https://www.mitsubishi-motors.co.jp/lineup/delica_mini/usp/usp_03.html)、[eKスペース商品ページ](https://www.mitsubishi-motors.co.jp/lineup/ek_space/)、[eKスペース主要装備](https://www.mitsubishi-motors.co.jp/lineup/ek_space/spec/spe_01.html)、[eKスペースカタログPDF](https://www.mitsubishi-motors.co.jp/lineup/ek_space/pdf/ek_space.pdf)、[三菱ニュースリリース（2025年9月18日）](https://www.mitsubishi-motors.com/jp/newsroom/newsrelease/2025/20250918_3.html)、[国土交通省 Level 1/2定義](https://www.mlit.go.jp/common/001343740.pdf)。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。
+
+## 2026-09-12 Mitsubishi ECLIPSE CROSS候補判定
+
+三菱自動車の公式ECLIPSE CROSS商品ページとグレード・価格ページを再確認した。公式ページはG／BLACK Edition／Pのガソリン3グレード、2WD／4WD、税込価格3,118,500円〜3,300,000円、MI-PILOT（ACC＋LKA）の装備比較を掲載している一方、「エクリプス クロスは生産終了のため、ボディカラー、オプションなどがお客様のご希望に添えない場合がございます」と明記している。また、商品ページ上には営業スタッフへの問い合わせと商談・購入予約の導線が残る。
+
+このため、現時点で新車の現行販売単位として6単位（3グレード×2WD・4WD）を公開カタログへ追加することは見送る。生産終了車を新車注文可能と誤認させないため、残在庫・地域別受注可否が一次情報で確認できた場合のみ、`unavailable`または残在庫向けの別区分として価格・MI-PILOT・販売状態を再評価する。現行411単位の集計件数は変更しない。
+
+根拠: [ECLIPSE CROSS商品ページ](https://www.mitsubishi-motors.co.jp/lineup/eclipse-cross/)、[グレード・価格・装備比較](https://www.mitsubishi-motors.co.jp/lineup/eclipse-cross/grade/)、[G（ガソリン）](https://www.mitsubishi-motors.co.jp/lineup/eclipse-cross/grade/g_gasoline.html)、[P（ガソリン）](https://www.mitsubishi-motors.co.jp/lineup/eclipse-cross/grade/p_gasoline.html)。確認日: 2026-09-12。
