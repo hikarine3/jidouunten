@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 283 | `src/data/vehicles.json` の全レコード（現行282 + 過去1） |
-| 既定表示 | 282 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 297 | `src/data/vehicles.json` の全レコード（現行296 + 過去1） |
+| 既定表示 | 296 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -45,6 +45,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota カローラ スポーツ／ツーリング） | 9 | カローラ スポーツ G“Z” / G / G“X” 2WDの3単位、カローラ ツーリング W×B / G / Xの2WD・E-Four 6単位。価格244万7,500円〜339万3,500円、全車速追従レーダークルーズコントロール・LTA・ステアリング保持を公式グレード／安全性能／カタログ資料から固定。特別仕様車3単位は販売終了時期の確認待ちで保留 |
 | 今回追加（Mercedes-Benz GLC／C-Class Sedan） | 11 | GLC 5単位、C-Class Sedan 6単位。MP202602価格表の744万〜1,844万円、アクティブディスタンスアシスト・アクティブステアリングアシスト・レーンキーピング・自動再発進の標準装備を確認。Level 2相当・ステアリング保持・注文可否未確認として掲載 |
 | 今回追加（SUBARU フォレスター） | 7 | Premium S:HEV EX、X-BREAK S:HEV EX、Touring EX、SPORT EX、X-BREAK S:HEV、Touring、SPORT EX Black Selection。現行グレード価格385万〜464万2,000円、EyeSightコアとEyeSight X（5単位）の装備差、渋滞時ハンズオフ0〜約50km/h・車線変更支援・運転者監視条件を公式装備表／安全ページで確認。全7単位をLevel 2相当・注文可否未確認として掲載 |
+| 今回追加（日産 エクストレイル） | 14 | X/G 2WD、X/G e-4ORCE、ROCK CREEK、NISMO、AUTECH（2列・3列）の現行14販売単位。2026年9月価格409万2,000円〜596万2,000円、プロパイロット（ナビリンク機能付）全車標準、車速・車間＋車線内操舵のLevel 2相当、ハンズオフ不可として公式価格・装備表・安全説明を確認。注文可否は未確認 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -58,6 +59,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Honda | ACCORD 2025 e:HEV | 掲載 | 2 | 2026-09-07 |
 | Nissan | 日産アリア（現行仕様）B6 / B6 e-4ORCE / B9 / B9 e-4ORCE | 掲載（4単位、B6のみ注文受付確認） | 2 | 2026-09-11 |
 | Nissan | セレナ C28 e-POWER LUXION | 掲載 | 2 | 2026-09-07 |
+| Nissan | エクストレイル X/G 2WD、X/G e-4ORCE、ROCK CREEK、NISMO、AUTECH（2列・3列） | 掲載（現行14単位、プロパイロット標準・ハンズオフ不可）／注文可否 未確認 | 2相当 | 2026-09-11 |
 | SUBARU | レヴォーグ レイバック（現行仕様）Limited EX | 注文可否 未確認（注文済み1.8Lグレードの工場出荷目処のみ確認） | 2 | 2026-09-11 |
 | SUBARU | フォレスター Premium S:HEV EX / X-BREAK S:HEV EX / Touring EX / SPORT EX / X-BREAK S:HEV / Touring / SPORT EX Black Selection | 掲載（現行7単位、EyeSight X 5単位は条件内ハンズオフ・車線変更支援）／注文可否 未確認 | 2相当 | 2026-09-11 |
 | Tesla | Model 3 Premium RWD / Premium ロングレンジAWD / Performance、Model Y Premium RWD / Premium ロングレンジAWD / L | 新車注文可（6単位） | 2相当 | 2026-09-10 |
@@ -754,3 +756,26 @@ SUBARU公式の現行グレード一覧、2026年5月装備表、安全性能ペ
 新車ページへの掲載は確認できるが、個別グレードの現在の受注可否・納期までは公式ページで確認できないため、7単位の`availability=unknown`を維持した。公式商品ページにはセルフ見積り、販売店検索、試乗予約への導線があり、`src/data/official-links.json`へ記録した。
 
 根拠: [フォレスター グレード一覧](https://www.subaru.jp/forester/grade/)、[装備表（2026.05）](https://www.subaru.jp/forester/specification/docs/equipment.pdf)、[安全性能](https://www.subaru.jp/forester/safety/)、[新型フォレスター発表](https://www.subaru.co.jp/news/2025_04_17_164724/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。
+
+## 2026-09-11 日産エクストレイル14販売単位追加
+
+日産公式の現行商品ページ、価格・グレード一覧、プロパイロット説明、2026年8月主要装備表（通常／NISMO／AUTECH）を照合し、エクストレイルの14販売単位を追加した。2WD（2列）のX・G・AUTECH Advanced Package、4WDのX/G e-4ORCE（2列・3列）、ROCK CREEK、NISMO、AUTECH、AUTECH SPORTS SPECを別単位に分けた。価格はすべて税込のメーカー希望小売価格で409万2,000円〜596万2,000円。現行価格ページの確認月を`catalogAsOf=2026-09`・`priceEffectiveAt=2026-09`とし、個別販売単位の発売日は公式資料で固定できないため`salesUnitIntroducedAt=null`とした。
+
+主要装備表でX／G／ROCK CREEK、NISMO、AUTECHの各単位に「プロパイロット」を標準装備として確認した。日産の説明はアクセル・ブレーキ・ステアリング操作を支援する通常のプロパイロットで、高速道路・自動車専用道路で使用する運転支援システム（自動運転ではない）と明記される。したがってACC（縦方向）＋車線内操舵（横方向）を国土交通省の定義へ照合しLevel 2相当と分類した。プロパイロット2.0のような条件内ハンズオフの根拠は確認できないため、全14単位を`handsOff=not_allowed`、`driverMonitoring=required`、能力は`adaptive_cruise_control`＋`lane_centering`に限定した。速度上限や個別の受注可否は公式に一律の根拠がないため推測せず、`speedKph`と`availability`は未確認としている。
+
+| 販売単位 | 価格（税込） | 駆動・座席 | 同じLevel 2内の差分 |
+|---|---:|---|---|
+| X | 4,092,000円 | 2WD・2列 | エントリー価格。プロパイロット標準 |
+| G | 4,653,000円 | 2WD・2列 | 2WD上位グレード |
+| AUTECH Advanced Package | 5,365,800円 | 2WD・2列 | AUTECH専用装備 |
+| X e-4ORCE | 4,389,000円 | 4WD・2列 | e-4ORCEの価格下限 |
+| G e-4ORCE | 4,950,000円 | 4WD・2列 | Gのe-4ORCE |
+| ROCK CREEK e-4ORCE | 4,757,500円（2列）／4,889,500円（3列） | 4WD | 専用外装・2列／3列 |
+| X e-4ORCE（3列） | 4,521,000円 | 4WD・3列 | 3列シート |
+| AUTECH e-4ORCE | 5,480,200円（2列）／5,559,400円（3列） | 4WD | AUTECH専用装備・2列／3列 |
+| AUTECH Advanced Package e-4ORCE | 5,662,800円 | 4WD・2列 | AUTECH上位パッケージ |
+| AUTECH SPORTS SPEC e-4ORCE | 5,904,800円 | 4WD・2列 | 専用チューニング |
+| NISMO e-4ORCE | 5,754,100円 | 4WD・2列 | NISMO専用チューニング |
+| NISMO Advanced Package e-4ORCE | 5,962,000円 | 4WD・2列 | NISMO上位パッケージ |
+
+根拠: [エクストレイル現行商品ページ](https://www3.nissan.co.jp/vehicles/new/x-trail.html)、[価格・グレード](https://www3.nissan.co.jp/vehicles/new/x-trail/specifications.html)、[プロパイロット](https://www3.nissan.co.jp/vehicles/new/x-trail/performance_safety/propilot.html)、[通常／ROCK CREEK装備表（2026.08）](https://www-asia.nissan-cdn.net/content/dam/Nissan/jp/vehicles/x-trail/2608/pdf/x-trail_2608_specsheet.pdf)、[NISMO装備表](https://www-asia.nissan-cdn.net/content/dam/Nissan/jp/vehicles/x-trail/2608/pdf/x-trail_2608_nismo_specsheet.pdf)、[AUTECH装備表](https://www-asia.nissan-cdn.net/content/dam/Nissan/jp/vehicles/x-trail/2608/pdf/x-trail_2608_autech_autech_sports_specsheet.pdf)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。
