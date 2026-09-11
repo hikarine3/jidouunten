@@ -35,15 +35,15 @@ try {
   const rootGraph = structuredGraph(rootHtml);
   assert.deepEqual(rootGraph.map((entry) => entry['@type']), ['WebSite', 'WebPage', 'ItemList', 'BreadcrumbList'], 'トップJSON-LDにWebSite/WebPage/ItemList/BreadcrumbList');
   const rootItemList = rootGraph.find((entry) => entry['@type'] === 'ItemList');
-  assert.equal(rootItemList.numberOfItems, 322, 'トップItemListは初期可視322件');
-  assert.equal(rootItemList.itemListElement.length, 322, 'トップItemList要素数は初期可視322件');
-  assert.deepEqual(rootItemList.itemListElement.map(({ position }) => position), Array.from({ length: 322 }, (_, index) => index + 1), 'トップItemList positionを連番で出力');
+  assert.equal(rootItemList.numberOfItems, 334, 'トップItemListは初期可視334件');
+  assert.equal(rootItemList.itemListElement.length, 334, 'トップItemList要素数は初期可視334件');
+  assert.deepEqual(rootItemList.itemListElement.map(({ position }) => position), Array.from({ length: 334 }, (_, index) => index + 1), 'トップItemList positionを連番で出力');
   assert.equal(rootGraph.filter((entry) => entry['@type'] === 'BreadcrumbList').length, 1, 'トップBreadcrumbListは重複しない');
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 322, '既定カタログは現行確認322件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*322[\s\S]*条件内可[\s\S]*66[\s\S]*不可[\s\S]*255[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*64/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await visibleCards(), 334, '既定カタログは現行確認334件');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*334[\s\S]*条件内可[\s\S]*66[\s\S]*不可[\s\S]*267[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*64/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="1"]').innerText(), /L1[\s\S]*2件/, 'Level 1の現行2件を表示');
   assert.equal(await page.locator('[data-level-shortcut="1"]').isDisabled(), false, '現行車があるLevel 1を絞り込み可能にする');
@@ -66,6 +66,8 @@ try {
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan エクストレイル' }).count(), 14, '日産エクストレイルの14販売単位を既定一覧に表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan エクストレイル' }).filter({ hasText: 'X e-4ORCE [2列]' }).innerText(), /LEVEL 2[\s\S]*約439万円[\s\S]*ハンズオフ：不可[\s\S]*車線中央維持/, 'エクストレイル X e-4ORCEの価格・Level 2・ハンズオフ不可を表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan エクストレイル' }).filter({ hasText: 'NISMO e-4ORCE' }).innerText(), /約575万円[\s\S]*ハンズオフ：不可/, 'エクストレイル NISMOの価格・ハンズオフ不可を表示');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan キックス' }).count(), 12, '日産キックスのP16現行12販売単位を既定一覧に表示');
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan キックス' }).filter({ hasText: 'X シンプルパッケージ' }).innerText(), /LEVEL 2[\s\S]*約300万円[\s\S]*ハンズオフ：不可[\s\S]*車線中央維持/, 'キックスの価格・Level 2・ハンズオン条件を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Honda ZR-V' }).count(), 4, 'Honda ZR-Vの4販売単位を既定一覧に表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Honda ZR-V' }).filter({ hasText: 'e:HEV X〈FF〉' }).innerText(), /LEVEL 2[\s\S]*約371万円[\s\S]*ハンズオフ：不可[\s\S]*渋滞時運転支援/, 'ZR-V X FFの価格・Level 2・手保持条件を表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Honda ZR-V' }).filter({ hasText: 'e:HEV Z〈4WD〉' }).innerText(), /約453万円[\s\S]*ハンズオフ：不可/, 'ZR-V Z 4WDの価格と手保持条件を表示');
@@ -128,10 +130,10 @@ try {
   await page.locator('[data-saved-resume-delete="search"]').click();
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '検索条件を削除すると再開バーを隠す');
   await page.locator('[data-reset-shortcut]').click();
-  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可21', '注文可否 未確認301', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
+  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可21', '注文可否 未確認313', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
   await page.locator('[data-status-shortcut="uncertain"]').click();
   assert.equal(new URL(page.url()).searchParams.get('availability'), 'unknown', '注文可否未確認のクイック絞り込みをURLへ保存');
-  assert.equal(await visibleCards(), 301, '注文可否未確認は301販売単位');
+  assert.equal(await visibleCards(), 313, '注文可否未確認は313販売単位');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="conditional"]').click();
   assert.equal(await visibleCards(), 66, '条件内ハンズオフは66件');
@@ -182,7 +184,7 @@ try {
   assert.equal(await page.locator('link[rel="alternate"][hreflang="ja-JP"]').getAttribute('href'), 'https://jidouunten.jp/', '日本語alternateを本体URLへ固定');
   const structuredData = JSON.parse(await page.locator('script[type="application/ld+json"]').first().textContent());
   assert.deepEqual(structuredData['@graph'].map((entry) => entry['@type']), ['WebSite', 'WebPage', 'ItemList', 'BreadcrumbList'], 'トップJSON-LDにWebSite/WebPage/ItemList/BreadcrumbListを出力');
-  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本で選べる自動運転・Level 1\/2運転支援車322販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本で選べる自動運転・Level 1\/2運転支援車334販売単位/, 'トップのdescription件数は公開データから生成');
   assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け173販売単位|日本向け157販売単位|日本向け139販売単位/, '古い固定件数を残さない');
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
@@ -200,7 +202,7 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 320, 'Level 2現行320件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 332, 'Level 2現行332件へ復帰');
   await levelMapPage.close();
   await page.goto(`${base}/levels/`);
   assert.match(await page.locator('.level-1').innerText(), /現行掲載 2件[\s\S]*このレベルの車両/, 'Level 1の現行掲載をレベル解説にも明記');
@@ -266,7 +268,7 @@ try {
   assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
   await page.goto(`${base}/?budget=under_300`);
-  assert.equal(await visibleCards(), 67, '本体価格の開始値が300万円未満の候補へ絞り込む');
+  assert.equal(await visibleCards(), 68, '本体価格の開始値が300万円未満の候補へ絞り込む');
   assert.equal(await page.locator('select[name="budget"]').inputValue(), 'under_300', '価格帯条件をURLから復元');
   assert.match(await page.locator('[data-selected-label]').innerText(), /〜300万円/, '価格帯を結果見出しへ明示');
 
@@ -300,14 +302,14 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 322, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 334, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  await page.waitForFunction(() => document.querySelectorAll('[data-vehicle-shell]:not([hidden])').length === 322);
-  assert.equal(await visibleCards(), 322, 'リセット後に既定322件');
+  await page.waitForFunction(() => document.querySelectorAll('[data-vehicle-shell]:not([hidden])').length === 334);
+  assert.equal(await visibleCards(), 334, 'リセット後に既定334件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -340,7 +342,7 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '比較保存を削除すると再開バーを隠す');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 323, 'すべての状態で過去車両を含む323件');
+  assert.equal(await visibleCards(), 335, 'すべての状態で過去車両を含む335件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
@@ -445,6 +447,15 @@ try {
   assert.match(await page.locator('main').innerText(), /日産各店の注文受付を確認済み[\s\S]*在庫・納期・契約条件/, '日産アリアB6の注文後確認事項を表示');
   assert.equal(await page.locator('[data-purchase-action]').count(), 4, '日産アリアB6に既存4種の公式次アクションを表示');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '日産アリアB6でも内部根拠を通常UIに出さない');
+
+  await page.goto(`${base}/cars/jp-nissan-kicks-2026-x-simple-2wd/`);
+  assert.match(await page.title(), /^Nissan キックス X シンプルパッケージ｜Level 2・価格・機能｜自動運転\.jp$/, 'キックス販売単位を含む詳細title');
+  assert.match(await page.locator('main').innerText(), /Nissan[\s\S]*キックス[\s\S]*X シンプルパッケージ[\s\S]*Level 2[\s\S]*2,999,700円[\s\S]*ハンズオフ：不可[\s\S]*車線中央維持/, 'キックス詳細に価格・Level 2・ハンズオン条件');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 4, 'キックス詳細に4種の公式次アクション');
+  assert.deepEqual(await page.locator('[data-purchase-action]').evaluateAll((links) => links.map((link) => link.dataset.actionType)), ['test_drive', 'dealer', 'estimate', 'catalog'], 'キックスの公式アクション種別');
+  await page.goto(`${base}/compare/?ids=jp-nissan-kicks-2026-x-simple-2wd&ids=jp-nissan-kicks-2026-g-e4orce-4wd`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  assert.match(await page.locator('[data-compare-result]').innerText(), /キックス[\s\S]*X シンプルパッケージ[\s\S]*G e-4ORCE[\s\S]*2,999,700円[\s\S]*4,248,200円/, 'キックス比較に2WD/e-4ORCEの価格差を表示');
 
   await page.goto(`${base}/cars/jp-mitsubishi-outlander-phev-2026-m-4wd-5seater/`);
   assert.match(await page.locator('main').innerText(), /Mitsubishi[\s\S]*アウトランダーPHEV[\s\S]*M 4WD（5人乗り）/);

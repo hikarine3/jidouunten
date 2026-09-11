@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 323 | `src/data/vehicles.json` の全レコード（現行322 + 過去1） |
-| 既定表示 | 322 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 335 | `src/data/vehicles.json` の全レコード（現行334 + 過去1） |
+| 既定表示 | 334 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -28,6 +28,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota クラウン スポーツ / 後発対策） | 4 | SPORT RS／SPORT Z（PHEV・HEV）／SPORT GのE-Four。価格532万7,300円〜777万7,000円、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・条件内ハンズオフ、GはACC・LTAのみとして能力差を販売単位へ固定 |
 | 今回追加（Honda ステップ ワゴン / 後発対策） | 10 | e:HEV AIR EX／SPADA／SPADA PREMIUM LINEとAIR EX／AIR／SPADA／SPADA PREMIUM LINEのFF・4WD。価格334万8,400円〜426万8,000円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
 | 今回追加（Honda フリード CROSSTAR / 後発対策） | 8 | e:HEV／ガソリン CROSSTARのFF・4WD、5／6人乗り。価格292万8,200円〜360万2,500円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
+| 今回追加（日産 キックス / 後発対策） | 12 | P16のG／X+／X／X シンプルパッケージ／ROCK CREEK／ROCK CREEK Utility Specを2WD・4WD（e-4ORCE）別に登録。価格299万9,700円〜430万9,800円、全車プロパイロット標準（車速30〜135km/h・車線中央付近の操舵支援）、ステアリング保持・常時監視、ハンズオフ不可を公式価格・FAQで確認 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定。Advanced Driveの0〜約40km/hとLCAの約85〜130km/h、T-Connect／コネクティッドナビ契約・地図条件も単位ごとに保持 |
@@ -64,6 +65,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Nissan | 日産アリア（現行仕様）B6 / B6 e-4ORCE / B9 / B9 e-4ORCE | 掲載（4単位、B6のみ注文受付確認） | 2 | 2026-09-11 |
 | Nissan | セレナ C28 e-POWER LUXION | 掲載 | 2 | 2026-09-07 |
 | Nissan | エクストレイル X/G 2WD、X/G e-4ORCE、ROCK CREEK、NISMO、AUTECH（2列・3列） | 掲載（現行14単位、プロパイロット標準・ハンズオフ不可）／注文可否 未確認 | 2相当 | 2026-09-11 |
+| Nissan | キックス P16 G / X+ / X / X シンプルパッケージ / ROCK CREEK / ROCK CREEK Utility Spec（2WD・4WD/e-4ORCE） | 掲載（現行12単位、プロパイロット標準・ハンズオフ不可）／注文可否 未確認 | 2相当 | 2026-09-12 |
 | SUBARU | レヴォーグ レイバック（現行仕様）Limited EX | 注文可否 未確認（注文済み1.8Lグレードの工場出荷目処のみ確認） | 2 | 2026-09-11 |
 | SUBARU | フォレスター Premium S:HEV EX / X-BREAK S:HEV EX / Touring EX / SPORT EX / X-BREAK S:HEV / Touring / SPORT EX Black Selection | 掲載（現行7単位、EyeSight X 5単位は条件内ハンズオフ・車線変更支援）／注文可否 未確認 | 2相当 | 2026-09-11 |
 | Tesla | Model 3 Premium RWD / Premium ロングレンジAWD / Performance、Model Y Premium RWD / Premium ロングレンジAWD / L | 新車注文可（6単位） | 2相当 | 2026-09-10 |
@@ -874,3 +876,28 @@ Honda公式のフリード現行商品ページ、タイプ一覧JSON、性能�
 | 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
 
 根拠: [FREED商品ページ](https://www.honda.co.jp/FREED/)、[タイプ一覧JSON](https://www.honda.co.jp/FREED/common/data/type.json)、[性能・安全](https://www.honda.co.jp/FREED/webcatalog/performance/)、[Honda TJA説明](https://www.honda.co.jp/hondasensing/sensing/tja/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。公式の商品・販売店・試乗・見積り・カタログ導線は `src/data/official-links.json` に記録した。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。
+
+## 2026-09-12 日産 キックス P16 12販売単位追加
+
+日産公式のキックス現行商品ページ・価格／グレードページ・走行安全ページと、P16型プロパイロットFAQを照合した。G、X+、X、X シンプルパッケージ、ROCK CREEK、ROCK CREEK Utility Specを2WDと4WD（e-4ORCE）に分け、価格差を比較できる12単位として登録した。日産公式FAQにP16型の2026年6月フルモデルチェンジ、全車プロパイロット標準、車速30〜135km/h設定、車速・車間制御と車線中央付近の操舵支援が記載されている。
+
+価格は税込・東京地区メーカー希望小売価格で、299万9,700円（X シンプルパッケージ 2WD）〜430万9,800円（ROCK CREEK e-4ORCE Utility Spec）。公式ページの掲載・見積り導線は確認したが、個別グレードの現在の受注可否・在庫・納期までは確定できないため、12単位とも `availability=unknown` とした。P16現行仕様の導入月を `salesUnitIntroducedAt=2026-06`、価格適用月を `priceEffectiveAt=2026-06`、カタログ確認月を `catalogAsOf=2026-06` としている。
+
+全12単位でプロパイロットの車速・車間制御（縦方向）と車線中央付近の操舵支援（横方向）を確認し、国土交通省の定義に照合してサイト上はLevel 2相当とした。ステアリング保持と運転者の常時監視が必要で、ハンズオフには対応しない。自動車線変更・車線変更支援、ドライバーモニターの搭載は公式根拠を確認できないため付与していない。
+
+| 販売単位 | 価格（税込） | 駆動方式 | 同じLevel 2内の差分 |
+|---|---:|---|---|
+| X シンプルパッケージ | 2,999,700円 | 2WD | 価格下限・シンプルパッケージ |
+| X | 3,259,300円 | 2WD | 標準X |
+| ROCK CREEK | 3,485,900円 | 2WD | 専用外装・装備 |
+| X+ | 3,549,700円 | 2WD | 上位X+ |
+| G | 3,898,400円 | 2WD | 上位G |
+| ROCK CREEK Utility Spec | 3,996,300円 | 2WD | Utility Spec |
+| X シンプルパッケージ e-4ORCE | 3,349,500円 | 4WD | 4WD・価格下限 |
+| X e-4ORCE | 3,599,200円 | 4WD | 4WD標準X |
+| ROCK CREEK e-4ORCE | 3,880,800円 | 4WD | 4WD専用外装 |
+| X+ e-4ORCE | 3,899,500円 | 4WD | 4WD上位X+ |
+| G e-4ORCE | 4,248,200円 | 4WD | 4WD上位G |
+| ROCK CREEK e-4ORCE Utility Spec | 4,309,800円 | 4WD | 4WD Utility Spec・価格上限 |
+
+根拠: [キックス商品ページ](https://www3.nissan.co.jp/vehicles/new/kicks.html)、[価格・グレード](https://www3.nissan.co.jp/vehicles/new/kicks/specifications.html)、[走行・安全](https://www3.nissan.co.jp/vehicles/new/kicks/performance_safety.html)、[P16型プロパイロットFAQ](https://faq2.nissan.co.jp/faq/show/82222?category_id=67&site_domain=default)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。公式の商品・販売店・試乗・見積り・カタログ導線は `src/data/official-links.json` に記録した。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。

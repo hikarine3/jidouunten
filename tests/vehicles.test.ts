@@ -152,14 +152,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(323);
+    expect(vehicles).toHaveLength(335);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補322件は全件の公式金額を保持する', () => {
+  it('現行候補334件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(322);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(322);
+    expect(current).toHaveLength(334);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(334);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -255,7 +255,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(64);
+    expect(officialLinks).toHaveLength(65);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -305,7 +305,7 @@ describe('vehicle data contract and filters', () => {
     const crownSportActions = officialLinkFor(vehicles.find(({ model }) => model === 'クラウン スポーツ')!)?.actions ?? [];
     expect(crownSportActions.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
     expect(crownSportActions.every(({ checkedAt }) => checkedAt === '2026-09-12')).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(99);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(103);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
@@ -320,6 +320,21 @@ describe('vehicle data contract and filters', () => {
     expect(xtrail.filter((vehicle) => vehicle.grade.includes('NISMO')).every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('x-trail_2608_nismo_specsheet.pdf')))).toBe(true);
     expect(xtrail.filter((vehicle) => vehicle.grade.includes('AUTECH')).every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('x-trail_2608_autech_autech_sports_specsheet.pdf')))).toBe(true);
     expect(officialLinkFor(xtrail[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
+  });
+
+  it('日産キックスはP16現行12販売単位を価格・プロパイロット能力付きで保持する', () => {
+    const kicks = vehicles.filter((vehicle) => vehicle.maker === 'Nissan' && vehicle.model === 'キックス');
+    expect(kicks).toHaveLength(12);
+    expect(kicks.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      2_999_700, 3_259_300, 3_349_500, 3_485_900, 3_549_700, 3_599_200, 3_880_800, 3_898_400, 3_899_500, 3_996_300, 4_248_200, 4_309_800,
+    ]);
+    expect(kicks.every((vehicle) => vehicle.currentCatalogListed && vehicle.generation === 'P16' && vehicle.catalogAsOf === '2026-06' && vehicle.salesUnitIntroducedAt === '2026-06' && vehicle.priceEffectiveAt === '2026-06')).toBe(true);
+    expect(kicks.every((vehicle) => vehicle.automationLevel === 2 && vehicle.category === 'driver_assistance' && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(kicks.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering')).toBe(true);
+    expect(kicks.every((vehicle) => vehicle.odd.speedKph.min === 30 && vehicle.odd.speedKph.max === 135)).toBe(true);
+    expect(kicks.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/kicks/specifications.html') && source.supports.some((fact) => fact.includes('円'))))).toBe(true);
+    expect(kicks.every((vehicle) => vehicle.sources.some((source) => source.url.includes('faq2.nissan.co.jp/faq/show/82222')))).toBe(true);
+    expect(officialLinkFor(kicks[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
   });
 
   it('トヨタ ヤリス クロスは2026年8月の20販売単位を価格・Level 2能力付きで保持する', () => {
