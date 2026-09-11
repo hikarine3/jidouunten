@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 412 | `src/data/vehicles.json` の全レコード（現行411 + 過去1） |
-| 既定表示 | 411 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 414 | `src/data/vehicles.json` の全レコード（現行413 + 過去1） |
+| 既定表示 | 413 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 19 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -48,6 +48,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota ヤリス クロス） | 20 | 2026年8月公式グレードJSONのZ“Adventure”／Z／G／X／U／GR SPORT、ハイブリッド・ガソリン、2WD／E-Fourの全20販売単位。価格212万6,300円〜335万5,000円、全車速追従ACC・LTA・渋滞時支援、ステアリング保持条件を一次資料で確認し、注文可否は未確認のまま掲載 |
 | 今回追加（Toyota ヤリス） | 17 | 2026年4月公式グレードJSONのZ／G／X、ハイブリッド・ガソリン、1.5L／1.0L、CVT／6MT、2WD／4WD・E-Fourの価格比較可能な17販売単位。価格169万7,300円〜288万4,200円。1.0L CVTの2単位はACCのみでLevel 1、その他15単位はLTA併用のLevel 2、ハイブリッド6単位は渋滞時停止・発進支援を確認。U（KINTO専用）2単位は月額のみのため車両本体価格比較から保留 |
 | 今回追加（Toyota プリウス） | 5 | 既存のHEV Z 2WDに、HEV Z E-Four／G 2WD・E-Four／X 2WD・E-Fourを追加。2026年7月公式価格表の279万6,200円〜425万1,500円、全車速ACC＋LTA・渋滞時支援（ハンズオフ不可）を販売単位へ固定。Xは法人向けチャネルのため法人向け注記と公式Webカタログ根拠を保持し、発売日は未確認・注文可否は未確認のまま表示 |
+| 今回追加（Toyota MIRAI） | 2 | MIRAI G／Z（2WD・5人乗り）。価格741万4,000円〜821万5,900円、アドバンスト ドライブ（渋滞時支援）・LCA標準、渋滞時0〜約40km/hの条件内ハンズオフを公式価格JSON・安全ページ・2026年3月装備表・一部改良発表で確認 |
 | 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
 | 今回追加（Mitsubishi / 後発対策） | 36 | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位に加え、デリカミニ 12単位（LDPのみのLevel 1 4単位／MI-PILOT標準のLevel 2 8単位）とeKスペース 4単位（LDPのみのLevel 1）を追加。公式価格・発売日・標準装備差・手放し不可を販売単位へ固定 |
@@ -89,6 +90,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Mazda | CX-30 20G / 20 Air Edition / 25L / 25 Air Edition | 掲載（4単位） | 2相当 | 2026-09-08 |
 | Mazda | MX-30 ROTARY-EV Natural Monotone | 掲載（1単位） | 2相当 | 2026-09-08 |
 | Toyota | プリウス 2026 Z（2WD） | 掲載 | 2相当 | 2026-09-10 |
+| Toyota | MIRAI Z／G（2WD・5人乗り） | 掲載（現行2単位、アドバンスト ドライブ・LCA標準） | 2相当 | 2026-09-12 |
 | Lexus | NX350h “version L” 2WD | 掲載 | 2相当 | 2026-09-10 |
 | Toyota | クラウン（クロスオーバー）CROSSOVER RS “THE LIMITED-MATTE METAL” 4WD | 掲載 | 2相当 | 2026-09-10 |
 | Lexus | LBX “Bespoke Build” 2WD（FF） | 掲載 | 2相当 | 2026-09-10 |
@@ -274,7 +276,7 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 | LM500h EXECUTIVE / version Lの注文後工場出荷目処 | Lexus | https://lexus.jp/news/info/delivery/index.html | 2026-09-11 |
 | IONIQ 5 Voyage / Lounge掲載車両の「車両注文」導線 | Hyundai Mobility Japan | https://www.hyundai.com/jp/stock/new | 2026-09-11 |
 
-この更新後の内訳は、全396販売単位（現行395、過去1）のうち`new_order_available` 21、`unknown` 374、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
+この注文状態確認時点（2026-09-11）の内訳は、全396販売単位（現行395、過去1）のうち`new_order_available` 21、`unknown` 374、`unavailable` 1。これは当時点のスナップショットであり、後続トランシェ追加後の現行集計ではない。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
 
 
 ## 未掲載・確認継続候補（内訳）
@@ -305,9 +307,9 @@ Tesla Model S／Model Xは、日本向けの現行新車販売単位として追
 
 ### Toyota / Lexusの次回販売単位化候補（2026-09-08確認）
 
-Toyotaの日本向け現行ラインアップと公式安全・主要装備資料から、レーダークルーズコントロール（全車速追従）とLTAの同時設定候補として、アクア、ヤリス、ヤリス クロス、カローラ、カローラ スポーツ、カローラ ツーリング、プリウス、シエンタ、ノア、ヴォクシー、アルファード、ヴェルファイア、クラウン、bZ4X、GRヤリス、RAV4、ハリアー、カローラ クロス、ランドクルーザー250、MIRAIの20モデルを抽出した。Lexus公式のLexus Safety System+対応車種比較では、LX、GX、RX、RZ、NX、UX、LBX、LS、ES、IS、LM、LCの12モデルにレーダークルーズコントロール（全車速追従）とLTAの設定がある。
+Toyotaの日本向け現行ラインアップと公式安全・主要装備資料から、レーダークルーズコントロール（全車速追従）とLTAの同時設定候補として20モデルを抽出した。2026-09-12時点でMIRAI G／Zの2販売単位を公開カタログへ反映し、残りの候補は販売単位ごとの標準／オプション、仕様期、価格、受注状態を継続照合する。Lexus公式のLexus Safety System+対応車種比較では、LX、GX、RX、RZ、NX、UX、LBX、LS、ES、IS、LM、LCの12モデルにレーダークルーズコントロール（全車速追従）とLTAの設定がある。
 
-これはモデル候補の棚卸しであり、公開済みのToyota／Lexus販売単位113件全体を網羅したという意味ではない。比較表の「設定あり」はメーカーオプションを含み得るため、グレード・パワートレーン・駆動方式ごとの標準／オプション、現行販売状態、価格、仕様期、作動条件を個別資料で照合するまで公開データへ追加しない。Toyota Roomy / Raize / Hilux / Land Cruiser 70 / GR86は両機能の現行販売単位を確定できず、クラウン スポーツ／エステート、GRカローラ、ランドクルーザー300も資料一式が不足するため保留する。
+これはモデル候補の棚卸しであり、公開済みのToyota／Lexus販売単位115件全体を網羅したという意味ではない。比較表の「設定あり」はメーカーオプションを含み得るため、グレード・パワートレーン・駆動方式ごとの標準／オプション、現行販売状態、価格、仕様期、作動条件を個別資料で照合するまで公開データへ追加しない。Toyota Roomy / Raize / Hilux / Land Cruiser 70 / GR86は両機能の現行販売単位を確定できず、クラウン スポーツ／エステート、GRカローラ、ランドクルーザー300も資料一式が不足するため保留する。
 
 公式母集団入口: https://toyota.jp/carlineup/ 、https://toyota.jp/safety/scene/highway/index2.html 、https://lexus.jp/models/ 、https://lexus.jp/safety/compare/ 、https://lexus.jp/safety/highway1/ 。確認日2026-09-08。
 
@@ -1083,6 +1085,30 @@ Honda公式のCIVIC現行商品ページ、タイプJSON、主要装備表、性
 
 三菱自動車の公式ECLIPSE CROSS商品ページとグレード・価格ページを再確認した。公式ページはG／BLACK Edition／Pのガソリン3グレード、2WD／4WD、税込価格3,118,500円〜3,300,000円、MI-PILOT（ACC＋LKA）の装備比較を掲載している一方、「エクリプス クロスは生産終了のため、ボディカラー、オプションなどがお客様のご希望に添えない場合がございます」と明記している。また、商品ページ上には営業スタッフへの問い合わせと商談・購入予約の導線が残る。
 
-このため、現時点で新車の現行販売単位として6単位（3グレード×2WD・4WD）を公開カタログへ追加することは見送る。生産終了車を新車注文可能と誤認させないため、残在庫・地域別受注可否が一次情報で確認できた場合のみ、`unavailable`または残在庫向けの別区分として価格・MI-PILOT・販売状態を再評価する。現行411単位の集計件数は変更しない。
+このため、現時点で新車の現行販売単位として6単位（3グレード×2WD・4WD）を公開カタログへ追加することは見送る。生産終了車を新車注文可能と誤認させないため、残在庫・地域別受注可否が一次情報で確認できた場合のみ、`unavailable`または残在庫向けの別区分として価格・MI-PILOT・販売状態を再評価する。現行413単位の集計件数は変更しない。
 
 根拠: [ECLIPSE CROSS商品ページ](https://www.mitsubishi-motors.co.jp/lineup/eclipse-cross/)、[グレード・価格・装備比較](https://www.mitsubishi-motors.co.jp/lineup/eclipse-cross/grade/)、[G（ガソリン）](https://www.mitsubishi-motors.co.jp/lineup/eclipse-cross/grade/g_gasoline.html)、[P（ガソリン）](https://www.mitsubishi-motors.co.jp/lineup/eclipse-cross/grade/p_gasoline.html)。確認日: 2026-09-12。
+
+## 2026-09-12 Toyota MIRAI Z／G 2販売単位追加
+
+トヨタ公式のMIRAI商品ページ、価格・グレードJSON、2026年3月の主要諸元・装備一覧、安全性能ページ、2025年12月22日付の一部改良発表を照合し、現行カタログのZ／G（いずれも2WD・5人乗り）を2販売単位として追加した。税込メーカー希望小売価格はG 741万4,000円、Z 821万5,900円。価格ページ・カタログ適用時点は2026年3月として保持し、個別の価格適用日は公式資料で固定できないため`priceEffectiveAt=null`とした。2025年12月22日の一部改良発売日を`salesUnitIntroducedAt`へ反映した。
+
+両グレードで全車速追従レーダークルーズコントロール（縦方向）とLTA（車線中央維持、横方向）の同時支援、Toyota Safety Sense、LCA（車線変更時の補助）を確認し、国土交通省の定義に照合してサイト上はLevel 2相当とした。さらに両グレードにアドバンスト ドライブ（渋滞時支援）が標準装備され、高速道路・自動車専用道路本線の渋滞時、0〜約40km/hなどの条件下で運転者監視を前提に認知・判断・操作を支援する。条件を満たす場合はハンズオフ可能だが、運転者は前方・周囲を監視し、いつでも操作できる状態を維持する必要があるため、`handsOff=allowed_in_conditions`、`driverMonitoring=required`とした。自動運転・無人運転を意味しない。
+
+| 販売単位 | 価格（税込） | 駆動・定員 | 同じLevel 2内の差分 |
+|---|---:|---|---|
+| G（2WD・5人乗り） | 7,414,000円 | 2WD・5人 | アドバンスト ドライブ（渋滞時支援）・LCA標準、価格下限 |
+| Z（2WD・5人乗り） | 8,215,900円 | 2WD・5人 | Gより上位装備。アドバンスト ドライブ・LCA標準、価格上限 |
+
+公式商品ページ・販売店・試乗・見積り・主要諸元PDFの導線は`src/data/official-links.json`に記録した。公式カタログ掲載は確認できるが、販売単位ごとの現在の受注可否は一次情報で固定できないため、2単位とも`availability=unknown`とした。価格・グレード、作動条件、LCAの有無を一覧・Level別フィルター・比較画面で確認できるようにし、既存のToyota／Lexus候補からMIRAIを「公開レコード化待ち」から移した。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| MIRAI現行商品ページ | トヨタ自動車株式会社 | https://toyota.jp/mirai/ | 2026-09-12 |
+| G／Zの価格・グレード、2WD・5人乗り | トヨタ自動車株式会社 | https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades28.json | 2026-09-12 |
+| アドバンスト ドライブの渋滞時0〜約40km/h、前方監視条件 | トヨタ自動車株式会社 | https://toyota.jp/mirai/safety/ | 2026-09-12 |
+| Z／Gのアドバンスト ドライブ・LCA標準装備 | トヨタ自動車株式会社 | https://toyota.jp/pages/contents/mirai/002_p_001/pdf/mirai_spec_202603.pdf | 2026-09-12 |
+| 2025年12月22日の一部改良発売 | トヨタ自動車株式会社 | https://global.toyota/jp/newsroom/toyota/43735032.html | 2026-09-12 |
+| 運転者主体で前後・左右を支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
+
+根拠: [MIRAI商品ページ](https://toyota.jp/mirai/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades28.json)、[安全性能](https://toyota.jp/mirai/safety/)、[主要諸元・装備一覧](https://toyota.jp/pages/contents/mirai/002_p_001/pdf/mirai_spec_202603.pdf)、[一部改良発表](https://global.toyota/jp/newsroom/toyota/43735032.html)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。

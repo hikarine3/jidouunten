@@ -163,14 +163,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(412);
+    expect(vehicles).toHaveLength(414);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補411件は全件の公式金額を保持する', () => {
+  it('現行候補413件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(411);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(411);
+    expect(current).toHaveLength(413);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(413);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -278,7 +278,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(76);
+    expect(officialLinks).toHaveLength(77);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -287,9 +287,9 @@ describe('vehicle data contract and filters', () => {
     expect(teslaActions.map(({ kind }) => kind).sort()).toEqual(['order', 'order', 'test_drive', 'test_drive']);
     expect(teslaActions.every(({ url, checkedAt }) => url.startsWith('https://www.tesla.com/') && checkedAt === '2026-09-10')).toBe(true);
     const toyotaEstimateLinks = officialLinks.filter(({ maker }) => maker === 'Toyota').flatMap((link) => (link.actions ?? []).filter(({ kind }) => kind === 'estimate'));
-    expect(toyotaEstimateLinks).toHaveLength(19);
+    expect(toyotaEstimateLinks).toHaveLength(20);
     expect(toyotaEstimateLinks.every(({ label, url }) => label === '公式で見積り' && url.startsWith('https://toyota.jp/service/estimate/grades?car_name_en='))).toBe(true);
-    expect(toyotaEstimateLinks.filter(({ url }) => !url.includes('COROLLA%20CROSS') && !url.includes('AQUA') && !url.includes('COROLLA') && !url.includes('YARIS+CROSS') && !url.includes('YARIS') && !url.includes('CROWN+SPORT') && !url.includes('CROWN+CROSSOVER')).every(({ checkedAt }) => checkedAt === '2026-09-10')).toBe(true);
+    expect(toyotaEstimateLinks.filter(({ url }) => !url.includes('COROLLA%20CROSS') && !url.includes('AQUA') && !url.includes('COROLLA') && !url.includes('YARIS+CROSS') && !url.includes('YARIS') && !url.includes('CROWN+SPORT') && !url.includes('CROWN+CROSSOVER') && !url.includes('MIRAI')).every(({ checkedAt }) => checkedAt === '2026-09-10')).toBe(true);
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('AQUA'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('YARIS+CROSS'))?.checkedAt).toBe('2026-09-11');
@@ -297,7 +297,8 @@ describe('vehicle data contract and filters', () => {
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA') && !url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('CROWN+SPORT'))?.checkedAt).toBe('2026-09-12');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('CROWN+CROSSOVER'))?.checkedAt).toBe('2026-09-12');
-    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'AQUA', 'COROLLA', 'COROLLA CROSS', 'COROLLA SPORT', 'COROLLA TOURING', 'CROWN CROSSOVER', 'CROWN SPORT', 'GR YARIS', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'YARIS', 'YARIS CROSS', 'bZ4X'].sort());
+    expect(toyotaEstimateLinks.find(({ url }) => url.includes('MIRAI'))?.checkedAt).toBe('2026-09-12');
+    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'AQUA', 'COROLLA', 'COROLLA CROSS', 'COROLLA SPORT', 'COROLLA TOURING', 'CROWN CROSSOVER', 'CROWN SPORT', 'GR YARIS', 'HARRIER', 'MIRAI', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'YARIS', 'YARIS CROSS', 'bZ4X'].sort());
     const expandedActionModels = new Map([
       ['Honda\u0000ACCORD', ['dealer', 'test_drive', 'estimate', 'catalog']],
       ['Honda\u0000VEZEL', ['dealer', 'test_drive', 'estimate', 'catalog']],
@@ -332,7 +333,7 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(147);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(151);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
@@ -904,6 +905,19 @@ describe('vehicle data contract and filters', () => {
     expect(bz4x?.capabilities).toEqual(expect.arrayContaining(['adaptive_cruise_control', 'lane_centering', 'traffic_jam_assist', 'hands_off_highway', 'driver_monitoring', 'lane_change_support']));
     expect(bz4x?.sources.some((source) => source.url === 'https://toyota.jp/bz4x/safety/')).toBe(true);
     expect(bz4x?.sources.some((source) => source.url.includes('manual.toyota.jp/bz4x'))).toBe(true);
+  });
+
+  it('Toyota MIRAIはZ/Gの2販売単位を価格・渋滞支援・車線変更支援付きで保持する', () => {
+    const mirai = vehicles.filter((vehicle) => vehicle.model === 'MIRAI');
+    expect(mirai).toHaveLength(2);
+    expect(mirai.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([7_414_000, 8_215_900]);
+    expect(mirai.every((vehicle) => vehicle.currentCatalogListed && vehicle.catalogAsOf === '2026-03' && vehicle.priceEffectiveAt === null && vehicle.salesUnitIntroducedAt === '2025-12-22' && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'allowed_in_conditions' && vehicle.availability === 'unknown')).toBe(true);
+    expect(mirai.every((vehicle) => vehicle.odd.speedKph.min === 0 && vehicle.odd.speedKph.max === 40)).toBe(true);
+    expect(mirai.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist,hands_off_highway,driver_monitoring,lane_change_support')).toBe(true);
+    expect(mirai.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('grades28.json')))).toBe(true);
+    expect(mirai.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('mirai_spec_202603.pdf')))).toBe(true);
+    expect(mirai.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('43735032.html')))).toBe(true);
+    expect(officialLinkFor(mirai[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
   });
 
   it('Toyota RAV4はHEV/PHEV・グレード別の価格とオプション差を販売単位へ固定する', () => {
