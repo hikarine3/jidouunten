@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 305 | `src/data/vehicles.json` の全レコード（現行304 + 過去1） |
-| 既定表示 | 304 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 315 | `src/data/vehicles.json` の全レコード（現行314 + 過去1） |
+| 既定表示 | 314 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -26,6 +26,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Honda VEZEL / 後発対策） | 2 | e:HEV ZのFF/4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
 | 今回追加（Honda ZR-V / 後発対策） | 4 | e:HEV X／e:HEV ZのFF・4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
 | 今回追加（Toyota クラウン スポーツ / 後発対策） | 4 | SPORT RS／SPORT Z（PHEV・HEV）／SPORT GのE-Four。価格532万7,300円〜777万7,000円、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・条件内ハンズオフ、GはACC・LTAのみとして能力差を販売単位へ固定 |
+| 今回追加（Honda ステップ ワゴン / 後発対策） | 10 | e:HEV AIR EX／SPADA／SPADA PREMIUM LINEとAIR EX／AIR／SPADA／SPADA PREMIUM LINEのFF・4WD。価格334万8,400円〜426万8,000円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定。Advanced Driveの0〜約40km/hとLCAの約85〜130km/h、T-Connect／コネクティッドナビ契約・地図条件も単位ごとに保持 |
@@ -822,3 +823,23 @@ Honda公式の現行商品・タイプ一覧、e:HEV X／Zの価格ページ、�
 | 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
 
 根拠: [クラウン スポーツ商品ページ](https://toyota.jp/crownsport/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades64.json)、[安全性能](https://toyota.jp/crownsport/safety/)、[主要諸元・装備一覧](https://toyota.jp/pages/contents/crownsport/001_p_001/pdf/crownsport_spec_202609.pdf)。公式サイトに掲載されたグレードと、作動条件・能力差を分離している。受注可否は未確認のため新車注文可とは表示しない。
+
+## 2026-09-12 Honda ステップ ワゴン10販売単位追加
+
+Honda公式のステップ ワゴン現行商品ページ、タイプ一覧、タイプJSON、性能・安全ページを照合し、通常乗用の10販売単位を追加した。e:HEV AIR EX〈FF〉、AIR EX〈FF／4WD〉、AIR〈FF〉、e:HEV SPADA〈FF〉、SPADA〈FF／4WD〉、e:HEV SPADA PREMIUM LINE〈FF〉、SPADA PREMIUM LINE〈FF／4WD〉を、動力・グレード・駆動方式の差が比較できる単位へ分離した。30周年特別仕様車、福祉車両、SPADA PREMIUM LINE BLACK EDITIONは通常10単位から除外し、別候補として扱う。
+
+価格はすべて税込メーカー希望小売価格で、334万8,400円（AIR〈FF〉）〜426万8,000円（e:HEV SPADA PREMIUM LINE〈FF〉）。現行タイプ一覧に掲載されていることは確認したが、個別グレードの現在の受注可否・在庫・納期までは公式ページで確定できないため、10単位とも `availability=unknown`、個別発売日・価格適用日は未設定、カタログ確認月は `catalogAsOf=2026-09` とした。
+
+全10単位でHonda SENSINGのACC（縦方向）とLKAS・トラフィックジャムアシスト（横方向）を確認し、国土交通省の定義に照合してサイト上はLevel 2相当とした。トラフィックジャムアシストは約0〜65km/h、LKASは約65〜120km/hの条件付き支援で、手放しでは作動しない。運転者の常時監視・ステアリング保持が必要なため `handsOff=not_allowed`、`driverMonitoring=required` とし、自動車線変更・車線変更支援は付与していない。
+
+| 販売単位 | 価格（税込） | 駆動・定員 | 同じLevel 2内の差分 |
+|---|---:|---|---|
+| AIR〈FF〉 | 3,348,400円 | FF・7名 | 価格下限。Honda SENSING標準 |
+| AIR EX〈FF／4WD〉 | 3,543,100円／3,763,100円 | FF／4WD・7名 | AIR EXの駆動方式差 |
+| e:HEV AIR EX〈FF〉 | 3,938,000円 | FF・7名 | ハイブリッド・AIR EX |
+| SPADA〈FF／4WD〉 | 3,603,600円／3,823,600円 | FF／4WD・7名 | SPADAの駆動方式差 |
+| e:HEV SPADA〈FF〉 | 3,998,500円 | FF・7名 | ハイブリッド・SPADA |
+| SPADA PREMIUM LINE〈FF／4WD〉 | 3,873,100円／4,063,400円 | FF／4WD・7名 | 上位内装・駆動方式差 |
+| e:HEV SPADA PREMIUM LINE〈FF〉 | 4,268,000円 | FF・7名 | ハイブリッド・上位グレード |
+
+根拠: [STEP WGN現行商品ページ](https://www.honda.co.jp/STEPWGN/)、[タイプ一覧](https://www.honda.co.jp/STEPWGN/webcatalog/type/list/)、[価格・タイプJSON](https://www.honda.co.jp/STEPWGN/common/data/type.json)、[性能・安全](https://www.honda.co.jp/STEPWGN/webcatalog/performance/)、[Honda TJA説明](https://www.honda.co.jp/hondasensing/sensing/tja/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。公式の商品・販売店・試乗・見積り・カタログ導線は `src/data/official-links.json` に記録した。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。

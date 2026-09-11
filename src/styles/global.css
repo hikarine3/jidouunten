@@ -82,7 +82,7 @@ h3 { line-height: 1.3; letter-spacing: -.025em; }
 .vehicle-card { background: var(--white); border: 1px solid var(--line); border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
 .vehicle-card-image { margin: 0; background: #e8eef0; }
 /* 一覧では識別用のサムネイルに留め、候補比較の縦スクロールを圧迫しない。詳細ページは別の大きい画像を使う。 */
-.vehicle-card-image img { display: block; width: 100%; height: clamp(112px, 11vw, 148px); object-fit: cover; object-position: center; }
+.vehicle-card-image img { display: block; width: 100%; height: clamp(88px, 8vw, 118px); object-fit: cover; object-position: center; }
 .vehicle-card-image figcaption { padding: 6px 12px; color: var(--muted); font-size: .62rem; line-height: 1.35; }
 .vehicle-card-image figcaption a, .detail-image figcaption a { color: inherit; font-weight: 700; }
 .vehicle-card-body { padding: 21px; flex: 1; min-width: 0; }

@@ -152,14 +152,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(305);
+    expect(vehicles).toHaveLength(315);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補304件は全件の公式金額を保持する', () => {
+  it('現行候補314件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(304);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(304);
+    expect(current).toHaveLength(314);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(314);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -228,8 +228,21 @@ describe('vehicle data contract and filters', () => {
     expect(officialLinkFor(forester[0])?.actions?.map(({ kind }) => kind)).toEqual(['estimate', 'dealer', 'test_drive']);
   });
 
+  it('Honda ステップ ワゴンは現行10販売単位を価格・渋滞支援付きで保持する', () => {
+    const stepwgn = vehicles.filter((vehicle) => vehicle.model === 'ステップ ワゴン');
+    expect(stepwgn).toHaveLength(10);
+    expect(stepwgn.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      3_348_400, 3_543_100, 3_603_600, 3_763_100, 3_823_600, 3_873_100, 3_938_000, 3_998_500, 4_063_400, 4_268_000,
+    ]);
+    expect(stepwgn.every((vehicle) => vehicle.currentCatalogListed && vehicle.catalogAsOf === '2026-09' && vehicle.priceEffectiveAt === null && vehicle.salesUnitIntroducedAt === null && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(stepwgn.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist')).toBe(true);
+    expect(stepwgn.every((vehicle) => vehicle.sources.some((source) => source.url.includes('STEPWGN') && source.supports.some((fact) => fact.includes('円'))))).toBe(true);
+    expect(stepwgn.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/performance/')))).toBe(true);
+    expect(officialLinkFor(stepwgn[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
+  });
+
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(62);
+    expect(officialLinks).toHaveLength(63);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -264,6 +277,9 @@ describe('vehicle data contract and filters', () => {
       expect(actions.every(({ checkedAt }) => checkedAt === '2026-09-11')).toBe(true);
       expect(actions.every(({ url }) => url.startsWith('https://'))).toBe(true);
     }
+    const stepwgnActions = officialLinkFor(vehicles.find(({ model }) => model === 'ステップ ワゴン')!)?.actions ?? [];
+    expect(stepwgnActions.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
+    expect(stepwgnActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://'))).toBe(true);
     const bydActions = officialLinks.filter(({ maker }) => maker === 'BYD').flatMap((link) => link.actions ?? []);
     expect(bydActions).toHaveLength(12);
     expect(bydActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
@@ -273,7 +289,7 @@ describe('vehicle data contract and filters', () => {
     const crownSportActions = officialLinkFor(vehicles.find(({ model }) => model === 'クラウン スポーツ')!)?.actions ?? [];
     expect(crownSportActions.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
     expect(crownSportActions.every(({ checkedAt }) => checkedAt === '2026-09-12')).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(91);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(95);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
