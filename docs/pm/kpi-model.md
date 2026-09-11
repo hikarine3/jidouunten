@@ -22,7 +22,7 @@
 | 機能名（プロパイロット2.0等）の静的URL | 0 | 該当ページなし |
 | 2台比較の静的URL | 0 | `/compare/?ids=a,b` のquery paramのみ |
 | 構造化データの型 | WebPage のみ | `src/layouts/Layout.astro` |
-| 公式アクションリンク | 40 | `src/data/official-links.json` の action 件数。注文可否を確認できたTesla・Volvo EX30の注文・試乗と、検討用の見積り・試乗・販売店・カタログ導線を分離 |
+| 公式アクションリンク | 40 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、検討用の見積り・試乗・販売店・カタログ導線と分離 |
 | Lighthouse production (mobile) | performance 1.00 / accessibility 1.00 | `.cache/lighthouse-production.json` |
 | KPI実測（表示・クリック・selector行動） | 未取得 | 公開初日のため観測期間0日 |
 
