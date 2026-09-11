@@ -2,6 +2,15 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 Toyota クラウン（クロスオーバー）通常3販売単位追加（本番反映済み）
+
+- トヨタ公式のクラウン（クロスオーバー）商品・`grades44.json`・安全性能・2026年9月装備比較表を突合し、通常カタログのCROSSOVER RS／Z／G（E-Four・5人乗り）を3販売単位で追加。価格は517万9,900円〜673万9,700円（税込）。全車ACC＋LTAのLevel 2相当、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・ドライバーモニター・条件内ハンズオフ、GはACC・LTA・渋滞時支援・ハンドル保持として比較できる。既存の特別仕様THE LIMITED-MATTE METALは別単位で保持し、注文可否・在庫・納期は3単位とも未確認。
+- exact app `58a3807`、Production `https://jidouunten.jp/`、immutable `https://fa2e7583.jidouunten.pages.dev`、直前rollback `https://ab09429b.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- 公開詳細は[クラウン クロスオーバー RS](https://jidouunten.jp/cars/jp-toyota-crown-crossover-2026-rs-e-four-advanced/)、[Z](https://jidouunten.jp/cars/jp-toyota-crown-crossover-2026-z-e-four/)、[G](https://jidouunten.jp/cars/jp-toyota-crown-crossover-2026-g-e-four/)、比較は[RS／G](https://jidouunten.jp/compare/?ids=jp-toyota-crown-crossover-2026-rs-e-four-advanced&ids=jp-toyota-crown-crossover-2026-g-e-four)。
+- 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のサムネイルで省スペース表示し、詳細画像・作者／ライセンス帰属・セルフホストWebPを維持。
+- QA: 349 HTML、sitemap-0 344 URL、詳細343件、ItemList 2ページ684項目、公式導線66モデル／64 URL／107 actions、Vitest＋保存再開65/65、価格343/343（現行342/342、exact327／range15／未確認1）、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build・release／structured PASS、registry 49 entities／490 surfaces／462 required selectors closure PASS、独立監査PASS、immutable／本体E2E各1/1（GA collect204）、主要URL200、未知URL404、IDN path/query301。
+- Issue #17（候補カバレッジ）と#37（公式導線・計測）は未確認母集団・受注状態の観測が残るためIn progressを維持し、全国網羅完了とは宣言しない。
+
 ## 2026-09-12 Honda CIVIC 5販売単位追加（本番反映済み）
 
 - Honda公式のCIVIC商品・タイプJSON・性能安全・主要装備表・発売発表を突合し、11代目CIVICのe:HEV LX／e:HEV EX／e:HEV RS／ガソリンEX／ガソリンRSを5販売単位で追加。2026年6月5日発売、価格394万6,800円〜465万9,600円（税込）。ACC＋LKASのLevel 2相当、e:HEV 3単位＋ガソリンEXは渋滞時運転支援標準、ガソリンRSは対象外として同じLevel 2内の差を比較できるようにした。注文可否・在庫・納期は未確認のため5単位とも`unknown`を維持。

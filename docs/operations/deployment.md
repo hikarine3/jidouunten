@@ -2,6 +2,19 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Toyota クラウン（クロスオーバー）通常3販売単位追加）
+
+- exact app release commit: `58a3807`
+- immutable: https://fa2e7583.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Toyota クラウン（クロスオーバー）の通常カタログCROSSOVER RS／Z／G（E-Four・5人乗り）を3販売単位として追加。価格は517万9,900円〜673万9,700円（税込、2026年9月参考価格）。全車ACC＋LTAのLevel 2相当で、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・ドライバーモニター・条件内ハンズオフ、GはACC・LTA・渋滞時支援・ハンドル保持として同じ車名内の能力差を比較できる。既存の特別仕様THE LIMITED-MATTE METALは別販売単位で保持し、3単位とも注文可否は`unknown`。
+- 公式根拠: [クラウン（クロスオーバー）商品](https://toyota.jp/crowncrossover/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades44.json)、[安全性能](https://toyota.jp/crowncrossover/safety/)、[主要装備比較表](https://toyota.jp/pages/contents/crowncrossover/001_p_001/pdf/crowncrossover_equipment_compare_202609.pdf)。公式見積り導線は既存モデルリンクを2026-09-12確認へ更新。
+- SEO／公開面: 349 HTML、sitemap-0は344 URL、詳細343件、トップ／一覧ItemListは2ページ・684項目。GTM実IDは349 HTMLへ各1件、テストID0件。
+- UI: 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のサムネイルで省スペース表示。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホストWebPは維持。
+- QA: `npm test` Vitest60＋保存再開5＝65/65、Python16/16、価格343/343（現行342/342、exact327／range15／未確認1）、公式導線66モデル／64 URL／107 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 49 entities／490 surfaces／462 required selectorsのclosure PASS、独立リリース監査PASS、immutable／本体E2E各1/1（GA collect HTTP204）。
+- 本番smoke: 本体・immutableのトップ、一覧、クラウン クロスオーバーRS/G詳細、比較、sitemapはHTTP200。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）はpath/queryを本体へ301。GTM実IDは`GTM-PV9QVMJV`。
+- 直前の正常配信・ロールバック候補: https://ab09429b.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-12 Honda CIVIC 5販売単位追加）
 
 - exact app release commit: `91b8d6d2baaebeabacb1b0228d2b1d59c7fd402b`
