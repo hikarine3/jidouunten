@@ -2,16 +2,25 @@
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
 import SavedResume from '../components/SavedResume.astro';
-const { title = '自動運転・Level 1/2車種一覧｜機能・価格で比較｜自動運転.jp', description = '日本で選べる自動運転・Level 1/2運転支援車を、自動化レベル、ハンズオフ、機能、価格、発売・導入時期から探して比較できます。', structuredData: extraStructuredData = [] } = Astro.props;
+const { title = '自動運転・Level 1/2車種一覧｜機能・価格で比較｜自動運転.jp', description = '日本で選べる自動運転・Level 1/2運転支援車を、自動化レベル、ハンズオフ、機能、価格、発売・導入時期から探して比較できます。', structuredData: extraStructuredData = [], breadcrumbs: customBreadcrumbs = [] } = Astro.props;
 const extraGraph = Array.isArray(extraStructuredData) ? extraStructuredData : [extraStructuredData];
 const canonical = new URL(Astro.url.pathname, 'https://jidouunten.jp').toString();
 const socialImage = 'https://jidouunten.jp/og.png';
+const pageName = title.split('｜')[0];
+const breadcrumbTail = Astro.url.pathname === '/'
+  ? []
+  : Astro.url.pathname === '/cars/'
+    ? [{ name: '車両一覧', url: 'https://jidouunten.jp/cars/' }]
+    : [{ name: pageName, url: canonical }];
+const fallbackBreadcrumbs = [{ name: '自動運転.jp', url: 'https://jidouunten.jp/' }, ...breadcrumbTail];
+const breadcrumbs = Array.isArray(customBreadcrumbs) && customBreadcrumbs.length ? customBreadcrumbs : fallbackBreadcrumbs;
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
     { '@type': 'WebSite', '@id': 'https://jidouunten.jp/#website', url: 'https://jidouunten.jp/', name: '自動運転.jp', inLanguage: 'ja-JP' },
     { '@type': 'WebPage', '@id': canonical, url: canonical, name: title, description, inLanguage: 'ja-JP', isPartOf: { '@id': 'https://jidouunten.jp/#website' } },
     ...extraGraph,
+    { '@type': 'BreadcrumbList', '@id': `${canonical}#breadcrumb`, itemListElement: breadcrumbs.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.name, item: item.url })) },
   ],
 };
 ---

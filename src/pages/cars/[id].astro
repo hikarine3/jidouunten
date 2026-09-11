@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { availabilityLabels, availabilityNotes, capabilityDefinition, displayCatalogAsOf, displayIntroducedAt, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, handsOffLabels, levelCaveat, levelLabels, listFact, monitoringLabels, officialLinkFor, vehicleReferenceLabel, vehicles } from '../../data/loader';
+import { availabilityLabels, availabilityNotes, capabilityDefinition, displayCatalogAsOf, displayIntroducedAt, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, handsOffLabels, levelCaveat, levelLabels, listFact, monitoringLabels, officialLinkFor, vehicleReferenceLabel, vehicleStructuredData, vehicles } from '../../data/loader';
 export function getStaticPaths() { return vehicles.map((vehicle) => ({ params: { id: vehicle.id }, props: { vehicle } })); }
 const { vehicle } = Astro.props;
 if (!vehicle) throw new Error('Vehicle not found');
@@ -30,14 +30,12 @@ const productStructuredData: Record<string, unknown> = {
 };
 const detailPrice = vehicle.price?.amounts[0]?.amountJpy;
 if (detailPrice) productStructuredData.offers = { '@type': 'Offer', price: detailPrice, priceCurrency: 'JPY', url: detailCanonical };
-const breadcrumbStructuredData = {
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: '車両一覧', item: 'https://jidouunten.jp/cars/' },
-    { '@type': 'ListItem', position: 2, name: `${vehicle.maker} ${vehicle.model}`, item: detailCanonical },
-    { '@type': 'ListItem', position: 3, name: vehicle.grade },
-  ],
-};
+const breadcrumbs = [
+  { name: '自動運転.jp', url: 'https://jidouunten.jp/' },
+  { name: '車両一覧', url: 'https://jidouunten.jp/cars/' },
+  { name: `${vehicle.maker} ${vehicle.model}`, url: detailCanonical },
+  { name: vehicle.grade, url: detailCanonical },
+];
 const publicClassificationRationale = (value: string) => value
   .replaceAll('handsOff=not_allowed', 'ハンズオフは不可')
   .replaceAll('handsOff=allowed_in_conditions', 'ハンズオフは条件内で可')
@@ -46,7 +44,7 @@ const publicClassificationRationale = (value: string) => value
   .replaceAll('allowed_in_conditions', '条件内で可')
   .replaceAll('unknown', '未確認');
 ---
-<Layout title={detailTitle} description={detailDescription} structuredData={[productStructuredData, breadcrumbStructuredData]}>
+<Layout title={detailTitle} description={detailDescription} structuredData={[productStructuredData, vehicleStructuredData(vehicle)]} breadcrumbs={breadcrumbs}>
   <section class="page-intro"><div class="wrap"><a class="subtle" href="/">← 車両一覧へ戻る</a></div></section>
   <section class="section" style="padding-top: 0;"><div class="wrap detail-grid">
     <aside class="detail-hero"><div class="eyebrow">{vehicle.market} / {vehicleReferenceLabel(vehicle)}</div><div class="level-num">{vehicle.automationLevel}</div><div class="eyebrow" style="color:white;">{levelLabels[vehicle.automationLevel]}</div><h1>{vehicle.maker}<br />{vehicle.model}</h1><p>{vehicle.grade}</p><span class:list={['pill', vehicle.availability === 'new_order_available' && 'lime']}>{availabilityLabels[vehicle.availability]}</span><p style="margin:18px 0 0; color:#d5e1e2; font-size:.84rem;">{levelCaveat(vehicle.automationLevel)}</p></aside>

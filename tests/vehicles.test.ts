@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleMatchesPriceBand, vehiclePriceMin, vehicleReferenceLabel, vehicleReferenceTotal, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleItemListStructuredData, vehicleMatchesPriceBand, vehiclePriceMin, vehiclePublicUrl, vehicleReferenceLabel, vehicleReferenceTotal, vehicleStructuredData, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -50,6 +50,20 @@ describe('vehicle data contract and filters', () => {
     expect(displayCatalogAsOf('2026-09')).toBe('2026年9月');
     expect(displayVehicleTiming({ salesUnitIntroducedAt: null, catalogAsOf: '2026-09' })).toBe('2026年9月');
     expect(displayVehicleTiming({ salesUnitIntroducedAt: null, catalogAsOf: null })).toBe('');
+  });
+
+  it('構造化データは車両正本と可視一覧のURL・名称・順序を一致させる', () => {
+    const dated = vehicleStructuredData(makeVehicle({ id: 'dated-car', maker: 'Maker', model: 'Model', modelYear: '2026', grade: 'Grade' }));
+    expect(dated).toMatchObject({ '@type': 'Car', url: vehiclePublicUrl('dated-car'), brand: { '@type': 'Brand', name: 'Maker' }, model: 'Model', modelDate: '2026', vehicleConfiguration: 'Grade' });
+    expect(dated).not.toHaveProperty('automationLevel');
+    expect(dated).not.toHaveProperty('aggregateRating');
+    const undated = vehicleStructuredData(makeVehicle({ id: 'undated-car', modelYear: null }));
+    expect(undated).not.toHaveProperty('modelDate');
+    const visible = sortVehicleList(vehicles).filter(isDefaultListedVehicle);
+    const itemList = vehicleItemListStructuredData(visible);
+    expect(itemList.itemListElement).toHaveLength(visible.length);
+    expect(itemList.numberOfItems).toBe(visible.length);
+    expect(itemList.itemListElement).toEqual(visible.map((vehicle, index) => ({ '@type': 'ListItem', position: index + 1, name: `${vehicle.maker} ${vehicle.model} ${vehicle.grade}`, url: vehiclePublicUrl(vehicle.id) })));
   });
 
   it('価格が安い順は車両本体の最小額を使い、未確認を末尾に置く', () => {
@@ -129,14 +143,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(250);
+    expect(vehicles).toHaveLength(260);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補249件は全件の公式金額を保持する', () => {
+  it('現行候補259件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(249);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(249);
+    expect(current).toHaveLength(259);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(259);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -178,7 +192,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(55);
+    expect(officialLinks).toHaveLength(56);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -216,7 +230,7 @@ describe('vehicle data contract and filters', () => {
     const mitsubishiActions = officialLinks.find(({ maker, model }) => maker === 'Mitsubishi' && model === 'アウトランダーPHEV')?.actions ?? [];
     expect(mitsubishiActions.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'estimate', 'dealer', 'catalog']);
     expect(mitsubishiActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(72);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(76);
   });
 
   it('トヨタ ヤリス クロスは2026年8月の20販売単位を価格・Level 2能力付きで保持する', () => {
@@ -510,6 +524,32 @@ describe('vehicle data contract and filters', () => {
     expect(lm.every((vehicle) => vehicle.requiredPackage?.includes('G-Link契約') && vehicle.limitations.some((limitation) => limitation.includes('G-Link契約')))).toBe(true);
     expect(lm.every((vehicle) => vehicle.availability === 'unknown' && vehicle.availabilityCheckedAt === '2026-09-11' && vehicle.sources.some((source) => source.url === 'https://lexus.jp/news/info/delivery/index.html' && source.supports.some((fact) => fact.includes('5.5〜6.0ヶ月')) && vehicle.limitations.some((limitation) => limitation.includes('現在の受注可否・納期'))))).toBe(true);
     expect(lm.every((vehicle) => !vehicle.classificationRationale?.includes('allowed_in_conditions'))).toBe(true);
+  });
+
+  it('Lexus LXは10販売単位を価格・定員別の条件付きハンズオフLevel 2として保持する', () => {
+    const lx = vehicles.filter((vehicle) => vehicle.model === 'LX');
+    expect(lx).toHaveLength(10);
+    expect(lx.map((vehicle) => vehicle.grade).sort()).toEqual([
+      'LX700h EXECUTIVE AWD（4人乗り）', 'LX700h AWD（5人乗り）', 'LX700h AWD（7人乗り）',
+      'LX700h OVERTRAIL+ AWD（5人乗り）', 'LX700h OVERTRAIL+ AWD（7人乗り）',
+      'LX600 EXECUTIVE AWD（4人乗り）', 'LX600 AWD（5人乗り）', 'LX600 AWD（7人乗り）',
+      'LX600 OVERTRAIL+ AWD（5人乗り）', 'LX600 OVERTRAIL+ AWD（7人乗り）',
+    ].sort());
+    expect(lx.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      14_500_000, 14_500_000, 14_900_000, 14_900_000, 15_900_000, 15_900_000, 15_900_000, 15_900_000, 20_000_000, 21_000_000,
+    ]);
+    expect(lx.every((vehicle) => vehicle.currentCatalogListed && vehicle.modelYear === null && vehicle.catalogAsOf === '2026-09' && vehicle.priceEffectiveAt === null)).toBe(true);
+    expect(lx.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'allowed_in_conditions' && vehicle.availability === 'unknown')).toBe(true);
+    expect(lx.every((vehicle) => vehicle.odd.speedKph.min === 0 && vehicle.odd.speedKph.max === 40 && vehicle.capabilities.includes('adaptive_cruise_control') && vehicle.capabilities.includes('lane_centering') && vehicle.capabilities.includes('traffic_jam_assist') && vehicle.capabilities.includes('hands_off_highway'))).toBe(true);
+    expect(lx.every((vehicle) => !vehicle.capabilities.includes('lane_change_support'))).toBe(true);
+    expect(lx.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://lexus.jp/models/lx/spec_price/'))).toBe(true);
+    expect(lx.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://lexus.jp/models/lx/features/safety/'))).toBe(true);
+    expect(lx.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://lexus.jp/models/lx/configurator/index.html'))).toBe(true);
+    expect(lx.flatMap((vehicle) => vehicle.sources.map((source) => source.url))).toContain('https://lexus.jp/models/lx/pdf/equipmentlist.pdf');
+    expect(lx.flatMap((vehicle) => vehicle.sources.map((source) => source.url))).toContain('https://lexus.jp/models/lx/pdf/detail.pdf');
+    expect(lx.filter((vehicle) => vehicle.grade.startsWith('LX700h') && !vehicle.grade.includes('OVERTRAIL')).every((vehicle) => vehicle.salesUnitIntroducedAt === '2025-03-24')).toBe(true);
+    expect(lx.filter((vehicle) => vehicle.grade.startsWith('LX600')).every((vehicle) => vehicle.salesUnitIntroducedAt === null)).toBe(true);
+    expect(officialLinkFor(lx[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'estimate', 'catalog', 'catalog']);
   });
 
   it('Lexus UX300hは6販売単位を価格・駆動方式別のステアリング保持Level 2として保持する', () => {

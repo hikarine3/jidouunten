@@ -15,14 +15,14 @@
 
 | 項目 | 値 | 確認方法 |
 |---|---:|---|
-| sitemap掲載URL数 | 255 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外） |
-| うち車両詳細 | 250 | `src/data/vehicles.json` の販売単位レコード数 |
+| sitemap掲載URL数 | 265 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外） |
+| うち車両詳細 | 260 | `src/data/vehicles.json` の販売単位レコード数 |
 | 掲載メーカー数 | 17 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi |
 | 条件別（レベル・道路・ハンズオフ・価格帯）の静的URL | 0 | 絞り込みはquery paramのみ（`/cars/?level=2`） |
 | 機能名（プロパイロット2.0等）の静的URL | 0 | 該当ページなし |
 | 2台比較の静的URL | 0 | `/compare/?ids=a,b` のquery paramのみ |
-| 構造化データの型 | 全256ページ: WebSite + WebPage ／ 車両詳細250ページ: Product + BreadcrumbListを追加 | `src/layouts/Layout.astro` と `src/pages/cars/[id].astro` のJSON-LD `@graph` |
-| 公式アクションリンク | 72 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線、BYD 4車種は試乗・販売店・カタログ導線、Mitsubishi OUTLANDER PHEVは商談・購入予約・試乗車・見積り・販売店・カタログ導線、Audi A5 / A5 Avantは見積り・正規ディーラー・試乗車導線、Toyotaアクア／カローラ／カローラ スポーツ／カローラ ツーリング／ヤリス／ヤリス クロスは公式見積り導線を保持。検討用導線と注文可否は分離 |
+| 構造化データの型 | 全266ページ: WebSite + WebPage + BreadcrumbList（一覧2ページはItemList）／車両詳細260ページ: Product + Car + BreadcrumbList | `src/layouts/Layout.astro` と `src/pages/cars/[id].astro` のJSON-LD `@graph` |
+| 公式アクションリンク | 76 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線、BYD 4車種は試乗・販売店・カタログ導線、Mitsubishi OUTLANDER PHEVは商談・購入予約・試乗車・見積り・販売店・カタログ導線、Audi A5 / A5 Avantは見積り・正規ディーラー・試乗車導線、Toyotaアクア／カローラ／カローラ スポーツ／カローラ ツーリング／ヤリス／ヤリス クロスは公式見積り導線、Lexus LXは販売店・見積り・カタログ・価格表導線を保持。検討用導線と注文可否は分離 |
 | 新車注文可（一次情報で確認） | 21 | `src/data/vehicles.json` の販売単位。Tesla 6、Volvo EX30 3、Hyundai IONIQ 5 2、Mitsubishi OUTLANDER PHEV 9、日産アリアB6 1。注文・出荷根拠を確認した単位のみで、在庫・納期・契約成立は保証しない |
 | Lighthouse production (mobile) | performance 1.00 / accessibility 1.00 | `.cache/lighthouse-production.json` |
 | KPI実測（表示・クリック・selector行動） | 未取得 | 公開初日のため観測期間0日 |
@@ -60,7 +60,7 @@ S1 検索表示回数
 | URL種別 | 想定クエリ | 表示/URL・月（中位） | 根拠の性質 |
 |---|---|---:|---|
 | 車両詳細 | 「車名 グレード 運転支援」 | 40 | ロングテール指名 |
-| 条件別一覧 | 「ハンズオフ 車」「レベル2 車種」 | 250 | 選択意図クエリ |
+| 条件別一覧 | 「ハンズオフ 車」「レベル2 車種」 | 260 | 選択意図クエリ |
 | 機能名 | 「プロパイロット2.0 車種」 | 700 | ブランド指名・需要集中 |
 | 2台比較 | 「A車 B車 比較」 | 80 | 高intentロングテール |
 
@@ -82,12 +82,12 @@ S1 検索表示回数
 
 ## 4. シナリオ（12か月後・月間）
 
-構成は「#17で公開済み販売単位を継続拡大」を前提とする。現時点の詳細ページは250件だが、未確認候補群を含む国内全候補の網羅率は未確定である。
+構成は「#17で公開済み販売単位を継続拡大」を前提とする。現時点の詳細ページは260件だが、未確認候補群を含む国内全候補の網羅率は未確定である。
 
 | 構成 | URL数 | 表示/URL | 表示回数 |
 |---|---:|---:|---:|
 | 車両詳細 | 60 | 40 | 2,400 |
-| 条件別一覧 | 40 | 250 | 10,000 |
+| 条件別一覧 | 40 | 260 | 10,400 |
 | 機能名 | 12 | 700 | 8,400 |
 | 2台比較 | 60 | 80 | 4,800 |
 | 合計 | 172 | — | 25,600 |
@@ -111,7 +111,7 @@ S1 検索表示回数
 
 | Issue | 支配する段 | 推定効果（中位・月間） | 実測で置き換える指標 |
 |---|---|---|---|
-| #17 販売単位の網羅 | S1の分母 | 車両詳細 250件を起点に、未掲載母集団と欠損理由を解決 | 掲載販売単位数・母集団カバー率 |
+| #17 販売単位の網羅 | S1の分母 | 車両詳細 260件を起点に、未掲載母集団と欠損理由を解決 | 掲載販売単位数・母集団カバー率 |
 | #19 条件別ページ生成 | S1 | indexable 179 URLを起点に、検索需要のある条件だけを追加 | GSC 表示回数/ページ |
 | #20 構造化データ・メタ | S2 | CTR 3.0%→4.2%、同表示回数でクリック +300 | GSC CTR |
 | #22 機能名ページ | S1 | 表示 +8,400、指名検索の受け皿 | GSC クエリ別表示 |

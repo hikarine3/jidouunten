@@ -347,6 +347,46 @@ export function displayVehicleTiming(vehicle: Pick<Vehicle, 'salesUnitIntroduced
   return displayCatalogAsOf(vehicle.catalogAsOf);
 }
 
+const publicSiteOrigin = 'https://jidouunten.jp';
+
+/** 車両詳細の公開URLを構造化データと画面リンクで共有する。 */
+export function vehiclePublicUrl(id: string, origin = publicSiteOrigin) {
+  return new URL(`/cars/${id}/`, origin).toString();
+}
+
+/** 実データに基づく車両構造化データ。安全性評価や価格offersはここへ混ぜない。 */
+export function vehicleStructuredData(vehicle: Pick<Vehicle, 'id' | 'maker' | 'model' | 'modelYear' | 'grade'>) {
+  const url = vehiclePublicUrl(vehicle.id);
+  return {
+    '@type': 'Car',
+    '@id': `${url}#car`,
+    url,
+    name: `${vehicle.maker} ${vehicle.model} ${vehicle.grade}`,
+    brand: { '@type': 'Brand', name: vehicle.maker },
+    model: vehicle.model,
+    ...(vehicle.modelYear ? { modelDate: vehicle.modelYear } : {}),
+    vehicleConfiguration: vehicle.grade,
+  };
+}
+
+/** 初期表示で可視になる販売単位だけをItemListへ載せる。 */
+export function vehicleItemListStructuredData(list: Array<Pick<Vehicle, 'id' | 'maker' | 'model' | 'grade'>>) {
+  const url = new URL('/cars/', publicSiteOrigin).toString();
+  return {
+    '@type': 'ItemList',
+    '@id': `${url}#itemlist`,
+    url,
+    numberOfItems: list.length,
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    itemListElement: list.map((vehicle, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: `${vehicle.maker} ${vehicle.model} ${vehicle.grade}`,
+      url: vehiclePublicUrl(vehicle.id),
+    })),
+  };
+}
+
 export type VehicleSort = 'introduced_desc' | 'price_asc' | 'maker_asc';
 
 export function vehiclePriceMin(vehicle: Pick<Vehicle, 'price'>) {

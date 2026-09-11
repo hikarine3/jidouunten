@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 250 | `src/data/vehicles.json` の全レコード（現行249 + 過去1） |
-| 既定表示 | 249 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 260 | `src/data/vehicles.json` の全レコード（現行259 + 過去1） |
+| 既定表示 | 259 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -32,6 +32,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota カローラ クロス / 後発対策） | 7 | Z / S / GR SPORT / Z“Adventure”の2WD・E-Four。価格298万1,000円〜407万7,700円、ACC・LTA・渋滞時支援・車線変更時の補助、ステアリング保持要求を販売単位へ固定 |
 | 今回追加（Toyota アクア / 後発対策） | 9 | Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD。価格244万3,100円〜323万8,400円、全車速追従ACC・LTA・ステアリング保持を販売単位へ固定 |
 | 今回追加（Toyota カローラ / 後発対策） | 6 | HYBRID W×B / G / Xの2WD・E-Four。価格238万400円〜334万2,900円、全車速追従ACC・LTA・停止保持・ステアリング保持を販売単位へ固定 |
+| 今回追加（Lexus LX / 後発対策） | 10 | LX700h/LX600のEXECUTIVE、5/7人乗り、OVERTRAIL+ 5/7人乗り。価格1,450万〜2,100万円、全車速追従ACC・LTA、Advanced Drive渋滞時0〜40km/hの条件付き支援、運転者監視を販売単位へ固定。LCA・自動車線変更は付与せず、受注可否は未確認 |
 | 今回追加（Volkswagen / Lexus / Toyota） | 9 | Volkswagen Tiguan 6単位、Lexus GX550 2単位、Toyota ランドクルーザー250 VX ガソリン4WD 1単位。価格・ACC／車線維持支援・ステアリング保持を一次資料で確認し、注文可否は未確認のまま掲載 |
 | 今回追加（Toyota ヤリス クロス） | 20 | 2026年8月公式グレードJSONのZ“Adventure”／Z／G／X／U／GR SPORT、ハイブリッド・ガソリン、2WD／E-Fourの全20販売単位。価格212万6,300円〜335万5,000円、全車速追従ACC・LTA・渋滞時支援、ステアリング保持条件を一次資料で確認し、注文可否は未確認のまま掲載 |
 | 今回追加（Toyota ヤリス） | 17 | 2026年4月公式グレードJSONのZ／G／X、ハイブリッド・ガソリン、1.5L／1.0L、CVT／6MT、2WD／4WD・E-Fourの価格比較可能な17販売単位。価格169万7,300円〜288万4,200円。1.0L CVTの2単位はACCのみでLevel 1、その他15単位はLTA併用のLevel 2、ハイブリッド6単位は渋滞時停止・発進支援を確認。U（KINTO専用）2単位は月額のみのため車両本体価格比較から保留 |
@@ -225,7 +226,7 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 | LM500h EXECUTIVE / version Lの注文後工場出荷目処 | Lexus | https://lexus.jp/news/info/delivery/index.html | 2026-09-11 |
 | IONIQ 5 Voyage / Lounge掲載車両の「車両注文」導線 | Hyundai Mobility Japan | https://www.hyundai.com/jp/stock/new | 2026-09-11 |
 
-この更新後の内訳は、全250販売単位（現行249、過去1）のうち`new_order_available` 21、`unknown` 228、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
+この更新後の内訳は、全260販売単位（現行259、過去1）のうち`new_order_available` 21、`unknown` 238、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
 
 
 ## 未掲載・確認継続候補（内訳）
@@ -657,3 +658,34 @@ LMと同じLexusでも、UX300hはハンズオフ不可・LCAなし・521万〜5
 | ハンドル保持必須 | [取扱説明書](https://www.mitsubishi-motors.co.jp/afterservice/manual/html/outlander_manual/07-04-13.html) |
 | 2026年6月25日一部改良・販売開始 | [三菱自動車ニュースリリース](https://www.mitsubishi-motors.com/jp/newsroom/newsrelease/2026/20260625_1.html) |
 | 現行9グレードを選べる購入予約入口（Chromeで可視確認） | [三菱自動車 オンライン見積り・購入予約](https://try.mitsubishi-motors.co.jp/olm/EGP0002.do?model=274&skp=1) |
+
+## 2026-09-11 Lexus LX追加トランシェ
+
+Lexus公式の現行価格・パッケージ、コンフィギュレーター、安全装備、主要装備／諸元／価格PDF、見積り・販売店導線を照合し、LXの10販売単位を追加した。LX700h EXECUTIVE（4人乗り）、5人乗り、7人乗り、OVERTRAIL+の5人／7人乗り、LX600 EXECUTIVE（4人乗り）、5人乗り、7人乗り、OVERTRAIL+の5人／7人乗りを別単位とし、価格は1,450万円〜2,100万円（税込）。`catalogAsOf=2026-09`、`priceEffectiveAt=null`とし、公式ページに現在価格の適用開始日が明記されていないことを保持する。発売リリースは2025-03-06発表、LX700hは2025-03-24発売だが、LX600およびOVERTRAIL+の販売単位導入日は推測せずnullとした。
+
+全10単位で全車速追従レーダークルーズ（縦方向）とLTA（横方向）を確認し、国土交通省の定義へ照合してLevel 2相当とした。Lexus Teammate Advanced Driveは公式安全表の「渋滞時支援のみ」に限定し、0〜40km/hの条件、運転者の前方・周囲監視必須を明記した。条件内のハンズオフは`allowed_in_conditions`としたが、自動運転を意味しない。LCA・自動車線変更は公式根拠がないため付与していない。公式の見積り・販売店導線は到達できるが、個別の受注可否・納期は確認できないため`availability=unknown`とした。限定仕様（HIDEKI MATSUYAMA EDITION等）は含めない。
+
+| 販売単位 | 価格（税込） | salesUnitIntroducedAt |
+|---|---:|---|
+| LX700h “EXECUTIVE”（4人乗り） | 21,000,000円 | 2025-03-24 |
+| LX700h（5人乗り） | 15,900,000円 | 2025-03-24 |
+| LX700h（7人乗り） | 15,900,000円 | 2025-03-24 |
+| LX700h “OVERTRAIL+”（5人乗り） | 15,900,000円 | 2025-03-24（LX700h発売日。パッケージ個別導入日は未確認） |
+| LX700h “OVERTRAIL+”（7人乗り） | 15,900,000円 | 2025-03-24（LX700h発売日。パッケージ個別導入日は未確認） |
+| LX600 “EXECUTIVE”（4人乗り） | 20,000,000円 | null |
+| LX600（5人乗り） | 14,500,000円 | null |
+| LX600（7人乗り） | 14,500,000円 | null |
+| LX600 “OVERTRAIL+”（5人乗り） | 14,900,000円 | null |
+| LX600 “OVERTRAIL+”（7人乗り） | 14,900,000円 | null |
+
+| 対象事実 | 発行元 | URL | 確認日 / HTTP |
+|---|---|---|---|
+| 現行LXの10パッケージ・価格 | Lexus | https://lexus.jp/models/lx/spec_price/ | 2026-09-11 / 200 |
+| 全車速追従ACC・LTA、Advanced Drive渋滞時支援 | Lexus | https://lexus.jp/models/lx/features/safety/ | 2026-09-11 / 200 |
+| 4/5/7人乗り販売単位 | Lexus | https://lexus.jp/models/lx/configurator/index.html | 2026-09-11 / 200 |
+| 公式見積り導線 | Lexus | https://lexus.jp/request/estimate_sim/version?car_name_en=LX700h | 2026-09-11 / 200 |
+| 公式販売店導線 | Lexus | https://lexus.jp/dealership/ | 2026-09-11 / 200 |
+| LX700hの2025-03-24発売、価格、Advanced Drive条件 | トヨタ自動車 | https://global.toyota/jp/newsroom/lexus/42331276.html | 2026-09-11 / 200 |
+| 主要装備一覧 | Lexus | https://lexus.jp/models/lx/pdf/equipmentlist.pdf | 2026-09-11 / 200 |
+| 主要諸元 | Lexus | https://lexus.jp/models/lx/pdf/detail.pdf | 2026-09-11 / 200 |
+| 価格表 | Lexus | https://lexus.jp/models/lx/pdf/pricelist.pdf | 2026-09-11 / 200 |
