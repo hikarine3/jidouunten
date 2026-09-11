@@ -2,6 +2,16 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 Audi A5／A5 Avant追加・詳細SEO強化）
+
+- exact app release commit: `e1ca12d`（E2E描画待ち補正 `05b9dd2`）
+- immutable: https://b4a74e7c.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Audi A5／A5 AvantのTFSI 110kW、TFSI quattro 150kW、TDI quattro 150kWをセダン／Avant各3単位、計6販売単位で追加。税込617万〜760万円、TFSIの日本発売日2025-02-17、TDIの日本発売日2025-06-24、全車Level 2相当（追従走行・車線中央維持・車線変更支援、ハンズオフ不可）として比較できる。注文可否は一次情報不足のため未確認を維持し、Audi公式の見積り・ディーラー・試乗導線を追加。
+- SEO: 現行240／全241販売単位。詳細ページのtitle／descriptionを販売単位（メーカー・車種・グレード・Level・価格・能力差）で一意化し、Product＋BreadcrumbList JSON-LDを追加。全247 HTMLでcanonical／robots／hreflang／OG/Twitter／WebSite＋WebPage JSON-LDを確認。sitemap-0は246 URL。
+- QA: `npm test` 51/51、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build247、release guard PASS、ローカルE2E1/1、immutable／本体E2E各1/1（GA collect HTTP204）。Audi根拠6/6・公式導線4/4 HTTP応答、registry静的marker6/6・required selector5/5、公開HTML内部情報漏れ0件、独立監査PASS。
+- 直前の正常配信・ロールバック候補: https://74a72192.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 ヤリス クロス20販売単位追加）
 
 ## 最新の配信（2026-09-11 Toyota ヤリス17販売単位・Level 1対応・SEO整合）

@@ -1,5 +1,15 @@
 # 初回公開の実測証拠
 
+## 2026-09-11 Audi A5／A5 Avant追加・詳細SEO強化（本番実測）
+
+- exact app release commit: `e1ca12d`（E2E描画待ち補正 `05b9dd2`）
+- Immutable deployment: https://b4a74e7c.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Audi A5／A5 Avantの6販売単位（617万〜760万円）を追加。TFSI（2025-02-17）／TDI（2025-06-24）の日本発売日、Level 2相当、追従走行・車線中央維持・車線変更支援、ハンズオフ不可を販売単位へ固定。公式見積り・ディーラー・試乗導線を表示し、注文可否は未確認を維持。
+- `npm test`: 51/51、`npm run check`: 0 errors / 0 warnings / 6 hints。実ID build247、release guard PASS。ローカルE2E1/1、immutable／本体E2E各1/1（GA collect HTTP204）。
+- SEO: 全247 HTMLにcanonical／description／robots／hreflang／OG/Twitter／WebSite＋WebPage JSON-LD。詳細241件にProduct＋BreadcrumbList JSON-LD、販売単位を含む一意title／description。sitemap-0は246 URL。Audi公式根拠6/6・公式導線4/4 HTTP応答、registry required selector5/5、公開HTML内部情報漏れ0件、独立監査PASS。
+- 直前正常deployment（rollback候補）: https://74a72192.jidouunten.pages.dev
+
 ## 2026-09-11 Toyota ヤリス17販売単位・Level 1対応・SEO整合（本番実測）
 
 - exact app release commit: `6f995bb`（実装 `d709dcf`）
