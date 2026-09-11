@@ -1,6 +1,15 @@
 # Cloudflare Pages公開運用
 
-更新: 2026-09-10
+更新: 2026-09-11
+
+## 最新の配信（2026-09-11）
+
+- exact app: `7e795dc16d4c14874f3bed72103f35e8af5b60a0`（前段 `72cd8bb`）
+- immutable: https://978636f5.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Level 1対象外の明示、用途ガイド、能力チェックボックスAND、複数能力の保存→再開、不正能力URLの安全な0件処理
+- QA: npm test 41/41、価格154/154、公式導線38モデル/39 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build160、Chrome E2E local/immutable/production各1/1、独立価値監査PASS
+- productionとimmutableはともにHTTP 200。固定URLと本体でAND条件、保存→再開、ガイド、異常URL、390/1280px横overflowを実ブラウザ確認。
 
 ## 配信方式
 

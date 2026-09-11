@@ -2,6 +2,14 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 Level 2用途ガイド・能力AND絞り込み（実装・本番反映済み）
+
+- 一覧トップをLevel 2〜3の比較対象として明示し、Level 1は「対象外」、Level 4/5は「掲載なし」と表示。Level 2の大量候補を用途ガイド（渋滞時ハンズオフ／車線変更支援／300万円未満）から一クリックで縮められるようにした。
+- 「できること」はチェックボックスの複数選択をすべて満たすAND条件として適用。URLへ値を保持し、保存した検索の保存・再開・削除も複数能力へ対応。不正な能力値でも画面例外を起こさず0件として扱う。
+- exact app release `7e795dc16d4c14874f3bed72103f35e8af5b60a0`（前段 `72cd8bb`）、Production `https://jidouunten.jp/`、immutable `https://978636f5.jidouunten.pages.dev`。Cloudflare Pages deploymentはProduction/mainへ完了。
+- QA: npm test 41/41、価格154/154、公式導線38モデル/39 actions、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build160ページ、Chrome E2E（ローカル・immutable・本体各1/1）。独立価値監査は `7e795dc` exact SHAでPASS（追加Chrome28/28、JS例外・横overflowなし）。
+- AND条件の保存検索は `/?capability=traffic_jam_assist&capability=hands_off_highway` で43件。3用途ガイドは34 / 44 / 14件。計測は同意後のみ既存GTM/GA4へ送信し、保存本文・指紋・車両IDは送信しない。
+
 ## 2026-09-11 本体価格帯フィルター（実装・本番反映済み）
 
 - 一覧に「〜300万円 / 300〜500万円 / 500〜800万円 / 800万円〜」の本体価格帯フィルターを追加。車両本体価格の確認済み開始値で分類し、価格未確認はどの帯にも含めない。保存検索URLにも条件を保持する。
