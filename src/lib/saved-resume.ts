@@ -31,6 +31,15 @@ export interface SavedResumeState {
 
 const ALLOWED_PATHS = new Set(['/', '/cars/', '/compare/']);
 const SEARCH_KEYS = new Set(['maker', 'level', 'capability', 'handsOff', 'road', 'availability', 'budget', 'sort']);
+const CAPABILITY_IDS = new Set([
+  'adaptive_cruise_control',
+  'lane_centering',
+  'traffic_jam_assist',
+  'hands_off_highway',
+  'lane_change_support',
+  'driver_monitoring',
+  'traffic_jam_pilot',
+]);
 
 export function emptySavedResumeState(): SavedResumeState {
   return { version: 1, search: null, compare: null };
@@ -72,7 +81,13 @@ export function normalizeSavedHref(kind: SavedResumeKind, href: unknown): string
     if (kind === 'search') {
       if (url.pathname !== '/' && url.pathname !== '/cars/') return null;
       for (const [key, value] of url.searchParams.entries()) {
-        if (!SEARCH_KEYS.has(key) || params.has(key) || !value || value.length > 120) return null;
+        if (!SEARCH_KEYS.has(key) || !value || value.length > 120) return null;
+        if (key === 'capability') {
+          if (!CAPABILITY_IDS.has(value)) return null;
+          if (!params.getAll('capability').includes(value)) params.append(key, value);
+          continue;
+        }
+        if (params.has(key)) return null;
         params.set(key, value);
       }
       if (params.get('sort') === 'introduced_desc') params.delete('sort');

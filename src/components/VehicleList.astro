@@ -124,7 +124,7 @@ const guideProfiles = [
       const show = (!values.maker || shell.dataset.maker === values.maker) && (!values.level || shell.dataset.level === values.level) && values.capability.every((capability) => shellCapabilities.includes(capability)) && (!values.road || (shell.dataset.road || '').split('|').includes(values.road)) && (!values.handsOff || shell.dataset.handsOff === values.handsOff) && (values.availability && values.availability !== 'all' ? shell.dataset.availability === values.availability : values.availability === 'all' ? true : defaultAvailable) && budgetMatch;
       shell.hidden = !show; const compareInput = shell.querySelector('input[name="ids"]'); if (!show && compareInput) compareInput.checked = false; if (show) count += 1;
     });
-    const capabilityText = values.capability.length ? values.capability.map((capability) => form?.querySelector(`input[name="capability"][value="${capability}"]`)?.closest('label')?.querySelector('strong')?.textContent || capability).join(' ＋ ') : '';
+    const capabilityText = values.capability.length ? values.capability.map((capability) => [...(form?.querySelectorAll('input[name="capability"]') || [])].find((input) => input.value === capability)?.closest('label')?.querySelector('strong')?.textContent || capability).join(' ＋ ') : '';
     const handsOffText = values.handsOff ? form?.querySelector('select[name="handsOff"] option:checked')?.textContent : '';
     const roadText = values.road ? form?.querySelector('select[name="road"] option:checked')?.textContent : '';
     const availabilityText = values.availability ? form?.querySelector('select[name="availability"] option:checked')?.textContent : '';

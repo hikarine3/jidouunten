@@ -12,6 +12,9 @@ const storage = () => {
 describe('saved resume URL and browser storage contract', () => {
   it('normalizes only supported search URLs and omits the default sort', () => {
     expect(normalizeSavedHref('search', '/?maker=Tesla&sort=introduced_desc')).toBe('/?maker=Tesla');
+    expect(normalizeSavedHref('search', '/?capability=traffic_jam_assist&capability=hands_off_highway')).toBe('/?capability=traffic_jam_assist&capability=hands_off_highway');
+    expect(normalizeSavedHref('search', '/?capability=traffic_jam_assist&capability=traffic_jam_assist')).toBe('/?capability=traffic_jam_assist');
+    expect(normalizeSavedHref('search', '/?capability=not-a-capability')).toBeNull();
     expect(normalizeSavedHref('search', '/cars/?level=2&availability=all')).toBe('/cars/?level=2&availability=all');
     expect(normalizeSavedHref('search', '/?budget=under_300&sort=price_asc')).toBe('/?budget=under_300&sort=price_asc');
     expect(normalizeSavedHref('search', '/?maker=Tesla&unknown=x')).toBeNull();
