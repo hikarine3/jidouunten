@@ -83,7 +83,7 @@ Direct UploadからGit integrationへの同一project内切替は不可。
 ## 配信手順
 
 1. `npm ci`、`npm test`、`npm run check`を実行する。
-2. `.env.example`と計測運用に従い公開IDを設定して `npm run build`。
+2. `.env.example`と計測運用に従い公開IDを設定して `npm run build`。配信前に `npm run check:release` を実行し、テスト計測IDを含むdistを止める。
 3. `npm run preview`でクエリ復元・2台比較・GTM通常読み込み・同意バナー非表示・モバイルを確認。
 4. 対象差分をcommit/pushし、次を実行する。
 
