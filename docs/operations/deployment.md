@@ -4,6 +4,13 @@
 
 ## 最新の配信（2026-09-11）
 
+- exact app: `681d6939540642953e88af4edd69cd29af70eb0e`（BYD DOLPHIN／ATTO 3／SEAL／SEALION 6の7販売単位を追加）
+- immutable: https://d45dbac4.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: BYDの現行7販売単位を追加。DOLPHIN Baseline／Long Range、ATTO 3、SEAL RWD／AWD、SEALION 6 FWD／AWDをLevel 2として価格・駆動・定員・能力差で比較できる。DOLPHIN／ATTO 3は車線変更支援（ウインカー操作を合図とする車線変更時の補助）、SEALはドライバー監視を含むが、いずれもハンズオフ不可。新車注文可否・在庫は未確認のまま表示し、カタログ掲載や見積り導線だけで受注可能とは表示しない。
+- QA: Vitest43/43、価格165/165（現行164/164）、公式導線43モデル/55 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build171、ローカル・immutable・production E2E各1/1、公開面依存レジストリ331/331、独立価値監査PASS
+- immutable／本体でHTTP 200を確認（`/`、BYD詳細、BYD比較、`/sitemap-index.xml`、`/sitemap-0.xml`、`/robots.txt`）。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301で維持される。`sitemap-0.xml`は170 URL。直前rollback: https://4c2f96d7.jidouunten.pages.dev
+
 - exact app: `16567f05acc1a3bd7145c5e225abd7c0c91407b4`（Hyundai IONIQ 5 4販売単位を追加、Volvo根拠表の配置を修正）
 - immutable: https://4c2f96d7.jidouunten.pages.dev
 - 本体: https://jidouunten.jp/
