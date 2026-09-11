@@ -2,6 +2,16 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 Toyota カローラ スポーツ／ツーリング追加）
+
+- exact app release commit: `6687267`
+- immutable: https://cf667796.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: カローラ スポーツ3単位、カローラ ツーリング6単位の計9販売単位を追加。全250販売単位（現行249）、税込244万7,500円〜339万3,500円。全車Level 2相当（追従走行＋車線中央維持）、ステアリング保持が必要でハンズオフ不可。同じLevel 2内の能力差を能力チェックボックスと比較で絞り込める。公式商品・グレード・安全性能・見積り導線を追加し、注文可否は未確認を維持。
+- SEO: 詳細250ページのtitle／descriptionを販売単位単位で一意化し、canonical／robots／hreflang／OG/Twitter／Product＋BreadcrumbList JSON-LDを確認。sitemap-0は255 URL、公開HTMLの内部enum・根拠URL漏れ0件。
+- QA: `npm test` 52/52、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build256、release guard PASS、ローカル／immutable／本体E2E各1/1（GA collect HTTP204）。カローラ公式根拠11/11 URL HTTP200、registry required selector5/5、独立監査PASS。
+- 直前の正常配信・ロールバック候補: https://b4a74e7c.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 Audi A5／A5 Avant追加・詳細SEO強化）
 
 - exact app release commit: `e1ca12d`（E2E描画待ち補正 `05b9dd2`）
