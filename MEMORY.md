@@ -2,6 +2,14 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 三菱 デリカミニ／eKスペース追加（本番反映済み）
+
+- 三菱公式の商品・グレード価格・主要装備・MI-PILOT・カタログ・発売資料を突合し、デリカミニ12単位（T／GのLevel 1、Premium／DELIMARU PackageのLevel 2）とeKスペース4単位（M／G、全車LDPのみのLevel 1）を追加。価格は1,749,000〜2,907,300円（税込）。eKスペースは現行カタログにMI-PILOT標準の記載がないためLevel 2を推測していない。全16単位ともハンズオフ不可・常時監視必須・注文可否未確認。
+- exact release `af6fc06`、Production `https://jidouunten.jp/`、immutable `https://4f200c90.jidouunten.pages.dev`、直前rollback `https://19c97f88.jidouunten.pages.dev`。Cloudflare Pages production/mainへ実IDで反映済み。
+- 公開詳細は[デリカミニ G 2WD](https://jidouunten.jp/cars/jp-mitsubishi-delica-mini-2025-g-2wd/)、[デリカミニ T Premium 2WD](https://jidouunten.jp/cars/jp-mitsubishi-delica-mini-2025-t-premium-2wd/)、[eKスペース M 2WD](https://jidouunten.jp/cars/jp-mitsubishi-ek-space-2025-m-2wd/)、比較は[デリカミニ Level 1／2](https://jidouunten.jp/compare/?ids=jp-mitsubishi-delica-mini-2025-g-2wd&ids=jp-mitsubishi-delica-mini-2025-t-premium-2wd)。公式の商品・試乗・見積り・販売店・カタログ導線を同期。
+- QA: 418 HTML、sitemap-0 417 URL、詳細412件、ItemList 2ページ822項目、公式導線76モデル／73 URL／147 actions、Vitest72/72、価格412/412（exact396／range15／未確認1）、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID release／structured PASS、registry508/508、公開HTML内部enum/source/accessedAt漏れ0、独立監査PASS、ローカル／immutable／本体E2E各1/1（GA collect HTTP204）、主要URL200、未知URL404、IDN path/query301。
+- 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のWebPサムネイル（実測デスクトップ374×115px／モバイル360×88px）で省スペース表示。作者・ライセンス帰属リンクと詳細の大きい画像を維持。
+
 ## 2026-09-12 三菱 eKクロス／eKクロス EV追加（本番反映済み）
 
 - 三菱公式のeKクロス／eKクロス EVの商品・グレード・装備・MI-PILOT・取扱説明書・発売資料を突合し、eKクロス8単位（G／G Premium／T／T Premium、2WD・4WD）とeKクロス EV 3単位（G／P、先進安全快適パッケージ有無）を追加。LDPのみはLevel 1、MI-PILOT（ACC＋LKA）標準またはパッケージ装着はLevel 2として分け、価格1,856,800円〜3,214,200円、EVパッケージ+110,000円、発売・価格適用日、ハンズオフ不可・常時監視必須を保持。同一車種・Level内のグレード／オプション差を比較できる。

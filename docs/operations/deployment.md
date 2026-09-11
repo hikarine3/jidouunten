@@ -2,6 +2,18 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 三菱 デリカミニ／eKスペース追加）
+
+- exact release commit: `af6fc06`
+- immutable: https://4f200c90.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 三菱デリカミニ12販売単位（T／GはLevel 1、Premium／DELIMARU PackageはMI-PILOT標準のLevel 2）とeKスペース4販売単位（M／G、全車LDPのみのLevel 1）を追加。価格はデリカミニ1,964,600〜2,907,300円、eKスペース1,749,000〜1,945,900円（税込）。同じLevel内のグレード・駆動方式差を一覧／比較で確認できる。eKスペースは現行2025年カタログにMI-PILOT標準の記載がないためLevel 2を推測していない。
+- 公式導線: デリカミニ／eKスペースの商品・試乗・見積り・販売店・カタログURLを`src/data/official-links.json`へ同期。注文可否は16単位とも未確認を維持。
+- SEO／公開面: 418 HTML、sitemap-0は417 URL、詳細412件、トップ／一覧ItemListは2ページ・822項目。GTM実IDは各HTML 1件、テスト計測ID0件。内部enum・根拠URL・確認日キーの公開HTML漏れ0件。
+- UI: 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のWebPサムネイルで省スペース表示（実ブラウザでデスクトップ374×115px、モバイル360×88px）。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホスト方針を維持。
+- QA: `npm test` Vitest72/72＋Python16/16、価格412/412（exact396／range15／未確認1）、公式導線76モデル／73 URL／147 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 508/508、独立監査PASS、ローカル／immutable／本体E2E各1/1（GA collect HTTP204）。
+- 本番smoke: 本体・immutableのトップ、一覧、デリカミニ Level 1／Level 2詳細、eKスペース詳細、比較、sitemap、robotsはHTTP200。未知URL404、`自動運転.jp`はpath/queryを本体へ301。参考画像WebP 3件はHTTP200。
+
 ## 最新の配信（2026-09-12 三菱 eKクロス／eKクロス EV追加）
 
 - exact release commit: `b3fac85`（実装 `1b5bf1a`、レジストリ件数同期を含む）
