@@ -2545,6 +2545,161 @@
   ],
   "historical_markers": [],
   "refresh_entrypoint": "npm run build"
+    },
+    "vehicle:subaru-jp-forester-2026": {
+      "entity_id": "vehicle:subaru-jp-forester-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": [
+        "src/data/vehicles.json",
+        "docs/research/vehicle-inventory-20260907.md"
+      ],
+      "generators": [
+        "src/data/loader.ts",
+        "src/components/VehicleList.astro",
+        "src/components/VehicleCard.astro",
+        "src/pages/cars/[id].astro",
+        "src/pages/compare/index.astro",
+        "@astrojs/sitemap"
+      ],
+      "surfaces": [
+        {
+          "url": "/",
+          "locale": "ja",
+          "output_path": "dist/index.html",
+          "markers": [
+            "SUBARU",
+            "フォレスター",
+            "LEVEL 2",
+            "約385万円",
+            "約464万円"
+          ]
+        },
+        {
+          "url": "/cars/",
+          "locale": "ja",
+          "output_path": "dist/cars/index.html",
+          "markers": [
+            "SUBARU",
+            "フォレスター",
+            "LEVEL 2",
+            "約385万円",
+            "約464万円"
+          ]
+        },
+        {
+          "url": "/cars/jp-subaru-forester-2026-premium-shev-ex/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-subaru-forester-2026-premium-shev-ex/index.html",
+          "markers": [
+            "SUBARU",
+            "フォレスター",
+            "Premium S:HEV EX",
+            "4,642,000円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-subaru-forester-2026-touring/",
+          "locale": "ja",
+          "output_path": "dist/cars/jp-subaru-forester-2026-touring/index.html",
+          "markers": [
+            "SUBARU",
+            "フォレスター",
+            "Touring",
+            "3,850,000円",
+            "Level 2",
+            "ハンズオフ：不可"
+          ]
+        },
+        {
+          "url": "/compare/?ids=jp-subaru-forester-2026-premium-shev-ex&ids=jp-subaru-forester-2026-touring",
+          "locale": "ja",
+          "output_path": "dist/compare/index.html",
+          "markers": [
+            "Premium S:HEV EX",
+            "Touring",
+            "ハンズオフ：条件内で可",
+            "ハンズオフ：不可"
+          ]
+        },
+        {
+          "url": "/sitemap-0.xml",
+          "locale": "ja",
+          "output_path": "dist/sitemap-0.xml",
+          "markers": [
+            "jp-subaru-forester-2026-premium-shev-ex",
+            "jp-subaru-forester-2026-xbreak-shev-ex",
+            "jp-subaru-forester-2026-touring-ex",
+            "jp-subaru-forester-2026-sport-ex",
+            "jp-subaru-forester-2026-xbreak-shev",
+            "jp-subaru-forester-2026-touring",
+            "jp-subaru-forester-2026-sport-ex-black-selection"
+          ]
+        }
+      ],
+      "required_render_selectors": [
+        {
+          "url": "/",
+          "selector": "[data-vehicle-shell]:has(input[value=\"jp-subaru-forester-2026-premium-shev-ex\"])",
+          "markers": [
+            "SUBARU",
+            "フォレスター",
+            "Premium S:HEV EX",
+            "約464万円",
+            "LEVEL 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/",
+          "selector": "[data-vehicle-shell]:has(input[value=\"jp-subaru-forester-2026-touring\"])",
+          "markers": [
+            "SUBARU",
+            "フォレスター",
+            "Touring",
+            "約385万円",
+            "LEVEL 2",
+            "ハンズオフ：不可"
+          ]
+        },
+        {
+          "url": "/cars/jp-subaru-forester-2026-premium-shev-ex/",
+          "selector": "main",
+          "markers": [
+            "SUBARU",
+            "フォレスター",
+            "Premium S:HEV EX",
+            "4,642,000円",
+            "Level 2",
+            "ハンズオフ：条件内で可"
+          ]
+        },
+        {
+          "url": "/cars/jp-subaru-forester-2026-touring/",
+          "selector": "main",
+          "markers": [
+            "SUBARU",
+            "フォレスター",
+            "Touring",
+            "3,850,000円",
+            "Level 2",
+            "ハンズオフ：不可"
+          ]
+        },
+        {
+          "url": "/compare/?ids=jp-subaru-forester-2026-premium-shev-ex&ids=jp-subaru-forester-2026-touring",
+          "selector": "[data-compare-result]",
+          "markers": [
+            "Premium S:HEV EX",
+            "Touring",
+            "ハンズオフ：条件内で可",
+            "ハンズオフ：不可"
+          ]
+        }
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
     }
   }
 }

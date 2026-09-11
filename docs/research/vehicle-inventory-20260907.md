@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 276 | `src/data/vehicles.json` の全レコード（現行275 + 過去1） |
-| 既定表示 | 275 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 283 | `src/data/vehicles.json` の全レコード（現行282 + 過去1） |
+| 既定表示 | 282 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -44,6 +44,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Audi / 後発対策） | 6 | A5 / A5 AvantのTFSI 110kW、TFSI quattro 150kW、TDI quattro 150kW。2026年4月価格表の617万〜760万円、アダプティブクルーズアシストプラス・レーンガイダンス・レーンチェンジアシスト、常時監視とステアリング保持を販売単位へ固定 |
 | 今回追加（Toyota カローラ スポーツ／ツーリング） | 9 | カローラ スポーツ G“Z” / G / G“X” 2WDの3単位、カローラ ツーリング W×B / G / Xの2WD・E-Four 6単位。価格244万7,500円〜339万3,500円、全車速追従レーダークルーズコントロール・LTA・ステアリング保持を公式グレード／安全性能／カタログ資料から固定。特別仕様車3単位は販売終了時期の確認待ちで保留 |
 | 今回追加（Mercedes-Benz GLC／C-Class Sedan） | 11 | GLC 5単位、C-Class Sedan 6単位。MP202602価格表の744万〜1,844万円、アクティブディスタンスアシスト・アクティブステアリングアシスト・レーンキーピング・自動再発進の標準装備を確認。Level 2相当・ステアリング保持・注文可否未確認として掲載 |
+| 今回追加（SUBARU フォレスター） | 7 | Premium S:HEV EX、X-BREAK S:HEV EX、Touring EX、SPORT EX、X-BREAK S:HEV、Touring、SPORT EX Black Selection。現行グレード価格385万〜464万2,000円、EyeSightコアとEyeSight X（5単位）の装備差、渋滞時ハンズオフ0〜約50km/h・車線変更支援・運転者監視条件を公式装備表／安全ページで確認。全7単位をLevel 2相当・注文可否未確認として掲載 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -58,6 +59,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Nissan | 日産アリア（現行仕様）B6 / B6 e-4ORCE / B9 / B9 e-4ORCE | 掲載（4単位、B6のみ注文受付確認） | 2 | 2026-09-11 |
 | Nissan | セレナ C28 e-POWER LUXION | 掲載 | 2 | 2026-09-07 |
 | SUBARU | レヴォーグ レイバック（現行仕様）Limited EX | 注文可否 未確認（注文済み1.8Lグレードの工場出荷目処のみ確認） | 2 | 2026-09-11 |
+| SUBARU | フォレスター Premium S:HEV EX / X-BREAK S:HEV EX / Touring EX / SPORT EX / X-BREAK S:HEV / Touring / SPORT EX Black Selection | 掲載（現行7単位、EyeSight X 5単位は条件内ハンズオフ・車線変更支援）／注文可否 未確認 | 2相当 | 2026-09-11 |
 | Tesla | Model 3 Premium RWD / Premium ロングレンジAWD / Performance、Model Y Premium RWD / Premium ロングレンジAWD / L | 新車注文可（6単位） | 2相当 | 2026-09-10 |
 | Audi | A5 / A5 Avant TFSI 110kW / TFSI quattro 150kW / TDI quattro 150kW | 掲載（6単位、注文可否 未確認） | 2相当 | 2026-09-11 |
 | Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 新車注文可（3単位、オンライン契約） | 2相当 | 2026-09-11 |
@@ -742,3 +744,13 @@ Mercedes-Benz Japanの2026年9月価格表、現行モデルページ、MP202602
 | ステアリング保持、停止後30秒以内の自動追従再発進、運転者監視 | Mercedes-Benz Japan | https://www.mercedes-benz.co.jp/passengercars/campaigns/safety-innovation.html | 2026-09-11 / 200 |
 
 価格表の掲載月・MP番号は保持するが、販売単位の正確な発売・注文開始日は公式資料で確定できないため`salesUnitIntroducedAt=null`とした。キャンペーン対象外は販売終了の根拠とみなさず、受注可能性を推測表示しない。
+
+## 2026-09-11 SUBARU フォレスター7販売単位追加
+
+SUBARU公式の現行グレード一覧、2026年5月装備表、安全性能ページ、新型発表資料を照合し、フォレスターの7グレードを販売単位として登録した。価格はTouring 385万円からPremium S:HEV EX 464万2,000円まで（AWD・税込、オプション・諸費用別）。個別グレードの販売単位導入日・価格適用日は公式ページで固定できないため、`salesUnitIntroducedAt=null`、`priceEffectiveAt=null`、`catalogAsOf=2026-09`とした。
+
+全7単位にEyeSightコアの全車速追従ACCと車線維持支援を確認し、国土交通省の定義に照合してLevel 2相当とした。Premium S:HEV EX、X-BREAK S:HEV EX、Touring EX、SPORT EX、SPORT EX Black Selectionの5単位はEyeSight Xが標準で、渋滞時ハンズオフアシスト（高速道路等・0〜約50km/h・条件内）、アクティブレーンチェンジアシスト、ドライバーモニタリングを表示する。X-BREAK S:HEVとTouringはEyeSightコアのみで、ハンズオフ不可・車線変更支援なしとした。いずれも自動運転装置ではなく、運転者の常時監視と即時介入が必要である。
+
+新車ページへの掲載は確認できるが、個別グレードの現在の受注可否・納期までは公式ページで確認できないため、7単位の`availability=unknown`を維持した。公式商品ページにはセルフ見積り、販売店検索、試乗予約への導線があり、`src/data/official-links.json`へ記録した。
+
+根拠: [フォレスター グレード一覧](https://www.subaru.jp/forester/grade/)、[装備表（2026.05）](https://www.subaru.jp/forester/specification/docs/equipment.pdf)、[安全性能](https://www.subaru.jp/forester/safety/)、[新型フォレスター発表](https://www.subaru.co.jp/news/2025_04_17_164724/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。

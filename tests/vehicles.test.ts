@@ -152,14 +152,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(276);
+    expect(vehicles).toHaveLength(283);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補275件は全件の公式金額を保持する', () => {
+  it('現行候補282件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(275);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(275);
+    expect(current).toHaveLength(282);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(282);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -214,8 +214,22 @@ describe('vehicle data contract and filters', () => {
     expect(officialLinkFor(mercedes.find((vehicle) => vehicle.model === 'C-Class Sedan')!)?.url).toBe('https://www.mercedes-benz.co.jp/passengercars/models/saloon/c-class/overview.html');
   });
 
+  it('SUBARUフォレスターは現行7グレードをEyeSight X有無の差付きで保持する', () => {
+    const forester = vehicles.filter((vehicle) => vehicle.model === 'フォレスター');
+    expect(forester).toHaveLength(7);
+    expect(forester.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([3_850_000, 3_993_000, 4_191_000, 4_301_000, 4_378_000, 4_521_000, 4_642_000]);
+    expect(forester.every((vehicle) => vehicle.currentCatalogListed && vehicle.catalogAsOf === '2026-09' && vehicle.priceEffectiveAt === null && vehicle.salesUnitIntroducedAt === null && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.availability === 'unknown')).toBe(true);
+    expect(forester.filter((vehicle) => vehicle.requiredPackage?.includes('アイサイトX'))).toHaveLength(5);
+    expect(forester.filter((vehicle) => vehicle.handsOff === 'allowed_in_conditions')).toHaveLength(5);
+    expect(forester.filter((vehicle) => vehicle.handsOff === 'not_allowed')).toHaveLength(2);
+    expect(forester.filter((vehicle) => vehicle.capabilities.includes('lane_change_support'))).toHaveLength(5);
+    expect(forester.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.subaru.jp/forester/grade/' && source.supports.some((fact) => fact.includes('円'))))).toBe(true);
+    expect(forester.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/equipment.pdf')))).toBe(true);
+    expect(officialLinkFor(forester[0])?.actions?.map(({ kind }) => kind)).toEqual(['estimate', 'dealer', 'test_drive']);
+  });
+
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(58);
+    expect(officialLinks).toHaveLength(59);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -253,7 +267,7 @@ describe('vehicle data contract and filters', () => {
     const mitsubishiActions = officialLinks.find(({ maker, model }) => maker === 'Mitsubishi' && model === 'アウトランダーPHEV')?.actions ?? [];
     expect(mitsubishiActions.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'estimate', 'dealer', 'catalog']);
     expect(mitsubishiActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(76);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(79);
   });
 
   it('トヨタ ヤリス クロスは2026年8月の20販売単位を価格・Level 2能力付きで保持する', () => {
