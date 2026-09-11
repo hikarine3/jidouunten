@@ -2,6 +2,18 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 日産 キックス P16 12販売単位追加）
+
+- exact app release commit: `40acdbc65cf1f39db7826c1b412137fece455c83`
+- immutable: https://4c27b72b.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 日産キックスP16のG／X+／X／X シンプルパッケージ／ROCK CREEK／ROCK CREEK Utility Specを2WD・4WD（e-4ORCE）別の12販売単位として追加。価格は299万9,700円〜430万9,800円（税込）。プロパイロットの車速30〜135km/h・車線中央付近の操舵支援、ステアリング保持・常時監視が必要なLevel 2相当、ハンズオフ不可として比較できるようにした。個別の受注可否・在庫・納期は一次情報で固定できないため12単位とも`unknown`を維持。
+- 公式導線: [キックス商品ページ](https://www3.nissan.co.jp/vehicles/new/kicks.html)、[価格・グレード](https://www3.nissan.co.jp/vehicles/new/kicks/specifications.html)、[走行・安全](https://www3.nissan.co.jp/vehicles/new/kicks/performance_safety.html)、FAQ、販売店・試乗・見積り・カタログ。詳細は[X シンプルパッケージ 2WD](https://jidouunten.jp/cars/jp-nissan-kicks-2026-x-simple-2wd/)、比較は[2WD/e-4ORCE比較](https://jidouunten.jp/compare/?ids=jp-nissan-kicks-2026-x-simple-2wd&ids=jp-nissan-kicks-2026-g-e4orce-4wd)で確認できる。
+- SEO／公開面: 341 HTML、車両URL336（詳細335＋トップ）、詳細335件、トップ／一覧ItemListは2ページ・668項目。GTM実IDは341 HTMLへ各1件、テストID0件。
+- QA: `npm test` Vitest63/63・Python16/16、価格335/335（現行334/334、exact319／range15／未確認1）、公式導線65モデル／63 URL／103 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build341、release／structured PASS（Breadcrumb341／Car335／ItemList668）、registry47 entities／473 surfaces／2,331 markers失敗0、独立リリース監査PASS。ローカル／immutable／本体E2E各1/1（GA collect HTTP204）。
+- 本番smoke: 本体・immutableのトップ、一覧、キックス詳細、キックス比較、sitemap-index、sitemap-0はHTTP200、未知URL404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）は`/cars/?level=2&sort=price_asc`を本体へpath/query維持の301。一覧の既存Wikimedia Commons参考写真はWebPサムネイル（HTTP200、163,592 bytes）を維持。
+- 直前の正常配信・ロールバック候補: https://0ab618f0.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-12 Honda フリード CROSSTAR 8販売単位追加）
 
 - exact app release commit: `a919fbc69c78a64b636d483d5cde226520fc25e4`

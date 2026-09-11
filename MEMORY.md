@@ -2,6 +2,14 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 日産 キックス P16 12販売単位追加（本番反映済み）
+
+- 日産公式のキックス商品・価格／グレード・走行安全ページとP16型プロパイロットFAQを突合し、G／X+／X／X シンプルパッケージ／ROCK CREEK／ROCK CREEK Utility Specの2WD・4WD（e-4ORCE）12販売単位を追加。価格は299万9,700円〜430万9,800円（税込、2026年6月価格基準）。全車プロパイロット標準、車速30〜135km/h・車線中央付近の操舵支援、ステアリング保持・常時監視が必要なLevel 2相当、ハンズオフ不可として表示し、車線変更支援は付与していない。受注可否・在庫・納期は確認できないため12単位とも`unknown`を維持。
+- exact app `40acdbc65cf1f39db7826c1b412137fece455c83`、Production `https://jidouunten.jp/`、immutable `https://4c27b72b.jidouunten.pages.dev`、直前rollback `https://0ab618f0.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- 公開詳細は[キックス X シンプルパッケージ 2WD](https://jidouunten.jp/cars/jp-nissan-kicks-2026-x-simple-2wd/)、比較は[キックス 2WD/e-4ORCE](https://jidouunten.jp/compare/?ids=jp-nissan-kicks-2026-x-simple-2wd&ids=jp-nissan-kicks-2026-g-e4orce-4wd)。公式商品・価格・安全・FAQ・販売店・試乗・見積り・カタログ導線を`src/data/official-links.json`へ同期。
+- QA: 341 HTML、車両URL336（詳細335＋トップ）、詳細335件、ItemList 2ページ668項目、公式導線65モデル／63 URL／103 actions、Vitest63/63、価格335/335（現行334/334、exact319／range15／未確認1）、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build・release／structured PASS（Breadcrumb341／Car335／ItemList668）、registry47 entities／473 surfaces／2,331 markers失敗0、required selector 447件ブラウザPASS、独立リリース監査PASS、immutable／production E2E各1/1（GA collect204）、主要URL200、未知URL404、IDN path/query301。
+- Issue #17（候補カバレッジ）と#37（公式導線・計測）は未確認母集団・受注状態の観測が残るためIn progressを維持し、全国網羅完了とは宣言しない。
+
 ## 2026-09-12 Honda フリード CROSSTAR 8販売単位追加（本番反映済み）
 
 - Honda公式のフリード商品・タイプ一覧／タイプJSON・性能安全・渋滞時運転支援ページを突合し、CROSSTARの通常乗用8販売単位（e:HEV／ガソリン、FF・4WD、5・6人乗り）を追加。価格は292万8,200円〜360万2,500円（税込、2026年9月確認）。Honda SENSING（ACC・車線中央維持・渋滞時運転支援）をLevel 2相当とし、ステアリング保持・常時監視が必要なハンズオフ不可として表示。30周年特別仕様・福祉車両・AIRは今回の比較から分離し、注文可否は8単位とも`unknown`を維持。
