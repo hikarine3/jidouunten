@@ -4,14 +4,14 @@
 
 ## 最新の配信（2026-09-12 Suzuki スペーシア12販売単位追加）
 
-- exact app release commit: `未確定（QA後に記録）`
-- immutable: QA後に記録
+- exact app release commit: `18d708c`
+- immutable: https://0208588f.jidouunten.pages.dev
 - 本体: https://jidouunten.jp/
 - 内容: スペーシア／スペーシア カスタムのHYBRID G／X／X セーフティプラスパッケージ／GS／XS／XSターボを2WD・4WDの全12販売単位で追加。価格は153万100円〜219万3,400円（税込）。G／Xは車線逸脱抑制のLevel 1相当、セーフティプラス／カスタムはACC全車速追従・停止保持＋車線維持支援のLevel 2相当。同じモデル内で能力差を比較でき、全12単位の注文可否は未確認。
 - 公式根拠: [スペーシア グレード・価格](https://www.suzuki.co.jp/car/spacia/detail/)、[安全装備](https://www.suzuki.co.jp/car/spacia/safety/)、[主要装備・主要諸元](https://www.suzuki.co.jp/car/spacia/detail/pdf/detail.pdf)、[発売資料](https://www.suzuki.co.jp/release/a/2023/1109/)。購入相談・試乗・見積り・カタログ導線を追加。
-- SEO／公開面（予定）: 371 HTML、sitemap-0は366 URL、詳細365件、トップ／一覧ItemListは2ページ・728項目。GTM実IDは実IDビルドで各1件。
-- UI: Level 1に車線逸脱抑制を追加し、Level 2の車線中央維持と別能力としてチェックボックスAND絞り込みできるようにした。一覧のWikimedia Commons参考写真は従来どおり省スペースのWebPサムネイル。
-- QA: `npm test` 67/67（Vitest）＋Python16/16、価格365/365（現行364/364、exact349／range15／未確認1）、公式導線69モデル／67 URL／119 actions、画像3/3。release／structured／ブラウザQA／独立監査後にpush・deployする。
+- SEO／公開面: 371 HTML、sitemap-0は366 URL、詳細365件、トップ／一覧ItemListは2ページ・728項目。GTM実IDは各HTML 1件、テスト計測ID0件。
+- UI: Level 1に車線逸脱抑制を追加し、Level 2の車線中央維持と別能力としてチェックボックスAND絞り込みできるようにした。一覧のWikimedia Commons参考写真はWebPサムネイル（デスクトップ374×102px、モバイル330×88px、`loading=lazy`）で省スペース表示。
+- QA: `npm test` 67/67（Vitest）＋Python16/16、価格365/365（現行364/364、exact349／range15／未確認1）、公式導線69モデル／67 URL／119 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 502/502、公開HTML enum/source/accessedAt漏れ0、独立監査PASS、immutable／本体E2E各1/1（GA collect HTTP204）、主要URL200、IDN path/query301。
 - 直前の正常配信・ロールバック候補: https://c9ddc80f.jidouunten.pages.dev
 
 ## 最新の配信（2026-09-12 Toyota GRヤリス10販売単位追加）

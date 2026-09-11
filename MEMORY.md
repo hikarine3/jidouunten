@@ -2,11 +2,12 @@
 
 更新: 2026-09-12
 
-## 2026-09-12 Suzuki スペーシア12販売単位追加（QA・配信準備中）
+## 2026-09-12 Suzuki スペーシア12販売単位追加（本番反映済み）
 
 - スズキ公式のスペーシア／スペーシア カスタムのグレード・価格、安全装備、発売資料を突合し、HYBRID G／X／X セーフティプラスパッケージ、カスタム HYBRID GS／XS／XSターボの2WD・4WDを全12販売単位で追加。価格は153万100円〜219万3,400円（税込）、発売日は2023年11月22日。G／Xは車線逸脱抑制のLevel 1相当、セーフティプラス／カスタム8単位はACC全車速追従・停止保持＋車線維持支援のLevel 2相当。ハンドル保持・常時監視が必要で、ハンズオフ・自動車線変更は付与していない。注文可否は12単位とも`unknown`。
 - `lane_departure_prevention`（車線逸脱抑制）を能力定義へ追加し、Level 1の車線逸脱抑制とLevel 2の車線中央維持を一覧のANDチェックで分離。公式導線はスペーシア／スペーシア カスタムへ購入相談・試乗・見積り・カタログを同期。
-- QA予定: 365販売単位／364現行、371 HTML、sitemap-0 366 URL、詳細365件、ItemList 2ページ728項目、公式導線69モデル／67 URL／119 actions、registry 51 entities／502 surfaces／470 required selectors。
+- exact app `18d708c`、Production `https://jidouunten.jp/`、immutable `https://0208588f.jidouunten.pages.dev`、直前rollback `https://c9ddc80f.jidouunten.pages.dev`。Cloudflare Pages production/mainへ実IDで反映済み。
+- QA: 371 HTML、sitemap-0 366 URL、詳細365件、ItemList 2ページ728項目、公式導線69モデル／67 URL／119 actions、registry 51 entities／502 surfaces／470 required selectors closure、Vitest67/67、価格365/365（現行364/364、exact349／range15／未確認1）、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID release／structured PASS、公開HTML enum/source/accessedAt漏れ0、独立監査PASS、immutable／production E2E各1/1（GA collect HTTP204）、主要URL200、IDN path/query301。Wikimedia Commons参考写真は一覧でデスクトップ374×102px、モバイル330×88pxの`loading=lazy` WebPサムネイル。
 - 出典: [スペーシア グレード・価格](https://www.suzuki.co.jp/car/spacia/detail/)、[安全装備](https://www.suzuki.co.jp/car/spacia/safety/)、[主要装備・諸元](https://www.suzuki.co.jp/car/spacia/detail/pdf/detail.pdf)、[発売資料](https://www.suzuki.co.jp/release/a/2023/1109/)、[国土交通省 Level 1/2定義](https://www.mlit.go.jp/common/001343740.pdf)。
 
 ## 2026-09-12 Toyota GRヤリス10販売単位追加（本番反映済み）
