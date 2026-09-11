@@ -15,14 +15,14 @@
 
 | 項目 | 値 | 確認方法 |
 |---|---:|---|
-| sitemap掲載URL数 | 163 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外） |
-| うち車両詳細 | 158 | `src/data/vehicles.json` の販売単位レコード数 |
-| 掲載メーカー数 | 13 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai |
+| sitemap掲載URL数 | 170 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外） |
+| うち車両詳細 | 165 | `src/data/vehicles.json` の販売単位レコード数 |
+| 掲載メーカー数 | 14 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD |
 | 条件別（レベル・道路・ハンズオフ・価格帯）の静的URL | 0 | 絞り込みはquery paramのみ（`/cars/?level=2`） |
 | 機能名（プロパイロット2.0等）の静的URL | 0 | 該当ページなし |
 | 2台比較の静的URL | 0 | `/compare/?ids=a,b` のquery paramのみ |
 | 構造化データの型 | WebPage のみ | `src/layouts/Layout.astro` |
-| 公式アクションリンク | 43 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線を保持。検討用導線と注文可否は分離 |
+| 公式アクションリンク | 55 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線、BYD 4車種は試乗・販売店・カタログ導線を保持。検討用導線と注文可否は分離 |
 | Lighthouse production (mobile) | performance 1.00 / accessibility 1.00 | `.cache/lighthouse-production.json` |
 | KPI実測（表示・クリック・selector行動） | 未取得 | 公開初日のため観測期間0日 |
 
@@ -110,8 +110,8 @@ S1 検索表示回数
 
 | Issue | 支配する段 | 推定効果（中位・月間） | 実測で置き換える指標 |
 |---|---|---|---|
-| #17 販売単位の網羅 | S1の分母 | 車両詳細 158件を起点に、未掲載母集団と欠損理由を解決 | 掲載販売単位数・母集団カバー率 |
-| #19 条件別ページ生成 | S1 | indexable 163 URLを起点に、検索需要のある条件だけを追加 | GSC 表示回数/ページ |
+| #17 販売単位の網羅 | S1の分母 | 車両詳細 165件を起点に、未掲載母集団と欠損理由を解決 | 掲載販売単位数・母集団カバー率 |
+| #19 条件別ページ生成 | S1 | indexable 170 URLを起点に、検索需要のある条件だけを追加 | GSC 表示回数/ページ |
 | #20 構造化データ・メタ | S2 | CTR 3.0%→4.2%、同表示回数でクリック +300 | GSC CTR |
 | #22 機能名ページ | S1 | 表示 +8,400、指名検索の受け皿 | GSC クエリ別表示 |
 | #21 A vs B 比較ページ | S1・S5 | 表示 +4,800、比較開始率の高い流入 | 比較開始率（流入元別） |

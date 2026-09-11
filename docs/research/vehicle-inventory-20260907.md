@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 154 | `src/data/vehicles.json` の全レコード（現行153 + 過去1） |
-| 既定表示 | 153 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 165 | `src/data/vehicles.json` の全レコード（現行164 + 過去1） |
+| 既定表示 | 164 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -30,6 +30,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Lexus LM / 後発対策） | 2 | LM500h EXECUTIVE（4人）/ version L（6人）のAWD。Advanced Drive・LCA・ドライバーモニター・全車速追従ACCを標準装備として確認し、価格1,520万〜2,030万円、渋滞時0〜約40km/hの条件付きハンズオフを販売単位へ固定 |
 | 今回追加（Lexus UX300h / 後発対策） | 6 | Shining Essence / version L / F SPORTの2WD・AWD。全車速追従ACC・LTA・ドライバー異常時対応システム標準、価格521万〜575.7万円、ステアリング保持が必要なハンズオフ不可、2027年2月生産終了予定を販売単位へ固定 |
 | 今回追加（Toyota カローラ クロス / 後発対策） | 7 | Z / S / GR SPORT / Z“Adventure”の2WD・E-Four。価格298万1,000円〜407万7,700円、ACC・LTA・渋滞時支援・車線変更時の補助、ステアリング保持要求を販売単位へ固定 |
+| 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -439,3 +440,42 @@ LMと同じLexusでも、UX300hはハンズオフ不可・LCAなし・521万〜5
 | HDA2は高速道路で車間・速度・車線中央維持を支援し、ウインカー操作時に車線変更をアシスト | Hyundai Mobility Japan | https://www.hyundai.com/jp/ioniq5 | 2026-09-11 |
 
 4単位はスマートクルーズコントロール（縦方向）とHDA/LFA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。HDA/HDA2は高速道路の運転支援であり、ステアリング保持・前方監視・必要時の即時操作が必要なためhandsOffは`not_allowed`、driverMonitoringは`required`とした。日本公式で販売単位ごとの新車注文可否やHDAの速度数値を固定できないため、availabilityと速度範囲は`unknown`のまま保持し、価格だけで受注可能とは表示しない。
+
+## BYD DOLPHIN / ATTO 3 / SEAL / SEALION 6の根拠（後発対策トランシェ）
+
+確認日は2026-09-11。BYD Auto Japanの現行商品ページ、価格改定・発売発表、主要諸元／装備表、取扱説明書を突き合わせ、4車種7販売単位を登録した。価格は299万2,000円〜572万円（税込）。DOLPHINはBaseline／Long Range、SEALはRWD／AWD、SEALION 6はFWD／AWDを別販売単位とし、ATTO 3は単一グレードで保持した。発売・導入時期は「その販売単位が現在掲載している仕様として販売開始された日」に統一し、DOLPHIN Baseline／Long Rangeは2026年2月10日装備更新版、SEAL RWD／AWDは2025年10月30日更新モデル、SEALION 6は2025年12月1日国内販売開始として記録した。Baselineの初回新規設定（2025年4月1日）とLong Rangeの初回導入（2023年9月20日）は履歴根拠としてsourcesに保持する。すべて日本公式サイトへの掲載は確認できるが、販売単位ごとの新車注文可否・在庫は明文で固定できないため`availability=unknown`とした。
+
+| メーカー | モデル / 販売単位 | 価格（税込） | Level | 同じLevel 2内で比較できる差分 |
+|---|---|---:|---:|---|
+| BYD | DOLPHIN Baseline | 2,992,000円 | 2 | 2026-02-10装備更新版の販売開始（2025-04-01に新規設定）。Navigation Pilot（ACC・ELKA）0〜120km/h、LKA/LDP/LCA表記。手保持が必要でハンズオフ不可。 |
+| BYD | DOLPHIN Long Range | 3,740,000円 | 2 | 2026-02-10装備更新版の販売開始（2023-09-20に初回導入）。Baselineと同じ運転支援構成。航続距離グレード差と価格を分離。 |
+| BYD | ATTO 3 | 4,180,000円 | 2 | LKA/LCC/ELK/LCA表記。Navigation Pilot／ICC速度は公式資料間で120・130・135km/hが不一致のため上限を断定しない。 |
+| BYD | SEAL RWD | 4,950,000円 | 2 | 2025-10-30更新モデルの販売開始。ACC/LDP/ELKA/ICC、間接式ドライバーモニタリング。LCA・自動車線変更は確認できず、手保持が必要。 |
+| BYD | SEAL AWD | 5,720,000円 | 2 | 2025-10-30更新モデルの販売開始。RWDと同じ運転支援構成。駆動方式・価格差を分離。 |
+| BYD | SEALION 6 FWD | 3,982,000円 | 2 | 3R1V ADAS（ACC設定30〜150km/h・追従0〜150km/h、LDW/LDP/ELKA/ICC）。車線変更はBSD警告で自動変更ではない。 |
+| BYD | SEALION 6 AWD | 4,488,000円 | 2 | FWDと同じ3R1V ADAS構成。駆動方式・価格差を分離。 |
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| DOLPHINのBaseline 2,992,000円／Long Range 3,740,000円、Navigation Pilot（ACC・ELKA）0〜120km/h、現行2グレード | BYD Auto Japan | https://byd.co.jp/e-life/cars/dolphin/ | 2026-09-11 |
+| DOLPHIN Baseline／Long RangeのACC・LKA・LCA等の装備表記 | BYD Auto Japan | https://byd.co.jp/news/uploads/BYD_DOLPHIN_specification.pdf | 2026-09-11 |
+| DOLPHIN Navigation Pilotは自動運転ではなく、ステアリングから両手を離さないよう要求 | BYD Auto Japan | https://byd.co.jp/e-life/after_support/pdf/manual_DOLPHIN.pdf | 2026-09-11 |
+| DOLPHINの2023年9月20日日本発売、2グレード | BYD Auto Japan | https://byd.co.jp/news/2023_0920_146.html | 2026-09-11 |
+| DOLPHIN Baselineの2025年4月1日新規設定、Long Rangeの新価格 | BYD Auto Japan | https://byd.co.jp/e-life/news/2025_0401_1.html | 2026-09-11 |
+| DOLPHIN Baseline／Long Rangeの2026年2月10日装備アップデート・販売開始 | BYD Auto Japan | https://byd.co.jp/news/2026_0210_301.html | 2026-09-11 |
+| DOLPHIN／ATTO 3の車線変更支援はウインカー操作を合図とする公式説明 | BYD Auto Japan | https://byd.co.jp/e-life/safety/ | 2026-09-11 |
+| ATTO 3の4,180,000円、現行1グレード、Navigation Pilot（ACC・ELKA）0〜120km/h、LCA表記 | BYD Auto Japan | https://byd.co.jp/e-life/cars/atto3/ | 2026-09-11 |
+| ATTO 3カタログのLKA/LCC/ELK/LCA表記 | BYD Auto Japan | https://byd.co.jp/e-life/cars/pdf/BYD_ATTO3_catalog.pdf | 2026-09-11 |
+| ATTO 3取扱説明書のステアリング保持要求と135km/h記載、OTA告知の120→130km/h変更 | BYD Auto Japan | https://byd.co.jp/e-life/after_support/pdf/manual_ATTO3_fl-after.pdf | 2026-09-11 |
+| ATTO 3のICC作動上限を120km/hから130km/hへ変更するOTA告知 | BYD Auto Japan | https://byd.co.jp/e-life/after_support/ota_update/dolphin/ | 2026-09-11 |
+| ATTO 3の2023年1月31日日本発売 | BYD Auto Japan | https://byd.co.jp/news/2023_0131_105.html | 2026-09-11 |
+| SEAL RWD 4,950,000円／AWD 5,720,000円、ACC・試乗導線、現行2グレード | BYD Auto Japan | https://byd.co.jp/e-life/cars/seal/ | 2026-09-11 |
+| SEALのACC/LDP/ELKA/ICC/DAW等の標準装備 | BYD Auto Japan | https://byd.co.jp/e-life/cars/pdf/BYD_SEAL_catalog.pdf | 2026-09-11 |
+| SEALのICCは運転支援で手保持が必要、間接式ドライバーモニタリングシステム | BYD Auto Japan | https://byd.co.jp/e-life/after_support/pdf/manual_SEAL.pdf | 2026-09-11 |
+| SEALの2024年6月25日日本発売（初期モデル） | BYD Auto Japan | https://byd.co.jp/news/2024_0625_199.html | 2026-09-11 |
+| SEAL RWD／AWDの2025年10月30日更新モデル販売開始と価格 | BYD Auto Japan | https://byd.co.jp/e-life/news/2025_1021_1.html | 2026-09-11 |
+| SEALION 6 FWD 3,982,000円／AWD 4,488,000円、3R1V ADAS、ACC設定30〜150km/h・追従0〜150km/h | BYD Auto Japan | https://byd.co.jp/e-life/cars/sealion6/ | 2026-09-11 |
+| SEALION 6の2026年3月18日カタログ、ACC・LDW・LDP・ELKA・ICC・DAW、LKA/LCA表記なし | BYD Auto Japan | https://www.byd.com/material/byd-site/jp/lineup/sealion6/catalog/BYD_SEALION6_catalog_260318.pdf | 2026-09-11 |
+| SEALION 6の2025年12月1日国内販売開始、FWD／AWD価格 | BYD Auto Japan | https://byd.co.jp/e-life/news/2025_1201_1.html | 2026-09-11 |
+
+7単位はACC（縦方向）と車線維持・車線内支援（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。DOLPHINとATTO 3は公式装備表にLCAがあるため「車線変更支援」を付与するが、手保持・運転者監視が必要で自動車線変更完了やハンズオフを意味しない。SEALは間接式ドライバーモニタリングを`required`として保持する一方、カメラ式とは断定しない。SEALION 6はBSD警告まででLCAの根拠がないため、車線変更支援能力を付与していない。公式資料間で速度が食い違うATTO 3は`factStatus=conflicting`、その他は`verified`とし、根拠のない受注可否・在庫は表示しない。

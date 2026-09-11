@@ -1451,7 +1451,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Lexus","UX300h","LEVEL 2","日本向け157販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Lexus","UX300h","LEVEL 2","日本向け164販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Lexus","UX300h","LEVEL 2"]},
         {"url":"/cars/jp-lexus-ux-2026-ux300h-shining-essence-2wd/","locale":"ja","output_path":"dist/cars/jp-lexus-ux-2026-ux300h-shining-essence-2wd/index.html","markers":["Lexus","UX300h","Shining Essence” 2WD","5,210,000円","Level 2","ハンズオフ：不可","ステアリング"]},
         {"url":"/cars/jp-lexus-ux-2026-ux300h-version-l-awd/","locale":"ja","output_path":"dist/cars/jp-lexus-ux-2026-ux300h-version-l-awd/index.html","markers":["Lexus","UX300h","version L” AWD","5,757,000円","Level 2","ハンズオフ：不可"]},
@@ -1481,7 +1481,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","カローラ クロス","LEVEL 2","日本向け157販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","カローラ クロス","LEVEL 2","日本向け164販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","カローラ クロス","LEVEL 2"]},
         {"url":"/cars/jp-toyota-corolla-cross-2026-z-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-z-2wd/index.html","markers":["カローラ クロス","Z（2WD）","3,613,500円","Level 2","ハンズオフ：不可"]},
         {"url":"/cars/jp-toyota-corolla-cross-2026-z-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-z-e-four/index.html","markers":["カローラ クロス","Z（E-Four）","3,872,000円","Level 2","ハンズオフ：不可"]},
@@ -1523,6 +1523,90 @@
         {"url":"/cars/jp-hyundai-ioniq5-2025-voyage/","selector":"main","markers":["IONIQ 5","Voyage","5,236,000円","車線変更支援"]},
         {"url":"/cars/jp-hyundai-ioniq5-2025-lounge-awd/","selector":"main","markers":["IONIQ 5","Lounge AWD","6,138,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/compare/?ids=jp-hyundai-ioniq5-2025-voyage-l&ids=jp-hyundai-ioniq5-2025-lounge-awd","selector":"[data-compare-result]","markers":["IONIQ 5","Voyage L","Lounge AWD","4,994,000円","6,138,000円","車線変更支援"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
+    "vehicle:byd-dolphin-jp-2025": {
+      "entity_id": "vehicle:byd-dolphin-jp-2025",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+      "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","DOLPHIN","LEVEL 2","日本向け164販売単位"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["BYD","DOLPHIN","LEVEL 2"]},
+        {"url":"/cars/jp-byd-dolphin-baseline/","locale":"ja","output_path":"dist/cars/jp-byd-dolphin-baseline/index.html","markers":["DOLPHIN","Baseline","2,992,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-byd-dolphin-long-range/","locale":"ja","output_path":"dist/cars/jp-byd-dolphin-long-range/index.html","markers":["DOLPHIN","Long Range","3,740,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-byd-dolphin-baseline&ids=jp-byd-dolphin-long-range","locale":"ja","output_path":"dist/compare/index.html","markers":["DOLPHIN","Baseline","Long Range","2,992,000円","3,740,000円"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-byd-dolphin-baseline","jp-byd-dolphin-long-range"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-byd-dolphin-baseline\"])","markers":["BYD","DOLPHIN","Baseline"]},
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-byd-dolphin-long-range\"])","markers":["BYD","DOLPHIN","Long Range"]},
+        {"url":"/cars/jp-byd-dolphin-baseline/","selector":"main","markers":["DOLPHIN","Baseline","2,992,000円","Level 2","ハンズオフ：不可","試乗を予約する","販売店を探す","カタログを見る"]},
+        {"url":"/cars/jp-byd-dolphin-long-range/","selector":"main","markers":["DOLPHIN","Long Range","3,740,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-byd-dolphin-baseline&ids=jp-byd-dolphin-long-range","selector":"[data-compare-result]","markers":["DOLPHIN","Baseline","Long Range","2,992,000円","3,740,000円","車線変更支援"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
+    "vehicle:byd-atto3-jp-2025": {
+      "entity_id": "vehicle:byd-atto3-jp-2025",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+      "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","ATTO 3","LEVEL 2","日本向け164販売単位"]},
+        {"url":"/cars/jp-byd-atto3/","locale":"ja","output_path":"dist/cars/jp-byd-atto3/index.html","markers":["ATTO 3","4,180,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-byd-atto3&ids=jp-byd-dolphin-baseline","locale":"ja","output_path":"dist/compare/index.html","markers":["ATTO 3","DOLPHIN","4,180,000円","2,992,000円"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-byd-atto3"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-byd-atto3\"])","markers":["BYD","ATTO 3"]},
+        {"url":"/cars/jp-byd-atto3/","selector":"main","markers":["ATTO 3","4,180,000円","Level 2","ハンズオフ：不可","車線変更支援"]},
+        {"url":"/compare/?ids=jp-byd-atto3&ids=jp-byd-dolphin-baseline","selector":"[data-compare-result]","markers":["ATTO 3","DOLPHIN","4,180,000円","2,992,000円"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
+    "vehicle:byd-seal-jp-2025": {
+      "entity_id": "vehicle:byd-seal-jp-2025",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+      "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","SEAL","LEVEL 2","日本向け164販売単位"]},
+        {"url":"/cars/jp-byd-seal-rwd/","locale":"ja","output_path":"dist/cars/jp-byd-seal-rwd/index.html","markers":["SEAL","SEAL（RWD）","4,950,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-byd-seal-awd/","locale":"ja","output_path":"dist/cars/jp-byd-seal-awd/index.html","markers":["SEAL","SEAL AWD","5,720,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-byd-seal-rwd&ids=jp-byd-seal-awd","locale":"ja","output_path":"dist/compare/index.html","markers":["SEAL","SEAL（RWD）","SEAL AWD","4,950,000円","5,720,000円"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-byd-seal-rwd","jp-byd-seal-awd"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-byd-seal-rwd\"])","markers":["BYD","SEAL","SEAL（RWD）"]},
+        {"url":"/cars/jp-byd-seal-rwd/","selector":"main","markers":["SEAL","SEAL（RWD）","4,950,000円","Level 2","ハンズオフ：不可","運転者監視"]},
+        {"url":"/cars/jp-byd-seal-awd/","selector":"main","markers":["SEAL","SEAL AWD","5,720,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-byd-seal-rwd&ids=jp-byd-seal-awd","selector":"[data-compare-result]","markers":["SEAL","SEAL（RWD）","SEAL AWD","4,950,000円","5,720,000円"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
+    "vehicle:byd-sealion6-jp-2026": {
+      "entity_id": "vehicle:byd-sealion6-jp-2026",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+      "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","SEALION 6","LEVEL 2","日本向け164販売単位"]},
+        {"url":"/cars/jp-byd-sealion6-fwd/","locale":"ja","output_path":"dist/cars/jp-byd-sealion6-fwd/index.html","markers":["SEALION 6","SEALION 6（FWD）","3,982,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-byd-sealion6-awd/","locale":"ja","output_path":"dist/cars/jp-byd-sealion6-awd/index.html","markers":["SEALION 6","SEALION 6 AWD","4,488,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-byd-sealion6-fwd&ids=jp-byd-sealion6-awd","locale":"ja","output_path":"dist/compare/index.html","markers":["SEALION 6","SEALION 6（FWD）","SEALION 6 AWD","3,982,000円","4,488,000円"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-byd-sealion6-fwd","jp-byd-sealion6-awd"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-byd-sealion6-fwd\"])","markers":["BYD","SEALION 6","SEALION 6（FWD）"]},
+        {"url":"/cars/jp-byd-sealion6-fwd/","selector":"main","markers":["SEALION 6","SEALION 6（FWD）","3,982,000円","Level 2","ハンズオフ：不可","車線中央維持"]},
+        {"url":"/cars/jp-byd-sealion6-awd/","selector":"main","markers":["SEALION 6","SEALION 6 AWD","4,488,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-byd-sealion6-fwd&ids=jp-byd-sealion6-awd","selector":"[data-compare-result]","markers":["SEALION 6","SEALION 6（FWD）","SEALION 6 AWD","3,982,000円","4,488,000円"]}
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"

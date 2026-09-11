@@ -122,14 +122,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(158);
+    expect(vehicles).toHaveLength(165);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補157件は全件の公式金額を保持する', () => {
+  it('現行候補164件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(157);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(157);
+    expect(current).toHaveLength(164);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(164);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -139,7 +139,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(39);
+    expect(officialLinks).toHaveLength(43);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -167,7 +167,10 @@ describe('vehicle data contract and filters', () => {
       expect(actions.every(({ checkedAt }) => checkedAt === '2026-09-11')).toBe(true);
       expect(actions.every(({ url }) => url.startsWith('https://'))).toBe(true);
     }
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(43);
+    const bydActions = officialLinks.filter(({ maker }) => maker === 'BYD').flatMap((link) => link.actions ?? []);
+    expect(bydActions).toHaveLength(12);
+    expect(bydActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(55);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {
@@ -238,6 +241,30 @@ describe('vehicle data contract and filters', () => {
     expect(ioniq5.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.hyundai.com/jp/purchase/downFile/ioniq5' && source.accessedAt === '2026-09-11'))).toBe(true);
     expect(ioniq5.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.hyundai.com/jp/customer-service/notice/679' && source.supports.some((fact) => fact.includes('2025年モデル'))))).toBe(true);
     expect(officialLinkFor(ioniq5[0])?.actions?.map(({ kind }) => kind)).toEqual(['test_drive', 'estimate', 'catalog']);
+  });
+
+  it('BYDの4車種7販売単位は価格とLevel 2内の能力差を保持する', () => {
+    const byd = vehicles.filter((vehicle) => vehicle.maker === 'BYD');
+    expect(byd).toHaveLength(7);
+    expect(byd.every((vehicle) => vehicle.automationLevel === 2 && vehicle.currentCatalogListed && vehicle.availability === 'unknown' && vehicle.handsOff === 'not_allowed')).toBe(true);
+    expect(byd.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([2_992_000, 3_740_000, 3_982_000, 4_180_000, 4_488_000, 4_950_000, 5_720_000]);
+    const dolphin = byd.filter((vehicle) => vehicle.model === 'DOLPHIN');
+    expect(dolphin).toHaveLength(2);
+    expect(dolphin.every((vehicle) => vehicle.capabilities.includes('lane_change_support') && vehicle.odd.speedKph.max === 120 && vehicle.driverMonitoring === 'unknown')).toBe(true);
+    expect(dolphin.every((vehicle) => vehicle.salesUnitIntroducedAt === '2026-02-10')).toBe(true);
+    expect(dolphin.every((vehicle) => vehicle.catalogAsOf === '2026-02' && vehicle.featureVersion.includes('2026年2月装備更新'))).toBe(true);
+    const atto3 = byd.find((vehicle) => vehicle.model === 'ATTO 3');
+    expect(atto3?.factStatus).toBe('conflicting');
+    expect(atto3?.capabilities).toContain('lane_change_support');
+    const seal = byd.filter((vehicle) => vehicle.model === 'SEAL');
+    expect(seal).toHaveLength(2);
+    expect(seal.every((vehicle) => vehicle.salesUnitIntroducedAt === '2025-10-30' && vehicle.priceEffectiveAt === '2025-10-30')).toBe(true);
+    expect(seal.every((vehicle) => vehicle.capabilities.includes('driver_monitoring') && !vehicle.capabilities.includes('lane_change_support') && vehicle.driverMonitoring === 'required')).toBe(true);
+    const sealion6 = byd.filter((vehicle) => vehicle.model === 'SEALION 6');
+    expect(sealion6).toHaveLength(2);
+    expect(sealion6.every((vehicle) => vehicle.capabilities.includes('adaptive_cruise_control') && vehicle.capabilities.includes('lane_centering') && !vehicle.capabilities.includes('lane_change_support') && vehicle.odd.speedKph.max === 150)).toBe(true);
+    expect(byd.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'BYD Auto Japan' && source.accessedAt === '2026-09-11'))).toBe(true);
+    expect(officialLinks.filter(({ maker }) => maker === 'BYD')).toHaveLength(4);
   });
 
   it('Toyota アルファードは乗車定員・駆動方式別の4販売単位を価格付きで保持する', () => {
