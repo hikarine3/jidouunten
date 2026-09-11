@@ -1,5 +1,17 @@
 # 計測・検索登録
 
+## 2026-09-11 本番観測スナップショット（GA4／GSC／Bing）
+
+2026-09-11 20:50 JSTに、公開後の本番データをAPIのread-only取得で確認した。GA4は`hostName=jidouunten.jp`で絞り、localhost・Pages preview・2026-09-07の初期QA値を除外した。GA4は処理遅延があるため速報値であり、実利用の完了数を保証しない。
+
+- **GA4（2026-09-10〜2026-09-11、production hostname）**: active users 16、sessions 19、screen page views 43、event count 142。
+- **GA4で返った独自イベント**: `filter_results` 16（9/10:1、9/11:15）、`view_vehicle` 5（3、2）、`outbound_manufacturer` 1（0、1）。`select_level`、`compare_vehicles`、`outbound_purchase_action`はこの期間の本番hostname行として返らなかった。これは「観測行なし」であり、成約・比較完了が存在しないという意味ではない。
+- **GA4標準イベント**: `page_view` 43、`session_start` 19、`user_engagement` 28、`first_visit` 15、`scroll` 12、`form_start` 2、`click` 1（いずれも同期間・本番hostname）。
+- **GSC**: Search Analytics最終データ（2026-09-02〜09-08）はクエリ1行のみ。「自動運転 レベル」表示1、クリック0、CTR0%、平均掲載順位71.0。`https://jidouunten.jp/sitemap-index.xml` は2026-09-11に再送信し`isPending=true`、API表示上の前回取得は9/7、前回内容はsubmitted=255・indexed=0のままで、270 URLへの更新反映待ち。
+- **Bing Webmaster**: API取得時点は2026-09-07〜09-09（遅延を含む）。登録状態は`registered`／`verified=true`、取得行3、clicks=0、impressions=0、page_stats/query_statsは0行。Bingのsitemap処理・検索流入は非同期のため、未反映を需要ゼロとは解釈しない。
+
+このスナップショットは、公式導線を配置したことと、実際の比較・送客成果を分離するための基準である。次回は同じフィルター・同じ期間定義で差分を取り、比較開始→比較完了→公式アクションの欠測が処理遅延なのか導線課題なのかを切り分ける。
+
 ## 2026-09-10 購入・試乗アクションの計測確認
 
 `fa36371ac1125948ccb403eccd73de7c848f2b5e` のTesla Model 3 / Model Y詳細・比較に、一次情報で確認した「今すぐ注文」「試乗を予約する」導線を追加した。

@@ -25,7 +25,10 @@
 | 公式アクションリンク | 76 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線、BYD 4車種は試乗・販売店・カタログ導線、Mitsubishi OUTLANDER PHEVは商談・購入予約・試乗車・見積り・販売店・カタログ導線、Audi A5 / A5 Avantは見積り・正規ディーラー・試乗車導線、Toyotaアクア／カローラ／カローラ スポーツ／カローラ ツーリング／ヤリス／ヤリス クロスは公式見積り導線、Lexus LXは販売店・見積り・カタログ・価格表導線を保持。検討用導線と注文可否は分離 |
 | 新車注文可（一次情報で確認） | 21 | `src/data/vehicles.json` の販売単位。Tesla 6、Volvo EX30 3、Hyundai IONIQ 5 2、Mitsubishi OUTLANDER PHEV 9、日産アリアB6 1。注文・出荷根拠を確認した単位のみで、在庫・納期・契約成立は保証しない |
 | Lighthouse production (mobile) | performance 1.00 / accessibility 1.00 | `.cache/lighthouse-production.json` |
-| KPI実測（表示・クリック・selector行動） | 未取得 | 公開初日のため観測期間0日 |
+| KPI実測（GA4、本番hostname） | active users 16 / sessions 19 / pageviews 43（2026-09-10〜09-11） | GA4 Data API。`hostName=jidouunten.jp`で絞り、localhost・Pages preview・初期QAを除外。速報値 |
+| GA4独自イベント（同期間） | `filter_results` 16 / `view_vehicle` 5 / `outbound_manufacturer` 1 | `select_level`・`compare_vehicles`・`outbound_purchase_action`は返却行なし。0件断定ではなく処理遅延・実利用不足を切り分け中 |
+| GSC検索（最終 2026-09-02〜09-08） | 1 query / 1 impression / 0 click / 平均順位71.0 | 「自動運転 レベル」の1行。sitemapは9/11再送信、`isPending=true`、前回submitted255/indexed0 |
+| Bing Webmaster（2026-09-07〜09-09） | 登録・検証済み / 3 rows / 0 impressions / 0 clicks | 遅延を含むAPI取得。page/query statsは0 rows。検索反映は非同期 |
 
 **重要な含意**: 単一時点のLighthouse結果だけでは、改善余地や流入制約を特定できない。
 検索需要、コンテンツ品質、内部導線、index状況、絞り込み・比較行動をそれぞれ実測し、
