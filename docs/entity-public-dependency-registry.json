@@ -5,7 +5,8 @@
       "entity_type": "vehicle_catalog_entries",
       "source_of_truth": [
         "src/data/vehicles.json",
-        "docs/research/vehicle-inventory-20260907.md"
+        "docs/research/vehicle-inventory-20260907.md",
+        "src/data/vehicle-images.json"
       ],
       "generators": [
         "src/data/loader.ts",
@@ -889,7 +890,8 @@
       "source_of_truth": [
         "src/data/vehicles.json",
         "src/data/official-links.json",
-        "docs/research/vehicle-inventory-20260907.md"
+        "docs/research/vehicle-inventory-20260907.md",
+        "src/data/vehicle-images.json"
       ],
       "generators": [
         "src/data/loader.ts",

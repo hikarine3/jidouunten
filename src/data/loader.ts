@@ -78,6 +78,24 @@ export interface OfficialAction {
   checkedAt: string;
 }
 
+/**
+ * 車種識別用の参考写真。車両仕様の根拠とは分離し、画像ごとの帰属情報を必ず持つ。
+ */
+export interface VehicleImage {
+  maker: string;
+  model: string;
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  note: string;
+  sourceUrl: string;
+  author: string;
+  authorUrl: string;
+  license: string;
+  licenseUrl: string;
+}
+
 export interface Vehicle {
   id: string;
   market: string;
@@ -125,8 +143,16 @@ const officialLinkModules = import.meta.glob('./official-links.json', { eager: t
 const officialLinkRaw = Object.values(officialLinkModules)[0];
 export const officialLinks: OfficialLink[] = Array.isArray(officialLinkRaw) ? officialLinkRaw as OfficialLink[] : [];
 
+const vehicleImageModules = import.meta.glob('./vehicle-images.json', { eager: true, import: 'default' }) as Record<string, unknown>;
+const vehicleImageRaw = Object.values(vehicleImageModules)[0];
+export const vehicleImages: VehicleImage[] = Array.isArray(vehicleImageRaw) ? vehicleImageRaw as VehicleImage[] : [];
+
 export function officialLinkFor(vehicle: Pick<Vehicle, 'maker' | 'model'>) {
   return officialLinks.find((link) => link.maker === vehicle.maker && link.model === vehicle.model);
+}
+
+export function vehicleImageFor(vehicle: Pick<Vehicle, 'maker' | 'model'>) {
+  return vehicleImages.find((image) => image.maker === vehicle.maker && image.model === vehicle.model);
 }
 
 export const levelLabels: Record<number, string> = {

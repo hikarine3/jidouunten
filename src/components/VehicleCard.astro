@@ -1,7 +1,8 @@
 ---
 import type { Vehicle } from '../data/loader';
-import { availabilityLabels, canonicalRoadType, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleTiming, handsOffLabels, levelLabels, monitoringLabels, vehicleReferenceLabel } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleTiming, handsOffLabels, levelLabels, monitoringLabels, vehicleImageFor, vehicleReferenceLabel } from '../data/loader';
 const { vehicle, selectable = false, checked = false } = Astro.props as { vehicle: Vehicle; selectable?: boolean; checked?: boolean };
+const image = vehicleImageFor(vehicle);
 const capabilityPriority = ['hands_off_highway', 'lane_change_support', 'traffic_jam_pilot', 'traffic_jam_assist', 'driver_monitoring', 'adaptive_cruise_control', 'lane_centering'];
 const visibleCapabilities = [...vehicle.capabilities]
   .sort((a, b) => capabilityPriority.indexOf(a) - capabilityPriority.indexOf(b))
@@ -9,6 +10,7 @@ const visibleCapabilities = [...vehicle.capabilities]
   .map(capabilityDefinition);
 ---
 <article class="vehicle-card">
+  {image && <figure class="vehicle-card-image"><img src={image.src} width={image.width} height={image.height} loading="lazy" decoding="async" alt={image.alt} /><figcaption><a href={image.sourceUrl} target="_blank" rel="noopener noreferrer">写真：Wikimedia Commons</a> / {image.author} · {image.license}</figcaption></figure>}
   <div class="vehicle-card-body">
     <div class:list={['vehicle-level-tag', vehicle.automationLevel >= 3 ? 'is-automated' : 'is-assistance']}>LEVEL {vehicle.automationLevel}<span>{levelLabels[vehicle.automationLevel]}</span></div>
     <h3><a href={`/cars/${vehicle.id}/`}>{vehicle.maker} {vehicle.model}</a></h3>

@@ -1,0 +1,44 @@
+[
+  {
+    "maker": "Toyota",
+    "model": "プリウス",
+    "src": "/vehicles/toyota-prius.webp",
+    "width": 1200,
+    "height": 552,
+    "alt": "Toyota プリウス（車種識別用の参考写真）",
+    "note": "2023年型プリウスZ HEVの写真。掲載グレード・年式と異なる場合があります。",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:2023_Toyota_Prius_Z_HEV.jpg",
+    "author": "TTTNIS",
+    "authorUrl": "https://commons.wikimedia.org/wiki/User:TTTNIS",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.ja"
+  },
+  {
+    "maker": "Tesla",
+    "model": "Model 3",
+    "src": "/vehicles/tesla-model-3.webp",
+    "width": 1200,
+    "height": 900,
+    "alt": "Tesla Model 3（車種識別用の参考写真）",
+    "note": "Model 3の参考写真。掲載グレード・年式と異なる場合があります。",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tesla_Model_3_Front_View.jpg",
+    "author": "Ominae",
+    "authorUrl": "https://commons.wikimedia.org/wiki/User:Ominae",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.ja"
+  },
+  {
+    "maker": "Tesla",
+    "model": "Model Y",
+    "src": "/vehicles/tesla-model-y.webp",
+    "width": 1200,
+    "height": 900,
+    "alt": "Tesla Model Y（車種識別用の参考写真）",
+    "note": "Model Yの参考写真。掲載グレード・年式と異なる場合があります。",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tesla_Model_Y.jpg",
+    "author": "Lekhaki",
+    "authorUrl": "https://commons.wikimedia.org/wiki/User:Lekhaki",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/deed.ja"
+  }
+]

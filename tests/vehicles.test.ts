@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleItemListStructuredData, vehicleMatchesPriceBand, vehiclePriceMin, vehiclePublicUrl, vehicleReferenceLabel, vehicleReferenceTotal, vehicleStructuredData, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleImageFor, vehicleImages, vehicleItemListStructuredData, vehicleMatchesPriceBand, vehiclePriceMin, vehiclePublicUrl, vehicleReferenceLabel, vehicleReferenceTotal, vehicleStructuredData, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -64,6 +64,14 @@ describe('vehicle data contract and filters', () => {
     expect(itemList.itemListElement).toHaveLength(visible.length);
     expect(itemList.numberOfItems).toBe(visible.length);
     expect(itemList.itemListElement).toEqual(visible.map((vehicle, index) => ({ '@type': 'ListItem', position: index + 1, name: `${vehicle.maker} ${vehicle.model} ${vehicle.grade}`, url: vehiclePublicUrl(vehicle.id) })));
+  });
+
+  it('車種識別写真はモデル単位で帰属情報を持ち、未登録車は従来表示を維持する', () => {
+    expect(vehicleImages).toHaveLength(3);
+    expect(vehicleImageFor({ maker: 'Toyota', model: 'プリウス' })).toMatchObject({ license: 'CC0 1.0', src: '/vehicles/toyota-prius.webp' });
+    expect(vehicleImageFor({ maker: 'Tesla', model: 'Model 3' })).toMatchObject({ license: 'CC BY-SA 4.0', src: '/vehicles/tesla-model-3.webp' });
+    expect(vehicleImageFor({ maker: 'Honda', model: 'ACCORD' })).toBeUndefined();
+    expect(vehicleImages.every((image) => image.sourceUrl.startsWith('https://commons.wikimedia.org/wiki/File:') && image.licenseUrl.startsWith('https://creativecommons.org/'))).toBe(true);
   });
 
   it('価格が安い順は車両本体の最小額を使い、未確認を末尾に置く', () => {
