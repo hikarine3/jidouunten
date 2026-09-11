@@ -8,7 +8,7 @@
 - immutable: https://6a29ce8d.jidouunten.pages.dev
 - 本体: https://jidouunten.jp/
 - 内容: Honda ステップ ワゴンの通常乗用10販売単位（AIR／SPADA／SPADA PREMIUM LINE、FF・4WD、e:HEVを含む）を追加。価格は334万8,400円〜426万8,000円（税込、2026年9月確認）。Honda SENSING（ACC・車線中央維持・渋滞時運転支援）をLevel 2相当、常時監視・ステアリング保持が必要なハンズオフ不可として登録し、30周年特別仕様・福祉車両・BLACK EDITIONは通常カタログから分離した。公式掲載は受注保証ではないため、注文可否は10単位とも`unknown`を維持。
-- UI: Wikimedia Commons参考写真は一覧で`clamp(88px, 8vw, 118px)`の`object-fit: cover`サムネイルへ縮小。実ブラウザはデスクトップ374×102px、モバイル360×88px、`loading="lazy"`。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホストWebPは維持。
+- UI: Wikimedia Commons参考写真は一覧で`clamp(88px, 8vw, 118px)`の`object-fit: cover`サムネイルへ縮小。実ブラウザはデスクトップ374×102px、モバイルはviewport 360pxでカード330×88px、`loading="lazy"`。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホストWebPは維持。
 - SEO／公開面: 321 HTML、車両URL316（詳細315＋トップ）、詳細315件、トップ／一覧ItemListは2ページ・628項目。GTM実IDは321 HTMLへ各1件、テストID0件。
 - QA: `npm test` Vitest61/61・Python16/16、価格315/315（現行314/314、exact299／range15／未確認1）、公式導線63モデル／61 URL／95 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build321、release／structured PASS（Breadcrumb321／Car315／ItemList628）、registry45 entities／445 surfaces／2,167 markers失敗0、独立リリース監査PASS、immutable／本体E2E各1/1（GA collect HTTP204）。
 - 本番smoke: ステップ ワゴン詳細、比較、sitemap-0はHTTP200、未知URLは404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）の`/cars/?level=2&sort=price_asc`は本体へ301（query維持）。画像WebPはHTTP200（`content-type: image/webp`、163,592 bytes）。
