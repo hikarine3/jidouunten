@@ -2256,6 +2256,295 @@
   ],
   "historical_markers": [],
   "refresh_entrypoint": "npm run build"
+    },
+    "vehicle:mercedes-jp-glc-cclass-2026": {
+  "entity_id": "vehicle:mercedes-jp-glc-cclass-2026",
+  "entity_type": "vehicle_catalog_entries",
+  "source_of_truth": [
+    "src/data/vehicles.json",
+    "src/data/official-links.json",
+    "docs/research/vehicle-inventory-20260907.md"
+  ],
+  "generators": [
+    "src/data/loader.ts",
+    "src/components/VehicleList.astro",
+    "src/components/VehicleCard.astro",
+    "src/pages/cars/[id].astro",
+    "src/pages/compare/index.astro",
+    "@astrojs/sitemap"
+  ],
+  "surfaces": [
+    {
+      "url": "/",
+      "locale": "ja",
+      "output_path": "dist/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "C-Class Sedan",
+        "LEVEL 2",
+        "275販売単位"
+      ]
+    },
+    {
+      "url": "/cars/",
+      "locale": "ja",
+      "output_path": "dist/cars/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "C-Class Sedan",
+        "LEVEL 2"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-glc-2026-220d-core/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-glc-2026-220d-core/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "GLC 220 d 4MATIC Core（ISG）",
+        "8,290,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-glc-2026-220d-sports/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-glc-2026-220d-sports/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "GLC 220 d 4MATIC Sports（ISG）",
+        "9,200,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-glc-2026-350e-sports-edition-star/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-glc-2026-350e-sports-edition-star/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "GLC 350 e 4MATIC Sports Edition Star",
+        "10,360,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-glc-2026-amg-43/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-glc-2026-amg-43/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "Mercedes-AMG GLC 43 4MATIC",
+        "12,320,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-glc-2026-amg-63-s-e-performance/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-glc-2026-amg-63-s-e-performance/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "Mercedes-AMG GLC 63 S E PERFORMANCE",
+        "18,440,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-c-class-sedan-2026-c200-sports/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-c-class-sedan-2026-c200-sports/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "C-Class Sedan",
+        "C 200 Sports（ISG）",
+        "7,440,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-c-class-sedan-2026-c200-luxury/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-c-class-sedan-2026-c200-luxury/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "C-Class Sedan",
+        "C 200 Luxury（ISG）",
+        "9,150,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-c-class-sedan-2026-c220d-sports/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-c-class-sedan-2026-c220d-sports/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "C-Class Sedan",
+        "C 220 d Sports（ISG）",
+        "7,640,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-c-class-sedan-2026-c220d-luxury/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-c-class-sedan-2026-c220d-luxury/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "C-Class Sedan",
+        "C 220 d Luxury（ISG）",
+        "9,310,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-c-class-sedan-2026-c350e-sports/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-c-class-sedan-2026-c350e-sports/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "C-Class Sedan",
+        "C 350 e Sports",
+        "10,450,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-c-class-sedan-2026-amg-c43-4matic/",
+      "locale": "ja",
+      "output_path": "dist/cars/jp-mercedes-c-class-sedan-2026-amg-c43-4matic/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "C-Class Sedan",
+        "Mercedes-AMG C 43 4MATIC",
+        "13,090,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/compare/",
+      "locale": "ja",
+      "output_path": "dist/compare/index.html",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "C-Class Sedan",
+        "Level 2"
+      ]
+    },
+    {
+      "url": "/sitemap-0.xml",
+      "locale": "ja",
+      "output_path": "dist/sitemap-0.xml",
+      "markers": [
+        "jp-mercedes-glc-2026-220d-core",
+        "jp-mercedes-glc-2026-220d-sports",
+        "jp-mercedes-glc-2026-350e-sports-edition-star",
+        "jp-mercedes-glc-2026-amg-43",
+        "jp-mercedes-glc-2026-amg-63-s-e-performance",
+        "jp-mercedes-c-class-sedan-2026-c200-sports",
+        "jp-mercedes-c-class-sedan-2026-c200-luxury",
+        "jp-mercedes-c-class-sedan-2026-c220d-sports",
+        "jp-mercedes-c-class-sedan-2026-c220d-luxury",
+        "jp-mercedes-c-class-sedan-2026-c350e-sports",
+        "jp-mercedes-c-class-sedan-2026-amg-c43-4matic"
+      ]
+    }
+  ],
+  "required_render_selectors": [
+    {
+      "url": "/",
+      "selector": "[data-vehicle-shell]:has(input[value=\"jp-mercedes-glc-2026-220d-core\"])",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "GLC 220 d 4MATIC Core（ISG）",
+        "約829万円",
+        "LEVEL 2",
+        "ハンズオフ：不可"
+      ]
+    },
+    {
+      "url": "/",
+      "selector": "[data-vehicle-shell]:has(input[value=\"jp-mercedes-c-class-sedan-2026-c200-sports\"])",
+      "markers": [
+        "Mercedes-Benz",
+        "C-Class Sedan",
+        "C 200 Sports（ISG）",
+        "約744万円",
+        "LEVEL 2",
+        "ハンズオフ：不可"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-glc-2026-220d-core/",
+      "selector": "main",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "GLC 220 d 4MATIC Core（ISG）",
+        "8,290,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/cars/jp-mercedes-c-class-sedan-2026-c200-sports/",
+      "selector": "main",
+      "markers": [
+        "Mercedes-Benz",
+        "C-Class Sedan",
+        "C 200 Sports（ISG）",
+        "7,440,000円",
+        "Level 2",
+        "ハンズオフ：不可",
+        "注文可否：未確認"
+      ]
+    },
+    {
+      "url": "/compare/",
+      "selector": "[data-compare-result]",
+      "markers": [
+        "Mercedes-Benz",
+        "GLC",
+        "C-Class Sedan",
+        "Level 2"
+      ]
+    }
+  ],
+  "historical_markers": [],
+  "refresh_entrypoint": "npm run build"
     }
   }
 }

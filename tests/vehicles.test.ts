@@ -152,14 +152,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(265);
+    expect(vehicles).toHaveLength(276);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補264件は全件の公式金額を保持する', () => {
+  it('現行候補275件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(264);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(264);
+    expect(current).toHaveLength(275);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(275);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -200,8 +200,22 @@ describe('vehicle data contract and filters', () => {
     expect(officialLinkFor(corollaTouring[0])?.actions?.map(({ kind }) => kind)).toEqual(['estimate']);
   });
 
+  it('Mercedes-Benz GLC／C-Class SedanはMP202602価格表・装備表に基づく11販売単位を保持する', () => {
+    const mercedes = vehicles.filter((vehicle) => vehicle.maker === 'Mercedes-Benz');
+    expect(mercedes).toHaveLength(11);
+    expect(mercedes.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      7_440_000, 7_640_000, 8_290_000, 9_150_000, 9_200_000, 9_310_000, 10_360_000, 10_450_000, 12_320_000, 13_090_000, 18_440_000,
+    ]);
+    expect(mercedes.every((vehicle) => vehicle.currentCatalogListed && vehicle.catalogAsOf === '2026-09' && vehicle.priceEffectiveAt === null && vehicle.price?.basis === 'price_list' && vehicle.price?.taxIncluded === 'included' && vehicle.salesUnitIntroducedAt === null)).toBe(true);
+    expect(mercedes.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(mercedes.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering')).toBe(true);
+    expect(mercedes.every((vehicle) => vehicle.sources.some((source) => source.url.includes('DI_MP202602') && source.supports.some((fact) => fact.includes('販売単位・標準装備'))))).toBe(true);
+    expect(officialLinkFor(mercedes.find((vehicle) => vehicle.model === 'GLC')!)?.url).toBe('https://www.mercedes-benz.co.jp/passengercars/models/suv/glc/overview.html');
+    expect(officialLinkFor(mercedes.find((vehicle) => vehicle.model === 'C-Class Sedan')!)?.url).toBe('https://www.mercedes-benz.co.jp/passengercars/models/saloon/c-class/overview.html');
+  });
+
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(56);
+    expect(officialLinks).toHaveLength(58);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');

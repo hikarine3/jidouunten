@@ -8,8 +8,9 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 265 | `src/data/vehicles.json` の全レコード（現行264 + 過去1） |
-| 既定表示 | 264 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 276 | `src/data/vehicles.json` の全レコード（現行275 + 過去1） |
+| 既定表示 | 275 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -42,6 +43,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Mitsubishi / 後発対策） | 9 | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M × 5・7人乗り。価格536万9,100円〜690万1,400円、MI-PILOT（全車速ACC・LKA）とLCAの警告・支援、ハンドル保持、公式の商談・購入予約導線を販売単位へ固定 |
 | 今回追加（Audi / 後発対策） | 6 | A5 / A5 AvantのTFSI 110kW、TFSI quattro 150kW、TDI quattro 150kW。2026年4月価格表の617万〜760万円、アダプティブクルーズアシストプラス・レーンガイダンス・レーンチェンジアシスト、常時監視とステアリング保持を販売単位へ固定 |
 | 今回追加（Toyota カローラ スポーツ／ツーリング） | 9 | カローラ スポーツ G“Z” / G / G“X” 2WDの3単位、カローラ ツーリング W×B / G / Xの2WD・E-Four 6単位。価格244万7,500円〜339万3,500円、全車速追従レーダークルーズコントロール・LTA・ステアリング保持を公式グレード／安全性能／カタログ資料から固定。特別仕様車3単位は販売終了時期の確認待ちで保留 |
+| 今回追加（Mercedes-Benz GLC／C-Class Sedan） | 11 | GLC 5単位、C-Class Sedan 6単位。MP202602価格表の744万〜1,844万円、アクティブディスタンスアシスト・アクティブステアリングアシスト・レーンキーピング・自動再発進の標準装備を確認。Level 2相当・ステアリング保持・注文可否未確認として掲載 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -711,3 +713,32 @@ Lexus公式の現行価格・パッケージ、コンフィギュレーター、
 | 主要装備一覧 | Lexus | https://lexus.jp/models/lx/pdf/equipmentlist.pdf | 2026-09-11 / 200 |
 | 主要諸元 | Lexus | https://lexus.jp/models/lx/pdf/detail.pdf | 2026-09-11 / 200 |
 | 価格表 | Lexus | https://lexus.jp/models/lx/pdf/pricelist.pdf | 2026-09-11 / 200 |
+
+## 2026-09-11 Mercedes-Benz GLC／C-Class Sedan追加トランシェ
+
+Mercedes-Benz Japanの2026年9月価格表、現行モデルページ、MP202602のData Information装備表、安全ページを突合し、GLC 5販売単位とC-Class Sedan 6販売単位を登録した。価格は税込744万円〜1,844万円。アクティブディスタンスアシスト・ディストロニック（縦方向）とアクティブステアリングアシスト（横方向）が標準装備で、国土交通省の定義へ照合してサイト上はLevel 2相当とした。ステアリングに手を添え、道路・交通を常時監視する必要があるためハンズオフ不可。モデルページ掲載と購入相談導線は販売状態の根拠と分け、個別の新車注文可否・在庫・納期は全11単位で`unknown`を維持する。
+
+| モデル | 販売単位 | 価格（税込） | 同じLevel 2内の比較差分 |
+|---|---|---:|---|
+| GLC | 220 d 4MATIC Core（ISG） | 8,290,000円 | エントリーのディーゼルSUV |
+| GLC | 220 d 4MATIC Sports（ISG） | 9,200,000円 | Coreとの装備・価格差 |
+| GLC | 350 e 4MATIC Sports Edition Star | 10,360,000円 | PHEVパワートレーン差 |
+| GLC | Mercedes-AMG GLC 43 4MATIC | 12,320,000円 | AMGグレード差 |
+| GLC | Mercedes-AMG GLC 63 S E PERFORMANCE | 18,440,000円 | AMG最上位・価格差 |
+| C-Class Sedan | C 200 Sports（ISG） | 7,440,000円 | セダンの価格下限 |
+| C-Class Sedan | C 200 Luxury（ISG） | 9,150,000円 | Luxury装備・価格差 |
+| C-Class Sedan | C 220 d Sports（ISG） | 7,640,000円 | ディーゼルのSports差 |
+| C-Class Sedan | C 220 d Luxury（ISG） | 9,310,000円 | ディーゼルのLuxury差 |
+| C-Class Sedan | C 350 e Sports | 10,450,000円 | PHEVパワートレーン差 |
+| C-Class Sedan | Mercedes-AMG C 43 4MATIC | 13,090,000円 | AMGグレード差 |
+
+| 対象事実 | 発行元 | URL | 確認日 / HTTP |
+|---|---|---|---|
+| GLC／C-Class Sedanの2026年9月価格表と税込価格 | Mercedes-Benz Japan | https://www.mercedes-benz.co.jp/passengercars/cars-guide/price-list.html | 2026-09-11 / 200 |
+| GLC現行MP202602、購入相談・オンラインショールーム | Mercedes-Benz Japan | https://www.mercedes-benz.co.jp/passengercars/models/suv/glc/overview.html | 2026-09-11 / 200 |
+| C-Class Sedan現行MP202602、ラインアップ | Mercedes-Benz Japan | https://www.mercedes-benz.co.jp/passengercars/models/saloon/c-class/overview.html | 2026-09-11 / 200 |
+| GLC販売単位・標準装備（ACC／アクティブステアリング／レーンキーピング／自動再発進） | Mercedes-Benz Japan | https://www.mercedes-benz.co.jp/content/dam/japan/passengercars/Model/catalog/glc_suv/GLC_DI_MP202602_260330.pdf | 2026-09-11 / 200 |
+| C-Class Sedan販売単位・標準装備（ACC／アクティブステアリング／レーンキーピング／自動再発進） | Mercedes-Benz Japan | https://www.mercedes-benz.co.jp/content/dam/japan/passengercars/Model/catalog/c_class_sedan/C-Class_Sedan_DI_MP202602_260423.pdf | 2026-09-11 / 200 |
+| ステアリング保持、停止後30秒以内の自動追従再発進、運転者監視 | Mercedes-Benz Japan | https://www.mercedes-benz.co.jp/passengercars/campaigns/safety-innovation.html | 2026-09-11 / 200 |
+
+価格表の掲載月・MP番号は保持するが、販売単位の正確な発売・注文開始日は公式資料で確定できないため`salesUnitIntroducedAt=null`とした。キャンペーン対象外は販売終了の根拠とみなさず、受注可能性を推測表示しない。

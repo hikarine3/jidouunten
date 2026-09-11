@@ -15,14 +15,14 @@
 
 | 項目 | 値 | 確認方法 |
 |---|---:|---|
-| sitemap掲載URL数 | 270 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外） |
-| うち車両詳細 | 265 | `src/data/vehicles.json` の販売単位レコード数 |
-| 掲載メーカー数 | 17 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi |
+| sitemap掲載URL数 | 281 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外、Mercedes追加後の想定値） |
+| うち車両詳細 | 276 | `src/data/vehicles.json` の販売単位レコード数 |
+| 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 条件別（レベル・道路・ハンズオフ・価格帯）の静的URL | 0 | 絞り込みはquery paramのみ（`/cars/?level=2`） |
 | 機能名（プロパイロット2.0等）の静的URL | 0 | 該当ページなし |
 | 2台比較の静的URL | 0 | `/compare/?ids=a,b` のquery paramのみ |
-| 構造化データの型 | 全271ページ: WebSite + WebPage + BreadcrumbList（一覧2ページはItemList）／車両詳細265ページ: Product + Car + BreadcrumbList | `src/layouts/Layout.astro` と `src/pages/cars/[id].astro` のJSON-LD `@graph` |
-| 公式アクションリンク | 76 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線、BYD 4車種は試乗・販売店・カタログ導線、Mitsubishi OUTLANDER PHEVは商談・購入予約・試乗車・見積り・販売店・カタログ導線、Audi A5 / A5 Avantは見積り・正規ディーラー・試乗車導線、Toyotaアクア／カローラ／カローラ スポーツ／カローラ ツーリング／ヤリス／ヤリス クロスは公式見積り導線、Lexus LXは販売店・見積り・カタログ・価格表導線を保持。検討用導線と注文可否は分離 |
+| 構造化データの型 | 全282ページ想定: WebSite + WebPage + BreadcrumbList（一覧2ページはItemList）／車両詳細276ページ: Product + Car + BreadcrumbList | `src/layouts/Layout.astro` と `src/pages/cars/[id].astro` のJSON-LD `@graph` |
+| 公式アクションリンク | 76 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線、BYD 4車種は試乗・販売店・カタログ導線、Mitsubishi OUTLANDER PHEVは商談・購入予約・試乗車・見積り・販売店・カタログ導線、Audi A5 / A5 Avantは見積り・正規ディーラー・試乗車導線、Toyotaアクア／カローラ／カローラ スポーツ／カローラ ツーリング／ヤリス／ヤリス クロスは公式見積り導線、Lexus LXは販売店・見積り・カタログ・価格表導線を保持。Mercedes-Benz GLC／C-Class Sedanは現行モデルページのみを保持し、注文可否と分離。検討用導線と注文可否は分離 |
 | 新車注文可（一次情報で確認） | 21 | `src/data/vehicles.json` の販売単位。Tesla 6、Volvo EX30 3、Hyundai IONIQ 5 2、Mitsubishi OUTLANDER PHEV 9、日産アリアB6 1。注文・出荷根拠を確認した単位のみで、在庫・納期・契約成立は保証しない |
 | Lighthouse production (mobile) | performance 1.00 / accessibility 1.00 | `.cache/lighthouse-production.json` |
 | KPI実測（GA4、本番hostname） | active users 16 / sessions 19 / pageviews 43（2026-09-10〜09-11） | GA4 Data API。`hostName=jidouunten.jp`で絞り、localhost・Pages preview・初期QAを除外。速報値 |
@@ -85,7 +85,7 @@ S1 検索表示回数
 
 ## 4. シナリオ（12か月後・月間）
 
-構成は「#17で公開済み販売単位を継続拡大」を前提とする。現時点の詳細ページは265件だが、未確認候補群を含む国内全候補の網羅率は未確定である。
+構成は「#17で公開済み販売単位を継続拡大」を前提とする。現時点の詳細ページは276件だが、未確認候補群を含む国内全候補の網羅率は未確定である。
 
 | 構成 | URL数 | 表示/URL | 表示回数 |
 |---|---:|---:|---:|
@@ -114,7 +114,7 @@ S1 検索表示回数
 
 | Issue | 支配する段 | 推定効果（中位・月間） | 実測で置き換える指標 |
 |---|---|---|---|
-| #17 販売単位の網羅 | S1の分母 | 車両詳細 265件を起点に、未掲載母集団と欠損理由を解決 | 掲載販売単位数・母集団カバー率 |
+| #17 販売単位の網羅 | S1の分母 | 車両詳細 276件を起点に、未掲載母集団と欠損理由を解決 | 掲載販売単位数・母集団カバー率 |
 | #19 条件別ページ生成 | S1 | indexable 179 URLを起点に、検索需要のある条件だけを追加 | GSC 表示回数/ページ |
 | #20 構造化データ・メタ | S2 | CTR 3.0%→4.2%、同表示回数でクリック +300 | GSC CTR |
 | #22 機能名ページ | S1 | 表示 +8,400、指名検索の受け皿 | GSC クエリ別表示 |
