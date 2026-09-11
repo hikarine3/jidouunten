@@ -2,6 +2,14 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 Mitsubishi OUTLANDER PHEV追加（実装・本番反映済み）
+
+- Mitsubishi Motors公式の2026年6月改良後ラインアップから、BLACK Edition／P Executive Package／P／G／M、5・7人乗りを9販売単位として追加。価格は536万9,100円〜690万1,400円（税込）。全車Level 2のMI-PILOT（ACC＋車線維持支援）として、グレード・駆動・定員・価格で比較できる。
+- LCAは死角の車両への注意喚起・衝突回避支援であり自動車線変更ではないため、`lane_change_support`へ分類していない。ステアリング保持が必要で、ドライバーモニター作動は未確認。購入導線は公式の9グレード選択入口（購入予約）だが、在庫・納期・契約確定は販売店確認と明記する。
+- exact app `c367aa4`、Production `https://jidouunten.jp/`、immutable `https://2897334d.jidouunten.pages.dev`。現行173／全174販売単位、公式導線44モデル／60 actions、sitemap-0は179 URL。
+- QA: Vitest44/44、価格174/174（現行173/173）、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build180、ローカル・immutable・本番E2E各1/1、公開面依存レジストリ640/640、独立価値監査PASS。主要URL HTTP200、IDN path/query 301を確認。
+- 根拠は[三菱アウトランダーPHEV公式](https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/)、[購入予約（9グレード選択）](https://try.mitsubishi-motors.co.jp/olm/EGP0002.do?model=274&skp=1)。
+
 ## 2026-09-11 Hyundai IONIQ 5追加（実装・本番反映済み）
 
 - Hyundai Mobility Japanの現行価格ページ・2026年6月公式カタログ・2025年モデル告知から、IONIQ 5のVoyage L／Voyage／Lounge／Lounge AWDを4販売単位として追加。価格は499万4,000円〜613万8,000円（税込）。Voyage LはHDA、他3単位はHDA2（車線変更アシスト付）として、同じLevel 2内の車線変更支援の差を一覧のチェックボックスAND・詳細・比較で確認できる。

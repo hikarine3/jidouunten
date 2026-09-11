@@ -4,6 +4,13 @@
 
 ## 最新の配信（2026-09-11）
 
+- exact app: `c367aa4`（Mitsubishi OUTLANDER PHEVの現行9販売単位を追加）
+- immutable: https://2897334d.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 三菱アウトランダーPHEVのBLACK Edition／P Executive Package／P／G／Mを、5・7人乗りと価格差を含む9販売単位で追加。全車Level 2のMI-PILOT（ACC＋車線維持支援）として比較できる。LCAは車線変更支援ではなく死角の車両への注意喚起・衝突回避支援のため、車線変更支援タグには含めない。ステアリング保持が必要で、ドライバーモニター作動は未確認。購入導線は公式の9グレード選択入口であり、在庫・納期・契約確定を保証しない。
+- QA: Vitest44/44、価格174/174（現行173/173）、公式導線44モデル/60 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build180、ローカル・immutable・production E2E各1/1、公開面依存レジストリ640/640、独立価値監査PASS
+- immutable／本体でHTTP 200を確認（`/`、`/cars/`、Mitsubishi詳細・比較、`/sitemap-index.xml`、`/sitemap-0.xml`、`/robots.txt`）。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301で維持される。`sitemap-0.xml`は179 URL。直前rollback: https://d45dbac4.jidouunten.pages.dev
+
 - exact app: `681d6939540642953e88af4edd69cd29af70eb0e`（BYD DOLPHIN／ATTO 3／SEAL／SEALION 6の7販売単位を追加）
 - immutable: https://d45dbac4.jidouunten.pages.dev
 - 本体: https://jidouunten.jp/
