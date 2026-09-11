@@ -588,7 +588,7 @@
     "factStatus": "verified",
     "lastReviewedAt": "2026-09-07"
   },
-    {
+  {
     "id": "jp-tesla-model-3-2026-premium",
     "market": "JP",
     "maker": "Tesla",
@@ -1328,7 +1328,7 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "new_order_available",
+    "availability": "unknown",
     "availabilityCheckedAt": "2026-09-11",
     "odd": {
       "roadTypes": ["不明"],
@@ -1342,7 +1342,7 @@
     "driverMonitoring": "required",
     "handsOff": "not_allowed",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring", "lane_change_support"],
-    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "Volvo公式Q&AでEX30のオンライン注文対象を確認。契約・納車条件は個別確認が必要"],
+    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "Volvo公式Q&AでEX30モデルのオンライン契約対象を確認済み。各2027年グレードの受注・在庫条件は未確認"],
     "sources": [
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/ex30/", "title": "ラインナップ・主要諸元｜EX30", "accessedAt": "2026-09-07", "supports": ["2027年モデルの日本向け現行3グレード", "Plus P5 Electricの車両本体価格4,790,000円"], "type": "manufacturer"},
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/electric-qa/", "title": "EX30についての質問（オンライン購入）", "accessedAt": "2026-09-11", "supports": ["オンラインで車両選択・契約・申込金支払いまで可能", "オンライン注文可能な車種はEX30のみ"], "type": "manufacturer"},
@@ -1371,7 +1371,7 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "new_order_available",
+    "availability": "unknown",
     "availabilityCheckedAt": "2026-09-11",
     "odd": {
       "roadTypes": ["不明"],
@@ -1385,7 +1385,7 @@
     "driverMonitoring": "required",
     "handsOff": "not_allowed",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring", "lane_change_support"],
-    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "Volvo公式Q&AでEX30のオンライン注文対象を確認。契約・納車条件は個別確認が必要"],
+    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "Volvo公式Q&AでEX30モデルのオンライン契約対象を確認済み。各2027年グレードの受注・在庫条件は未確認"],
     "sources": [
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/ex30/", "title": "ラインナップ・主要諸元｜EX30", "accessedAt": "2026-09-07", "supports": ["2027年モデルの日本向け現行3グレード", "Ultra P5 Long Range Electricの車両本体価格5,790,000円"], "type": "manufacturer"},
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/electric-qa/", "title": "EX30についての質問（オンライン購入）", "accessedAt": "2026-09-11", "supports": ["オンラインで車両選択・契約・申込金支払いまで可能", "オンライン注文可能な車種はEX30のみ"], "type": "manufacturer"},
@@ -1414,7 +1414,7 @@
     "currentCatalogListed": true,
     "automationLevel": 2,
     "category": "driver_assistance",
-    "availability": "new_order_available",
+    "availability": "unknown",
     "availabilityCheckedAt": "2026-09-11",
     "odd": {
       "roadTypes": ["不明"],
@@ -1428,7 +1428,7 @@
     "driverMonitoring": "required",
     "handsOff": "not_allowed",
     "capabilities": ["adaptive_cruise_control", "lane_centering", "driver_monitoring", "lane_change_support"],
-    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "Volvo公式Q&AでEX30のオンライン注文対象を確認。契約・納車条件は個別確認が必要"],
+    "limitations": ["自動運転ではなく運転支援", "両手をステアリングから離せない", "カメラ・車線認識や道路状況により操舵支援が中断する場合がある", "Volvo公式Q&AでEX30モデルのオンライン契約対象を確認済み。各2027年グレードの受注・在庫条件は未確認"],
     "sources": [
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/ex30/", "title": "ラインナップ・主要諸元｜EX30", "accessedAt": "2026-09-07", "supports": ["2027年モデルの日本向け現行3グレード", "Ultra P8 AWD Electricの車両本体価格6,290,000円"], "type": "manufacturer"},
       {"publisher": "ボルボ・カー・ジャパン", "url": "https://www.volvocars.com/jp/l/electric-qa/", "title": "EX30についての質問（オンライン購入）", "accessedAt": "2026-09-11", "supports": ["オンラインで車両選択・契約・申込金支払いまで可能", "オンライン注文可能な車種はEX30のみ"], "type": "manufacturer"},

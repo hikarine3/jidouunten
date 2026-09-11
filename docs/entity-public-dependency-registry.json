@@ -104,16 +104,16 @@
       "surfaces": [
         {"url": "/", "locale": "ja", "output_path": "dist/index.html", "markers": ["Volvo", "EX30", "LEVEL 2"]},
         {"url": "/cars/", "locale": "ja", "output_path": "dist/cars/index.html", "markers": ["Volvo", "EX30", "LEVEL 2"]},
-        {"url": "/cars/jp-volvo-ex30-my2027-plus-p5-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-plus-p5-electric/index.html", "markers": ["Volvo", "EX30", "Plus P5 Electric", "Level 2", "新車注文可"]},
-        {"url": "/cars/jp-volvo-ex30-my2027-ultra-p5-long-range-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-ultra-p5-long-range-electric/index.html", "markers": ["Volvo", "EX30", "Ultra P5 Long Range Electric", "Level 2", "新車注文可"]},
-        {"url": "/cars/jp-volvo-ex30-my2027-ultra-p8-awd-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-ultra-p8-awd-electric/index.html", "markers": ["Volvo", "EX30", "Ultra P8 AWD Electric", "Level 2", "新車注文可"]},
+        {"url": "/cars/jp-volvo-ex30-my2027-plus-p5-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-plus-p5-electric/index.html", "markers": ["Volvo", "EX30", "Plus P5 Electric", "Level 2"]},
+        {"url": "/cars/jp-volvo-ex30-my2027-ultra-p5-long-range-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-ultra-p5-long-range-electric/index.html", "markers": ["Volvo", "EX30", "Ultra P5 Long Range Electric", "Level 2"]},
+        {"url": "/cars/jp-volvo-ex30-my2027-ultra-p8-awd-electric/", "locale": "ja", "output_path": "dist/cars/jp-volvo-ex30-my2027-ultra-p8-awd-electric/index.html", "markers": ["Volvo", "EX30", "Ultra P8 AWD Electric", "Level 2"]},
         {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["Volvo", "EX30", "Plus P5 Electric", "Ultra P8 AWD Electric"]},
         {"url": "/sitemap-0.xml", "locale": "ja", "output_path": "dist/sitemap-0.xml", "markers": ["jp-volvo-ex30-my2027-plus-p5-electric", "jp-volvo-ex30-my2027-ultra-p5-long-range-electric", "jp-volvo-ex30-my2027-ultra-p8-awd-electric"]}
       ],
       "required_render_selectors": [
-        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Plus P5 Electric", "新車注文可"]},
-        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Ultra P5 Long Range Electric", "新車注文可"]},
-        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Ultra P8 AWD Electric", "新車注文可"]}
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Plus P5 Electric"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Ultra P5 Long Range Electric"]},
+        {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["Volvo", "EX30", "Ultra P8 AWD Electric"]}
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"

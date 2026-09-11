@@ -515,7 +515,7 @@ describe('vehicle data contract and filters', () => {
     expect(ex30.every((vehicle) => vehicle.modelYear === '2027' && vehicle.automationLevel === 2)).toBe(true);
     expect(ex30.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
     expect(ex30.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'ボルボ・カー・ジャパン'))).toBe(true);
-    expect(ex30.every((vehicle) => vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-11')).toBe(true);
+    expect(ex30.every((vehicle) => vehicle.availability === 'unknown' && vehicle.availabilityCheckedAt === '2026-09-11')).toBe(true);
     expect(ex30.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.volvocars.com/jp/l/electric-qa/' && source.accessedAt === '2026-09-11'))).toBe(true);
     expect(officialLinks.find(({ maker, model }) => maker === 'Volvo' && model === 'EX30')?.actions).toEqual([
       { kind: 'order', label: 'オンラインで注文', url: 'https://www.volvocars.com/jp/shop/', checkedAt: '2026-09-11' },
