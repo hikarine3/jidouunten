@@ -34,8 +34,8 @@ try {
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 197, '既定カタログは現行確認197件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*197[\s\S]*条件内可[\s\S]*48[\s\S]*不可[\s\S]*148[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*50/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await visibleCards(), 217, '既定カタログは現行確認217件');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*217[\s\S]*条件内可[\s\S]*48[\s\S]*不可[\s\S]*168[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*50/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="1"]').innerText(), /対象外/, 'Level 1を0件ではなく対象外として表示');
   assert.equal(await page.locator('[data-level-shortcut="1"]').isDisabled(), true, '対象外のLevel 1は絞り込みボタンを無効化');
@@ -85,10 +85,10 @@ try {
   await page.locator('[data-saved-resume-delete="search"]').click();
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '検索条件を削除すると再開バーを隠す');
   await page.locator('[data-reset-shortcut]').click();
-  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可21', '注文可否 未確認176', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
+  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可21', '注文可否 未確認196', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
   await page.locator('[data-status-shortcut="uncertain"]').click();
   assert.equal(new URL(page.url()).searchParams.get('availability'), 'unknown', '注文可否未確認のクイック絞り込みをURLへ保存');
-  assert.equal(await visibleCards(), 176, '注文可否未確認は176販売単位');
+  assert.equal(await visibleCards(), 196, '注文可否未確認は196販売単位');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="conditional"]').click();
   assert.equal(await visibleCards(), 48, '条件内ハンズオフは48件');
@@ -108,6 +108,8 @@ try {
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヴォクシー' }).count(), 6, 'ヴォクシーは駆動方式・定員別の6販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota カローラ クロス' }).count(), 7, 'カローラ クロスはグレード・駆動方式別の7販売単位を既定一覧に表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota カローラ クロス' }).filter({ hasText: 'S（2WD）' }).innerText(), /約298万円[\s\S]*ハンズオフ：不可[\s\S]*車線変更支援/, 'カローラ クロスSは価格・手保持・車線変更時の補助を表示');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヤリス クロス' }).count(), 20, 'ヤリス クロスは現行20販売単位を一覧に表示');
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヤリス クロス' }).filter({ hasText: 'X（ガソリン車・2WD）' }).innerText(), /約213万円[\s\S]*ハンズオフ：不可[\s\S]*渋滞時運転支援/, 'ヤリス クロスXは価格・手保持・渋滞時支援を表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ヴォクシー' }).filter({ hasText: 'S-G 2WD（7人乗り）' }).innerText(), /条件付き支援パッケージ[\s\S]*\+78,100円[\s\S]*装着時のみ条件内で可/, 'ヴォクシー一覧カードにオプション必要条件と追加価格を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ノア' }).count(), 8, 'ノアはS-Z/S-G/S-Xと駆動方式・定員別の8販売単位を既定一覧に表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota ノア' }).filter({ hasText: 'HYBRID S-G 2WD（7人乗り）' }).innerText(), /約370万円[\s\S]*条件付き支援パッケージ[\s\S]*\+78,100円[\s\S]*装着時のみ条件内で可/, 'ノア一覧カードにグレード別オプション価格を表示');
@@ -137,7 +139,7 @@ try {
   assert.equal(await page.locator('link[rel="alternate"][hreflang="ja-JP"]').getAttribute('href'), 'https://jidouunten.jp/', '日本語alternateを本体URLへ固定');
   const structuredData = JSON.parse(await page.locator('script[type="application/ld+json"]').first().textContent());
   assert.deepEqual(structuredData['@graph'].map((entry) => entry['@type']), ['WebSite', 'WebPage'], 'WebSiteとWebPageのJSON-LDを出力');
-  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本で選べる自動運転・Level 2運転支援車197販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本で選べる自動運転・Level 2運転支援車217販売単位/, 'トップのdescription件数は公開データから生成');
   assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け173販売単位|日本向け157販売単位|日本向け139販売単位/, '古い固定件数を残さない');
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
@@ -155,7 +157,7 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 197, 'Level 2現行197件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 217, 'Level 2現行217件へ復帰');
   await levelMapPage.close();
   await page.goto(`${base}/levels/`);
   assert.match(await page.locator('.level-1').innerText(), /このサイトの車両一覧では対象外/, 'Level 1の取り扱いをレベル解説にも明記');
@@ -217,11 +219,11 @@ try {
   assert.equal(await page.locator('[data-sort-label]').innerText(), 'メーカー名順', '現在の並び順を明示');
 
   await page.goto(`${base}/?sort=price_asc`);
-  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').first().innerText(), /Toyota[\s\S]*シエンタ[\s\S]*X（ガソリン車・2WD・5人乗り）[\s\S]*約215万円/, '価格順は公式掲載の最小金額が安い販売単位から');
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').first().innerText(), /Toyota[\s\S]*ヤリス クロス[\s\S]*X（ガソリン車・2WD）[\s\S]*約213万円/, '価格順は公式掲載の最小金額が安い販売単位から');
   assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
   await page.goto(`${base}/?budget=under_300`);
-  assert.equal(await visibleCards(), 26, '本体価格の開始値が300万円未満の候補へ絞り込む');
+  assert.equal(await visibleCards(), 42, '本体価格の開始値が300万円未満の候補へ絞り込む');
   assert.equal(await page.locator('select[name="budget"]').inputValue(), 'under_300', '価格帯条件をURLから復元');
   assert.match(await page.locator('[data-selected-label]').innerText(), /〜300万円/, '価格帯を結果見出しへ明示');
 
@@ -255,13 +257,13 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 197, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 217, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  assert.equal(await visibleCards(), 197, 'リセット後に既定197件');
+  assert.equal(await visibleCards(), 217, 'リセット後に既定217件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -294,7 +296,7 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '比較保存を削除すると再開バーを隠す');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 198, 'すべての状態で過去車両を含む198件');
+  assert.equal(await visibleCards(), 218, 'すべての状態で過去車両を含む218件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
@@ -406,6 +408,20 @@ try {
   assert.equal(await page.locator('[data-purchase-action][data-action-type="order"]').count(), 0, '注文可否未確認のノアに注文CTAを表示しない');
   assert.doesNotMatch(await page.locator('main').innerText(), /121,000円/, 'ノアS-ZにAdvanced Parkの価格を誤表示しない');
   assert.doesNotMatch(await page.locator('main').innerText(), /noah_spec_202609|sources|accessedAt/, 'ノア詳細に内部根拠を表示しない');
+
+  await page.goto(`${base}/cars/jp-toyota-yaris-cross-2026-x-gas-2wd/`);
+  assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*ヤリス クロス[\s\S]*X（ガソリン車・2WD）/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*2,126,300円[\s\S]*ハンズオフ[\s\S]*不可[\s\S]*渋滞時運転支援/, 'ヤリス クロス詳細に価格・手保持・渋滞時支援を表示');
+  assert.equal(await page.locator('[data-purchase-action][data-action-type="estimate"]').getAttribute('href'), 'https://toyota.jp/service/estimate/grades?car_name_en=YARIS+CROSS', 'ヤリス クロスの公式見積りURL');
+  assert.doesNotMatch(await page.locator('main').innerText(), /grades59\.json|sources|accessedAt|not_allowed/, 'ヤリス クロス詳細に内部根拠や内部enumを表示しない');
+
+  await page.goto(`${base}/compare/?ids=jp-toyota-yaris-cross-2026-x-gas-2wd&ids=jp-toyota-yaris-cross-2026-z-adventure-hev-e-four`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  const yarisCrossCompare = await page.locator('[data-compare-result]').innerText();
+  assert.match(yarisCrossCompare, /ヤリス クロス[\s\S]*X（ガソリン車・2WD）[\s\S]*Z“Adventure”（ハイブリッド車・E-Four）/);
+  assert.match(yarisCrossCompare, /2,126,300円[\s\S]*3,355,000円[\s\S]*ハンズオフ：不可/, 'ヤリス クロス比較に価格と手保持条件を表示');
+  assert.equal(await page.locator('[data-compare-result] [data-action-type="estimate"]').count(), 2, 'ヤリス クロス比較に両車の公式見積り導線');
+  assert.doesNotMatch(yarisCrossCompare, /grades59\.json|sources|accessedAt|not_allowed/, 'ヤリス クロス比較に内部根拠や内部enumを表示しない');
 
   await page.goto(`${base}/cars/jp-toyota-voxy-2026-sz-2wd-7seater/`);
   assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*ヴォクシー[\s\S]*S-Z 2WD（7人乗り）/);

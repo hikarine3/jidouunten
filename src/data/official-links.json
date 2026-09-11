@@ -48,4 +48,5 @@
   ,{"maker":"Volkswagen","model":"Tiguan","url":"https://www.volkswagen.co.jp/ja/models/tiguan.html","kind":"product","checkedAt":"2026-09-11"}
   ,{"maker":"Lexus","model":"GX550","url":"https://lexus.jp/models/gx/","kind":"product","checkedAt":"2026-09-11"}
   ,{"maker":"Toyota","model":"ランドクルーザー250","url":"https://toyota.jp/landcruiser250/","kind":"product","checkedAt":"2026-09-11"}
+  ,{"maker":"Toyota","model":"ヤリス クロス","url":"https://toyota.jp/yariscross/","kind":"product","checkedAt":"2026-09-11","actions":[{"kind":"estimate","label":"公式で見積り","url":"https://toyota.jp/service/estimate/grades?car_name_en=YARIS+CROSS","checkedAt":"2026-09-11"}]}
 ]

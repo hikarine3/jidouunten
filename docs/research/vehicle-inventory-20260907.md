@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 198 | `src/data/vehicles.json` の全レコード（現行197 + 過去1） |
-| 既定表示 | 197 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 218 | `src/data/vehicles.json` の全レコード（現行217 + 過去1） |
+| 既定表示 | 217 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -33,6 +33,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota アクア / 後発対策） | 9 | Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD。価格244万3,100円〜323万8,400円、全車速追従ACC・LTA・ステアリング保持を販売単位へ固定 |
 | 今回追加（Toyota カローラ / 後発対策） | 6 | HYBRID W×B / G / Xの2WD・E-Four。価格238万400円〜334万2,900円、全車速追従ACC・LTA・停止保持・ステアリング保持を販売単位へ固定 |
 | 今回追加（Volkswagen / Lexus / Toyota） | 9 | Volkswagen Tiguan 6単位、Lexus GX550 2単位、Toyota ランドクルーザー250 VX ガソリン4WD 1単位。価格・ACC／車線維持支援・ステアリング保持を一次資料で確認し、注文可否は未確認のまま掲載 |
+| 今回追加（Toyota ヤリス クロス） | 20 | 2026年8月公式グレードJSONのZ“Adventure”／Z／G／X／U／GR SPORT、ハイブリッド・ガソリン、2WD／E-Fourの全20販売単位。価格212万6,300円〜335万5,000円、全車速追従ACC・LTA・渋滞時支援、ステアリング保持条件を一次資料で確認し、注文可否は未確認のまま掲載 |
 | 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
 | 今回追加（Mitsubishi / 後発対策） | 9 | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M × 5・7人乗り。価格536万9,100円〜690万1,400円、MI-PILOT（全車速ACC・LKA）とLCAの警告・支援、ハンドル保持、公式の商談・購入予約導線を販売単位へ固定 |
@@ -96,6 +97,23 @@ Lexus GX550は現行モデル、安全装備、価格・パッケージページ
 
 Toyota ランドクルーザー250は、2026年4月の公式グレード・主要装備資料と取扱説明書からVXガソリン4WD（570万円）を登録した。全車速追従ACCとLTAの同時支援を確認し、ハンドル保持・常時監視が必要なLevel 2相当として表示する。公式掲載は確認できるが販売単位の受注可否は固定できないため`unknown`とした。
 
+## 2026-09-11 Toyota ヤリス クロス追加トランシェ
+
+トヨタ公式の現行ヤリス クロス商品ページ（modelId 59）とグレードJSONを照合し、Z“Adventure”／Z／G／X／U／GR SPORTのハイブリッド車・ガソリン車、2WD／E-Fourを含む全20販売単位を登録した。税込メーカー希望小売価格は212万6,300円〜335万5,000円で、グレードJSONの価格を各販売単位へ直接結び付けた。2026年8月の主要諸元・装備表を`catalogAsOf`・`priceEffectiveAt`へ保持し、個別の発売日・受注可否は一次資料で固定できないため`salesUnitIntroducedAt=null`、`availability=unknown`とした。
+
+安全ページ・主要装備表・取扱説明書で、全車速追従レーダークルーズコントロール（縦方向）とレーントレーシングアシスト（LTA、横方向）の組合せ、渋滞時の停止・発進支援、ステアリング保持要求を確認した。したがって国土交通省の定義へ照合したサイト上の分類は全20単位でLevel 2相当、handsOffは`not_allowed`、driverMonitoringは`required`とした。LTAはステアリングを保持しないと停止する運転支援であり、自動運転や自動車線変更とは表示していない。ウインカー操作に伴う予備加減速の記載は、車線変更支援として誤解されるため能力キーには追加していない。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| ヤリス クロス現行商品ページとmodelId 59 | トヨタ自動車 | https://toyota.jp/yariscross/ | 2026-09-11 |
+| Z“Adventure”／Z／G／X／U／GR SPORT、ハイブリッド・ガソリン、2WD／E-Fourの20単位と税込価格 | トヨタ自動車 | https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades59.json | 2026-09-11 |
+| 全車速追従ACC、LTA、渋滞時支援、ステアリング保持条件 | トヨタ自動車 | https://toyota.jp/yariscross/safety/ | 2026-09-11 |
+| 2026年8月の主要諸元・装備表、Toyota Safety SenseのLTA・LDA・全車速追従ACC | トヨタ自動車 | https://toyota.jp/pages/contents/yariscross/001_p_001/pdf/yariscross_spec_202608.pdf | 2026-09-11 |
+| LTAはレーダークルーズと併用し運転者がステアリングを保持 | トヨタ自動車 | https://manual.toyota.jp/yariscross/2401/cv/ja_JP/contents/vhch04se050404.php | 2026-09-11 |
+| Level 2の定義（運転者主体の前後・左右支援） | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-11 |
+
+ヤリス クロスは公式の商品ページと見積り導線を保持するが、個別販売単位の現在の注文受付を確認できないため、注文可能とは表示しない。Toyotaの他モデルと同じLevel 2ラベルでも、ヤリス クロスはハンズオフ不可・車線変更支援なしとして絞り込み比較できる。
+
 Volvo EX30は、日本向け2027年モデルの2026年第29週生産分以降の諸元・価格表で3グレードとPilot Assist、全車速追従ACC、ドライバーモニタリングを確認した。Pilot Assistは速度・車間と操舵を支援する一方、取扱説明書が運転者に両手保持と即時介入を求めるため、Level 2相当の運転支援として登録した。税込車両本体価格は479万〜629万円で、価格適用時点は2026年7月、確認日は2026-09-07。価格根拠は内部保持し、価格表示機能はIssue #16で一貫した価格契約を実装してから公開する。
 
 Suzuki e VITARAは、現行価格ページと2025年9月16日付の日本発売資料でX 2WD / Z 2WD / Z 4WDの3販売単位、発売日2026-01-16、価格399万3000円 / 448万8000円 / 492万8000円を確認した。公式取扱説明書で車線維持支援中もステアリング保持が必要で、操作がないと警告後に機能を一時停止するため、全3単位のhandsOffを`not_allowed`と確定した。価格適用開始日は公式情報で確認できないため `priceEffectiveAt=null` とした。
@@ -141,7 +159,7 @@ MINI Countrymanは、2026年7月以降生産の日本向け装備・価格表か
 | LM500h EXECUTIVE / version Lの注文後工場出荷目処 | Lexus | https://lexus.jp/news/info/delivery/index.html | 2026-09-11 |
 | IONIQ 5 Voyage / Lounge掲載車両の「車両注文」導線 | Hyundai Mobility Japan | https://www.hyundai.com/jp/stock/new | 2026-09-11 |
 
-この更新後の内訳は、全198販売単位（現行197、過去1）のうち`new_order_available` 21、`unknown` 176、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
+この更新後の内訳は、全218販売単位（現行217、過去1）のうち`new_order_available` 21、`unknown` 196、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
 
 
 ## 未掲載・確認継続候補（内訳）
@@ -166,7 +184,7 @@ MINI Countrymanは、2026年7月以降生産の日本向け装備・価格表か
 
 Toyotaの日本向け現行ラインアップと公式安全・主要装備資料から、レーダークルーズコントロール（全車速追従）とLTAの同時設定候補として、アクア、ヤリス、ヤリス クロス、カローラ、カローラ スポーツ、カローラ ツーリング、プリウス、シエンタ、ノア、ヴォクシー、アルファード、ヴェルファイア、クラウン、bZ4X、GRヤリス、RAV4、ハリアー、カローラ クロス、ランドクルーザー250、MIRAIの20モデルを抽出した。Lexus公式のLexus Safety System+対応車種比較では、LX、GX、RX、RZ、NX、UX、LBX、LS、ES、IS、LM、LCの12モデルにレーダークルーズコントロール（全車速追従）とLTAの設定がある。
 
-これはモデル候補の棚卸しであり、公開可能な販売単位32件ではない。比較表の「設定あり」はメーカーオプションを含み得るため、グレード・パワートレーン・駆動方式ごとの標準／オプション、現行販売状態、価格、仕様期、作動条件を個別資料で照合するまで公開データへ追加しない。Toyota Roomy / Raize / Hilux / Land Cruiser 70 / GR86は両機能の現行販売単位を確定できず、クラウン スポーツ／エステート、GRカローラ、ランドクルーザー300も資料一式が不足するため保留する。
+これはモデル候補の棚卸しであり、公開済みのToyota／Lexus販売単位113件全体を網羅したという意味ではない。比較表の「設定あり」はメーカーオプションを含み得るため、グレード・パワートレーン・駆動方式ごとの標準／オプション、現行販売状態、価格、仕様期、作動条件を個別資料で照合するまで公開データへ追加しない。Toyota Roomy / Raize / Hilux / Land Cruiser 70 / GR86は両機能の現行販売単位を確定できず、クラウン スポーツ／エステート、GRカローラ、ランドクルーザー300も資料一式が不足するため保留する。
 
 公式母集団入口: https://toyota.jp/carlineup/ 、https://toyota.jp/safety/scene/highway/index2.html 、https://lexus.jp/models/ 、https://lexus.jp/safety/compare/ 、https://lexus.jp/safety/highway1/ 。確認日2026-09-08。
 
