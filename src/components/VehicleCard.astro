@@ -3,7 +3,7 @@ import type { Vehicle } from '../data/loader';
 import { availabilityLabels, canonicalRoadType, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleTiming, handsOffLabels, levelLabels, monitoringLabels, vehicleImageFor, vehicleReferenceLabel } from '../data/loader';
 const { vehicle, selectable = false, checked = false } = Astro.props as { vehicle: Vehicle; selectable?: boolean; checked?: boolean };
 const image = vehicleImageFor(vehicle);
-const capabilityPriority = ['hands_off_highway', 'lane_change_support', 'traffic_jam_pilot', 'traffic_jam_assist', 'driver_monitoring', 'adaptive_cruise_control', 'lane_centering'];
+const capabilityPriority = ['hands_off_highway', 'lane_change_support', 'traffic_jam_pilot', 'traffic_jam_assist', 'driver_monitoring', 'adaptive_cruise_control', 'lane_centering', 'lane_departure_prevention'];
 const visibleCapabilities = [...vehicle.capabilities]
   .sort((a, b) => capabilityPriority.indexOf(a) - capabilityPriority.indexOf(b))
   .slice(0, 3)

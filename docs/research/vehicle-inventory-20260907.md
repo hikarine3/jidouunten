@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 353 | `src/data/vehicles.json` の全レコード（現行352 + 過去1） |
-| 既定表示 | 352 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 365 | `src/data/vehicles.json` の全レコード（現行364 + 過去1） |
+| 既定表示 | 364 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -32,6 +32,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Honda CIVIC / 後発対策） | 5 | 2026年6月5日発売のe:HEV LX／EX／RS、ガソリンEX／RSを登録。価格394万6,800円〜465万9,600円、全車ACC＋LKASのLevel 2相当。e:HEV 3単位とガソリンEXはトラフィックジャムアシスト標準、ガソリンRSは対象外として同じLevel 2内の渋滞支援差を比較可能にした |
 | 今回追加（Toyota クラウン（クロスオーバー） / 後発対策） | 3 | 通常カタログのCROSSOVER RS／Z／G（いずれもE-Four）を追加。価格517万9,900円〜673万9,700円、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・条件内ハンズオフ、GはACC・LTA・渋滞時支援のみとして能力差を販売単位へ固定。特別仕様THE LIMITED-MATTE METALは既存の別単位として保持 |
 | 今回追加（Toyota GRヤリス / 後発対策） | 10 | RZ“High performance”／RZ／RCとAero performance package、GR-DAT（8AT）／6MTの全10販売単位。価格361万7,200円〜588万2,200円、全車ACC＋LTAのLevel 2相当・ハンズオフ不可。GR-DATは全車速追従だが停止保持なし、6MTは約30km/h以上から。公式ページ・価格JSON・安全性能・装備表・取扱説明書で確認し、注文可否は未確認 |
+| 今回追加（Suzuki スペーシア / 後発対策） | 12 | スペーシア HYBRID G／X／X セーフティプラスパッケージ、スペーシア カスタム HYBRID GS／XS／XSターボの2WD・4WD。価格153万100円〜219万3,400円、G／Xは車線逸脱抑制のLevel 1相当、セーフティプラス／カスタムはACC全車速追従・停止保持＋車線維持支援のLevel 2相当。発売日2023年11月22日、注文可否は未確認 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定。Advanced Driveの0〜約40km/hとLCAの約85〜130km/h、T-Connect／コネクティッドナビ契約・地図条件も単位ごとに保持 |
@@ -75,6 +76,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Audi | A5 / A5 Avant TFSI 110kW / TFSI quattro 150kW / TDI quattro 150kW | 掲載（6単位、注文可否 未確認） | 2相当 | 2026-09-11 |
 | Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 新車注文可（3単位、オンライン契約） | 2相当 | 2026-09-11 |
 | Suzuki | e VITARA X 2WD / Z 2WD / Z 4WD（現行仕様） | 掲載（3単位） | 2相当 | 2026-09-07 |
+| Suzuki | スペーシア HYBRID G／X／X セーフティプラスパッケージ、スペーシア カスタム HYBRID GS／XS／XSターボ（2WD・4WD） | 掲載（現行12単位、Level 1の車線逸脱抑制4単位／Level 2のACC・車線維持8単位、注文可否 未確認） | 1／2相当 | 2026-09-12 |
 | Renault | ARKANA esprit Alpine FULL HYBRID E-TECH / MILD HYBRID、techno FULL HYBRID E-TECH / MILD HYBRID | 掲載（4単位） | 2相当 | 2026-09-07 |
 | BMW | 3シリーズ セダン G20 318i / 320i / 320d xDrive / 330e M Sport、M340i xDrive | 掲載（通常カタログ5単位） | 2相当 | 2026-09-07 |
 | BMW | 3シリーズ ツーリング G21 318i / 320i / 320d xDrive M Sport、M340i xDrive | 掲載（通常カタログ4単位） | 2相当 | 2026-09-07 |
@@ -883,6 +885,23 @@ Honda公式の現行商品・タイプ一覧、e:HEV X／Zの価格ページ、�
 | 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
 
 根拠: [GRヤリス商品ページ](https://toyota.jp/gryaris/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades60.json)、[安全性能](https://toyota.jp/gryaris/safety/)、[主要装備比較表](https://toyota.jp/pages/contents/gryaris/001_p_002/pdf/gryaris_spec_202603.pdf)、[LTA取扱説明書](https://manual.toyota.jp/gr_yaris/2604/cv/ja_JP/contents/vhch04se050404.php)。GR-DAT／6MT、RZ／RC、Aero packageの価格・作動条件差を同じLevel 2内で比較できるよう販売単位へ固定した。自動車線変更やハンズオフを意味する機能は根拠がないため付与していない。
+
+## 2026-09-12 Suzuki スペーシア12販売単位追加
+
+スズキ公式のスペーシア／スペーシア カスタムのグレード・価格ページ、安全装備ページ、2023年11月22日発売資料を照合し、HYBRID G／X／X セーフティプラスパッケージ、カスタム HYBRID GS／XS／XSターボの2WD・4WDを全12販売単位として追加した。税込メーカー希望小売価格は153万100円（スペーシア HYBRID G 2WD）〜219万3,400円（カスタム HYBRID XSターボ 4WD）。現行カタログ掲載と公式見積り・試乗導線は確認できたが、個別の現在受注・納期は一次情報で固定できないため全12単位を `availability=unknown` とした。
+
+スペーシア HYBRID G／Xの4単位はACC・車線維持支援機能が設定対象外で、車線逸脱の可能性が高いときに操舵を補助する「車線逸脱抑制」を確認できるため、サイト上はLevel 1相当として掲載した。X セーフティプラスパッケージとスペーシア カスタムの8単位はACC（全車速追従・停止保持）とACC連動の車線維持支援を確認し、国土交通省の定義に照合してLevel 2相当とした。いずれもハンドル保持・常時監視が必要で、ハンズオフや自動車線変更は付与していない。
+
+| 販売単位 | 価格（税込） | Level | 同じモデル内の差分 |
+|---|---:|---:|---|
+| HYBRID G 2WD / 4WD | 1,530,100円 / 1,656,600円 | 1相当 | 車線逸脱抑制。ACC・車線中央維持なし |
+| HYBRID X 2WD / 4WD | 1,705,000円 / 1,824,900円 | 1相当 | 車線逸脱抑制。ACC・車線中央維持なし |
+| HYBRID X セーフティプラスパッケージ 2WD / 4WD | 1,771,000円 / 1,890,900円 | 2相当 | ACC全車速・停止保持＋車線維持支援 |
+| カスタム HYBRID GS 2WD / 4WD | 1,801,800円 / 1,925,000円 | 2相当 | ACC全車速・停止保持＋車線維持支援 |
+| カスタム HYBRID XS 2WD / 4WD | 1,995,400円 / 2,115,300円 | 2相当 | ACC全車速・停止保持＋車線維持支援 |
+| カスタム HYBRID XSターボ 2WD / 4WD | 2,073,500円 / 2,193,400円 | 2相当 | ACC全車速・停止保持＋車線維持支援 |
+
+根拠: [スペーシア グレード・価格](https://www.suzuki.co.jp/car/spacia/detail/)、[安全装備](https://www.suzuki.co.jp/car/spacia/safety/)、[主要装備・主要諸元PDF](https://www.suzuki.co.jp/car/spacia/detail/pdf/detail.pdf)、[2023年11月22日発売資料](https://www.suzuki.co.jp/release/a/2023/1109/)、[公式見積り](https://www.suzuki.co.jp/car/purchase/estimate/)、[試乗車検索](https://www.suzuki.co.jp/dealer/Map/getPref/car/8)、[国土交通省 Level 1/2定義](https://www.mlit.go.jp/common/001343740.pdf)。車線逸脱抑制と車線中央維持を別能力として登録したことで、同じ価格帯でもLevel 1／2の違いを一覧のチェックボックスでAND絞り込みできる。
 
 ## 2026-09-12 Honda ステップ ワゴン10販売単位追加
 

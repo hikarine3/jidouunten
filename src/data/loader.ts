@@ -14,6 +14,7 @@ export type DriverMonitoring = 'required' | 'takeover_ready' | 'not_required_in_
 export const capabilityDefinitions = {
   adaptive_cruise_control: { label: '追従走行（ACC）', description: '先行車との車間を保つよう速度を調整します。' },
   lane_centering: { label: '車線中央維持', description: '車線の中央付近を走るようハンドル操作を支援します。' },
+  lane_departure_prevention: { label: '車線逸脱抑制', description: '車線からはみ出しそうなとき、車線内へ戻す操舵を補助します。車線中央維持とは異なります。' },
   traffic_jam_assist: { label: '渋滞時運転支援', description: '渋滞時の追従走行と車線維持を支援します。運転者の常時監視が必要です。' },
   hands_off_highway: { label: '条件内ハンズオフ', description: '条件を満たす区間でハンドルから手を離せます。運転者の常時監視が必要です。' },
   lane_change_support: { label: '車線変更支援', description: '運転者の確認や操作を前提に、車線変更を支援します。' },

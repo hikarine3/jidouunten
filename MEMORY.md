@@ -2,6 +2,13 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 Suzuki スペーシア12販売単位追加（QA・配信準備中）
+
+- スズキ公式のスペーシア／スペーシア カスタムのグレード・価格、安全装備、発売資料を突合し、HYBRID G／X／X セーフティプラスパッケージ、カスタム HYBRID GS／XS／XSターボの2WD・4WDを全12販売単位で追加。価格は153万100円〜219万3,400円（税込）、発売日は2023年11月22日。G／Xは車線逸脱抑制のLevel 1相当、セーフティプラス／カスタム8単位はACC全車速追従・停止保持＋車線維持支援のLevel 2相当。ハンドル保持・常時監視が必要で、ハンズオフ・自動車線変更は付与していない。注文可否は12単位とも`unknown`。
+- `lane_departure_prevention`（車線逸脱抑制）を能力定義へ追加し、Level 1の車線逸脱抑制とLevel 2の車線中央維持を一覧のANDチェックで分離。公式導線はスペーシア／スペーシア カスタムへ購入相談・試乗・見積り・カタログを同期。
+- QA予定: 365販売単位／364現行、371 HTML、sitemap-0 366 URL、詳細365件、ItemList 2ページ728項目、公式導線69モデル／67 URL／119 actions、registry 51 entities／502 surfaces／470 required selectors。
+- 出典: [スペーシア グレード・価格](https://www.suzuki.co.jp/car/spacia/detail/)、[安全装備](https://www.suzuki.co.jp/car/spacia/safety/)、[主要装備・諸元](https://www.suzuki.co.jp/car/spacia/detail/pdf/detail.pdf)、[発売資料](https://www.suzuki.co.jp/release/a/2023/1109/)、[国土交通省 Level 1/2定義](https://www.mlit.go.jp/common/001343740.pdf)。
+
 ## 2026-09-12 Toyota GRヤリス10販売単位追加（本番反映済み）
 
 - トヨタ公式のGRヤリス商品・`grades60.json`・安全性能・2026年3月主要装備表・取扱説明書を突合し、RZ“High performance”／RZ／RCとAero performance packageのGR-DAT（8AT・4WD）／6MT（4WD）を全10販売単位で追加。価格は361万7,200円〜588万2,200円（税込）。全車ACC＋LTAのLevel 2相当・ステアリング保持必須、GR-DATは全車速追従（停止保持なし）、6MTは約30km/h以上から作動。同じLevel 2内のグレード・変速機・Aero packageの価格・作動条件差を比較できるようにし、車線変更時の補助はアクティブな車線変更支援と区別。注文可否・在庫・納期は10単位とも未確認。
