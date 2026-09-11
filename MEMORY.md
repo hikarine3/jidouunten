@@ -2,6 +2,15 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 Toyota GRヤリス10販売単位追加（本番反映済み）
+
+- トヨタ公式のGRヤリス商品・`grades60.json`・安全性能・2026年3月主要装備表・取扱説明書を突合し、RZ“High performance”／RZ／RCとAero performance packageのGR-DAT（8AT・4WD）／6MT（4WD）を全10販売単位で追加。価格は361万7,200円〜588万2,200円（税込）。全車ACC＋LTAのLevel 2相当・ステアリング保持必須、GR-DATは全車速追従（停止保持なし）、6MTは約30km/h以上から作動。同じLevel 2内のグレード・変速機・Aero packageの価格・作動条件差を比較できるようにし、車線変更時の補助はアクティブな車線変更支援と区別。注文可否・在庫・納期は10単位とも未確認。
+- exact app `45f2e3d`、Production `https://jidouunten.jp/`、immutable `https://c9ddc80f.jidouunten.pages.dev`、直前rollback `https://fa2e7583.jidouunten.pages.dev`。Cloudflare Pages production/mainへ実IDで反映済み。
+- 公開詳細は[GRヤリス RZ High performance GR-DAT](https://jidouunten.jp/cars/jp-toyota-gr-yaris-2026-rz-high-performance-gr-dat/)、[RC 6MT](https://jidouunten.jp/cars/jp-toyota-gr-yaris-2026-rc-6mt/)、比較は[RC 6MT／RZ High performance GR-DAT](https://jidouunten.jp/compare/?ids=jp-toyota-gr-yaris-2026-rc-6mt&ids=jp-toyota-gr-yaris-2026-rz-high-performance-gr-dat)。公式商品・価格・安全・装備・取説・販売店・試乗・見積り・カタログ導線を同期。
+- 公式根拠は[GRヤリス商品](https://toyota.jp/gryaris/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades60.json)、[安全性能](https://toyota.jp/gryaris/safety/)、[主要装備比較表](https://toyota.jp/pages/contents/gryaris/001_p_002/pdf/gryaris_spec_202603.pdf)、[LTA取扱説明書](https://manual.toyota.jp/gr_yaris/2604/cv/ja_JP/contents/vhch04se050404.php)。
+- QA: 359 HTML、sitemap-0 354 URL、詳細353件、ItemList 2ページ704項目、公式導線67モデル／65 URL／111 actions、Vitest＋保存再開66/66、価格353/353（現行352/352、exact337／range15／未確認1）、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build・release／structured PASS、registry 50 entities／496 surfaces／466 required selectors closure PASS、独立監査PASS、immutable／本体E2E各1/1（GA collect HTTP204）、主要URL200、未知URL404、IDN path/query301。
+- Issue #17（候補カバレッジ）と#37（公式導線・計測）は未確認母集団・受注状態の観測が残るためIn progressを維持し、全国網羅完了とは宣言しない。
+
 ## 2026-09-12 Toyota クラウン（クロスオーバー）通常3販売単位追加（本番反映済み）
 
 - トヨタ公式のクラウン（クロスオーバー）商品・`grades44.json`・安全性能・2026年9月装備比較表を突合し、通常カタログのCROSSOVER RS／Z／G（E-Four・5人乗り）を3販売単位で追加。価格は517万9,900円〜673万9,700円（税込）。全車ACC＋LTAのLevel 2相当、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・ドライバーモニター・条件内ハンズオフ、GはACC・LTA・渋滞時支援・ハンドル保持として比較できる。既存の特別仕様THE LIMITED-MATTE METALは別単位で保持し、注文可否・在庫・納期は3単位とも未確認。

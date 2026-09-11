@@ -2,18 +2,18 @@
 
 更新: 2026-09-12
 
-## 最新の配信（2026-09-12 Toyota クラウン（クロスオーバー）通常3販売単位追加）
+## 最新の配信（2026-09-12 Toyota GRヤリス10販売単位追加）
 
-- exact app release commit: `58a3807`
-- immutable: https://fa2e7583.jidouunten.pages.dev
+- exact app release commit: `45f2e3d`
+- immutable: https://c9ddc80f.jidouunten.pages.dev
 - 本体: https://jidouunten.jp/
-- 内容: Toyota クラウン（クロスオーバー）の通常カタログCROSSOVER RS／Z／G（E-Four・5人乗り）を3販売単位として追加。価格は517万9,900円〜673万9,700円（税込、2026年9月参考価格）。全車ACC＋LTAのLevel 2相当で、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・ドライバーモニター・条件内ハンズオフ、GはACC・LTA・渋滞時支援・ハンドル保持として同じ車名内の能力差を比較できる。既存の特別仕様THE LIMITED-MATTE METALは別販売単位で保持し、3単位とも注文可否は`unknown`。
-- 公式根拠: [クラウン（クロスオーバー）商品](https://toyota.jp/crowncrossover/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades44.json)、[安全性能](https://toyota.jp/crowncrossover/safety/)、[主要装備比較表](https://toyota.jp/pages/contents/crowncrossover/001_p_001/pdf/crowncrossover_equipment_compare_202609.pdf)。公式見積り導線は既存モデルリンクを2026-09-12確認へ更新。
-- SEO／公開面: 349 HTML、sitemap-0は344 URL、詳細343件、トップ／一覧ItemListは2ページ・684項目。GTM実IDは349 HTMLへ各1件、テストID0件。
+- 内容: Toyota GRヤリスのRZ“High performance”／RZ／RCとAero performance package、GR-DAT（8AT・4WD）／6MT（4WD）の全10販売単位を追加。価格は361万7,200円〜588万2,200円（税込、2026年3月仕様）。全車ACC＋LTAのLevel 2相当・ステアリング保持必須で、GR-DATは全車速追従（停止保持なし）、6MTは約30km/h以上から作動。同じLevel 2内でグレード、変速機、Aero packageの価格・作動条件差を比較できる。注文可否は10単位とも`unknown`。
+- 公式根拠: [GRヤリス商品](https://toyota.jp/gryaris/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades60.json)、[安全性能](https://toyota.jp/gryaris/safety/)、[主要装備比較表](https://toyota.jp/pages/contents/gryaris/001_p_002/pdf/gryaris_spec_202603.pdf)、[LTA取扱説明書](https://manual.toyota.jp/gr_yaris/2604/cv/ja_JP/contents/vhch04se050404.php)。GRヤリスの販売店・試乗・見積り・カタログ導線を追加。
+- SEO／公開面: 359 HTML、sitemap-0は354 URL、詳細353件、トップ／一覧ItemListは2ページ・704項目。GTM実IDは359 HTMLへ各1件、テストID0件。
 - UI: 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のサムネイルで省スペース表示。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホストWebPは維持。
-- QA: `npm test` Vitest60＋保存再開5＝65/65、Python16/16、価格343/343（現行342/342、exact327／range15／未確認1）、公式導線66モデル／64 URL／107 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 49 entities／490 surfaces／462 required selectorsのclosure PASS、独立リリース監査PASS、immutable／本体E2E各1/1（GA collect HTTP204）。
-- 本番smoke: 本体・immutableのトップ、一覧、クラウン クロスオーバーRS/G詳細、比較、sitemapはHTTP200。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）はpath/queryを本体へ301。GTM実IDは`GTM-PV9QVMJV`。
-- 直前の正常配信・ロールバック候補: https://ab09429b.jidouunten.pages.dev
+- QA: `npm test` Vitest61＋保存再開5＝66/66、Python16/16、価格353/353（現行352/352、exact337／range15／未確認1）、公式導線67モデル／65 URL／111 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 50 entities／496 surfaces／466 required selectorsのclosure PASS、独立リリース監査PASS、immutable／本体E2E各1/1（GA collect HTTP204）。
+- 本番smoke: 本体・immutableのトップ、一覧、GRヤリスRZ High performance／RC詳細、比較、sitemapはHTTP200。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）はpath/queryを本体へ301。GTM実IDは`GTM-PV9QVMJV`、テストIDは0件。
+- 直前の正常配信・ロールバック候補: https://fa2e7583.jidouunten.pages.dev
 
 ## 最新の配信（2026-09-12 Honda CIVIC 5販売単位追加）
 
