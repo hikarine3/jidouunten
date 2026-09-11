@@ -116,6 +116,13 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Lexus | GX550 version L / OVERTRAIL+ | 掲載（2単位） | 2相当 | 2026-09-11 |
 | Toyota | ランドクルーザー250 VX ガソリン 4WD | 掲載（1単位） | 2相当 | 2026-09-11 |
 
+## 2026-09-12 Mazda未掲載候補の再確認
+
+Mazda公式の商品・グレード・安全ページと2026年7月仕様PDFを直接確認した。MAZDA3 FASTBACK 25S／25L／X Touring、MAZDA3 SEDAN 25L、CX-30 20G／20 Air Edition／25L／25 Air Edition、MX-30 ROTARY-EVは、MRCCとCTS（車線に沿った操舵支援）の組み合わせを確認でき、既存の12販売単位へ重複なく掲載済みである。CX-30 20GはEX Package装着時のみCTS・ドライバー・モニタリングが付くため、標準装備とオプションを分離して保持する。20C／20SはCTSが「—」のため対象外6単位として維持し、車線変更支援やハンズオフは付与しない。Mazdaの公式ページは購入相談・見積り・試乗・販売店導線で、個別の受注受付は示さないため、掲載単位の`availability=unknown`と発売日未確認は変更しない。
+
+- 根拠: [MAZDA3安全性能](https://www.mazda.co.jp/cars/passenger/mazda3/safety/)、[MAZDA3 2026-07仕様](https://www.mazda.co.jp/content/dam/mazda/official/mazda-co-jp/cars/mazda3/common/pdf/mazda3_specification_202607.pdf)、[CX-30安全性能](https://www.mazda.co.jp/cars/passenger/cx-30/safety/)、[CX-30 2026-07仕様](https://www.mazda.co.jp/content/dam/mazda/official/mazda-co-jp/cars/cx-30/common/pdf/cx-30_specification_202607.pdf)、[MX-30 ROTARY-EV安全性能](https://www.mazda.co.jp/cars/passenger/mx-30/safety/)。確認日は2026-09-12。
+- 判定: 新規追加候補0件。既存Mazda 12販売単位の根拠再確認と、対象外6単位の除外理由を台帳へ固定した。
+
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。2026-09-10確認時点で両モデルの日本向け公式商品ページに「今すぐ注文」導線が表示され、公式FAQも注文後の手続きと注文可能なトリム・納車予定時期をDesign Studioで確認する流れを案内しているため、6販売単位の`availability`を`new_order_available`へ更新した。ただし注文後の在庫・納車時期・ソフトウェア提供条件は個別確認が必要。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式ホーム、現行日本語取扱説明書、保証ページの存在は確認できるが、現行日本円MSRP・グレード・注文CTA・日本仕様のLevel 2/ODDを確定できず、2026-09-12時点で公開データへの追加を見送った。新車在庫・補助金ページもModel 3/Yの価格カードのみで、S/Xを日本の現行販売単位と断定できない。主要Tesla URLは調査環境でHTTP 403（bot対策）だったため、再開条件は日本向けDesign Studio／在庫車／販売開始告知の一次情報が公開されることとする。
 
 ## 2026-09-12 Tesla Model S / X 再確認
