@@ -15,14 +15,14 @@
 
 | 項目 | 値 | 確認方法 |
 |---|---:|---|
-| sitemap掲載URL数 | 159 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外） |
-| うち車両詳細 | 154 | `src/data/vehicles.json` の販売単位レコード数 |
-| 掲載メーカー数 | 12 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus |
+| sitemap掲載URL数 | 163 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外） |
+| うち車両詳細 | 158 | `src/data/vehicles.json` の販売単位レコード数 |
+| 掲載メーカー数 | 13 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai |
 | 条件別（レベル・道路・ハンズオフ・価格帯）の静的URL | 0 | 絞り込みはquery paramのみ（`/cars/?level=2`） |
 | 機能名（プロパイロット2.0等）の静的URL | 0 | 該当ページなし |
 | 2台比較の静的URL | 0 | `/compare/?ids=a,b` のquery paramのみ |
 | 構造化データの型 | WebPage のみ | `src/layouts/Layout.astro` |
-| 公式アクションリンク | 40 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、検討用の見積り・試乗・販売店・カタログ導線と分離 |
+| 公式アクションリンク | 43 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線を保持。検討用導線と注文可否は分離 |
 | Lighthouse production (mobile) | performance 1.00 / accessibility 1.00 | `.cache/lighthouse-production.json` |
 | KPI実測（表示・クリック・selector行動） | 未取得 | 公開初日のため観測期間0日 |
 
@@ -97,7 +97,7 @@ S1 検索表示回数
 | 中位 | 100% | 25,600 | 1,075 | 127 | 50 |
 | 上振れ | 190% | 48,640 | 2,043 | 241 | 95 |
 
-現状（159URL・改善なし・順位を得た場合）の旧推定式は、URL種別構成が変わったため再計算待ち。送客は未観測。
+現状（163URL・改善なし・順位を得た場合）の旧推定式は、URL種別構成が変わったため再計算待ち。送客は未観測。
 
 **下振れシナリオでも、現状比で表示18倍・送客0件→15件/月。** この差が施策全体の期待値である。
 ただし新規ドメインが順位を得られない場合は下振れを更に下回る。順位獲得は保証されない。
@@ -110,8 +110,8 @@ S1 検索表示回数
 
 | Issue | 支配する段 | 推定効果（中位・月間） | 実測で置き換える指標 |
 |---|---|---|---|
-| #17 販売単位の網羅 | S1の分母 | 車両詳細 154件を起点に、未掲載母集団と欠損理由を解決 | 掲載販売単位数・母集団カバー率 |
-| #19 条件別ページ生成 | S1 | indexable 159 URLを起点に、検索需要のある条件だけを追加 | GSC 表示回数/ページ |
+| #17 販売単位の網羅 | S1の分母 | 車両詳細 158件を起点に、未掲載母集団と欠損理由を解決 | 掲載販売単位数・母集団カバー率 |
+| #19 条件別ページ生成 | S1 | indexable 163 URLを起点に、検索需要のある条件だけを追加 | GSC 表示回数/ページ |
 | #20 構造化データ・メタ | S2 | CTR 3.0%→4.2%、同表示回数でクリック +300 | GSC CTR |
 | #22 機能名ページ | S1 | 表示 +8,400、指名検索の受け皿 | GSC クエリ別表示 |
 | #21 A vs B 比較ページ | S1・S5 | 表示 +4,800、比較開始率の高い流入 | 比較開始率（流入元別） |

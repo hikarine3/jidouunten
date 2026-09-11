@@ -122,14 +122,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(154);
+    expect(vehicles).toHaveLength(158);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補153件は全件の公式金額を保持する', () => {
+  it('現行候補157件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(153);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(153);
+    expect(current).toHaveLength(157);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(157);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -139,7 +139,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(38);
+    expect(officialLinks).toHaveLength(39);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -167,7 +167,7 @@ describe('vehicle data contract and filters', () => {
       expect(actions.every(({ checkedAt }) => checkedAt === '2026-09-11')).toBe(true);
       expect(actions.every(({ url }) => url.startsWith('https://'))).toBe(true);
     }
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(40);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(43);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {
@@ -225,6 +225,19 @@ describe('vehicle data contract and filters', () => {
     expect(tesla.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
     expect(tesla.every((vehicle) => vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-10')).toBe(true);
     expect(tesla.every((vehicle) => vehicleReferenceLabel(vehicle) === '現行仕様')).toBe(true);
+  });
+
+  it('Hyundai IONIQ 5はHDA/HDA2のグレード差を販売単位へ保持する', () => {
+    const ioniq5 = vehicles.filter((vehicle) => vehicle.maker === 'Hyundai' && vehicle.model === 'IONIQ 5');
+    expect(ioniq5).toHaveLength(4);
+    expect(ioniq5.map((vehicle) => vehicle.grade).sort()).toEqual(['Lounge', 'Lounge AWD', 'Voyage', 'Voyage L'].sort());
+    expect(ioniq5.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([4_994_000, 5_236_000, 5_742_000, 6_138_000]);
+    expect(ioniq5.every((vehicle) => vehicle.modelYear === '2025' && vehicle.catalogAsOf === '2026-06' && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.availability === 'unknown')).toBe(true);
+    expect(ioniq5.find((vehicle) => vehicle.grade === 'Voyage L')?.capabilities).not.toContain('lane_change_support');
+    expect(ioniq5.filter((vehicle) => vehicle.grade !== 'Voyage L').every((vehicle) => vehicle.capabilities.includes('lane_change_support'))).toBe(true);
+    expect(ioniq5.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.hyundai.com/jp/purchase/downFile/ioniq5' && source.accessedAt === '2026-09-11'))).toBe(true);
+    expect(ioniq5.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.hyundai.com/jp/customer-service/notice/679' && source.supports.some((fact) => fact.includes('2025年モデル'))))).toBe(true);
+    expect(officialLinkFor(ioniq5[0])?.actions?.map(({ kind }) => kind)).toEqual(['test_drive', 'estimate', 'catalog']);
   });
 
   it('Toyota アルファードは乗車定員・駆動方式別の4販売単位を価格付きで保持する', () => {

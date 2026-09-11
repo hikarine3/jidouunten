@@ -34,14 +34,19 @@ try {
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 153, '既定カタログは現行確認153件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*153[\s\S]*条件内可[\s\S]*48[\s\S]*不可[\s\S]*104[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*44/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await visibleCards(), 157, '既定カタログは現行確認157件');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*157[\s\S]*条件内可[\s\S]*48[\s\S]*不可[\s\S]*108[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*47/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="1"]').innerText(), /対象外/, 'Level 1を0件ではなく対象外として表示');
   assert.equal(await page.locator('[data-level-shortcut="1"]').isDisabled(), true, '対象外のLevel 1は絞り込みボタンを無効化');
   assert.match(await page.locator('.level-scope-note').innerText(), /Level 1.*対象外/, '車両一覧の取り扱い範囲を明記');
   assert.match(await page.locator('[data-level-shortcut="3"]').innerText(), /L3[\s\S]*条件付自動運転[\s\S]*過去例 1件/, 'Level 3の過去例を現行車と区別');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, 'Tesla Model 3 / Model Yの6販売仕様を既定一覧に表示');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Hyundai IONIQ 5' }).count(), 4, 'Hyundai IONIQ 5の4グレードを既定一覧に表示');
+  const hyundaiVoyageLCard = page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Hyundai IONIQ 5' }).filter({ hasText: 'Voyage L' });
+  assert.match(await hyundaiVoyageLCard.innerText(), /約499万円[\s\S]*ハンズオフ：不可/, 'IONIQ 5 Voyage LはHDA・ハンズオフ不可を表示');
+  assert.doesNotMatch(await hyundaiVoyageLCard.innerText(), /車線変更支援/, 'IONIQ 5 Voyage LはHDAのみで車線変更支援を表示しない');
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Hyundai IONIQ 5' }).filter({ hasText: 'Lounge AWD' }).innerText(), /約614万円[\s\S]*車線変更支援/, 'IONIQ 5 Lounge AWDはHDA2の車線変更支援を表示');
   await page.locator('[data-maker-shortcut="Tesla"]').click();
   assert.equal(new URL(page.url()).searchParams.get('maker'), 'Tesla', 'Teslaクイック絞り込みをURLへ保存');
   assert.equal(await visibleCards(), 6, 'Teslaクイック絞り込みは6件');
@@ -72,7 +77,7 @@ try {
   assert.equal(await visibleCards(), 48, '条件内ハンズオフは48件');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-capability-shortcut="lane_change_support"]').click();
-  assert.equal(await visibleCards(), 44, '車線変更支援は44件');
+  assert.equal(await visibleCards(), 47, '車線変更支援は47件');
   await page.locator('[data-reset-shortcut]').click();
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo EX30' }).count(), 3, 'Volvo EX30の3販売単位を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Suzuki e VITARA' }).count(), 3, 'Suzuki e VITARAの3販売単位を既定一覧に表示');
@@ -110,7 +115,7 @@ try {
   await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://jidouunten.jp/og.png', 'OG画像は絶対URL');
-  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け153販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け157販売単位/, 'トップのdescription件数は公開データから生成');
   assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け139販売単位/, '古い固定件数を残さない');
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
@@ -128,7 +133,7 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 153, 'Level 2現行153件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 157, 'Level 2現行157件へ復帰');
   await levelMapPage.close();
   await page.goto(`${base}/levels/`);
   assert.match(await page.locator('.level-1').innerText(), /このサイトの車両一覧では対象外/, 'Level 1の取り扱いをレベル解説にも明記');
@@ -228,13 +233,13 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 153, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 157, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  assert.equal(await visibleCards(), 153, 'リセット後に既定153件');
+  assert.equal(await visibleCards(), 157, 'リセット後に既定157件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -267,7 +272,7 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '比較保存を削除すると再開バーを隠す');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 154, 'すべての状態で過去車両を含む154件');
+  assert.equal(await visibleCards(), 158, 'すべての状態で過去車両を含む158件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
@@ -322,6 +327,26 @@ try {
   assert.deepEqual({ vehicle_id: detailPurchaseEvent.vehicle_id, action_type: detailPurchaseEvent.action_type, placement: detailPurchaseEvent.placement }, { vehicle_id: 'jp-tesla-model-3-2026-premium', action_type: 'order', placement: 'vehicle_detail' }, '詳細の購入アクション計測');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '根拠URL・確認日は通常UIに出さない');
   await page.screenshot({ path: `${qaDir}/desktop-tesla-detail.png`, fullPage: false });
+
+  await page.goto(`${base}/cars/jp-hyundai-ioniq5-2025-voyage-l/`);
+  assert.match(await page.locator('main').innerText(), /Hyundai[\s\S]*IONIQ 5[\s\S]*Voyage L/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*4,994,000円[\s\S]*ハンズオフ[\s\S]*不可/, 'IONIQ 5 Voyage Lの公式価格と手保持条件を表示');
+  assert.match(await page.locator('main').innerText(), /HDA[\s\S]*車線中央維持/, 'IONIQ 5 Voyage LのHDA機能を平易に表示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /HDA2|車線変更支援/, 'IONIQ 5 Voyage LにHDA2・車線変更支援を誤表示しない');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 3, 'IONIQ 5詳細に試乗・見積り・カタログ導線');
+  assert.deepEqual(await page.locator('[data-purchase-action]').evaluateAll((links) => links.map((link) => ({ kind: link.dataset.actionType, href: link.getAttribute('href') }))), [
+    { kind: 'test_drive', href: 'https://www.hyundai.com/jp/purchase/test-drive' },
+    { kind: 'estimate', href: 'https://www.hyundai.com/jp/purchase/estimation/ioniq5/result?code=BFB&environment=indoor' },
+    { kind: 'catalog', href: 'https://www.hyundai.com/jp/purchase/downFile/ioniq5' },
+  ], 'IONIQ 5の公式アクションURLを保持');
+
+  await page.goto(`${base}/compare/?ids=jp-hyundai-ioniq5-2025-voyage-l&ids=jp-hyundai-ioniq5-2025-lounge-awd`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  const hyundaiCompare = await page.locator('[data-compare-result]').innerText();
+  assert.match(hyundaiCompare, /IONIQ 5[\s\S]*Voyage L[\s\S]*Lounge AWD/);
+  assert.match(hyundaiCompare, /4,994,000円[\s\S]*6,138,000円[\s\S]*車線変更支援/, 'IONIQ 5比較にグレード別価格とHDA/HDA2能力差');
+  assert.equal(await page.locator('[data-compare-result] [data-action-type="estimate"]').count(), 2, 'IONIQ 5比較に両車の公式見積り導線');
+  assert.doesNotMatch(hyundaiCompare, /sources|accessedAt|allowed_in_conditions|not_allowed/, 'IONIQ 5比較に内部根拠や内部enumを表示しない');
 
   await page.goto(`${base}/cars/jp-toyota-noah-2026-hybrid-sz-2wd-7seater-advanced-drive/`);
   assert.match(await page.locator('main').innerText(), /Toyota[\s\S]*ノア[\s\S]*HYBRID S-Z 2WD/);

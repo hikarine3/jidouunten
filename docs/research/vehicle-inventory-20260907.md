@@ -144,7 +144,7 @@ MINI Countrymanの限定仕様は通常カタログ8単位へ混在させない�
 | Mazda MX-30 EV | 現行掲載未確認 | 現行ラインアップ掲載を確認できず、ROTARY-EVと混ぜない |
 | Mazda MX-30 ROTARY-EV（ROTARY-EVグレード） | 対象外 | 2026年7月主要諸元・装備表でMRCCは標準だがCTSは「—」。縦横同時支援を確定できないため、Natural Monotoneのみ公開 |
 | Toyota Roomy / Raize / Hilux / Land Cruiser 70 / GR86 | 証拠不足 | LTA＋全車速ACCの現行グレード根拠が不足 |
-| Hyundai IONIQ 5 | 監視条件の証拠不足 | HDA2等の装備は確認したが、運転者責任・常時監視の日本向け明文が未確認 |
+| Hyundai IONIQ 5 | 掲載済み（4販売単位） | 価格ページ・2026年6月公式カタログでVoyage L／Voyage／Lounge／Lounge AWDとHDA/HDA2を照合。日本向け販売単位別の新車注文可否・HDA速度は未確認のため、availabilityと速度範囲はunknown |
 
 ## Mazdaの根拠（今回追加、内部保持）
 
@@ -424,4 +424,18 @@ LMと同じLexusでも、UX300hはハンズオフ不可・LCAなし・521万〜5
 | 2027年モデル3グレードと税込479万〜629万円 | ボルボ・カー・ジャパン | https://www.volvocars.com/jp/l/ex30/ | 2026-09-07 |
 | EX30のみオンラインで車両選択・契約・申込金支払いまで可能 | ボルボ・カー・ジャパン | https://www.volvocars.com/jp/l/electric-qa/ | 2026-09-11 |
 | 3グレードにPilot Assist、全車速追従ACC、ドライバーモニタリングカメラ付DACを標準装備。内容は2026年7月現在 | ボルボ・カー・ジャパン | https://azure-eu-assets.contentstack.com/v3/assets/blt84e01a6904dbd2e8/blt65613ad142855bdf/6a466a78035de07c64d4cca5/MY27_EX30_Ver2_W29%E4%BB%A5%E9%99%8D.pdf | 2026-09-07 |
-| Pilot Assistは速度・車間・操舵を支援し、運転者は両手保持と即時介入が必要 | Volvo Support JP | https://www.volvocars.com/jp/support/car/ex30/24w17/article/47d2c97fd33effd3c0a8cc3718c999b7-85596e53922f2e19c0a8cc42679c08ea-8664b2fa77a7e089c0a8296870d1a409/47d2c97fd33effd3c0a8cc3718c999b7-835992c35a0096eec0a8b0971dfcc685-8664b2fa77a7e089c0a8296870d1a409/47d2c97fd33effd3c0a8cc3718c999b7-69b1d5f35a03429ac0a8b0970ac5ed2e-8664b2fa77a7e089c0a8296870d1a409/54f1934e3fd57300c0a8b0c1194a56be-69b1d5f35a03429ac0a8b0970ac5ed2e-8664b2fa77a7e089c0a8296870d1a409/ | 2026-09-07 |
+| Pilot Assistは速度・車間・操舵を支援し、運転者は両手保持と即時介入が必要 | Volvo Support JP | https://www.volvocars.com/jp/support/car/ex30/24w17/article/47d2c97fd33effd3c0a8cc3718c999b7-85596e53922f2e19c0a8cc42679c08ea-8664b2fa77a7e089c0a8296870d1a409/47d2c97fd33effd3c0a8cc3718c999b7-835992c35a0096eec0a8b0971dfcc685-8664b2fa77a7e089c0a8296870d1a409/47d2c97fd33effd3c0a8b0970ac5ed2e-8664b2fa77a7e089c0a8296870d1a409/54f1934e3fd57300c0a8b0c1194a56be-69b1d5f35a03429ac0a8b0970ac5ed2e-8664b2fa77a7e089c0a8296870d1a409/ | 2026-09-07 |
+
+## Hyundai IONIQ 5の根拠（後発対策トランシェ）
+
+確認日は2026-09-11。Hyundai Mobility Japanの現行価格ページと2026年6月カタログから、The new IONIQ 5のVoyage L／Voyage／Lounge／Lounge AWDを4販売単位として登録した。価格は499万4,000円〜613万8,000円（税込）。Voyage LはHDA、他3グレードはHDA2（車線変更アシスト付）と公式表で区別されるため、同じLevel 2内の車線変更支援の有無を比較できるようにした。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| Voyage L／Voyage／Lounge／Lounge AWDの価格4,994,000円〜6,138,000円、HDA/HDA2のグレード別装備 | Hyundai Mobility Japan | https://www.hyundai.com/jp/ioniq5/price | 2026-09-11 |
+| 現行IONIQ 5のラインアップ、HDAによる高速道路の速度・車間・車線維持支援、ステアリング保持の感知 | Hyundai Mobility Japan | https://www.hyundai.com/jp/ioniq5 | 2026-09-11 |
+| 2026年6月現在のカタログ、Voyage LはHDA、Voyage/Lounge/Lounge AWDはHDA2（車線変更アシスト付） | Hyundai Mobility Japan | https://www.hyundai.com/jp/purchase/downFile/ioniq5 | 2026-09-11 |
+| The new IONIQ 5を2025年モデル以降として掲載 | Hyundai Mobility Japan | https://www.hyundai.com/jp/customer-service/notice/679 | 2026-09-11 |
+| HDA2は高速道路で車間・速度・車線中央維持を支援し、ウインカー操作時に車線変更をアシスト | Hyundai Mobility Japan | https://www.hyundai.com/jp/ioniq5 | 2026-09-11 |
+
+4単位はスマートクルーズコントロール（縦方向）とHDA/LFA（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。HDA/HDA2は高速道路の運転支援であり、ステアリング保持・前方監視・必要時の即時操作が必要なためhandsOffは`not_allowed`、driverMonitoringは`required`とした。日本公式で販売単位ごとの新車注文可否やHDAの速度数値を固定できないため、availabilityと速度範囲は`unknown`のまま保持し、価格だけで受注可能とは表示しない。

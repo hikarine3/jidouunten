@@ -254,14 +254,14 @@
         {"url": "/cars/jp-mini-countryman-u25-john-cooper-works-all4/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-john-cooper-works-all4/index.html", "markers": ["MINI", "Countryman", "JOHN COOPER WORKS COUNTRYMAN ALL4", "Level 2"]},
         {"url": "/cars/jp-mini-countryman-u25-e/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-e/index.html", "markers": ["MINI", "Countryman", "E", "Level 2"]},
         {"url": "/cars/jp-mini-countryman-u25-se-all4/", "locale": "ja", "output_path": "dist/cars/jp-mini-countryman-u25-se-all4/index.html", "markers": ["MINI", "Countryman", "SE ALL4", "Level 2"]},
-        {"url": "/compare/", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["MINI", "Countryman", "C SELECT", "SE ALL4"]},
+        {"url": "/compare/?ids=jp-mini-countryman-u25-c-select&ids=jp-mini-countryman-u25-se-all4", "locale": "ja", "output_path": "dist/compare/index.html", "markers": ["MINI", "Countryman", "C SELECT", "SE ALL4"]},
         {"url": "/sitemap-0.xml", "locale": "ja", "output_path": "dist/sitemap-0.xml", "markers": ["jp-mini-countryman-u25-c-select", "jp-mini-countryman-u25-se-all4"]}
       ],
       "required_render_selectors": [
         {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["MINI", "Countryman", "C SELECT"]},
         {"url": "/", "selector": "[data-vehicle-shell]:not([hidden])", "markers": ["MINI", "Countryman", "SE ALL4"]},
         {"url": "/cars/jp-mini-countryman-u25-c-select/", "selector": "main", "markers": ["MINI", "Countryman", "C SELECT", "Level 2"]},
-        {"url": "/compare/", "selector": "[data-compare-result]", "markers": ["MINI", "Countryman", "C SELECT", "SE ALL4"]}
+        {"url": "/compare/?ids=jp-mini-countryman-u25-c-select&ids=jp-mini-countryman-u25-se-all4", "selector": "[data-compare-result]", "markers": ["MINI", "Countryman", "C SELECT", "SE ALL4"]}
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
@@ -1451,7 +1451,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Lexus","UX300h","LEVEL 2","日本向け139販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Lexus","UX300h","LEVEL 2","日本向け157販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Lexus","UX300h","LEVEL 2"]},
         {"url":"/cars/jp-lexus-ux-2026-ux300h-shining-essence-2wd/","locale":"ja","output_path":"dist/cars/jp-lexus-ux-2026-ux300h-shining-essence-2wd/index.html","markers":["Lexus","UX300h","Shining Essence” 2WD","5,210,000円","Level 2","ハンズオフ：不可","ステアリング"]},
         {"url":"/cars/jp-lexus-ux-2026-ux300h-version-l-awd/","locale":"ja","output_path":"dist/cars/jp-lexus-ux-2026-ux300h-version-l-awd/index.html","markers":["Lexus","UX300h","version L” AWD","5,757,000円","Level 2","ハンズオフ：不可"]},
@@ -1481,7 +1481,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","カローラ クロス","LEVEL 2","日本向け153販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","カローラ クロス","LEVEL 2","日本向け157販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","カローラ クロス","LEVEL 2"]},
         {"url":"/cars/jp-toyota-corolla-cross-2026-z-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-z-2wd/index.html","markers":["カローラ クロス","Z（2WD）","3,613,500円","Level 2","ハンズオフ：不可"]},
         {"url":"/cars/jp-toyota-corolla-cross-2026-z-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-z-e-four/index.html","markers":["カローラ クロス","Z（E-Four）","3,872,000円","Level 2","ハンズオフ：不可"]},
@@ -1498,6 +1498,31 @@
         {"url":"/cars/jp-toyota-corolla-cross-2026-z-2wd/","selector":"main","markers":["カローラ クロス","Z（2WD）","3,613,500円","Level 2","ハンズオフ：不可","ステアリングを常に保持"]},
         {"url":"/cars/jp-toyota-corolla-cross-2026-gr-sport-e-four/","selector":"main","markers":["カローラ クロス","GR SPORT","4,077,700円","Level 2","ハンズオフ：不可"]},
         {"url":"/compare/?ids=jp-toyota-corolla-cross-2026-z-2wd&ids=jp-toyota-corolla-cross-2026-s-e-four","selector":"[data-compare-result]","markers":["カローラ クロス","Z（2WD）","S（E-Four）","車線変更支援"]}
+      ],
+      "historical_markers": [],
+      "refresh_entrypoint": "npm run build"
+    },
+    "vehicle:hyundai-jp-ioniq5-2025": {
+      "entity_id": "vehicle:hyundai-jp-ioniq5-2025",
+      "entity_type": "vehicle_catalog_entries",
+      "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+      "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+      "surfaces": [
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Hyundai","IONIQ 5","LEVEL 2"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Hyundai","IONIQ 5","LEVEL 2"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-voyage-l/","locale":"ja","output_path":"dist/cars/jp-hyundai-ioniq5-2025-voyage-l/index.html","markers":["IONIQ 5","Voyage L","4,994,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-voyage/","locale":"ja","output_path":"dist/cars/jp-hyundai-ioniq5-2025-voyage/index.html","markers":["IONIQ 5","Voyage","5,236,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-lounge/","locale":"ja","output_path":"dist/cars/jp-hyundai-ioniq5-2025-lounge/index.html","markers":["IONIQ 5","Lounge","5,742,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-lounge-awd/","locale":"ja","output_path":"dist/cars/jp-hyundai-ioniq5-2025-lounge-awd/index.html","markers":["IONIQ 5","Lounge AWD","6,138,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-hyundai-ioniq5-2025-voyage-l&ids=jp-hyundai-ioniq5-2025-lounge-awd","locale":"ja","output_path":"dist/compare/index.html","markers":["IONIQ 5","Voyage L","Lounge AWD","4,994,000円","6,138,000円"]},
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-hyundai-ioniq5-2025-voyage-l","jp-hyundai-ioniq5-2025-lounge-awd"]}
+      ],
+      "required_render_selectors": [
+        {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-hyundai-ioniq5-2025-voyage-l\"])","markers":["Hyundai","IONIQ 5","Voyage L"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-voyage-l/","selector":"main","markers":["IONIQ 5","Voyage L","4,994,000円","Level 2","ハンズオフ：不可","ステアリング","試乗を申し込む","見積りシミュレーション","カタログを見る"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-voyage/","selector":"main","markers":["IONIQ 5","Voyage","5,236,000円","車線変更支援"]},
+        {"url":"/cars/jp-hyundai-ioniq5-2025-lounge-awd/","selector":"main","markers":["IONIQ 5","Lounge AWD","6,138,000円","Level 2","ハンズオフ：不可"]},
+        {"url":"/compare/?ids=jp-hyundai-ioniq5-2025-voyage-l&ids=jp-hyundai-ioniq5-2025-lounge-awd","selector":"[data-compare-result]","markers":["IONIQ 5","Voyage L","Lounge AWD","4,994,000円","6,138,000円","車線変更支援"]}
       ],
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
