@@ -31,6 +31,7 @@ describe('vehicle data contract and filters', () => {
       makeVehicle({ id: 'other', maker: 'Honda', capabilities: ['lane_change_support'] }),
     ];
     expect(filterVehicleList(list, { maker: 'Tesla', capability: 'lane_change_support' }).map((vehicle) => vehicle.id)).toEqual(['tesla-match']);
+    expect(filterVehicleList(list, { capability: ['lane_centering', 'lane_change_support'] }).map((vehicle) => vehicle.id)).toEqual(['tesla-match']);
   });
 
   it('sorts by confirmed introduction date and leaves unknown dates last', () => {

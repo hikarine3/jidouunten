@@ -216,7 +216,7 @@ export function displayDate(date: string) {
 export function filterVehicles(input: {
   level?: string | number;
   maker?: string;
-  capability?: string;
+  capability?: string | string[];
   road?: string;
   handsOff?: string;
   availability?: string;
@@ -234,20 +234,21 @@ export function isDefaultListedVehicle(vehicle: Pick<Vehicle, 'availability' | '
 export function filterVehicleList(list: Vehicle[], input: {
   level?: string | number;
   maker?: string;
-  capability?: string;
+  capability?: string | string[];
   road?: string;
   handsOff?: string;
   availability?: string;
   budget?: string;
 }) {
   const level = input.level === undefined || input.level === '' ? undefined : Number(input.level);
+  const capabilities = Array.isArray(input.capability) ? input.capability : input.capability ? [input.capability] : [];
   return list.filter((vehicle) => {
     // Unknown order status remains visible as a review candidate, but is never
     // presented as orderable. Explicitly excluded records can opt out.
     if (!input.availability && !isDefaultListedVehicle(vehicle)) return false;
     if (level !== undefined && vehicle.automationLevel !== level) return false;
     if (input.maker && vehicle.maker !== input.maker) return false;
-    if (input.capability && !vehicle.capabilities.includes(input.capability)) return false;
+    if (!capabilities.every((capability) => vehicle.capabilities.includes(capability))) return false;
     if (input.road && !vehicle.odd.roadTypes.some((road) => canonicalRoadType(road) === input.road)) return false;
     if (input.handsOff && vehicle.handsOff !== input.handsOff) return false;
     if (input.availability && input.availability !== 'all' && vehicle.availability !== input.availability) return false;

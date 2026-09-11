@@ -37,6 +37,9 @@ try {
   assert.equal(await visibleCards(), 153, '既定カタログは現行確認153件');
   assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*153[\s\S]*条件内可[\s\S]*48[\s\S]*不可[\s\S]*104[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*44/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
+  assert.match(await page.locator('[data-level-shortcut="1"]').innerText(), /対象外/, 'Level 1を0件ではなく対象外として表示');
+  assert.equal(await page.locator('[data-level-shortcut="1"]').isDisabled(), true, '対象外のLevel 1は絞り込みボタンを無効化');
+  assert.match(await page.locator('.level-scope-note').innerText(), /Level 1.*対象外/, '車両一覧の取り扱い範囲を明記');
   assert.match(await page.locator('[data-level-shortcut="3"]').innerText(), /L3[\s\S]*条件付自動運転[\s\S]*過去例 1件/, 'Level 3の過去例を現行車と区別');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, 'Tesla Model 3 / Model Yの6販売仕様を既定一覧に表示');
   await page.locator('[data-maker-shortcut="Tesla"]').click();
@@ -128,6 +131,7 @@ try {
   assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 153, 'Level 2現行153件へ復帰');
   await levelMapPage.close();
   await page.goto(`${base}/levels/`);
+  assert.match(await page.locator('.level-1').innerText(), /このサイトの車両一覧では対象外/, 'Level 1の取り扱いをレベル解説にも明記');
   const level3Link = page.locator('.level-3 a');
   assert.match(await level3Link.getAttribute('href'), /level=3&availability=all/, 'Level 3は過去例を含む一覧へ遷移');
   await level3Link.click();
@@ -155,7 +159,18 @@ try {
 
   await page.goto(`${base}/?capability=lane_change_support&maker=Mazda`);
   assert.equal(await visibleCards(), 2, 'メーカーと能力をAND条件で絞り込む');
-  assert.equal(await page.locator('select[name="capability"]').inputValue(), 'lane_change_support', '能力条件をURLから復元');
+  assert.equal(await page.locator('input[name="capability"][value="lane_change_support"]').isChecked(), true, '能力条件をURLから復元');
+  await page.goto(`${base}/?capability=traffic_jam_assist&capability=hands_off_highway`);
+  assert.equal(await visibleCards(), 43, '能力チェックは複数選択をAND条件で適用');
+  assert.equal(await page.locator('input[name="capability"]:checked').count(), 2, '能力チェックを2つ選択');
+  await page.goto(`${base}/`);
+  const guideButton = page.locator('[data-guide="traffic-hands-off"]');
+  assert.equal(await guideButton.isVisible(), true, '使い方ガイドを表示');
+  await guideButton.click();
+  assert.equal(new URL(page.url()).searchParams.get('level'), '2', '使い方ガイドがLevel 2を設定');
+  assert.equal(new URL(page.url()).searchParams.get('handsOff'), 'allowed_in_conditions', '使い方ガイドがハンズオフ条件を設定');
+  assert.equal(new URL(page.url()).searchParams.get('capability'), 'traffic_jam_assist', '使い方ガイドが必要能力を設定');
+  assert.equal(await visibleCards(), 34, '使い方ガイドが高速道路・渋滞・条件内ハンズオフへ絞り込む');
 
   await page.goto(`${base}/?sort=maker_asc`);
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').first().innerText(), /^LEVEL 2[\s\S]*BMW/, 'メーカー名順へ切替');
