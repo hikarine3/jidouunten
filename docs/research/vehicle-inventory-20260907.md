@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 315 | `src/data/vehicles.json` の全レコード（現行314 + 過去1） |
-| 既定表示 | 314 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 323 | `src/data/vehicles.json` の全レコード（現行322 + 過去1） |
+| 既定表示 | 322 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -27,6 +27,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Honda ZR-V / 後発対策） | 4 | e:HEV X／e:HEV ZのFF・4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
 | 今回追加（Toyota クラウン スポーツ / 後発対策） | 4 | SPORT RS／SPORT Z（PHEV・HEV）／SPORT GのE-Four。価格532万7,300円〜777万7,000円、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・条件内ハンズオフ、GはACC・LTAのみとして能力差を販売単位へ固定 |
 | 今回追加（Honda ステップ ワゴン / 後発対策） | 10 | e:HEV AIR EX／SPADA／SPADA PREMIUM LINEとAIR EX／AIR／SPADA／SPADA PREMIUM LINEのFF・4WD。価格334万8,400円〜426万8,000円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
+| 今回追加（Honda フリード CROSSTAR / 後発対策） | 8 | e:HEV／ガソリン CROSSTARのFF・4WD、5／6人乗り。価格292万8,200円〜360万2,500円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定。Advanced Driveの0〜約40km/hとLCAの約85〜130km/h、T-Connect／コネクティッドナビ契約・地図条件も単位ごとに保持 |
@@ -91,6 +92,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | アルファード Z HEV 2WD / E-Four（7人乗り）、G HEV 2WD / E-Four（8人乗り） | 掲載（4単位） | 2相当 | 2026-09-10 |
 | Honda | VEZEL e:HEV Z FF / 4WD | 掲載（2単位） | 2相当 | 2026-09-10 |
 | Honda | ZR-V e:HEV X／e:HEV Z FF / 4WD | 掲載（現行4単位、Honda SENSING標準・ハンズオフ不可）／注文可否 未確認 | 2相当 | 2026-09-11 |
+| Honda | フリード e:HEV CROSSTAR／CROSSTAR FF・4WD（5／6人乗り） | 掲載（現行8単位、Honda SENSING標準・ハンズオフ不可）／注文可否 未確認 | 2相当 | 2026-09-12 |
 | Toyota | ヴェルファイア Executive Lounge PHEV E-Four（6人）、Executive Lounge HEV 2WD/E-Four（7人）、Z Premier HEV 2WD/E-Four、Z Premier ターボガソリン 2WD/4WD（7人） | 掲載（7単位） | 2相当 | 2026-09-10 |
 | Toyota | ヴォクシー S-Z/S-G 2WD・E-Four（7人）、S-G 2WD（8人）、S-G マルチユーティリティ（2WD・5人） | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Toyota | ノア HYBRID S-Z/S-G/S-X 2WD・E-Four（7人）、S-G/S-X 2WD（8人） | 掲載（8単位） | 2相当 | 2026-09-10 |
@@ -843,3 +845,32 @@ Honda公式のステップ ワゴン現行商品ページ、タイプ一覧、�
 | e:HEV SPADA PREMIUM LINE〈FF〉 | 4,268,000円 | FF・7名 | ハイブリッド・上位グレード |
 
 根拠: [STEP WGN現行商品ページ](https://www.honda.co.jp/STEPWGN/)、[タイプ一覧](https://www.honda.co.jp/STEPWGN/webcatalog/type/list/)、[価格・タイプJSON](https://www.honda.co.jp/STEPWGN/common/data/type.json)、[性能・安全](https://www.honda.co.jp/STEPWGN/webcatalog/performance/)、[Honda TJA説明](https://www.honda.co.jp/hondasensing/sensing/tja/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。公式の商品・販売店・試乗・見積り・カタログ導線は `src/data/official-links.json` に記録した。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。
+
+## 2026-09-12 Honda フリード CROSSTAR 8販売単位追加
+
+Honda公式のフリード現行商品ページ、タイプ一覧JSON、性能・安全ページを照合し、通常乗用のCROSSTAR 8販売単位を追加した。e:HEV CROSSTAR／CROSSTARのFF・4WDと5／6人乗りを別単位に分け、福祉車両（スロープ／リフトアップシート）とAIR系は今回のCROSSTARトランシェから除外した。
+
+価格はすべて税込メーカー希望小売価格で、292万8,200円（CROSSTAR〈FF・5人乗り〉）〜360万2,500円（e:HEV CROSSTAR〈4WD・6人乗り〉）。個別販売単位の発売日・価格適用日・受注可否は現行ページで固定できないため、`salesUnitIntroducedAt=null`、`priceEffectiveAt=null`、`availability=unknown`、`catalogAsOf=2026-09`とした。
+
+全8単位でHonda SENSINGのACC（縦方向）とLKAS・トラフィックジャムアシスト（横方向）を確認し、国土交通省の定義に照合してサイト上はLevel 2相当とした。トラフィックジャムアシストは約0〜65km/h、LKASは約65〜120km/hの条件付き支援で、手放しでは作動しない。運転者の常時監視・ステアリング保持が必要なため `handsOff=not_allowed`、`driverMonitoring=required` とし、自動車線変更・車線変更支援は付与していない。
+
+| 販売単位 | 価格（税込） | 駆動・定員 | 同じLevel 2内の差分 |
+|---|---:|---|---|
+| CROSSTAR〈FF・5人乗り〉 | 2,928,200円 | FF・5人 | ガソリンの価格下限 |
+| CROSSTAR〈FF・6人乗り〉 | 2,972,200円 | FF・6人 | 6人乗り差 |
+| CROSSTAR〈4WD・5人乗り〉 | 3,159,200円 | 4WD・5人 | 4WD差 |
+| CROSSTAR〈4WD・6人乗り〉 | 3,203,200円 | 4WD・6人 | 4WD・6人乗り |
+| e:HEV CROSSTAR〈FF・5人乗り〉 | 3,327,500円 | FF・5人 | e:HEVの価格下限 |
+| e:HEV CROSSTAR〈FF・6人乗り〉 | 3,371,500円 | FF・6人 | e:HEV・6人乗り |
+| e:HEV CROSSTAR〈4WD・5人乗り〉 | 3,558,500円 | 4WD・5人 | e:HEV・4WD |
+| e:HEV CROSSTAR〈4WD・6人乗り〉 | 3,602,500円 | 4WD・6人 | 価格上限 |
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| フリード現行商品ページ | 本田技研工業株式会社 | https://www.honda.co.jp/FREED/ | 2026-09-12 |
+| CROSSTARのFF／4WD・5／6人乗りと税込価格 | 本田技研工業株式会社 | https://www.honda.co.jp/FREED/common/data/type.json | 2026-09-12 |
+| Honda SENSING、ACC・LKAS・トラフィックジャムアシスト、運転者監視 | 本田技研工業株式会社 | https://www.honda.co.jp/FREED/webcatalog/performance/ | 2026-09-12 |
+| トラフィックジャムアシストの約0〜65km/h条件・手放し不可 | 本田技研工業株式会社 | https://www.honda.co.jp/hondasensing/sensing/tja/ | 2026-09-12 |
+| 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
+
+根拠: [FREED商品ページ](https://www.honda.co.jp/FREED/)、[タイプ一覧JSON](https://www.honda.co.jp/FREED/common/data/type.json)、[性能・安全](https://www.honda.co.jp/FREED/webcatalog/performance/)、[Honda TJA説明](https://www.honda.co.jp/hondasensing/sensing/tja/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。公式の商品・販売店・試乗・見積り・カタログ導線は `src/data/official-links.json` に記録した。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。
