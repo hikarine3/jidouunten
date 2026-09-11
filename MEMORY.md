@@ -2,6 +2,13 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 Volvo EX30注文導線の事実範囲（実装・本番反映済み）
+
+- Volvo公式Q&AでEX30車種がオンライン契約対象であることを確認したが、2027年のPlus P5／Ultra P5 Long Range／Ultra P8 AWD各グレードの受注・在庫条件までは示されない。3販売単位の`availability`は`unknown`を維持し、詳細には「注文可否：未確認」と表示する。
+- 詳細の「オンラインで注文」は車種単位の公式導線への参考リンクとして保持。外部ショップは実行環境で403だったため、疎通成功や受注可能の根拠にはしていない。
+- exact app `907b7a556b4195634e38dbc4f4271c9eccfd3cc5`、Production `https://jidouunten.jp/`、immutable `https://4a8c18d3.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- QA: Vitest41/41、価格154/154（現行153/153）、公式導線38モデル/40 actions、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build160、ローカル・immutable・本番E2E各シナリオ1/1、主要URL HTTP200。独立価値監査・リリース監査PASS。
+
 ## 2026-09-11 Level 2用途ガイド・能力AND絞り込み（実装・本番反映済み）
 
 - 一覧トップをLevel 2〜3の比較対象として明示し、Level 1は「対象外」、Level 4/5は「掲載なし」と表示。Level 2の大量候補を用途ガイド（渋滞時ハンズオフ／車線変更支援／300万円未満）から一クリックで縮められるようにした。
