@@ -247,7 +247,7 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 
 | 候補 | 未確認の理由 | 次回確認先 |
 |---|---|---|
-| Tesla Model S / Model X | 日本向け公式サポート情報は確認できるが、現行カタログのモデル年・グレード・注文可否を一次情報で確認できない | Tesla Japanの現行デザインスタジオ・日本向けカタログ |
+| Tesla Model S / Model X | 2026-09-11再確認。日本向け現行価格表・グレード・注文導線がなく、Model Xの商品URLはTesla Japanトップへ遷移。公式マニュアルにACC／Autosteer／Auto Lane Changeはあるが、既存車両・アフターサービス情報から国内新車販売単位へは解決できないため対象外・保留 | Tesla Japanの現行デザインスタジオ・日本向け価格表・注文導線（再掲載時に再調査） |
 | Toyota / Lexusの現行Toyota Safety Sense / Lexus Safety System+搭載車 | Toyota 20モデル、Lexus 12モデルをモデル候補まで確認。販売単位ごとの標準／オプション、仕様期、価格、取説の照合は未完 | 各ブランド日本公式カタログ・主要装備表・取扱説明書 |
 | Mercedes-Benzの現行運転支援搭載車 | 日本仕様の販売単位と監視条件を未確認 | Mercedes-Benz Japan公式モデルページ・取扱説明書 |
 | BMWの3シリーズ以外の現行Driving Assistant搭載車 | 日本仕様のグレード別装備を未確認 | BMW Japan公式モデルページ・取扱説明書 |
@@ -258,6 +258,14 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 | Mitsubishi / Suzuki / Daihatsuの一次確認候補 | OUTLANDER PHEV 9単位とe VITARA 3単位は掲載済み。ECLIPSE CROSS、eKクロス、eKクロス EV、eKスペース、デリカミニ等はMI-PILOTの標準／メーカーオプションと現行価格の販売単位展開を継続中 | 各社日本公式グレード表・装備表・取扱説明書 |
 | BMW限定車 / Mモデル・MINIの一次確認候補 | BMW通常3シリーズ9単位とMINI Countryman通常8単位は掲載済み。BMW限定車・M3、MINI Countryman Shadow Edition / Slate Blueは通常単位と分けて確認待ち | 各社日本公式装備価格表・取扱説明書 |
 | Audi / Mercedes-Benz / Porsche等 | モデル単位の支援機能は確認できるが、グレード別の標準／オプションと販売状態の確認が未完 | 各社日本公式装備価格表・コンフィギュレーター |
+
+## 2026-09-11 Tesla Model S / Model X再確認
+
+Tesla Model S／Model Xは、日本向けの現行新車販売単位として追加できる一次根拠がないため、2車種とも登録可能な販売単位を0件とした。Model Sの日本向け商品ページは確認できず、Model Xの`https://www.tesla.com/ja_JP/modelx`はTesla Japanトップへ遷移する。Tesla Japanの[補助金・エコカー減税ページ](https://www.tesla.com/ja_JP/support/incentives)に現行販売価格・注文リンクとして掲載されるのはModel 3、Model Y、Model Y Lで、S／Xは含まれない。
+
+日本向けの[Model Sオーナーズマニュアル](https://www.tesla.com/ownersmanual/models/en_jp/)と[Model Xオーナーズマニュアル](https://www.tesla.com/ownersmanual/modelx/ja_jp/)にはTraffic-Aware Cruise Control、Autosteer、Auto Lane Changeの説明がある。しかしこれは既存車両やソフトウェアのサポート情報であり、現行国内の価格・グレード・注文可能性を証明しない。手放し不可・運転者監視が必要な組合せはLevel 2相当の暫定分類材料にはなるが、販売単位へ紐付ける根拠がないため公開データへ流用しない。
+
+注文・納車サポートや延長保証ページにS／Xの名称が残る場合も、既存車両・アフターサービス対象を示すだけで現行新車販売の証拠とは扱わない。Tesla JapanがS／Xの国内価格表または注文可能なデザインスタジオを再掲載した時点で、価格・グレード・hardware／software・注文状態を再調査する。確認日: 2026-09-11。
 
 この台帳の未確認ブランド／モデル群を確認するまでは、サイト全体の国内候補を「網羅」と主張しない。L1のみ、発売予定、過去車両、Level 4サービスは別区分として追加調査する。
 
