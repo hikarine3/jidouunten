@@ -152,14 +152,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(297);
+    expect(vehicles).toHaveLength(301);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補296件は全件の公式金額を保持する', () => {
+  it('現行候補300件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(296);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(296);
+    expect(current).toHaveLength(300);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(300);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -229,7 +229,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(60);
+    expect(officialLinks).toHaveLength(61);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -250,6 +250,7 @@ describe('vehicle data contract and filters', () => {
     const expandedActionModels = new Map([
       ['Honda\u0000ACCORD', ['dealer', 'test_drive', 'estimate', 'catalog']],
       ['Honda\u0000VEZEL', ['dealer', 'test_drive', 'estimate', 'catalog']],
+      ['Honda\u0000ZR-V', ['dealer', 'test_drive', 'estimate', 'catalog']],
       ['Nissan\u0000日産アリア', ['dealer', 'test_drive', 'estimate', 'catalog']],
       ['Nissan\u0000セレナ', ['dealer', 'test_drive', 'estimate', 'catalog']],
       ['Nissan\u0000エクストレイル', ['dealer', 'test_drive', 'estimate', 'catalog']],
@@ -268,7 +269,7 @@ describe('vehicle data contract and filters', () => {
     const mitsubishiActions = officialLinks.find(({ maker, model }) => maker === 'Mitsubishi' && model === 'アウトランダーPHEV')?.actions ?? [];
     expect(mitsubishiActions.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'estimate', 'dealer', 'catalog']);
     expect(mitsubishiActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(83);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(87);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
@@ -633,6 +634,19 @@ describe('vehicle data contract and filters', () => {
     expect(vezel.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => a! - b!)).toEqual([3_268_100, 3_488_100]);
     expect(vezel.every((vehicle) => vehicle.modelYear === '2026' && vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed' && vehicle.odd.speedKph.max === 120)).toBe(true);
     expect(vezel.every((vehicle) => vehicle.sources.some((source) => source.url.includes('/ownersmanual/webom/jpn/vezel/2026/')))).toBe(true);
+  });
+
+  it('Honda ZR-V e:HEV X／ZはFF・4WDを分け、Honda SENSINGと価格を保持する', () => {
+    const zrV = vehicles.filter((vehicle) => vehicle.model === 'ZR-V');
+    expect(zrV).toHaveLength(4);
+    expect(zrV.map((vehicle) => vehicle.grade).sort()).toEqual(['e:HEV X〈4WD〉', 'e:HEV X〈FF〉', 'e:HEV Z〈4WD〉', 'e:HEV Z〈FF〉'].sort());
+    expect(zrV.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => a! - b!)).toEqual([3_707_000, 3_927_000, 4_307_600, 4_527_600]);
+    expect(zrV.every((vehicle) => vehicle.currentCatalogListed && vehicle.modelYear === null && vehicle.catalogAsOf === '2026-09' && vehicle.salesUnitIntroducedAt === null && vehicle.priceEffectiveAt === null)).toBe(true);
+    expect(zrV.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(zrV.every((vehicle) => vehicle.odd.speedKph.min === 0 && vehicle.odd.speedKph.max === 120 && vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist')).toBe(true);
+    expect(zrV.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.honda.co.jp/ZR-V/webcatalog/performance/' && source.supports.some((fact) => fact.includes('Honda SENSING'))))).toBe(true);
+    expect(zrV.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.honda.co.jp/hondasensing/sensing/tja/' && source.supports.some((fact) => fact.includes('手放し'))))).toBe(true);
+    expect(officialLinkFor(zrV[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
   });
 
   it('Toyota ノア現行HEV全8販売単位を価格・定員・能力差つきで保持する', () => {

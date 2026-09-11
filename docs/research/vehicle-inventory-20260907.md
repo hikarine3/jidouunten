@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 297 | `src/data/vehicles.json` の全レコード（現行296 + 過去1） |
-| 既定表示 | 296 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 301 | `src/data/vehicles.json` の全レコード（現行300 + 過去1） |
+| 既定表示 | 300 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -24,6 +24,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota ハリアー / 後発対策） | 6 | G・Z・Z“Leather Package”の2WD/E-Four。2026年8月価格、ACC・LTA・停止保持・ハンドル保持要求を販売単位へ固定し、根拠がないLCA・ドライバーモニターは付与しない |
 | 今回追加（Toyota アルファード / 後発対策） | 4 | Z/G HEVの2WD/E-Four・7/8人乗り。2026年6月価格、ACC・LTA・ステアリング保持要求を販売単位へ固定 |
 | 今回追加（Honda VEZEL / 後発対策） | 2 | e:HEV ZのFF/4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
+| 今回追加（Honda ZR-V / 後発対策） | 4 | e:HEV X／e:HEV ZのFF・4WD。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）、約0〜120km/hの条件、公式価格を販売単位へ固定 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定。Advanced Driveの0〜約40km/hとLCAの約85〜130km/h、T-Connect／コネクティッドナビ契約・地図条件も単位ごとに保持 |
@@ -86,6 +87,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | ハリアー G（2WD/E-Four） / Z（2WD/E-Four） / Z“Leather Package”（2WD/E-Four） | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Toyota | アルファード Z HEV 2WD / E-Four（7人乗り）、G HEV 2WD / E-Four（8人乗り） | 掲載（4単位） | 2相当 | 2026-09-10 |
 | Honda | VEZEL e:HEV Z FF / 4WD | 掲載（2単位） | 2相当 | 2026-09-10 |
+| Honda | ZR-V e:HEV X／e:HEV Z FF / 4WD | 掲載（現行4単位、Honda SENSING標準・ハンズオフ不可）／注文可否 未確認 | 2相当 | 2026-09-11 |
 | Toyota | ヴェルファイア Executive Lounge PHEV E-Four（6人）、Executive Lounge HEV 2WD/E-Four（7人）、Z Premier HEV 2WD/E-Four、Z Premier ターボガソリン 2WD/4WD（7人） | 掲載（7単位） | 2相当 | 2026-09-10 |
 | Toyota | ヴォクシー S-Z/S-G 2WD・E-Four（7人）、S-G 2WD（8人）、S-G マルチユーティリティ（2WD・5人） | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Toyota | ノア HYBRID S-Z/S-G/S-X 2WD・E-Four（7人）、S-G/S-X 2WD（8人） | 掲載（8単位） | 2相当 | 2026-09-10 |
@@ -779,3 +781,26 @@ SUBARU公式の現行グレード一覧、2026年5月装備表、安全性能ペ
 | NISMO Advanced Package e-4ORCE | 5,962,000円 | 4WD・2列 | NISMO上位パッケージ |
 
 根拠: [エクストレイル現行商品ページ](https://www3.nissan.co.jp/vehicles/new/x-trail.html)、[価格・グレード](https://www3.nissan.co.jp/vehicles/new/x-trail/specifications.html)、[プロパイロット](https://www3.nissan.co.jp/vehicles/new/x-trail/performance_safety/propilot.html)、[通常／ROCK CREEK装備表（2026.08）](https://www-asia.nissan-cdn.net/content/dam/Nissan/jp/vehicles/x-trail/2608/pdf/x-trail_2608_specsheet.pdf)、[NISMO装備表](https://www-asia.nissan-cdn.net/content/dam/Nissan/jp/vehicles/x-trail/2608/pdf/x-trail_2608_nismo_specsheet.pdf)、[AUTECH装備表](https://www-asia.nissan-cdn.net/content/dam/Nissan/jp/vehicles/x-trail/2608/pdf/x-trail_2608_autech_autech_sports_specsheet.pdf)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。
+
+## 2026-09-11 Honda ZR-V 4販売単位追加
+
+Honda公式の現行商品・タイプ一覧、e:HEV X／Zの価格ページ、性能・安全ページ、トラフィックジャムアシスト説明を照合し、ZR-Vの通常4販売単位を登録した。e:HEV X／e:HEV ZのFF・4WDを別単位とし、価格は370万7,000円〜452万7,600円（税込、メーカー希望小売価格）。個別の販売単位導入日・価格適用日は現行ページで固定できないため、`salesUnitIntroducedAt=null`、`priceEffectiveAt=null`、`catalogAsOf=2026-09`とした。BLACK STYLE／CROSS TOURINGは特別仕様車のため通常グレード束から保留した。
+
+全4単位でHonda SENSINGのACC（縦方向）、LKAS・トラフィックジャムアシスト（横方向）を確認し、国土交通省の定義に照合してサイト上はLevel 2相当とした。TJAは約0〜65km/hの渋滞時支援、LKASは約65〜120km/hの条件付きで、手放しでは作動しない。運転者の常時監視・ステアリング保持が必要なため、`handsOff=not_allowed`、`driverMonitoring=required`とし、自動車線変更・車線変更支援は付与していない。現行商品ページ掲載とセルフ見積り・販売店・試乗・カタログ導線は確認したが、実注文・在庫・納期は確認できないため`availability=unknown`を維持する。
+
+| 販売単位 | 価格（税込） | 駆動・定員 | 同じLevel 2内の差分 |
+|---|---:|---|---|
+| e:HEV X〈FF〉 | 3,707,000円 | FF・5人 | エントリー価格。Honda SENSING標準 |
+| e:HEV X〈4WD〉 | 3,927,000円 | 4WD・5人 | Xの4WD差 |
+| e:HEV Z〈FF〉 | 4,307,600円 | FF・5人 | Zの装備差・価格差 |
+| e:HEV Z〈4WD〉 | 4,527,600円 | 4WD・5人 | Zの4WD差・価格上限 |
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| ZR-V現行商品・2026年3月26日一部改良掲載 | 本田技研工業株式会社 | https://www.honda.co.jp/ZR-V/ | 2026-09-11 |
+| e:HEV X／ZのFF・4WD価格 | 本田技研工業株式会社 | https://www.honda.co.jp/ZR-V/webcatalog/type/list/ ／ https://www.honda.co.jp/ZR-V/webcatalog/type/x/ ／ https://www.honda.co.jp/ZR-V/webcatalog/type/z/ | 2026-09-11 |
+| Honda SENSING、ACC・LKAS・トラフィックジャムアシスト、運転者監視 | 本田技研工業株式会社 | https://www.honda.co.jp/ZR-V/webcatalog/performance/ | 2026-09-11 |
+| トラフィックジャムアシストの約0〜65km/h条件・手放し不可 | 本田技研工業株式会社 | https://www.honda.co.jp/hondasensing/sensing/tja/ | 2026-09-11 |
+| 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-11 |
+
+根拠: [ZR-V商品ページ](https://www.honda.co.jp/ZR-V/)、[タイプ一覧](https://www.honda.co.jp/ZR-V/webcatalog/type/list/)、[性能・安全](https://www.honda.co.jp/ZR-V/webcatalog/performance/)、[Honda TJA説明](https://www.honda.co.jp/hondasensing/sensing/tja/)。Hondaサイトは通常curlで403となる場合があるため、一次URLの確認はブラウザUAで行った。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。
