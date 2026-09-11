@@ -1,5 +1,17 @@
 # 初回公開の実測証拠
 
+## 2026-09-11 候補拡充・SEO／一覧改善（本番実測）
+
+- exact app release commit: `90a7f7db13eae274b7de246fb9960578d3dd5ecc`
+- Immutable deployment: https://7626aae0.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Volkswagen Tiguan 6、Lexus GX550 2、Toyota ランドクルーザー250 1を追加し、全198販売単位（現行197、過去1）へ更新。価格・一次出典・ACC／車線維持・保持条件を販売単位へ紐付け、注文可否は未確認を維持した。
+- SEO／UIは一覧トップの用途ガイド全幅・中央配置、0件能力カード抑制、時期確認月フォールバック、title／description、robots、canonical、hreflang、OG/Twitter、WebSite＋WebPage JSON-LDを反映。
+- `npm test`: Vitest48/48、価格198/198（現行197/197）、公式導線49モデル／48 URL／62 actions、注文可21・未確認176・現在利用不可1、Python16/16。
+- `npm run check`: 0 errors / 0 warnings / 6 hints。実ID build204、release guard（実ID204/204・テストID0）。ローカル・immutable・本体E2E各1/1（GA collect HTTP204）。
+- 新規9詳細、一覧、比較、sitemapを実ブラウザ・静的markerで確認。公開面依存レジストリ333/333、公開HTMLの内部enum／内部日付キー漏れ0件。主要URL HTTP200、IDN path/query 301を確認。
+- 直前正常deployment（rollback候補）: https://36c737f6.jidouunten.pages.dev
+
 ## 2026-09-11 メーカー横断の公式アクション導線（本番実測）
 
 - exact app release commit: `c2725a994ee222a1634a9b15d786babd4a3342c2`。

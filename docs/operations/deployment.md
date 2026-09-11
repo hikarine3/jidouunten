@@ -2,6 +2,16 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 候補拡充・SEO／一覧改善）
+
+- exact app: `90a7f7db13eae274b7de246fb9960578d3dd5ecc`
+- immutable: https://7626aae0.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Volkswagen Tiguan 6、Lexus GX550 2、Toyota ランドクルーザー250 1の計9販売単位を追加。全198販売単位（現行197、過去1）を、Level 2相当・ACC／車線維持・ステアリング保持・価格で比較可能にした。注文可否は一次根拠がないため9単位とも未確認を維持。
+- SEO／UI: 一覧トップの用途ガイドを全幅・中央基準へ修正、0件の能力カードを非表示、発売日不明カードは確認月フォールバックまたは項目省略。title／description、robots、canonical、hreflang、OG/Twitter、WebSite＋WebPage JSON-LDを各静的ページへ出力。
+- QA: Vitest48/48、価格198/198（現行197/197）、公式導線49モデル／62 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build204、release guard、ローカルE2E1/1、immutable・production E2E各1/1（GA collect HTTP204）、registry333/333、公開HTML内部enum・内部日付キー漏れ0件。主要URL HTTP200、IDN path/query 301を確認。
+- 直前の正常配信・ロールバック候補: https://36c737f6.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 注文状態の一次情報更新）
 
 - exact app: `d75ecee`（メーカー一次情報を再確認し、Volvo EX30 3グレードとヒョンデ IONIQ 5 Voyage／Lounge 2グレードを新車注文可へ更新。SUBARU レイバックとLexus LMは注文後の工場出荷目処のみのため注文可否未確認を維持。注文可否チェッカー・研究台帳・依存レジストリを同期）

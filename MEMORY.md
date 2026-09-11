@@ -2,6 +2,15 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 候補拡充・SEO／一覧改善（実装・本番反映済み）
+
+- Volkswagen Tiguan 6、Lexus GX550 2、Toyota ランドクルーザー250 1を追加。全198販売単位（現行197、過去1）、現行は全件公式価格を保持し、ACC＋車線維持支援をLevel 2相当として比較できる。注文可否は根拠不足のため未確認を維持。
+- 一覧トップの用途ガイドを全幅・中央基準へ修正し、0件の能力カードは描画しない。発売日がないカードは現行カタログ確認月を補助表示し、確認情報がない場合は時期行を省略する。
+- SEOはtitle／description、robots、canonical、ja-JP hreflang、OG/Twitter、WebSite＋WebPage JSON-LDを静的全ページへ反映。GSC/Bingのsitemap設定とGTM/GA4の既存運用は維持。
+- exact app `90a7f7db13eae274b7de246fb9960578d3dd5ecc`、Production `https://jidouunten.jp/`、immutable `https://7626aae0.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- QA: Vitest48/48、価格198/198（現行197/197）、公式導線49モデル／62 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build204、registry333/333、ローカル・immutable・本体E2E各1/1（GA collect204）、主要URL200、IDN path/query301、公開HTML内部enum・内部日付キー漏れ0件。独立Lunaリリース監査PASS。
+- 次の後続候補はAudi等の一次情報確認と、Issue #38の自動運転タクシー領域。現行カタログを「網羅」とはまだ主張しない。
+
 ## 2026-09-11 注文状態の一次情報追加確認（監査・本番反映済み）
 
 - 独立監査で、SUBARU レイバック Limited EX 1とLexus LM 2は「注文済み車両の工場出荷目処」であり現在の受付導線を直接確認できないため、注文可否を`unknown`へ戻した。Volvo EX30 2027 3とHyundai IONIQ 5 Voyage／Lounge 2のみを`new_order_available`へ更新。全189販売単位の内訳は注文可21／未確認167／現在利用不可1。
