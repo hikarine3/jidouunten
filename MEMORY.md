@@ -2,6 +2,12 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 価格メタデータ補正・本番反映
+
+- Lexus GX550 2販売単位の`priceEffectiveAt`は一次資料に明示がないためnullへ補正。公開表示は価格と2026年9月のカタログ確認月に限定し、推定日付を出さない。
+- exact app `6483639`、Production `https://jidouunten.jp/`、immutable `https://df93d984.jidouunten.pages.dev`。直前rollback候補は`https://7626aae0.jidouunten.pages.dev`。
+- QA: Vitest48/48、価格198/198（現行197/197）、公式導線49モデル／62 actions、check 0 errors/0 warnings/6 hints、実ID build204、E2E immutable・本体各1/1（GA collect204）、GX550詳細2/2、主要URL200、IDN path/query301、独立候補監査PASS。
+
 ## 2026-09-11 候補拡充・SEO／一覧改善（実装・本番反映済み）
 
 - Volkswagen Tiguan 6、Lexus GX550 2、Toyota ランドクルーザー250 1を追加。全198販売単位（現行197、過去1）、現行は全件公式価格を保持し、ACC＋車線維持支援をLevel 2相当として比較できる。注文可否は根拠不足のため未確認を維持。

@@ -2,6 +2,15 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 価格メタデータ補正）
+
+- exact app: `6483639`（Lexus GX550 2販売単位で、一次資料に明示のない価格適用日を推定せず`priceEffectiveAt`を未設定へ補正）
+- immutable: https://df93d984.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 公開表示・SEO・サイトマップの内容は直前配信から不変。GX550は価格と2026年9月のカタログ確認月を表示し、日付の推定値は表示しない。
+- QA: Vitest48/48、価格198/198（現行197/197）、公式導線49モデル／62 actions、Astro check 0 errors / 0 warnings / 6 hints、実ID build204、release guard PASS、immutable・production E2E各1/1（GA collect HTTP204）、GX550詳細2/2、主要URL HTTP200、IDN path/query 301、独立候補監査PASS。
+- 直前の正常配信・ロールバック候補: https://7626aae0.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 候補拡充・SEO／一覧改善）
 
 - exact app: `90a7f7db13eae274b7de246fb9960578d3dd5ecc`

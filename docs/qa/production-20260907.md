@@ -1,5 +1,16 @@
 # 初回公開の実測証拠
 
+## 2026-09-11 価格メタデータ補正（本番実測）
+
+- exact app release commit: `6483639`
+- Immutable deployment: https://df93d984.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Lexus GX550 2販売単位の`priceEffectiveAt`を、一次資料に明示がないため未設定へ補正。公開面は価格と2026年9月カタログ確認月を表示し、推定日付を表示しない。
+- `npm test`: 48/48、価格198/198（現行197/197）、公式導線49モデル／62 actions、Python16/16。
+- `npm run check`: 0 errors / 0 warnings / 6 hints。実ID build204、release guard PASS。
+- immutable・本体E2E各1/1（GA collect HTTP204）、GX550詳細2/2、主要URL HTTP200、IDN path/query 301、独立候補監査PASS。
+- 直前正常deployment（rollback候補）: https://7626aae0.jidouunten.pages.dev
+
 ## 2026-09-11 候補拡充・SEO／一覧改善（本番実測）
 
 - exact app release commit: `90a7f7db13eae274b7de246fb9960578d3dd5ecc`
