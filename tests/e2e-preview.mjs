@@ -34,8 +34,8 @@ try {
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 164, '既定カタログは現行確認164件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*164[\s\S]*条件内可[\s\S]*48[\s\S]*不可[\s\S]*115[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*50/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await visibleCards(), 173, '既定カタログは現行確認173件');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*173[\s\S]*条件内可[\s\S]*48[\s\S]*不可[\s\S]*124[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*50/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="1"]').innerText(), /対象外/, 'Level 1を0件ではなく対象外として表示');
   assert.equal(await page.locator('[data-level-shortcut="1"]').isDisabled(), true, '対象外のLevel 1は絞り込みボタンを無効化');
@@ -49,6 +49,9 @@ try {
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden]) h3').filter({ hasText: /^BYD SEALION 6$/ }).count(), 2, 'BYD SEALION 6のFWD/AWDを既定一覧に表示');
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BYD DOLPHIN' }).filter({ hasText: 'Baseline' }).innerText(), /約299万円[\s\S]*ハンズオフ：不可[\s\S]*車線変更支援/, 'DOLPHIN Baselineの価格・手保持・車線変更支援を表示');
   assert.doesNotMatch(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'BYD SEALION 6' }).filter({ hasText: 'FWD' }).innerText(), /車線変更支援/, 'SEALION 6は自動車線変更支援を表示しない');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Mitsubishi アウトランダーPHEV' }).count(), 9, 'Mitsubishi OUTLANDER PHEVの9販売単位を既定一覧に表示');
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Mitsubishi アウトランダーPHEV' }).filter({ hasText: 'M 4WD（5人乗り）' }).innerText(), /約537万円[\s\S]*ハンズオフ：不可/, 'OUTLANDER PHEV Mの価格・手保持条件を表示');
+  assert.doesNotMatch(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Mitsubishi アウトランダーPHEV' }).filter({ hasText: 'M 4WD（5人乗り）' }).innerText(), /車線変更支援/, 'OUTLANDER PHEVのLCA警告を自動車線変更支援と誤表示しない');
   const hyundaiVoyageLCard = page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Hyundai IONIQ 5' }).filter({ hasText: 'Voyage L' });
   assert.match(await hyundaiVoyageLCard.innerText(), /約499万円[\s\S]*ハンズオフ：不可/, 'IONIQ 5 Voyage LはHDA・ハンズオフ不可を表示');
   assert.doesNotMatch(await hyundaiVoyageLCard.innerText(), /車線変更支援/, 'IONIQ 5 Voyage LはHDAのみで車線変更支援を表示しない');
@@ -121,7 +124,7 @@ try {
   await page.screenshot({ path: `${qaDir}/desktop-tesla-list.png`, fullPage: false });
   assert.equal(await page.locator('.hero, .road-art, .level-card').count(), 0, 'トップはLPヒーローではなく一覧');
   assert.equal(await page.locator('meta[property="og:image"]').getAttribute('content'), 'https://jidouunten.jp/og.png', 'OG画像は絶対URL');
-  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け164販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け173販売単位/, 'トップのdescription件数は公開データから生成');
   assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け157販売単位|日本向け139販売単位/, '古い固定件数を残さない');
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
@@ -139,7 +142,7 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 164, 'Level 2現行164件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 173, 'Level 2現行173件へ復帰');
   await levelMapPage.close();
   await page.goto(`${base}/levels/`);
   assert.match(await page.locator('.level-1').innerText(), /このサイトの車両一覧では対象外/, 'Level 1の取り扱いをレベル解説にも明記');
@@ -239,13 +242,13 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 164, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 173, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  assert.equal(await visibleCards(), 164, 'リセット後に既定164件');
+  assert.equal(await visibleCards(), 173, 'リセット後に既定173件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -278,15 +281,16 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '比較保存を削除すると再開バーを隠す');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 165, 'すべての状態で過去車両を含む165件');
+  assert.equal(await visibleCards(), 174, 'すべての状態で過去車両を含む174件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), '現在利用不可', '販売状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=new_order_available`);
-  assert.equal(await visibleCards(), 6, '新車注文可は販売単位の公式注文可否を確認できたTesla 6件');
+  assert.equal(await visibleCards(), 15, '新車注文可は販売単位の公式注文導線を確認できたTesla 6件＋Mitsubishi 9件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), '新車注文可', '新車注文可の結果見出しを正しく表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, '新車注文可フィルタはTesla 6件に絞り込む');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Mitsubishi アウトランダーPHEV' }).count(), 9, '新車注文可フィルタはMitsubishi 9件を含む');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo' }).count(), 0, 'グレード別の注文可否未確認Volvo EX30は新車注文可に含めない');
   await page.goto(`${base}/compare/?ids=jp-honda-accord-2025-ehev-sensing360plus&ids=jp-subaru-levorg-layback-2023-limited-ex`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
@@ -333,6 +337,16 @@ try {
   assert.deepEqual({ vehicle_id: detailPurchaseEvent.vehicle_id, action_type: detailPurchaseEvent.action_type, placement: detailPurchaseEvent.placement }, { vehicle_id: 'jp-tesla-model-3-2026-premium', action_type: 'order', placement: 'vehicle_detail' }, '詳細の購入アクション計測');
   assert.equal(await page.getByRole('heading', { name: '根拠と更新日' }).count(), 0, '根拠URL・確認日は通常UIに出さない');
   await page.screenshot({ path: `${qaDir}/desktop-tesla-detail.png`, fullPage: false });
+
+  await page.goto(`${base}/cars/jp-mitsubishi-outlander-phev-2026-m-4wd-5seater/`);
+  assert.match(await page.locator('main').innerText(), /Mitsubishi[\s\S]*アウトランダーPHEV[\s\S]*M 4WD（5人乗り）/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*5,369,100円[\s\S]*ハンズオフ[\s\S]*不可/, 'OUTLANDER PHEV Mの公式価格と手保持条件を表示');
+  assert.match(await page.locator('main').innerText(), /確認できた機能[\s\S]*追従走行（ACC）[\s\S]*車線中央維持/, 'OUTLANDER PHEVのMI-PILOT能力を平易に表示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /確認できた機能[\s\S]*車線変更支援/, 'OUTLANDER PHEVのLCA警告を自動車線変更支援と誤表示しない');
+  assert.match(await page.locator('main').innerText(), /新車注文可[\s\S]*販売店別の在庫・納期は未確認/, 'OUTLANDER PHEVの購入予約と個別確認事項を表示');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 5, 'OUTLANDER PHEV詳細に5種の公式次アクションを表示');
+  assert.deepEqual(await page.locator('[data-purchase-action]').allTextContents(), ['購入予約（グレードを選択） ↗', '展示車・試乗車を検索（車種選択） ↗', 'オンライン見積り ↗', '販売店を探す ↗', 'カタログを見る ↗'], 'OUTLANDER PHEVの公式アクションラベル');
+  assert.equal(await page.locator('[data-purchase-action]').first().getAttribute('href'), 'https://try.mitsubishi-motors.co.jp/olm/EGP0002.do?model=274&skp=1', 'OUTLANDER PHEVの購入予約は9グレードを選べる公式入口');
 
   await page.goto(`${base}/cars/jp-hyundai-ioniq5-2025-voyage-l/`);
   assert.match(await page.locator('main').innerText(), /Hyundai[\s\S]*IONIQ 5[\s\S]*Voyage L/);

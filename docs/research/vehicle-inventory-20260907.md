@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 165 | `src/data/vehicles.json` の全レコード（現行164 + 過去1） |
-| 既定表示 | 164 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 174 | `src/data/vehicles.json` の全レコード（現行173 + 過去1） |
+| 既定表示 | 173 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -31,6 +31,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Lexus UX300h / 後発対策） | 6 | Shining Essence / version L / F SPORTの2WD・AWD。全車速追従ACC・LTA・ドライバー異常時対応システム標準、価格521万〜575.7万円、ステアリング保持が必要なハンズオフ不可、2027年2月生産終了予定を販売単位へ固定 |
 | 今回追加（Toyota カローラ クロス / 後発対策） | 7 | Z / S / GR SPORT / Z“Adventure”の2WD・E-Four。価格298万1,000円〜407万7,700円、ACC・LTA・渋滞時支援・車線変更時の補助、ステアリング保持要求を販売単位へ固定 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
+| 今回追加（Mitsubishi / 後発対策） | 9 | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M × 5・7人乗り。価格536万9,100円〜690万1,400円、MI-PILOT（全車速ACC・LKA）とLCAの警告・支援、ハンドル保持、公式の商談・購入予約導線を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -74,6 +75,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | シエンタ Z/G/X ハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗り | 掲載（18単位） | 2相当 | 2026-09-10 |
 | Lexus | LM500h EXECUTIVE AWD（4人乗り） / version L AWD（6人乗り） | 掲載（2単位） | 2相当 | 2026-09-10 |
 | Lexus | UX300h “Shining Essence” / “version L” / “F SPORT” 2WD・AWD | 掲載（6単位） | 2相当 | 2026-09-10 |
+| Mitsubishi | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M 4WD（5・7人乗り） | 掲載（9単位） | 2相当 | 2026-09-11 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。2026-09-10確認時点で両モデルの日本向け公式商品ページに「今すぐ注文」導線が表示され、公式FAQも注文後の手続きと注文可能なトリム・納車予定時期をDesign Studioで確認する流れを案内しているため、6販売単位の`availability`を`new_order_available`へ更新した。ただし注文後の在庫・納車時期・ソフトウェア提供条件は個別確認が必要。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -103,7 +105,7 @@ MINI Countrymanは、2026年7月以降生産の日本向け装備・価格表か
 | VolvoのEX30以外の現行Pilot Assist搭載車 | 日本仕様のモデル年・必要装備を未確認 | Volvo Cars Japan公式モデルページ・取扱説明書 |
 | Volkswagenの現行IQ.DRIVE搭載車 | 日本仕様のモデル年・販売状態を未確認 | Volkswagen Japan公式モデルページ・取扱説明書 |
 | Hyundaiの現行HDA搭載車 | 日本向け販売単位・現行掲載を未確認 | Hyundai Mobility Japan公式モデルページ |
-| Mitsubishi / Suzuki / Daihatsuの一次確認候補 | 縦横支援を確認済みのモデルがあるが、現行仕様期・全グレード・価格適用日の販売単位展開を継続中（e VITARA 3単位は掲載済み） | 各社日本公式グレード表・装備表・取扱説明書 |
+| Mitsubishi / Suzuki / Daihatsuの一次確認候補 | OUTLANDER PHEV 9単位とe VITARA 3単位は掲載済み。ECLIPSE CROSS、eKクロス、eKクロス EV、eKスペース、デリカミニ等はMI-PILOTの標準／メーカーオプションと現行価格の販売単位展開を継続中 | 各社日本公式グレード表・装備表・取扱説明書 |
 | BMW限定車 / Mモデル・MINIの一次確認候補 | BMW通常3シリーズ9単位とMINI Countryman通常8単位は掲載済み。BMW限定車・M3、MINI Countryman Shadow Edition / Slate Blueは通常単位と分けて確認待ち | 各社日本公式装備価格表・取扱説明書 |
 | Audi / Mercedes-Benz / Porsche等 | モデル単位の支援機能は確認できるが、グレード別の標準／オプションと販売状態の確認が未完 | 各社日本公式装備価格表・コンフィギュレーター |
 
@@ -125,7 +127,7 @@ Toyotaの日本向け現行ラインアップと公式安全・主要装備資�
 | メーカー | 確認済み候補 | 残作業 |
 |---|---|---|
 | Mazda | 掲載済み35単位（CX-80 8、CX-60 11、新型CX-5 4、MAZDA3 7、CX-30 4、MX-30 Natural Monotone 1） | MAZDA3 FASTBACK 15C / 15S・SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EVグレードはMRCCとCTSの同時支援を確定できず対象外。ROTARY-EV以外の限定仕様は別途確認 |
-| Mitsubishi | OUTLANDER PHEV、ECLIPSE CROSS、eKクロス、eKクロス EV、eKスペース、デリカミニ | MI-PILOTの標準／メーカーオプションとグレード別価格を固定 |
+| Mitsubishi | OUTLANDER PHEV 9単位（掲載済み）、ECLIPSE CROSS、eKクロス、eKクロス EV、eKスペース、デリカミニ | OUTLANDER PHEV以外はMI-PILOTの標準／メーカーオプションとグレード別価格を固定 |
 | Suzuki | FRONX、SOLIO/BANDIT、SWIFT CVT、SPACIA系（e VITARA 3単位は掲載済み） | ACC＋車線中央維持の対象グレードとパッケージを販売単位へ展開 |
 | Daihatsu | MOVE、MOVE CANBUS、TANTO系、TAFT、ROCKY | Smart Cruise Packを含む標準／オプション差を販売単位へ展開 |
 | BMW | 3シリーズ Sedan 5グレード、Touring 4グレード | 掲載済み。Edition Shadow、M3、50周年限定車は受注・在庫確認待ち |
@@ -479,3 +481,33 @@ LMと同じLexusでも、UX300hはハンズオフ不可・LCAなし・521万〜5
 | SEALION 6の2025年12月1日国内販売開始、FWD／AWD価格 | BYD Auto Japan | https://byd.co.jp/e-life/news/2025_1201_1.html | 2026-09-11 |
 
 7単位はACC（縦方向）と車線維持・車線内支援（横方向）の同時支援を国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当とした。DOLPHINとATTO 3は公式装備表にLCAがあるため「車線変更支援」を付与するが、手保持・運転者監視が必要で自動車線変更完了やハンズオフを意味しない。SEALは間接式ドライバーモニタリングを`required`として保持する一方、カメラ式とは断定しない。SEALION 6はBSD警告まででLCAの根拠がないため、車線変更支援能力を付与していない。公式資料間で速度が食い違うATTO 3は`factStatus=conflicting`、その他は`verified`とし、根拠のない受注可否・在庫は表示しない。
+
+## Mitsubishi OUTLANDER PHEVの根拠（後発対策トランシェ）
+
+確認日は2026-09-11。三菱自動車の現行商品ページ、各グレード価格ページ、主要装備表、MI-PILOT説明、取扱説明書、2026年6月25日一部改良発表を突き合わせ、9販売単位を登録した。価格はすべて税込のメーカー希望小売価格で、4WD、5人／7人乗りを別単位に分けている。`salesUnitIntroducedAt` と `priceEffectiveAt` は一部改良の販売開始日である2026-06-25、`catalogAsOf` は2026-06とした。モデル年は公式の明示がないためnullである。
+
+| グレード / 販売単位 | 価格（税込） | Level | 同じLevel 2内で比較できる差分 |
+|---|---:|---:|---|
+| BLACK Edition 4WD（7人） | 6,901,400円 | 2 | 5人乗りより91,300円高い最上位。MI-PILOT・全車速ACC・LKA標準 |
+| BLACK Edition 4WD（5人） | 6,810,100円 | 2 | BLACK Editionの5人乗り。MI-PILOT・全車速ACC・LKA標準 |
+| P Executive Package 4WD（7人） | 6,791,400円 | 2 | BLACK Editionより110,000円安い上級パッケージ。MI-PILOT・全車速ACC・LKA標準 |
+| P Executive Package 4WD（5人） | 6,700,100円 | 2 | 7人乗りより91,300円安い。MI-PILOT・全車速ACC・LKA標準 |
+| P 4WD（7人） | 6,510,900円 | 2 | Pの7人乗り。MI-PILOT・全車速ACC・LKA標準 |
+| P 4WD（5人） | 6,419,600円 | 2 | 7人乗りより91,300円安い。MI-PILOT・全車速ACC・LKA標準 |
+| G 4WD（7人） | 6,076,400円 | 2 | Pより安いG。MI-PILOT・全車速ACC・LKA標準 |
+| G 4WD（5人） | 5,985,100円 | 2 | 9単位中の5人乗り価格下限。MI-PILOT・全車速ACC・LKA標準 |
+| M 4WD（5人） | 5,369,100円 | 2 | 5人乗りのエントリー。MI-PILOT・全車速ACC・LKA標準 |
+
+公式のMI-PILOTは全車速ACCとLKAを統合し、高速道路・自動車専用道路で先行車追従、渋滞時の停止・発進、同一車線の中央維持を支援する。ACC設定車速は約30km/h以上、停止後およそ30秒以内の発進に対応するが、上限速度は公式ページで数値を固定できないためnullとした。LCAは後側方車両への警告・衝突回避支援であり、自動車線変更を完了する機能ではないため、9単位の`capabilities`には`lane_change_support`を付与していない。取扱説明書が「必ずハンドルを持つ」ことを求めるため全9単位を`handsOff=not_allowed`、カメラ式ドライバーモニタリングは一次資料で確認できないため`driverMonitoring=unknown`とした。
+
+現行商品ページに「商談予約・購入予約受付中」の導線があるため、9単位を`availability=new_order_available`とした。ただしこれは公式の購入予約導線があることを示すもので、販売店ごとの在庫・納期や注文確定を保証しない。購入判断では各地域の販売店へ在庫・納期を確認する必要がある。
+
+| 対象事実 | 一次ソース |
+|---|---|
+| 現行5グレード、4WD、5／7人乗り、商談・購入予約導線 | [アウトランダーPHEV公式](https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/) |
+| 各グレードの価格 | [BLACK Edition](https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/grade/black_edition.html)、[P Executive Package](https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/grade/p_executive_package.html)、[P](https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/grade/p.html)、[G](https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/grade/g.html)、[M](https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/grade/m.html) |
+| MI-PILOT、全車速ACC、LKAの標準装備 | [主要装備表](https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/spec/spe_01.html) |
+| ACC・LKAの作動条件 | [MI-PILOT説明](https://www.mitsubishi-motors.co.jp/lineup/outlander_phev/usp/usp_02.html) |
+| ハンドル保持必須 | [取扱説明書](https://www.mitsubishi-motors.co.jp/afterservice/manual/html/outlander_manual/07-04-13.html) |
+| 2026年6月25日一部改良・販売開始 | [三菱自動車ニュースリリース](https://www.mitsubishi-motors.com/jp/newsroom/newsrelease/2026/20260625_1.html) |
+| 現行9グレードを選べる購入予約入口（Chromeで可視確認） | [三菱自動車 オンライン見積り・購入予約](https://try.mitsubishi-motors.co.jp/olm/EGP0002.do?model=274&skp=1) |

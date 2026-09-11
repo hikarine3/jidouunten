@@ -122,14 +122,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(165);
+    expect(vehicles).toHaveLength(174);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補164件は全件の公式金額を保持する', () => {
+  it('現行候補173件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(164);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(164);
+    expect(current).toHaveLength(173);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(173);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -139,7 +139,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(43);
+    expect(officialLinks).toHaveLength(44);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -170,7 +170,10 @@ describe('vehicle data contract and filters', () => {
     const bydActions = officialLinks.filter(({ maker }) => maker === 'BYD').flatMap((link) => link.actions ?? []);
     expect(bydActions).toHaveLength(12);
     expect(bydActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(55);
+    const mitsubishiActions = officialLinks.find(({ maker, model }) => maker === 'Mitsubishi' && model === 'アウトランダーPHEV')?.actions ?? [];
+    expect(mitsubishiActions.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'estimate', 'dealer', 'catalog']);
+    expect(mitsubishiActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(60);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {
@@ -265,6 +268,21 @@ describe('vehicle data contract and filters', () => {
     expect(sealion6.every((vehicle) => vehicle.capabilities.includes('adaptive_cruise_control') && vehicle.capabilities.includes('lane_centering') && !vehicle.capabilities.includes('lane_change_support') && vehicle.odd.speedKph.max === 150)).toBe(true);
     expect(byd.every((vehicle) => vehicle.sources.some((source) => source.publisher === 'BYD Auto Japan' && source.accessedAt === '2026-09-11'))).toBe(true);
     expect(officialLinks.filter(({ maker }) => maker === 'BYD')).toHaveLength(4);
+  });
+
+  it('Mitsubishi OUTLANDER PHEVは5グレード・定員別の9販売単位を価格付きで保持する', () => {
+    const outlander = vehicles.filter((vehicle) => vehicle.maker === 'Mitsubishi' && vehicle.model === 'アウトランダーPHEV');
+    expect(outlander).toHaveLength(9);
+    expect(outlander.every((vehicle) => vehicle.market === 'JP' && vehicle.currentCatalogListed && vehicle.automationLevel === 2 && vehicle.availability === 'new_order_available')).toBe(true);
+    expect(outlander.every((vehicle) => vehicle.salesUnitIntroducedAt === '2026-06-25' && vehicle.priceEffectiveAt === '2026-06-25' && vehicle.catalogAsOf === '2026-06')).toBe(true);
+    expect(outlander.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'unknown' && vehicle.capabilities.includes('adaptive_cruise_control') && vehicle.capabilities.includes('lane_centering') && !vehicle.capabilities.includes('lane_change_support'))).toBe(true);
+    expect(outlander.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([5_369_100, 5_985_100, 6_076_400, 6_419_600, 6_510_900, 6_700_100, 6_791_400, 6_810_100, 6_901_400]);
+    expect(outlander.every((vehicle) => vehicle.grade.includes('4WD'))).toBe(true);
+    expect(outlander.filter((vehicle) => vehicle.grade.includes('7人')).length).toBe(4);
+    expect(outlander.filter((vehicle) => vehicle.grade.includes('5人')).length).toBe(5);
+    expect(outlander.every((vehicle) => vehicle.sources.some((source) => source.publisher === '三菱自動車' && source.accessedAt === '2026-09-11'))).toBe(true);
+    expect(officialLinkFor(outlander[0])?.actions?.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'estimate', 'dealer', 'catalog']);
+    expect(officialLinkFor(outlander[0])?.actions?.find(({ kind }) => kind === 'order')?.url).toBe('https://try.mitsubishi-motors.co.jp/olm/EGP0002.do?model=274&skp=1');
   });
 
   it('Toyota アルファードは乗車定員・駆動方式別の4販売単位を価格付きで保持する', () => {
