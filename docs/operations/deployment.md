@@ -2,6 +2,17 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 Lexus LX追加・構造化SEO）
+
+- exact app release commit: `0ecae52`
+- immutable: https://e194ed52.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Lexus LX700h／LX600のEXECUTIVE、5人／7人、OVERTRAIL+を計10販売単位で追加。全260販売単位（現行259）、税込1,450万〜2,100万円。全車Level 2相当で、全車速追従ACC・LTA、Advanced Driveの渋滞時0〜約40km/h条件、運転者監視必須を表示。LCA・自動車線変更は根拠がないため付与せず、受注可否は未確認を維持。
+- SEO: 266 HTMLにcanonical／robots／hreflang／OG/Twitter、WebSite＋WebPage＋BreadcrumbListを出力。260詳細にProduct＋Car＋BreadcrumbList、トップ／一覧に可視259件のItemListを追加。構造化データ検査はBreadcrumbList266／Car260／ItemList2ページ518項目、内部enum・根拠フィールド漏れ0件。
+- QA: `npm test` 54/54、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build266、release guard PASS、ローカル／immutable／本体E2E各1/1（GA collect HTTP204）。LX公式根拠・導線10件相当をHTTP200、registry静的surface14/14・required marker12/12・sitemap10/10、独立監査PASS。
+- 本番smoke: immutable／本体で一覧、LX詳細、LX比較、sitemap-index、sitemap-0、robotsをHTTP200、未知URLを404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）の`/cars/?level=2&sort=price_asc`を本体へ301（query維持）。
+- 直前の正常配信・ロールバック候補: https://cf667796.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 Toyota カローラ スポーツ／ツーリング追加）
 
 - exact app release commit: `6687267`

@@ -1,5 +1,17 @@
 # 初回公開の実測証拠
 
+## 2026-09-11 Lexus LX追加・構造化SEO（本番実測）
+
+- exact app release commit: `0ecae52`
+- Immutable deployment: https://e194ed52.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Lexus LX700h／LX600の10販売単位を追加。全260販売単位（現行259）、価格1,450万〜2,100万円、全車Level 2相当。ACC・LTA、Advanced Drive渋滞時0〜約40km/h、運転者監視必須、条件内ハンズオフを表示し、LCA・自動車線変更は付与しない。受注可否は未確認を維持。
+- `npm test`: 54/54（価格260/260、現行259/259、公式導線56モデル／76 actions、Python16/16）。
+- `npm run check`: 0 errors / 0 warnings / 6 hints。実ID build266、release guard／構造化データ検査PASS（BreadcrumbList266、Car260、ItemList2ページ518項目）。
+- ローカル・immutable・本体E2E各1/1（GA collect HTTP204）。LX公式根拠・導線HTTP200、registry静的surface14/14・required marker12/12・sitemap10/10、公開HTML内部enum・根拠URL漏れ0件、独立監査PASS。
+- 本番smokeは一覧、LX詳細・比較、sitemap-index、sitemap-0、robotsをHTTP200、未知URL404、日本語IDNのpath/queryを本体へ301で確認。詳細title／description／canonical／OGとProduct＋Car＋BreadcrumbListを確認。
+- 直前正常deployment（rollback候補）: https://cf667796.jidouunten.pages.dev
+
 ## 2026-09-11 Toyota カローラ スポーツ／ツーリング追加（本番実測）
 
 - exact app release commit: `6687267`

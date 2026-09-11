@@ -2,6 +2,14 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 Lexus LX追加・構造化SEO（本番反映済み）
+
+- Lexus公式の価格・安全・コンフィギュレーター・諸元を突合し、LX700h／LX600のEXECUTIVE、5人／7人、OVERTRAIL+を10販売単位へ追加。全260販売単位（現行259）、価格1,450万〜2,100万円（税込）。全車Level 2相当でACC・LTA、Advanced Drive渋滞時0〜約40km/h、運転者監視必須、条件内ハンズオフを保持。LCA・自動車線変更は付与せず、受注可否は未確認。
+- SEOを更新し、全266 HTMLへcanonical／robots／hreflang／OG/Twitter、WebSite＋WebPage＋BreadcrumbListを出力。260詳細にProduct＋Car＋BreadcrumbList、トップ／一覧に可視259件のItemListを追加。構造化データ検査はBreadcrumbList266／Car260／ItemList2ページ518項目、公開HTML内部enum・根拠フィールド漏れ0件。
+- exact app `0ecae52` をpush・deploy済み。Production `https://jidouunten.jp/`、immutable `https://e194ed52.jidouunten.pages.dev`、直前rollback `https://cf667796.jidouunten.pages.dev`。
+- QA: npm test54/54、価格260/260（現行259/259、exact244／range15／未確認1）、公式導線56モデル／76 actions、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build266、release guard PASS、local／immutable／production E2E各1/1（GA collect HTTP204）。LX公式根拠・導線HTTP200、registry静的14/14・required marker12/12・sitemap10/10、独立監査PASS、主要URL200、未知URL404、IDN path/query301。
+- 外部車両写真は今回も追加せず、`docs/licenses/assets.md`へWikimedia Commons再利用時の作者・ライセンス・改変・商標／肖像確認とAVIF/WebPセルフホスト方針を追記。全国候補の母集団確認とIssue #25の観測は継続し、網羅完了とは宣言しない。
+
 ## 2026-09-11 Toyota ヤリス17販売単位・Level 1対応・SEO整合（本番反映済み）
 
 - トヨタ公式の現行ヤリス商品ページ、grades53 JSON、2026年4月仕様表、安全ページ、取扱説明書を突合し、価格比較可能な17販売単位を追加。価格は169万7,300円〜288万4,200円（税込）。1.0L CVTのG／X 2単位はACCのみのLevel 1、残り15単位はACC＋LTAのLevel 2、ハイブリッド6単位は渋滞時停止・発進支援を表示。KINTO月額のみのU 2単位は車両本体価格比較から保留し、推測価格を出していない。
