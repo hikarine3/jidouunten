@@ -333,7 +333,7 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(151);
+      expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(155);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
@@ -1086,7 +1086,7 @@ describe('vehicle data contract and filters', () => {
   it('三菱 eKクロス系はLDPのみとMI-PILOT標準・オプションを販売単位で分ける', () => {
     const ek = vehicles.filter((vehicle) => vehicle.model === 'eKクロス' || vehicle.model === 'eKクロス EV');
     expect(ek).toHaveLength(11);
-    expect(ek.every((vehicle) => vehicle.currentCatalogListed && vehicle.availability === 'unknown' && vehicle.lastReviewedAt === '2026-09-12')).toBe(true);
+    expect(ek.every((vehicle) => vehicle.currentCatalogListed && vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-12' && vehicle.lastReviewedAt === '2026-09-12')).toBe(true);
     expect(ek.filter((vehicle) => vehicle.automationLevel === 1)).toHaveLength(6);
     expect(ek.filter((vehicle) => vehicle.automationLevel === 2)).toHaveLength(5);
     const gas = ek.filter((vehicle) => vehicle.model === 'eKクロス');
@@ -1099,9 +1099,9 @@ describe('vehicle data contract and filters', () => {
     expect(evPackage?.automationLevel).toBe(2);
     expect(evPackage?.price?.optionalPackages).toEqual(expect.arrayContaining([expect.objectContaining({ amountJpy: 110000, label: '先進安全快適パッケージ（MI-PILOT［ACC・LKA］等）' })]));
     expect(evPackage?.requiredPackage).toContain('110,000円');
-    expect(ek.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.sources.some((source) => source.url.includes('mitsubishi-motors.com')))).toBe(true);
-    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKクロス' })?.actions).toHaveLength(4);
-    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKクロス EV' })?.actions).toHaveLength(4);
+    expect(ek.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.sources.some((source) => source.url.includes('mitsubishi-motors.co.jp') && source.supports.some((fact) => fact.includes('商談予約・購入予約受付中'))))).toBe(true);
+    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKクロス' })?.actions).toHaveLength(5);
+    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKクロス EV' })?.actions).toHaveLength(5);
   });
 
   it('三菱 デリカミニはグレード別のLevel 1/2と発売日・価格を保持する', () => {
@@ -1112,17 +1112,17 @@ describe('vehicle data contract and filters', () => {
     expect(delica.filter((vehicle) => vehicle.automationLevel === 2)).toHaveLength(8);
     expect(delica.filter((vehicle) => vehicle.automationLevel === 1).every((vehicle) => vehicle.capabilities.join(',') === 'lane_departure_prevention')).toBe(true);
     expect(delica.filter((vehicle) => vehicle.automationLevel === 2).every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,lane_departure_prevention' && vehicle.requiredPackage?.includes('MI-PILOT'))).toBe(true);
-    expect(delica.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.sources.some((source) => source.url.includes('mitsubishi-motors.com')))).toBe(true);
+    expect(delica.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-12' && vehicle.sources.some((source) => source.url.includes('mitsubishi-motors.co.jp') && source.supports.some((fact) => fact.includes('商談予約・購入予約受付中'))))).toBe(true);
     expect(delica.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([1964600, 2042700, 2129600, 2179100, 2219800, 2258300, 2296800, 2387000, 2649900, 2740100, 2817100, 2907300]);
-    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'デリカミニ' })?.actions).toHaveLength(4);
+    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'デリカミニ' })?.actions).toHaveLength(5);
   });
 
   it('三菱 eKスペースは現行M/G・2WD/4WDをLDPのみのLevel 1として保持する', () => {
     const ekSpace = vehicles.filter((vehicle) => vehicle.model === 'eKスペース');
     expect(ekSpace).toHaveLength(4);
     expect(ekSpace.every((vehicle) => vehicle.currentCatalogListed && vehicle.automationLevel === 1 && vehicle.capabilities.join(',') === 'lane_departure_prevention' && vehicle.salesUnitIntroducedAt === '2025-10-29' && vehicle.priceEffectiveAt === '2025-10-29')).toBe(true);
-    expect(ekSpace.every((vehicle) => vehicle.price?.optionalPackages.length === 0 && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
-    expect(ekSpace.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/ek_space.pdf')))).toBe(true);
-    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKスペース' })?.actions).toHaveLength(4);
+    expect(ekSpace.every((vehicle) => vehicle.price?.optionalPackages.length === 0 && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-12')).toBe(true);
+    expect(ekSpace.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/ek_space.pdf')) && vehicle.sources.some((source) => source.url === 'https://www.mitsubishi-motors.co.jp/lineup/ek_space/' && source.supports.some((fact) => fact.includes('商談予約・購入予約受付中'))))).toBe(true);
+    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKスペース' })?.actions).toHaveLength(5);
   });
 });

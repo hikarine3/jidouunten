@@ -153,10 +153,10 @@ try {
   await page.locator('[data-saved-resume-delete="search"]').click();
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '検索条件を削除すると再開バーを隠す');
   await page.locator('[data-reset-shortcut]').click();
-  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可21', '注文可否 未確認392', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
+  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可48', '注文可否 未確認365', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
   await page.locator('[data-status-shortcut="uncertain"]').click();
   assert.equal(new URL(page.url()).searchParams.get('availability'), 'unknown', '注文可否未確認のクイック絞り込みをURLへ保存');
-  assert.equal(await visibleCards(), 392, '注文可否未確認は392販売単位');
+  assert.equal(await visibleCards(), 365, '注文可否未確認は365販売単位');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="conditional"]').click();
   assert.equal(await visibleCards(), 70, '条件内ハンズオフは70件');
@@ -371,7 +371,7 @@ try {
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), '現在利用不可', '販売状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=new_order_available`);
-  assert.equal(await visibleCards(), 21, '新車注文可は販売単位の公式注文・出荷目処を確認できた21件');
+  assert.equal(await visibleCards(), 48, '新車注文可は販売単位の公式購入予約・注文導線を確認できた48件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), '新車注文可', '新車注文可の結果見出しを正しく表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, '新車注文可フィルタはTesla 6件に絞り込む');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Mitsubishi アウトランダーPHEV' }).count(), 9, '新車注文可フィルタはMitsubishi 9件を含む');
@@ -379,6 +379,10 @@ try {
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo EX30' }).count(), 3, '新車注文可フィルタはVolvo EX30 3グレードを含む');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ has: page.locator('.maker').filter({ hasText: /　Voyage$/ }) }).count(), 1, '新車注文可フィルタはIONIQ 5 Voyageを含む');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ has: page.locator('.maker').filter({ hasText: /　Lounge$/ }) }).count(), 1, '新車注文可フィルタはIONIQ 5 Loungeを含む');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden]) h3 a').filter({ hasText: /^Mitsubishi eKクロス$/ }).count(), 8, '新車注文可フィルタはeKクロス8単位を含む');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden]) h3 a').filter({ hasText: /^Mitsubishi eKクロス EV$/ }).count(), 3, '新車注文可フィルタはeKクロス EV 3単位を含む');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden]) h3 a').filter({ hasText: /^Mitsubishi デリカミニ$/ }).count(), 12, '新車注文可フィルタはデリカミニ12単位を含む');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden]) h3 a').filter({ hasText: /^Mitsubishi eKスペース$/ }).count(), 4, '新車注文可フィルタはeKスペース4単位を含む');
   await page.goto(`${base}/compare/?ids=jp-honda-accord-2025-ehev-sensing360plus&ids=jp-subaru-levorg-layback-2023-limited-ex`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   assert.equal(await page.locator('[data-compare-select]').isVisible(), false, '比較URLは選択フォームを畳み結果を先に見せる');
@@ -501,8 +505,9 @@ try {
   await page.goto(`${base}/cars/jp-mitsubishi-ek-cross-2026-g-premium-2wd/`);
   assert.match(await page.title(), /^Mitsubishi eKクロス G Premium 2WD｜Level 2・価格・機能｜自動運転\.jp$/, 'eKクロス販売単位を含む詳細title');
   assert.match(await page.locator('main').innerText(), /Mitsubishi[\s\S]*eKクロス[\s\S]*G Premium 2WD[\s\S]*Level 2[\s\S]*1,999,800円[\s\S]*ハンズオフ：不可[\s\S]*車線中央維持/, 'eKクロス MI-PILOT標準グレードの価格・Level 2・能力差を表示');
-  assert.equal(await page.locator('[data-purchase-action]').count(), 4, 'eKクロス詳細に4種の公式次アクション');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 5, 'eKクロス詳細に購入予約を含む5種の公式次アクション');
   assert.deepEqual(await page.locator('[data-purchase-action]').evaluateAll((links) => links.map((link) => ({ kind: link.dataset.actionType, href: link.getAttribute('href') }))), [
+    { kind: 'order', href: 'https://mirsvr.mitsubishi-motors.co.jp/eq2/EQ2G00.do?model=259&sourceId=EQ2' },
     { kind: 'test_drive', href: 'https://mirsvr.mitsubishi-motors.co.jp/eq2/EQ2G00.do?sourceId=EQ2&model=259' },
     { kind: 'estimate', href: 'https://try.mitsubishi-motors.co.jp/olm/EGP0002.do?name=ek_x' },
     { kind: 'dealer', href: 'https://map.mitsubishi-motors.co.jp/search/listHansha.do' },
@@ -524,7 +529,7 @@ try {
   await page.goto(`${base}/cars/jp-mitsubishi-delica-mini-2025-t-premium-2wd/`);
   assert.match(await page.title(), /^Mitsubishi デリカミニ T Premium 2WD｜Level 2・価格・機能｜自動運転\.jp$/, 'デリカミニLevel 2販売単位を含む詳細title');
   assert.match(await page.locator('main').innerText(), /デリカミニ[\s\S]*T Premium 2WD[\s\S]*Level 2[\s\S]*2,219,800円[\s\S]*車線中央維持/, 'デリカミニPremiumはMI-PILOT・価格・Level 2を表示');
-  assert.equal(await page.locator('[data-purchase-action]').count(), 4, 'デリカミニ詳細に4種の公式次アクション');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 5, 'デリカミニ詳細に購入予約を含む5種の公式次アクション');
   await page.goto(`${base}/cars/jp-mitsubishi-ek-space-2025-m-2wd/`);
   assert.match(await page.title(), /^Mitsubishi eKスペース M 2WD｜Level 1・価格・機能｜自動運転\.jp$/, 'eKスペース販売単位を含む詳細title');
   assert.match(await page.locator('main').innerText(), /Mitsubishi[\s\S]*eKスペース[\s\S]*M 2WD[\s\S]*Level 1[\s\S]*1,749,000円[\s\S]*車線逸脱抑制/, 'eKスペースMはLevel 1・価格・LDPを表示');

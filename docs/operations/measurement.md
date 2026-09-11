@@ -51,7 +51,7 @@ production E2EでGA collect HTTP 204を確認した。
 
 `1dff8d69803c7ff98a036f141730b1b6b82d4796` を実IDでビルドし、
 `https://271972c3.jidouunten.pages.dev` と `https://jidouunten.jp/` へ配信した。Tesla Model 3 / Model Yの6販売単位は、
-公式商品ページの「今すぐ注文」導線を根拠に `new_order_available` とし、注文後の納期・在庫・ソフトウェア条件は個別確認と表示する。
+公式商品ページの「今すぐ注文」または「商談予約・購入予約受付中」導線を根拠に `new_order_available` とし、注文・予約後の納期・在庫・契約条件は個別確認と表示する。
 production E2Eで新車注文可フィルタ、Tesla詳細・比較、GA collect HTTP 204を確認した。保存・再開のlocalStorage本文や検索query・車両IDをGAへ送信しない契約も維持している。
 
 ## 2026-09-10 保存・再開導線の計測確認
