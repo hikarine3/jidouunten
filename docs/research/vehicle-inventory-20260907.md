@@ -50,7 +50,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota プリウス） | 5 | 既存のHEV Z 2WDに、HEV Z E-Four／G 2WD・E-Four／X 2WD・E-Fourを追加。2026年7月公式価格表の279万6,200円〜425万1,500円、全車速ACC＋LTA・渋滞時支援（ハンズオフ不可）を販売単位へ固定。Xは法人向けチャネルのため法人向け注記と公式Webカタログ根拠を保持し、発売日は未確認・注文可否は未確認のまま表示 |
 | 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
-| 今回追加（Mitsubishi / 後発対策） | 20 | OUTLANDER PHEV 9単位に加え、eKクロス 8単位（LDPのみのLevel 1 4単位／MI-PILOT標準のLevel 2 4単位）とeKクロス EV 3単位（LDPのみのG・P、P＋先進安全快適パッケージ）を追加。公式価格・標準／オプション差・手放し不可を販売単位へ固定 |
+| 今回追加（Mitsubishi / 後発対策） | 36 | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位に加え、デリカミニ 12単位（LDPのみのLevel 1 4単位／MI-PILOT標準のLevel 2 8単位）とeKスペース 4単位（LDPのみのLevel 1）を追加。公式価格・発売日・標準装備差・手放し不可を販売単位へ固定 |
 | 今回追加（Audi / 後発対策） | 6 | A5 / A5 AvantのTFSI 110kW、TFSI quattro 150kW、TDI quattro 150kW。2026年4月価格表の617万〜760万円、アダプティブクルーズアシストプラス・レーンガイダンス・レーンチェンジアシスト、常時監視とステアリング保持を販売単位へ固定 |
 | 今回追加（Toyota カローラ スポーツ／ツーリング） | 9 | カローラ スポーツ G“Z” / G / G“X” 2WDの3単位、カローラ ツーリング W×B / G / Xの2WD・E-Four 6単位。価格244万7,500円〜339万3,500円、全車速追従レーダークルーズコントロール・LTA・ステアリング保持を公式グレード／安全性能／カタログ資料から固定。特別仕様車3単位は販売終了時期の確認待ちで保留 |
 | 今回追加（Mercedes-Benz GLC／C-Class Sedan） | 11 | GLC 5単位、C-Class Sedan 6単位。MP202602価格表の744万〜1,844万円、アクティブディスタンスアシスト・アクティブステアリングアシスト・レーンキーピング・自動再発進の標準装備を確認。Level 2相当・ステアリング保持・注文可否未確認として掲載 |
@@ -107,7 +107,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | シエンタ Z/G/X ハイブリッド車・ガソリン車、2WD/E-Four、5/7人乗り | 掲載（18単位） | 2相当 | 2026-09-10 |
 | Lexus | LM500h EXECUTIVE AWD（4人乗り） / version L AWD（6人乗り） | 注文可否 未確認（注文後工場出荷目処のみ確認） | 2相当 | 2026-09-11 |
 | Lexus | UX300h “Shining Essence” / “version L” / “F SPORT” 2WD・AWD | 掲載（6単位） | 2相当 | 2026-09-10 |
-| Mitsubishi | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位 | 掲載（20単位） | 1・2相当 | 2026-09-12 |
+| Mitsubishi | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、デリカミニ 12単位、eKスペース 4単位 | 掲載（36単位） | 1・2相当 | 2026-09-12 |
 | Toyota | アクア Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD | 掲載（9単位） | 2相当 | 2026-09-11 |
 | Toyota | カローラ HYBRID W×B / G / Xの2WD・E-Four | 掲載（6単位） | 2相当 | 2026-09-11 |
 | Toyota | カローラ スポーツ G“Z” / G / G“X” 2WD | 掲載（3単位、注文可否 未確認） | 2相当 | 2026-09-11 |
@@ -289,7 +289,7 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 | VolvoのEX30以外の現行Pilot Assist搭載車 | 日本仕様のモデル年・必要装備を未確認 | Volvo Cars Japan公式モデルページ・取扱説明書 |
 | Volkswagenの現行IQ.DRIVE搭載車 | 日本仕様のモデル年・販売状態を未確認 | Volkswagen Japan公式モデルページ・取扱説明書 |
 | Hyundaiの現行HDA搭載車 | 日本向け販売単位・現行掲載を未確認 | Hyundai Mobility Japan公式モデルページ |
-| Mitsubishi / Suzuki / Daihatsuの一次確認候補 | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、e VITARA 3単位は掲載済み。ECLIPSE CROSS、eKスペース、デリカミニ等はMI-PILOTの標準／メーカーオプションと現行価格の販売単位展開を継続中 | 各社日本公式グレード表・装備表・取扱説明書 |
+| Mitsubishi / Suzuki / Daihatsuの一次確認候補 | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、デリカミニ 12単位、eKスペース 4単位、e VITARA 3単位は掲載済み。ECLIPSE CROSS等は販売単位展開を継続中 | 各社日本公式グレード表・装備表・取扱説明書 |
 | BMW限定車 / Mモデル・MINIの一次確認候補 | BMW通常3シリーズ9単位とMINI Countryman通常8単位は掲載済み。BMW限定車・M3、MINI Countryman Shadow Edition / Slate Blueは通常単位と分けて確認待ち | 各社日本公式装備価格表・取扱説明書 |
 | Audi / Mercedes-Benz / Porsche等 | モデル単位の支援機能は確認できるが、グレード別の標準／オプションと販売状態の確認が未完 | 各社日本公式装備価格表・コンフィギュレーター |
 
@@ -319,7 +319,7 @@ Toyotaの日本向け現行ラインアップと公式安全・主要装備資�
 | メーカー | 確認済み候補 | 残作業 |
 |---|---|---|
 | Mazda | 掲載済み35単位（CX-80 8、CX-60 11、新型CX-5 4、MAZDA3 7、CX-30 4、MX-30 Natural Monotone 1） | MAZDA3 FASTBACK 15C / 15S・SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EVグレードはMRCCとCTSの同時支援を確定できず対象外。ROTARY-EV以外の限定仕様は別途確認 |
-| Mitsubishi | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位（掲載済み）、ECLIPSE CROSS、eKスペース、デリカミニ | ECLIPSE CROSS、eKスペース、デリカミニはMI-PILOTの標準／メーカーオプションとグレード別価格を固定 |
+| Mitsubishi | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、デリカミニ 12単位、eKスペース 4単位（掲載済み）、ECLIPSE CROSS | ECLIPSE CROSSはMI-PILOTの標準／メーカーオプションとグレード別価格を固定 |
 | Suzuki | FRONX、SOLIO/BANDIT、SWIFT CVT、SPACIA系（e VITARA 3単位は掲載済み） | ACC＋車線中央維持の対象グレードとパッケージを販売単位へ展開 |
 | Daihatsu | MOVE、MOVE CANBUS、TANTO系、TAFT、ROCKY | Smart Cruise Packを含む標準／オプション差を販売単位へ展開 |
 | BMW | 3シリーズ Sedan 5グレード、Touring 4グレード | 掲載済み。Edition Shadow、M3、50周年限定車は受注・在庫確認待ち |
@@ -741,7 +741,7 @@ eKクロスの2026年8月27日一部改良価格は、G 185万6,800円〜T Premi
 | LDP、MI-PILOTの手放し不可と運転者責任 | [eKシリーズ取扱説明書](https://www.mitsubishi-motors.co.jp/afterservice/manual/pdf/ek_series_manual.pdf)、[eKクロス EV取扱説明書](https://www.mitsubishi-motors.co.jp/afterservice/manual/pdf/ek_x_ev_manual.pdf) |
 | Level 1／2の分類定義 | [国土交通省 自動走行レベルの定義](https://www.mlit.go.jp/common/001343740.pdf) |
 
-確認日: 2026-09-12。根拠URLと確認日はデータ正本に保持し、通常一覧には表示しない。eKスペース、デリカミニ、エクリプス クロスなど三菱の残候補は、同じMI-PILOT標準／オプションと価格の突合が終わるまで未掲載候補に残す。
+確認日: 2026-09-12。根拠URLと確認日はデータ正本に保持し、通常一覧には表示しない。eKスペースとデリカミニは今回掲載済み。エクリプス クロスなど三菱の残候補は、同じMI-PILOT標準／オプションと価格の突合が終わるまで未掲載候補に残す。
 
 ## 2026-09-11 Lexus LX追加トランシェ
 
@@ -1063,3 +1063,18 @@ Honda公式のCIVIC現行商品ページ、タイプJSON、主要装備表、性
 | 運転者主体で前後・左右を支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
 
 根拠: [CIVIC商品ページ](https://www.honda.co.jp/CIVIC/)、[タイプJSON](https://www.honda.co.jp/CIVIC/common/data/type.json)、[性能・安全](https://www.honda.co.jp/CIVIC/webcatalog/performance/)、[主要装備表](https://www.honda.co.jp/CIVIC/common/pdf/civic_equipment_list.pdf)、[Honda発表資料](https://global.honda/jp/news/2026/4260604-civic.html)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。
+
+## 2026-09-12 Mitsubishi デリカミニ／eKスペース 16販売単位追加
+
+三菱自動車の新型デリカミニ／eKスペースについて、現行商品ページ、グレード別価格、主要装備、マイパイロット説明、2025年9月18日発表資料を照合した。両車とも2025年10月29日発売の現行カタログに掲載されており、発売日とグレード別の税込価格を販売単位へ固定した。
+
+デリカミニは6グレード×2WD・4WDの12単位。T／GはLDPのみのLevel 1相当4単位、T Premium／G Premium（DELIMARU Packageを含む）は全車速ACC＋LKAのMI-PILOT標準でLevel 2相当8単位。eKスペースはM／G×2WD・4WDの4単位で、現行主要装備表はLDPを全車標準とする一方、MI-PILOT（ACC・LKA）の標準装備を記載していないため、4単位ともLevel 1相当とした。旧ページに残るMI-PILOT案内は現行2025年カタログと整合しないため、eKスペースのLevel 2販売単位やオプション価格は推測で追加していない。
+
+全16単位で運転者の常時監視・操作が必要、ハンズオフ不可。デリカミニのMI-PILOTは高速道路・自動車専用道路の同一車線支援で、ACC設定車速は約30km/h以上。価格はデリカミニ196万4,600円〜290万7,300円、eKスペース174万9,000円〜194万5,900円（税込）。注文可否は公式掲載だけでは確定できないため、全16単位をunknownとした。
+
+| モデル | 掲載単位 | Level 1 | Level 2 | 価格（税込） |
+|---|---:|---:|---:|---:|
+| デリカミニ | 12 | 4（T／G） | 8（T Premium／G Premium、DELIMARU Package含む） | 1,964,600〜2,907,300円 |
+| eKスペース | 4 | 4（M／G） | 0 | 1,749,000〜1,945,900円 |
+
+根拠: [デリカミニ商品ページ](https://www.mitsubishi-motors.co.jp/lineup/delica_mini/)、[デリカミニ主要装備](https://www.mitsubishi-motors.co.jp/lineup/delica_mini/spec/spe_01.html)、[デリカミニMI-PILOT](https://www.mitsubishi-motors.co.jp/lineup/delica_mini/usp/usp_03.html)、[eKスペース商品ページ](https://www.mitsubishi-motors.co.jp/lineup/ek_space/)、[eKスペース主要装備](https://www.mitsubishi-motors.co.jp/lineup/ek_space/spec/spe_01.html)、[eKスペースカタログPDF](https://www.mitsubishi-motors.co.jp/lineup/ek_space/pdf/ek_space.pdf)、[三菱ニュースリリース（2025年9月18日）](https://www.mitsubishi-motors.com/jp/newsroom/newsrelease/2025/20250918_3.html)、[国土交通省 Level 1/2定義](https://www.mlit.go.jp/common/001343740.pdf)。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。

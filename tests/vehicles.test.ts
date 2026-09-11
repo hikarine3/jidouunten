@@ -163,14 +163,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(396);
+    expect(vehicles).toHaveLength(412);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補395件は全件の公式金額を保持する', () => {
+  it('現行候補411件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(395);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(395);
+    expect(current).toHaveLength(411);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(411);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -278,7 +278,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(74);
+    expect(officialLinks).toHaveLength(76);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -332,7 +332,7 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(139);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(147);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
@@ -1088,5 +1088,27 @@ describe('vehicle data contract and filters', () => {
     expect(ek.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.sources.some((source) => source.url.includes('mitsubishi-motors.com')))).toBe(true);
     expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKクロス' })?.actions).toHaveLength(4);
     expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKクロス EV' })?.actions).toHaveLength(4);
+  });
+
+  it('三菱 デリカミニはグレード別のLevel 1/2と発売日・価格を保持する', () => {
+    const delica = vehicles.filter((vehicle) => vehicle.model === 'デリカミニ');
+    expect(delica).toHaveLength(12);
+    expect(delica.every((vehicle) => vehicle.currentCatalogListed && vehicle.salesUnitIntroducedAt === '2025-10-29' && vehicle.priceEffectiveAt === '2025-10-29' && vehicle.catalogAsOf === '2025-09' && vehicle.lastReviewedAt === '2026-09-12')).toBe(true);
+    expect(delica.filter((vehicle) => vehicle.automationLevel === 1)).toHaveLength(4);
+    expect(delica.filter((vehicle) => vehicle.automationLevel === 2)).toHaveLength(8);
+    expect(delica.filter((vehicle) => vehicle.automationLevel === 1).every((vehicle) => vehicle.capabilities.join(',') === 'lane_departure_prevention')).toBe(true);
+    expect(delica.filter((vehicle) => vehicle.automationLevel === 2).every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,lane_departure_prevention' && vehicle.requiredPackage?.includes('MI-PILOT'))).toBe(true);
+    expect(delica.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.sources.some((source) => source.url.includes('mitsubishi-motors.com')))).toBe(true);
+    expect(delica.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([1964600, 2042700, 2129600, 2179100, 2219800, 2258300, 2296800, 2387000, 2649900, 2740100, 2817100, 2907300]);
+    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'デリカミニ' })?.actions).toHaveLength(4);
+  });
+
+  it('三菱 eKスペースは現行M/G・2WD/4WDをLDPのみのLevel 1として保持する', () => {
+    const ekSpace = vehicles.filter((vehicle) => vehicle.model === 'eKスペース');
+    expect(ekSpace).toHaveLength(4);
+    expect(ekSpace.every((vehicle) => vehicle.currentCatalogListed && vehicle.automationLevel === 1 && vehicle.capabilities.join(',') === 'lane_departure_prevention' && vehicle.salesUnitIntroducedAt === '2025-10-29' && vehicle.priceEffectiveAt === '2025-10-29')).toBe(true);
+    expect(ekSpace.every((vehicle) => vehicle.price?.optionalPackages.length === 0 && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required')).toBe(true);
+    expect(ekSpace.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/ek_space.pdf')))).toBe(true);
+    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKスペース' })?.actions).toHaveLength(4);
   });
 });
