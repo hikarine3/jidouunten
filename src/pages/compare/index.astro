@@ -2,6 +2,22 @@
 import Layout from '../../layouts/Layout.astro';
 import { availabilityLabels, availabilityNotes, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleReferenceLabel, vehicles } from '../../data/loader';
 
+const availabilityPublicKeys: Record<string, string> = {
+  new_order_available: 'order',
+  inventory_only: 'stock',
+  used_only: 'used',
+  service_available: 'service',
+  trial_or_research: 'trial',
+  announced: 'future',
+  unavailable: 'closed',
+  unknown: 'uncertain',
+};
+const handsOffPublicKeys: Record<string, string> = { allowed_in_conditions: 'conditional', not_allowed: 'hands_on', unknown: 'uncertain' };
+const monitoringPublicKeys: Record<string, string> = { required: 'monitor', takeover_ready: 'ready', not_required_in_odd: 'not_needed', unknown: 'uncertain' };
+const publicAvailabilityLabels = Object.fromEntries(Object.entries(availabilityLabels).map(([key, label]) => [availabilityPublicKeys[key], label]));
+const publicAvailabilityNotes = Object.fromEntries(Object.entries(availabilityNotes).map(([key, note]) => [availabilityPublicKeys[key], note]));
+const publicHandsOffLabels = Object.fromEntries(Object.entries(handsOffLabels).map(([key, label]) => [handsOffPublicKeys[key], label]));
+const publicMonitoringLabels = Object.fromEntries(Object.entries(monitoringLabels).map(([key, label]) => [monitoringPublicKeys[key], label]));
 const publicCatalog = vehicles.map((vehicle) => ({
   id: vehicle.id,
   maker: vehicle.maker,
@@ -9,9 +25,9 @@ const publicCatalog = vehicles.map((vehicle) => ({
   grade: vehicle.grade,
   automationLevel: vehicle.automationLevel,
   requiredPackage: vehicle.requiredPackage,
-  availability: vehicle.availability,
-  handsOff: vehicle.handsOff,
-  driverMonitoring: vehicle.driverMonitoring,
+  availability: availabilityPublicKeys[vehicle.availability],
+  handsOff: handsOffPublicKeys[vehicle.handsOff],
+  driverMonitoring: monitoringPublicKeys[vehicle.driverMonitoring],
   odd: vehicle.odd,
   capabilities: vehicle.capabilities.map((id) => capabilityDefinition(id).label),
   referenceLabel: vehicleReferenceLabel(vehicle),
@@ -38,7 +54,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
     <div class="empty" data-compare-empty><h2>比較する車両を一覧から選んでください。</h2><p>車両一覧の「比較に追加」から2台を選ぶと、条件を横並びで確認できます。</p><a class="button text" href="/">車を探す</a></div>
     <div data-compare-result hidden></div>
   </div></section>
-  <script define:vars={{ catalog: publicCatalog, levelLabels, availabilityLabels, availabilityNotes, handsOffLabels, monitoringLabels }}>
+  <script define:vars={{ catalog: publicCatalog, levelLabels, availabilityLabels: publicAvailabilityLabels, availabilityNotes: publicAvailabilityNotes, handsOffLabels: publicHandsOffLabels, monitoringLabels: publicMonitoringLabels }}>
     // @ts-nocheck
     const escapeHtml = (value) => String(value ?? '不明').replace(/[&<>"']/g, (char) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
     const fact = (value) => Array.isArray(value) ? value.join(' / ') || '不明' : value || '不明';
@@ -69,16 +85,17 @@ const publicCatalog = vehicles.map((vehicle) => ({
       if (selected.length !== 2) return;
       const headings = selected.map((v) => `<th>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</th>`).join('');
       const cells = (fn) => selected.map((v) => `<td>${fn(v)}</td>`).join('');
-      const normalize = (value) => String(value ?? '不明')
+    const normalize = (value) => String(value ?? '不明')
         .replace(/高速道路の本線/g, '高速道路')
         .replace(/自動車専用道路の本線/g, '自動車専用道路')
         .replace(/[\s　]/g, '');
-      const isUnknown = (value) => {
+    const isUnknown = (value) => {
         const text = String(value ?? '').trim();
-        return !text || text === '不明' || text.includes('不明') || text.includes('未確認') || text === '価格要確認' || text === '公式価格未確認' || text === '標準装備 / 不明' || text.includes('算出不可');
-      };
-      const stateFor = (values) => {
-        if (values.some(isUnknown)) return 'unknown';
+      return !text || text === '不明' || text.includes('不明') || text.includes('未確認') || text === '価格要確認' || text === '公式価格未確認' || text === '標準装備 / 不明' || text.includes('算出不可');
+    };
+    const uncertainState = 'unconfirmed';
+    const stateFor = (values) => {
+        if (values.some(isUnknown)) return uncertainState;
         return new Set(values.map(normalize)).size > 1 ? 'diff' : 'same';
       };
       const row = (label, valueFn, key, noteFn) => {
@@ -91,7 +108,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
       const capabilityLabels = [...new Set(selected.flatMap((v) => v.capabilities))].sort((a, b) => a.localeCompare(b, 'ja'));
       const capabilityRows = capabilityLabels.map((label) => {
         const allConfirmed = selected.every((v) => v.capabilities.includes(label));
-        const state = allConfirmed ? 'same' : 'unknown';
+        const state = allConfirmed ? 'same' : uncertainState;
         return `<tr class="compare-row compare-row-${state}" data-compare-row="capability-${escapeHtml(label)}"><th>確認できた機能<small>${escapeHtml(label)}</small></th>${selected.map((v) => `<td>${v.capabilities.includes(label) ? '<strong>確認済み</strong>' : '未確認'}</td>`).join('')}</tr>`;
       }).join('');
       const optionalPackageRows = selected.some((v) => v.optionalPackageLabel)
@@ -115,9 +132,9 @@ const publicCatalog = vehicles.map((vehicle) => ({
         row('運転者監視', (v) => monitoringLabels[v.driverMonitoring], 'driver-monitoring'),
         row('必要パッケージ', (v) => v.requiredPackage || '不明', 'required-package'),
         row('販売・利用状態', (v) => availabilityLabels[v.availability], 'availability', (v) => availabilityNotes[v.availability] ? `<small>${escapeHtml(availabilityNotes[v.availability])}</small>` : ''),
-        `<tr class="compare-row compare-row-unknown" data-compare-row="official"><th>公式サイト<small>最新仕様を確認</small></th>${selected.map((v) => `<td>${v.officialLink ? `<a class="button small text" href="${escapeHtml(v.officialLink.url)}" target="_blank" rel="noopener noreferrer" data-official-link data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}" data-link-kind="${escapeHtml(v.officialLink.kind)}">${v.officialLink.kind === 'archive' ? '過去資料を開く' : '公式サイトを開く'} ↗</a>` : 'リンク未確認'}</td>`).join('')}</tr>`,
-        `<tr class="compare-row compare-row-unknown" data-compare-row="purchase-actions"><th>公式の購入・試乗<small>注文・試乗</small></th>${selected.map((v) => `<td>${actionLinks(v, ['order', 'test_drive'], 'alt')}</td>`).join('')}</tr>`,
-        `<tr class="compare-row compare-row-unknown" data-compare-row="consideration-actions"><th>公式の検討用導線<small>見積り・販売店・カタログ</small></th>${selected.map((v) => `<td>${actionLinks(v, ['estimate', 'dealer', 'catalog'], 'text')}<small>注文できることを示すリンクではありません。</small></td>`).join('')}</tr>`,
+        `<tr class="compare-row compare-row-${uncertainState}" data-compare-row="official"><th>公式サイト<small>最新仕様を確認</small></th>${selected.map((v) => `<td>${v.officialLink ? `<a class="button small text" href="${escapeHtml(v.officialLink.url)}" target="_blank" rel="noopener noreferrer" data-official-link data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}" data-link-kind="${escapeHtml(v.officialLink.kind)}">${v.officialLink.kind === 'archive' ? '過去資料を開く' : '公式サイトを開く'} ↗</a>` : 'リンク未確認'}</td>`).join('')}</tr>`,
+        `<tr class="compare-row compare-row-${uncertainState}" data-compare-row="purchase-actions"><th>公式の購入・試乗<small>注文・試乗</small></th>${selected.map((v) => `<td>${actionLinks(v, ['order', 'test_drive'], 'alt')}</td>`).join('')}</tr>`,
+        `<tr class="compare-row compare-row-${uncertainState}" data-compare-row="consideration-actions"><th>公式の検討用導線<small>見積り・販売店・カタログ</small></th>${selected.map((v) => `<td>${actionLinks(v, ['estimate', 'dealer', 'catalog'], 'text')}<small>注文できることを示すリンクではありません。</small></td>`).join('')}</tr>`,
       ].join('');
       const diffCount = selected.length === 2 ? [
         selected.map((v) => v.priceLabel),

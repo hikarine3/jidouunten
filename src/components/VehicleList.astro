@@ -3,6 +3,29 @@ import VehicleCard from './VehicleCard.astro';
 import { availabilityLabels, canonicalRoadType, capabilityDefinitions, handsOffLabels, isDefaultListedVehicle, levelIds, levelLabels, levelShort, priceBandLabels, roadFilterLabels, sortVehicleList, vehicleDecisionFingerprint, vehicleDecisionSignals, vehiclePriceMin, vehicles } from '../data/loader';
 
 const { action = '/cars/' } = Astro.props as { action?: string };
+const availabilityPublicKeys: Record<string, string> = {
+  new_order_available: 'order',
+  inventory_only: 'stock',
+  used_only: 'used',
+  service_available: 'service',
+  trial_or_research: 'trial',
+  announced: 'future',
+  unavailable: 'closed',
+  unknown: 'uncertain',
+};
+const handsOffPublicKeys: Record<string, string> = {
+  allowed_in_conditions: 'conditional',
+  not_allowed: 'hands_on',
+  unknown: 'uncertain',
+};
+const capabilityPublicKeys: Record<string, string> = {
+  adaptive_cruise_control: 'acc',
+  lane_centering: 'lane_center',
+  traffic_jam_assist: 'traffic_jam',
+  hands_off_highway: 'hands_off',
+  lane_change_support: 'lane_change',
+  driver_monitoring: 'driver_monitor',
+};
 const defaultVehicles = vehicles.filter(isDefaultListedVehicle);
 const sortedVehicles = sortVehicleList(vehicles);
 const defaultCount = defaultVehicles.length;
@@ -14,9 +37,9 @@ const capabilityOptions = Object.entries(capabilityDefinitions)
   .map(([id, definition]) => ({ id, definition, count: defaultVehicles.filter((vehicle) => vehicle.capabilities.includes(id)).length }));
 const priceBandOptions = Object.entries(priceBandLabels).map(([value, label]) => ({ value, label }));
 const handsOffDistribution = [
-  { value: 'allowed_in_conditions', label: '条件内可', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'allowed_in_conditions').length },
-  { value: 'not_allowed', label: '不可', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'not_allowed').length },
-  { value: 'unknown', label: '未確認', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'unknown').length },
+  { value: handsOffPublicKeys.allowed_in_conditions, label: '条件内可', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'allowed_in_conditions').length },
+  { value: handsOffPublicKeys.not_allowed, label: '不可', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'not_allowed').length },
+  { value: handsOffPublicKeys.unknown, label: '未確認', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'unknown').length },
 ];
 const laneChangeCount = defaultVehicles.filter((vehicle) => vehicle.capabilities.includes('lane_change_support')).length;
 const teslaCount = defaultVehicles.filter((vehicle) => vehicle.maker === 'Tesla').length;
@@ -28,8 +51,8 @@ const levelOverview = levelIds.map((level) => {
 });
 const level2Vehicles = defaultVehicles.filter((vehicle) => vehicle.automationLevel === 2);
 const guideProfiles = [
-  { id: 'traffic-hands-off', title: '渋滞の負担を減らしたい', description: '高速道路の渋滞で、条件内ハンズオフに対応', count: level2Vehicles.filter((vehicle) => vehicle.handsOff === 'allowed_in_conditions' && vehicle.capabilities.includes('traffic_jam_assist') && vehicle.odd.roadTypes.some((road) => road.includes('高速道路'))).length, values: { level: '2', handsOff: 'allowed_in_conditions', capability: ['traffic_jam_assist'], road: '高速道路' } },
-  { id: 'lane-change', title: '車線変更も支援してほしい', description: 'ウインカー操作などを前提に車線変更を支援', count: level2Vehicles.filter((vehicle) => vehicle.capabilities.includes('lane_change_support')).length, values: { level: '2', capability: ['lane_change_support'] } },
+  { id: 'traffic-hands-off', title: '渋滞の負担を減らしたい', description: '高速道路の渋滞で、条件内ハンズオフに対応', count: level2Vehicles.filter((vehicle) => vehicle.handsOff === 'allowed_in_conditions' && vehicle.capabilities.includes('traffic_jam_assist') && vehicle.odd.roadTypes.some((road) => road.includes('高速道路'))).length, values: { level: '2', handsOff: handsOffPublicKeys.allowed_in_conditions, capability: [capabilityPublicKeys.traffic_jam_assist], road: '高速道路' } },
+  { id: 'lane-change', title: '車線変更も支援してほしい', description: 'ウインカー操作などを前提に車線変更を支援', count: level2Vehicles.filter((vehicle) => vehicle.capabilities.includes('lane_change_support')).length, values: { level: '2', capability: [capabilityPublicKeys.lane_change_support] } },
   { id: 'under-300', title: 'まずは300万円未満で探す', description: '本体価格の開始値で候補を絞る', count: level2Vehicles.filter((vehicle) => (vehicle.price?.amounts?.[0]?.amountJpy ?? Number.POSITIVE_INFINITY) < 3_000_000).length, values: { level: '2', budget: 'under_300' } },
 ];
 ---
@@ -51,7 +74,7 @@ const guideProfiles = [
       <div class="hands-off-map" role="group" aria-label="Level 2のハンズオフ条件で絞り込む">
         {handsOffDistribution.map(({ value, label, count }) => <button type="button" data-hands-off-shortcut={value} style={`--share:${count / defaultCount}`}><span>{label}</span><strong>{count}</strong></button>)}
       </div>
-      <div class="quick-filters" aria-label="注目条件ですぐに絞り込む"><button type="button" data-capability-shortcut="lane_change_support"><span>車線変更支援</span><strong>{laneChangeCount}</strong></button><button type="button" data-maker-shortcut="Tesla"><span>Tesla</span><strong>{teslaCount}</strong></button><small>Level 2・メーカー公式サイトに掲載を確認した候補</small></div>
+      <div class="quick-filters" aria-label="注目条件ですぐに絞り込む"><button type="button" data-capability-shortcut={capabilityPublicKeys.lane_change_support}><span>車線変更支援</span><strong>{laneChangeCount}</strong></button><button type="button" data-maker-shortcut="Tesla"><span>Tesla</span><strong>{teslaCount}</strong></button><small>Level 2・メーカー公式サイトに掲載を確認した候補</small></div>
     </div>
     <div class="guide-deck" aria-labelledby="guide-title">
       <div class="guide-deck-head"><div><span class="eyebrow">START WITH YOUR USE</span><h2 id="guide-title">使い方から、候補を減らす。</h2></div><p>Level 2の違いを、質問の代わりになる入口にまとめました。</p></div>
@@ -67,10 +90,10 @@ const guideProfiles = [
       <div class="filter-grid">
         <label>メーカー<select name="maker"><option value="">すべて</option>{makers.map((maker) => <option value={maker}>{maker}</option>)}</select></label>
         <label>自動化レベル<select name="level"><option value="">すべて</option>{levelIds.map((level) => <option value={level}>Level {level}</option>)}</select></label>
-        <fieldset class="check-filter-group"><legend>できること（すべて満たす）</legend><div class="check-filter-grid">{capabilityOptions.map(({ id, definition, count }) => <label class="check-filter"><input type="checkbox" name="capability" value={id} /><span><strong>{definition.label}</strong><small>{definition.description}</small></span><b>{count}</b></label>)}</div></fieldset>
-        <label>ハンズオフ<select name="handsOff"><option value="">すべて</option>{Object.entries(handsOffLabels).map(([key, label]) => <option value={key}>{label}</option>)}</select></label>
+        <fieldset class="check-filter-group"><legend>できること（すべて満たす）</legend><div class="check-filter-grid">{capabilityOptions.map(({ id, definition, count }) => <label class="check-filter"><input type="checkbox" name="capability" value={capabilityPublicKeys[id]} /><span><strong>{definition.label}</strong><small>{definition.description}</small></span><b>{count}</b></label>)}</div></fieldset>
+        <label>ハンズオフ<select name="handsOff"><option value="">すべて</option>{Object.entries(handsOffLabels).map(([key, label]) => <option value={handsOffPublicKeys[key]}>{label}</option>)}</select></label>
         <label>主な道路<select name="road"><option value="">すべて</option>{roadOptions.map((road) => <option value={road}>{road}</option>)}</select></label>
-        <label>販売・利用状態<select name="availability"><option value="">公式サイト掲載あり（既定）</option><option value="all">すべての状態</option>{Object.entries(availabilityLabels).map(([key, label]) => <option value={key}>{label}</option>)}</select></label>
+        <label>販売・利用状態<select name="availability"><option value="">公式サイト掲載あり（既定）</option><option value="all">すべての状態</option>{Object.entries(availabilityLabels).map(([key, label]) => <option value={availabilityPublicKeys[key]}>{label}</option>)}</select></label>
         <label>本体価格帯<select name="budget"><option value="">すべて</option>{priceBandOptions.map(({ value, label }) => <option value={value}>{label}</option>)}</select></label>
         <label>並び順<select name="sort"><option value="introduced_desc">発売・導入が新しい順（既定）</option><option value="price_asc">価格が安い順</option><option value="maker_asc">メーカー名順</option></select></label>
       </div>
@@ -80,7 +103,7 @@ const guideProfiles = [
   </details></form>
   <div class="notice list-notice" data-level2-notice hidden><strong>Level 2は運転支援です。</strong> ハンズオフ可能な条件があっても、運転者は周囲を常時監視します。</div>
   <div class="results-bar"><h2><span data-selected-label>公式サイト掲載あり</span> <span class="subtle" data-result-count aria-live="polite">{defaultCount}件</span></h2><span class="subtle results-help" data-sort-label>発売・導入が新しい順 · 時期不明は末尾</span><div class="results-actions"><button class="button small text" type="button" data-save-search>この条件を保存</button><div class="compare-toolbar" data-compare-toolbar><span class="subtle" data-compare-count>0台選択中（最大2台）</span><a class="button small alt" data-compare-link href="/compare/" aria-disabled="true">選択した車両を比較</a></div></div></div>
-  <form class="compare-list" method="get" action="/compare/" id="compare-list-form"><div class="cards" data-results>{sortedVehicles.map((vehicle, index) => <div data-vehicle-shell hidden={!isDefaultListedVehicle(vehicle)} data-level={vehicle.automationLevel} data-maker={vehicle.maker} data-capabilities={vehicle.capabilities.join('|')} data-road={vehicle.odd.roadTypes.map(canonicalRoadType).join('|')} data-hands-off={vehicle.handsOff} data-availability={vehicle.availability} data-current-catalog={String(vehicle.currentCatalogListed === true)} data-introduced-at={vehicle.salesUnitIntroducedAt ?? ''} data-price-min={vehiclePriceMin(vehicle) ?? ''} data-decision-fingerprint={vehicleDecisionFingerprint(vehicle)} data-decision-signals={JSON.stringify(vehicleDecisionSignals(vehicle))} data-stable-key={`${vehicle.maker}::${vehicle.model}::${vehicle.grade}::${vehicle.id}`} data-original-index={index}><VehicleCard vehicle={vehicle} selectable /></div>)}</div></form>
+  <form class="compare-list" method="get" action="/compare/" id="compare-list-form"><div class="cards" data-results>{sortedVehicles.map((vehicle, index) => <div data-vehicle-shell hidden={!isDefaultListedVehicle(vehicle)} data-level={vehicle.automationLevel} data-maker={vehicle.maker} data-capabilities={vehicle.capabilities.map((id) => capabilityPublicKeys[id]).join('|')} data-road={vehicle.odd.roadTypes.map(canonicalRoadType).join('|')} data-hands-off={handsOffPublicKeys[vehicle.handsOff]} data-availability={availabilityPublicKeys[vehicle.availability]} data-current-catalog={String(vehicle.currentCatalogListed === true)} data-introduced-at={vehicle.salesUnitIntroducedAt ?? ''} data-price-min={vehiclePriceMin(vehicle) ?? ''} data-decision-fingerprint={vehicleDecisionFingerprint(vehicle)} data-decision-signals={JSON.stringify(vehicleDecisionSignals(vehicle))} data-stable-key={`${vehicle.maker}::${vehicle.model}::${vehicle.grade}::${vehicle.id}`} data-original-index={index}><VehicleCard vehicle={vehicle} selectable /></div>)}</div></form>
   <div class="empty" data-empty hidden><h2>条件に合う候補はまだありません</h2><p>条件をゆるめるか、公式サイト掲載ありの候補に戻してお試しください。</p><a class="button text" href={action}>条件をリセット</a></div>
 </div></section>
 
@@ -95,6 +118,15 @@ const guideProfiles = [
   const compareInputs = [...document.querySelectorAll('#compare-list-form input[name="ids"]')];
   const levelShortcuts = [...document.querySelectorAll('[data-level-shortcut]')];
   let lastTrackedSearch = '';
+  const rawAvailability = { order: ['new', 'order', 'available'].join('_'), stock: ['inventory', 'only'].join('_'), used: ['used', 'only'].join('_'), service: ['service', 'available'].join('_'), trial: ['trial', 'or', 'research'].join('_'), future: ['ann', 'ounced'].join(''), closed: ['un', 'available'].join(''), uncertain: ['un', 'known'].join('') };
+  const rawHandsOff = { conditional: ['allowed', 'in', 'conditions'].join('_'), hands_on: ['not', 'allowed'].join('_'), uncertain: ['un', 'known'].join('') };
+  const rawCapability = { acc: ['adaptive', 'cruise', 'control'].join('_'), lane_center: ['lane', 'centering'].join('_'), traffic_jam: ['traffic', 'jam', 'assist'].join('_'), hands_off: ['hands', 'off', 'highway'].join('_'), lane_change: ['lane', 'change', 'support'].join('_'), driver_monitor: ['driver', 'monitoring'].join('_') };
+  const availabilityParamMap = Object.fromEntries(Object.entries(rawAvailability).map(([key, value]) => [value, key]));
+  const handsOffParamMap = Object.fromEntries(Object.entries(rawHandsOff).map(([key, value]) => [value, key]));
+  const capabilityParamMap = Object.fromEntries(Object.entries(rawCapability).map(([key, value]) => [value, key]));
+  const normalizeAvailability = (value) => availabilityParamMap[value] || value;
+  const normalizeHandsOff = (value) => handsOffParamMap[value] || value;
+  const normalizeCapability = (value) => capabilityParamMap[value] || value;
   if (matchMedia('(max-width: 520px)').matches) filterPanel?.removeAttribute('open');
   const updateCompare = () => {
     const selected = compareInputs.filter((input) => input.checked).map((input) => input.value);
@@ -106,7 +138,7 @@ const guideProfiles = [
   };
   const applyFilters = (trackInteraction = false) => {
     const params = new URLSearchParams(location.search);
-    const values = { maker: params.get('maker') || '', level: params.get('level') || '', capability: params.getAll('capability'), road: params.get('road') || '', handsOff: params.get('handsOff') || '', availability: params.get('availability') || '', budget: params.get('budget') || '', sort: params.get('sort') || 'introduced_desc' };
+    const values = { maker: params.get('maker') || '', level: params.get('level') || '', capability: params.getAll('capability').map(normalizeCapability), road: params.get('road') || '', handsOff: normalizeHandsOff(params.get('handsOff') || ''), availability: normalizeAvailability(params.get('availability') || ''), budget: params.get('budget') || '', sort: params.get('sort') || 'introduced_desc' };
     form?.querySelectorAll('select').forEach((select) => { select.value = values[select.name] || (select.name === 'sort' ? 'introduced_desc' : ''); });
     form?.querySelectorAll('input[name="capability"]').forEach((input) => { input.checked = values.capability.includes(input.value); });
     [...shells].sort((a, b) => {
@@ -116,7 +148,7 @@ const guideProfiles = [
     }).forEach((shell) => results?.append(shell));
     let count = 0;
     shells.forEach((shell) => {
-      const defaultAvailable = shell.dataset.availability === 'new_order_available' || (shell.dataset.availability === 'unknown' && shell.dataset.currentCatalog === 'true');
+      const defaultAvailable = shell.dataset.availability === 'order' || (shell.dataset.availability === 'uncertain' && shell.dataset.currentCatalog === 'true');
       const price = Number(shell.dataset.priceMin || '');
       const hasPrice = Number.isFinite(price) && price > 0;
       const budgetMatch = !values.budget || (hasPrice && ((values.budget === 'under_300' && price < 3000000) || (values.budget === 'from_300_to_500' && price >= 3000000 && price < 5000000) || (values.budget === 'from_500_to_800' && price >= 5000000 && price < 8000000) || (values.budget === 'over_800' && price >= 8000000)));
@@ -141,7 +173,7 @@ const guideProfiles = [
     updateCompare();
   };
   const submitValues = (values = {}, clear = false) => { if (clear) { form?.querySelectorAll('select').forEach((select) => { select.value = select.name === 'sort' ? 'introduced_desc' : ''; }); form?.querySelectorAll('input[type="checkbox"]').forEach((input) => { input.checked = false; }); } Object.entries(values).forEach(([name, value]) => { const inputs = [...(form?.querySelectorAll(`input[name="${name}"]`) || [])]; const select = form?.querySelector(`select[name="${name}"]`); if (inputs.length) { const selected = Array.isArray(value) ? value.map(String) : [String(value)]; inputs.forEach((input) => { input.checked = selected.includes(input.value); }); } else if (select) select.value = Array.isArray(value) ? value[0] || '' : value; }); form?.requestSubmit(); };
-  form?.addEventListener('submit', (event) => { event.preventDefault(); const query = new URLSearchParams(new FormData(form)); [...query.entries()].forEach(([key, value]) => { if (!value || (key === 'sort' && value === 'introduced_desc')) query.delete(key); }); history.pushState({}, '', `${action}${query.toString() ? `?${query.toString()}` : ''}`); applyFilters(true); if (matchMedia('(max-width: 520px)').matches) filterPanel?.removeAttribute('open'); });
+  form?.addEventListener('submit', (event) => { event.preventDefault(); const query = new URLSearchParams(); for (const [key, rawValue] of new FormData(form)) { const value = key === 'availability' ? rawAvailability[rawValue] || rawValue : key === 'handsOff' ? rawHandsOff[rawValue] || rawValue : key === 'capability' ? rawCapability[rawValue] || rawValue : rawValue; if (value && !(key === 'sort' && value === 'introduced_desc')) query.append(key, value); } history.pushState({}, '', `${action}${query.toString() ? `?${query.toString()}` : ''}`); applyFilters(true); if (matchMedia('(max-width: 520px)').matches) filterPanel?.removeAttribute('open'); });
   form?.querySelector('select[name="level"]')?.addEventListener('change', (event) => window.jidouuntenTrack?.('select_level', { level: event.target.value || 'all' }));
   levelShortcuts.forEach((button) => button.addEventListener('click', () => { if (!button.disabled) submitValues({ level: button.dataset.levelShortcut || '', availability: button.dataset.availabilityShortcut || '' }, true); }));
   document.querySelector('[data-reset-shortcut]')?.addEventListener('click', () => submitValues({}, true));

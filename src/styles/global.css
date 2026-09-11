@@ -84,7 +84,7 @@ h3 { line-height: 1.3; letter-spacing: -.025em; }
 .vehicle-card h3 { font-size: 1.28rem; margin-bottom: 5px; }
 .vehicle-price { margin: 12px 0 2px; color: var(--navy); font-family: 'DM Sans', 'Noto Sans JP', sans-serif; font-size: 1.15rem; font-weight: 800; }
 .vehicle-price small { display: block; margin-top: 2px; color: var(--muted); font-family: 'Noto Sans JP', sans-serif; font-size: .65rem; font-weight: 500; }
-.vehicle-price.is-unknown { color: var(--muted); font-size: .94rem; }
+.vehicle-price.is-unconfirmed { color: var(--muted); font-size: .94rem; }
 .vehicle-option { display: grid; gap: 1px; margin: 8px 0 2px; color: #315766; font-size: .72rem; }
 .vehicle-option span { color: var(--muted); font-size: .64rem; }
 .vehicle-option strong { color: var(--navy); font-size: .76rem; }
@@ -202,7 +202,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .compare-table thead th:first-child { color: var(--lime); }
 .compare-table .compare-row-diff th, .compare-table .compare-row-diff td { background: #f3f9df; }
 .compare-table .compare-row-diff th { color: var(--ink); }
-.compare-table .compare-row-unknown th, .compare-table .compare-row-unknown td { background: #fbfcfc; }
+.compare-table .compare-row-unconfirmed th, .compare-table .compare-row-unconfirmed td { background: #fbfcfc; }
 .compare-table[data-hide-same="true"] .compare-row-same { display: none; }
 .compare-diff-summary { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; padding: 11px 14px; border: 1px solid rgba(149,214,0,.5); border-radius: 11px; background: #f5faea; }
 .compare-diff-summary strong { color: var(--ink); font-size: .86rem; }

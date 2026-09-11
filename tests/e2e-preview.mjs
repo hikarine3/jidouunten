@@ -82,10 +82,10 @@ try {
   await page.locator('[data-saved-resume-delete="search"]').click();
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '検索条件を削除すると再開バーを隠す');
   await page.locator('[data-reset-shortcut]').click();
-  await page.locator('[data-hands-off-shortcut="allowed_in_conditions"]').click();
+  await page.locator('[data-hands-off-shortcut="conditional"]').click();
   assert.equal(await visibleCards(), 48, '条件内ハンズオフは48件');
   await page.locator('[data-reset-shortcut]').click();
-  await page.locator('[data-capability-shortcut="lane_change_support"]').click();
+  await page.locator('[data-capability-shortcut="lane_change"]').click();
   assert.equal(await visibleCards(), 50, '車線変更支援は50件');
   await page.locator('[data-reset-shortcut]').click();
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Volvo EX30' }).count(), 3, 'Volvo EX30の3販売単位を既定一覧に表示');
@@ -129,7 +129,7 @@ try {
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
   assert.match(await page.locator('footer').innerText(), /自動運転\.jp[\s\S]*車を探す[\s\S]*レベルの定義[\s\S]*比較する[\s\S]*プライバシー[\s\S]*1st Class/, '共通フッターに主要導線と運営元');
-  assert.equal(await page.locator('[data-vehicle-shell][data-availability="unavailable"]:visible').count(), 0, '過去車両は既定非表示');
+  assert.equal(await page.locator('[data-vehicle-shell][data-availability="closed"]:visible').count(), 0, '過去車両は既定非表示');
   assert.equal(await page.locator('[data-consent]').count(), 0, 'Analytics同意バナーを表示しない');
   assert.equal(await page.locator('script[src*="/gtm.js?id="]').count(), 1, 'サイト自身のGTM bootstrapを1回だけ通常読み込み');
   const levelMapPage = await browser.newPage({ viewport: { width: 1280, height: 900 } });
@@ -173,7 +173,7 @@ try {
 
   await page.goto(`${base}/?capability=lane_change_support&maker=Mazda`);
   assert.equal(await visibleCards(), 2, 'メーカーと能力をAND条件で絞り込む');
-  assert.equal(await page.locator('input[name="capability"][value="lane_change_support"]').isChecked(), true, '能力条件をURLから復元');
+  assert.equal(await page.locator('input[name="capability"][value="lane_change"]').isChecked(), true, '能力条件をURLから復元');
   await page.goto(`${base}/?capability=traffic_jam_assist&capability=hands_off_highway`);
   assert.equal(await visibleCards(), 43, '能力チェックは複数選択をAND条件で適用');
   assert.equal(await page.locator('input[name="capability"]:checked').count(), 2, '能力チェックを2つ選択');
@@ -492,7 +492,7 @@ try {
   assert.match(noahCompare, /ノア[\s\S]*HYBRID S-Z 2WD（7人乗り）[\s\S]*HYBRID S-X 2WD（7人乗り）/);
   assert.match(noahCompare, /4,056,800円[\s\S]*3,261,500円[\s\S]*122,100円[\s\S]*参考総額[\s\S]*4,178,900円[\s\S]*算出不可[\s\S]*ハンズオフ：条件内で可[\s\S]*ハンズオフ：不可/, 'ノア比較にS-Z/S-Xの参考総額・価格・能力差');
   const noahReferenceTotalRow = page.locator('[data-compare-row="reference-total"]');
-  assert.equal(await noahReferenceTotalRow.getAttribute('class').then((value) => value.includes('compare-row-unknown')), true, 'ノアの算出不可総額は優劣から分離');
+  assert.equal(await noahReferenceTotalRow.getAttribute('class').then((value) => value.includes('compare-row-unconfirmed')), true, 'ノアの算出不可総額は優劣から分離');
   assert.equal(await noahReferenceTotalRow.getAttribute('class').then((value) => value.includes('compare-row-diff')), false, 'ノアの算出不可総額を確認済み差分に数えない');
   assert.doesNotMatch(noahCompare, /noah_spec_202609|sources|accessedAt|allowed_in_conditions|not_allowed/, 'ノア比較に内部根拠や内部enumを表示しない');
 
@@ -542,7 +542,7 @@ try {
   assert.equal((await page.locator('[data-compare-result]').getByText('新車注文可', { exact: true }).count()), 2, '比較でもTeslaの注文可状態を表示');
   assert.match(await page.locator('[data-compare-diff-count]').getAttribute('data-compare-diff-count').catch(() => ''), /./, '比較の確認済み差分件数を保持');
   assert.ok(await page.locator('.compare-row-diff').count() > 0, '比較で意味のある既知差分を強調');
-  assert.ok(await page.locator('.compare-row-unknown').count() > 0, '比較で未確認項目を優劣から分離');
+  assert.ok(await page.locator('.compare-row-unconfirmed').count() > 0, '比較で未確認項目を優劣から分離');
   const sameRows = page.locator('.compare-table .compare-row-same');
   const sameRowCount = await sameRows.count();
   assert.ok(sameRowCount > 0, '同値項目を識別');
@@ -574,7 +574,7 @@ try {
   await page.goto(`${base}/compare/?ids=jp-toyota-harrier-2026-g-2wd&ids=jp-tesla-model-3-2026-premium`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   const unknownMonitoringRow = page.locator('[data-compare-row="driver-monitoring"]');
-  assert.equal(await unknownMonitoringRow.getAttribute('class').then((value) => value.includes('compare-row-unknown')), true, '監視条件不明は既知の差分扱いしない');
+  assert.equal(await unknownMonitoringRow.getAttribute('class').then((value) => value.includes('compare-row-unconfirmed')), true, '監視条件不明は既知の差分扱いしない');
   assert.equal(await unknownMonitoringRow.getAttribute('class').then((value) => value.includes('compare-row-diff')), false, '監視条件不明を差分バッジで強調しない');
 
   await page.goto(`${base}/cars/jp-honda-legend-2021-honda-sensing-elite/`);
@@ -665,7 +665,7 @@ try {
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
   const cx5PackageCompare = page.locator('[data-compare-result]');
   assert.match(await cx5PackageCompare.innerText(), /追加パッケージ[\s\S]*EX Package \+227,700円/, '比較にオプション価格を表示');
-  assert.equal(await cx5PackageCompare.locator('[data-compare-row="optional-package"]').getAttribute('class').then((value) => value.includes('compare-row-unknown')), true, '片側未確認の追加価格は差分扱いしない');
+  assert.equal(await cx5PackageCompare.locator('[data-compare-row="optional-package"]').getAttribute('class').then((value) => value.includes('compare-row-unconfirmed')), true, '片側未確認の追加価格は差分扱いしない');
 
   await page.goto(`${base}/cars/jp-bmw-3-series-g20-sedan-318i-m-sport/`);
   assert.match(await page.locator('main').innerText(), /JP \/ G20[\s\S]*BMW[\s\S]*3シリーズ セダン[\s\S]*318i M Sport/);
