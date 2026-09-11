@@ -129,14 +129,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(235);
+    expect(vehicles).toHaveLength(241);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補234件は全件の公式金額を保持する', () => {
+  it('現行候補240件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(234);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(234);
+    expect(current).toHaveLength(240);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(240);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -145,8 +145,25 @@ describe('vehicle data contract and filters', () => {
     expect(vehicles.find(({ id }) => id === 'jp-subaru-levorg-layback-2023-limited-ex')?.price?.kind).toBe('range');
   });
 
+  it('Audi A5 / A5 Avantは2026年4月価格表の6販売単位をLevel 2能力付きで保持する', () => {
+    const audi = vehicles.filter((vehicle) => vehicle.maker === 'Audi');
+    expect(audi).toHaveLength(6);
+    expect(audi.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      6_170_000, 6_420_000, 7_000_000, 7_250_000, 7_350_000, 7_600_000,
+    ]);
+    expect(audi.every((vehicle) => vehicle.currentCatalogListed && vehicle.catalogAsOf === '2026-04' && vehicle.priceEffectiveAt === '2026-04' && vehicle.price?.kind === 'exact' && vehicle.price?.basis === 'msrp' && vehicle.price?.taxIncluded === 'included')).toBe(true);
+    expect(audi.filter((vehicle) => vehicle.grade.startsWith('TFSI')).every((vehicle) => vehicle.salesUnitIntroducedAt === '2025-02-17' && vehicle.sources.some((source) => source.url.endsWith('s5n52g0000002avz.html')))).toBe(true);
+    expect(audi.filter((vehicle) => vehicle.grade.startsWith('TDI')).every((vehicle) => vehicle.salesUnitIntroducedAt === '2025-06-24' && vehicle.sources.some((source) => source.url.endsWith('s5n52g0000003ck6.html')))).toBe(true);
+    expect(audi.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(audi.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,lane_change_support')).toBe(true);
+    expect(audi.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.audi-press.jp/press-releases/2026/s5n52g00000061vq.html' && source.supports.some((fact) => fact.includes('メーカー希望小売価格'))))).toBe(true);
+    expect(audi.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('A5_S5_Product_Information.pdf')))).toBe(true);
+    expect(officialLinkFor(audi.find((vehicle) => vehicle.model === 'A5')!)?.actions?.map(({ kind }) => kind)).toEqual(['estimate', 'dealer', 'test_drive']);
+    expect(officialLinkFor(audi.find((vehicle) => vehicle.model === 'A5 Avant')!)?.actions?.map(({ kind }) => kind)).toEqual(['estimate', 'dealer', 'test_drive']);
+  });
+
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(51);
+    expect(officialLinks).toHaveLength(53);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -184,7 +201,7 @@ describe('vehicle data contract and filters', () => {
     const mitsubishiActions = officialLinks.find(({ maker, model }) => maker === 'Mitsubishi' && model === 'アウトランダーPHEV')?.actions ?? [];
     expect(mitsubishiActions.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'estimate', 'dealer', 'catalog']);
     expect(mitsubishiActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(64);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(70);
   });
 
   it('トヨタ ヤリス クロスは2026年8月の20販売単位を価格・Level 2能力付きで保持する', () => {

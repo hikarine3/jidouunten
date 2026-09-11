@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 235 | `src/data/vehicles.json` の全レコード（現行234 + 過去1） |
-| 既定表示 | 234 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 241 | `src/data/vehicles.json` の全レコード（現行240 + 過去1） |
+| 既定表示 | 240 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -38,6 +38,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
 | 今回追加（Mitsubishi / 後発対策） | 9 | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M × 5・7人乗り。価格536万9,100円〜690万1,400円、MI-PILOT（全車速ACC・LKA）とLCAの警告・支援、ハンドル保持、公式の商談・購入予約導線を販売単位へ固定 |
+| 今回追加（Audi / 後発対策） | 6 | A5 / A5 AvantのTFSI 110kW、TFSI quattro 150kW、TDI quattro 150kW。2026年4月価格表の617万〜760万円、アダプティブクルーズアシストプラス・レーンガイダンス・レーンチェンジアシスト、常時監視とステアリング保持を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -53,6 +54,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Nissan | セレナ C28 e-POWER LUXION | 掲載 | 2 | 2026-09-07 |
 | SUBARU | レヴォーグ レイバック（現行仕様）Limited EX | 注文可否 未確認（注文済み1.8Lグレードの工場出荷目処のみ確認） | 2 | 2026-09-11 |
 | Tesla | Model 3 Premium RWD / Premium ロングレンジAWD / Performance、Model Y Premium RWD / Premium ロングレンジAWD / L | 新車注文可（6単位） | 2相当 | 2026-09-10 |
+| Audi | A5 / A5 Avant TFSI 110kW / TFSI quattro 150kW / TDI quattro 150kW | 掲載（6単位、注文可否 未確認） | 2相当 | 2026-09-11 |
 | Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 新車注文可（3単位、オンライン契約） | 2相当 | 2026-09-11 |
 | Suzuki | e VITARA X 2WD / Z 2WD / Z 4WD（現行仕様） | 掲載（3単位） | 2相当 | 2026-09-07 |
 | Renault | ARKANA esprit Alpine FULL HYBRID E-TECH / MILD HYBRID、techno FULL HYBRID E-TECH / MILD HYBRID | 掲載（4単位） | 2相当 | 2026-09-07 |
@@ -157,6 +159,30 @@ MINI Countrymanは、2026年7月以降生産の日本向け装備・価格表か
 | 現行ページに「日産各店で注文できるB6」「11/26より注文受付中」、B6（2WD）の掲載 | 日産自動車 | https://www3.nissan.co.jp/vehicles/new/ariya.html | 2026-09-11 |
 | B6（2WD）を含む各車の注文後の工場出荷時期目処 | 日産自動車 | https://www3.nissan.co.jp/siteinfo/product.html | 2026-09-11 |
 
+## Audi A5 / A5 Avantの根拠（2026-09-11確認）
+
+Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備説明・Product Informationを突き合わせ、セダンとAvantの各パワートレーンを6販売単位として登録した。TFSIは2025年2月17日、TDIは2025年6月24日の日本発売日を公式プレスリリースで確認し、販売単位の導入時点へ反映した。価格は税込メーカー希望小売価格で、販売店の値引き・諸費用・オプションは含まない。現行商品ページの掲載は確認できたが、販売単位ごとの現在の注文受付を一次情報で固定できなかったため、`availability=unknown`を維持した。
+
+| 販売単位 | 価格（税込） | Level | 同じLevel 2内で比較できる差分 |
+|---|---:|---:|---|
+| A5 TFSI 110kW | 617万円 | 2相当 | セダンの価格下限。アダプティブクルーズアシストプラス標準 |
+| A5 TFSI quattro 150kW | 700万円 | 2相当 | quattro 4WD。価格表上位の150kW仕様 |
+| A5 TDI quattro 150kW | 735万円 | 2相当 | quattro 4WDディーゼル。価格表上位の150kW仕様 |
+| A5 Avant TFSI 110kW | 642万円 | 2相当 | Avantの価格下限。アダプティブクルーズアシストプラス標準 |
+| A5 Avant TFSI quattro 150kW | 725万円 | 2相当 | quattro 4WD。セダン同出力仕様より25万円高い |
+| A5 Avant TDI quattro 150kW | 760万円 | 2相当 | quattro 4WDディーゼル。6単位中の価格上限 |
+
+公式説明のアダプティブクルーズアシストプラス（車間・車速）とレーンガイダンス（車線中央維持）の同時支援を、国土交通省のLevel 2定義に照合してサイト上はLevel 2相当と分類した。レーンチェンジアシストはウインカー操作と周囲確認を前提に車線変更を支援する機能であり、自動運転や無人走行を意味しない。全6単位でステアリング保持・前方監視・必要時の操作が必要なため、ハンズオフは不可とした。販売単位別の作動速度上限は公式資料で固定できないため未設定とし、天候・道路・車線認識条件による制限を明記している。
+
+| 対象事実 | 一次ソース |
+|---|---|
+| A5 / A5 Avantのモデル掲載 | [Audi A5 Press Center](https://www.audi-press.jp/models/a5/index.html) |
+| A5 / A5 Avantのアダプティブクルーズアシストプラス、車線中央維持、レーンチェンジアシスト、6販売単位の税込メーカー希望小売価格（2026年4月） | [Audi Japan 2026年4月更新プレスリリース](https://www.audi-press.jp/press-releases/2026/s5n52g00000061vq.html) |
+| A5 / A5 Avant TFSIの日本発売日（2025年2月17日） | [Audi Japan Press Center](https://www.audi-press.jp/press-releases/2025/s5n52g0000002avz.html) |
+| A5 / A5 Avant TDIの日本発売日（2025年6月24日） | [Audi Japan Press Center](https://www.audi-press.jp/press-releases/2025/s5n52g0000003ck6.html) |
+| A5 / A5 Avantの装備仕様、レーンガイダンス・レーンチェンジアシスト | [Audi Japan 2026年4月更新プレスリリース](https://www.audi-press.jp/press-releases/2026/s5n52g00000061vq.html)、[Product Information PDF](https://productinfo.audi.co.jp/related_link/197/top/460/pdf/A5_S5_Product_Information.pdf) |
+| Level 2の定義との照合 | [国土交通省 自動走行レベルの定義](https://www.mlit.go.jp/common/001343740.pdf) |
+
 ## 2026-09-11 注文状態の追加確認
 
 注文可否は「公式商品ページがある」だけでは更新せず、メーカー一次情報に注文・出荷・在庫車両の注文導線がある販売単位だけを更新した。販売店ブログや検索結果スニペットは根拠に採用していない。
@@ -177,7 +203,7 @@ MINI Countrymanは、2026年7月以降生産の日本向け装備・価格表か
 | LM500h EXECUTIVE / version Lの注文後工場出荷目処 | Lexus | https://lexus.jp/news/info/delivery/index.html | 2026-09-11 |
 | IONIQ 5 Voyage / Lounge掲載車両の「車両注文」導線 | Hyundai Mobility Japan | https://www.hyundai.com/jp/stock/new | 2026-09-11 |
 
-この更新後の内訳は、全235販売単位（現行234、過去1）のうち`new_order_available` 21、`unknown` 213、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
+この更新後の内訳は、全241販売単位（現行240、過去1）のうち`new_order_available` 21、`unknown` 219、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
 
 
 ## 未掲載・確認継続候補（内訳）

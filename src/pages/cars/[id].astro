@@ -11,6 +11,33 @@ const referenceTotalLabel = displayVehicleReferenceTotal(vehicle);
 const officialActions = officialLink?.actions ?? [];
 const purchaseActions = officialActions.filter(({ kind }) => kind === 'order' || kind === 'test_drive');
 const considerationActions = officialActions.filter(({ kind }) => kind === 'estimate' || kind === 'dealer' || kind === 'catalog');
+const detailCanonical = `https://jidouunten.jp/cars/${vehicle.id}/`;
+const capabilitySummary = vehicle.capabilities.map((item) => capabilityDefinition(item).label).slice(0, 3).join('・');
+const detailTitle = `${vehicle.maker} ${vehicle.model} ${vehicle.grade}｜Level ${vehicle.automationLevel}・価格・機能｜自動運転.jp`;
+const detailDescription = `${vehicle.maker} ${vehicle.model} ${vehicle.grade}のLevel ${vehicle.automationLevel}運転支援。${displayVehiclePrice(vehicle)}、${capabilitySummary || '主な運転支援機能'}、${handsOffLabels[vehicle.handsOff]}を確認できます。`;
+const productStructuredData: Record<string, unknown> = {
+  '@type': 'Product',
+  '@id': `${detailCanonical}#product`,
+  name: `${vehicle.maker} ${vehicle.model} ${vehicle.grade}`,
+  description: detailDescription,
+  brand: { '@type': 'Brand', name: vehicle.maker },
+  category: '自動運転・運転支援車',
+  additionalProperty: [
+    { '@type': 'PropertyValue', name: '自動化レベル', value: `Level ${vehicle.automationLevel}` },
+    { '@type': 'PropertyValue', name: 'ハンズオフ', value: handsOffLabels[vehicle.handsOff] },
+    { '@type': 'PropertyValue', name: '運転者の監視', value: monitoringLabels[vehicle.driverMonitoring] },
+  ],
+};
+const detailPrice = vehicle.price?.amounts[0]?.amountJpy;
+if (detailPrice) productStructuredData.offers = { '@type': 'Offer', price: detailPrice, priceCurrency: 'JPY', url: detailCanonical };
+const breadcrumbStructuredData = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '車両一覧', item: 'https://jidouunten.jp/cars/' },
+    { '@type': 'ListItem', position: 2, name: `${vehicle.maker} ${vehicle.model}`, item: detailCanonical },
+    { '@type': 'ListItem', position: 3, name: vehicle.grade },
+  ],
+};
 const publicClassificationRationale = (value: string) => value
   .replaceAll('handsOff=not_allowed', 'ハンズオフは不可')
   .replaceAll('handsOff=allowed_in_conditions', 'ハンズオフは条件内で可')
@@ -19,7 +46,7 @@ const publicClassificationRationale = (value: string) => value
   .replaceAll('allowed_in_conditions', '条件内で可')
   .replaceAll('unknown', '未確認');
 ---
-<Layout title={`${vehicle.maker} ${vehicle.model}｜自動運転.jp`} description={`${vehicle.maker} ${vehicle.model}の自動化レベル、作動条件、必要装備を確認できます。`}>
+<Layout title={detailTitle} description={detailDescription} structuredData={[productStructuredData, breadcrumbStructuredData]}>
   <section class="page-intro"><div class="wrap"><a class="subtle" href="/">← 車両一覧へ戻る</a></div></section>
   <section class="section" style="padding-top: 0;"><div class="wrap detail-grid">
     <aside class="detail-hero"><div class="eyebrow">{vehicle.market} / {vehicleReferenceLabel(vehicle)}</div><div class="level-num">{vehicle.automationLevel}</div><div class="eyebrow" style="color:white;">{levelLabels[vehicle.automationLevel]}</div><h1>{vehicle.maker}<br />{vehicle.model}</h1><p>{vehicle.grade}</p><span class:list={['pill', vehicle.availability === 'new_order_available' && 'lime']}>{availabilityLabels[vehicle.availability]}</span><p style="margin:18px 0 0; color:#d5e1e2; font-size:.84rem;">{levelCaveat(vehicle.automationLevel)}</p></aside>
