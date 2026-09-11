@@ -1,5 +1,14 @@
 # 初回公開の実測証拠
 
+## 2026-09-11 Wikimedia Commons参考写真パイロット（本番実測）
+
+- exact app release commit: `3ac0c48`
+- Immutable deployment: https://dc6031c0.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- プリウス／Tesla Model 3／Tesla Model Yの参考写真3件をセルフホストWebPで追加（幅1200px以下・各250KB以下）。一覧12/12、詳細画像・Commonsファイルページ／作者／ライセンスURLを実ブラウザで確認。未登録Hondaは画像なし。
+- `npm test`: 55/55（価格265/265、公式導線56モデル／76 actions、Python16/16、画像3/3）。`npm run check`: 0 errors / 0 warnings / 6 hints。実ID build271、release guard／構造化データ検査PASS（BreadcrumbList271、Car265、ItemList2ページ528項目）。
+- ローカルE2E1/1、本番E2E1/1（GA collect HTTP204）、Commons一次URL・ライセンスURL3/3 HTTP200。本番smokeはトップ、一覧、Prius詳細、Tesla Model 3詳細、画像、sitemap、robotsをHTTP200、未知URL404。独立リリース監査PASS。
+
 ## 2026-09-11 Toyota プリウスHEV販売単位拡張（本番実測）
 
 - exact app release commit: `31a6543`（実装本体 `1e0b7b3`）

@@ -2,6 +2,14 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 Wikimedia Commons参考写真パイロット（本番反映済み）
+
+- 車両一覧・詳細へToyota プリウス、Tesla Model 3、Tesla Model Yの3モデル画像を追加。参考写真であり、掲載グレード・年式やADAS性能の証明ではない。Commonsファイルページ・作者・ライセンス名を各公式URLへ直接リンクし、CC0 1.0／CC BY-SA 4.0の帰属情報を`src/data/vehicle-images.json`と`docs/licenses/assets.md`へ固定した。
+- 画像は原典からセルフホストWebPへ変換（幅1200px以下、各250KB以下）。人物・ナンバープレートを避け、メーカー公式画像・単独ロゴは採用しない。車体バッジ等が写る場合も識別目的で、メーカーの提携・推奨を示さない。未登録モデルは写真なし表示を維持し、全265販売単位に写真があるとは宣言しない。
+- exact app `3ac0c48`、Production `https://jidouunten.jp/`、immutable `https://dc6031c0.jidouunten.pages.dev`、直前rollback `https://a207ad82.jidouunten.pages.dev`。
+- QA: npm test55/55、価格265/265、公式導線56モデル／76 actions、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build271、release／structured PASS、local／production E2E各1/1（GA collect204）、画像3/3・Commons一次URL／ライセンスURL HTTP200、独立リリース監査PASS。本番主要URL200、未知URL404。
+- Commonsは一律「著作権フリー」ではなく、ファイルごとのライセンスと帰属条件を確認する。CC BY/CC BY-SAは表示・ライセンスリンクが必要で、商標・肖像・プライバシー等の権利は別途残る。方針と出典は`docs/licenses/assets.md`および[Commonsの再利用ガイダンス](https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia/en)を参照。
+
 ## 2026-09-11 Toyota プリウスHEV販売単位拡張（本番反映済み）
 
 - トヨタ公式の価格・グレード／安全性能／HEV取扱説明書／国土交通省定義を突合し、既存のHEV Z 2WDにZ E-Four、G 2WD・E-Four、X 2WD・E-Fourを追加。プリウスは6販売単位、価格279万6,200円〜425万1,500円、全車Level 2相当（ACC＋LTA、ステアリング保持・常時監視、ハンズオフ不可）として比較できる。

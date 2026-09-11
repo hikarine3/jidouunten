@@ -2,6 +2,16 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 Wikimedia Commons参考写真パイロット）
+
+- exact app release commit: `3ac0c48`
+- immutable: https://dc6031c0.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 車両一覧・詳細へ、Toyota プリウス／Tesla Model 3／Tesla Model Yの参考写真を追加。写真は車両識別用で、掲載グレード・年式やADAS性能を示すものではない。Commonsのファイルページ、作者、ライセンス名をそれぞれ直接リンクし、CC0 1.0またはCC BY-SA 4.0の条件を記録した。画像はセルフホストWebP（幅1200px以下・各250KB以下）へ最適化し、未登録モデルは従来どおり写真なしのフォールバックとした。
+- QA: `npm test` 55/55（価格265/265、公式導線56モデル／76 actions、Python16/16、画像3/3）、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build271、release guard／構造化データ検査PASS（BreadcrumbList271／Car265／ItemList2ページ528項目）。独立リリース監査PASS、ローカルE2E1/1・本番E2E1/1（GA collect HTTP204）。画像はCommons一次URL・ライセンスURL 3/3 HTTP200、一覧12/12・詳細画像／帰属リンクを実ブラウザで確認。
+- 本番smoke: immutable／本体のトップ、一覧、Prius詳細、Tesla Model 3詳細、画像2件、sitemap-index、robotsはHTTP200、未知URLは404。`自動運転.jp`の既存path/query 301も維持。
+- 直前の正常配信・ロールバック候補: https://a207ad82.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 Toyota プリウスHEV販売単位拡張）
 
 - exact app release commit: `31a6543`（実装本体 `1e0b7b3`、監査修正を含む）
