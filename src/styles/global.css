@@ -342,6 +342,15 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .quick-filters button { display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 7px 9px; }
 .quick-filters strong { color: white; font-size: 1rem; }
 .quick-filters small { grid-column: 1 / -1; color: #8fa4af; font-size: .58rem; text-align: right; }
+.availability-summary { display: grid; gap: 7px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.12); }
+.availability-summary-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; color: #f8fbf4; font-size: .7rem; font-weight: 800; }
+.availability-summary-head small { color: #8fa4af; font-size: .6rem; font-weight: 600; }
+.availability-summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.availability-summary-grid button { display: grid; gap: 2px; min-width: 0; padding: 8px 9px; border: 1px solid rgba(255,255,255,.15); border-radius: 10px; color: white; text-align: left; background: rgba(255,255,255,.05); cursor: pointer; }
+.availability-summary-grid button:hover, .availability-summary-grid button:focus-visible { border-color: var(--lime); background: rgba(255,255,255,.12); }
+.availability-summary-grid span { color: #bdcad1; font-size: .59rem; font-weight: 800; line-height: 1.25; }
+.availability-summary-grid strong { color: var(--lime); font-size: 1.1rem; line-height: 1; }
+.availability-summary p { margin: 0; color: #8fa4af; font-size: .6rem; line-height: 1.5; }
 .list-section { padding-top: 8px; }
 #vehicle-filters .filters { padding: 0; margin: 16px 0; }
 #vehicle-filters summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; cursor: pointer; font-size: .78rem; font-weight: 900; }
@@ -371,6 +380,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
   .hands-off-map button { min-height: 56px; }
   .quick-filters { grid-template-columns: auto auto; margin: 0; }
   .quick-filters small { display: none; }
+  .availability-summary { grid-column: 1 / -1; }
 }
 
 @media (max-width: 650px) {
@@ -401,6 +411,9 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
   .hands-off-map strong { font-size: 1.2rem; }
   .quick-filters { display: flex; margin: 0; }
   .quick-filters button { flex: 1; padding: 5px 8px; }
+  .availability-summary { margin-top: 6px; padding-top: 6px; }
+  .availability-summary-grid button { padding: 5px 7px; }
+  .availability-summary { display: none; }
   .filter-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-inner { grid-template-columns: 1fr; align-items: start; }
   .footer-inner nav { flex-wrap: wrap; justify-content: flex-start; }

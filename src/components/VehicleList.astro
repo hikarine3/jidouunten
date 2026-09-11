@@ -41,6 +41,11 @@ const handsOffDistribution = [
   { value: handsOffPublicKeys.not_allowed, label: '不可', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'not_allowed').length },
   { value: handsOffPublicKeys.unknown, label: '未確認', count: defaultVehicles.filter((vehicle) => vehicle.handsOff === 'unknown').length },
 ];
+const availabilityDistribution = [
+  { value: availabilityPublicKeys.new_order_available, label: '新車注文可', count: vehicles.filter((vehicle) => vehicle.availability === 'new_order_available').length },
+  { value: availabilityPublicKeys.unknown, label: '注文可否 未確認', count: vehicles.filter((vehicle) => vehicle.availability === 'unknown').length },
+  { value: availabilityPublicKeys.unavailable, label: '現在利用不可', count: vehicles.filter((vehicle) => vehicle.availability === 'unavailable').length },
+];
 const laneChangeCount = defaultVehicles.filter((vehicle) => vehicle.capabilities.includes('lane_change_support')).length;
 const teslaCount = defaultVehicles.filter((vehicle) => vehicle.maker === 'Tesla').length;
 const levelOverview = levelIds.map((level) => {
@@ -75,6 +80,7 @@ const guideProfiles = [
         {handsOffDistribution.map(({ value, label, count }) => <button type="button" data-hands-off-shortcut={value} style={`--share:${count / defaultCount}`}><span>{label}</span><strong>{count}</strong></button>)}
       </div>
       <div class="quick-filters" aria-label="注目条件ですぐに絞り込む"><button type="button" data-capability-shortcut={capabilityPublicKeys.lane_change_support}><span>車線変更支援</span><strong>{laneChangeCount}</strong></button><button type="button" data-maker-shortcut="Tesla"><span>Tesla</span><strong>{teslaCount}</strong></button><small>Level 2・メーカー公式サイトに掲載を確認した候補</small></div>
+      <div class="availability-summary" aria-label="販売状態の内訳"><div class="availability-summary-head"><span>販売状態を先に確認</span><small>クリックで絞り込み</small></div><div class="availability-summary-grid">{availabilityDistribution.map(({ value, label, count }) => <button type="button" data-status-shortcut={value}><span>{label}</span><strong>{count}</strong></button>)}</div><p>「注文可否 未確認」は、公式掲載は確認できても販売単位の注文受付を一次情報で固定できない状態です。注文・在庫・納期は販売店で確認してください。</p></div>
     </div>
     <div class="guide-deck" aria-labelledby="guide-title">
       <div class="guide-deck-head"><div><span class="eyebrow">START WITH YOUR USE</span><h2 id="guide-title">使い方から、候補を減らす。</h2></div><p>Level 2の違いを、質問の代わりになる入口にまとめました。</p></div>
@@ -181,6 +187,7 @@ const guideProfiles = [
   document.querySelectorAll('[data-capability-shortcut]').forEach((button) => button.addEventListener('click', () => submitValues({ level: '2', capability: button.dataset.capabilityShortcut }, true)));
   document.querySelectorAll('[data-guide]').forEach((button) => button.addEventListener('click', () => { let values; try { values = JSON.parse(button.dataset.guideValues || '{}'); } catch { values = {}; } submitValues(values, true); }));
   document.querySelectorAll('[data-maker-shortcut]').forEach((button) => button.addEventListener('click', () => submitValues({ maker: button.dataset.makerShortcut }, true)));
+  document.querySelectorAll('[data-status-shortcut]').forEach((button) => button.addEventListener('click', () => submitValues({ availability: button.dataset.statusShortcut }, true)));
   compareInputs.forEach((input) => input.addEventListener('change', updateCompare));
   compareForm?.addEventListener('submit', (event) => { if (compareInputs.filter((input) => input.checked).length !== 2) event.preventDefault(); });
   document.querySelector('[data-compare-link]')?.addEventListener('click', (event) => { if (compareInputs.filter((input) => input.checked).length !== 2) event.preventDefault(); });

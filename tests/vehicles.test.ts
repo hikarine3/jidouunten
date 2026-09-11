@@ -122,14 +122,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(174);
+    expect(vehicles).toHaveLength(189);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補173件は全件の公式金額を保持する', () => {
+  it('現行候補188件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(173);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(173);
+    expect(current).toHaveLength(188);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(188);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -139,7 +139,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(44);
+    expect(officialLinks).toHaveLength(46);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -148,11 +148,13 @@ describe('vehicle data contract and filters', () => {
     expect(teslaActions.map(({ kind }) => kind).sort()).toEqual(['order', 'order', 'test_drive', 'test_drive']);
     expect(teslaActions.every(({ url, checkedAt }) => url.startsWith('https://www.tesla.com/') && checkedAt === '2026-09-10')).toBe(true);
     const toyotaEstimateLinks = officialLinks.filter(({ maker }) => maker === 'Toyota').flatMap((link) => (link.actions ?? []).filter(({ kind }) => kind === 'estimate'));
-    expect(toyotaEstimateLinks).toHaveLength(11);
+    expect(toyotaEstimateLinks).toHaveLength(13);
     expect(toyotaEstimateLinks.every(({ label, url }) => label === '公式で見積り' && url.startsWith('https://toyota.jp/service/estimate/grades?car_name_en='))).toBe(true);
-    expect(toyotaEstimateLinks.filter(({ url }) => !url.includes('COROLLA%20CROSS')).every(({ checkedAt }) => checkedAt === '2026-09-10')).toBe(true);
+    expect(toyotaEstimateLinks.filter(({ url }) => !url.includes('COROLLA%20CROSS') && !url.includes('AQUA') && !url.includes('COROLLA')).every(({ checkedAt }) => checkedAt === '2026-09-10')).toBe(true);
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
-    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'COROLLA CROSS', 'CROWN CROSSOVER', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'bZ4X'].sort());
+    expect(toyotaEstimateLinks.find(({ url }) => url.includes('AQUA'))?.checkedAt).toBe('2026-09-11');
+    expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA') && !url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
+    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'AQUA', 'COROLLA', 'COROLLA CROSS', 'CROWN CROSSOVER', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'bZ4X'].sort());
     const expandedActionModels = new Map([
       ['Honda\u0000ACCORD', ['dealer', 'test_drive', 'estimate', 'catalog']],
       ['Honda\u0000VEZEL', ['dealer', 'test_drive', 'estimate', 'catalog']],
@@ -173,7 +175,7 @@ describe('vehicle data contract and filters', () => {
     const mitsubishiActions = officialLinks.find(({ maker, model }) => maker === 'Mitsubishi' && model === 'アウトランダーPHEV')?.actions ?? [];
     expect(mitsubishiActions.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'estimate', 'dealer', 'catalog']);
     expect(mitsubishiActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(60);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(62);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {

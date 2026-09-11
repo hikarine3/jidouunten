@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 174 | `src/data/vehicles.json` の全レコード（現行173 + 過去1） |
-| 既定表示 | 173 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 189 | `src/data/vehicles.json` の全レコード（現行188 + 過去1） |
+| 既定表示 | 188 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -30,6 +30,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Lexus LM / 後発対策） | 2 | LM500h EXECUTIVE（4人）/ version L（6人）のAWD。Advanced Drive・LCA・ドライバーモニター・全車速追従ACCを標準装備として確認し、価格1,520万〜2,030万円、渋滞時0〜約40km/hの条件付きハンズオフを販売単位へ固定 |
 | 今回追加（Lexus UX300h / 後発対策） | 6 | Shining Essence / version L / F SPORTの2WD・AWD。全車速追従ACC・LTA・ドライバー異常時対応システム標準、価格521万〜575.7万円、ステアリング保持が必要なハンズオフ不可、2027年2月生産終了予定を販売単位へ固定 |
 | 今回追加（Toyota カローラ クロス / 後発対策） | 7 | Z / S / GR SPORT / Z“Adventure”の2WD・E-Four。価格298万1,000円〜407万7,700円、ACC・LTA・渋滞時支援・車線変更時の補助、ステアリング保持要求を販売単位へ固定 |
+| 今回追加（Toyota アクア / 後発対策） | 9 | Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD。価格244万3,100円〜323万8,400円、全車速追従ACC・LTA・ステアリング保持を販売単位へ固定 |
+| 今回追加（Toyota カローラ / 後発対策） | 6 | HYBRID W×B / G / Xの2WD・E-Four。価格238万400円〜334万2,900円、全車速追従ACC・LTA・停止保持・ステアリング保持を販売単位へ固定 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
 | 今回追加（Mitsubishi / 後発対策） | 9 | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M × 5・7人乗り。価格536万9,100円〜690万1,400円、MI-PILOT（全車速ACC・LKA）とLCAの警告・支援、ハンドル保持、公式の商談・購入予約導線を販売単位へ固定 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
@@ -76,6 +78,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Lexus | LM500h EXECUTIVE AWD（4人乗り） / version L AWD（6人乗り） | 掲載（2単位） | 2相当 | 2026-09-10 |
 | Lexus | UX300h “Shining Essence” / “version L” / “F SPORT” 2WD・AWD | 掲載（6単位） | 2相当 | 2026-09-10 |
 | Mitsubishi | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M 4WD（5・7人乗り） | 掲載（9単位） | 2相当 | 2026-09-11 |
+| Toyota | アクア Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD | 掲載（9単位） | 2相当 | 2026-09-11 |
+| Toyota | カローラ HYBRID W×B / G / Xの2WD・E-Four | 掲載（6単位） | 2相当 | 2026-09-11 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。2026-09-10確認時点で両モデルの日本向け公式商品ページに「今すぐ注文」導線が表示され、公式FAQも注文後の手続きと注文可能なトリム・納車予定時期をDesign Studioで確認する流れを案内しているため、6販売単位の`availability`を`new_order_available`へ更新した。ただし注文後の在庫・納車時期・ソフトウェア提供条件は個別確認が必要。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
 
@@ -416,6 +420,17 @@ ZとGR SPORTはAdvanced Drive等をメーカーオプションとして表示し
 | 高速道路・自動車専用道路でのLTA条件、ステアリング保持、ハンズオフ時の停止 | Lexus | https://manual.lexus.jp/ux/2312/hev/ja_JP/contents/vhch04se050404.php | 2026-09-10 |
 
 LMと同じLexusでも、UX300hはハンズオフ不可・LCAなし・521万〜575.7万円、LMは条件付きハンズオフ・LCA標準・1,520万〜2,030万円となる。この同一ブランド内の「価格だけではない能力差」を、2WD/AWD・グレード・定員・作動条件とともに比較できることが後発耐性になる。
+
+## Toyota アクア／カローラの根拠（後発対策トランシェ）
+
+確認日は2026-09-11。トヨタ公式の現行価格・グレード、WEBカタログ、安全性能ページ、取扱説明書から、アクア9販売単位（Z/G/X/Uの2WD・E-Four、GR SPORT 2WD）とカローラ6販売単位（HYBRID W×B/G/Xの2WD・E-Four）を追加した。価格はアクア244万3,100円〜323万8,400円、カローラ238万400円〜334万2,900円（税込）。全単位で全車速追従ACCとLTAの同時支援、ステアリング保持を確認し、国土交通省定義へ照合してLevel 2相当とした。注文可否は販売単位の明文根拠を確認できないため`unknown`を維持する。
+
+| 対象 | 価格・グレード | 支援根拠 | 公式入口 |
+|---|---|---|---|
+| アクア | Z/G/X/U（KINTO専用）の2WD・E-Four、GR SPORT 2WD | 全車速追従レーダークルーズ、LTA、高速道路中心の支援、ステアリング保持 | https://toyota.jp/aqua/grade/ / https://toyota.jp/aqua/safety/ |
+| カローラ | HYBRID W×B/G/Xの2WD・E-Four | 全車速追従レーダークルーズ、LTA、停止保持、高速道路の車線中央支援、ステアリング保持 | https://toyota.jp/corolla/grade/ / https://toyota.jp/corolla/safety/ |
+
+価格の適用時点はアクア2026-07、カローラ2026-05の公式掲載基準を保持し、確認日と混同しない。公開一覧では同じモデル名に駆動方式・グレードを混ぜず、各販売単位の価格・能力・販売状態・公式見積り導線へ接続した。
 
 ## Toyota カローラ クロスの根拠（後発対策トランシェ）
 
