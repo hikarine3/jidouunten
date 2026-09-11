@@ -63,6 +63,9 @@ try {
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'SUBARU フォレスター' }).filter({ hasText: 'Premium S:HEV EX' }).innerText(), /LEVEL 2[\s\S]*約464万円[\s\S]*ハンズオフ：条件内で可[\s\S]*車線変更支援/, 'フォレスター EyeSight Xの価格・条件内ハンズオフ・車線変更支援を表示');
   const foresterTouringCard = page.locator('[data-vehicle-shell]:not([hidden])').filter({ has: page.locator('h3 a').filter({ hasText: /^SUBARU フォレスター$/ }) }).filter({ has: page.locator('.maker').filter({ hasText: /Touring$/ }) });
   assert.match(await foresterTouringCard.innerText(), /LEVEL 2[\s\S]*約385万円[\s\S]*ハンズオフ：不可/, 'フォレスター標準EyeSightの価格・ハンズオフ不可を表示');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan エクストレイル' }).count(), 14, '日産エクストレイルの14販売単位を既定一覧に表示');
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan エクストレイル' }).filter({ hasText: 'X e-4ORCE [2列]' }).innerText(), /LEVEL 2[\s\S]*約439万円[\s\S]*ハンズオフ：不可[\s\S]*車線中央維持/, 'エクストレイル X e-4ORCEの価格・Level 2・ハンズオフ不可を表示');
+  assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Nissan エクストレイル' }).filter({ hasText: 'NISMO e-4ORCE' }).innerText(), /約575万円[\s\S]*ハンズオフ：不可/, 'エクストレイル NISMOの価格・ハンズオフ不可を表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Toyota アクア' }).count(), 9, 'Toyota アクアの9販売単位を既定一覧に表示');
   const yarisCards = page.locator('[data-vehicle-shell]:not([hidden])').filter({ has: page.locator('h3').filter({ hasText: /^Toyota ヤリス$/ }) });
   assert.equal(await yarisCards.count(), 17, 'Toyota ヤリスの17販売単位を既定一覧に表示');
