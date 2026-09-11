@@ -152,14 +152,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(343);
+    expect(vehicles).toHaveLength(353);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補342件は全件の公式金額を保持する', () => {
+  it('現行候補352件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(342);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(342);
+    expect(current).toHaveLength(352);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(352);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -267,7 +267,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(66);
+    expect(officialLinks).toHaveLength(67);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -276,7 +276,7 @@ describe('vehicle data contract and filters', () => {
     expect(teslaActions.map(({ kind }) => kind).sort()).toEqual(['order', 'order', 'test_drive', 'test_drive']);
     expect(teslaActions.every(({ url, checkedAt }) => url.startsWith('https://www.tesla.com/') && checkedAt === '2026-09-10')).toBe(true);
     const toyotaEstimateLinks = officialLinks.filter(({ maker }) => maker === 'Toyota').flatMap((link) => (link.actions ?? []).filter(({ kind }) => kind === 'estimate'));
-    expect(toyotaEstimateLinks).toHaveLength(18);
+    expect(toyotaEstimateLinks).toHaveLength(19);
     expect(toyotaEstimateLinks.every(({ label, url }) => label === '公式で見積り' && url.startsWith('https://toyota.jp/service/estimate/grades?car_name_en='))).toBe(true);
     expect(toyotaEstimateLinks.filter(({ url }) => !url.includes('COROLLA%20CROSS') && !url.includes('AQUA') && !url.includes('COROLLA') && !url.includes('YARIS+CROSS') && !url.includes('YARIS') && !url.includes('CROWN+SPORT') && !url.includes('CROWN+CROSSOVER')).every(({ checkedAt }) => checkedAt === '2026-09-10')).toBe(true);
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
@@ -286,7 +286,7 @@ describe('vehicle data contract and filters', () => {
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA') && !url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('CROWN+SPORT'))?.checkedAt).toBe('2026-09-12');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('CROWN+CROSSOVER'))?.checkedAt).toBe('2026-09-12');
-    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'AQUA', 'COROLLA', 'COROLLA CROSS', 'COROLLA SPORT', 'COROLLA TOURING', 'CROWN CROSSOVER', 'CROWN SPORT', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'YARIS', 'YARIS CROSS', 'bZ4X'].sort());
+    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'AQUA', 'COROLLA', 'COROLLA CROSS', 'COROLLA SPORT', 'COROLLA TOURING', 'CROWN CROSSOVER', 'CROWN SPORT', 'GR YARIS', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'YARIS', 'YARIS CROSS', 'bZ4X'].sort());
     const expandedActionModels = new Map([
       ['Honda\u0000ACCORD', ['dealer', 'test_drive', 'estimate', 'catalog']],
       ['Honda\u0000VEZEL', ['dealer', 'test_drive', 'estimate', 'catalog']],
@@ -318,7 +318,7 @@ describe('vehicle data contract and filters', () => {
     const crownSportActions = officialLinkFor(vehicles.find(({ model }) => model === 'クラウン スポーツ')!)?.actions ?? [];
     expect(crownSportActions.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
     expect(crownSportActions.every(({ checkedAt }) => checkedAt === '2026-09-12')).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(107);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(111);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
@@ -381,6 +381,21 @@ describe('vehicle data contract and filters', () => {
     expect(yaris.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('grades53.json') && source.supports.some((fact) => fact.includes('円'))))).toBe(true);
     expect(yaris.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('yaris_spec_202604.pdf')))).toBe(true);
     expect(officialLinkFor(yaris[0])?.actions?.map(({ kind }) => kind)).toEqual(['estimate']);
+  });
+
+  it('トヨタ GRヤリスは2026年3月の全10販売単位を価格・LTA差付きで保持する', () => {
+    const grYaris = vehicles.filter((vehicle) => vehicle.model === 'GRヤリス');
+    expect(grYaris).toHaveLength(10);
+    expect(grYaris.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      3_617_200, 3_967_200, 4_112_200, 4_462_200, 4_537_200, 4_887_200, 5_037_200, 5_387_200, 5_532_200, 5_882_200,
+    ]);
+    expect(grYaris.every((vehicle) => vehicle.currentCatalogListed && vehicle.catalogAsOf === '2026-03' && vehicle.priceEffectiveAt === '2026-03' && vehicle.salesUnitIntroducedAt === null && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(grYaris.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering')).toBe(true);
+    expect(grYaris.every((vehicle) => vehicle.odd.speedKph.min === null && vehicle.odd.speedKph.max === null)).toBe(true);
+    expect(grYaris.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('grades60.json') && source.supports.some((fact) => fact.includes('円'))))).toBe(true);
+    expect(grYaris.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('gryaris_spec_202603.pdf')))).toBe(true);
+    expect(grYaris.every((vehicle) => vehicle.sources.some((source) => source.url.includes('/gr_yaris/2604/') && source.type === 'manual'))).toBe(true);
+    expect(officialLinkFor(grYaris[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
   });
 
   it('VW Tiguan・Lexus GX550・Toyota ランドクルーザー250の9販売単位を保持する', () => {

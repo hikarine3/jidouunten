@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 343 | `src/data/vehicles.json` の全レコード（現行342 + 過去1） |
-| 既定表示 | 342 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 353 | `src/data/vehicles.json` の全レコード（現行352 + 過去1） |
+| 既定表示 | 352 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -31,6 +31,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（日産 キックス / 後発対策） | 12 | P16のG／X+／X／X シンプルパッケージ／ROCK CREEK／ROCK CREEK Utility Specを2WD・4WD（e-4ORCE）別に登録。価格299万9,700円〜430万9,800円、全車プロパイロット標準（車速30〜135km/h・車線中央付近の操舵支援）、ステアリング保持・常時監視、ハンズオフ不可を公式価格・FAQで確認 |
 | 今回追加（Honda CIVIC / 後発対策） | 5 | 2026年6月5日発売のe:HEV LX／EX／RS、ガソリンEX／RSを登録。価格394万6,800円〜465万9,600円、全車ACC＋LKASのLevel 2相当。e:HEV 3単位とガソリンEXはトラフィックジャムアシスト標準、ガソリンRSは対象外として同じLevel 2内の渋滞支援差を比較可能にした |
 | 今回追加（Toyota クラウン（クロスオーバー） / 後発対策） | 3 | 通常カタログのCROSSOVER RS／Z／G（いずれもE-Four）を追加。価格517万9,900円〜673万9,700円、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・条件内ハンズオフ、GはACC・LTA・渋滞時支援のみとして能力差を販売単位へ固定。特別仕様THE LIMITED-MATTE METALは既存の別単位として保持 |
+| 今回追加（Toyota GRヤリス / 後発対策） | 10 | RZ“High performance”／RZ／RCとAero performance package、GR-DAT（8AT）／6MTの全10販売単位。価格361万7,200円〜588万2,200円、全車ACC＋LTAのLevel 2相当・ハンズオフ不可。GR-DATは全車速追従だが停止保持なし、6MTは約30km/h以上から。公式ページ・価格JSON・安全性能・装備表・取扱説明書で確認し、注文可否は未確認 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定。Advanced Driveの0〜約40km/hとLCAの約85〜130km/h、T-Connect／コネクティッドナビ契約・地図条件も単位ごとに保持 |
@@ -257,7 +258,7 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 | LM500h EXECUTIVE / version Lの注文後工場出荷目処 | Lexus | https://lexus.jp/news/info/delivery/index.html | 2026-09-11 |
 | IONIQ 5 Voyage / Lounge掲載車両の「車両注文」導線 | Hyundai Mobility Japan | https://www.hyundai.com/jp/stock/new | 2026-09-11 |
 
-この更新後の内訳は、全265販売単位（現行264、過去1）のうち`new_order_available` 21、`unknown` 243、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
+この更新後の内訳は、全353販売単位（現行352、過去1）のうち`new_order_available` 21、`unknown` 331、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
 
 
 ## 未掲載・確認継続候補（内訳）
@@ -851,6 +852,37 @@ Honda公式の現行商品・タイプ一覧、e:HEV X／Zの価格ページ、�
 | 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
 
 根拠: [クラウン（クロスオーバー）商品ページ](https://toyota.jp/crowncrossover/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades44.json)、[安全性能](https://toyota.jp/crowncrossover/safety/)、[主要装備比較表](https://toyota.jp/pages/contents/crowncrossover/001_p_001/pdf/crowncrossover_equipment_compare_202609.pdf)。通常3グレードと特別仕様を別販売単位へ分け、RS/Zの条件内ハンズオフ・車線変更支援とGのハンドル保持を同じ比較キーへ固定した。受注可否は未確認のため新車注文可とは表示しない。
+
+## 2026-09-12 Toyota GRヤリス10販売単位追加
+
+トヨタ公式のGRヤリス商品ページ、`grades60.json`（価格・グレードJSON）、安全性能ページ、2026年3月主要装備表、取扱説明書を照合し、RZ“High performance”／RZ／RCとAero performance packageのGR-DAT（8AT・4WD）／6MT（4WD）を全10販売単位として追加した。メーカー希望小売価格は税込361万7,200円（RC・6MT）〜588万2,200円（RZ“High performance”＋Aero・GR-DAT）。公式カタログ掲載は確認できたが個別の現行受注可否は固定できないため、`availability=unknown`、販売単位導入日は未設定とした。
+
+全10単位でToyota Safety Senseのレーダークルーズコントロール（縦方向）とレーントレーシングアシスト（LTA、横方向）を確認し、国土交通省の定義に照合してサイト上はLevel 2相当とした。GR-DATは全車速追従だが停止保持なし、6MTは約30km/h以上から作動する。LTAはレーダークルーズ作動中の高速道路・自動車専用道路で車線内操舵を支援するが、ステアリング保持が必要でハンズオフ不可。安全性能ページの「車線変更時の補助」は加減速支援であり、当サイトのアクティブな車線変更支援タグとは区別している。
+
+| 販売単位 | 価格（税込） | 仕様差 |
+|---|---:|---|
+| RZ“High performance”［GR-DAT（8AT・4WD）］ | 5,387,200円 | 上位グレード・全車速追従（停止保持なし） |
+| RZ“High performance”［6MT（4WD）］ | 5,037,200円 | 上位グレード・約30km/h以上から追従 |
+| RZ［GR-DAT（8AT・4WD）］ | 4,887,200円 | GR-DAT・全車速追従（停止保持なし） |
+| RZ［6MT（4WD）］ | 4,537,200円 | 6MT・約30km/h以上から追従 |
+| RC［GR-DAT（8AT・4WD）］ | 3,967,200円 | 価格下限側・GR-DAT |
+| RC［6MT（4WD）］ | 3,617,200円 | 価格下限・6MT |
+| RZ“High performance”＋Aero［GR-DAT（8AT・4WD）］ | 5,882,200円 | Aero package・価格上限 |
+| RZ“High performance”＋Aero［6MT（4WD）］ | 5,532,200円 | Aero package・6MT |
+| RC＋Aero［GR-DAT（8AT・4WD）］ | 4,462,200円 | Aero package・GR-DAT |
+| RC＋Aero［6MT（4WD）］ | 4,112,200円 | Aero package・6MT |
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| GRヤリス現行商品ページ | トヨタ自動車株式会社 | https://toyota.jp/gryaris/ | 2026-09-12 |
+| 全10グレードの価格・仕様 | トヨタ自動車株式会社 | https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades60.json | 2026-09-12 |
+| レーダークルーズ・LTA・車線変更時の補助 | トヨタ自動車株式会社 | https://toyota.jp/gryaris/safety/ | 2026-09-12 |
+| 2026年3月主要装備比較表 | トヨタ自動車株式会社 | https://toyota.jp/pages/contents/gryaris/001_p_002/pdf/gryaris_spec_202603.pdf | 2026-09-12 |
+| LTAの作動条件・ステアリング保持 | トヨタ自動車株式会社 | https://manual.toyota.jp/gr_yaris/2604/cv/ja_JP/contents/vhch04se050404.php | 2026-09-12 |
+| GR-DAT／6MTのレーダークルーズ条件 | トヨタ自動車株式会社 | https://manual.toyota.jp/gr_yaris/2604/cv/ja_JP/contents/vhch04se050408.php | 2026-09-12 |
+| 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
+
+根拠: [GRヤリス商品ページ](https://toyota.jp/gryaris/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades60.json)、[安全性能](https://toyota.jp/gryaris/safety/)、[主要装備比較表](https://toyota.jp/pages/contents/gryaris/001_p_002/pdf/gryaris_spec_202603.pdf)、[LTA取扱説明書](https://manual.toyota.jp/gr_yaris/2604/cv/ja_JP/contents/vhch04se050404.php)。GR-DAT／6MT、RZ／RC、Aero packageの価格・作動条件差を同じLevel 2内で比較できるよう販売単位へ固定した。自動車線変更やハンズオフを意味する機能は根拠がないため付与していない。
 
 ## 2026-09-12 Honda ステップ ワゴン10販売単位追加
 
