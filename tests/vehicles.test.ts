@@ -615,12 +615,14 @@ describe('vehicle data contract and filters', () => {
     const priusUnits = vehicles.filter((vehicle) => vehicle.model === 'プリウス');
     expect(priusUnits).toHaveLength(6);
     expect(priusUnits.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([2_796_200, 3_049_200, 3_324_200, 3_577_200, 3_998_500, 4_251_500]);
-    expect(priusUnits.every((vehicle) => vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === '2026-07' && vehicle.salesUnitIntroducedAt === '2026-07' && vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.availability === 'unknown')).toBe(true);
+    expect(priusUnits.every((vehicle) => vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === '2026-07' && vehicle.salesUnitIntroducedAt === null && vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.availability === 'unknown')).toBe(true);
     expect(priusUnits.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/prius/grade/' && source.supports.some((support) => support.includes('円'))))).toBe(true);
+    expect(priusUnits.filter((vehicle) => vehicle.grade.includes('法人向け'))).toHaveLength(2);
+    expect(priusUnits.filter((vehicle) => vehicle.grade.includes('法人向け')).every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/request/webcatalog/prius/' && source.supports.some((support) => support.includes('法人向け'))))).toBe(true);
     const prius = vehicles.find((vehicle) => vehicle.id === 'jp-toyota-prius-2026-z-2wd');
     expect(prius?.modelYear).toBe('2026');
     expect(prius?.catalogAsOf).toBe('2026-07');
-    expect(prius?.salesUnitIntroducedAt).toBe('2026-07');
+    expect(prius?.salesUnitIntroducedAt).toBeNull();
     expect(prius?.priceEffectiveAt).toBe('2026-07');
     expect(prius?.price?.amounts[0].amountJpy).toBe(3_998_500);
     expect(prius?.handsOff).toBe('not_allowed');
