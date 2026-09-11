@@ -273,6 +273,7 @@ try {
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
+  await page.waitForFunction(() => document.querySelectorAll('[data-vehicle-shell]:not([hidden])').length === 240);
   assert.equal(await visibleCards(), 240, 'リセット後に既定240件');
 
   await page.locator('input[name="ids"]').nth(0).check();
