@@ -1,6 +1,18 @@
 # Cloudflare Pages公開運用
 
-更新: 2026-09-11
+更新: 2026-09-12
+
+## 最新の配信（2026-09-12 Honda ZR-V 4販売単位追加）
+
+- exact app release commit: `bf2749e`
+- immutable: https://95cea680.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Honda ZR-Vの現行e:HEV X／e:HEV ZをFF・4WD各1、計4販売単位として追加。価格は370万7,000円〜452万7,600円（税込、2026年9月確認）。Honda SENSING（ACC・LKAS・トラフィックジャムアシスト）をLevel 2相当として表示し、ステアリング保持・常時監視が必要、ハンズオフ不可、車線変更支援は根拠なしとした。実注文・在庫・納期は確認できないため4単位とも注文可否`unknown`。個別発売日・価格適用日は推定せず未設定、現行カタログ確認月`2026-09`を保持。
+- 公式根拠／導線: [ZR-V商品ページ](https://www.honda.co.jp/ZR-V/)、[タイプ一覧](https://www.honda.co.jp/ZR-V/webcatalog/type/list/)、[Xグレード](https://www.honda.co.jp/ZR-V/webcatalog/type/x/)、[Zグレード](https://www.honda.co.jp/ZR-V/webcatalog/type/z/)、[性能・安全](https://www.honda.co.jp/ZR-V/webcatalog/performance/)、[TJA](https://www.honda.co.jp/hondasensing/sensing/tja/)。販売店・試乗・見積り・カタログの公式導線を記録。
+- SEO／公開面: 307 HTML、sitemap-0は306 URL、詳細301件、トップ／一覧ItemListは2ページ・600項目。GTM実IDは307 HTMLへ各1件、テストID0件。公開HTMLへ内部根拠URL・enumを漏らさない既存ガードを維持。
+- QA: `npm test` Vitest59/59・Python16/16、価格301/301（現行300/300、exact285／range15／未確認1）、公式導線61モデル／59 URL／87 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build307、release／structured PASS（Breadcrumb307／Car301／ItemList600）、registry 43 entities／423 surfaces／2,045 markers失敗0。独立リリース監査2件ともexact `bf2749e`でPASS、ローカル／immutable／本体E2E各1/1（GA collect HTTP204）。
+- 本番smoke: immutable／本体のトップ、一覧、ZR-V詳細2種、比較、sitemap-index、sitemap-0、robotsはHTTP200、未知URLは404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301（query維持）。一覧画像はWikimedia Commons参考写真をサムネイル（デスクトップ374×140.8px、モバイル360×112px、`object-fit: cover`）で省スペース表示し、詳細の大きい表示・作者／ライセンス帰属を維持。
+- 直前の正常配信・ロールバック候補: https://6e16f4db.jidouunten.pages.dev
 
 ## 最新の配信（2026-09-11 日産エクストレイル14販売単位追加／一覧サムネイル継続）
 

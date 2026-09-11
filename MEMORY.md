@@ -1,6 +1,14 @@
 # MEMORY
 
-更新: 2026-09-11
+更新: 2026-09-12
+
+## 2026-09-12 Honda ZR-V 4販売単位追加（本番反映済み）
+
+- Honda公式のZR-V商品・タイプ一覧／X・Z価格・性能安全・TJAページを突合し、現行e:HEV X／e:HEV ZのFF・4WD各1、計4販売単位を追加。価格は370万7,000円〜452万7,600円（税込、2026年9月確認）。Honda SENSINGのACC・LKAS・トラフィックジャムアシストをLevel 2相当として表示し、ステアリング保持・常時監視が必要、ハンズオフ不可、車線変更支援なし。実注文・在庫・納期は確認できないため注文可否`unknown`を維持し、個別発売日・価格適用日を推測せず未設定、`catalogAsOf=2026-09`とした。
+- 公式の商品・タイプ・性能・TJAに加え、販売店・試乗・見積り・カタログ導線を記録。特別仕様車BLACK STYLE／CROSS TOURINGは通常4単位から分離・保留。Level2内のTJA／LKAS差と手保持条件を一覧・詳細・比較で確認できる。
+- exact app `bf2749e`、Production `https://jidouunten.jp/`、immutable `https://95cea680.jidouunten.pages.dev`、直前rollback `https://6e16f4db.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- QA: 全301販売単位（現行300）、sitemap-0 306 URL、詳細301件、ItemList 2ページ600項目、公式導線61モデル／59 URL／87 actions、Vitest59/59、価格301/301（exact285／range15／未確認1）、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build307、release／structured PASS、registry 43 entities／423 surfaces／2,045 markers失敗0、独立監査2件PASS、local／immutable／production E2E各1/1（GA collect204）、主要URL200、未知URL404、IDN path/query301。
+- 既存のWikimedia Commons参考写真3モデルは一覧サムネイル（デスクトップ374×140.8px、モバイル360×112px、`object-fit: cover`）で省スペース表示し、詳細画像・作者／ライセンス帰属・セルフホストWebP方針を維持。Issue #17は未確認候補が残るためIn progress、#37も公式導線・注文状態の観測継続でIn progress。全国網羅完了とは宣言しない。
 
 ## 2026-09-11 日産エクストレイル14販売単位追加（本番反映済み）
 
