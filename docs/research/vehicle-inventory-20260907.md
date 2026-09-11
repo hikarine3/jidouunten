@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 189 | `src/data/vehicles.json` の全レコード（現行188 + 過去1） |
-| 既定表示 | 188 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 198 | `src/data/vehicles.json` の全レコード（現行197 + 過去1） |
+| 既定表示 | 197 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -32,6 +32,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota カローラ クロス / 後発対策） | 7 | Z / S / GR SPORT / Z“Adventure”の2WD・E-Four。価格298万1,000円〜407万7,700円、ACC・LTA・渋滞時支援・車線変更時の補助、ステアリング保持要求を販売単位へ固定 |
 | 今回追加（Toyota アクア / 後発対策） | 9 | Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD。価格244万3,100円〜323万8,400円、全車速追従ACC・LTA・ステアリング保持を販売単位へ固定 |
 | 今回追加（Toyota カローラ / 後発対策） | 6 | HYBRID W×B / G / Xの2WD・E-Four。価格238万400円〜334万2,900円、全車速追従ACC・LTA・停止保持・ステアリング保持を販売単位へ固定 |
+| 今回追加（Volkswagen / Lexus / Toyota） | 9 | Volkswagen Tiguan 6単位、Lexus GX550 2単位、Toyota ランドクルーザー250 VX ガソリン4WD 1単位。価格・ACC／車線維持支援・ステアリング保持を一次資料で確認し、注文可否は未確認のまま掲載 |
 | 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
 | 今回追加（Mitsubishi / 後発対策） | 9 | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M × 5・7人乗り。価格536万9,100円〜690万1,400円、MI-PILOT（全車速ACC・LKA）とLCAの警告・支援、ハンドル保持、公式の商談・購入予約導線を販売単位へ固定 |
@@ -81,8 +82,19 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Mitsubishi | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M 4WD（5・7人乗り） | 掲載（9単位） | 2相当 | 2026-09-11 |
 | Toyota | アクア Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD | 掲載（9単位） | 2相当 | 2026-09-11 |
 | Toyota | カローラ HYBRID W×B / G / Xの2WD・E-Four | 掲載（6単位） | 2相当 | 2026-09-11 |
+| Volkswagen | Tiguan eTSI Active / Elegance / R-Line、TDI 4MOTION Active / Elegance / R-Line | 掲載（6単位） | 2相当 | 2026-09-11 |
+| Lexus | GX550 version L / OVERTRAIL+ | 掲載（2単位） | 2相当 | 2026-09-11 |
+| Toyota | ランドクルーザー250 VX ガソリン 4WD | 掲載（1単位） | 2相当 | 2026-09-11 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。2026-09-10確認時点で両モデルの日本向け公式商品ページに「今すぐ注文」導線が表示され、公式FAQも注文後の手続きと注文可能なトリム・納車予定時期をDesign Studioで確認する流れを案内しているため、6販売単位の`availability`を`new_order_available`へ更新した。ただし注文後の在庫・納車時期・ソフトウェア提供条件は個別確認が必要。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
+
+## 2026-09-11 Volkswagen／Lexus／Toyota追加トランシェ
+
+Volkswagen Tiguanは日本公式の現行モデルページ、2026年1月価格表、主要装備表を照合し、eTSI 3単位とTDI 4MOTION 3単位の計6販売単位を登録した。価格は494万9,000円〜666万4,000円（税込）。全単位でTravel Assist、Lane Assist、全車速ACCの標準装備を確認したが、メーカーがLevel 2認証と明記したものではないため、ACCと車線維持の同時支援を国土交通省定義へ照合した「Level 2相当」として表示する。価格表・装備表の確認月を`catalogAsOf`へ保持し、個別の受注可否は`unknown`とした。
+
+Lexus GX550は現行モデル、安全装備、価格・パッケージページを照合し、version L（1,270万円）とOVERTRAIL+（1,195万円）の2販売単位を登録した。両単位でLTAと全車速追従レーダークルーズを確認し、ステアリング保持が必要なLevel 2相当として扱う。価格・仕様の確認月は2026年9月、受注可否は販売店・時期で変動するため`unknown`を維持した。
+
+Toyota ランドクルーザー250は、2026年4月の公式グレード・主要装備資料と取扱説明書からVXガソリン4WD（570万円）を登録した。全車速追従ACCとLTAの同時支援を確認し、ハンドル保持・常時監視が必要なLevel 2相当として表示する。公式掲載は確認できるが販売単位の受注可否は固定できないため`unknown`とした。
 
 Volvo EX30は、日本向け2027年モデルの2026年第29週生産分以降の諸元・価格表で3グレードとPilot Assist、全車速追従ACC、ドライバーモニタリングを確認した。Pilot Assistは速度・車間と操舵を支援する一方、取扱説明書が運転者に両手保持と即時介入を求めるため、Level 2相当の運転支援として登録した。税込車両本体価格は479万〜629万円で、価格適用時点は2026年7月、確認日は2026-09-07。価格根拠は内部保持し、価格表示機能はIssue #16で一貫した価格契約を実装してから公開する。
 
@@ -129,7 +141,7 @@ MINI Countrymanは、2026年7月以降生産の日本向け装備・価格表か
 | LM500h EXECUTIVE / version Lの注文後工場出荷目処 | Lexus | https://lexus.jp/news/info/delivery/index.html | 2026-09-11 |
 | IONIQ 5 Voyage / Lounge掲載車両の「車両注文」導線 | Hyundai Mobility Japan | https://www.hyundai.com/jp/stock/new | 2026-09-11 |
 
-この更新後の内訳は、全189販売単位（現行188、過去1）のうち`new_order_available` 21、`unknown` 167、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
+この更新後の内訳は、全198販売単位（現行197、過去1）のうち`new_order_available` 21、`unknown` 176、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
 
 
 ## 未掲載・確認継続候補（内訳）

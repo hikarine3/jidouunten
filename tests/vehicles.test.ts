@@ -129,14 +129,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(189);
+    expect(vehicles).toHaveLength(198);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補188件は全件の公式金額を保持する', () => {
+  it('現行候補197件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(188);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(188);
+    expect(current).toHaveLength(197);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(197);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -146,7 +146,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(46);
+    expect(officialLinks).toHaveLength(49);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -183,6 +183,18 @@ describe('vehicle data contract and filters', () => {
     expect(mitsubishiActions.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'estimate', 'dealer', 'catalog']);
     expect(mitsubishiActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
     expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(62);
+  });
+
+  it('VW Tiguan・Lexus GX550・Toyota ランドクルーザー250の9販売単位を保持する', () => {
+    const tranche = vehicles.filter((vehicle) => ['Volkswagen', 'Lexus', 'Toyota'].includes(vehicle.maker) && ['Tiguan', 'GX550', 'ランドクルーザー250'].includes(vehicle.model));
+    expect(tranche).toHaveLength(9);
+    expect(tranche.filter((vehicle) => vehicle.model === 'Tiguan')).toHaveLength(6);
+    expect(tranche.filter((vehicle) => vehicle.model === 'GX550')).toHaveLength(2);
+    expect(tranche.filter((vehicle) => vehicle.model === 'ランドクルーザー250')).toHaveLength(1);
+    expect(tranche.every((vehicle) => vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed' && vehicle.capabilities.includes('adaptive_cruise_control') && vehicle.capabilities.includes('lane_centering'))).toBe(true);
+    expect(tranche.every((vehicle) => vehicle.currentCatalogListed && vehicle.availability === 'unknown' && vehicle.price?.kind === 'exact')).toBe(true);
+    expect(tranche.every((vehicle) => vehicle.sources.some((source) => source.supports.some((support) => support.includes('円'))))).toBe(true);
+    expect(tranche.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
   });
 
   it('Level 4とLevel 5を限定条件の有無で分ける', () => {
