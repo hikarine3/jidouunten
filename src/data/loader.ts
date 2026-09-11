@@ -189,6 +189,41 @@ export const availabilityNotes: Partial<Record<Availability, string>> = {
   unknown: 'メーカー公式サイトへの掲載は確認済みです。新車で注文できるかは未確認です。',
 };
 
+export type FactStatus = Vehicle['factStatus'];
+
+export const factStatusLabels: Record<FactStatus, string> = {
+  verified: '確認済み',
+  stale: '要再確認',
+  conflicting: '情報が競合',
+  unknown: '情報未確認',
+};
+
+/**
+ * 販売状態は90日、機能・ODDを含むレコード全体は180日を暫定期限とする。
+ * factStatusの手動判定を優先し、verifiedでも期限を超えたらstaleへ落とす。
+ * asOfを引数に取ることで、ビルド時と期限判定テストの基準日を固定できる。
+ */
+export function vehicleFactStatus(
+  vehicle: Pick<Vehicle, 'factStatus' | 'availabilityCheckedAt' | 'lastReviewedAt'>,
+  asOf: Date = new Date(),
+): FactStatus {
+  if (vehicle.factStatus !== 'verified') return vehicle.factStatus;
+  const ageDays = (date: string) => Math.floor((asOf.valueOf() - Date.parse(date)) / 86_400_000);
+  const availabilityAge = ageDays(vehicle.availabilityCheckedAt);
+  const reviewAge = ageDays(vehicle.lastReviewedAt);
+  if (availabilityAge >= 90 || reviewAge >= 180) return 'stale';
+  return 'verified';
+}
+
+/** 公開面へ出す鮮度ラベル。確認済みの販売単位には余計な表示を追加しない。 */
+export function displayVehicleFactStatus(
+  vehicle: Pick<Vehicle, 'factStatus' | 'availabilityCheckedAt' | 'lastReviewedAt'>,
+  asOf?: Date,
+) {
+  const status = vehicleFactStatus(vehicle, asOf);
+  return status === 'verified' ? null : factStatusLabels[status];
+}
+
 export const handsOffLabels: Record<HandsOff, string> = {
   allowed_in_conditions: 'ハンズオフ：条件内で可',
   not_allowed: 'ハンズオフ：不可',

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { availabilityLabels, availabilityNotes, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleReferenceLabel, vehicles } from '../../data/loader';
+import { availabilityLabels, availabilityNotes, capabilityDefinition, displayOptionalPackagePrices, displayVehicleFactStatus, displayVehiclePrice, displayVehicleReferenceTotal, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleReferenceLabel, vehicles } from '../../data/loader';
 
 const availabilityPublicKeys: Record<string, string> = {
   new_order_available: 'order',
@@ -34,6 +34,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
   priceLabel: displayVehiclePrice(vehicle),
   optionalPackageLabel: displayOptionalPackagePrices(vehicle),
   referenceTotalLabel: displayVehicleReferenceTotal(vehicle),
+  freshnessLabel: displayVehicleFactStatus(vehicle),
   decisionFingerprint: vehicleDecisionFingerprint(vehicle),
   decisionSignals: vehicleDecisionSignals(vehicle),
   officialLink: (() => {
@@ -117,6 +118,9 @@ const publicCatalog = vehicles.map((vehicle) => ({
       const referenceTotalRows = selected.some((v) => v.referenceTotalLabel)
         ? row('参考総額<small>本体＋確認済み追加パッケージ</small>', (v) => v.referenceTotalLabel || '算出不可（本体価格または追加価格を合算できません）', 'reference-total')
         : '';
+      const freshnessRows = selected.some((v) => v.freshnessLabel)
+        ? row('情報状態', (v) => v.freshnessLabel || '確認済み', 'fact-status')
+        : '';
       const actionLinks = (v, kinds, buttonClass) => {
         const actions = (v.officialLink?.actions || []).filter((action) => kinds.includes(action.kind));
         return actions.length ? `<div class="purchase-action-list">${actions.map((action) => `<a class="button small ${buttonClass}" href="${escapeHtml(action.url)}" target="_blank" rel="noopener noreferrer" data-purchase-action data-action-type="${escapeHtml(action.kind)}" data-vehicle-id="${escapeHtml(v.id)}" data-manufacturer="${escapeHtml(v.maker)}">${escapeHtml(action.label)} ↗</a>`).join('')}</div>` : '次アクション未確認';
@@ -125,6 +129,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
         row('参考価格<small>車両本体の公式掲載価格</small>', (v) => v.priceLabel, 'price'),
         optionalPackageRows,
         referenceTotalRows,
+        freshnessRows,
         row('自動化レベル', (v) => `Level ${v.automationLevel} · ${levelLabels[v.automationLevel]}`, 'level'),
         row('道路', (v) => fact(v.odd.roadTypes), 'road'),
         row('速度', (v) => v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明'), 'speed'),
@@ -140,6 +145,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
         selected.map((v) => v.priceLabel),
         selected.map((v) => v.optionalPackageLabel || '追加価格は未確認'),
         selected.map((v) => v.referenceTotalLabel || '参考総額は算出不可'),
+        selected.map((v) => v.freshnessLabel || '確認済み'),
         selected.map((v) => `Level ${v.automationLevel} · ${levelLabels[v.automationLevel]}`),
         selected.map((v) => fact(v.odd.roadTypes)),
         selected.map((v) => v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明')),

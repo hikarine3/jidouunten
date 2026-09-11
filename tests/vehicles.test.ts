@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleImageFor, vehicleImages, vehicleItemListStructuredData, vehicleMatchesPriceBand, vehiclePriceMin, vehiclePublicUrl, vehicleReferenceLabel, vehicleReferenceTotal, vehicleStructuredData, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehicleFactStatus, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, factStatusLabels, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleFactStatus, vehicleImageFor, vehicleImages, vehicleItemListStructuredData, vehicleMatchesPriceBand, vehiclePriceMin, vehiclePublicUrl, vehicleReferenceLabel, vehicleReferenceTotal, vehicleStructuredData, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -50,6 +50,17 @@ describe('vehicle data contract and filters', () => {
     expect(displayCatalogAsOf('2026-09')).toBe('2026年9月');
     expect(displayVehicleTiming({ salesUnitIntroducedAt: null, catalogAsOf: '2026-09' })).toBe('2026年9月');
     expect(displayVehicleTiming({ salesUnitIntroducedAt: null, catalogAsOf: null })).toBe('');
+  });
+
+  it('販売状態90日・機能とODD180日の期限を超えた販売単位だけ要再確認にする', () => {
+    const asOf = new Date('2026-09-12T00:00:00Z');
+    expect(vehicleFactStatus(makeVehicle({ availabilityCheckedAt: '2026-06-14', lastReviewedAt: '2026-09-01' }), asOf)).toBe('stale');
+    expect(vehicleFactStatus(makeVehicle({ availabilityCheckedAt: '2026-09-01', lastReviewedAt: '2026-03-16' }), asOf)).toBe('stale');
+    expect(vehicleFactStatus(makeVehicle({ availabilityCheckedAt: '2026-09-01', lastReviewedAt: '2026-09-01' }), asOf)).toBe('verified');
+    expect(vehicleFactStatus(makeVehicle({ factStatus: 'conflicting' }), asOf)).toBe('conflicting');
+    expect(vehicleFactStatus(makeVehicle({ factStatus: 'unknown' }), asOf)).toBe('unknown');
+    expect(displayVehicleFactStatus(makeVehicle({ availabilityCheckedAt: '2026-06-14' }), asOf)).toBe(factStatusLabels.stale);
+    expect(displayVehicleFactStatus(makeVehicle(), asOf)).toBeNull();
   });
 
   it('構造化データは車両正本と可視一覧のURL・名称・順序を一致させる', () => {
