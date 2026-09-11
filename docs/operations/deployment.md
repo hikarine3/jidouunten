@@ -4,6 +4,13 @@
 
 ## 最新の配信（2026-09-11）
 
+- exact app: `16567f05acc1a3bd7145c5e225abd7c0c91407b4`（Hyundai IONIQ 5 4販売単位を追加、Volvo根拠表の配置を修正）
+- immutable: https://4c2f96d7.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 現行157販売単位（全158件）へHyundai IONIQ 5のVoyage L／Voyage／Lounge／Lounge AWDを追加。Voyage LはHDA、他3グレードはHDA2（車線変更アシスト付）として同じLevel 2内の差をAND絞り込み・比較できる。新車注文可否とHDA速度数値は未確認のまま表示し、価格だけで受注可能とは表示しない。
+- QA: Vitest42/42、価格158/158（現行157/157）、公式導線39モデル/43 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build164、ローカル・immutable・production E2E各1/1、公開面依存レジストリ315/315、独立価値監査PASS
+- immutable／本体でHTTP 200を確認（`/`、`/sitemap-index.xml`、`/sitemap-0.xml`、`/robots.txt`、Hyundai詳細、Hyundai比較）。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301で維持される。直前rollback: https://4a8c18d3.jidouunten.pages.dev
+
 - exact app: `907b7a556b4195634e38dbc4f4271c9eccfd3cc5`（前段 `da4170a`）
 - immutable: https://4a8c18d3.jidouunten.pages.dev
 - 本体: https://jidouunten.jp/

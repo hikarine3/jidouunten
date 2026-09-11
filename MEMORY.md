@@ -2,6 +2,19 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 Hyundai IONIQ 5追加（実装・本番反映済み）
+
+- Hyundai Mobility Japanの現行価格ページ・2026年6月公式カタログ・2025年モデル告知から、IONIQ 5のVoyage L／Voyage／Lounge／Lounge AWDを4販売単位として追加。価格は499万4,000円〜613万8,000円（税込）。Voyage LはHDA、他3単位はHDA2（車線変更アシスト付）として、同じLevel 2内の車線変更支援の差を一覧のチェックボックスAND・詳細・比較で確認できる。
+- HDA/HDA2はいずれもステアリング保持・前方監視が必要な運転支援として扱い、hands-offは不可、driverMonitoringは必須。販売単位ごとの新車注文可否とHDA速度数値は公式根拠が固定できないため`unknown`のまま保持し、価格だけで受注可能とは表示しない。
+- exact app `16567f05acc1a3bd7145c5e225abd7c0c91407b4`、Production `https://jidouunten.jp/`、immutable `https://4c2f96d7.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。現行157／全158販売単位、公式導線39モデル／43 actions。
+- QA: Vitest42/42、価格158/158（現行157/157）、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build164、ローカル・immutable・本番E2E各1/1、公開面依存レジストリ315/315、独立価値監査PASS。主要URL HTTP200、IDN path/query 301を確認。
+- 画像・ロゴ・外部本文の転載は追加していない。根拠は[Hyundai価格・装備](https://www.hyundai.com/jp/ioniq5/price)、[The new IONIQ 5公式](https://www.hyundai.com/jp/ioniq5)、[公式カタログ](https://www.hyundai.com/jp/purchase/downFile/ioniq5)、[2025年モデル告知](https://www.hyundai.com/jp/customer-service/notice/679)。
+
+## 自動運転タクシーの将来領域（Issue化）
+
+- 購入可能車のカタログとは別の「自動運転タクシー／移動サービス」領域を設ける要件を [JID-038](https://github.com/hikarine3/jidouunten/issues/38) に登録。`体験受付中`・`実証中`・`発表／準備中`・`終了`を分け、国・都道府県／市区町村・運行エリア、事業者、利用方法、対象者、料金、運行日時、提供期間、公式根拠・確認日を地域別に比較する。
+- 日本の進捗と海外の先行事例を別フィルターで追い、購入車一覧・Level別件数・車両口コミへ混在させない。実装時はJID-007（Level 4サービス分離）とJID-003（鮮度管理）へ接続する。
+
 ## 2026-09-11 Volvo EX30注文導線の事実範囲（実装・本番反映済み）
 
 - Volvo公式Q&AでEX30車種がオンライン契約対象であることを確認したが、2027年のPlus P5／Ultra P5 Long Range／Ultra P8 AWD各グレードの受注・在庫条件までは示されない。3販売単位の`availability`は`unknown`を維持し、詳細には「注文可否：未確認」と表示する。
