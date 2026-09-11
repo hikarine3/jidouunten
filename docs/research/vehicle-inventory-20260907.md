@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 340 | `src/data/vehicles.json` の全レコード（現行339 + 過去1） |
-| 既定表示 | 339 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 343 | `src/data/vehicles.json` の全レコード（現行342 + 過去1） |
+| 既定表示 | 342 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 18 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -30,6 +30,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Honda フリード CROSSTAR / 後発対策） | 8 | e:HEV／ガソリン CROSSTARのFF・4WD、5／6人乗り。価格292万8,200円〜360万2,500円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
 | 今回追加（日産 キックス / 後発対策） | 12 | P16のG／X+／X／X シンプルパッケージ／ROCK CREEK／ROCK CREEK Utility Specを2WD・4WD（e-4ORCE）別に登録。価格299万9,700円〜430万9,800円、全車プロパイロット標準（車速30〜135km/h・車線中央付近の操舵支援）、ステアリング保持・常時監視、ハンズオフ不可を公式価格・FAQで確認 |
 | 今回追加（Honda CIVIC / 後発対策） | 5 | 2026年6月5日発売のe:HEV LX／EX／RS、ガソリンEX／RSを登録。価格394万6,800円〜465万9,600円、全車ACC＋LKASのLevel 2相当。e:HEV 3単位とガソリンEXはトラフィックジャムアシスト標準、ガソリンRSは対象外として同じLevel 2内の渋滞支援差を比較可能にした |
+| 今回追加（Toyota クラウン（クロスオーバー） / 後発対策） | 3 | 通常カタログのCROSSOVER RS／Z／G（いずれもE-Four）を追加。価格517万9,900円〜673万9,700円、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・条件内ハンズオフ、GはACC・LTA・渋滞時支援のみとして能力差を販売単位へ固定。特別仕様THE LIMITED-MATTE METALは既存の別単位として保持 |
 | 今回追加（Toyota ヴェルファイア / 後発対策） | 7 | Executive Lounge PHEV/HEV、Z Premier HEV/ターボの2WD・E-Four/4WD。ACC・LTA・LCA・アドバンスト ドライブ（渋滞時支援）の標準装備、0〜約40km/hの条件付きハンズオフ、2026年6月価格を販売単位へ固定 |
 | 今回追加（Toyota ヴォクシー / 後発対策） | 6 | S-Z/S-Gの2WD・E-Four、7/8人乗りとS-GベースのMULTI UTILITY 5人乗り。ACC・LTA標準、Advanced Drive・LCA・ドライバーモニターのメーカーオプション価格と作動条件を販売単位へ固定 |
 | 今回追加（Toyota ノア / 後発対策） | 7 | 既存S-Z 2WDを含む現行HEV 8単位へ拡張。S-Z/S-GのAdvanced Drive等セット（122,100円／78,100円）、LCA・ドライバーモニター、S-Xの設定なし、2WD/E-Four・7/8人を販売単位へ固定。Advanced Driveの0〜約40km/hとLCAの約85〜130km/h、T-Connect／コネクティッドナビ契約・地図条件も単位ごとに保持 |
@@ -828,6 +829,28 @@ Honda公式の現行商品・タイプ一覧、e:HEV X／Zの価格ページ、�
 | 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
 
 根拠: [クラウン スポーツ商品ページ](https://toyota.jp/crownsport/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades64.json)、[安全性能](https://toyota.jp/crownsport/safety/)、[主要諸元・装備一覧](https://toyota.jp/pages/contents/crownsport/001_p_001/pdf/crownsport_spec_202609.pdf)。公式サイトに掲載されたグレードと、作動条件・能力差を分離している。受注可否は未確認のため新車注文可とは表示しない。
+
+## 2026-09-12 Toyota クラウン（クロスオーバー）通常グレード追加トランシェ
+
+トヨタ公式のクラウン（クロスオーバー）商品ページ、`grades44.json`（model id 44）、安全性能ページ、2026年9月主要装備比較表を照合し、通常カタログのRS／Z／GをE-Four・5人乗りの販売単位として追加した。メーカー希望小売価格は税込517万9,900円（CROSSOVER G）〜673万9,700円（CROSSOVER RS）で、価格は2026年9月現在の参考価格（オプション・諸費用別）。販売単位ごとの発売日・現在の受注可否は公式資料で固定できないため `salesUnitIntroducedAt=null`、`availability=unknown` とした。
+
+安全性能ページで全車に全車速追従レーダークルーズコントロール・LTA、RS／Zにアドバンスト ドライブ（渋滞時支援）・レーンチェンジアシスト・ドライバーモニターカメラが標準装備とされることを確認した。RS／Zは渋滞時0〜約40km/hの条件内ハンズオフと車線変更支援を能力タグへ反映し、GはRS／Z限定装備を付与せずACC・LTA・渋滞時運転支援・ハンドル保持のみとした。全単位を国土交通省の定義に照合したサイト上のLevel 2相当として表示するが、自動運転とは表記しない。既存の特別仕様THE LIMITED-MATTE METALは通常グレードと価格・販売単位が異なるため別レコードで保持する。
+
+| 販売単位 | 価格（税込） | 駆動・定員 | 同じLevel 2内の差分 |
+|---|---:|---|---|
+| CROSSOVER RS（ハイブリッド車）・E-Four Advanced | 6,739,700円 | E-Four Advanced・5人 | アドバンスト ドライブ0〜約40km/h、LCA、ドライバーモニター、条件内ハンズオフ |
+| CROSSOVER Z（ハイブリッド車）・E-Four | 5,999,400円 | E-Four・5人 | アドバンスト ドライブ0〜約40km/h、LCA、ドライバーモニター、条件内ハンズオフ |
+| CROSSOVER G（ハイブリッド車）・E-Four | 5,179,900円 | E-Four・5人 | ACC・LTA・渋滞時運転支援、ハンドル保持。アドバンスト ドライブ／LCAは標準対象外 |
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| クラウン（クロスオーバー）現行商品ページ | トヨタ自動車株式会社 | https://toyota.jp/crowncrossover/ | 2026-09-12 |
+| CROSSOVER RS／Z／Gの価格・駆動・定員 | トヨタ自動車株式会社 | https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades44.json | 2026-09-12 |
+| 全車速追従ACC・LTA、RS/Zのアドバンスト ドライブ・LCA・ドライバーモニター、渋滞時0〜約40km/h | トヨタ自動車株式会社 | https://toyota.jp/crowncrossover/safety/ | 2026-09-12 |
+| 2026年9月主要装備比較表（価格・標準装備） | トヨタ自動車株式会社 | https://toyota.jp/pages/contents/crowncrossover/001_p_001/pdf/crowncrossover_equipment_compare_202609.pdf | 2026-09-12 |
+| 縦・横方向を運転者主体で支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
+
+根拠: [クラウン（クロスオーバー）商品ページ](https://toyota.jp/crowncrossover/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades44.json)、[安全性能](https://toyota.jp/crowncrossover/safety/)、[主要装備比較表](https://toyota.jp/pages/contents/crowncrossover/001_p_001/pdf/crowncrossover_equipment_compare_202609.pdf)。通常3グレードと特別仕様を別販売単位へ分け、RS/Zの条件内ハンズオフ・車線変更支援とGのハンドル保持を同じ比較キーへ固定した。受注可否は未確認のため新車注文可とは表示しない。
 
 ## 2026-09-12 Honda ステップ ワゴン10販売単位追加
 

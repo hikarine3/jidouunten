@@ -152,14 +152,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(340);
+    expect(vehicles).toHaveLength(343);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補339件は全件の公式金額を保持する', () => {
+  it('現行候補342件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(339);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(339);
+    expect(current).toHaveLength(342);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(342);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -278,13 +278,14 @@ describe('vehicle data contract and filters', () => {
     const toyotaEstimateLinks = officialLinks.filter(({ maker }) => maker === 'Toyota').flatMap((link) => (link.actions ?? []).filter(({ kind }) => kind === 'estimate'));
     expect(toyotaEstimateLinks).toHaveLength(18);
     expect(toyotaEstimateLinks.every(({ label, url }) => label === '公式で見積り' && url.startsWith('https://toyota.jp/service/estimate/grades?car_name_en='))).toBe(true);
-    expect(toyotaEstimateLinks.filter(({ url }) => !url.includes('COROLLA%20CROSS') && !url.includes('AQUA') && !url.includes('COROLLA') && !url.includes('YARIS+CROSS') && !url.includes('YARIS') && !url.includes('CROWN+SPORT')).every(({ checkedAt }) => checkedAt === '2026-09-10')).toBe(true);
+    expect(toyotaEstimateLinks.filter(({ url }) => !url.includes('COROLLA%20CROSS') && !url.includes('AQUA') && !url.includes('COROLLA') && !url.includes('YARIS+CROSS') && !url.includes('YARIS') && !url.includes('CROWN+SPORT') && !url.includes('CROWN+CROSSOVER')).every(({ checkedAt }) => checkedAt === '2026-09-10')).toBe(true);
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('AQUA'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('YARIS+CROSS'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('YARIS') && !url.includes('YARIS+CROSS'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA') && !url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('CROWN+SPORT'))?.checkedAt).toBe('2026-09-12');
+    expect(toyotaEstimateLinks.find(({ url }) => url.includes('CROWN+CROSSOVER'))?.checkedAt).toBe('2026-09-12');
     expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'AQUA', 'COROLLA', 'COROLLA CROSS', 'COROLLA SPORT', 'COROLLA TOURING', 'CROWN CROSSOVER', 'CROWN SPORT', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'YARIS', 'YARIS CROSS', 'bZ4X'].sort());
     const expandedActionModels = new Map([
       ['Honda\u0000ACCORD', ['dealer', 'test_drive', 'estimate', 'catalog']],
@@ -812,6 +813,24 @@ describe('vehicle data contract and filters', () => {
     expect(sport.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('grades64.json')))).toBe(true);
     expect(sport.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('crownsport_spec_202609.pdf')))).toBe(true);
     expect(officialLinkFor(sport[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
+  });
+
+  it('Toyota クラウン（クロスオーバー）はRS/Z/Gの価格とハンズオフ差を保持する', () => {
+    const crossover = vehicles.filter((vehicle) => vehicle.model === 'クラウン（クロスオーバー）');
+    expect(crossover).toHaveLength(4);
+    expect(crossover.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([5_179_900, 5_999_400, 6_739_700, 7_590_000]);
+    expect(crossover.every((vehicle) => vehicle.currentCatalogListed && vehicle.catalogAsOf === '2026-09' && vehicle.priceEffectiveAt === '2026-09' && vehicle.automationLevel === 2 && vehicle.availability === 'unknown')).toBe(true);
+    const advanced = crossover.filter((vehicle) => vehicle.grade.includes('CROSSOVER RS') || vehicle.grade.includes('CROSSOVER Z'));
+    expect(advanced).toHaveLength(3);
+    expect(advanced.every((vehicle) => vehicle.handsOff === 'allowed_in_conditions' && vehicle.driverMonitoring === 'required' && vehicle.odd.speedKph.max === 40 && vehicle.capabilities.includes('lane_change_support'))).toBe(true);
+    const base = crossover.find((vehicle) => vehicle.grade.includes('CROSSOVER G'))!;
+    expect(base.handsOff).toBe('not_allowed');
+    expect(base.driverMonitoring).toBe('unknown');
+    expect(base.capabilities.join(',')).toBe('adaptive_cruise_control,lane_centering,traffic_jam_assist');
+    expect(base.odd.speedKph.max).toBeNull();
+    expect(crossover.filter((vehicle) => vehicle.id !== 'jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd').every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('grades44.json')))).toBe(true);
+    expect(crossover.filter((vehicle) => vehicle.id !== 'jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd').every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('crowncrossover_equipment_compare_202609.pdf')))).toBe(true);
+    expect(officialLinkFor(crossover[0])?.actions?.map(({ kind }) => kind)).toEqual(['estimate']);
   });
 
   it('Toyota bZ4X Zは価格・渋滞時支援・監視条件を販売単位へ固定する', () => {
