@@ -2,6 +2,19 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Honda CIVIC 5販売単位追加）
+
+- exact app release commit: `91b8d6d2baaebeabacb1b0228d2b1d59c7fd402b`
+- immutable: https://ab09429b.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Honda CIVIC（11代目）のe:HEV LX／e:HEV EX／e:HEV RS／ガソリンEX／ガソリンRSを5販売単位として追加。2026年6月5日発売、価格は394万6,800円〜465万9,600円（税込）。全車ACC＋LKASのLevel 2相当で、e:HEV 3単位とガソリンEXは渋滞時運転支援（TJA）標準、ガソリンRSは対象外として比較できる。注文可否・在庫・納期は一次情報で固定できないため5単位とも`unknown`を維持。
+- 公式導線: [CIVIC商品ページ](https://www.honda.co.jp/CIVIC/)、[タイプデータ](https://www.honda.co.jp/CIVIC/common/data/type.json)、[性能・安全](https://www.honda.co.jp/CIVIC/webcatalog/performance/)、[主要装備表](https://www.honda.co.jp/CIVIC/common/pdf/civic_equipment_list.pdf)、[発売発表](https://global.honda/jp/news/2026/4260604-civic.html)。販売店・試乗・見積り・カタログ導線を保持。
+- SEO／公開面: 346 HTML、sitemap-0は341 URL、詳細340件、トップ／一覧ItemListは2ページ・678項目。GTM実IDは346 HTMLへ各1件、テストID0件。
+- UI: 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のサムネイルで省スペース表示。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホストWebPは維持。
+- QA: `npm test` Vitest59＋保存再開5＝64/64、Python16/16、価格340/340（現行339/339、exact324／range15／未確認1）、公式導線66モデル／64 URL／107 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 48 entities／482 surfaces／455 required selectorsのclosure PASS、独立リリース監査PASS、immutable／本体E2E各1/1（GA collect204）。
+- 本番smoke: 本体・immutableのトップ、一覧、CIVIC詳細、比較、sitemapはHTTP200、未知URL404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）はpath/queryを本体へ301。参考画像WebPはHTTP200（163,592 bytes）。
+- 直前の正常配信・ロールバック候補: https://4c27b72b.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-12 日産 キックス P16 12販売単位追加）
 
 - exact app release commit: `40acdbc65cf1f39db7826c1b412137fece455c83`
