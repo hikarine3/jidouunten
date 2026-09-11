@@ -2,6 +2,17 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Toyota MIRAI追加・一覧サムネイル回帰確認）
+
+- exact release commit: `0e95015`
+- immutable: https://50d723bc.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Toyota MIRAIのG／Z（2WD・5人乗り）を2販売単位で追加。価格はG 741万4,000円、Z 821万5,900円（税込）。全車速追従ACC・LTA、LCA、アドバンスト ドライブ（渋滞時支援）を公式資料で確認し、Level 2相当・渋滞時0〜約40km/hの条件内ハンズオフ・常時監視必須として登録した。グレード差・価格差を一覧／詳細／比較／能力フィルターへ反映し、公式商品・販売店・試乗・見積り・カタログ導線を同期。
+- SEO／公開面: 420 HTML、sitemap-0は419 URL、車両詳細414件、トップ／一覧ItemListは2ページ・826項目。GTM実IDは各HTML 1件、テスト計測ID0件。公開HTML内部enum・source・accessedAt漏れ0件。
+- UI: 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のWebPサムネイルで省スペース表示（実ブラウザでデスクトップ374×115px、モバイル360×88px）。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホスト方針を維持。
+- QA: `npm test` 73/73＋Python16/16、価格414/414（exact398／range15／未確認1）、公式導線77モデル／74 URL／151 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 508/508、独立監査PASS、ローカル／immutable／本体E2E各1/1（本体GA collect HTTP204）。
+- 本番smoke: 本体・immutableのトップ、一覧、MIRAI G/Z詳細、MIRAI比較、sitemap、robots、参考画像WebPはHTTP200。未知URL404、`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）はpath/queryを本体へ301（TLS対応のPunycode URLで確認）。
+
 ## 最新の配信（2026-09-12 三菱 デリカミニ／eKスペース追加）
 
 - exact release commit: `af6fc06`
