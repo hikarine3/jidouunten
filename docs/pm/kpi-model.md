@@ -21,7 +21,7 @@
 | 条件別（レベル・道路・ハンズオフ・価格帯）の静的URL | 0 | 絞り込みはquery paramのみ（`/cars/?level=2`） |
 | 機能名（プロパイロット2.0等）の静的URL | 0 | 該当ページなし |
 | 2台比較の静的URL | 0 | `/compare/?ids=a,b` のquery paramのみ |
-| 構造化データの型 | WebSite + WebPage | `src/layouts/Layout.astro` のJSON-LD `@graph` |
+| 構造化データの型 | 全247ページ: WebSite + WebPage ／ 車両詳細241ページ: Product + BreadcrumbListを追加 | `src/layouts/Layout.astro` と `src/pages/cars/[id].astro` のJSON-LD `@graph` |
 | 公式アクションリンク | 70 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線、BYD 4車種は試乗・販売店・カタログ導線、Mitsubishi OUTLANDER PHEVは商談・購入予約・試乗車・見積り・販売店・カタログ導線、Audi A5 / A5 Avantは見積り・正規ディーラー・試乗車導線、Toyotaアクア／カローラ／ヤリス／ヤリス クロスは公式見積り導線を保持。検討用導線と注文可否は分離 |
 | 新車注文可（一次情報で確認） | 21 | `src/data/vehicles.json` の販売単位。Tesla 6、Volvo EX30 3、Hyundai IONIQ 5 2、Mitsubishi OUTLANDER PHEV 9、日産アリアB6 1。注文・出荷根拠を確認した単位のみで、在庫・納期・契約成立は保証しない |
 | Lighthouse production (mobile) | performance 1.00 / accessibility 1.00 | `.cache/lighthouse-production.json` |
