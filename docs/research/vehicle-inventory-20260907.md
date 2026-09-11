@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 260 | `src/data/vehicles.json` の全レコード（現行259 + 過去1） |
-| 既定表示 | 259 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 265 | `src/data/vehicles.json` の全レコード（現行264 + 過去1） |
+| 既定表示 | 264 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -36,6 +36,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Volkswagen / Lexus / Toyota） | 9 | Volkswagen Tiguan 6単位、Lexus GX550 2単位、Toyota ランドクルーザー250 VX ガソリン4WD 1単位。価格・ACC／車線維持支援・ステアリング保持を一次資料で確認し、注文可否は未確認のまま掲載 |
 | 今回追加（Toyota ヤリス クロス） | 20 | 2026年8月公式グレードJSONのZ“Adventure”／Z／G／X／U／GR SPORT、ハイブリッド・ガソリン、2WD／E-Fourの全20販売単位。価格212万6,300円〜335万5,000円、全車速追従ACC・LTA・渋滞時支援、ステアリング保持条件を一次資料で確認し、注文可否は未確認のまま掲載 |
 | 今回追加（Toyota ヤリス） | 17 | 2026年4月公式グレードJSONのZ／G／X、ハイブリッド・ガソリン、1.5L／1.0L、CVT／6MT、2WD／4WD・E-Fourの価格比較可能な17販売単位。価格169万7,300円〜288万4,200円。1.0L CVTの2単位はACCのみでLevel 1、その他15単位はLTA併用のLevel 2、ハイブリッド6単位は渋滞時停止・発進支援を確認。U（KINTO専用）2単位は月額のみのため車両本体価格比較から保留 |
+| 今回追加（Toyota プリウス） | 5 | 既存のHEV Z 2WDに、HEV Z E-Four／G 2WD・E-Four／X 2WD・E-Fourを追加。2026年7月公式価格表の279万6,200円〜425万1,500円、全車速ACC＋LTA・渋滞時支援（ハンズオフ不可）を販売単位へ固定。Xは法人向けチャネルのため注文可否を未確認のまま表示 |
 | 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
 | 今回追加（Mitsubishi / 後発対策） | 9 | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M × 5・7人乗り。価格536万9,100円〜690万1,400円、MI-PILOT（全車速ACC・LKA）とLCAの警告・支援、ハンドル保持、公式の商談・購入予約導線を販売単位へ固定 |
@@ -140,6 +141,19 @@ Toyota ランドクルーザー250は、2026年4月の公式グレード・主�
 
 ヤリス クロスは公式の商品ページと見積り導線を保持するが、個別販売単位の現在の注文受付を確認できないため、注文可能とは表示しない。Toyotaの他モデルと同じLevel 2ラベルでも、ヤリス クロスはハンズオフ不可・車線変更支援なしとして絞り込み比較できる。
 
+## 2026-09-11 Toyota プリウス追加トランシェ
+
+トヨタ公式の現行プリウス価格・グレードページと2026年7月主要諸元・装備表を照合し、既存のHEV Z（2WD）にHEV Z（E-Four）、G（2WD／E-Four）、X（2WD／E-Four）の5販売単位を追加した。価格は税込279万6,200円〜425万1,500円で、公式価格表の「2026年7月現在」の参考価格を`catalogAsOf`／`priceEffectiveAt`へ反映した。Xは法人向けグレードとして掲載されるため、通常小売との販売チャネル差をグレード名に残し、注文可否は全6単位とも`unknown`とした。
+
+全6単位で全車速追従レーダークルーズコントロール（前後方向）とLTA（左右方向）を確認し、国土交通省の定義に照合したサイト上のLevel 2相当として登録した。ZのLCAは標準記載があるが、既存レコードとの能力比較契約を変更しないため今回の共通能力タグには付与していない。全車でステアリング保持・常時監視が必要で、ハンズオフ不可。PHEV G／ZとKINTO専用Uは、価格の性質と販売チャネルが異なるため今回の通常HEVトランシェから分離して確認継続とする。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| プリウス現行価格・グレード、HEV Z/G/Xの2WD・E-Four価格 | トヨタ自動車 | https://toyota.jp/prius/grade/ | 2026-09-11 |
+| 2026年7月主要諸元・装備表 | トヨタ自動車 | https://toyota.jp/pages/contents/prius/005_p_001/pdf/prius_spec_202607.pdf | 2026-09-11 |
+| ACC・LTA・手放し継続時の警告と解除 | トヨタ自動車 | https://toyota.jp/prius/safety/ / https://manual.toyota.jp/prius/3066/hev/ja_JP/contents/vhch04se050404.php | 2026-09-11 |
+| Level 2の定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-11 |
+
 ## 2026-09-11 Toyota ヤリス追加トランシェ
 
 トヨタ公式の現行ヤリス商品ページ（modelId 53）とグレードJSON（19エントリ）を照合した。Uグレード2単位（ハイブリッド車 2WD／E-Four）は公式ページがKINTO月額のみを案内し、他グレードの車両本体価格表に含まれないため、価格比較可能な17単位を公開カタログへ登録した。Uの月額料金を車両本体価格へ換算する推測は行わず、確認継続候補として内部に残す。公開17単位の税込メーカー希望小売価格は169万7,300円〜288万4,200円で、グレードJSONの価格を各販売単位へ直接結び付けた。主要諸元・装備表の適用月を`catalogAsOf=2026-04`へ保持し、ページで販売単位別の発売日・価格適用日・注文受付を固定できないため、`salesUnitIntroducedAt`／`priceEffectiveAt`はnull、`availability=unknown`とした。
@@ -226,7 +240,7 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 | LM500h EXECUTIVE / version Lの注文後工場出荷目処 | Lexus | https://lexus.jp/news/info/delivery/index.html | 2026-09-11 |
 | IONIQ 5 Voyage / Lounge掲載車両の「車両注文」導線 | Hyundai Mobility Japan | https://www.hyundai.com/jp/stock/new | 2026-09-11 |
 
-この更新後の内訳は、全260販売単位（現行259、過去1）のうち`new_order_available` 21、`unknown` 238、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
+この更新後の内訳は、全265販売単位（現行264、過去1）のうち`new_order_available` 21、`unknown` 243、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
 
 
 ## 未掲載・確認継続候補（内訳）

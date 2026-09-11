@@ -903,14 +903,24 @@
         {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","プリウス","Lexus","NX","LEVEL 2"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","プリウス","Lexus","NX","LEVEL 2"]},
         {"url":"/cars/jp-toyota-prius-2026-z-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-prius-2026-z-2wd/index.html","markers":["Toyota","プリウス","Z（2WD）","3,998,500円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-prius-2026-z-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-prius-2026-z-e-four/index.html","markers":["Toyota","プリウス","Z（E-Four）","4,251,500円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-prius-2026-g-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-prius-2026-g-2wd/index.html","markers":["Toyota","プリウス","G（2WD）","3,324,200円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-prius-2026-g-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-prius-2026-g-e-four/index.html","markers":["Toyota","プリウス","G（E-Four）","3,577,200円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-prius-2026-x-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-prius-2026-x-2wd/index.html","markers":["Toyota","プリウス","X（2WD）","2,796,200円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-prius-2026-x-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-prius-2026-x-e-four/index.html","markers":["Toyota","プリウス","X（E-Four）","3,049,200円","Level 2","ハンズオフ：不可"]},
         {"url":"/cars/jp-lexus-nx-2026-nx350h-version-l-2wd/","locale":"ja","output_path":"dist/cars/jp-lexus-nx-2026-nx350h-version-l-2wd/index.html","markers":["Lexus","NX","NX350h","6,376,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/compare/","locale":"ja","output_path":"dist/compare/index.html","markers":["プリウス","NX350h"]},
-        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-toyota-prius-2026-z-2wd","jp-lexus-nx-2026-nx350h-version-l-2wd"]}
+        {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-toyota-prius-2026-z-2wd","jp-toyota-prius-2026-z-e-four","jp-toyota-prius-2026-g-2wd","jp-toyota-prius-2026-g-e-four","jp-toyota-prius-2026-x-2wd","jp-toyota-prius-2026-x-e-four","jp-lexus-nx-2026-nx350h-version-l-2wd"]}
       ],
       "required_render_selectors": [
         {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-prius-2026-z-2wd\"])","markers":["Toyota","プリウス","Z（2WD）"]},
         {"url":"/cars/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-prius-2026-z-2wd\"])","markers":["Toyota","プリウス","Z（2WD）"]},
         {"url":"/cars/jp-toyota-prius-2026-z-2wd/","selector":"main","markers":["Toyota","プリウス","3,998,500円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-prius-2026-z-e-four/","selector":"main","markers":["Toyota","プリウス","Z（E-Four）","4,251,500円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-prius-2026-g-2wd/","selector":"main","markers":["Toyota","プリウス","G（2WD）","3,324,200円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-prius-2026-g-e-four/","selector":"main","markers":["Toyota","プリウス","G（E-Four）","3,577,200円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-prius-2026-x-2wd/","selector":"main","markers":["Toyota","プリウス","X（2WD）","2,796,200円","Level 2","ハンズオフ：不可"]},
+        {"url":"/cars/jp-toyota-prius-2026-x-e-four/","selector":"main","markers":["Toyota","プリウス","X（E-Four）","3,049,200円","Level 2","ハンズオフ：不可"]},
         {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-lexus-nx-2026-nx350h-version-l-2wd\"])","markers":["Lexus","NX","NX350h"]},
         {"url":"/cars/","selector":"[data-vehicle-shell]:has(input[value=\"jp-lexus-nx-2026-nx350h-version-l-2wd\"])","markers":["Lexus","NX","NX350h"]},
         {"url":"/cars/jp-lexus-nx-2026-nx350h-version-l-2wd/","selector":"main","markers":["Lexus","NX","6,376,000円","Level 2","ハンズオフ：不可"]},
@@ -1480,7 +1490,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Lexus","UX300h","LEVEL 2","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Lexus","UX300h","LEVEL 2","264販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Lexus","UX300h","LEVEL 2"]},
         {"url":"/cars/jp-lexus-ux-2026-ux300h-shining-essence-2wd/","locale":"ja","output_path":"dist/cars/jp-lexus-ux-2026-ux300h-shining-essence-2wd/index.html","markers":["Lexus","UX300h","Shining Essence” 2WD","5,210,000円","Level 2","ハンズオフ：不可","ステアリング"]},
         {"url":"/cars/jp-lexus-ux-2026-ux300h-version-l-awd/","locale":"ja","output_path":"dist/cars/jp-lexus-ux-2026-ux300h-version-l-awd/index.html","markers":["Lexus","UX300h","version L” AWD","5,757,000円","Level 2","ハンズオフ：不可"]},
@@ -1510,7 +1520,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","カローラ クロス","LEVEL 2","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","カローラ クロス","LEVEL 2","264販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","カローラ クロス","LEVEL 2"]},
         {"url":"/cars/jp-toyota-corolla-cross-2026-z-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-z-2wd/index.html","markers":["カローラ クロス","Z（2WD）","3,613,500円","Level 2","ハンズオフ：不可"]},
         {"url":"/cars/jp-toyota-corolla-cross-2026-z-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-cross-2026-z-e-four/index.html","markers":["カローラ クロス","Z（E-Four）","3,872,000円","Level 2","ハンズオフ：不可"]},
@@ -1563,7 +1573,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","DOLPHIN","LEVEL 2","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","DOLPHIN","LEVEL 2","264販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["BYD","DOLPHIN","LEVEL 2"]},
         {"url":"/cars/jp-byd-dolphin-baseline/","locale":"ja","output_path":"dist/cars/jp-byd-dolphin-baseline/index.html","markers":["DOLPHIN","Baseline","2,992,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/cars/jp-byd-dolphin-long-range/","locale":"ja","output_path":"dist/cars/jp-byd-dolphin-long-range/index.html","markers":["DOLPHIN","Long Range","3,740,000円","Level 2","ハンズオフ：不可"]},
@@ -1586,7 +1596,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","ATTO 3","LEVEL 2","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","ATTO 3","LEVEL 2","264販売単位"]},
         {"url":"/cars/jp-byd-atto3/","locale":"ja","output_path":"dist/cars/jp-byd-atto3/index.html","markers":["ATTO 3","4,180,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/compare/?ids=jp-byd-atto3&ids=jp-byd-dolphin-baseline","locale":"ja","output_path":"dist/compare/index.html","markers":["ATTO 3","DOLPHIN","4,180,000円","2,992,000円"]},
         {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-byd-atto3"]}
@@ -1605,7 +1615,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","SEAL","LEVEL 2","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","SEAL","LEVEL 2","264販売単位"]},
         {"url":"/cars/jp-byd-seal-rwd/","locale":"ja","output_path":"dist/cars/jp-byd-seal-rwd/index.html","markers":["SEAL","SEAL（RWD）","4,950,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/cars/jp-byd-seal-awd/","locale":"ja","output_path":"dist/cars/jp-byd-seal-awd/index.html","markers":["SEAL","SEAL AWD","5,720,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/compare/?ids=jp-byd-seal-rwd&ids=jp-byd-seal-awd","locale":"ja","output_path":"dist/compare/index.html","markers":["SEAL","SEAL（RWD）","SEAL AWD","4,950,000円","5,720,000円"]},
@@ -1626,7 +1636,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","SEALION 6","LEVEL 2","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["BYD","SEALION 6","LEVEL 2","264販売単位"]},
         {"url":"/cars/jp-byd-sealion6-fwd/","locale":"ja","output_path":"dist/cars/jp-byd-sealion6-fwd/index.html","markers":["SEALION 6","SEALION 6（FWD）","3,982,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/cars/jp-byd-sealion6-awd/","locale":"ja","output_path":"dist/cars/jp-byd-sealion6-awd/index.html","markers":["SEALION 6","SEALION 6 AWD","4,488,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/compare/?ids=jp-byd-sealion6-fwd&ids=jp-byd-sealion6-awd","locale":"ja","output_path":"dist/compare/index.html","markers":["SEALION 6","SEALION 6（FWD）","SEALION 6 AWD","3,982,000円","4,488,000円"]},
@@ -1647,7 +1657,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Nissan","日産アリア","LEVEL 2","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Nissan","日産アリア","LEVEL 2","264販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Nissan","日産アリア","LEVEL 2"]},
         {"url":"/cars/jp-nissan-ariya-2026-b6/","locale":"ja","output_path":"dist/cars/jp-nissan-ariya-2026-b6/index.html","markers":["日産アリア","B6","6,675,900円","Level 2","新車注文可","注文後の在庫・納車時期"]},
         {"url":"/compare/?ids=jp-nissan-ariya-2026-b6&ids=jp-nissan-ariya-2026-b6-e4orce","locale":"ja","output_path":"dist/compare/index.html","markers":["日産アリア","B6","B6 e-4ORCE","6,675,900円","7,280,900円"]},
@@ -1667,7 +1677,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Mitsubishi","アウトランダーPHEV","LEVEL 2","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Mitsubishi","アウトランダーPHEV","LEVEL 2","264販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Mitsubishi","アウトランダーPHEV","LEVEL 2"]},
         {"url":"/cars/jp-mitsubishi-outlander-phev-2026-black-edition-4wd-7seater/","locale":"ja","output_path":"dist/cars/jp-mitsubishi-outlander-phev-2026-black-edition-4wd-7seater/index.html","markers":["アウトランダーPHEV","BLACK Edition","6,901,400円","Level 2","ハンズオフ：不可","新車注文可"]},
         {"url":"/cars/jp-mitsubishi-outlander-phev-2026-black-edition-4wd-5seater/","locale":"ja","output_path":"dist/cars/jp-mitsubishi-outlander-phev-2026-black-edition-4wd-5seater/index.html","markers":["アウトランダーPHEV","BLACK Edition","6,810,100円","Level 2","新車注文可"]},
@@ -1707,8 +1717,8 @@
         "@astrojs/sitemap"
       ],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","アクア","カローラ","259販売単位"]},
-        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","アクア","カローラ","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","アクア","カローラ","264販売単位"]},
+        {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","アクア","カローラ","264販売単位"]},
         {"url":"/cars/jp-toyota-aqua-2026-z-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-aqua-2026-z-2wd/index.html","markers":["Toyota","アクア","Z（2WD）","2,857,800円","Level 2","ハンズオフ：不可"]},
         {"url":"/cars/jp-toyota-aqua-2026-gr-sport-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-aqua-2026-gr-sport-2wd/index.html","markers":["Toyota","アクア","GR SPORT（2WD）","3,238,400円","Level 2"]},
         {"url":"/cars/jp-toyota-corolla-2026-hybrid-wxb-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-2026-hybrid-wxb-2wd/index.html","markers":["Toyota","カローラ","HYBRID W×B（2WD）","3,128,400円","Level 2"]},
@@ -1729,7 +1739,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Volkswagen","Tiguan","Lexus","GX550","ランドクルーザー250","LEVEL 2","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Volkswagen","Tiguan","Lexus","GX550","ランドクルーザー250","LEVEL 2","264販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Volkswagen","Tiguan","Lexus","GX550","ランドクルーザー250","LEVEL 2"]},
         {"url":"/cars/jp-volkswagen-tiguan-2026-etsi-active/","locale":"ja","output_path":"dist/cars/jp-volkswagen-tiguan-2026-etsi-active/index.html","markers":["Volkswagen","Tiguan","eTSI Active","4,949,000円","Level 2","ハンズオフ：不可"]},
         {"url":"/cars/jp-volkswagen-tiguan-2026-tdi-4motion-r-line/","locale":"ja","output_path":"dist/cars/jp-volkswagen-tiguan-2026-tdi-4motion-r-line/index.html","markers":["Volkswagen","Tiguan","TDI 4MOTION R-Line","6,664,000円","Level 2"]},
@@ -1755,7 +1765,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","ヤリス クロス","259販売単位","Level 2"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","ヤリス クロス","264販売単位","Level 2"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","ヤリス クロス","Level 2"]},
         {"url":"/cars/jp-toyota-yaris-cross-2026-x-gas-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-yaris-cross-2026-x-gas-2wd/index.html","markers":["Toyota","ヤリス クロス","X（ガソリン車・2WD）","2,126,300円","Level 2","ハンズオフ：不可"]},
         {"url":"/cars/jp-toyota-yaris-cross-2026-z-adventure-hev-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-yaris-cross-2026-z-adventure-hev-e-four/index.html","markers":["Toyota","ヤリス クロス","Z“Adventure”（ハイブリッド車・E-Four）","3,355,000円","Level 2","ハンズオフ：不可"]},
@@ -1777,7 +1787,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","ヤリス","259販売単位","Level 1"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","ヤリス","264販売単位","Level 1"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","ヤリス","Level 1","Level 2"]},
         {"url":"/cars/jp-toyota-yaris-2026-x-gas-1l-cvt-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-yaris-2026-x-gas-1l-cvt-2wd/index.html","markers":["Toyota","ヤリス","X（ガソリン車 1.0L・CVT・2WD）","1,697,300円","Level 1","ハンズオフ：不可"]},
         {"url":"/cars/jp-toyota-yaris-2026-z-hev-e-four/","locale":"ja","output_path":"dist/cars/jp-toyota-yaris-2026-z-hev-e-four/index.html","markers":["Toyota","ヤリス","Z（ハイブリッド車 1.5L・E-Four）","2,884,200円","Level 2","渋滞時運転支援"]},
@@ -1799,7 +1809,7 @@
       "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
       "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
       "surfaces": [
-        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Audi","A5","A5 Avant","LEVEL 2","259販売単位"]},
+        {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Audi","A5","A5 Avant","LEVEL 2","264販売単位"]},
         {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Audi","A5","A5 Avant","LEVEL 2"]},
         {"url":"/cars/jp-audi-a5-2026-tfsi-110kw/","locale":"ja","output_path":"dist/cars/jp-audi-a5-2026-tfsi-110kw/index.html","markers":["Audi","A5","TFSI 110kW","6,170,000円","Level 2","ハンズオフ：不可","車線変更支援","見積りを依頼する"]},
         {"url":"/cars/jp-audi-a5-avant-2026-tdi-quattro-150kw/","locale":"ja","output_path":"dist/cars/jp-audi-a5-avant-2026-tdi-quattro-150kw/index.html","markers":["Audi","A5 Avant","TDI quattro 150kW","7,600,000円","Level 2","ハンズオフ：不可","車線変更支援","見積りを依頼する"]},
@@ -1816,7 +1826,7 @@
       "historical_markers": [],
       "refresh_entrypoint": "npm run build"
     },
-    "vehicle:toyota-corolla-sport-touring-2026": {"entity_id":"vehicle:toyota-corolla-sport-touring-2026","entity_type":"vehicle_catalog_entries","source_of_truth":["src/data/vehicles.json","src/data/official-links.json","docs/research/vehicle-inventory-20260907.md"],"generators":["src/data/loader.ts","src/components/VehicleList.astro","src/components/VehicleCard.astro","src/pages/cars/[id].astro","src/pages/compare/index.astro","@astrojs/sitemap"],"surfaces":[{"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","カローラ スポーツ","カローラ ツーリング","LEVEL 2","259販売単位"]},{"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","カローラ スポーツ","カローラ ツーリング","LEVEL 2"]},{"url":"/cars/jp-toyota-corolla-sport-2026-g-z-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-sport-2026-g-z-2wd/index.html","markers":["Toyota","カローラ スポーツ","G“Z” 2WD","3,220,200円","Level 2","ハンズオフ：不可","公式で見積り"]},{"url":"/cars/jp-toyota-corolla-touring-2026-w-b-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-touring-2026-w-b-2wd/index.html","markers":["Toyota","カローラ ツーリング","W×B 2WD","3,179,000円","Level 2","ハンズオフ：不可","公式で見積り"]},{"url":"/compare/","locale":"ja","output_path":"dist/compare/index.html","markers":["カローラ スポーツ","カローラ ツーリング","3,220,200円","3,179,000円","Level 2"]},{"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-toyota-corolla-sport-2026-g-z-2wd","jp-toyota-corolla-sport-2026-g-2wd","jp-toyota-corolla-sport-2026-g-x-2wd","jp-toyota-corolla-touring-2026-w-b-2wd","jp-toyota-corolla-touring-2026-w-b-e-four","jp-toyota-corolla-touring-2026-g-2wd","jp-toyota-corolla-touring-2026-g-e-four","jp-toyota-corolla-touring-2026-x-2wd","jp-toyota-corolla-touring-2026-x-e-four"]}],"required_render_selectors":[{"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-corolla-sport-2026-g-z-2wd\"])","markers":["Toyota","カローラ スポーツ","G“Z” 2WD","約322万円","LEVEL 2","ハンズオフ：不可"]},{"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-corolla-touring-2026-w-b-2wd\"])","markers":["Toyota","カローラ ツーリング","W×B 2WD","約318万円","LEVEL 2","ハンズオフ：不可"]},{"url":"/cars/jp-toyota-corolla-sport-2026-g-z-2wd/","selector":"main","markers":["Toyota","カローラ スポーツ","G“Z” 2WD","3,220,200円","Level 2","ハンズオフ：不可","公式で見積り"]},{"url":"/cars/jp-toyota-corolla-touring-2026-w-b-2wd/","selector":"main","markers":["Toyota","カローラ ツーリング","W×B 2WD","3,179,000円","Level 2","ハンズオフ：不可","公式で見積り"]},{"url":"/compare/?ids=jp-toyota-corolla-sport-2026-g-z-2wd&ids=jp-toyota-corolla-touring-2026-w-b-2wd","selector":"[data-compare-result]","markers":["カローラ スポーツ","カローラ ツーリング","3,220,200円","3,179,000円","Level 2"]}],"historical_markers":[],"refresh_entrypoint":"npm run build"},
+    "vehicle:toyota-corolla-sport-touring-2026": {"entity_id":"vehicle:toyota-corolla-sport-touring-2026","entity_type":"vehicle_catalog_entries","source_of_truth":["src/data/vehicles.json","src/data/official-links.json","docs/research/vehicle-inventory-20260907.md"],"generators":["src/data/loader.ts","src/components/VehicleList.astro","src/components/VehicleCard.astro","src/pages/cars/[id].astro","src/pages/compare/index.astro","@astrojs/sitemap"],"surfaces":[{"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Toyota","カローラ スポーツ","カローラ ツーリング","LEVEL 2","264販売単位"]},{"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Toyota","カローラ スポーツ","カローラ ツーリング","LEVEL 2"]},{"url":"/cars/jp-toyota-corolla-sport-2026-g-z-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-sport-2026-g-z-2wd/index.html","markers":["Toyota","カローラ スポーツ","G“Z” 2WD","3,220,200円","Level 2","ハンズオフ：不可","公式で見積り"]},{"url":"/cars/jp-toyota-corolla-touring-2026-w-b-2wd/","locale":"ja","output_path":"dist/cars/jp-toyota-corolla-touring-2026-w-b-2wd/index.html","markers":["Toyota","カローラ ツーリング","W×B 2WD","3,179,000円","Level 2","ハンズオフ：不可","公式で見積り"]},{"url":"/compare/","locale":"ja","output_path":"dist/compare/index.html","markers":["カローラ スポーツ","カローラ ツーリング","3,220,200円","3,179,000円","Level 2"]},{"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-toyota-corolla-sport-2026-g-z-2wd","jp-toyota-corolla-sport-2026-g-2wd","jp-toyota-corolla-sport-2026-g-x-2wd","jp-toyota-corolla-touring-2026-w-b-2wd","jp-toyota-corolla-touring-2026-w-b-e-four","jp-toyota-corolla-touring-2026-g-2wd","jp-toyota-corolla-touring-2026-g-e-four","jp-toyota-corolla-touring-2026-x-2wd","jp-toyota-corolla-touring-2026-x-e-four"]}],"required_render_selectors":[{"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-corolla-sport-2026-g-z-2wd\"])","markers":["Toyota","カローラ スポーツ","G“Z” 2WD","約322万円","LEVEL 2","ハンズオフ：不可"]},{"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-toyota-corolla-touring-2026-w-b-2wd\"])","markers":["Toyota","カローラ ツーリング","W×B 2WD","約318万円","LEVEL 2","ハンズオフ：不可"]},{"url":"/cars/jp-toyota-corolla-sport-2026-g-z-2wd/","selector":"main","markers":["Toyota","カローラ スポーツ","G“Z” 2WD","3,220,200円","Level 2","ハンズオフ：不可","公式で見積り"]},{"url":"/cars/jp-toyota-corolla-touring-2026-w-b-2wd/","selector":"main","markers":["Toyota","カローラ ツーリング","W×B 2WD","3,179,000円","Level 2","ハンズオフ：不可","公式で見積り"]},{"url":"/compare/?ids=jp-toyota-corolla-sport-2026-g-z-2wd&ids=jp-toyota-corolla-touring-2026-w-b-2wd","selector":"[data-compare-result]","markers":["カローラ スポーツ","カローラ ツーリング","3,220,200円","3,179,000円","Level 2"]}],"historical_markers":[],"refresh_entrypoint":"npm run build"},
     "manufacturer-official-links:jp-current": {
       "entity_id": "manufacturer-official-links:jp-current",
       "entity_type": "manufacturer_official_links",

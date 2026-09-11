@@ -143,14 +143,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(260);
+    expect(vehicles).toHaveLength(265);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補259件は全件の公式金額を保持する', () => {
+  it('現行候補264件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(259);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(259);
+    expect(current).toHaveLength(264);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(264);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -612,6 +612,11 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('Toyota プリウスとLexus NXの主要販売単位を価格・手保持条件付きで保持する', () => {
+    const priusUnits = vehicles.filter((vehicle) => vehicle.model === 'プリウス');
+    expect(priusUnits).toHaveLength(6);
+    expect(priusUnits.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([2_796_200, 3_049_200, 3_324_200, 3_577_200, 3_998_500, 4_251_500]);
+    expect(priusUnits.every((vehicle) => vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === '2026-07' && vehicle.salesUnitIntroducedAt === '2026-07' && vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.availability === 'unknown')).toBe(true);
+    expect(priusUnits.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://toyota.jp/prius/grade/' && source.supports.some((support) => support.includes('円'))))).toBe(true);
     const prius = vehicles.find((vehicle) => vehicle.id === 'jp-toyota-prius-2026-z-2wd');
     expect(prius?.modelYear).toBe('2026');
     expect(prius?.catalogAsOf).toBe('2026-07');
