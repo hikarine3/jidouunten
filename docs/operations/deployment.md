@@ -2,6 +2,15 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 Toyota アクア／カローラ）
+
+- exact app: `527f4f7`（Toyota アクア9／カローラ6の現行15販売単位、販売状態クイック絞り込み、公開面依存レジストリ更新）
+- immutable: https://4f0e10ee.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Toyota アクア（Z／G／X／U・GR SPORT）9単位とカローラ（HYBRID W×B／G／X）6単位を追加。価格・駆動方式・Level 2相当のACC／LTA・ステアリング保持条件を販売単位で比較できる。公式見積り導線は追加したが、注文可否は15単位とも未確認のまま表示する。一覧操作盤から「新車注文可16／注文可否 未確認172／現在利用不可1」をクリックして絞り込める。
+- QA: Vitest45/45、価格189/189（現行188/188）、公式導線46モデル/62 actions、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build195、ローカルE2E1/1、immutable・production E2E各1/1（GA collect HTTP204）、公開面依存レジストリ316/316、独立Lunaリリース監査PASS
+- immutable／本体でHTTP 200を確認（`/`、`/cars/`、アクア詳細・カローラ詳細、Toyota 2台比較、`/levels/`、`/sitemap-index.xml`、`/sitemap-0.xml`、`/robots.txt`）。`sitemap-0.xml`は194 URL。公開HTMLの内部enum・source/accessedAt等の漏れは0件。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301で維持される。直前の正常配信は https://021157cb.jidouunten.pages.dev（途中の実ID再配信前URL https://6c520966.jidouunten.pages.dev はロールバック対象にしない）。
+
 ## 最新の配信（2026-09-11 日産アリアB6）
 
 - exact app: `c6a429b`（日産アリアB6の注文状態確認、公開HTMLの内部enum除去）

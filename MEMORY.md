@@ -2,6 +2,14 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 Toyota アクア／カローラ拡張（実装・本番反映済み）
+
+- トヨタ公式の現行価格・グレード、安全性能、取扱説明書を根拠に、アクア9単位（Z／G／X／Uの2WD・E-Four、GR SPORT 2WD）とカローラ6単位（HYBRID W×B／G／Xの2WD・E-Four）を追加。価格帯はアクア244万3,100円〜323万8,400円、カローラ238万400円〜334万2,900円。全車速追従ACC＋LTA、ステアリング保持を確認し、Level 2相当として比較可能にした。
+- 公式見積り導線をアクア／カローラへ追加したが、カタログ掲載・見積り導線は受注可能の証明ではないため、15単位すべて`unknown`を維持。一覧操作盤で新車注文可16／注文可否未確認172／現在利用不可1を可視化し、未確認をそのまま絞り込める。
+- exact app `527f4f782fc3eda556928ab0e56011a27d6e5e25`、Production `https://jidouunten.jp/`、immutable `https://4f0e10ee.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。全189販売単位（現行188件）、公式導線46モデル／62 actions、sitemap-0は194 URL。
+- QA: Vitest45/45、価格189/189（現行188/188）、Python16/16、Astro check 0 errors / 0 warnings / 6 hints、実ID build195、ローカル・immutable・本番E2E各1/1（GA collect204）、公開面依存レジストリ316/316、独立Lunaリリース監査PASS。内部enum・source/accessedAt等の公開HTML漏れ0件、主要URL HTTP200、IDN path/query 301を確認。
+- 根拠は[トヨタ アクア公式](https://toyota.jp/aqua/)、[アクア価格・グレード](https://toyota.jp/aqua/grade/)、[アクア安全性能](https://toyota.jp/aqua/safety/)、[トヨタ カローラ公式](https://toyota.jp/corolla/)、[カローラ価格・グレード](https://toyota.jp/corolla/grade/)、[カローラ安全性能](https://toyota.jp/corolla/safety/)。
+
 ## 2026-09-11 日産アリアB6注文受付確認（実装・本番反映済み）
 
 - 日産公式の現行アリアページで「日産各店で注文できるB6」「11/26より注文受付中」を確認。B6（2WD）の参考価格6,675,900円と紐付け、B6だけを`new_order_available`、B6 e-4ORCE／B9／B9 e-4ORCEは`unknown`のまま4販売単位へ反映した。注文受付の明示は在庫・納期・契約成立を保証しないため、制限事項で販売店確認を促している。
