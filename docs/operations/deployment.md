@@ -2,6 +2,18 @@
 
 更新: 2026-09-11
 
+## 最新の配信（2026-09-11 SUBARU フォレスター／一覧サムネイル改善）
+
+- exact app release commit: `02bf120`（フォレスター追加 `83ecbf7`、依存レジストリ件数同期 `ad5a076`、一覧画像のサムネイル化を含む）
+- immutable: https://f99e6571.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: SUBARU フォレスター現行7販売単位を追加。価格は385万円〜464万2,000円（税込）。全7単位をLevel 2相当として、EyeSight X標準の5単位は条件内ハンズオフ・車線変更支援、コアEyeSightの2単位はハンズオン必須として比較できる。個別発売日・価格適用日・受注可否は一次情報で固定できないため未確認を維持。公式グレード／装備／安全ページと見積り・販売店・試乗導線を記録した。
+- UI: Wikimedia Commons参考写真3モデルは詳細ページの大きい表示を維持し、車両一覧では識別用サムネイル（デスクトップ実測374×140.8px、モバイル360×112px、`object-fit: cover`）へ縮小。写真は従来どおりセルフホストWebP・作者／ライセンス帰属リンク付きで、フォレスター画像は追加していない。
+- SEO／公開面: 289 HTML、sitemap-0は288 URL、詳細283件、トップ／一覧ItemListは2ページ・564項目。公式導線は59モデル／57 URL／79 actions。GTM実IDは289 HTMLへ各1件、テストID0件。
+- QA: `npm test` 57/57、価格283/283、画像3/3、Python16/16、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build289、release guard／構造化データPASS。独立リリース監査2件ともexact `02bf120`でPASS、registry 41 entities／397 surfaces／1,892 markers失敗0。ローカル／immutable／本体E2E各1/1（GA collect HTTP204）、本番サムネイル実測・主要URL200、未知URL404、IDN path/query301。
+- 公式根拠: [SUBARUグレード一覧](https://www.subaru.jp/forester/grade/)、[装備表](https://www.subaru.jp/forester/specification/docs/equipment.pdf)、[安全性能](https://www.subaru.jp/forester/safety/)。
+- 直前の正常配信・ロールバック候補: https://b8e0e573.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-11 Mercedes-Benz GLC／C-Class Sedan追加）
 
 - exact app release commit: `5fb3b70`（Mercedes追加 `4af6086`、依存レジストリ旧件数修正を含む）

@@ -2,6 +2,15 @@
 
 更新: 2026-09-11
 
+## 2026-09-11 SUBARU フォレスター追加／一覧サムネイル化（本番反映済み）
+
+- SUBARU公式の現行グレード一覧・2026年5月装備表・安全性能・発表資料を突合し、フォレスター7販売単位（Touring／Touring EX／SPORT EX／SPORT EX Black Selection／X-BREAK S:HEV／X-BREAK S:HEV EX／Premium S:HEV EX）を追加。価格は385万円〜464万2,000円（税込）。全車Level 2相当で、EyeSight X標準の5単位は条件内ハンズオフ・車線変更支援、非Xの2単位はハンズオン必須として同じLevel 2内の差を表示する。
+- 個別の発売日・価格適用日・受注可否は公式一次情報で固定できないため未確認を維持。公式掲載は注文可能を意味しない。公式グレード／装備／安全ページ、見積り・販売店・試乗導線を保持する。
+- 一覧のWikimedia Commons参考写真3モデルは、詳細ページの画像とは分けて識別用サムネイルへ変更。CSSは固定高さ＋`object-fit: cover`で、実ブラウザ確認はデスクトップ374×140.8px、モバイル360×112px。画像はセルフホストWebP（各250KB以下）・作者／ライセンス帰属リンク付きで、フォレスター画像は追加していない。
+- exact app `02bf1201b44e6e15222a053466855f0f542fa730`、Production `https://jidouunten.jp/`、immutable `https://f99e6571.jidouunten.pages.dev`、直前rollback `https://b8e0e573.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- QA: 全283販売単位（現行282）、sitemap-0 288 URL、詳細283件、ItemList 2ページ564項目、公式導線59モデル／57 URL／79 actions、Vitest57/57、価格283/283、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build289、release／structured PASS、registry 41 entities／397 surfaces／1,892 markers失敗0、独立監査2件PASS、local／immutable／production E2E各1/1（GA collect204）、主要URL200、未知URL404、IDN path/query301。
+- 根拠は[SUBARUグレード一覧](https://www.subaru.jp/forester/grade/)、[装備表](https://www.subaru.jp/forester/specification/docs/equipment.pdf)、[安全性能](https://www.subaru.jp/forester/safety/)。Issue #17/#37は未確認母集団・受注状態の観測が残るため継続し、全国網羅完了とは宣言しない。
+
 ## 2026-09-11 Mercedes-Benz GLC／C-Class Sedan追加（本番反映済み）
 
 - Mercedes-Benz Japanの価格表・GLC／C-Class Sedan公式ページ・MP202602装備表・安全ページを突合し、GLC 5単位＋C-Class Sedan 6単位＝11単位を追加。全276販売単位（現行275、過去1）、価格744万〜1,844万円（税込）。全車Level 2相当（ACC＋車線中央維持、ステアリング保持・常時監視、ハンズオフ不可）として、同じLevel 2内の価格・グレード差を比較できる。
