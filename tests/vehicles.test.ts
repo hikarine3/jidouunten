@@ -129,14 +129,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(241);
+    expect(vehicles).toHaveLength(250);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補240件は全件の公式金額を保持する', () => {
+  it('現行候補249件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(240);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(240);
+    expect(current).toHaveLength(249);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(249);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -162,8 +162,23 @@ describe('vehicle data contract and filters', () => {
     expect(officialLinkFor(audi.find((vehicle) => vehicle.model === 'A5 Avant')!)?.actions?.map(({ kind }) => kind)).toEqual(['estimate', 'dealer', 'test_drive']);
   });
 
+  it('カローラ スポーツ／ツーリングは公式価格表の9販売単位をLevel 2能力付きで保持する', () => {
+    const corollaSport = vehicles.filter((vehicle) => vehicle.model === 'カローラ スポーツ');
+    const corollaTouring = vehicles.filter((vehicle) => vehicle.model === 'カローラ ツーリング');
+    expect(corollaSport).toHaveLength(3);
+    expect(corollaTouring).toHaveLength(6);
+    expect(corollaSport.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([2_531_600, 2_831_900, 3_220_200]);
+    expect(corollaTouring.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([2_447_500, 2_662_000, 2_812_700, 3_027_200, 3_179_000, 3_393_500]);
+    expect([...corollaSport, ...corollaTouring].every((vehicle) => vehicle.currentCatalogListed && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown' && vehicle.salesUnitIntroducedAt === null)).toBe(true);
+    expect([...corollaSport, ...corollaTouring].every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering')).toBe(true);
+    expect(corollaSport.every((vehicle) => vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === '2026-07' && vehicle.sources.some((source) => source.url.endsWith('corollasport_equipment_compare_202607.pdf')))).toBe(true);
+    expect(corollaTouring.every((vehicle) => vehicle.catalogAsOf === '2026-05' && vehicle.priceEffectiveAt === '2026-05' && vehicle.sources.some((source) => source.url.endsWith('corollatouring_main.pdf')))).toBe(true);
+    expect(officialLinkFor(corollaSport[0])?.actions?.map(({ kind }) => kind)).toEqual(['estimate']);
+    expect(officialLinkFor(corollaTouring[0])?.actions?.map(({ kind }) => kind)).toEqual(['estimate']);
+  });
+
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(53);
+    expect(officialLinks).toHaveLength(55);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -172,7 +187,7 @@ describe('vehicle data contract and filters', () => {
     expect(teslaActions.map(({ kind }) => kind).sort()).toEqual(['order', 'order', 'test_drive', 'test_drive']);
     expect(teslaActions.every(({ url, checkedAt }) => url.startsWith('https://www.tesla.com/') && checkedAt === '2026-09-10')).toBe(true);
     const toyotaEstimateLinks = officialLinks.filter(({ maker }) => maker === 'Toyota').flatMap((link) => (link.actions ?? []).filter(({ kind }) => kind === 'estimate'));
-    expect(toyotaEstimateLinks).toHaveLength(15);
+    expect(toyotaEstimateLinks).toHaveLength(17);
     expect(toyotaEstimateLinks.every(({ label, url }) => label === '公式で見積り' && url.startsWith('https://toyota.jp/service/estimate/grades?car_name_en='))).toBe(true);
     expect(toyotaEstimateLinks.filter(({ url }) => !url.includes('COROLLA%20CROSS') && !url.includes('AQUA') && !url.includes('COROLLA') && !url.includes('YARIS+CROSS') && !url.includes('YARIS')).every(({ checkedAt }) => checkedAt === '2026-09-10')).toBe(true);
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
@@ -180,7 +195,7 @@ describe('vehicle data contract and filters', () => {
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('YARIS+CROSS'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('YARIS') && !url.includes('YARIS+CROSS'))?.checkedAt).toBe('2026-09-11');
     expect(toyotaEstimateLinks.find(({ url }) => url.includes('COROLLA') && !url.includes('COROLLA%20CROSS'))?.checkedAt).toBe('2026-09-11');
-    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'AQUA', 'COROLLA', 'COROLLA CROSS', 'CROWN CROSSOVER', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'YARIS', 'YARIS CROSS', 'bZ4X'].sort());
+    expect(toyotaEstimateLinks.map(({ url }) => new URL(url).searchParams.get('car_name_en')).sort()).toEqual(['ALPHARD', 'AQUA', 'COROLLA', 'COROLLA CROSS', 'COROLLA SPORT', 'COROLLA TOURING', 'CROWN CROSSOVER', 'HARRIER', 'NOAH', 'PRIUS', 'RAV4', 'SIENTA', 'VELLFIRE', 'VOXY', 'YARIS', 'YARIS CROSS', 'bZ4X'].sort());
     const expandedActionModels = new Map([
       ['Honda\u0000ACCORD', ['dealer', 'test_drive', 'estimate', 'catalog']],
       ['Honda\u0000VEZEL', ['dealer', 'test_drive', 'estimate', 'catalog']],
@@ -201,7 +216,7 @@ describe('vehicle data contract and filters', () => {
     const mitsubishiActions = officialLinks.find(({ maker, model }) => maker === 'Mitsubishi' && model === 'アウトランダーPHEV')?.actions ?? [];
     expect(mitsubishiActions.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'estimate', 'dealer', 'catalog']);
     expect(mitsubishiActions.every(({ checkedAt, url }) => checkedAt === '2026-09-11' && url.startsWith('https://'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(70);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(72);
   });
 
   it('トヨタ ヤリス クロスは2026年8月の20販売単位を価格・Level 2能力付きで保持する', () => {

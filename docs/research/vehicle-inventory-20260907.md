@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 241 | `src/data/vehicles.json` の全レコード（現行240 + 過去1） |
-| 既定表示 | 240 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 250 | `src/data/vehicles.json` の全レコード（現行249 + 過去1） |
+| 既定表示 | 249 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -39,6 +39,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
 | 今回追加（Mitsubishi / 後発対策） | 9 | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M × 5・7人乗り。価格536万9,100円〜690万1,400円、MI-PILOT（全車速ACC・LKA）とLCAの警告・支援、ハンドル保持、公式の商談・購入予約導線を販売単位へ固定 |
 | 今回追加（Audi / 後発対策） | 6 | A5 / A5 AvantのTFSI 110kW、TFSI quattro 150kW、TDI quattro 150kW。2026年4月価格表の617万〜760万円、アダプティブクルーズアシストプラス・レーンガイダンス・レーンチェンジアシスト、常時監視とステアリング保持を販売単位へ固定 |
+| 今回追加（Toyota カローラ スポーツ／ツーリング） | 9 | カローラ スポーツ G“Z” / G / G“X” 2WDの3単位、カローラ ツーリング W×B / G / Xの2WD・E-Four 6単位。価格244万7,500円〜339万3,500円、全車速追従レーダークルーズコントロール・LTA・ステアリング保持を公式グレード／安全性能／カタログ資料から固定。特別仕様車3単位は販売終了時期の確認待ちで保留 |
 | 未掲載・確認継続候補群 | 件数未確定 | Tesla Model S / X と、下記のブランド／モデル群。一次確認済みでも販売単位への展開・レビュー未完なら含める |
 | Mazda掲載対象外 | 6 | MAZDA3 FASTBACK 15C / 15S、SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EV（ROTARY-EVグレード）。主要諸元・装備表でMRCCとCTSの同時支援を確定できない |
 
@@ -86,11 +87,32 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Mitsubishi | OUTLANDER PHEV BLACK Edition / P Executive Package / P / G / M 4WD（5・7人乗り） | 掲載（9単位） | 2相当 | 2026-09-11 |
 | Toyota | アクア Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD | 掲載（9単位） | 2相当 | 2026-09-11 |
 | Toyota | カローラ HYBRID W×B / G / Xの2WD・E-Four | 掲載（6単位） | 2相当 | 2026-09-11 |
+| Toyota | カローラ スポーツ G“Z” / G / G“X” 2WD | 掲載（3単位、注文可否 未確認） | 2相当 | 2026-09-11 |
+| Toyota | カローラ ツーリング W×B / G / X 2WD・E-Four | 掲載（6単位、注文可否 未確認） | 2相当 | 2026-09-11 |
 | Volkswagen | Tiguan eTSI Active / Elegance / R-Line、TDI 4MOTION Active / Elegance / R-Line | 掲載（6単位） | 2相当 | 2026-09-11 |
 | Lexus | GX550 version L / OVERTRAIL+ | 掲載（2単位） | 2相当 | 2026-09-11 |
 | Toyota | ランドクルーザー250 VX ガソリン 4WD | 掲載（1単位） | 2相当 | 2026-09-11 |
 
 Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年6月26日現在の公式ベースプライスを根拠にModel 3 / Model Yを各3販売仕様へ分けて登録した。2026-09-10確認時点で両モデルの日本向け公式商品ページに「今すぐ注文」導線が表示され、公式FAQも注文後の手続きと注文可能なトリム・納車予定時期をDesign Studioで確認する流れを案内しているため、6販売単位の`availability`を`new_order_available`へ更新した。ただし注文後の在庫・納車時期・ソフトウェア提供条件は個別確認が必要。Tesla自身がドライブアシスト機能を完全自動運転ではないと説明しているため、FSD等の名称だけでLevel 3以上とは判定していない。Model S / Model Xは公式サポート情報で存在と支援機能の説明を確認できるが、現行カタログのモデル年・グレード・注文可否を確認できないため、内部の未確認候補に残し、公開データへ追加しない。
+
+## 2026-09-11 Toyota カローラ スポーツ／ツーリング追加トランシェ
+
+トヨタ公式の現行商品ページ、価格・グレードページ、安全性能ページ、主要装備・価格表を照合し、カローラ スポーツ3単位とカローラ ツーリング6単位を登録した。カローラ スポーツはG“Z” 2WD（322万200円）、G 2WD（283万1,900円）、G“X” 2WD（253万1,600円）、カローラ ツーリングはW×B 2WD（317万9,000円）／E-Four（339万3,500円）、G 2WD（281万2,700円）／E-Four（302万7,200円）、X 2WD（244万7,500円）／E-Four（266万2,000円）である。適用資料はスポーツが2026年7月、ツーリングが2026年5月。販売単位ごとの発売日・現在の受注受付は公式資料で固定できないため、\`salesUnitIntroducedAt=null\`、\`availability=unknown\`とした。
+
+安全性能ページと装備表で、全車速追従レーダークルーズコントロール（縦方向）とLTA（横方向）の標準装備、運転者のステアリング保持・周囲監視を確認した。国土交通省の定義に照合してサイト上はLevel 2相当、全9単位の\`handsOff=not_allowed\`、\`driverMonitoring=required\`、能力は\`adaptive_cruise_control\`と\`lane_centering\`に限定した。トヨタが車両をLevel 2認証したという意味ではなく、ハンズオフや自動車線変更の機能として表示しない。カローラ スポーツ G“Z・ACTIVE ELEGANCE”とカローラ ツーリング ACTIVE SPORTの特別仕様3単位は掲載ページを確認できるが、販売終了時期が明記されていないため次回確認へ保留した。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| カローラ スポーツ現行商品ページ | トヨタ自動車 | https://toyota.jp/corollasport/ | 2026-09-11 |
+| カローラ スポーツ3単位の価格・装備（2026年7月） | トヨタ自動車 | https://toyota.jp/corollasport/grade/ | 2026-09-11 |
+| カローラ スポーツ全車速追従ACC・LTA・手保持条件 | トヨタ自動車 | https://toyota.jp/corollasport/safety/ | 2026-09-11 |
+| カローラ スポーツ主要装備・価格表 | トヨタ自動車 | https://toyota.jp/pages/contents/corollasport/001_p_001/pdf/corollasport_equipment_compare_202607.pdf | 2026-09-11 |
+| カローラ ツーリング現行商品・価格ページ | トヨタ自動車 | https://toyota.jp/corollatouring/ ／ https://toyota.jp/corollatouring/grade/ | 2026-09-11 |
+| カローラ ツーリング全車速追従ACC・LTA・手保持条件 | トヨタ自動車 | https://toyota.jp/corollatouring/safety/ | 2026-09-11 |
+| カローラ ツーリング主要装備・価格表（2026年5月） | トヨタ自動車 | https://toyota.jp/pages/contents/request/webcatalog/corollatouring/corollatouring_main.pdf | 2026-09-11 |
+| Level 2の定義（運転者主体の前後・左右支援） | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-11 |
+
+公式見積り導線は\`https://toyota.jp/service/estimate/grades?car_name_en=COROLLA%20SPORT\`および\`COROLLA%20TOURING\`をモデル単位の検討出口として保持する。個別販売単位の注文可否・納期は販売店確認が必要で、注文可能とは表示しない。
 
 ## 2026-09-11 Volkswagen／Lexus／Toyota追加トランシェ
 
@@ -203,7 +225,7 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 | LM500h EXECUTIVE / version Lの注文後工場出荷目処 | Lexus | https://lexus.jp/news/info/delivery/index.html | 2026-09-11 |
 | IONIQ 5 Voyage / Lounge掲載車両の「車両注文」導線 | Hyundai Mobility Japan | https://www.hyundai.com/jp/stock/new | 2026-09-11 |
 
-この更新後の内訳は、全241販売単位（現行240、過去1）のうち`new_order_available` 21、`unknown` 219、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
+この更新後の内訳は、全250販売単位（現行249、過去1）のうち`new_order_available` 21、`unknown` 228、`unavailable` 1。未確認は現在の注文受付を直接確認できないものを含み、国内全候補の網羅を意味しない。
 
 
 ## 未掲載・確認継続候補（内訳）
