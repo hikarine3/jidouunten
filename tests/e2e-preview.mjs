@@ -35,19 +35,19 @@ try {
   const rootGraph = structuredGraph(rootHtml);
   assert.deepEqual(rootGraph.map((entry) => entry['@type']), ['WebSite', 'WebPage', 'ItemList', 'BreadcrumbList'], 'トップJSON-LDにWebSite/WebPage/ItemList/BreadcrumbList');
   const rootItemList = rootGraph.find((entry) => entry['@type'] === 'ItemList');
-  assert.equal(rootItemList.numberOfItems, 384, 'トップItemListは初期可視384件');
-  assert.equal(rootItemList.itemListElement.length, 384, 'トップItemList要素数は初期可視384件');
-  assert.deepEqual(rootItemList.itemListElement.map(({ position }) => position), Array.from({ length: 384 }, (_, index) => index + 1), 'トップItemList positionを連番で出力');
+  assert.equal(rootItemList.numberOfItems, 395, 'トップItemListは初期可視395件');
+  assert.equal(rootItemList.itemListElement.length, 395, 'トップItemList要素数は初期可視395件');
+  assert.deepEqual(rootItemList.itemListElement.map(({ position }) => position), Array.from({ length: 395 }, (_, index) => index + 1), 'トップItemList positionを連番で出力');
   assert.equal(rootGraph.filter((entry) => entry['@type'] === 'BreadcrumbList').length, 1, 'トップBreadcrumbListは重複しない');
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 384, '既定カタログは現行確認384件');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*384[\s\S]*条件内可[\s\S]*68[\s\S]*不可[\s\S]*315[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*66/, 'トップ操作盤に能力差の実データ分布');
+  assert.equal(await visibleCards(), 395, '既定カタログは現行確認395件');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*395[\s\S]*条件内可[\s\S]*68[\s\S]*不可[\s\S]*326[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*66/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
-  assert.match(await page.locator('[data-level-shortcut="1"]').innerText(), /L1[\s\S]*14件/, 'Level 1の現行14件を表示');
+  assert.match(await page.locator('[data-level-shortcut="1"]').innerText(), /L1[\s\S]*20件/, 'Level 1の現行20件を表示');
   assert.equal(await page.locator('[data-level-shortcut="1"]').isDisabled(), false, '現行車があるLevel 1を絞り込み可能にする');
-  assert.match(await page.locator('.level-scope-note').innerText(), /Level 1[\s\S]*14件/, '車両一覧のLevel 1取り扱い件数を明記');
+  assert.match(await page.locator('.level-scope-note').innerText(), /Level 1[\s\S]*20件/, '車両一覧のLevel 1取り扱い件数を明記');
   assert.match(await page.locator('[data-level-shortcut="3"]').innerText(), /L3[\s\S]*条件付自動運転[\s\S]*過去例 1件/, 'Level 3の過去例を現行車と区別');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Tesla' }).count(), 6, 'Tesla Model 3 / Model Yの6販売仕様を既定一覧に表示');
   assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])').filter({ hasText: 'Hyundai IONIQ 5' }).count(), 4, 'Hyundai IONIQ 5の4グレードを既定一覧に表示');
@@ -138,10 +138,10 @@ try {
   await page.locator('[data-saved-resume-delete="search"]').click();
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '検索条件を削除すると再開バーを隠す');
   await page.locator('[data-reset-shortcut]').click();
-  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可21', '注文可否 未確認363', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
+  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可21', '注文可否 未確認374', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
   await page.locator('[data-status-shortcut="uncertain"]').click();
   assert.equal(new URL(page.url()).searchParams.get('availability'), 'unknown', '注文可否未確認のクイック絞り込みをURLへ保存');
-  assert.equal(await visibleCards(), 363, '注文可否未確認は363販売単位');
+  assert.equal(await visibleCards(), 374, '注文可否未確認は374販売単位');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="conditional"]').click();
   assert.equal(await visibleCards(), 68, '条件内ハンズオフは68件');
@@ -192,7 +192,7 @@ try {
   assert.equal(await page.locator('link[rel="alternate"][hreflang="ja-JP"]').getAttribute('href'), 'https://jidouunten.jp/', '日本語alternateを本体URLへ固定');
   const structuredData = JSON.parse(await page.locator('script[type="application/ld+json"]').first().textContent());
   assert.deepEqual(structuredData['@graph'].map((entry) => entry['@type']), ['WebSite', 'WebPage', 'ItemList', 'BreadcrumbList'], 'トップJSON-LDにWebSite/WebPage/ItemList/BreadcrumbListを出力');
-  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本で選べる自動運転・Level 1\/2運転支援車384販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本で選べる自動運転・Level 1\/2運転支援車395販売単位/, 'トップのdescription件数は公開データから生成');
   assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け173販売単位|日本向け157販売単位|日本向け139販売単位/, '古い固定件数を残さない');
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
@@ -210,10 +210,10 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 370, 'Level 2現行370件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 375, 'Level 2現行375件へ復帰');
   await levelMapPage.close();
   await page.goto(`${base}/levels/`);
-  assert.match(await page.locator('.level-1').innerText(), /現行掲載 14件[\s\S]*このレベルの車両/, 'Level 1の現行掲載をレベル解説にも明記');
+  assert.match(await page.locator('.level-1').innerText(), /現行掲載 20件[\s\S]*このレベルの車両/, 'Level 1の現行掲載をレベル解説にも明記');
   const level3Link = page.locator('.level-3 a');
   assert.match(await level3Link.getAttribute('href'), /level=3&availability=all/, 'Level 3は過去例を含む一覧へ遷移');
   await level3Link.click();
@@ -276,7 +276,7 @@ try {
   assert.equal(await page.locator('[data-sort-label]').innerText(), '価格が安い順 · 価格要確認は末尾', '価格順の基準を明示');
 
   await page.goto(`${base}/?budget=under_300`);
-  assert.equal(await visibleCards(), 100, '本体価格の開始値が300万円未満の候補へ絞り込む');
+  assert.equal(await visibleCards(), 109, '本体価格の開始値が300万円未満の候補へ絞り込む');
   assert.equal(await page.locator('select[name="budget"]').inputValue(), 'under_300', '価格帯条件をURLから復元');
   assert.match(await page.locator('[data-selected-label]').innerText(), /〜300万円/, '価格帯を結果見出しへ明示');
 
@@ -310,14 +310,14 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 384, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 395, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  await page.waitForFunction(() => document.querySelectorAll('[data-vehicle-shell]:not([hidden])').length === 384);
-  assert.equal(await visibleCards(), 384, 'リセット後に既定384件');
+  await page.waitForFunction(() => document.querySelectorAll('[data-vehicle-shell]:not([hidden])').length === 395);
+  assert.equal(await visibleCards(), 395, 'リセット後に既定395件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -350,7 +350,7 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '比較保存を削除すると再開バーを隠す');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 385, 'すべての状態で過去車両を含む385件');
+  assert.equal(await visibleCards(), 396, 'すべての状態で過去車両を含む396件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
@@ -482,6 +482,25 @@ try {
   assert.equal(await page.locator('[data-purchase-action]').count(), 5, 'OUTLANDER PHEV詳細に5種の公式次アクションを表示');
   assert.deepEqual(await page.locator('[data-purchase-action]').allTextContents(), ['購入予約（グレードを選択） ↗', '展示車・試乗車を検索（車種選択） ↗', 'オンライン見積り ↗', '販売店を探す ↗', 'カタログを見る ↗'], 'OUTLANDER PHEVの公式アクションラベル');
   assert.equal(await page.locator('[data-purchase-action]').first().getAttribute('href'), 'https://try.mitsubishi-motors.co.jp/olm/EGP0002.do?model=274&skp=1', 'OUTLANDER PHEVの購入予約は9グレードを選べる公式入口');
+
+  await page.goto(`${base}/cars/jp-mitsubishi-ek-cross-2026-g-premium-2wd/`);
+  assert.match(await page.title(), /^Mitsubishi eKクロス G Premium 2WD｜Level 2・価格・機能｜自動運転\.jp$/, 'eKクロス販売単位を含む詳細title');
+  assert.match(await page.locator('main').innerText(), /Mitsubishi[\s\S]*eKクロス[\s\S]*G Premium 2WD[\s\S]*Level 2[\s\S]*1,999,800円[\s\S]*ハンズオフ：不可[\s\S]*車線中央維持/, 'eKクロス MI-PILOT標準グレードの価格・Level 2・能力差を表示');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 4, 'eKクロス詳細に4種の公式次アクション');
+  assert.deepEqual(await page.locator('[data-purchase-action]').evaluateAll((links) => links.map((link) => ({ kind: link.dataset.actionType, href: link.getAttribute('href') }))), [
+    { kind: 'test_drive', href: 'https://mirsvr.mitsubishi-motors.co.jp/eq2/EQ2G00.do?sourceId=EQ2&model=259' },
+    { kind: 'estimate', href: 'https://try.mitsubishi-motors.co.jp/olm/EGP0002.do?name=ek_x' },
+    { kind: 'dealer', href: 'https://map.mitsubishi-motors.co.jp/search/listHansha.do' },
+    { kind: 'catalog', href: 'https://www.mitsubishi-motors.co.jp/lineup/ek_x/pdf_view.html' },
+  ], 'eKクロスの公式アクションURLを保持');
+  await page.goto(`${base}/cars/jp-mitsubishi-ek-cross-2026-g-2wd/`);
+  assert.match(await page.locator('main').innerText(), /eKクロス[\s\S]*G 2WD[\s\S]*Level 1[\s\S]*1,856,800円[\s\S]*車線逸脱抑制/, 'eKクロス標準GはLevel 1・価格・車線逸脱抑制のみを表示');
+  assert.doesNotMatch(await page.locator('main').innerText(), /確認できた機能[\s\S]*追従走行（ACC）[\s\S]*車線中央維持/, 'eKクロス標準GはMI-PILOT非搭載として表示');
+  await page.goto(`${base}/cars/jp-mitsubishi-ek-cross-ev-2026-p-2wd-advanced-safety-comfort/`);
+  assert.match(await page.locator('main').innerText(), /eKクロス EV[\s\S]*P 2WD（先進安全快適パッケージ）[\s\S]*Level 2[\s\S]*3,214,200円[\s\S]*追加パッケージ[\s\S]*110,000円[\s\S]*参考総額[\s\S]*3,324,200円/, 'eKクロス EVはパッケージ込みの参考総額を表示');
+  await page.goto(`${base}/compare/?ids=jp-mitsubishi-ek-cross-2026-g-2wd&ids=jp-mitsubishi-ek-cross-2026-g-premium-2wd`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  assert.match(await page.locator('[data-compare-result]').innerText(), /eKクロス[\s\S]*G 2WD[\s\S]*G Premium 2WD[\s\S]*1,856,800円[\s\S]*1,999,800円[\s\S]*Level 1[\s\S]*Level 2[\s\S]*車線中央維持/, 'eKクロス比較にグレード別価格・能力差を表示');
 
   await page.goto(`${base}/cars/jp-hyundai-ioniq5-2025-voyage-l/`);
   assert.match(await page.locator('main').innerText(), /Hyundai[\s\S]*IONIQ 5[\s\S]*Voyage L/);

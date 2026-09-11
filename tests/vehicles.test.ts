@@ -163,14 +163,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(385);
+    expect(vehicles).toHaveLength(396);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補364件は全件の公式金額を保持する', () => {
+  it('現行候補395件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(384);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(384);
+    expect(current).toHaveLength(395);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(395);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -278,7 +278,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(72);
+    expect(officialLinks).toHaveLength(74);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -332,7 +332,7 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(131);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(139);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
@@ -1067,5 +1067,26 @@ describe('vehicle data contract and filters', () => {
       ['SE ALL4', '6,780,000円'],
     ]);
     expect(mini.every((vehicle) => vehicle.sources.some((source) => source.url.includes('MINI_COUNTRYMAN_EPL_2607') && source.supports.some((support) => support.includes(expectedPrices.get(vehicle.grade) ?? ''))))).toBe(true);
+  });
+
+  it('三菱 eKクロス系はLDPのみとMI-PILOT標準・オプションを販売単位で分ける', () => {
+    const ek = vehicles.filter((vehicle) => vehicle.model === 'eKクロス' || vehicle.model === 'eKクロス EV');
+    expect(ek).toHaveLength(11);
+    expect(ek.every((vehicle) => vehicle.currentCatalogListed && vehicle.availability === 'unknown' && vehicle.lastReviewedAt === '2026-09-12')).toBe(true);
+    expect(ek.filter((vehicle) => vehicle.automationLevel === 1)).toHaveLength(6);
+    expect(ek.filter((vehicle) => vehicle.automationLevel === 2)).toHaveLength(5);
+    const gas = ek.filter((vehicle) => vehicle.model === 'eKクロス');
+    expect(gas).toHaveLength(8);
+    expect(gas.filter((vehicle) => vehicle.automationLevel === 1).every((vehicle) => vehicle.capabilities.join(',') === 'lane_departure_prevention')).toBe(true);
+    expect(gas.filter((vehicle) => vehicle.automationLevel === 2).every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,lane_departure_prevention')).toBe(true);
+    expect(gas.filter((vehicle) => vehicle.automationLevel === 2).every((vehicle) => vehicle.requiredPackage === 'MI-PILOT（全車速ACC・LKA）標準装備')).toBe(true);
+    expect(ek.find((vehicle) => vehicle.id === 'jp-mitsubishi-ek-cross-ev-2026-p-2wd')?.automationLevel).toBe(1);
+    const evPackage = ek.find((vehicle) => vehicle.id === 'jp-mitsubishi-ek-cross-ev-2026-p-2wd-advanced-safety-comfort');
+    expect(evPackage?.automationLevel).toBe(2);
+    expect(evPackage?.price?.optionalPackages).toEqual(expect.arrayContaining([expect.objectContaining({ amountJpy: 110000, label: '先進安全快適パッケージ（MI-PILOT［ACC・LKA］等）' })]));
+    expect(evPackage?.requiredPackage).toContain('110,000円');
+    expect(ek.every((vehicle) => vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.sources.some((source) => source.url.includes('mitsubishi-motors.com')))).toBe(true);
+    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKクロス' })?.actions).toHaveLength(4);
+    expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKクロス EV' })?.actions).toHaveLength(4);
   });
 });
