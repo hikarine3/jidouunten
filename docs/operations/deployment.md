@@ -2,6 +2,18 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Toyota クラウン スポーツ4販売単位追加）
+
+- exact app release commit: `2b7a9be9e007f3905f0ecb6c34b9461a42f622f3`
+- immutable: https://f41ea571.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Toyota クラウン スポーツのSPORT RS／SPORT Z（PHEV）とSPORT Z／SPORT G（HEV）を、駆動方式を含む4販売単位として追加。価格は532万7,300円〜777万7,000円（税込、2026年9月確認）。全車をLevel 2として、RS／ZはAdvanced Driveの条件内ハンズオフ・運転者監視・車線変更支援、Gはハンズオン必須として能力差を比較できるようにした。注文可否は公式カタログ掲載だけでは受注を保証しないため4単位とも`unknown`。個別発売日・価格適用日は推定せず、現行カタログ確認月`2026-09`を保持。
+- 公式根拠／導線: [クラウン スポーツ商品ページ](https://toyota.jp/crownsport/)、[グレード一覧](https://toyota.jp/crownsport/grade/)、[安全性能](https://toyota.jp/crownsport/safety/)、[2026年9月仕様表](https://toyota.jp/pages/contents/crownsport/001_p_001/pdf/specifications.pdf)、[国土交通省 自動運転レベル定義](https://www.mlit.go.jp/jidosha/anzen/01asv/jidounten/level.html)。販売店・試乗・見積り・カタログの公式導線を記録。
+- SEO／公開面: 311 HTML、sitemap-0は306 URL、詳細305件、トップ／一覧ItemListは2ページ・608項目。GTM実IDは311 HTMLへ各1件、テストID0件。公開HTMLへ内部根拠URL・enumを漏らさないガードを維持。
+- QA: `npm test` Vitest60/60・Python16/16、価格305/305（現行304/304、exact289／range15／未確認1）、公式導線62モデル／60 URL／91 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build311、release／structured PASS（Breadcrumb311／Car305／ItemList608）、registry 44 entities／431 surfaces／2,086 markers失敗0。独立リリース監査2件ともexact `2b7a9be9`でPASS。
+- 本番smoke: immutable／本体のトップ、一覧、クラウン スポーツ詳細2種、比較、sitemap-0はHTTP200、未知URLは404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301（query維持）。一覧画像はWikimedia Commons参考写真をサムネイル（デスクトップ374×140.8px、モバイル360×112px、`loading="lazy"`・`object-fit: cover`）で省スペース表示し、詳細の大きい表示・作者／ライセンス帰属を維持。immutable／本体E2E各1/1（GA collect HTTP204）。
+- 直前の正常配信・ロールバック候補: https://95cea680.jidouunten.pages.dev
+
 ## 最新の配信（2026-09-12 Honda ZR-V 4販売単位追加）
 
 - exact app release commit: `bf2749e`

@@ -2,6 +2,15 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 Toyota クラウン スポーツ4販売単位追加（本番反映済み）
+
+- Toyota公式のクラウン スポーツ商品・グレード・安全性能・2026年9月仕様表を突合し、SPORT RS／SPORT Z（PHEV）とSPORT Z／SPORT G（HEV）を駆動方式込みの4販売単位で追加。価格は532万7,300円〜777万7,000円（税込、2026年9月確認）。全車Level 2相当として、RS／ZはAdvanced Driveの条件内ハンズオフ・運転者監視・車線変更支援、Gはハンズオン必須とし、同じLevel 2内の能力差を比較できるようにした。注文可否はカタログ掲載だけでは受注可能の証明にならないため4単位とも`unknown`を維持。個別発売日・価格適用日は推定せず、カタログ確認月`2026-09`を保持。
+- 公式導線は商品・グレード・安全性能・販売店・試乗・見積り・カタログを記録。`src/data/official-links.json`、tests、research、KPI、公開面依存レジストリを同期。
+- exact app `2b7a9be9e007f3905f0ecb6c34b9461a42f622f3`、Production `https://jidouunten.jp/`、immutable `https://f41ea571.jidouunten.pages.dev`、直前rollback `https://95cea680.jidouunten.pages.dev`。Cloudflare Pages production/mainへ反映済み。
+- QA: 311 HTML、sitemap-0 306 URL、詳細305件、ItemList 2ページ608項目、公式導線62モデル／60 URL／91 actions、Vitest60/60、価格305/305（現行304、exact289／range15／未確認1）、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build・release／structured PASS、registry44 entities／431 surfaces／2,086 markers失敗0、独立リリース監査2件PASS、immutable／production E2E各1/1（GA collect204）、主要URL200、未知URL404、IDN path/query301。
+- 一覧画像は既存Wikimedia Commons参考写真3件をデスクトップ374×140.8px／モバイル360×112pxの`loading="lazy"`・`object-fit: cover`サムネイルで省スペース表示。詳細の大きい画像と作者・ライセンス帰属リンクは維持し、新規画像は追加していない。
+- Issue #17（候補カバレッジ）と#37（公式導線・計測）は未確認母集団・受注状態の観測が残るためIn progressを維持し、全国網羅完了とは宣言しない。
+
 ## 2026-09-12 Honda ZR-V 4販売単位追加（本番反映済み）
 
 - Honda公式のZR-V商品・タイプ一覧／X・Z価格・性能安全・TJAページを突合し、現行e:HEV X／e:HEV ZのFF・4WD各1、計4販売単位を追加。価格は370万7,000円〜452万7,600円（税込、2026年9月確認）。Honda SENSINGのACC・LKAS・トラフィックジャムアシストをLevel 2相当として表示し、ステアリング保持・常時監視が必要、ハンズオフ不可、車線変更支援なし。実注文・在庫・納期は確認できないため注文可否`unknown`を維持し、個別発売日・価格適用日を推測せず未設定、`catalogAsOf=2026-09`とした。
