@@ -2,14 +2,14 @@
 
 ## 2026-09-12 本番観測スナップショット（GA4／GSC／Bing）
 
-2026-09-12 JSTに、スペーシア配信後の本番データをread-onlyで再取得した。GA4は`hostName=jidouunten.jp`、期間は2026-09-10〜2026-09-11に限定し、localhost・Pages preview・初期QAを除外した。前回取得後の集計反映により数値が増えている。GA4の集計遅延を考慮し、成約や需要の達成値とは扱わない。
+2026-09-12 JSTに、Discovery Sport配信後の本番データをread-onlyで再取得した。GA4は`hostName=jidouunten.jp`、期間は2026-09-10〜2026-09-11に限定し、localhost・Pages preview・初期QAを除外した。前回取得後の集計反映により数値が増えている。今回のデプロイ直後の新候補利用はまだ集計期間へ反映されていない。GA4の集計遅延を考慮し、成約や需要の達成値とは扱わない。
 
 - **GA4（production hostname）**: active users 19、sessions 23、screen page views 53、event count 168。
 - **GA4独自イベント**: `filter_results` 16、`view_vehicle` 6、`outbound_manufacturer` 1。`select_level`、`compare_vehicles`、`outbound_purchase_action`はこの期間・本番hostnameの返却行なし（0件断定ではなく、利用量または処理遅延の切り分け継続）。標準イベントは`page_view` 53、`user_engagement` 34、`session_start` 23、`first_visit` 18、`scroll` 14、`form_start` 2、`click` 1。
-- **GSC**: 最終データ（2026-09-03〜09-09）は「自動運転 レベル」1 impression、0 click、平均順位71.0。`sitemap-index.xml`は`isPending=false`、`lastDownloaded=2026-09-11T13:47:28Z`、errors/warnings 0。ただしAPIのsubmitted=255・indexed=0は未更新で、現行366 URLの検出を意味しない。
+- **GSC**: 最終データ（2026-09-03〜09-09）は「自動運転 レベル」1 impression、0 click、平均順位71.0。`sitemap-index.xml`は`isPending=false`、`lastDownloaded=2026-09-11T13:47:28Z`、errors/warnings 0。ただしAPIのsubmitted=255・indexed=0は未更新で、現行sitemap-0の461 URLやDiscovery Sport追加の検出を意味しない。
 - **Bing Webmaster**: 最新取得日は2026-09-09、clicks=0、impressions=0、top page/queryは空。registered・verified状態とsitemap受理は維持し、非同期処理中の未反映を需要ゼロとは解釈しない。
 
-今回の観測で、GSC sitemapのpending解除は確認できた一方、検出URL数と比較・購入アクションはまだ観測できていない。GA4の9/12当日分（partial）は標準イベントのみで、公式導線イベントはまだ返却されていない。次回も同じhostname・期間定義で、`compare_vehicles`→`outbound_purchase_action`の欠測が処理遅延か利用不足かを確認する。
+今回の観測で、GSC sitemapのpending解除は確認できた一方、検出URL数と比較・購入アクションはまだ観測できていない。GA4の9/12当日分（partial）は標準イベントのみで、公式導線イベントはまだ返却されていない。次回も同じhostname・期間定義で、Discovery Sportを含む新公開面の検索検出と`compare_vehicles`→`outbound_purchase_action`の欠測が処理遅延か利用不足かを確認する。
 
 ## 2026-09-12 0件救済イベントの契約
 
