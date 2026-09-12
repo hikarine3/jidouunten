@@ -61,6 +61,14 @@
 - pushと既存Pages projectへの本番deployは上記継続承認と全gateを満たす場合だけ行う。
   DNS変更、Secret追加・変更、課金、データ削除、別targetへの公開は都度ユーザーの明示依頼なしに行わない。
 
+## commit・pushチェックポイント
+
+- 利用者向けの一つの縦切り（表示・操作・計測・focused QAが揃った単位）ごとに、変更を小さなcheckpoint commitへ分け、監査が参照できるremote SHAを早めに作る。未完成の別作業を同じcommitへ混ぜない。
+- push前は、対象ファイルだけを明示的に`git add`し、`git diff --cached --check`とfocused QAを通す。作業ツリーに未分類のunstaged/untracked差分がある場合は自動で止める。
+- 標準手順は `scripts/commit-push-checkpoint.sh "feat: <利用者に起きる変化>"`。このscriptはstaged差分だけをcommitし、force pushせず、`origin HEAD`へpushしたSHAとbranchを出力する。空commit・未staged差分の巻き込み・`git add -A`は行わない。
+- commit後はIssueへSHA、変更前後の公開surface、focused QA、残failureを記録する。監査はそのexact SHAを対象にし、監査後にsourceを変更したら同じgateをやり直して新SHAを作る。
+- 本番公開はcheckpointのpushだけでは完了とせず、Phase 5〜7の全gate、immutable URL、本体smoke、rollbackを別途記録する。共有branchのforce-push、履歴の作り直し、無関係な変更のrevertはしない。
+
 ## 終了時
 
 - Issueへ成果物、QA、公開URL、残リスクを記録する。
