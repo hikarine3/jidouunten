@@ -2,6 +2,19 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Land Rover Discovery Sport 3販売単位追加）
+
+- exact release commit: `4c619d6fc7a04bda0b2d59a73582fa40e99fc014`（Discovery Sportの正本・公式導線・依存registry・E2E・KPIを同期）
+- immutable: https://2af69c7f.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Cloudflare Pages: `2af69c7f-8bcf-4d1c-a71e-d46e8f2b73e2`（Production / main / source `4c619d6`）
+- 内容: Land Rover Discovery SportのDynamic S／Landmark／Metropolitanを3販売単位で追加。公式仕様・価格表から税込724万円〜／823万円〜／1,071万円〜、ACC＋車線中央維持のLevel 2相当、ステアリング保持・常時監視必須・ハンズオフ不可として登録した。発売日・個別の受注可否・作動道路／速度は一次情報で固定できないため未確認を維持し、同一Level内のグレード価格差を一覧・詳細・比較で確認できるようにした。
+- 公式導線: 商品、グレード・価格、コンフィギュレーター、試乗、リテイラー検索をDiscovery Sportの詳細へ追加。公式掲載は受注保証ではないため、購入前に販売店確認を促す。
+- 根拠: [Discovery Sport商品](https://www.landrover.co.jp/discovery/discovery-sport/index.html)、[グレード・価格](https://www.landrover.co.jp/discovery/discovery-sport/models-and-specifications.html)、[安全機能](https://www.landrover.co.jp/explore-land-rover/about-suvs/safety-features.html)、[コンフィギュレーター](https://www.landrover.co.jp/build-your-own/index.html)、[試乗予約](https://www.landrover.co.jp/book-a-test-drive/index.html)、[リテイラー検索](https://retailers.landrover.co.jp/search)、[Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)（確認日: 2026-09-12）。
+- SEO／公開面: 462 HTML、sitemap-0は461 URL、車両詳細456件、トップ／一覧ItemListは2ページ・910項目。GTM実IDは各HTML 1件、テスト計測ID0件、公開HTML内部enum・source・accessedAt漏れ0件。registry closureは既存546/546＋Discovery 7/7。
+- QA: `npm test` Vitest80/80＋Python16/16、価格456/456（exact434／range21／未確認1）、公式導線83モデル／80 URL／171 actions、注文可48／未確認407／利用不可1、鮮度確認済み455／要再確認0／競合1、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、独立リリース監査PASS。ローカル／immutable／本体E2E各1/1（本体・immutable GA collect HTTP204）。
+- 本番smoke: 本体・immutableのトップ、一覧、Discovery Sport 3詳細、Discovery比較、sitemap、robotsはHTTP200。未知URL404、`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）の`/cars/?level=1&sort=release_desc`は本体へqueryを維持した301。一覧の既存Wikimedia Commons画像はデスクトップ約374×115px・モバイル約360×88pxのWebPサムネイル（`loading=lazy`・`object-fit: cover`）を維持し、新規画像は権利確認ができないため追加していない。
+
 ## 最新の配信（2026-09-12 Jeep Commander／Suzuki FRONX候補追加）
 
 - exact release commit: `b8f2817e1cc8f60fa10dd05fa19bebbf63ab486c`（Jeep Commander 1単位、Suzuki FRONX 2単位、公式導線・台帳・E2Eを同期。registry件数マーカーは後続docs commit `27b8b3872ed4f02f4a0102769d8aeaca158c9824`で452へ同期）
