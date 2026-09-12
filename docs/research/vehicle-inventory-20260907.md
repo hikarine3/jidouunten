@@ -8,9 +8,9 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 448 | `src/data/vehicles.json` の全レコード（現行447 + 過去1） |
-| 既定表示 | 447 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
-| 掲載メーカー数 | 19 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu |
+| 公開データ | 450 | `src/data/vehicles.json` の全レコード（現行449 + 過去1） |
+| 既定表示 | 449 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 掲載メーカー数 | 21 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu / Cadillac / Peugeot |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -50,6 +50,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota ヤリス） | 17 | 2026年4月公式グレードJSONのZ／G／X、ハイブリッド・ガソリン、1.5L／1.0L、CVT／6MT、2WD／4WD・E-Fourの価格比較可能な17販売単位。価格169万7,300円〜288万4,200円。1.0L CVTの2単位はACCのみでLevel 1、その他15単位はLTA併用のLevel 2、ハイブリッド6単位は渋滞時停止・発進支援を確認。U（KINTO専用）2単位は月額のみのため車両本体価格比較から保留 |
 | 今回追加（Toyota プリウス） | 5 | 既存のHEV Z 2WDに、HEV Z E-Four／G 2WD・E-Four／X 2WD・E-Fourを追加。2026年7月公式価格表の279万6,200円〜425万1,500円、全車速ACC＋LTA・渋滞時支援（ハンズオフ不可）を販売単位へ固定。Xは法人向けチャネルのため法人向け注記と公式Webカタログ根拠を保持し、発売日は未確認・注文可否は未確認のまま表示 |
 | 今回追加（Toyota MIRAI） | 2 | MIRAI G／Z（2WD・5人乗り）。価格741万4,000円〜821万5,900円、アドバンスト ドライブ（渋滞時支援）・LCA標準、渋滞時0〜約40km/hの条件内ハンズオフを公式価格JSON・安全ページ・2026年3月装備表・一部改良発表で確認 |
+| 今回追加（Cadillac LYRIQ） | 1 | LYRIQ SPORT。税込1,100万円〜、2025年3月8日販売開始、全車速ACC＋LKAを日本向け公式資料で確認。車線中央維持・ハンズオフ・個別注文可否・モデル年は未確認のためLevel 1相当・ハンズオフ不可・注文可否未確認として登録 |
+| 今回追加（Peugeot E-3008） | 1 | NEW E-3008 GT。税込760万円〜（2026年9月価格）、全車共通ACC（ストップ＆ゴー）・レーンキープアシストとGTのレーンポジショニングアシストを公式ページで確認。発売日・個別受注可否・作動道路／速度・ハンズオフ条件は未確認のためLevel 2相当・ハンズオフ不可・注文可否未確認として登録 |
 | 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 注文状態更新（2026-09-12） | 27 | 三菱公式の商品ページに「商談予約・購入予約受付中」を確認したeKクロス8、eKクロス EV 3、デリカミニ12、eKスペース4を`new_order_available`へ更新。購入予約は注文確定ではなく、在庫・納期・契約成立は販売店での確認が必要 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
@@ -135,6 +137,19 @@ Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年
 - 対象: Tesla Model S / Model X。日本向け公式ホーム、Model S／Model X日本語取扱説明書、保証、[新車在庫](https://www.tesla.com/ja_jp/inventory/new?redirect=no)、[補助金](https://www.tesla.com/ja_JP/support/incentives)、[注文FAQ](https://www.tesla.com/ja_JP/support/faq)を確認。
 - 判定: 公式ページ自体の存在は確認できるが、現行日本円価格・グレード・注文CTA・在庫車・日本仕様ADASのODD／監視条件を一次情報で固定できないため、`未確認／掲載保留`。Model 3／Model Yの現行6販売単位とは混ぜない。
 - 制約: 主要URLへの直接HTTP GETは調査環境で403。検索インデックスだけで価格・注文可否・Levelを補完せず、S/Xの公開ID追加は行わない。再確認時は日本向けの現行トリム＋円価格、注文受付または在庫車、Autopilot／Autosteerの日本仕様条件を別々に確認する。
+
+## 2026-09-12 Peugeot NEW E-3008 GT追加
+
+プジョー・ジャポンの日本向け商品ページと購入サポートページを確認し、NEW E-3008 GTを1販売単位として追加した。商品ページは5人乗り、GTのレーンポジショニングアシスト、全車共通のアクティブクルーズコントロール（ストップ＆ゴー）・レーンキープアシストを掲載している。購入サポートページは2026年9月現在の税込メーカー希望小売価格を760万円〜と明記し、販売価格はディーラーごとに異なり、諸費用・オプションが別であることを示す。これらを前後・左右の同時支援として国土交通省のLevel 2定義へ照合し、サイト上はLevel 2相当、運転者監視・操作が必要、ハンズオフ不可とした。
+
+発売日、個別の受注・在庫、作動道路・速度範囲、ハンズオフ可能条件は日本向け一次資料で確認できなかったため、推測で補わず未確認として保持する。直接HTTP取得は調査環境のWAFにより商品ページ・購入サポートページとも403だったが、公式検索結果で表示されたページ本文と公式ADAS説明を照合した。したがってHTTP 200や注文可能とは記録していない。公式リンクは商品ページと見積もりシミュレーション導線のみを保持し、試乗・販売店URLは正確な遷移先を確認できるまで追加しない。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| NEW E-3008 GTの商品・装備・価格掲載 | プジョー・ジャポン | https://www.peugeot.co.jp/range/new-peugeot-3008/electric.html | 2026-09-12 |
+| 2026年9月現在の税込メーカー希望小売価格760万円〜、諸費用・オプション別 | プジョー・ジャポン | https://www.peugeot.co.jp/buy/buy-peugeot/current-offers/peugeot-e-3008.html | 2026-09-12 |
+| レーンポジショニングアシストの車線内位置維持説明 | プジョー・ジャポン | https://www.peugeot.co.jp/brand/innovation/driving-experience/adas.html/1000 | 2026-09-12 |
+| Level 2の定義（運転者主体の前後・左右支援） | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
 
 ## 2026-09-11 Toyota カローラ スポーツ／ツーリング追加トランシェ
 

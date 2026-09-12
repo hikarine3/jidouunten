@@ -143,7 +143,7 @@ describe('vehicle data contract and filters', () => {
     expect(filterVehicleList(vehicles, { level: 1, handsOff: 'allowed_in_conditions' })).toHaveLength(0);
     expect(filterVehicleList(vehicles, { level: 3, availability: 'new_order_available' })).toHaveLength(0);
     expect(filterVehicleList(vehicles, { level: 3, availability: 'all' })).toHaveLength(1);
-    expect(filterVehicleList(vehicles, {})).toHaveLength(448);
+    expect(filterVehicleList(vehicles, {})).toHaveLength(449);
   });
 
   it('uses one default-list predicate for filtering and top-page counts', () => {
@@ -178,14 +178,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(449);
+    expect(vehicles).toHaveLength(450);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補448件は全件の公式金額を保持する', () => {
+  it('現行候補449件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(448);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(448);
+    expect(current).toHaveLength(449);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(449);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -307,8 +307,17 @@ describe('vehicle data contract and filters', () => {
     expect(officialLinkFor(nbox[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
   });
 
+  it('Peugeot E-3008 GTは公式価格とADAS能力を保守的に保持する', () => {
+    const e3008 = vehicles.find((vehicle) => vehicle.id === 'jp-peugeot-e3008-2026-gt');
+    expect(e3008).toMatchObject({ maker: 'Peugeot', model: 'E-3008', grade: 'GT', automationLevel: 2, handsOff: 'not_allowed', driverMonitoring: 'required', availability: 'unknown', priceEffectiveAt: '2026-09' });
+    expect(e3008?.price).toMatchObject({ kind: 'range', basis: 'msrp', taxIncluded: 'included', amounts: [{ amountJpy: 7_600_000, qualifier: 'GT' }] });
+    expect(e3008?.capabilities).toEqual(['adaptive_cruise_control', 'lane_centering', 'lane_departure_prevention']);
+    expect(e3008?.sources.some((source) => source.url === 'https://www.peugeot.co.jp/range/new-peugeot-3008/electric.html' && source.supports.some((fact) => fact.includes('レーンポジショニングアシスト')))).toBe(true);
+    expect(officialLinkFor(e3008!)?.actions?.map(({ kind }) => kind)).toEqual(['estimate']);
+  });
+
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(79);
+    expect(officialLinks).toHaveLength(80);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -363,7 +372,7 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(163);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(164);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
