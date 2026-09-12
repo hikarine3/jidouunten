@@ -2,6 +2,17 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Cadillac LYRIQ SPORT候補追加）
+
+- exact release commit: `51db9e6`（実装 `10c0310`、依存レジストリ件数同期を含む）
+- immutable: https://d25bb67f.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Cadillac LYRIQ SPORTを日本向けの購入候補として1販売単位追加。キャデラック公式の商品・主要諸元・販売開始リリースで、税込1,100万円〜、2025年3月8日販売開始、全車速追従ACC＋レーンキープアシストを確認した。日本向けページから自動運転レベル2、車線中央維持、ハンズオフ、注文可を確認できないため、Level 1相当・ハンズオフ不可・注文可否未確認として登録。モデル年は公式ページに明記がないため未設定。試乗予約・見積り・販売店・カタログの公式導線を詳細ページへ追加した。
+- 根拠: [LYRIQ商品ページ](https://www.cadillacjapan.com/electric/lyriq)、[主要諸元](https://www.cadillacjapan.com/electric/lyriq/features-specs/features-specs-1)、[販売開始リリース](https://news.cadillacjapan.com/jp/cadillac/newsroom.detail.html/Pages/news/jp/ja/2025/mar/0307_Cadillac-LYRIQ.html)（確認日: 2026-09-12）。価格の「〜」表記は上限未確認の価格レンジとして扱い、能力・注文可否を価格根拠から推測していない。
+- SEO／公開面: 455 HTML、sitemap-0は454 URL、車両詳細449件、トップ／一覧ItemListは2ページ・896項目。GTM実IDは各HTML 1件、テスト計測ID0件。公開HTML内部enum・source・accessedAt漏れ0件。
+- QA: `npm test` 77/77＋Python16/16、価格449/449（exact432／range16／未確認1）、公式導線79モデル／76 URL／163 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、鮮度確認済み448／要再確認0／競合1／未確認0、registry closure 546/546、独立リリース監査PASS。
+- 本番smoke: immutable／本体E2E各1/1（本体GA collect HTTP204）。トップ、一覧、LYRIQ詳細、比較、sitemap、robotsはHTTP200、未知URL404、`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301。既存Wikimedia Commons画像は一覧でデスクトップ約374×115px・モバイル約360×88pxのWebPサムネイル（`loading=lazy`・`object-fit: cover`）を維持。LYRIQ用の新規画像は権利確認できる素材がないため追加していない。
+
 ## 最新の配信（2026-09-12 0件フィルター救済）
 
 - exact release commit: `d923268`
