@@ -3272,5 +3272,27 @@
     ],
     "historical_markers": [],
     "refresh_entrypoint": "npm run build"
+  },
+  "vehicle:land-rover-discovery-sport-2026": {
+    "entity_id": "vehicle:land-rover-discovery-sport-2026",
+    "entity_type": "vehicle_catalog_entries",
+    "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+    "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+    "surfaces": [
+      {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Land Rover","Discovery Sport","Dynamic S","LEVEL 2","455販売単位"]},
+      {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Land Rover","Discovery Sport","Dynamic S","Level 2"]},
+      {"url":"/cars/jp-land-rover-discovery-sport-2026-dynamic-s/","locale":"ja","output_path":"dist/cars/jp-land-rover-discovery-sport-2026-dynamic-s/index.html","markers":["Land Rover","Discovery Sport","Dynamic S","7,240,000円〜","Level 2","ハンズオフ：不可","注文可否：未確認"]},
+      {"url":"/cars/jp-land-rover-discovery-sport-2026-landmark/","locale":"ja","output_path":"dist/cars/jp-land-rover-discovery-sport-2026-landmark/index.html","markers":["Land Rover","Discovery Sport","Landmark","8,230,000円〜","Level 2","ハンズオフ：不可","注文可否：未確認"]},
+      {"url":"/cars/jp-land-rover-discovery-sport-2026-metropolitan/","locale":"ja","output_path":"dist/cars/jp-land-rover-discovery-sport-2026-metropolitan/index.html","markers":["Land Rover","Discovery Sport","Metropolitan","10,710,000円〜","Level 2","ハンズオフ：不可","注文可否：未確認"]},
+      {"url":"/compare/?ids=jp-land-rover-discovery-sport-2026-dynamic-s&ids=jp-land-rover-discovery-sport-2026-landmark","locale":"ja","output_path":"dist/compare/index.html","markers":["Discovery Sport","Dynamic S","Landmark","Level 2"]},
+      {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-land-rover-discovery-sport-2026-dynamic-s","jp-land-rover-discovery-sport-2026-landmark","jp-land-rover-discovery-sport-2026-metropolitan"]}
+    ],
+    "required_render_selectors": [
+      {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-land-rover-discovery-sport-2026-dynamic-s\"])","markers":["Land Rover","Discovery Sport","Dynamic S","Level 2"]},
+      {"url":"/cars/jp-land-rover-discovery-sport-2026-dynamic-s/","selector":"main","markers":["Land Rover","Discovery Sport","Dynamic S","7,240,000円〜","Level 2","ハンズオフ：不可"]},
+      {"url":"/compare/?ids=jp-land-rover-discovery-sport-2026-dynamic-s&ids=jp-land-rover-discovery-sport-2026-landmark","selector":"[data-compare-result]","markers":["Discovery Sport","Dynamic S","Landmark","Level 2"]}
+    ],
+    "historical_markers": [],
+    "refresh_entrypoint": "npm run build"
   }
 }

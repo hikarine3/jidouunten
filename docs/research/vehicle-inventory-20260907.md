@@ -8,9 +8,9 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 453 | `src/data/vehicles.json` の全レコード（現行452 + 過去1） |
-| 既定表示 | 452 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
-| 掲載メーカー数 | 22 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu / Cadillac / Peugeot / Jeep |
+| 公開データ | 456 | `src/data/vehicles.json` の全レコード（現行455 + 過去1） |
+| 既定表示 | 455 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 掲載メーカー数 | 23 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu / Cadillac / Peugeot / Jeep / Land Rover |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -54,6 +54,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Peugeot E-3008） | 1 | NEW E-3008 GT。税込760万円〜（2026年9月価格）、全車共通ACC（ストップ＆ゴー）・レーンキープアシストとGTのレーンポジショニングアシストを公式ページで確認。発売日・個別受注可否・作動道路／速度・ハンズオフ条件は未確認のためLevel 2相当・ハンズオフ不可・注文可否未確認として登録 |
 | 今回追加（Jeep Commander） | 1 | Commander Limited（4WD・7人乗り）。税込619万円〜（2026年7月価格）、ACC STOP&GO・Active Lane Management・Highway Assistを公式商品／安全ページで確認。Level 2相当・ハンズオフ不可・自動車線変更なし、個別受注可否は未確認 |
 | 今回追加（Suzuki FRONX） | 2 | 2WD・6AT／4WD・6AT。税込254万1,000円／273万9,000円、2024年10月16日発売、全車速追従ACC・車線維持支援を公式価格／安全ページで確認。Level 2相当・ハンズオフ不可、ドライバーモニタリングと個別受注可否は未確認 |
+| 今回追加（Land Rover Discovery Sport） | 3 | Dynamic S / Landmark / Metropolitan。税込724万〜1,071万円〜、ACC・レーンキープアシストを公式仕様・安全ページで確認。Level 2相当・ハンズオフ不可・自動車線変更なし、道路・速度・発売日・個別受注可否は未確認 |
 | 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 注文状態更新（2026-09-12） | 27 | 三菱公式の商品ページに「商談予約・購入予約受付中」を確認したeKクロス8、eKクロス EV 3、デリカミニ12、eKスペース4を`new_order_available`へ更新。購入予約は注文確定ではなく、在庫・納期・契約成立は販売店での確認が必要 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
@@ -1222,3 +1223,17 @@ ACC〈STOP & GO〉（前後方向）、Active Lane Management／Highway Assist�
 公式の商品・価格・安全ページとオンライン見積り導線は`src/data/official-links.json`に記録した。画像は追加していない。
 
 根拠: [FRONX商品ページ](https://www.suzuki.co.jp/car/fronx/)、[価格・グレード](https://www.suzuki.co.jp/car/fronx/detail/)、[安全装備](https://www.suzuki.co.jp/car/fronx/safety/)、[発売資料](https://www.suzuki.co.jp/release/a/2024/1016/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。確認日: 2026-09-12。
+
+## 2026-09-12 Land Rover Discovery Sport 3販売単位追加
+
+Land Rover Japanの日本向け商品ページ、モデル・仕様比較、安全機能ページを直接確認し、Discovery SportのDynamic S / Landmark / Metropolitanを現行カタログ掲載の3販売単位として追加した。税込価格はそれぞれ7,240,000円〜、8,230,000円〜、10,710,000円〜。ACC（縦方向）とレーンキープアシスト（横方向）を根拠にLevel 2相当へ分類し、運転者の常時監視・ステアリング保持が必要な`handsOff=not_allowed`とした。自動車線変更の根拠はないため付与していない。
+
+道路種別・速度範囲・個別発売日・個別受注可否は公式資料で確認できないため各販売単位で未確認（unknown）とし、サイト掲載と注文可否を混同しない。コンフィギュレーター、試乗予約、リテイラー検索は検討用の公式導線として保持するが、注文可能とは表示しない。商品画像は権利確認を行っていないため追加していない。対象URLは調査日に直接GETし、いずれもHTTP 200を確認した。
+
+| 販売単位 | 税込メーカー希望小売価格 | Level | 能力・制約 | availability |
+|---|---:|---:|---|---|
+| Dynamic S | 7,240,000円〜 | 2相当 | ACC＋レーンキープアシスト、ハンズオフ不可、自動車線変更なし | unknown |
+| Landmark | 8,230,000円〜 | 2相当 | ACC＋レーンキープアシスト、ハンズオフ不可、自動車線変更なし | unknown |
+| Metropolitan | 10,710,000円〜 | 2相当 | ACC＋レーンキープアシスト、ハンズオフ不可、自動車線変更なし | unknown |
+
+根拠: [Discovery Sport商品ページ](https://www.landrover.co.jp/discovery/discovery-sport/index.html)、[モデル・仕様比較](https://www.landrover.co.jp/discovery/discovery-sport/models-and-specifications.html)、[安全機能](https://www.landrover.co.jp/explore-land-rover/about-suvs/safety-features.html)、[コンフィギュレーター](https://www.landrover.co.jp/build-your-own/index.html)、[試乗予約](https://www.landrover.co.jp/book-a-test-drive/index.html)、[リテイラー検索](https://retailers.landrover.co.jp/search)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。確認日: 2026-09-12。
