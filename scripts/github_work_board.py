@@ -133,6 +133,12 @@ def validate_candidate(config: dict[str, Any], candidate: Any) -> list[str]:
     if candidate.get("status") not in {"ready", "backlog"}:
         errors.append("status must be ready or backlog")
 
+    issue_number = candidate.get("issue_number")
+    if issue_number is not None and (
+        isinstance(issue_number, bool) or not isinstance(issue_number, int) or issue_number <= 0
+    ):
+        errors.append("issue_number must be a positive integer when supplied")
+
     rank = candidate.get("rank")
     if isinstance(rank, bool) or not isinstance(rank, (int, float)) or rank <= 0:
         errors.append("rank must be a positive number")
@@ -367,16 +373,20 @@ def preflight_issue_conflicts(candidates: list[dict[str, Any]], issues: list[dic
         conflicting: list[dict[str, Any]] = []
         duplicate_titles: list[dict[str, Any]] = []
         candidate_title = re.sub(r"\s+", " ", candidate["title"].strip()).casefold()
+        reusable_number = candidate.get("issue_number")
+        reusable = [issue for issue in issues if issue.get("number") == reusable_number] if reusable_number else []
+        if reusable_number and not reusable:
+            errors.append(f"{sprint_id}: issue_number does not match an existing Issue")
         for issue in issues:
             body = str(issue.get("body") or "")
             title = str(issue.get("title") or "")
             if exact_marker in body:
                 marked.append(issue)
                 continue
-            if re.search(rf"\b{re.escape(sprint_id)}\b", title, re.IGNORECASE):
+            if re.search(rf"\b{re.escape(sprint_id)}\b", title, re.IGNORECASE) and issue not in reusable:
                 conflicting.append(issue)
             core_title = re.sub(r"^JID-[A-Z0-9-]+\s*:\s*", "", title, flags=re.IGNORECASE)
-            if re.sub(r"\s+", " ", core_title.strip()).casefold() == candidate_title:
+            if re.sub(r"\s+", " ", core_title.strip()).casefold() == candidate_title and issue not in reusable:
                 duplicate_titles.append(issue)
         if len(marked) > 1:
             errors.append(f"{sprint_id}: multiple Issues contain the stable marker")
@@ -394,6 +404,13 @@ def ensure_issue(config: dict[str, Any], candidate: dict[str, Any], issues: list
     marker = candidate_marker(candidate["sprint_id"])
     title = f"{candidate['sprint_id']}: {candidate['title']}"
     body = issue_body(candidate)
+    issue_number = candidate.get("issue_number")
+    if issue_number:
+        for issue in issues:
+            if issue.get("number") == issue_number:
+                run_gh(["issue", "edit", str(issue["url"]), "--repo", config["repository"], "--title", title, "--body", body])
+                return issue
+        raise BoardError(f"{candidate['sprint_id']}: issue_number does not match an existing Issue")
     for issue in issues:
         if marker in str(issue.get("body") or ""):
             run_gh(["issue", "edit", str(issue["url"]), "--repo", config["repository"], "--title", title, "--body", body])

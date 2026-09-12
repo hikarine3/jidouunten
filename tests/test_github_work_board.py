@@ -128,6 +128,24 @@ class PortfolioValidationTest(unittest.TestCase):
         self.assertTrue(any("unmarked Issue" in error for error in errors))
         self.assertTrue(any("already has this title" in error for error in errors))
 
+    def test_existing_issue_number_allows_explicit_reuse(self):
+        row = candidate(1)
+        row["issue_number"] = 28
+        issues = [{
+            "number": 28,
+            "url": "https://github.com/example/issues/28",
+            "title": "JID-OLD: 旧候補名",
+            "body": "no stable marker",
+            "state": "OPEN",
+        }]
+        self.assertEqual(board.preflight_issue_conflicts([row], issues), [])
+
+    def test_missing_reuse_issue_is_rejected_before_write(self):
+        row = candidate(1)
+        row["issue_number"] = 999
+        errors = board.preflight_issue_conflicts([row], [])
+        self.assertTrue(any("issue_number does not match" in error for error in errors))
+
     def test_invalid_portfolio_stops_before_first_github_read_or_write(self):
         portfolio = {"schema_version": 1, "candidates": [candidate(i) for i in range(1, 10)]}
         with tempfile.TemporaryDirectory() as directory:
