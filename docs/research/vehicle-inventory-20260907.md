@@ -1129,6 +1129,20 @@ Honda公式のCIVIC現行商品ページ、タイプJSON、主要装備表、性
 
 根拠: [MIRAI商品ページ](https://toyota.jp/mirai/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades28.json)、[安全性能](https://toyota.jp/mirai/safety/)、[主要諸元・装備一覧](https://toyota.jp/pages/contents/mirai/002_p_001/pdf/mirai_spec_202603.pdf)、[一部改良発表](https://global.toyota/jp/newsroom/toyota/43735032.html)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。
 
+## 2026-09-12 Cadillac LYRIQ SPORT 1販売単位追加
+
+キャデラック日本公式の現行商品ページ、主要諸元・主要装備、日本導入発表、見積依頼・試乗・新車即納車検索導線を確認し、Cadillac LYRIQ SPORT（日本向け）を1販売単位として追加した。公式商品ページ掲載価格は11,000,000円〜。日本導入発表は2025年3月8日からの販売開始を示す（モデル年は公式ページで明示されないため設定しない）。
+
+主要装備表には全車速追従のアダプティブクルーズコントロールと、レーンキープアシスト／レーンディパーチャーウォーニングが掲載されている。ただし、日本公式資料は車線中央維持、車線変更支援、渋滞時支援、作動道路・速度範囲を明示していないため、Level 2とはせず保守的にLevel 1相当とした。ハンズオフ可能条件も確認できないため`handsOff=not_allowed`、運転者監視の方式は未確認のため`driverMonitoring=unknown`とした。
+
+商品ページから正規ディーラーの見積依頼・試乗予約・コンフィギュレーター・新車即納車検索へ到達できるが、個別車両の在庫・受注可否は公式ページだけでは固定できないため`availability=unknown`を維持した。日本導入発表に「指定価格（税込）11,000,000円」の記載があるため、価格データの`taxIncluded=included`とした。画像は追加していない。
+
+| 販売単位 | 価格 | Level相当 | ハンズオフ | 注文可否 |
+|---|---:|---|---|---|
+| LYRIQ SPORT（日本向け） | 11,000,000円〜 | Level 1相当（全車速ACC＋LKA。車線中央維持は未確認） | 不可 | unknown（見積・ディーラー導線は確認、個別受注は未確認） |
+
+根拠: [LYRIQ商品ページ](https://www.cadillacjapan.com/electric/lyriq)、[主要諸元・主要装備](https://www.cadillacjapan.com/electric/lyriq/features-specs/features-specs-1)、[日本導入発表](https://news.cadillacjapan.com/jp/cadillac/newsroom.detail.html/Pages/news/jp/ja/2025/mar/0307_Cadillac-LYRIQ.html)、[見積依頼](https://gmj-portal.com/request/quote-request?brandId=1)、[試乗予約](https://gmj-portal.com/request/test-ride?brandId=1&evar25=ca_tdr)、[新車即納車検索](https://gmj-portal.com/dealer/exhibition-vehicle/cadillac?delivery=immediate&models%5B0%5D=1120)。確認日: 2026-09-12。未確認の輸入車候補群が残るため、国内候補の網羅完了とは扱わない。
+
 ## 2026-09-12 Honda N-BOX 34販売単位追加
 
 Honda公式のN-BOX商品ページ、タイプ一覧、価格データ、性能・安全ページ、2026年7月発行カタログ、2027年版取扱説明書を照合し、通常乗用の現行17タイプをFF・4WD別の34販売単位として追加した。N-BOX、ファッションスタイル、N-BOX JOY、CUSTOMの標準・ターボ・BLACK STYLE・コーディネートを含み、福祉車両のスロープ仕様は通常乗用の比較対象から除外した。

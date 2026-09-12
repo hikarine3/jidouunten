@@ -3191,5 +3191,25 @@
     ],
     "historical_markers": [],
     "refresh_entrypoint": "npm run build"
+  },
+  "vehicle:cadillac-jp-lyriq-2025-sport": {
+    "entity_id": "vehicle:cadillac-jp-lyriq-2025-sport",
+    "entity_type": "vehicle_catalog_entries",
+    "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+    "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+    "surfaces": [
+      {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Cadillac","LYRIQ","SPORT","LEVEL 1"]},
+      {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Cadillac","LYRIQ","SPORT","Level 1"]},
+      {"url":"/cars/jp-cadillac-lyriq-2025-sport/","locale":"ja","output_path":"dist/cars/jp-cadillac-lyriq-2025-sport/index.html","markers":["Cadillac","LYRIQ","SPORT","11,000,000円〜","Level 1","ハンズオフ：不可"]},
+      {"url":"/compare/?ids=jp-cadillac-lyriq-2025-sport","locale":"ja","output_path":"dist/compare/index.html","markers":["Cadillac","LYRIQ","SPORT","Level 1"]},
+      {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-cadillac-lyriq-2025-sport"]}
+    ],
+    "required_render_selectors": [
+      {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-cadillac-lyriq-2025-sport\"])","markers":["Cadillac","LYRIQ","SPORT","LEVEL 1"]},
+      {"url":"/cars/jp-cadillac-lyriq-2025-sport/","selector":"main","markers":["Cadillac","LYRIQ","SPORT","11,000,000円〜","Level 1","ハンズオフ：不可"]},
+      {"url":"/compare/?ids=jp-cadillac-lyriq-2025-sport","selector":"[data-compare-result]","markers":["Cadillac","LYRIQ","SPORT","Level 1"]}
+    ],
+    "historical_markers": [],
+    "refresh_entrypoint": "npm run build"
   }
 }
