@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Focused browser contract for JID-024. Run against a built preview server.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

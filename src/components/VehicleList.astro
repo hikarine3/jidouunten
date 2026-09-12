@@ -54,7 +54,9 @@ const levelOverview = levelIds.map((level) => {
   const listedCount = defaultVehicles.filter((vehicle) => vehicle.automationLevel === level).length;
   const totalCount = vehicles.filter((vehicle) => vehicle.automationLevel === level).length;
   const outOfScope = listedCount === 0 && level <= 1;
-  return { level, label: levelLabels[level], description: levelShort[level], totalCount, countLabel: outOfScope ? '対象外' : listedCount ? `${listedCount}件` : totalCount ? `過去例 ${totalCount}件` : '掲載なし', availabilityShortcut: listedCount ? '' : totalCount ? 'all' : '', outOfScope };
+  const kind = level <= 2 ? '運転支援' : '自動運転';
+  const statusLabel = outOfScope ? '対象外' : listedCount ? '現行掲載' : totalCount ? '過去例のみ' : '現在掲載なし';
+  return { level, label: levelLabels[level], description: levelShort[level], kind, statusLabel, totalCount, countLabel: outOfScope ? '対象外' : listedCount ? `${listedCount}件` : totalCount ? `過去例 ${totalCount}件` : '掲載なし', availabilityShortcut: listedCount ? '' : totalCount ? 'all' : '', outOfScope };
 });
 const level2Vehicles = defaultVehicles.filter((vehicle) => vehicle.automationLevel === 2);
 const currentLevel1Count = defaultVehicles.filter((vehicle) => vehicle.automationLevel === 1).length;
@@ -71,11 +73,11 @@ const guideProfiles = [
       <button type="button" class="command-reset" data-reset-shortcut>すべての車に戻す</button>
     </div>
     <div class="level-deck">
-      <div class="level-deck-head"><span><strong>掲載対象</strong> Level 1–3</span><a href="/levels/">Levelの違い ↗</a><span><strong>Level 1</strong> も比較可能</span></div>
+      <div class="level-deck-head"><span><strong>運転支援</strong> Level 1–2 <i aria-hidden="true">/</i> <strong>自動運転</strong> Level 3–5</span><a href="/levels/">Levelの違い ↗</a><span><strong>現行・過去例</strong>を分けて表示</span></div>
       <div class="level-rail" role="group" aria-label="自動化レベルで絞り込む">
-        {levelOverview.map(({ level, label, description, totalCount, countLabel, availabilityShortcut, outOfScope }) => <button type="button" class:list={['level-shortcut', level >= 3 && 'is-automated']} data-level-shortcut={String(level)} data-availability-shortcut={availabilityShortcut} aria-label={`Level ${level} ${label}、${description}、${countLabel}${outOfScope ? '（このサイトの対象外）' : ''}`} aria-pressed="false" disabled={outOfScope || totalCount === 0}><span class="level-index">L{level}</span><strong>{label}</strong><span class="level-count">{countLabel}</span></button>)}
+        {levelOverview.map(({ level, label, description, kind, statusLabel, totalCount, countLabel, availabilityShortcut, outOfScope }) => <button type="button" class:list={['level-shortcut', level >= 3 && 'is-automated']} data-level-shortcut={String(level)} data-level-kind={kind} data-level-status={statusLabel} data-availability-shortcut={availabilityShortcut} aria-label={`Level ${level} ${kind}・${label}、${description}、${statusLabel} ${countLabel}${outOfScope ? '（このサイトの対象外）' : ''}${totalCount === 0 ? '（市場に存在しないという意味ではありません）' : ''}`} aria-pressed="false" disabled={outOfScope || totalCount === 0}><span class="level-index">L{level}</span><span class="level-kind">{kind}</span><strong class:list={{ 'is-kind-name': label === kind }}>{label}</strong><span class="level-meta"><span class="level-status">{statusLabel}</span><span class="level-count">{countLabel}</span></span></button>)}
       </div>
-      <p class="level-scope-note">この車両一覧は、前後または左右の支援を分けて確認できるLevel 1（現行{currentLevel1Count}件）、前後と左右を同時に支援するLevel 2、確認できたLevel 3を比較対象にしています。Level 4・5は現在掲載がありません。</p>
+      <p class="level-scope-note">Level 1–2は運転支援、Level 3–5は自動運転として区別しています。Level 1は前後または左右のみの支援（現行{currentLevel1Count}件）、Level 2は前後と左右を同時に支援。Level 3は過去例、Level 4・5は現在掲載なしです（市場に存在しないという意味ではありません）。</p>
     </div>
     <div class="capability-deck">
       <div class="capability-title"><span>L2のハンズオフ</span><small>運転者の常時監視が必要</small></div>
