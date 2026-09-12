@@ -211,6 +211,20 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .detail-hero h1 { font-size: 2.4rem; margin: 12px 0; letter-spacing: -.06em; }
 .detail-section { background: var(--white); border: 1px solid var(--line); border-radius: 15px; padding: 24px; margin-bottom: 16px; }
 .detail-section h2 { font-size: 1.35rem; margin-bottom: 16px; }
+.adas-checklist { border-color: rgba(149, 214, 0, .65); background: linear-gradient(135deg, #fbfff3, #f2f8e7); }
+.checklist-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+.checklist-heading h2 { margin-bottom: 8px; }
+.checklist-heading p:last-child { margin: 0; color: var(--muted); max-width: 620px; }
+.checklist-progress { flex: 0 0 auto; padding: 7px 10px; border-radius: 999px; color: #315200; background: var(--lime); font-size: .72rem; font-weight: 900; white-space: nowrap; }
+.checklist-items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin-top: 18px; }
+.checklist-item { display: flex; align-items: flex-start; gap: 10px; padding: 11px 12px; border: 1px solid rgba(20, 70, 90, .14); border-radius: 10px; background: rgba(255,255,255,.78); cursor: pointer; }
+.checklist-item:has(input:checked) { border-color: var(--lime-deep); box-shadow: 0 0 0 2px rgba(149,214,0,.16); }
+.checklist-item input { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 2px; accent-color: var(--lime-deep); }
+.checklist-item span { display: grid; gap: 3px; }
+.checklist-item strong { font-size: .8rem; }
+.checklist-item small { color: var(--muted); font-size: .72rem; line-height: 1.45; }
+.checklist-complete { margin: 13px 0 0; color: #315200; font-size: .78rem; font-weight: 800; }
+.checklist-next { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 17px; padding-top: 14px; border-top: 1px solid rgba(20,70,90,.12); color: var(--muted); font-size: .72rem; font-weight: 700; }
 .about-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .about-grid .detail-section { margin-bottom: 0; }
 .about-card { min-height: 185px; }
@@ -349,6 +363,9 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
   .compare-table { display: block; overflow-x: auto; white-space: normal; min-width: 640px; }
   .detail-section { padding: 18px; }
   .official-next, .purchase-actions { align-items: stretch; flex-direction: column; }
+  .checklist-heading { flex-direction: column; }
+  .checklist-items { grid-template-columns: 1fr; }
+  .checklist-next { justify-content: flex-start; }
   .purchase-action-list { justify-content: flex-start; }
 }
 
