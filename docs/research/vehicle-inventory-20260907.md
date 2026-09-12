@@ -1154,3 +1154,11 @@ Honda公式のN-BOX商品ページ、タイプ一覧、価格データ、性能�
 | 運転者主体で前後・左右を支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
 
 根拠: [N-BOX商品ページ](https://www.honda.co.jp/Nbox/)、[タイプ一覧](https://www.honda.co.jp/Nbox/webcatalog/type/list/)、[タイプデータ](https://www.honda.co.jp/Nbox/common/data/type.json)、[性能・安全](https://www.honda.co.jp/Nbox/webcatalog/performance/)、[取扱説明書](https://www.honda.co.jp/ownersmanual/webom/jpn/n-box/2027/details/69113e1849de55-32403005.html)、[カタログ請求](https://www.honda.co.jp/Nbox/catalog/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。
+
+## 2026-09-12 日産4モデルの工場出荷目処を補助表示
+
+日産の「各車両の工場出荷時期の目処について」を確認し、日産アリア、エクストレイル、キックス、セレナの31販売単位へ、モデル単位の工場出荷目処を追加した。アリアは3〜4ヶ月程度、エクストレイルとキックスは1〜2ヶ月程度、セレナは販売店への問い合わせ案内である（いずれも2026年9月11日時点）。
+
+このページは「各車両、ご注文いただいてからの工場出荷時期目途」と明記する一方、一部仕様・グレードは記載通りに用意できない場合や、販売店の状況で納車時期が変わる旨も併記している。そのため、工場出荷目処は一覧・詳細・比較の補助情報として表示するが、個別販売単位の注文受付を直接証明するものとは扱わず、`availability=unknown`を維持した。注文可否を新車注文可へ更新するには、従来どおり販売単位の明文受付・購入予約根拠が必要である。
+
+根拠: [日産 各車両の工場出荷時期の目処](https://www3.nissan.co.jp/siteinfo/product.html)、確認日: 2026-09-12（ページ表示は2026/9/11時点）。

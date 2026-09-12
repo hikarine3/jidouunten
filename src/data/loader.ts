@@ -409,6 +409,18 @@ export function displayVehicleTiming(vehicle: Pick<Vehicle, 'salesUnitIntroduced
   return displayCatalogAsOf(vehicle.catalogAsOf);
 }
 
+/**
+ * メーカーがモデル単位で公開する工場出荷目処を、注文可否とは分離して表示する。
+ * 個別グレードの注文受付や納車を保証しないため、根拠のない「注文可」へ変換しない。
+ */
+export function vehicleFactoryShippingEstimate(vehicle: Pick<Vehicle, 'sources'>) {
+  const evidence = vehicle.sources
+    .flatMap((source) => source.supports)
+    .find((fact) => fact.startsWith('注文後の工場出荷時期目処：'));
+  if (!evidence) return null;
+  return evidence.replace('注文後の工場出荷時期目処：', '').replace(/（モデル単位）$/, '');
+}
+
 const publicSiteOrigin = 'https://jidouunten.jp';
 
 /** 車両詳細の公開URLを構造化データと画面リンクで共有する。 */

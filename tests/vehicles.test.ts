@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehicleFactStatus, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, factStatusLabels, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleFactStatus, vehicleImageFor, vehicleImages, vehicleItemListStructuredData, vehicleMatchesPriceBand, vehiclePriceMin, vehiclePublicUrl, vehicleReferenceLabel, vehicleReferenceTotal, vehicleStructuredData, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehicleFactStatus, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, factStatusLabels, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleFactStatus, vehicleFactoryShippingEstimate, vehicleImageFor, vehicleImages, vehicleItemListStructuredData, vehicleMatchesPriceBand, vehiclePriceMin, vehiclePublicUrl, vehicleReferenceLabel, vehicleReferenceTotal, vehicleStructuredData, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -50,6 +50,13 @@ describe('vehicle data contract and filters', () => {
     expect(displayCatalogAsOf('2026-09')).toBe('2026年9月');
     expect(displayVehicleTiming({ salesUnitIntroducedAt: null, catalogAsOf: '2026-09' })).toBe('2026年9月');
     expect(displayVehicleTiming({ salesUnitIntroducedAt: null, catalogAsOf: null })).toBe('');
+  });
+
+  it('モデル単位の工場出荷目処を注文可否と分離して表示できる', () => {
+    const withEstimate = makeVehicle({ sources: [{ url: 'https://www3.nissan.co.jp/siteinfo/product.html', publisher: '日産自動車', title: '各車両の工場出荷時期の目処について', accessedAt: '2026-09-12', supports: ['注文後の工場出荷時期目処：1〜2ヶ月程度（モデル単位）'] }] });
+    expect(vehicleFactoryShippingEstimate(withEstimate)).toBe('1〜2ヶ月程度');
+    expect(vehicleFactoryShippingEstimate(makeVehicle())).toBeNull();
+    expect(withEstimate.availability).toBe('new_order_available');
   });
 
   it('販売状態90日・機能とODD180日の期限を超えた販売単位だけ要再確認にする', () => {
@@ -534,7 +541,7 @@ describe('vehicle data contract and filters', () => {
     const ariya = vehicles.filter((vehicle) => vehicle.maker === 'Nissan' && vehicle.model === '日産アリア');
     expect(ariya).toHaveLength(4);
     expect(ariya.find((vehicle) => vehicle.grade === 'B6')?.availability).toBe('new_order_available');
-    expect(ariya.find((vehicle) => vehicle.grade === 'B6')?.availabilityCheckedAt).toBe('2026-09-11');
+    expect(ariya.find((vehicle) => vehicle.grade === 'B6')?.availabilityCheckedAt).toBe('2026-09-12');
     expect(ariya.find((vehicle) => vehicle.grade === 'B6')?.sources.some((source) => source.url === 'https://www3.nissan.co.jp/vehicles/new/ariya.html' && source.accessedAt === '2026-09-11' && source.supports.some((fact) => fact.includes('日産各店で注文できるB6')))).toBe(true);
     expect(ariya.filter((vehicle) => vehicle.grade !== 'B6').every((vehicle) => vehicle.availability === 'unknown')).toBe(true);
     expect(ariya.find((vehicle) => vehicle.grade === 'B6')?.limitations.at(-1)).toContain('在庫・納期・契約条件');

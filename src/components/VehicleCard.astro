@@ -1,8 +1,9 @@
 ---
 import type { Vehicle } from '../data/loader';
-import { availabilityLabels, canonicalRoadType, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleTiming, factStatusLabels, handsOffLabels, levelLabels, monitoringLabels, vehicleFactStatus, vehicleImageFor, vehicleReferenceLabel } from '../data/loader';
+import { availabilityLabels, canonicalRoadType, capabilityDefinition, displayOptionalPackagePrices, displayVehiclePrice, displayVehicleTiming, factStatusLabels, handsOffLabels, levelLabels, monitoringLabels, vehicleFactoryShippingEstimate, vehicleFactStatus, vehicleImageFor, vehicleReferenceLabel } from '../data/loader';
 const { vehicle, selectable = false, checked = false } = Astro.props as { vehicle: Vehicle; selectable?: boolean; checked?: boolean };
 const image = vehicleImageFor(vehicle);
+const shippingEstimate = vehicleFactoryShippingEstimate(vehicle);
 const factStatus = vehicleFactStatus(vehicle);
 const capabilityPriority = ['hands_off_highway', 'lane_change_support', 'traffic_jam_pilot', 'traffic_jam_assist', 'driver_monitoring', 'adaptive_cruise_control', 'lane_centering', 'lane_departure_prevention'];
 const visibleCapabilities = [...vehicle.capabilities]
@@ -28,6 +29,7 @@ const visibleCapabilities = [...vehicle.capabilities]
     </div>
     <div class="card-specs">
       {displayVehicleTiming(vehicle) && <span><strong>{vehicle.salesUnitIntroducedAt ? '時期' : '確認月'}</strong> {displayVehicleTiming(vehicle)}</span>}
+      {shippingEstimate && <span><strong>出荷目処</strong> {shippingEstimate}</span>}
       <span><strong>道路</strong> {vehicle.odd.roadTypes.map(canonicalRoadType).filter((road, index, list) => list.indexOf(road) === index).join(' / ') || '不明'}</span>
       <span><strong>監視</strong> {monitoringLabels[vehicle.driverMonitoring]}</span>
     </div>

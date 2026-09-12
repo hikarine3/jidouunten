@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { availabilityLabels, availabilityNotes, capabilityDefinition, displayOptionalPackagePrices, displayVehicleFactStatus, displayVehiclePrice, displayVehicleReferenceTotal, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleReferenceLabel, vehicles } from '../../data/loader';
+import { availabilityLabels, availabilityNotes, capabilityDefinition, displayOptionalPackagePrices, displayVehicleFactStatus, displayVehiclePrice, displayVehicleReferenceTotal, handsOffLabels, levelLabels, monitoringLabels, officialLinkFor, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleFactoryShippingEstimate, vehicleReferenceLabel, vehicles } from '../../data/loader';
 
 const availabilityPublicKeys: Record<string, string> = {
   new_order_available: 'order',
@@ -34,6 +34,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
   priceLabel: displayVehiclePrice(vehicle),
   optionalPackageLabel: displayOptionalPackagePrices(vehicle),
   referenceTotalLabel: displayVehicleReferenceTotal(vehicle),
+  shippingEstimateLabel: vehicleFactoryShippingEstimate(vehicle),
   freshnessLabel: displayVehicleFactStatus(vehicle),
   decisionFingerprint: vehicleDecisionFingerprint(vehicle),
   decisionSignals: vehicleDecisionSignals(vehicle),
@@ -130,6 +131,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
         optionalPackageRows,
         referenceTotalRows,
         freshnessRows,
+        row('工場出荷目処<small>モデル単位の目安</small>', (v) => v.shippingEstimateLabel || '未確認', 'factory-shipping'),
         row('自動化レベル', (v) => `Level ${v.automationLevel} · ${levelLabels[v.automationLevel]}`, 'level'),
         row('道路', (v) => fact(v.odd.roadTypes), 'road'),
         row('速度', (v) => v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明'), 'speed'),
@@ -146,6 +148,7 @@ const publicCatalog = vehicles.map((vehicle) => ({
         selected.map((v) => v.optionalPackageLabel || '追加価格は未確認'),
         selected.map((v) => v.referenceTotalLabel || '参考総額は算出不可'),
         selected.map((v) => v.freshnessLabel || '確認済み'),
+        selected.map((v) => v.shippingEstimateLabel || '未確認'),
         selected.map((v) => `Level ${v.automationLevel} · ${levelLabels[v.automationLevel]}`),
         selected.map((v) => fact(v.odd.roadTypes)),
         selected.map((v) => v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明')),
