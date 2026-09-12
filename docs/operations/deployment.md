@@ -2,6 +2,18 @@
 
 更新: 2026-09-13
 
+## 最新の配信（2026-09-13 発売・導入時期の表示補正）
+
+- exact app release commit: `f6eecbf37f99a33c6a3c03cb443f4c965acd5322`
+- immutable: https://7942d460.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Honda N-BOX 34販売単位について、Honda公式取扱説明書の「発売年月2026年07月～」を`販売単位の発売・導入時期 2026年7月`として一覧・詳細へ反映した。詳細では発売・導入時期と現行カタログ確認月を別項目で表示し、一次資料で発売年月を固定できない車両は「未確認」のままカタログ確認月と混同しないようにした。
+- 根拠: [Honda N-BOX 取扱説明書](https://www.honda.co.jp/ownersmanual/webom/jpn/n-box/2027/details/69113e1849de55-32403005.html)（確認日: 2026-09-12）。発売年月が明記された34件以外は、発表日・カタログ確認月から発売日を推定していない。
+- SEO／公開面: 483 HTML、sitemap-0は482 URL、車両詳細476件、トップ／一覧ItemListは2ページ・950項目。GTM実IDは各HTML 1件、テスト計測ID0件、公開HTML内部enum・source・accessedAt漏れ0件。
+- QA: `npm test` Vitest88件中88件正常＋Python27件中27件正常、価格476/476、発売年月根拠34件中34件正常、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、独立リリース監査PASS。実ブラウザはimmutable／本体の詳細・一覧・GTM各1件中1件正常（2環境計2/2）。
+- 本番smoke: immutable／本体のトップ、一覧、N-BOX詳細、ヤリス（発売・導入時期未確認＋現行カタログ確認月）詳細はHTTP200。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301。
+- rollback: https://82a29373.jidouunten.pages.dev（直前正常、source `587e8bd`）
+
 ## 最新の配信（2026-09-13 自宅充電チェック）
 
 - exact app release commit: `587e8bdff720d246111fd6db2a4fc719e65e3285`
