@@ -2,6 +2,18 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Jeep Commander／Suzuki FRONX候補追加）
+
+- exact release commit: `b8f2817e1cc8f60fa10dd05fa19bebbf63ab486c`（Jeep Commander 1単位、Suzuki FRONX 2単位、公式導線・台帳・E2Eを同期。registry件数マーカーは後続docs commit `27b8b3872ed4f02f4a0102769d8aeaca158c9824`で452へ同期）
+- immutable: https://69ce7e54.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Cloudflare Pages: `69ce7e54-99a7-47ee-a49e-5cc09d516344`（Production / main / source `b8f2817`）
+- 内容: Jeep Commander Limited（4WD・7人乗り、税込619万円〜）とSuzuki FRONX（2WD・6AT 254万1,000円、4WD・6AT 273万9,000円）を日本向け現行候補として追加。いずれもACC＋車線維持支援のLevel 2相当、ハンズオフ不可。CommanderはHighway Assist／Active Lane Management、FRONXは車線変更時の加減速・側方警告を自動車線変更支援と区別し、FRONXのドライバーモニタリングは未確認、個別受注可否は全3単位で未確認とした。公式商品・安全・価格・見積り等の導線を詳細・比較へ反映した。
+- 根拠: [Jeep Commander商品](https://www.jeep-japan.com/commander.html)、[Jeep安全性能](https://www.jeep-japan.com/commander/safety-security.html)、[Suzuki FRONX商品](https://www.suzuki.co.jp/car/fronx/)、[FRONX価格](https://www.suzuki.co.jp/car/fronx/detail/)、[FRONX安全](https://www.suzuki.co.jp/car/fronx/safety/)、[FRONX発売発表](https://www.suzuki.co.jp/release/a/2024/1016/)、[Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)（確認日: 2026-09-12）。
+- SEO／公開面: 459 HTML、sitemap-0は458 URL、車両詳細453件、トップ／一覧ItemListは2ページ・904項目。GTM実IDは各HTML 1件、テスト計測ID0件、公開HTML内部enum・source・accessedAt漏れ0件。
+- QA: `npm test` 79/79＋Python16/16、価格453/453（exact434／range18／未確認1）、公式導線82モデル／79 URL／168 actions、注文可48／未確認404／利用不可1、鮮度確認済み452／要再確認0／競合1、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry closure 546/546、独立リリース監査PASS。
+- 本番smoke: immutable／本体E2E各1/1（本体GA collect HTTP204）。トップ、一覧、Commander詳細、FRONX詳細、FRONX比較、sitemap、robotsはHTTP200、未知URL404、`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301。既存Wikimedia Commons画像は一覧でデスクトップ約374×115px・モバイル約360×88pxのWebPサムネイル（`loading=lazy`・`object-fit: cover`）を維持し、新規画像は追加していない。
+
 ## 最新の配信（2026-09-12 Peugeot E-3008 GT候補追加）
 
 - exact release commit: `9bebe69`（Peugeot E-3008 GTの正本・公式導線・台帳・テストを同期）
