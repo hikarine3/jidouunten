@@ -182,7 +182,7 @@ describe('vehicle data contract and filters', () => {
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補452件は全件の公式金額を保持する', () => {
+  it('現行候補455件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
     expect(current).toHaveLength(455);
     expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(455);
