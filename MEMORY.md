@@ -4,6 +4,7 @@
 
 ## 2026-09-12 Sprint停止・価値レーン切り替え
 
+- 日付付きの下記エントリは各時点の監査・公開履歴であり、現行件数や次作業の正本ではない。現行状態は `docs/pm/goals/sprint-loop.md`、GitHub Project、KPI・運用ドキュメントから再取得する。
 - 現在の車種・グレード追加トランシェはコミット済み分で閉じる。ユーザーが再開を明示し、一次情報・価格・能力差の仮説と有限の対象範囲をIssueへ固定するまで、新規車両レコードを追加しない。
 - 公開件数、marker、registry、docsの同期だけでは価値Sprintにしない。同一の価値仮説や外部確認待ちで90分以上前進しない場合は、閉じた作業・残failure・次候補・続行判断を確認する。
 - 打ち切り対象のactiveは自動再開しない。Status／PM Phase／RankはGitHub Projectを正本とし、停止理由を記録したうえでユーザー確認後に変更する。
@@ -367,10 +368,10 @@
 
 ## 次のdelivery
 
-[GitHub Project `jidouunten Delivery`](https://github.com/users/hikarine3/projects/5) の最上位Ready Issueを
-正本として着手する。初回公開Sprintは
-[JID-001](https://github.com/hikarine3/jidouunten/issues/1) で、仕様は
-`docs/pm/requirements/20260907-level-first-selector-mvp.md`。
+[GitHub Project `jidouunten Delivery`](https://github.com/users/hikarine3/projects/5) と各Issueを作業状態の正本とし、
+`docs/pm/goals/sprint-loop.md` の起動・停止・候補選定契約に従う。初期Sprint `JID-001` を固定的な次作業として
+再利用せず、active／Readyの現在状態を毎回取得する。現在の車種・グレード追加トランシェは閉じているため、
+ユーザーの明示的な再開なしに新規車両レコードを開始しない。
 
 ## 実装・データ・routing
 
