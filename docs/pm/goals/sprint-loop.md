@@ -127,5 +127,5 @@ Phase 0〜7の意味は `docs/pm/github-work-management.md` を使います。�
 ## Short `/goal` paste
 
 ```text
-/goal docs/pm/goals/sprint-loop.md を読み、GitHub Project `jidouunten Delivery` のIn progressを継続し、なければStatus=ReadyをWork priority、同順位はRank順に消費する。Readyがある間はPhase 0を再実行しない。activeもReadyも0件ならPhase 0を行い、価値gateを通る重複なしのReady候補10件以上を全件事前検証してProjectへ登録するまで完了扱いにしない。現在の車種・グレード追加トランシェはコミット済み分で閉じ、ユーザーが再開を明示するまで新規追加を始めない。件数・registry同期だけの作業を価値Sprintにしない。通常実装はrepoのmodel routingで低コストagentへ範囲固定し、親は採択・統合・高risk判断だけを行う。Phase 5まで件数付きQAと実ブラウザ確認、Phase 6で独立レビューを行う。2026-09-10のオーナー継続承認により全gate PASSのexact candidateは再確認なしでpush/deployし、DNS/Secret/課金/削除/別targetは都度承認まで実行しない。GitHub取得失敗をReady 0件扱いせず、本書の終端・停止条件まで継続する。
+/goal docs/pm/goals/sprint-loop.md をPJ固有正本として読む。PJ=jidouunten / 作業状態正本=GitHub Project `jidouunten Delivery` / release gate=本書のPhase 5〜7。共通契約は `../vpshikaku/docs/claude-rules/sprint-loop-common-contract.md` から読み、モデル割当はrepo `CLAUDE.md` と `../vpshikaku/docs/model-routing.md` に従う。停止条件は本書の「終端・停止条件」「打ち切りと価値レーンの切り替え」を適用する。現在の車種・グレード追加トランシェはコミット済み分で閉じ、ユーザーが明示的に再開するまで新規追加しない。件数・registry同期だけの作業は価値Sprintにしない。DNS/Secret/課金/削除/別targetは明示承認まで実行しない。
 ```
