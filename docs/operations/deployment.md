@@ -2,6 +2,17 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 三菱4車種の購入予約導線確認）
+
+- exact release commit: `4f9e492`
+- immutable: https://4f6fc55b.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 三菱 eKクロス8販売単位、eKクロス EV 3販売単位、デリカミニ12販売単位、eKスペース4販売単位（計27単位）について、三菱公式商品ページの「商談予約・購入予約受付中」を確認し、販売状態を`new_order_available`へ更新した。購入予約は最終契約・個別在庫・納期を保証しないため、販売店確認が必要と明記している。eKクロス／eKクロス EV／デリカミニ／eKスペースの公式購入予約URLを詳細ページのアクションへ同期した。
+- SEO／公開面: 420 HTML、sitemap-0は419 URL、車両詳細414件、トップ／一覧ItemListは2ページ・826項目。GTM実IDは各HTML 1件、テスト計測ID0件。公開HTML内部enum・source・accessedAt漏れ0件。
+- UI: 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のWebPサムネイルで省スペース表示（実ブラウザでデスクトップ374×115px、モバイル360×88px）。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホスト方針を維持。
+- QA: `npm test` Vitest73/73＋Python16/16、価格414/414（exact398／range15／未確認1）、公式導線77モデル／74 URL／155 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、注文可48件／未確認365件、registry 508/508、独立リリース監査PASS。
+- 本番smoke: immutable／本体のトップ、一覧、eKクロス、eKクロス EV、デリカミニ、eKスペース詳細と購入予約導線、比較、sitemap、robotsはHTTP200。未知URL404、`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）はpath/queryを本体へ301。immutable／本体E2E各1/1、本体GA collect HTTP204。Cloudflare Pages deployment APIでも`4f6fc55b`をproduction・`jidouunten.jp` alias・deploy successとして確認。
+
 ## 最新の配信（2026-09-12 Toyota MIRAI追加・一覧サムネイル回帰確認）
 
 - exact release commit: `0e95015`
