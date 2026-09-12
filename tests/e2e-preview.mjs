@@ -333,6 +333,16 @@ try {
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
+  assert.match(await page.locator('[data-empty]').innerText(), /掲載データに一致する候補がない/, '0件時に市場不存在と断定しない');
+  assert.equal(await page.locator('[data-empty-relax]').count(), 1, '0件時に候補が出る緩和だけを提示');
+  assert.match(await page.locator('[data-empty-relax]').first().innerText(), /Level 3の条件を外す[\s\S]*447件/, 'Level条件を外した実データ件数を提示');
+  assert.ok((await events()).some((event) => event.event === 'filter_empty_results'), '0件到達イベントをdataLayerへ送る');
+  assert.ok((await events()).some((event) => event.event === 'filter_relaxation_shown'), '緩和候補表示イベントをdataLayerへ送る');
+  await page.locator('[data-empty-relax]').first().click();
+  assert.equal(new URL(page.url()).searchParams.has('level'), false, '緩和ボタンでLevel条件をURLから外す');
+  assert.equal(await visibleCards(), 447, '緩和ボタンで候補447件を表示');
+  assert.ok((await events()).some((event) => event.event === 'filter_relaxation_apply' && event.relaxation_filter === 'level'), '緩和適用イベントをdataLayerへ送る');
+  await page.goto(`${base}/?level=3`);
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
   await page.waitForFunction(() => document.querySelectorAll('[data-vehicle-shell]:not([hidden])').length === 447);

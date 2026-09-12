@@ -27,6 +27,9 @@ ALL_PAGES_TRIGGER_ID = "2147479553"
 EVENT_PARAMETERS = {
     "select_level": ("level",),
     "filter_results": ("filter_name", "filter_value", "result_count"),
+    "filter_empty_results": ("filter_name", "filter_value", "result_count"),
+    "filter_relaxation_shown": ("filter_name", "relaxation_count"),
+    "filter_relaxation_apply": ("filter_name", "relaxation_filter", "result_count"),
     "compare_vehicles": ("vehicle_ids", "vehicle_count"),
     "view_vehicle": ("vehicle_id", "model_year", "grade"),
     "outbound_manufacturer": ("vehicle_id", "manufacturer", "link_url", "link_domain", "link_type", "placement"),

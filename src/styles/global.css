@@ -178,6 +178,14 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .card-foot > .subtle, .card-actions, .card-actions .button { white-space: nowrap; }
 .empty { padding: 42px 24px; border: 1px dashed var(--line); border-radius: 16px; text-align: center; background: var(--white); }
 .empty p { color: var(--muted); }
+.empty-suggestions { display: grid; gap: 6px; max-width: 680px; margin: 22px auto; padding: 16px; border: 1px solid var(--line); border-radius: 13px; text-align: left; background: #f8faf6; }
+.empty-suggestions > strong { font-size: .88rem; }
+.empty-suggestions > small { color: var(--muted); font-size: .7rem; }
+.empty-suggestion-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; }
+.empty-suggestion { display: inline-flex; align-items: center; gap: 8px; padding: 8px 11px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: var(--white); font-size: .76rem; font-weight: 800; cursor: pointer; }
+.empty-suggestion:hover, .empty-suggestion:focus-visible { border-color: var(--lime-deep); box-shadow: 0 0 0 2px rgba(129,157,33,.16); }
+.empty-suggestion strong { color: var(--accent); white-space: nowrap; }
+.empty-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; }
 .page-intro { padding: 68px 0 32px; }
 .page-intro h1 { font-size: clamp(2.3rem, 5vw, 4.2rem); max-width: 760px; }
 .detail-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 34px; align-items: start; }

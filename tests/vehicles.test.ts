@@ -138,6 +138,14 @@ describe('vehicle data contract and filters', () => {
     expect(filterVehicleList([makeVehicle({ id: 'mainline', odd: { ...makeVehicle().odd, roadTypes: ['高速道路の本線'] } })], { road: '高速道路' }).map((v) => v.id)).toEqual(['mainline']);
   });
 
+  it('0件になる代表条件は市場不存在と断定せず、1条件の緩和で候補が戻る', () => {
+    expect(filterVehicleList(vehicles, { level: 3 })).toHaveLength(0);
+    expect(filterVehicleList(vehicles, { level: 1, handsOff: 'allowed_in_conditions' })).toHaveLength(0);
+    expect(filterVehicleList(vehicles, { level: 3, availability: 'new_order_available' })).toHaveLength(0);
+    expect(filterVehicleList(vehicles, { level: 3, availability: 'all' })).toHaveLength(1);
+    expect(filterVehicleList(vehicles, {})).toHaveLength(447);
+  });
+
   it('uses one default-list predicate for filtering and top-page counts', () => {
     const list = [
       makeVehicle({ id: 'orderable' }),

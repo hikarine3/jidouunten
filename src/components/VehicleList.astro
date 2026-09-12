@@ -113,7 +113,7 @@ const guideProfiles = [
   <div class="notice list-notice" data-level2-notice hidden><strong>Level 2は運転支援です。</strong> ハンズオフ可能な条件があっても、運転者は周囲を常時監視します。</div>
   <div class="results-bar"><h2><span data-selected-label>公式サイト掲載あり</span> <span class="subtle" data-result-count aria-live="polite">{defaultCount}件</span></h2><span class="subtle results-help" data-sort-label>発売・導入が新しい順 · 時期不明は末尾</span><div class="results-actions"><button class="button small text" type="button" data-save-search>この条件を保存</button><div class="compare-toolbar" data-compare-toolbar><span class="subtle" data-compare-count>0台選択中（最大2台）</span><a class="button small alt" data-compare-link href="/compare/" aria-disabled="true">選択した車両を比較</a></div></div></div>
   <form class="compare-list" method="get" action="/compare/" id="compare-list-form"><div class="cards" data-results>{sortedVehicles.map((vehicle, index) => <div data-vehicle-shell hidden={!isDefaultListedVehicle(vehicle)} data-level={vehicle.automationLevel} data-maker={vehicle.maker} data-capabilities={vehicle.capabilities.map((id) => capabilityPublicKeys[id]).join('|')} data-road={vehicle.odd.roadTypes.map(canonicalRoadType).join('|')} data-hands-off={handsOffPublicKeys[vehicle.handsOff]} data-availability={availabilityPublicKeys[vehicle.availability]} data-current-catalog={String(vehicle.currentCatalogListed === true)} data-introduced-at={vehicle.salesUnitIntroducedAt ?? ''} data-price-min={vehiclePriceMin(vehicle) ?? ''} data-decision-fingerprint={vehicleDecisionFingerprint(vehicle)} data-decision-signals={JSON.stringify(vehicleDecisionSignals(vehicle))} data-stable-key={`${vehicle.maker}::${vehicle.model}::${vehicle.grade}::${vehicle.id}`} data-original-index={index}><VehicleCard vehicle={vehicle} selectable /></div>)}</div></form>
-  <div class="empty" data-empty hidden><h2>条件に合う候補はまだありません</h2><p>条件をゆるめるか、公式サイト掲載ありの候補に戻してお試しください。</p><a class="button text" href={action}>条件をリセット</a></div>
+  <div class="empty" data-empty hidden><h2>条件に合う候補はまだありません</h2><p>これは市場に存在しないという意味ではなく、現在の掲載データに一致する候補がない状態です。</p><div class="empty-suggestions" data-empty-suggestions hidden><strong>条件を1つ外すと、次の候補が見つかります。</strong><small>緩和はおすすめ順位ではなく、選び直しの入口です。</small><div class="empty-suggestion-list" data-empty-suggestion-list></div></div><div class="empty-links"><a class="button text" href={action}>条件をリセット</a><a class="button text" href="/levels/">Levelの違いを見る</a></div></div>
 </div></section>
 
 <script define:vars={{ action }}>
@@ -130,12 +130,32 @@ const guideProfiles = [
   const rawAvailability = { order: ['new', 'order', 'available'].join('_'), stock: ['inventory', 'only'].join('_'), used: ['used', 'only'].join('_'), service: ['service', 'available'].join('_'), trial: ['trial', 'or', 'research'].join('_'), future: ['ann', 'ounced'].join(''), closed: ['un', 'available'].join(''), uncertain: ['un', 'known'].join('') };
   const rawHandsOff = { conditional: ['allowed', 'in', 'conditions'].join('_'), hands_on: ['not', 'allowed'].join('_'), uncertain: ['un', 'known'].join('') };
   const rawCapability = { acc: ['adaptive', 'cruise', 'control'].join('_'), lane_center: ['lane', 'centering'].join('_'), traffic_jam: ['traffic', 'jam', 'assist'].join('_'), hands_off: ['hands', 'off', 'highway'].join('_'), lane_change: ['lane', 'change', 'support'].join('_'), driver_monitor: ['driver', 'monitoring'].join('_') };
+  const publicAvailability = Object.fromEntries(Object.entries(rawAvailability).map(([key, value]) => [value, key]));
+  const publicHandsOff = Object.fromEntries(Object.entries(rawHandsOff).map(([key, value]) => [value, key]));
+  const publicCapability = Object.fromEntries(Object.entries(rawCapability).map(([key, value]) => [value, key]));
   const availabilityParamMap = Object.fromEntries(Object.entries(rawAvailability).map(([key, value]) => [value, key]));
   const handsOffParamMap = Object.fromEntries(Object.entries(rawHandsOff).map(([key, value]) => [value, key]));
   const capabilityParamMap = Object.fromEntries(Object.entries(rawCapability).map(([key, value]) => [value, key]));
   const normalizeAvailability = (value) => availabilityParamMap[value] || value;
   const normalizeHandsOff = (value) => handsOffParamMap[value] || value;
   const normalizeCapability = (value) => capabilityParamMap[value] || value;
+  const trackEvent = (event, payload = {}) => {
+    if (window.jidouuntenTrack) window.jidouuntenTrack(event, payload);
+    else { window.__jidouuntenPendingEvents = window.__jidouuntenPendingEvents || []; window.__jidouuntenPendingEvents.push({ event, payload }); }
+  };
+  const relaxationOptions = new Map();
+  let lastEmptySearch = '';
+  let lastRelaxationSearch = '';
+  const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
+  const filterMatch = (shell, values) => {
+    const defaultAvailable = shell.dataset.availability === 'order' || (shell.dataset.availability === 'uncertain' && shell.dataset.currentCatalog === 'true');
+    const price = Number(shell.dataset.priceMin || '');
+    const hasPrice = Number.isFinite(price) && price > 0;
+    const budgetMatch = !values.budget || (hasPrice && ((values.budget === 'under_300' && price < 3000000) || (values.budget === 'from_300_to_500' && price >= 3000000 && price < 5000000) || (values.budget === 'from_500_to_800' && price >= 5000000 && price < 8000000) || (values.budget === 'over_800' && price >= 8000000)));
+    const shellCapabilities = (shell.dataset.capabilities || '').split('|');
+    return (!values.maker || shell.dataset.maker === values.maker) && (!values.level || shell.dataset.level === values.level) && values.capability.every((capability) => shellCapabilities.includes(capability)) && (!values.road || (shell.dataset.road || '').split('|').includes(values.road)) && (!values.handsOff || shell.dataset.handsOff === values.handsOff) && (values.availability && values.availability !== 'all' ? shell.dataset.availability === values.availability : values.availability === 'all' ? true : defaultAvailable) && budgetMatch;
+  };
+  const publicValues = (values) => ({ maker: values.maker, level: values.level, capability: values.capability.map((value) => publicCapability[value] || value), road: values.road, handsOff: publicHandsOff[values.handsOff] || '', availability: publicAvailability[values.availability] || values.availability, budget: values.budget, sort: values.sort });
   if (matchMedia('(max-width: 520px)').matches) filterPanel?.removeAttribute('open');
   const updateCompare = () => {
     const selected = compareInputs.filter((input) => input.checked).map((input) => input.value);
@@ -157,12 +177,7 @@ const guideProfiles = [
     }).forEach((shell) => results?.append(shell));
     let count = 0;
     shells.forEach((shell) => {
-      const defaultAvailable = shell.dataset.availability === 'order' || (shell.dataset.availability === 'uncertain' && shell.dataset.currentCatalog === 'true');
-      const price = Number(shell.dataset.priceMin || '');
-      const hasPrice = Number.isFinite(price) && price > 0;
-      const budgetMatch = !values.budget || (hasPrice && ((values.budget === 'under_300' && price < 3000000) || (values.budget === 'from_300_to_500' && price >= 3000000 && price < 5000000) || (values.budget === 'from_500_to_800' && price >= 5000000 && price < 8000000) || (values.budget === 'over_800' && price >= 8000000)));
-      const shellCapabilities = (shell.dataset.capabilities || '').split('|');
-      const show = (!values.maker || shell.dataset.maker === values.maker) && (!values.level || shell.dataset.level === values.level) && values.capability.every((capability) => shellCapabilities.includes(capability)) && (!values.road || (shell.dataset.road || '').split('|').includes(values.road)) && (!values.handsOff || shell.dataset.handsOff === values.handsOff) && (values.availability && values.availability !== 'all' ? shell.dataset.availability === values.availability : values.availability === 'all' ? true : defaultAvailable) && budgetMatch;
+      const show = filterMatch(shell, values);
       shell.hidden = !show; const compareInput = shell.querySelector('input[name="ids"]'); if (!show && compareInput) compareInput.checked = false; if (show) count += 1;
     });
     const capabilityText = values.capability.length ? values.capability.map((capability) => [...(form?.querySelectorAll('input[name="capability"]') || [])].find((input) => input.value === capability)?.closest('label')?.querySelector('strong')?.textContent || capability).join(' ＋ ') : '';
@@ -176,12 +191,38 @@ const guideProfiles = [
     const resultCount = document.querySelector('[data-result-count]'); if (resultCount) resultCount.textContent = `${count}件`;
     const sortLabel = document.querySelector('[data-sort-label]'); if (sortLabel) sortLabel.textContent = values.sort === 'maker_asc' ? 'メーカー名順' : values.sort === 'price_asc' ? '価格が安い順 · 価格要確認は末尾' : '発売・導入が新しい順 · 時期不明は末尾';
     const empty = document.querySelector('[data-empty]'); if (empty) empty.hidden = count !== 0;
+    const suggestionShell = document.querySelector('[data-empty-suggestions]');
+    const suggestionList = document.querySelector('[data-empty-suggestion-list]');
+    relaxationOptions.clear();
+    const suggestions = [];
+    const addSuggestion = (filterName, label, nextValues) => {
+      const suggestedCount = shells.filter((shell) => filterMatch(shell, nextValues)).length;
+      if (suggestedCount > 0 && !suggestions.some((suggestion) => suggestion.filterName === filterName && suggestion.count === suggestedCount)) suggestions.push({ filterName, label, count: suggestedCount, values: publicValues(nextValues) });
+    };
+    if (count === 0) {
+      values.capability.forEach((capability) => addSuggestion('capability', `「${capability === '"' ? '能力条件' : (form?.querySelector(`input[name="capability"][value="${publicCapability[capability] || capability}"]`)?.closest('label')?.querySelector('strong')?.textContent || capability)}」を外す`, { ...values, capability: values.capability.filter((item) => item !== capability) }));
+      if (values.maker) addSuggestion('maker', `メーカー「${values.maker}」を外す`, { ...values, maker: '' });
+      if (values.level) addSuggestion('level', `Level ${values.level}の条件を外す`, { ...values, level: '' });
+      if (values.road) addSuggestion('road', `道路条件「${values.road}」を外す`, { ...values, road: '' });
+      if (values.handsOff) addSuggestion('hands_off', 'ハンズオフ条件を外す', { ...values, handsOff: '' });
+      if (values.availability && values.availability !== 'all') addSuggestion('availability', '販売・利用状態をすべて表示', { ...values, availability: 'all' });
+      if (values.budget) addSuggestion('budget', '価格帯条件を外す', { ...values, budget: '' });
+    }
+    suggestions.slice(0, 6).forEach((suggestion, index) => relaxationOptions.set(`relax-${index}`, suggestion));
+    if (suggestionShell && suggestionList) {
+      suggestionShell.hidden = count !== 0 || suggestions.length === 0;
+      suggestionList.innerHTML = suggestions.slice(0, 6).map((suggestion, index) => `<button type="button" class="empty-suggestion" data-empty-relax="relax-${index}"><span>${escapeHtml(suggestion.label)}</span><strong>${suggestion.count}件</strong></button>`).join('');
+    }
+    const filterSignature = `${location.search}|${count}`;
+    if (count === 0 && location.search !== lastEmptySearch) { trackEvent('filter_empty_results', { filter_name: 'vehicle_filters', filter_value: `${values.maker || 'all'}|${values.level || 'all'}|${values.capability.join(',') || 'all'}|${values.road || 'all'}|${values.handsOff || 'all'}|${values.budget || 'all'}|${values.availability || 'default'}`, result_count: count }); lastEmptySearch = location.search; }
+    if (count === 0 && suggestions.length && filterSignature !== lastRelaxationSearch) { trackEvent('filter_relaxation_shown', { filter_name: 'vehicle_filters', relaxation_count: suggestions.length }); lastRelaxationSearch = filterSignature; }
     const notice = document.querySelector('[data-level2-notice]'); if (notice) notice.hidden = values.level !== '2' && !values.handsOff && values.capability.length === 0;
     levelShortcuts.forEach((button) => button.setAttribute('aria-pressed', button.dataset.levelShortcut === values.level ? 'true' : 'false'));
     if (trackInteraction && location.search !== lastTrackedSearch) { window.jidouuntenTrack?.('filter_results', { filter_name: 'vehicle_filters', filter_value: `${values.maker || 'all'}|${values.level || 'all'}|${values.capability.join(',') || 'all'}|${values.road || 'all'}|${values.handsOff || 'all'}|${values.budget || 'all'}|${values.availability || 'default'}|${values.sort}`, result_count: count }); lastTrackedSearch = location.search; }
     updateCompare();
   };
   const submitValues = (values = {}, clear = false) => { if (clear) { form?.querySelectorAll('select').forEach((select) => { select.value = select.name === 'sort' ? 'introduced_desc' : ''; }); form?.querySelectorAll('input[type="checkbox"]').forEach((input) => { input.checked = false; }); } Object.entries(values).forEach(([name, value]) => { const inputs = [...(form?.querySelectorAll(`input[name="${name}"]`) || [])]; const select = form?.querySelector(`select[name="${name}"]`); if (inputs.length) { const selected = Array.isArray(value) ? value.map(String) : [String(value)]; inputs.forEach((input) => { input.checked = selected.includes(input.value); }); } else if (select) select.value = Array.isArray(value) ? value[0] || '' : value; }); form?.requestSubmit(); };
+  document.addEventListener('click', (event) => { const button = event.target.closest('[data-empty-relax]'); if (!button) return; const suggestion = relaxationOptions.get(button.dataset.emptyRelax); if (!suggestion) return; trackEvent('filter_relaxation_apply', { filter_name: 'vehicle_filters', relaxation_filter: suggestion.filterName, result_count: suggestion.count }); submitValues(suggestion.values, true); });
   form?.addEventListener('submit', (event) => { event.preventDefault(); const query = new URLSearchParams(); for (const [key, rawValue] of new FormData(form)) { const value = key === 'availability' ? rawAvailability[rawValue] || rawValue : key === 'handsOff' ? rawHandsOff[rawValue] || rawValue : key === 'capability' ? rawCapability[rawValue] || rawValue : rawValue; if (value && !(key === 'sort' && value === 'introduced_desc')) query.append(key, value); } history.pushState({}, '', `${action}${query.toString() ? `?${query.toString()}` : ''}`); applyFilters(true); if (matchMedia('(max-width: 520px)').matches) filterPanel?.removeAttribute('open'); });
   form?.querySelector('select[name="level"]')?.addEventListener('change', (event) => window.jidouuntenTrack?.('select_level', { level: event.target.value || 'all' }));
   levelShortcuts.forEach((button) => button.addEventListener('click', () => { if (!button.disabled) submitValues({ level: button.dataset.levelShortcut || '', availability: button.dataset.availabilityShortcut || '' }, true); }));
