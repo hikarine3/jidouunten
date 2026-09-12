@@ -23,13 +23,15 @@ GitHubの状態を、このファイルや別のtodo/queue JSONへ複製しま�
 
 1. `~/.claude/CLAUDE.md`、repo `CLAUDE.md`、共通契約を全文読む。
 2. `git status --short --branch`、実行中writer、GitHub Projectの取得成否を確認する。
-3. `Status=In progress` があれば、そのIssueを現在Phaseから継続する。
-4. ただし「打ち切りと価値レーンの切り替え」に該当するactiveは実装を再開しない。停止理由・残failureをIssueへ記録し、Status／PM Phase／Rankの変更はユーザー確認後にGitHub正本へ反映する。
-5. activeがなく `Status=Ready` があれば、`Work priority`、同順位は`Rank`昇順の先頭をclaimする。
-6. Readyが1件でもある間はPhase 0の候補探索・再採点・内部基盤Sprintを開始しない。
-7. GitHub取得失敗をReady 0件として扱わない。activeもReadyも0件と確認できた場合だけ
+3. Issueが先に作られた可能性がある場合は、`python3 scripts/github_work_board.py sync-issues` を実行し、
+   JID形式のIssueとProject itemの欠落を冪等に補正する。Project取得失敗は欠落なしと扱わない。
+4. `Status=In progress` があれば、そのIssueを現在Phaseから継続する。
+5. ただし「打ち切りと価値レーンの切り替え」に該当するactiveは実装を再開しない。停止理由・残failureをIssueへ記録し、Status／PM Phase／Rankの変更はユーザー確認後にGitHub正本へ反映する。
+6. activeがなく `Status=Ready` があれば、`Work priority`、同順位は`Rank`昇順の先頭をclaimする。
+7. Readyが1件でもある間はPhase 0の候補探索・再採点・内部基盤Sprintを開始しない。
+8. GitHub取得失敗をReady 0件として扱わない。activeもReadyも0件と確認できた場合だけ
    [`../prompts/phase_0.md`](../prompts/phase_0.md)を実行する。
-8. Phase 0は、価値gateを通過した重複なしのReady候補10件以上をportfolioとして全件事前検証し、
+9. Phase 0は、価値gateを通過した重複なしのReady候補10件以上をportfolioとして全件事前検証し、
    GitHub Projectへ一括登録するまで完了扱いにしない。1〜9件の部分登録や数合わせの内部作業は禁止する。
 
 ## このPJの価値・観測・配信契約

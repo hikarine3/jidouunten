@@ -214,5 +214,24 @@ class SelectionTest(unittest.TestCase):
         self.assertEqual(result["minimum_ready_candidates"], 10)
 
 
+class IssueProjectReconciliationTest(unittest.TestCase):
+    def test_chat_created_jid_issue_is_selected_even_without_marker(self):
+        issues = [
+            {"number": 1, "title": "JID-001: selector", "body": "旧本文", "url": "https://github.com/o/r/issues/1"},
+            {"number": 2, "title": "運用メモ", "body": "<!-- jidouunten-work-item:JID-002 -->", "url": "https://github.com/o/r/issues/2"},
+            {"number": 3, "title": "メモ", "body": "対象外", "url": "https://github.com/o/r/issues/3"},
+        ]
+        missing, count = board.issue_project_diff(issues, [])
+        self.assertEqual(count, 2)
+        self.assertEqual([row["number"] for row in missing], [1, 2])
+
+    def test_existing_project_item_is_not_added_again(self):
+        issues = [{"number": 1, "title": "JID-001: selector", "url": "https://github.com/o/r/issues/1"}]
+        items = [{"content": {"url": "https://github.com/o/r/issues/1"}}]
+        missing, count = board.issue_project_diff(issues, items)
+        self.assertEqual(count, 1)
+        self.assertEqual(missing, [])
+
+
 if __name__ == "__main__":
     unittest.main()

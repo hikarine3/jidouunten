@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "docs/pm/github-project.json"
 ID_IN_TITLE = re.compile(r"\bJID-[A-Z0-9][A-Z0-9-]*\b", re.IGNORECASE)
 ID_FORMAT = re.compile(r"^JID-[A-Z0-9][A-Z0-9-]{0,75}$")
+WORK_ISSUE_TITLE = re.compile(r"^JID-[A-Z0-9][A-Z0-9-]*\s*:", re.IGNORECASE)
 PRIORITY_ORDER = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
 PHASE0_MIN_READY_CANDIDATES = 10
 
@@ -364,6 +365,117 @@ def existing_issues(config: dict[str, Any]) -> list[dict[str, Any]]:
     return [row for row in raw if isinstance(row, dict)]
 
 
+def repository_issues(config: dict[str, Any]) -> list[dict[str, Any]]:
+    """Read all repository Issues through REST, including Issues made in chat.
+
+    ``gh issue list`` is GraphQL-backed and is also used by the Project adapter.
+    REST keeps this inventory useful during a temporary Project GraphQL read
+    limit, and ``pull_request`` entries are excluded because the endpoint mixes
+    pull requests into its response.
+    """
+    raw = run_gh([
+        "api", "--method", "GET",
+        f"repos/{config['repository']}/issues",
+        "-f", "state=all", "-f", "per_page=100", "--paginate", "--slurp",
+    ], expect_json=True)
+    pages = raw if isinstance(raw, list) else []
+    rows: list[dict[str, Any]] = []
+    for page in pages:
+        if not isinstance(page, list):
+            continue
+        for issue in page:
+            if not isinstance(issue, dict) or issue.get("pull_request"):
+                continue
+            rows.append({
+                "number": issue.get("number"),
+                "title": issue.get("title") or "",
+                "body": issue.get("body") or "",
+                "state": str(issue.get("state") or "").upper(),
+                "url": issue.get("html_url") or issue.get("url") or "",
+            })
+    return rows
+
+
+def is_work_issue(issue: dict[str, Any]) -> bool:
+    """Return true for a JID work Issue, whether or not it has a marker."""
+    title = str(issue.get("title") or "")
+    body = str(issue.get("body") or "")
+    return bool(WORK_ISSUE_TITLE.search(title) or ID_IN_TITLE.search(body))
+
+
+def issue_project_diff(
+    issues: list[dict[str, Any]], items: list[dict[str, Any]]
+) -> tuple[list[dict[str, Any]], int]:
+    """Find work Issues missing from Project without changing either source."""
+    project_urls = {
+        str((row.get("content") or {}).get("url") or "")
+        for row in items
+        if isinstance(row, dict)
+    }
+    work = [issue for issue in issues if is_work_issue(issue)]
+    missing = [issue for issue in work if str(issue.get("url") or "") not in project_urls]
+    return missing, len(work)
+
+
+def sync_issues(config: dict[str, Any]) -> None:
+    """Reconcile chat-created JID Issues into the live Project Kanban.
+
+    The repository Issue remains the source record. This command only adds a
+    missing Project item; it never edits, closes, relabels, or reprioritizes an
+    Issue and it is safe to rerun after an interrupted ``item-add``.
+    """
+    view, _ = doctor(config)
+    issues = repository_issues(config)
+    items = project_items(config)
+    missing, work_count = issue_project_diff(issues, items)
+    print(
+        f"ISSUE_PROJECT_RECONCILE: scanned={len(issues)} work_issues={work_count} "
+        f"missing={len(missing)}"
+    )
+    added = 0
+    known_urls = {
+        str((row.get("content") or {}).get("url") or "")
+        for row in items
+        if isinstance(row, dict)
+    }
+    for issue in missing:
+        issue_url = str(issue.get("url") or "")
+        if not issue_url:
+            raise BoardError(f"JID Issue #{issue.get('number')} has no URL")
+        if issue_url in known_urls:
+            print(f"PROJECT_ITEM_ADD: #{issue.get('number')} SKIP race-already-present")
+            continue
+        try:
+            run_gh([
+                "project", "item-add", str(config["project_number"]),
+                "--owner", config["owner"], "--url", issue_url,
+            ])
+        except BoardError as exc:
+            # A second worker may have added it after the inventory read. Do a
+            # single bounded refresh before reporting a real failure.
+            try:
+                refreshed = project_items(config)
+            except BoardError:
+                refreshed = []
+            refreshed_urls = {
+                str((row.get("content") or {}).get("url") or "")
+                for row in refreshed
+                if isinstance(row, dict)
+            }
+            if issue_url in refreshed_urls:
+                known_urls.add(issue_url)
+                print(f"PROJECT_ITEM_ADD: #{issue.get('number')} SKIP race-already-present")
+                continue
+            raise BoardError(f"Issue #{issue.get('number')} item-add failed: {exc}") from exc
+        known_urls.add(issue_url)
+        added += 1
+        print(f"PROJECT_ITEM_ADD: #{issue.get('number')} PASS added")
+    print(
+        f"ISSUE_PROJECT_RECONCILE: PASS added={added} "
+        f"already_present={work_count - len(missing)}"
+    )
+
+
 def preflight_issue_conflicts(candidates: list[dict[str, Any]], issues: list[dict[str, Any]]) -> list[str]:
     errors: list[str] = []
     for candidate in candidates:
@@ -499,6 +611,10 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("doctor")
+    sub.add_parser(
+        "sync-issues",
+        help="reconcile JID Issues (including chat-created Issues) into the Project Kanban",
+    )
     next_parser = sub.add_parser("next")
     next_parser.add_argument("--json", action="store_true")
     validate_parser = sub.add_parser("validate-portfolio")
@@ -512,6 +628,8 @@ def main() -> int:
         if args.command == "doctor":
             view, _ = doctor(config)
             print(f"PASS: GitHub Project {view['title']} is available and matches the field contract")
+        elif args.command == "sync-issues":
+            sync_issues(config)
         elif args.command == "next":
             result = attach_next_action(config, select_next(project_items(config)))
             if args.json:

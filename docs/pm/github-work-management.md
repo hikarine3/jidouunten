@@ -1,6 +1,6 @@
 # GitHub Work Management
 
-更新: 2026-09-07
+更新: 2026-09-12
 
 ## 正本
 
@@ -42,6 +42,21 @@ Issueは成果物へのリンクを持ち、長文仕様を二重に保持しな
 実行入口は `python3 scripts/github_work_board.py`、接続設定とfield契約は
 [`github-project.json`](github-project.json)、Phase 0の調査・候補・停止条件は
 [`prompts/phase_0.md`](prompts/phase_0.md)を正本とする。
+
+### Issue→Project Kanbanの反映
+
+Chatや別の作業経路でIssueが先に作られることがあるため、IssueとProject itemの存在を同一視しない。
+作業開始時またはIssue作成後に次を実行する。
+
+```bash
+python3 scripts/github_work_board.py sync-issues
+```
+
+このコマンドはRESTでリポジトリの全Issueを読み、タイトルが`JID-...:`または本文にJID識別子を
+持つ作業Issueだけを対象に、Project Kanbanにないものを`item-add`する。既存itemは再追加せず、
+Issue本文・ラベル・状態・優先順位は変更しない。出力の`scanned/work_issues/missing/added`を
+作業ログまたは対象Issueへ記録する。Project APIが読めない場合は失敗として扱い、Issueだけを
+見て「Kanban登録済み」と報告してはならない。
 
 ## Issueの要件
 
