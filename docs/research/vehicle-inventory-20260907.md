@@ -8,9 +8,9 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 450 | `src/data/vehicles.json` の全レコード（現行449 + 過去1） |
-| 既定表示 | 449 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
-| 掲載メーカー数 | 21 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu / Cadillac / Peugeot |
+| 公開データ | 453 | `src/data/vehicles.json` の全レコード（現行452 + 過去1） |
+| 既定表示 | 452 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 掲載メーカー数 | 22 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu / Cadillac / Peugeot / Jeep |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
 | 今回追加（Volvo） | 3 | EX30 2027年モデルの3グレード。日本向け諸元・価格表と取扱説明書で確認 |
@@ -52,6 +52,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota MIRAI） | 2 | MIRAI G／Z（2WD・5人乗り）。価格741万4,000円〜821万5,900円、アドバンスト ドライブ（渋滞時支援）・LCA標準、渋滞時0〜約40km/hの条件内ハンズオフを公式価格JSON・安全ページ・2026年3月装備表・一部改良発表で確認 |
 | 今回追加（Cadillac LYRIQ） | 1 | LYRIQ SPORT。税込1,100万円〜、2025年3月8日販売開始、全車速ACC＋LKAを日本向け公式資料で確認。車線中央維持・ハンズオフ・個別注文可否・モデル年は未確認のためLevel 1相当・ハンズオフ不可・注文可否未確認として登録 |
 | 今回追加（Peugeot E-3008） | 1 | NEW E-3008 GT。税込760万円〜（2026年9月価格）、全車共通ACC（ストップ＆ゴー）・レーンキープアシストとGTのレーンポジショニングアシストを公式ページで確認。発売日・個別受注可否・作動道路／速度・ハンズオフ条件は未確認のためLevel 2相当・ハンズオフ不可・注文可否未確認として登録 |
+| 今回追加（Jeep Commander） | 1 | Commander Limited（4WD・7人乗り）。税込619万円〜（2026年7月価格）、ACC STOP&GO・Active Lane Management・Highway Assistを公式商品／安全ページで確認。Level 2相当・ハンズオフ不可・自動車線変更なし、個別受注可否は未確認 |
+| 今回追加（Suzuki FRONX） | 2 | 2WD・6AT／4WD・6AT。税込254万1,000円／273万9,000円、2024年10月16日発売、全車速追従ACC・車線維持支援を公式価格／安全ページで確認。Level 2相当・ハンズオフ不可、ドライバーモニタリングと個別受注可否は未確認 |
 | 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 注文状態更新（2026-09-12） | 27 | 三菱公式の商品ページに「商談予約・購入予約受付中」を確認したeKクロス8、eKクロス EV 3、デリカミニ12、eKスペース4を`new_order_available`へ更新。購入予約は注文確定ではなく、在庫・納期・契約成立は販売店での確認が必要 |
 | 今回追加（BYD / 後発対策） | 7 | DOLPHIN Baseline / Long Range、ATTO 3、SEAL RWD / AWD、SEALION 6 FWD / AWD。価格299万2,000円〜572万円、ACC・車線内支援・車線変更支援の装備差、間接式ドライバーモニタリング、運転者の手保持条件を販売単位へ固定 |
@@ -1191,3 +1193,32 @@ Honda公式のN-BOX商品ページ、タイプ一覧、価格データ、性能�
 このページは「各車両、ご注文いただいてからの工場出荷時期目途」と明記する一方、一部仕様・グレードは記載通りに用意できない場合や、販売店の状況で納車時期が変わる旨も併記している。そのため、工場出荷目処は一覧・詳細・比較の補助情報として表示するが、個別販売単位の注文受付を直接証明するものとは扱わず、`availability=unknown`を維持した。注文可否を新車注文可へ更新するには、従来どおり販売単位の明文受付・購入予約根拠が必要である。
 
 根拠: [日産 各車両の工場出荷時期の目処](https://www3.nissan.co.jp/siteinfo/product.html)、確認日: 2026-09-12（ページ表示は2026/9/11時点）。
+
+## 2026-09-12 Jeep Commander Limited 1販売単位追加
+
+ジープ・ジャパンの現行Commander商品ページ、安全性能ページ、公式カタログPDFを照合し、Commander Limited（4WD・7人乗り）を1販売単位として追加した。商品ページで2026年7月の税込メーカー希望小売価格6,190,000円〜、7人乗りを確認した。販売店別価格や諸費用は別表示のため、価格は車両本体の概算レンジとして保持する。
+
+ACC〈STOP & GO〉（前後方向）、Active Lane Management／Highway Assist（車線内の左右方向）を確認し、国土交通省の定義へ照合してLevel 2相当とした。日本向け公式資料に手放し可能条件や自動車線変更の根拠はないため、ハンズオフ不可・車線変更支援なしとする。Highway Assistの速度範囲、個別の在庫・納期・受注可否は販売店確認が必要で、`availability=unknown`を維持した。
+
+| 販売単位 | 価格（税込） | Level相当 | 同じLevel 2内の差分 | 注文可否 |
+|---|---:|---|---|---|
+| Commander Limited（4WD・7人乗り） | 6,190,000円〜 | Level 2相当 | ACC STOP&GO＋Active Lane Management／Highway Assist、7人乗り | unknown |
+
+公式の商品・安全・カタログ・見積り・試乗・販売店導線は`src/data/official-links.json`に記録した。画像は追加していない。
+
+根拠: [Commander商品ページ](https://www.jeep-japan.com/commander.html)、[安全性能](https://www.jeep-japan.com/commander/safety-security.html)、[公式カタログPDF](https://dl.stellantisjapan.jp/data/jeep/catalog/commander.pdf)、[見積り](https://krs.bz/pcj/m/jeep-estimate)、[試乗予約](https://krs.bz/pcj/m/jeep-testdrive)、[販売店検索](https://www.jeep-japan.com/dealer.html)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。確認日: 2026-09-12。
+
+## 2026-09-12 Suzuki FRONX 2販売単位追加
+
+スズキ公式のFRONX商品ページ、価格・グレードページ、安全装備ページ、2024年10月16日発売資料を照合し、2WD・6ATと4WD・6ATを別販売単位として追加した。税込メーカー希望小売価格は2WDが2,541,000円、4WDが2,739,000円。発売日は2024年10月16日として記録し、現行カタログ掲載は2026年9月確認時点で保持する。
+
+全車速追従ACC（停止保持機能付き、前後方向）とACC作動中の車線維持支援（左右方向）を確認し、国土交通省の定義へ照合してLevel 2相当とした。ウインカー連動の加減速やブラインドスポット警告は自動車線変更ではないため、車線変更支援タグは付与していない。ドライバーモニタリングシステムの搭載、個別在庫・納期・受注可否は公式ページで固定できないため未確認とした。
+
+| 販売単位 | 価格（税込） | Level相当 | 同じLevel 2内の差分 | 注文可否 |
+|---|---:|---|---|---|
+| FRONX 2WD・6AT | 2,541,000円 | Level 2相当 | 2WD、ACC＋車線維持支援 | unknown |
+| FRONX 4WD・6AT | 2,739,000円 | Level 2相当 | 4WD、ACC＋車線維持支援 | unknown |
+
+公式の商品・価格・安全ページとオンライン見積り導線は`src/data/official-links.json`に記録した。画像は追加していない。
+
+根拠: [FRONX商品ページ](https://www.suzuki.co.jp/car/fronx/)、[価格・グレード](https://www.suzuki.co.jp/car/fronx/detail/)、[安全装備](https://www.suzuki.co.jp/car/fronx/safety/)、[発売資料](https://www.suzuki.co.jp/release/a/2024/1016/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。確認日: 2026-09-12。

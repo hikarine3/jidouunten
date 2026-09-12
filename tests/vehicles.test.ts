@@ -143,7 +143,7 @@ describe('vehicle data contract and filters', () => {
     expect(filterVehicleList(vehicles, { level: 1, handsOff: 'allowed_in_conditions' })).toHaveLength(0);
     expect(filterVehicleList(vehicles, { level: 3, availability: 'new_order_available' })).toHaveLength(0);
     expect(filterVehicleList(vehicles, { level: 3, availability: 'all' })).toHaveLength(1);
-    expect(filterVehicleList(vehicles, {})).toHaveLength(449);
+    expect(filterVehicleList(vehicles, {})).toHaveLength(452);
   });
 
   it('uses one default-list predicate for filtering and top-page counts', () => {
@@ -178,14 +178,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(450);
+    expect(vehicles).toHaveLength(453);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補449件は全件の公式金額を保持する', () => {
+  it('現行候補452件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(449);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(449);
+    expect(current).toHaveLength(452);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(452);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -316,8 +316,21 @@ describe('vehicle data contract and filters', () => {
     expect(officialLinkFor(e3008!)?.actions?.map(({ kind }) => kind)).toEqual(['estimate']);
   });
 
+  it('Jeep CommanderとSuzuki FRONXはLevel 2の販売単位・価格・能力差を保持する', () => {
+    const commander = vehicles.find((vehicle) => vehicle.id === 'jp-jeep-commander-2026-limited-4wd');
+    expect(commander).toMatchObject({ maker: 'Jeep', model: 'Commander', grade: 'Limited（4WD・7人乗り）', automationLevel: 2, handsOff: 'not_allowed', driverMonitoring: 'required', availability: 'unknown' });
+    expect(commander?.price).toMatchObject({ kind: 'range', basis: 'msrp', taxIncluded: 'included', amounts: [{ amountJpy: 6_190_000 }] });
+    expect(commander?.capabilities).toEqual(['adaptive_cruise_control', 'lane_centering']);
+    expect(officialLinkFor(commander!)?.actions?.map(({ kind }) => kind)).toEqual(['estimate', 'test_drive', 'dealer']);
+    const fronx = vehicles.filter((vehicle) => vehicle.model === 'FRONX');
+    expect(fronx).toHaveLength(2);
+    expect(fronx.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([2_541_000, 2_739_000]);
+    expect(fronx.every((vehicle) => vehicle.automationLevel === 2 && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'unknown' && vehicle.availability === 'unknown' && vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering')).toBe(true);
+    expect(officialLinkFor(fronx[0])?.actions?.map(({ kind }) => kind)).toEqual(['estimate']);
+  });
+
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(80);
+    expect(officialLinks).toHaveLength(82);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -372,7 +385,7 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(164);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(168);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {

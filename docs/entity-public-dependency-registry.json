@@ -3231,5 +3231,46 @@
     ],
     "historical_markers": [],
     "refresh_entrypoint": "npm run build"
+  },
+  "vehicle:jeep-jp-commander-2026-limited": {
+    "entity_id": "vehicle:jeep-jp-commander-2026-limited",
+    "entity_type": "vehicle_catalog_entries",
+    "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+    "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+    "surfaces": [
+      {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Jeep","Commander","LEVEL 2"]},
+      {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Jeep","Commander","Level 2"]},
+      {"url":"/cars/jp-jeep-commander-2026-limited-4wd/","locale":"ja","output_path":"dist/cars/jp-jeep-commander-2026-limited-4wd/index.html","markers":["Jeep","Commander","Limited","6,190,000円〜","Level 2","ハンズオフ：不可"]},
+      {"url":"/compare/?ids=jp-jeep-commander-2026-limited-4wd&ids=jp-tesla-model-3-2026-premium","locale":"ja","output_path":"dist/compare/index.html","markers":["Jeep","Commander","Limited","Level 2"]},
+      {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-jeep-commander-2026-limited-4wd"]}
+    ],
+    "required_render_selectors": [
+      {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-jeep-commander-2026-limited-4wd\"])","markers":["Jeep","Commander","LEVEL 2"]},
+      {"url":"/cars/jp-jeep-commander-2026-limited-4wd/","selector":"main","markers":["Jeep","Commander","Limited","6,190,000円〜","Level 2","ハンズオフ：不可"]},
+      {"url":"/compare/?ids=jp-jeep-commander-2026-limited-4wd&ids=jp-tesla-model-3-2026-premium","selector":"[data-compare-result]","markers":["Jeep","Commander","Limited","Level 2"]}
+    ],
+    "historical_markers": [],
+    "refresh_entrypoint": "npm run build"
+  },
+  "vehicle:suzuki-jp-fronx-2024": {
+    "entity_id": "vehicle:suzuki-jp-fronx-2024",
+    "entity_type": "vehicle_catalog_entries",
+    "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+    "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+    "surfaces": [
+      {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Suzuki","FRONX","LEVEL 2"]},
+      {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Suzuki","FRONX","Level 2"]},
+      {"url":"/cars/jp-suzuki-fronx-2024-2wd/","locale":"ja","output_path":"dist/cars/jp-suzuki-fronx-2024-2wd/index.html","markers":["Suzuki","FRONX","2WD・6AT","2,541,000円","Level 2","ハンズオフ：不可"]},
+      {"url":"/cars/jp-suzuki-fronx-2024-4wd/","locale":"ja","output_path":"dist/cars/jp-suzuki-fronx-2024-4wd/index.html","markers":["Suzuki","FRONX","4WD・6AT","2,739,000円","Level 2","ハンズオフ：不可"]},
+      {"url":"/compare/?ids=jp-suzuki-fronx-2024-2wd&ids=jp-suzuki-fronx-2024-4wd","locale":"ja","output_path":"dist/compare/index.html","markers":["Suzuki","FRONX","2WD・6AT","4WD・6AT","Level 2"]},
+      {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-suzuki-fronx-2024-2wd","jp-suzuki-fronx-2024-4wd"]}
+    ],
+    "required_render_selectors": [
+      {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-suzuki-fronx-2024-2wd\"])","markers":["Suzuki","FRONX","2WD・6AT","LEVEL 2"]},
+      {"url":"/cars/jp-suzuki-fronx-2024-2wd/","selector":"main","markers":["Suzuki","FRONX","2WD・6AT","2,541,000円","Level 2","ハンズオフ：不可"]},
+      {"url":"/compare/?ids=jp-suzuki-fronx-2024-2wd&ids=jp-suzuki-fronx-2024-4wd","selector":"[data-compare-result]","markers":["Suzuki","FRONX","2WD・6AT","4WD・6AT","Level 2"]}
+    ],
+    "historical_markers": [],
+    "refresh_entrypoint": "npm run build"
   }
 }
