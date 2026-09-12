@@ -2,6 +2,17 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Honda N-BOX 34販売単位追加）
+
+- exact release commit: `e410abb`
+- immutable: https://bf37c947.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: Honda N-BOXの現行17タイプをFF・4WD別の34販売単位として追加。N-BOX／ファッションスタイル／N-BOX JOY／CUSTOMの標準・ターボ・BLACK STYLE・コーディネートを、2026年7月カタログ、税込価格176万8,800円〜282万400円、Honda SENSINGの渋滞追従ACC・LKAS、Level 2相当・ステアリング保持必須として一覧／詳細／比較へ反映した。福祉車両スロープ仕様は通常乗用の比較対象から除外。個別発売日・注文可否は未確認のまま保持し、Honda公式の商品・販売店・試乗・見積り・カタログ導線を追加した。
+- SEO／公開面: 454 HTML、sitemap-0は453 URL、車両詳細448件、トップ／一覧ItemListは2ページ・894項目。GTM実IDは各HTML 1件、テスト計測ID0件。公開HTML内部enum・source・accessedAt漏れ0件。
+- UI: 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のWebPサムネイルで省スペース表示（実ブラウザでデスクトップ374×115px、モバイル360×88px）。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホスト方針を維持。
+- QA: `npm test` Vitest74/74＋Python16/16、価格448/448（exact432／range15／未確認1）、公式導線78モデル／75 URL／159 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、注文可48件／未確認399件、registry 508/508。
+- 本番smoke: immutable／本体のトップ、一覧、N-BOX標準・CUSTOM詳細、sitemap、robotsはHTTP200。未知URL404、`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）はpath/queryを本体へ301。immutable／本体E2E各1/1、本体GA collect HTTP204。Cloudflare Pages deployment listで`bf37c947`をProduction・main・`e410abb`として確認。
+
 ## 最新の配信（2026-09-12 三菱4車種の購入予約導線確認）
 
 - exact release commit: `4f9e492`
