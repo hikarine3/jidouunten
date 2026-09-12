@@ -651,6 +651,7 @@ try {
 
   await page.goto(`${base}/compare/?ids=jp-toyota-yaris-cross-2026-x-gas-2wd&ids=jp-toyota-yaris-cross-2026-z-adventure-hev-e-four`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  await page.getByRole('button', { name: 'すべての項目を表示' }).click();
   const yarisCrossCompare = await page.locator('[data-compare-result]').innerText();
   assert.match(yarisCrossCompare, /ヤリス クロス[\s\S]*X（ガソリン車・2WD）[\s\S]*Z“Adventure”（ハイブリッド車・E-Four）/);
   assert.match(yarisCrossCompare, /2,126,300円[\s\S]*3,355,000円[\s\S]*ハンズオフ：不可/, 'ヤリス クロス比較に価格と手保持条件を表示');
@@ -837,10 +838,13 @@ try {
   const sameRows = page.locator('.compare-table .compare-row-same');
   const sameRowCount = await sameRows.count();
   assert.ok(sameRowCount > 0, '同値項目を識別');
-  await page.getByRole('button', { name: '同じ項目を隠す' }).click();
-  assert.equal(await page.locator('.compare-table .compare-row-same:visible').count(), 0, '同値項目を隠せる');
+  assert.equal(await page.locator('.compare-table .compare-row-same:visible').count(), 0, '同値項目は初期状態で畳む');
   await page.getByRole('button', { name: 'すべての項目を表示' }).click();
   assert.equal(await page.locator('.compare-table .compare-row-same:visible').count(), sameRowCount, '同値項目を1操作で再表示');
+  await page.getByRole('button', { name: '同じ項目を隠す' }).click();
+  assert.equal(await page.locator('.compare-table .compare-row-same:visible').count(), 0, '同値項目を再び畳める');
+  const compareCompleteTwo = (await events()).filter((event) => event.event === 'compare_complete').at(-1);
+  assert.deepEqual({ vehicle_count: compareCompleteTwo.vehicle_count, completion_definition: compareCompleteTwo.completion_definition }, { vehicle_count: 2, completion_definition: 'comparison_result_rendered' }, '比較結果表示を完了イベントとして計測');
   assert.match(await page.locator('[data-compare-result]').innerText(), /確認できた機能[\s\S]*確認済み/, '比較で機能を平易な日本語で表示');
   assert.equal(await page.locator('[data-compare-result] [data-purchase-action]').count(), 4, '比較でも2台の注文・試乗アクションを表示');
   const comparePurchase = page.locator('[data-compare-result] [data-purchase-action]').first();
@@ -854,6 +858,19 @@ try {
   await compareOfficial.click();
   const compareOutbound = (await events()).filter((event) => event.event === 'outbound_manufacturer').at(-1);
   assert.deepEqual({ vehicle_id: compareOutbound.vehicle_id, manufacturer: compareOutbound.manufacturer, link_type: compareOutbound.link_type, placement: compareOutbound.placement }, { vehicle_id: 'jp-tesla-model-3-2026-premium', manufacturer: 'Tesla', link_type: 'product', placement: 'comparison' }, '比較の公式遷移イベント');
+
+  await page.goto(`${base}/compare/?ids=jp-tesla-model-3-2026-premium&ids=jp-tesla-model-y-2026-premium&ids=jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd`);
+  await page.locator('[data-compare-result]').waitFor({ state: 'visible' });
+  assert.equal(await page.locator('.compare-table thead th').count(), 4, '3台比較は項目列を含む4列を表示');
+  assert.equal(await page.locator('[data-compare-result] .vehicle-card').count(), 3, '3台比較の候補カードを表示');
+  assert.equal(await page.locator('[data-compare-select]').isHidden(), true, '比較結果表示後は選択フォームを畳む');
+  assert.equal(await page.locator('[data-compare-change-wrap]').isVisible(), true, '3台比較から車両変更へ戻れる');
+  const compareCompleteThree = (await events()).filter((event) => event.event === 'compare_complete').at(-1);
+  assert.equal(compareCompleteThree.vehicle_count, 3, '3台比較の完了イベントに台数を含める');
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert.equal(await page.locator('[data-compare-result]').isVisible(), true, '390pxでも3台比較結果を表示');
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), '3台比較でページ全体の横はみ出しを起こさない');
+  await page.setViewportSize({ width: 1280, height: 900 });
 
   await page.goto(`${base}/compare/?ids=jp-toyota-crown-crossover-2026-rs-limited-matte-metal-4wd&ids=jp-lexus-rx-2026-rx500h-f-sport-performance-awd`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });

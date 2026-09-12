@@ -5,7 +5,7 @@
 2026-09-12 JSTに、Discovery Sport配信後の本番データをread-onlyで再取得した。GA4は`hostName=jidouunten.jp`、期間は2026-09-10〜2026-09-11に限定し、localhost・Pages preview・初期QAを除外した。前回取得後の集計反映により数値が増えている。今回のデプロイ直後の新候補利用はまだ集計期間へ反映されていない。GA4の集計遅延を考慮し、成約や需要の達成値とは扱わない。
 
 - **GA4（production hostname）**: active users 25、sessions 37、screen page views 85、event count 261。
-- **GA4独自イベント**: `filter_results` 18、`view_vehicle` 15、`compare_vehicles` 1、`outbound_manufacturer` 1、`outbound_purchase_action` 0。比較→公式情報遷移の経路は返ったが、購入・試乗アクションはまだ観測できない。標準イベントも継続受信している。
+- **GA4独自イベント**: `filter_results` 18、`view_vehicle` 15、`compare_vehicles` 1、`compare_complete` 0、`outbound_manufacturer` 1、`outbound_purchase_action` 0。比較→公式情報遷移の経路は返ったが、今回の比較完了・購入・試乗アクションはまだ観測できない。新イベントは公開直後のため、次回同じ期間定義で再確認する。
 - **GSC**: 最終データ（2026-09-03〜09-09）は「自動運転 レベル」1 impression、0 click、平均順位71.0。`sitemap-index.xml`は`isPending=false`、`lastDownloaded=2026-09-11T13:47:28Z`、errors/warnings 0。ただしAPIのsubmitted=255・indexed=0は未更新で、現行sitemap-0の461 URLやDiscovery Sport追加の検出を意味しない。
 - **Bing Webmaster**: 最新取得日は2026-09-09、clicks=0、impressions=0、top page/queryは空。registered・verified状態とsitemap受理は維持し、非同期処理中の未反映を需要ゼロとは解釈しない。
 
@@ -39,8 +39,8 @@
 遷移直前に `outbound_purchase_action` を1回だけ送信し、購入判断の出口を `outbound_manufacturer`（単なる公式情報遷移）と分離する。
 送信項目は `vehicle_id`、`manufacturer`、`action_type`、`link_url`、`link_domain`、`placement` の6項目で、個人情報・自由入力・保存本文は含めない。
 
-公開GTM APIのread-only取得で、`GTM-PV9QVMJV` の **version 10** を確認した。Google tag 1個、Custom Event trigger 9個、ネイティブGA4 Event tag 9個（すべて pause 0）、dataLayer variable 17個、正しい測定ID `G-Q58GM7BVB6`、compiler error 0、HTML tag 0である。0件到達・緩和候補表示・緩和適用の専用trigger/tagも公開版で有効になっている。
-`python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish` の公開receiptは `public_id=GTM-PV9QVMJV`、version 10。アプリの独立監査では詳細アクション6/6（各2）、比較アクション4/4、0件救済イベントpayload、Tesla公式ドメイン、390px表示、GA collect HTTP 204を確認した。
+公開GTM APIのread-only取得で、`GTM-PV9QVMJV` の **version 11** を確認した。Google tag 1個、Custom Event trigger 10個、ネイティブGA4 Event tag 10個（すべて pause 0）、dataLayer variable 19個、正しい測定ID `G-Q58GM7BVB6`、compiler error 0、HTML tag 0である。比較完了、0件到達・緩和候補表示・緩和適用の専用trigger/tagも公開版で有効になっている。
+`python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish` の公開receiptは `public_id=GTM-PV9QVMJV`、version 11。アプリの独立監査では詳細アクション6/6（各2）、比較アクション4/4、3台比較完了イベントpayload、0件救済イベントpayload、Tesla公式ドメイン、390px表示、GA collect HTTP 204を確認した。
 
 ## 2026-09-11 メーカー横断アクション導線の計測確認
 
@@ -97,7 +97,7 @@ localStorageのみを使い、保存本文・検索query・車両ID・表示名�
 | サービス | resource | 状態 |
 |---|---|---|
 | Google Analytics 4 | account `1st` / property `jidouunten.jp` (`552960231`) / web stream `https://jidouunten.jp` / `G-Q58GM7BVB6` | 日本時間・JPY、拡張計測有効 |
-| Google Tag Manager | web container `jidouunten.jp` / `GTM-PV9QVMJV` | version 9公開済み |
+| Google Tag Manager | web container `jidouunten.jp` / `GTM-PV9QVMJV` | version 11公開済み |
 | Google Search Console | domain property `sc-domain:jidouunten.jp` | DNS TXT確認済み、sitemap取得成功 |
 | Bing Webmaster Tools | `https://jidouunten.jp/` | DNS CNAME確認済み、sitemap送信済み・処理中 |
 
@@ -142,6 +142,13 @@ window.dataLayer.push({
   vehicle_count: 2,
 });
 window.dataLayer.push({
+  event: "compare_complete",
+  vehicle_ids: "vehicle-a,vehicle-b",
+  vehicle_count: 2,
+  diff_count: 3,
+  completion_definition: "comparison_result_rendered",
+});
+window.dataLayer.push({
   event: "view_vehicle",
   vehicle_id: "vehicle-a",
   model_year: "2026",
@@ -169,6 +176,8 @@ window.dataLayer.push({
 
 `filter_results` は、初期表示や同じ値の再選択ではなく、利用者の操作で結果集合が変わった時だけ送る。
 `view_vehicle` は詳細画面表示時に1回、`outbound_manufacturer` は公式リンク遷移直前に送る。
+`compare_complete` は比較結果（2〜3台の表と差分件数）が描画された時に1回送る「比較完了」イベントであり、
+ボタン押下や優劣判定を意味しない。`compare_vehicles`（比較開始）と分けてS5→S6を測定する。
 `link_type` は `product` / `archive`、`placement` は `vehicle_detail` / `comparison` とし、
 メーカー公式の商品情報と過去資料を区別する。`outbound_purchase_action` の `action_type` は
 `order` / `test_drive` / `dealer` / `catalog` のいずれかとし、確認済みのアクションだけを表示・送信する。
@@ -183,15 +192,15 @@ python3 scripts/setup_measurement.py --create-container
 python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish
 ```
 
-公開version 10にはGoogle tag、9個のCustom Event trigger、対応する9個のネイティブGA4 Event tag、
-17個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
-構成だったため停止・除去した。API取得した公開版で、ネイティブevent tag 9個（pause 0）、HTML tag 0個、
-9個すべて正しい測定ID `G-Q58GM7BVB6`、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
+公開version 11にはGoogle tag、10個のCustom Event trigger、対応する10個のネイティブGA4 Event tag、
+19個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
+構成だったため停止・除去した。API取得した公開版で、ネイティブevent tag 10個（pause 0）、HTML tag 0個、
+10個すべて正しい測定ID `G-Q58GM7BVB6`、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
 workspaceに差分がなければpublishしない。
 
 2026-09-10にversion 8で `outbound_manufacturer` の分類項目を反映した後、version 9で
 `outbound_purchase_action` のtrigger、GA4 Event tag、`action_type`等の変数を追加した。version 10では
-0件到達・緩和候補表示・緩和適用を追加し、公開版の9イベント構成でページ表示・一覧操作・0件救済・比較・詳細表示・公式情報遷移・購入/試乗アクションを各1契約で扱う。
+0件到達・緩和候補表示・緩和適用を追加した後、version 11で比較完了（2〜3台の結果描画）を追加した。公開版の10イベント構成でページ表示・一覧操作・0件救済・比較開始/完了・詳細表示・公式情報遷移・購入/試乗アクションを各1契約で扱う。
 
 ## 読み込み方針
 

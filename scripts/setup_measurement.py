@@ -31,6 +31,7 @@ EVENT_PARAMETERS = {
     "filter_relaxation_shown": ("filter_name", "relaxation_count"),
     "filter_relaxation_apply": ("filter_name", "relaxation_filter", "result_count"),
     "compare_vehicles": ("vehicle_ids", "vehicle_count"),
+    "compare_complete": ("vehicle_ids", "vehicle_count", "diff_count", "completion_definition"),
     "view_vehicle": ("vehicle_id", "model_year", "grade"),
     "outbound_manufacturer": ("vehicle_id", "manufacturer", "link_url", "link_domain", "link_type", "placement"),
     "outbound_purchase_action": ("vehicle_id", "manufacturer", "action_type", "link_url", "link_domain", "placement"),
