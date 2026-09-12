@@ -1,6 +1,18 @@
 # Cloudflare Pages公開運用
 
-更新: 2026-09-12
+更新: 2026-09-13
+
+## 最新の配信（2026-09-13 自宅充電チェック）
+
+- exact app release commit: `587e8bdff720d246111fd6db2a4fc719e65e3285`
+- immutable: https://82a29373.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Cloudflare Pages: `82a29373-38b8-4c62-a3f6-286380e11dbb`（Production / main / source `587e8bd`）
+- 内容: `/cars/` に、自宅充電が必要と一次情報で確認できた既存販売単位を絞る3択チェックを追加。「充電できる」は69件、「充電は難しい」は確認済み必須候補だけを除外、「まだ不明」は475件を保持する。未確認を充電不要とは解釈せず、電気工事・適合・充電器購入を断定しない。476詳細URL、sitemap、既存車両データは変更していない。
+- URL/計測: `/cars/?homeCharging=available|not_available|unknown` を復元可能。GTM version 13（`GTM-PV9QVMJV`）へ `charge_check_start` / `charge_check_result` を追加し、固定enumと結果件数だけを送信。GSC/Bingの検索値は公開後の観測対象で、未取得を0扱いしない。
+- QA: `npm test` Vitest87/87＋Python20/20、価格476/476、公式導線476販売単位、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID `check:release`（483 HTML / 476 Car / ItemList 950項目）。実ブラウザはフィルター4状態・390px・クリック計測を6/6正常（69/406/475件、開始・結果各1）。独立リリース監査 `VERDICT: PASS`。
+- 本番smoke: immutable／本体のトップ・一覧・充電クエリ・sitemap・robotsはHTTP200。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）の`/cars/?homeCharging=available`は本体へ301（query維持）。GA collectは本体でHTTP204。
+- rollback: https://47209734.jidouunten.pages.dev（直前正常、source `acedd1b`）
 
 ## 最新の配信（2026-09-12 Suzuki ソリオ／ソリオ バンディット8販売単位追加）
 
