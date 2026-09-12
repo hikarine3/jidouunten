@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 414 | `src/data/vehicles.json` の全レコード（現行413 + 過去1） |
-| 既定表示 | 413 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 448 | `src/data/vehicles.json` の全レコード（現行447 + 過去1） |
+| 既定表示 | 447 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 19 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -30,6 +30,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Honda フリード CROSSTAR / 後発対策） | 8 | e:HEV／ガソリン CROSSTARのFF・4WD、5／6人乗り。価格292万8,200円〜360万2,500円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
 | 今回追加（日産 キックス / 後発対策） | 12 | P16のG／X+／X／X シンプルパッケージ／ROCK CREEK／ROCK CREEK Utility Specを2WD・4WD（e-4ORCE）別に登録。価格299万9,700円〜430万9,800円、全車プロパイロット標準（車速30〜135km/h・車線中央付近の操舵支援）、ステアリング保持・常時監視、ハンズオフ不可を公式価格・FAQで確認 |
 | 今回追加（Honda CIVIC / 後発対策） | 5 | 2026年6月5日発売のe:HEV LX／EX／RS、ガソリンEX／RSを登録。価格394万6,800円〜465万9,600円、全車ACC＋LKASのLevel 2相当。e:HEV 3単位とガソリンEXはトラフィックジャムアシスト標準、ガソリンRSは対象外として同じLevel 2内の渋滞支援差を比較可能にした |
+| 今回追加（Honda N-BOX / 後発対策） | 34 | 現行17タイプ×FF・4WD（N-BOX／ファッションスタイル／N-BOX JOY／CUSTOM／各特別仕様・ターボ）を登録。価格176万8,800円〜282万400円、Honda SENSINGの渋滞追従ACC・LKAS、Level 2相当・ステアリング保持必須。2026年7月カタログ掲載、個別発売日・注文可否は未確認 |
 | 今回追加（Toyota クラウン（クロスオーバー） / 後発対策） | 3 | 通常カタログのCROSSOVER RS／Z／G（いずれもE-Four）を追加。価格517万9,900円〜673万9,700円、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・条件内ハンズオフ、GはACC・LTA・渋滞時支援のみとして能力差を販売単位へ固定。特別仕様THE LIMITED-MATTE METALは既存の別単位として保持 |
 | 今回追加（Toyota GRヤリス / 後発対策） | 10 | RZ“High performance”／RZ／RCとAero performance package、GR-DAT（8AT）／6MTの全10販売単位。価格361万7,200円〜588万2,200円、全車ACC＋LTAのLevel 2相当・ハンズオフ不可。GR-DATは全車速追従だが停止保持なし、6MTは約30km/h以上から。公式ページ・価格JSON・安全性能・装備表・取扱説明書で確認し、注文可否は未確認 |
 | 今回追加（Suzuki スペーシア / 後発対策） | 12 | スペーシア HYBRID G／X／X セーフティプラスパッケージ、スペーシア カスタム HYBRID GS／XS／XSターボの2WD・4WD。価格153万100円〜219万3,400円、G／Xは車線逸脱抑制のLevel 1相当、セーフティプラス／カスタムはACC全車速追従・停止保持＋車線維持支援のLevel 2相当。発売日2023年11月22日、注文可否は未確認 |
@@ -103,6 +104,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Toyota | アルファード Z HEV 2WD / E-Four（7人乗り）、G HEV 2WD / E-Four（8人乗り） | 掲載（4単位） | 2相当 | 2026-09-10 |
 | Honda | VEZEL e:HEV Z FF / 4WD | 掲載（2単位） | 2相当 | 2026-09-10 |
 | Honda | ZR-V e:HEV X／e:HEV Z FF / 4WD | 掲載（現行4単位、Honda SENSING標準・ハンズオフ不可）／注文可否 未確認 | 2相当 | 2026-09-11 |
+| Honda | N-BOX／ファッションスタイル／N-BOX JOY／CUSTOM（標準・ターボ・BLACK STYLE・コーディネート、各FF・4WD） | 掲載（現行34単位、Honda SENSINGの渋滞追従ACC・LKAS、ステアリング保持必須）／注文可否 未確認 | 2相当 | 2026-09-12 |
 | Honda | フリード e:HEV CROSSTAR／CROSSTAR FF・4WD（5／6人乗り） | 掲載（現行8単位、Honda SENSING標準・ハンズオフ不可）／注文可否 未確認 | 2相当 | 2026-09-12 |
 | Toyota | ヴェルファイア Executive Lounge PHEV E-Four（6人）、Executive Lounge HEV 2WD/E-Four（7人）、Z Premier HEV 2WD/E-Four、Z Premier ターボガソリン 2WD/4WD（7人） | 掲載（7単位） | 2相当 | 2026-09-10 |
 | Toyota | ヴォクシー S-Z/S-G 2WD・E-Four（7人）、S-G 2WD（8人）、S-G マルチユーティリティ（2WD・5人） | 掲載（6単位） | 2相当 | 2026-09-10 |
@@ -1126,3 +1128,29 @@ Honda公式のCIVIC現行商品ページ、タイプJSON、主要装備表、性
 | 運転者主体で前後・左右を支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
 
 根拠: [MIRAI商品ページ](https://toyota.jp/mirai/)、[価格・グレードJSON](https://toyota.jp/pages/contents/include/carpage_format/carlineup/data/json/grades28.json)、[安全性能](https://toyota.jp/mirai/safety/)、[主要諸元・装備一覧](https://toyota.jp/pages/contents/mirai/002_p_001/pdf/mirai_spec_202603.pdf)、[一部改良発表](https://global.toyota/jp/newsroom/toyota/43735032.html)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。
+
+## 2026-09-12 Honda N-BOX 34販売単位追加
+
+Honda公式のN-BOX商品ページ、タイプ一覧、価格データ、性能・安全ページ、2026年7月発行カタログ、2027年版取扱説明書を照合し、通常乗用の現行17タイプをFF・4WD別の34販売単位として追加した。N-BOX、ファッションスタイル、N-BOX JOY、CUSTOMの標準・ターボ・BLACK STYLE・コーディネートを含み、福祉車両のスロープ仕様は通常乗用の比較対象から除外した。
+
+税込メーカー希望小売価格は176万8,800円〜282万400円。全単位でHonda SENSINGの渋滞追従ACC（停車中から作動）とLKAS（約65km/h以上）を確認し、前後・左右を同時に支援するLevel 2相当として分類した。これは自動運転ではなく、運転者の常時監視とステアリング保持が必要な運転支援である。車線変更支援・ハンズオフは公式根拠がないため付与していない。
+
+| 対象 | 単位数 | 価格（税込） | 公式に確認した能力差 |
+|---|---:|---:|---|
+| N-BOX／ファッションスタイル | 6 | 1,768,800〜2,073,500円 | ACC・LKAS、標準／2トーン・FF/4WD |
+| N-BOX JOY（標準・BLACK STYLE） | 8 | 1,981,100〜2,613,600円 | ACC・LKAS、特別仕様・FF/4WD |
+| N-BOX JOY ターボ（標準・BLACK STYLE） | 8 | 2,456,300〜2,820,400円 | ACC・LKAS、ターボ・特別仕様・FF/4WD |
+| N-BOX CUSTOM（標準・コーディネート・ターボ） | 12 | 1,994,300〜2,803,900円 | ACC・LKAS、ターボ・コーディネート・2トーン・FF/4WD |
+
+現行カタログ掲載は`catalogAsOf=2026-07`へ反映した。Honda公式資料では個別タイプの発売日・現在の注文受付・在庫・納期を固定できないため、`salesUnitIntroducedAt`、`priceEffectiveAt`は未設定、`availability=unknown`とした。公式商品・販売店・試乗・見積り・カタログ導線は`src/data/official-links.json`に記録し、一覧・詳細・比較の価格、能力差、Level 2フィルターへ反映した。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| N-BOX現行商品ページ | 本田技研工業株式会社 | https://www.honda.co.jp/Nbox/ | 2026-09-12 |
+| 17タイプのFF・4WD価格 | 本田技研工業株式会社 | https://www.honda.co.jp/Nbox/webcatalog/type/list/ ／ https://www.honda.co.jp/Nbox/common/data/type.json | 2026-09-12 |
+| 渋滞追従ACC・LKASの作動条件 | 本田技研工業株式会社 | https://www.honda.co.jp/Nbox/webcatalog/performance/ | 2026-09-12 |
+| Honda SENSINGの監視条件・発売年月 | 本田技研工業株式会社 | https://www.honda.co.jp/ownersmanual/webom/jpn/n-box/2027/details/69113e1849de55-32403005.html | 2026-09-12 |
+| 2026年7月発行カタログ | 本田技研工業株式会社 | https://www.honda.co.jp/Nbox/catalog/ | 2026-09-12 |
+| 運転者主体で前後・左右を支援するLevel 2定義 | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
+
+根拠: [N-BOX商品ページ](https://www.honda.co.jp/Nbox/)、[タイプ一覧](https://www.honda.co.jp/Nbox/webcatalog/type/list/)、[タイプデータ](https://www.honda.co.jp/Nbox/common/data/type.json)、[性能・安全](https://www.honda.co.jp/Nbox/webcatalog/performance/)、[取扱説明書](https://www.honda.co.jp/ownersmanual/webom/jpn/n-box/2027/details/69113e1849de55-32403005.html)、[カタログ請求](https://www.honda.co.jp/Nbox/catalog/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。未確認の国内候補群が残るため、全国網羅の完了とは扱わない。

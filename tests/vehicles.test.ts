@@ -163,14 +163,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(414);
+    expect(vehicles).toHaveLength(448);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補413件は全件の公式金額を保持する', () => {
+  it('現行候補447件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(413);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(413);
+    expect(current).toHaveLength(447);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(447);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -277,8 +277,23 @@ describe('vehicle data contract and filters', () => {
     expect(officialLinkFor(civic[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
   });
 
+  it('Honda N-BOXは現行17タイプ×駆動方式をLevel 2・価格付きで保持する', () => {
+    const nbox = vehicles.filter((vehicle) => vehicle.maker === 'Honda' && vehicle.model === 'N-BOX');
+    expect(nbox).toHaveLength(34);
+    expect(nbox.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
+      1_768_800, 1_867_800, 1_914_000, 1_928_300, 1_981_100, 1_994_300, 2_013_000, 2_063_600, 2_073_500, 2_126_300, 2_139_500, 2_208_800,
+      2_385_900, 2_436_500, 2_456_300, 2_468_400, 2_481_600, 2_531_100, 2_538_800, 2_542_100, 2_581_700, 2_592_700, 2_598_200, 2_601_500,
+      2_613_600, 2_626_800, 2_658_700, 2_675_200, 2_684_000, 2_687_300, 2_737_900, 2_743_400, 2_803_900, 2_820_400,
+    ].sort((a, b) => a - b));
+    expect(nbox.every((vehicle) => vehicle.currentCatalogListed && vehicle.generation === 'JF5/JF6' && vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === null && vehicle.salesUnitIntroducedAt === null && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(nbox.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist')).toBe(true);
+    expect(nbox.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/Nbox/webcatalog/performance/')))).toBe(true);
+    expect(nbox.every((vehicle) => vehicle.sources.some((source) => source.url.includes('/ownersmanual/webom/jpn/n-box/2027/')))).toBe(true);
+    expect(officialLinkFor(nbox[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
+  });
+
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(77);
+    expect(officialLinks).toHaveLength(78);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -333,7 +348,7 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-      expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(155);
+      expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(159);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
