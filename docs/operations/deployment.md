@@ -2,6 +2,19 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Suzuki ソリオ／ソリオ バンディット8販売単位追加）
+
+- exact release commit: `408989c477bda5cfb75c34a4e3370dfa2d430dc1`
+- immutable: https://d8e7df1e.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Cloudflare Pages: `d8e7df1e-fa52-4d06-bed4-11b7ce60f775`（Production / main / source `408989c`）
+- 内容: スズキ ソリオ／ソリオ バンディットのHYBRID MG・MX・MZ・MVを、2WD・4WDの8販売単位として追加。税込192万6,100円〜264万8,800円、ACC＋車線維持支援のLevel 2相当、ハンドル保持・常時監視必須・ハンズオフ不可として一覧・詳細・比較へ反映した。MZ／MVのみACC停止保持・再発進に対応する差分を販売単位へ固定し、MG／MXには付与していない。個別受注可否は一次情報で確認できないため8単位とも`unknown`を維持した。
+- 公式導線: ソリオ／ソリオ バンディットの商品、購入相談・見積り、展示車・試乗車、販売店、主要装備・諸元PDFを詳細へ追加。導線は公式掲載を示すが、在庫・納期・契約成立は保証しない。
+- 根拠: [ソリオ商品ページ](https://www.suzuki.co.jp/car/solio/)、[価格・オンライン見積り](https://www.suzuki.co.jp/car/solio/detail/)、[安全装備](https://www.suzuki.co.jp/car/solio/safety/)、[2025年1月16日仕様変更](https://www.suzuki.co.jp/release/a/2025/0116/)、[自動走行レベルの定義](https://www.mlit.go.jp/common/001343740.pdf)（確認日: 2026-09-12）。
+- SEO／公開面: 482 HTML、sitemap-0は481 URL、車両詳細476件、トップ／一覧ItemListは2ページ・950項目。GTM実IDは各HTML 1件、テスト計測ID0件、公開HTML内部enum・source・accessedAt漏れ0件。registry closureは553/553。
+- QA: `npm test` 83件中83件正常＋Python16件中16件正常、価格476/476（exact454／range21／未確認1）、公式導線87モデル／83 URL／186 actions、注文可48／未確認427／利用不可1、鮮度確認済み475／要再確認0／競合1、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、独立リリース監査PASS。
+- 本番smoke: immutable／本体E2E各1件中1件正常（GA collect HTTP204）。本体・immutableのトップ、一覧、ソリオMG／MZ詳細、ソリオ比較、sitemap、robotsはHTTP200、未知URL404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301。既存Wikimedia Commons参考写真は一覧でデスクトップ約374×115px・モバイル約360×88pxのWebPサムネイル（`loading=lazy`・`object-fit: cover`）で省スペース表示し、作者・ライセンス帰属リンクとセルフホスト方針を維持。新規画像は追加していない。
+
 ## 最新の配信（2026-09-12 日産リーフ ZE2 5販売単位追加）
 
 - exact release commit: `66cd1459887aad74e106459c2ab504017850faf9`
