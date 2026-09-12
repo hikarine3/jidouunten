@@ -116,7 +116,7 @@ Phase 0〜7の意味は `docs/pm/github-work-management.md` を使います。�
 
 車種追加や公開件数の増加を自己目的化しないため、次の条件を満たさない作業は現在のトランシェで打ち切る。
 
-- 車種・グレード追加は、一次情報・価格・能力差が購入判断の完了率を改善する明確な仮説と、対象範囲をIssueへ固定できた場合だけ開始する。既存コミットの後続を件数目的で増やさない。
+- 現在の車種・グレード追加トランシェは、コミット済み分で閉じる。新しい追加は自動では開始せず、ユーザーが再開を明示したうえで、一次情報・価格・能力差が購入判断の完了率を改善する仮説と対象範囲をIssueへ固定できた場合だけ例外的に開始する。既存コミットの後続を件数目的で増やさない。
 - 「国内候補を網羅する」は無期限の完了条件にしない。次に調べる母集団を、対象市場・期間・売れ筋上位NまたはLevel別代表集合・除外条件・分母とともにIssueへ固定する。分母がない状態では網羅完了を宣言せず、掲載／未確認／対象外は一度の観測として扱う。
 - docs、件数、marker、registryの同期だけで、公開ユーザー導線・検索需要・計測のいずれも改善しない候補はrelease候補にしない。同じ失敗が再発したら原因をIssueへ追記し、同じ作業を繰り返さない。
 - 同一の価値仮説、外部確認待ち、または調査不能で90分以上前進しない場合は、作業を止めて、閉じた作業・残るfailure・次の候補・続行判断をユーザーへ確認する。停止後に別の件数作業へ逃げない。
@@ -125,5 +125,5 @@ Phase 0〜7の意味は `docs/pm/github-work-management.md` を使います。�
 ## Short `/goal` paste
 
 ```text
-/goal docs/pm/goals/sprint-loop.md を読み、GitHub Project `jidouunten Delivery` のIn progressを継続し、なければStatus=ReadyをWork priority、同順位はRank順に消費する。Readyがある間はPhase 0を再実行しない。activeもReadyも0件ならPhase 0を行い、価値gateを通る重複なしのReady候補10件以上を全件事前検証してProjectへ登録するまで完了扱いにしない。通常実装はrepoのmodel routingで低コストagentへ範囲固定し、親は採択・統合・高risk判断だけを行う。Phase 5まで件数付きQAと実ブラウザ確認、Phase 6で独立レビューを行う。2026-09-10のオーナー継続承認により全gate PASSのexact candidateは再確認なしでpush/deployし、DNS/Secret/課金/削除/別targetは都度承認まで実行しない。GitHub取得失敗をReady 0件扱いせず、本書の終端・停止条件まで継続する。
+/goal docs/pm/goals/sprint-loop.md を読み、GitHub Project `jidouunten Delivery` のIn progressを継続し、なければStatus=ReadyをWork priority、同順位はRank順に消費する。Readyがある間はPhase 0を再実行しない。activeもReadyも0件ならPhase 0を行い、価値gateを通る重複なしのReady候補10件以上を全件事前検証してProjectへ登録するまで完了扱いにしない。現在の車種・グレード追加トランシェはコミット済み分で閉じ、ユーザーが再開を明示するまで新規追加を始めない。件数・registry同期だけの作業を価値Sprintにしない。通常実装はrepoのmodel routingで低コストagentへ範囲固定し、親は採択・統合・高risk判断だけを行う。Phase 5まで件数付きQAと実ブラウザ確認、Phase 6で独立レビューを行う。2026-09-10のオーナー継続承認により全gate PASSのexact candidateは再確認なしでpush/deployし、DNS/Secret/課金/削除/別targetは都度承認まで実行しない。GitHub取得失敗をReady 0件扱いせず、本書の終端・停止条件まで継続する。
 ```
