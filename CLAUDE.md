@@ -27,6 +27,9 @@
 - 現行Sprint、Todo、優先順位、担当、PM Phase、依存、公開状態の正本はGitHub ProjectとIssue。
 - repoは戦略、要件、データ契約、根拠、QA結果、運用ルールの正本。
 - `todo.md`、`roadmap.md`、独自JSON/YAMLへGitHubの状態を複製しない。
+- GitHub取得断時は `python3 scripts/github_work_board.py next --json --allow-cache` で、24時間以内の
+  `.cache/github-work-board.snapshot.json` を読み取り専用で使える。`source=cache`／`live_state_unknown=true` の間は
+  claim、Status／Phase／Rank／Release変更、Issue／Project write、push／deploy、Phase 0開始を行わない。
 - `Status=Ready` を Priority、同順位では Rank の順で着手する。Readyがある間は候補探索を
   繰り返さない。
 - activeもReadyも0件の場合だけ `docs/pm/prompts/phase_0.md` を実行する。価値gateを通る

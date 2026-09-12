@@ -4,22 +4,29 @@
 GitHub Project #5 and its Issues are the live work-state source.  A Phase 0
 portfolio is evidence, not a second queue: every candidate is validated before
 the first GitHub write, then registration is idempotent through a stable marker.
+An ignored, integrity-checked snapshot is available for bounded read-only
+continuity when GitHub cannot be reached; it can never authorize a write.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "docs/pm/github-project.json"
+CACHE_PATH = ROOT / ".cache" / "github-work-board.snapshot.json"
+CACHE_SCHEMA_VERSION = 1
+CACHE_MAX_AGE_HOURS = 24
 ID_IN_TITLE = re.compile(r"\bJID-[A-Z0-9][A-Z0-9-]*\b", re.IGNORECASE)
 ID_FORMAT = re.compile(r"^JID-[A-Z0-9][A-Z0-9-]{0,75}$")
 WORK_ISSUE_TITLE = re.compile(r"^JID-[A-Z0-9][A-Z0-9-]*\s*:", re.IGNORECASE)
@@ -39,6 +46,160 @@ def load_json(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise BoardError(f"{path} must contain an object")
     return value
+
+
+def utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def parse_utc_timestamp(value: Any) -> datetime:
+    try:
+        parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except (TypeError, ValueError) as exc:
+        raise BoardError("cached Project snapshot has an invalid captured_at timestamp") from exc
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def validate_cache_age_hours(value: Any) -> float:
+    if isinstance(value, bool) or not isinstance(value, (int, float)) or value <= 0:
+        raise BoardError("cache max age must be a positive number of hours")
+    return float(value)
+
+
+def cache_payload(config: dict[str, Any], items: list[dict[str, Any]], project_id: str = "") -> dict[str, Any]:
+    return {
+        "schema_version": CACHE_SCHEMA_VERSION,
+        "captured_at": utc_now().isoformat().replace("+00:00", "Z"),
+        "source": "github-project",
+        "repository": config["repository"],
+        "project_number": config["project_number"],
+        "project_title": config["project_title"],
+        "project_id": project_id,
+        "items": items,
+    }
+
+
+def cache_digest(payload: dict[str, Any]) -> str:
+    canonical = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def save_board_snapshot(config: dict[str, Any], items: list[dict[str, Any]], project_id: str = "") -> None:
+    """Persist a non-authoritative, read-only last-known Project snapshot.
+
+    The ignored `.cache` file is continuity evidence only. It is never used for
+    writes, claiming, Phase 0 exhaustion, or completion decisions.
+    """
+    payload = cache_payload(config, items, project_id)
+    record = {**payload, "sha256": cache_digest(payload)}
+    CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    temporary = CACHE_PATH.with_name(f".{CACHE_PATH.name}.tmp")
+    temporary.write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    os.replace(temporary, CACHE_PATH)
+
+
+def read_board_snapshot(config: dict[str, Any], max_age_hours: float = CACHE_MAX_AGE_HOURS) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Read and validate the last live snapshot without contacting GitHub."""
+    max_age = validate_cache_age_hours(max_age_hours)
+    try:
+        record = json.loads(CACHE_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise BoardError(f"no usable Project cache at {CACHE_PATH}: {exc}") from exc
+    if not isinstance(record, dict):
+        raise BoardError("cached Project snapshot must contain an object")
+    payload = {key: value for key, value in record.items() if key != "sha256"}
+    if record.get("schema_version") != CACHE_SCHEMA_VERSION:
+        raise BoardError("cached Project snapshot schema is unsupported")
+    if record.get("source") != "github-project":
+        raise BoardError("cached Project snapshot source is not GitHub Project")
+    if record.get("repository") != config["repository"] or record.get("project_number") != config["project_number"] or record.get("project_title") != config["project_title"]:
+        raise BoardError("cached Project snapshot belongs to a different repository or Project")
+    if not isinstance(record.get("items"), list):
+        raise BoardError("cached Project snapshot items must be an array")
+    if not isinstance(record.get("sha256"), str) or not re.fullmatch(r"[0-9a-f]{64}", record["sha256"]):
+        raise BoardError("cached Project snapshot lacks a valid integrity digest")
+    if cache_digest(payload) != record["sha256"]:
+        raise BoardError("cached Project snapshot integrity check failed")
+    captured_at = parse_utc_timestamp(record.get("captured_at"))
+    age_seconds = max(0.0, (utc_now() - captured_at).total_seconds())
+    if age_seconds > max_age * 3600:
+        raise BoardError(f"cached Project snapshot is stale ({age_seconds / 3600:.1f}h > {max_age:g}h)")
+    metadata = {
+        "source": "cache",
+        "captured_at": record["captured_at"],
+        "age_seconds": round(age_seconds, 3),
+        "max_age_hours": max_age,
+        "sha256": record["sha256"],
+        "read_only": True,
+    }
+    return [row for row in record["items"] if isinstance(row, dict)], metadata
+
+
+def offline_next(config: dict[str, Any], max_age_hours: float = CACHE_MAX_AGE_HOURS) -> dict[str, Any]:
+    """Select from cache for read-only continuity, never as live board truth."""
+    try:
+        items, metadata = read_board_snapshot(config, max_age_hours)
+    except BoardError as exc:
+        return {
+            "status": "offline_unavailable",
+            "source": "none",
+            "read_only": True,
+            "live_state_unknown": True,
+            "next_action": "reconnect_github",
+            "reason": str(exc),
+        }
+    result = select_next(items)
+    if result.get("status") == "exhausted":
+        return {
+            "status": "offline_snapshot_exhausted",
+            "ready_count": result.get("ready_count", 0),
+            "source": metadata["source"],
+            "read_only": True,
+            "live_state_unknown": True,
+            "next_action": "reconnect_github",
+            "captured_at": metadata["captured_at"],
+            "cache_age_seconds": metadata["age_seconds"],
+            "cache_sha256": metadata["sha256"],
+        }
+    return {
+        **result,
+        **metadata,
+        "claimable": False,
+        "live_state_unknown": True,
+        "next_action": "reconnect_github_before_claim_or_write",
+    }
+
+
+def cache_status(config: dict[str, Any], max_age_hours: float = CACHE_MAX_AGE_HOURS) -> dict[str, Any]:
+    try:
+        items, metadata = read_board_snapshot(config, max_age_hours)
+    except BoardError as exc:
+        return {"status": "unavailable", "path": str(CACHE_PATH), "reason": str(exc)}
+    selected = select_next(items)
+    return {
+        "status": "available",
+        "path": str(CACHE_PATH),
+        "item_count": len(items),
+        "captured_at": metadata["captured_at"],
+        "age_seconds": metadata["age_seconds"],
+        "max_age_hours": metadata["max_age_hours"],
+        "sha256": metadata["sha256"],
+        "last_known_status": selected["status"],
+    }
+
+
+def next_with_cache_fallback(config: dict[str, Any], max_age_hours: float = CACHE_MAX_AGE_HOURS) -> dict[str, Any]:
+    """Read live first, then fall back to a bounded read-only snapshot."""
+    try:
+        items = project_items(config)
+        save_board_snapshot(config, items)
+        return attach_next_action(config, select_next(items))
+    except BoardError as exc:
+        result = offline_next(config, max_age_hours)
+        result["live_error"] = str(exc)
+        return result
 
 
 def run_gh(args: list[str], *, expect_json: bool = False) -> Any:
@@ -307,7 +468,8 @@ def doctor(config: dict[str, Any]) -> tuple[dict[str, Any], dict[str, dict[str, 
         actual = [option.get("name") for option in fields[name].get("options", [])]
         if actual != expected:
             raise BoardError(f"GitHub Project field contract drift: {name}")
-    project_items(config)
+    items = project_items(config)
+    save_board_snapshot(config, items, str(view.get("id") or ""))
     return view, fields
 
 
@@ -618,13 +780,21 @@ def add_portfolio(config: dict[str, Any], manifest: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
-    sub.add_parser("doctor")
+    doctor_parser = sub.add_parser("doctor")
+    doctor_parser.add_argument("--offline", action="store_true", help="use the last validated snapshot without contacting GitHub")
+    doctor_parser.add_argument("--cache-max-age-hours", type=float, default=CACHE_MAX_AGE_HOURS)
     sub.add_parser(
         "sync-issues",
         help="reconcile JID Issues (including chat-created Issues) into the Project Kanban",
     )
     next_parser = sub.add_parser("next")
     next_parser.add_argument("--json", action="store_true")
+    next_parser.add_argument("--offline", action="store_true", help="select from the last validated snapshot without contacting GitHub")
+    next_parser.add_argument("--allow-cache", action="store_true", help="try GitHub first, then use a read-only snapshot on transient failure")
+    next_parser.add_argument("--cache-max-age-hours", type=float, default=CACHE_MAX_AGE_HOURS)
+    cache_parser = sub.add_parser("cache-status", help="show the last validated Project snapshot without contacting GitHub")
+    cache_parser.add_argument("--json", action="store_true")
+    cache_parser.add_argument("--cache-max-age-hours", type=float, default=CACHE_MAX_AGE_HOURS)
     validate_parser = sub.add_parser("validate-portfolio")
     validate_parser.add_argument("--manifest", type=Path, required=True)
     add_parser = sub.add_parser("add-portfolio")
@@ -634,12 +804,31 @@ def main() -> int:
     try:
         config = load_json(CONFIG_PATH)
         if args.command == "doctor":
-            view, _ = doctor(config)
-            print(f"PASS: GitHub Project {view['title']} is available and matches the field contract")
+            if args.offline:
+                result = cache_status(config, args.cache_max_age_hours)
+                if result.get("status") != "available":
+                    raise BoardError(result.get("reason", "Project cache unavailable"))
+                print(f"PASS: offline Project cache {result['item_count']} items captured {result['captured_at']} (read-only)")
+            else:
+                view, _ = doctor(config)
+                print(f"PASS: GitHub Project {view['title']} is available and matches the field contract")
         elif args.command == "sync-issues":
             sync_issues(config)
         elif args.command == "next":
-            result = attach_next_action(config, select_next(project_items(config)))
+            if args.offline:
+                result = offline_next(config, args.cache_max_age_hours)
+            elif args.allow_cache:
+                result = next_with_cache_fallback(config, args.cache_max_age_hours)
+            else:
+                items = project_items(config)
+                save_board_snapshot(config, items)
+                result = attach_next_action(config, select_next(items))
+            if args.json:
+                print(json.dumps(result, ensure_ascii=False, indent=2))
+            else:
+                print(result["status"])
+        elif args.command == "cache-status":
+            result = cache_status(config, args.cache_max_age_hours)
             if args.json:
                 print(json.dumps(result, ensure_ascii=False, indent=2))
             else:

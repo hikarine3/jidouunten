@@ -214,6 +214,93 @@ class SelectionTest(unittest.TestCase):
         self.assertEqual(result["minimum_ready_candidates"], 10)
 
 
+class CacheFallbackTest(unittest.TestCase):
+    def setUp(self):
+        self.directory = tempfile.TemporaryDirectory()
+        self.original_cache_path = board.CACHE_PATH
+        board.CACHE_PATH = Path(self.directory.name) / "github-work-board.snapshot.json"
+        self.config = {
+            **CONFIG,
+            "repository": "hikarine3/jidouunten",
+            "project_number": 5,
+            "project_title": "jidouunten Delivery",
+        }
+
+    def tearDown(self):
+        board.CACHE_PATH = self.original_cache_path
+        self.directory.cleanup()
+
+    def test_live_snapshot_round_trip_has_integrity_and_metadata(self):
+        items = [{"status": "Ready", "work priority": "P1", "rank": 4, "content": {"title": "JID-001: cached"}}]
+        board.save_board_snapshot(self.config, items, "project-id")
+        cached_items, metadata = board.read_board_snapshot(self.config)
+        self.assertEqual(cached_items, items)
+        self.assertEqual(metadata["source"], "cache")
+        self.assertEqual(metadata["read_only"], True)
+        self.assertEqual(len(metadata["sha256"]), 64)
+
+    def test_offline_ready_is_visible_but_never_claimable(self):
+        board.save_board_snapshot(self.config, [{
+            "status": "Ready", "work priority": "P1", "rank": 4,
+            "content": {"title": "JID-001: cached"},
+        }])
+        result = board.offline_next(self.config)
+        self.assertEqual(result["status"], "ready")
+        self.assertEqual(result["source"], "cache")
+        self.assertEqual(result["claimable"], False)
+        self.assertEqual(result["live_state_unknown"], True)
+        self.assertEqual(result["candidate"]["sprint_id"], "JID-001")
+
+    def test_offline_empty_snapshot_never_becomes_phase_zero_exhausted(self):
+        board.save_board_snapshot(self.config, [])
+        result = board.offline_next(self.config)
+        self.assertEqual(result["status"], "offline_snapshot_exhausted")
+        self.assertEqual(result["live_state_unknown"], True)
+        self.assertEqual(result["next_action"], "reconnect_github")
+
+    def test_tampered_snapshot_is_fail_closed(self):
+        board.save_board_snapshot(self.config, [])
+        record = json.loads(board.CACHE_PATH.read_text(encoding="utf-8"))
+        record["items"] = [{"status": "Ready"}]
+        board.CACHE_PATH.write_text(json.dumps(record), encoding="utf-8")
+        result = board.offline_next(self.config)
+        self.assertEqual(result["status"], "offline_unavailable")
+        self.assertEqual(result["live_state_unknown"], True)
+
+    def test_expired_snapshot_is_fail_closed(self):
+        board.save_board_snapshot(self.config, [])
+        record = json.loads(board.CACHE_PATH.read_text(encoding="utf-8"))
+        record["captured_at"] = "2020-01-01T00:00:00Z"
+        payload = {key: value for key, value in record.items() if key != "sha256"}
+        record["sha256"] = board.cache_digest(payload)
+        board.CACHE_PATH.write_text(json.dumps(record), encoding="utf-8")
+        result = board.offline_next(self.config)
+        self.assertEqual(result["status"], "offline_unavailable")
+        self.assertIn("stale", result["reason"])
+
+    def test_cache_status_does_not_contact_github(self):
+        board.save_board_snapshot(self.config, [])
+        result = board.cache_status(self.config)
+        self.assertEqual(result["status"], "available")
+        self.assertEqual(result["item_count"], 0)
+        self.assertEqual(result["last_known_status"], "exhausted")
+
+    def test_live_failure_falls_back_without_making_ready_claimable(self):
+        board.save_board_snapshot(self.config, [{
+            "status": "Ready", "work priority": "P1", "rank": 4,
+            "content": {"title": "JID-001: cached"},
+        }])
+        original_project_items = board.project_items
+        board.project_items = lambda _config: (_ for _ in ()).throw(board.BoardError("GitHub unavailable"))
+        try:
+            result = board.next_with_cache_fallback(self.config)
+        finally:
+            board.project_items = original_project_items
+        self.assertEqual(result["status"], "ready")
+        self.assertEqual(result["claimable"], False)
+        self.assertIn("GitHub unavailable", result["live_error"])
+
+
 class IssueProjectReconciliationTest(unittest.TestCase):
     def test_chat_created_jid_issue_is_selected_even_without_marker(self):
         issues = [

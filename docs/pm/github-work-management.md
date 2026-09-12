@@ -1,6 +1,6 @@
 # GitHub Work Management
 
-更新: 2026-09-12
+更新: 2026-09-13
 
 ## 正本
 
@@ -15,7 +15,8 @@ KPIの分解と公開時点の実測baselineは [kpi-model.md](kpi-model.md) に
 未計測のシナリオ値は優先順位や完了条件の根拠にせず、`Expected impact` field には
 利用者に起きる変化と、公開後に実測する指標を書く。
 
-ローカルにGitHub Projectの状態を複製したtodo/roadmap/stateファイルは作らない。
+ローカルにGitHub Projectの状態を複製したtodo/roadmap/stateファイルは作らない。例外として、通信断時の
+再開判断だけに使う非権威・読み取り専用の最終スナップショットを、無視対象の`.cache/`へ保存する。
 Issueは成果物へのリンクを持ち、長文仕様を二重に保持しない。
 
 ## Project fields
@@ -58,6 +59,28 @@ python3 scripts/github_work_board.py sync-issues
 優先順位は変更しない。出力の`scanned/work_issues/missing/added`を
 作業ログまたは対象Issueへ記録する。Project APIが読めない場合は失敗として扱い、Issueだけを
 見て「Kanban登録済み」と報告してはならない。
+
+### GitHub取得断時のSprint Loop継続
+
+`doctor`または`next`のlive取得が成功したとき、Project item一覧を`.cache/github-work-board.snapshot.json`
+へ原子的に保存する。これはqueue・正本・Issueの代替ではなく、SHA-256、取得時刻、repository、Projectを
+検証できる最後の読み取り専用投影である。`.cache/`はcommit・pushしない。
+
+通信断や一時的な認証失敗時は、次のどちらかでactiveの確認や次候補の作業計画を続けられる。
+
+```bash
+python3 scripts/github_work_board.py doctor --offline
+python3 scripts/github_work_board.py next --json --allow-cache
+python3 scripts/github_work_board.py next --json --offline
+python3 scripts/github_work_board.py cache-status --json
+```
+
+既定の有効期限は24時間。結果には`source=cache`、`captured_at`、`read_only=true`、
+`live_state_unknown=true`を付け、Ready候補を表示しても`claimable=false`とする。activeがキャッシュに
+あれば実装・QAを続けられるが、Status／Phase／Rank／Releaseの変更、Issue作成・編集、Project登録、
+Phase 0の開始、push/deployはGitHub再接続後にlive stateを再取得してから行う。キャッシュが空・破損・
+期限切れの場合は`offline_unavailable`を返し、GitHub取得失敗をReady 0件や`exhausted`へ変換しない。
+`sync-issues`、`add-portfolio`、その他のwrite操作にはcache fallbackを適用しない。
 
 ## Issueの要件
 

@@ -15,7 +15,9 @@ python3 scripts/github_work_board.py next --json
 - `active`: 現在のIssueを継続し、Phase 0を実行しない。
 - `ready`: Priority、同順位はRank順の先頭を実行し、Phase 0を実行しない。
 - `exhausted`: このPhase 0を開始する。
-- GitHub取得失敗: `exhausted`ではない。復旧・再試行し、旧todoやローカルqueueへfallbackしない。
+- GitHub取得失敗: `exhausted`ではない。`python3 scripts/github_work_board.py next --json --allow-cache`で
+  24時間以内の読み取り専用スナップショットからactive／Readyの確認だけ継続できるが、Phase 0・claim・writeは
+  GitHub再接続後まで開始しない。復旧・再試行し、旧todoやローカルqueueへfallbackしない。
 
 ## Gate 1: 情報を更新する
 
