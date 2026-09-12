@@ -304,7 +304,7 @@ describe('vehicle data contract and filters', () => {
     expect(officialLinkFor(civic[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
   });
 
-  it('Honda N-BOXは現行17タイプ×駆動方式をLevel 2・価格付きで保持する', () => {
+  it('Honda N-BOXは現行17タイプ×駆動方式をLevel 2・価格・発売年月付きで保持する', () => {
     const nbox = vehicles.filter((vehicle) => vehicle.maker === 'Honda' && vehicle.model === 'N-BOX');
     expect(nbox).toHaveLength(34);
     expect(nbox.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([
@@ -312,11 +312,17 @@ describe('vehicle data contract and filters', () => {
       2_385_900, 2_436_500, 2_456_300, 2_468_400, 2_481_600, 2_531_100, 2_538_800, 2_542_100, 2_581_700, 2_592_700, 2_598_200, 2_601_500,
       2_613_600, 2_626_800, 2_658_700, 2_675_200, 2_684_000, 2_687_300, 2_737_900, 2_743_400, 2_803_900, 2_820_400,
     ].sort((a, b) => a - b));
-    expect(nbox.every((vehicle) => vehicle.currentCatalogListed && vehicle.generation === 'JF5/JF6' && vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === null && vehicle.salesUnitIntroducedAt === null && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(nbox.every((vehicle) => vehicle.currentCatalogListed && vehicle.generation === 'JF5/JF6' && vehicle.catalogAsOf === '2026-07' && vehicle.priceEffectiveAt === null && vehicle.salesUnitIntroducedAt === '2026-07' && vehicle.sources.some((source) => source.url.includes('/ownersmanual/') && source.supports.includes('発売年月2026年07月～')) && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
     expect(nbox.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist')).toBe(true);
     expect(nbox.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/Nbox/webcatalog/performance/')))).toBe(true);
     expect(nbox.every((vehicle) => vehicle.sources.some((source) => source.url.includes('/ownersmanual/webom/jpn/n-box/2027/')))).toBe(true);
     expect(officialLinkFor(nbox[0])?.actions?.map(({ kind }) => kind)).toEqual(['dealer', 'test_drive', 'estimate', 'catalog']);
+  });
+
+  it('一次資料に発売年月が明記された販売単位は、確認月ではなく発売年月を使う', () => {
+    const explicitLaunchMonth = vehicles.filter((vehicle) => vehicle.sources.some((source) => source.supports.some((fact) => fact.startsWith('発売年月'))));
+    expect(explicitLaunchMonth).toHaveLength(34);
+    expect(explicitLaunchMonth.every((vehicle) => vehicle.salesUnitIntroducedAt === '2026-07')).toBe(true);
   });
 
   it('Peugeot E-3008 GTは公式価格とADAS能力を保守的に保持する', () => {
