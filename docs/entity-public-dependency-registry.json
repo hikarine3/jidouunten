@@ -3320,5 +3320,29 @@
     ],
     "historical_markers": [],
     "refresh_entrypoint": "npm run build"
+  },
+  "vehicle:nissan-jp-leaf-ze2-2026": {
+    "entity_id": "vehicle:nissan-jp-leaf-ze2-2026",
+    "entity_type": "vehicle_catalog_entries",
+    "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+    "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+    "surfaces": [
+      {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Nissan","リーフ","LEVEL 2","467販売単位"]},
+      {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Nissan","リーフ","Level 2"]},
+      {"url":"/cars/jp-nissan-leaf-2026-b5-s-2wd/","locale":"ja","output_path":"dist/cars/jp-nissan-leaf-2026-b5-s-2wd/index.html","markers":["Nissan","リーフ","B5 S","4,389,000円","Level 2","ハンズオフ：不可"]},
+      {"url":"/cars/jp-nissan-leaf-2026-b5-x-2wd/","locale":"ja","output_path":"dist/cars/jp-nissan-leaf-2026-b5-x-2wd/index.html","markers":["Nissan","リーフ","B5 X","4,738,800円","Level 2","ハンズオフ：条件内で可"]},
+      {"url":"/cars/jp-nissan-leaf-2026-b5-g-2wd/","locale":"ja","output_path":"dist/cars/jp-nissan-leaf-2026-b5-g-2wd/index.html","markers":["Nissan","リーフ","B5 G","5,648,500円","Level 2","ハンズオフ：条件内で可"]},
+      {"url":"/cars/jp-nissan-leaf-2026-b7-x-2wd/","locale":"ja","output_path":"dist/cars/jp-nissan-leaf-2026-b7-x-2wd/index.html","markers":["Nissan","リーフ","B7 X","5,188,700円","Level 2","ハンズオフ：条件内で可"]},
+      {"url":"/cars/jp-nissan-leaf-2026-b7-g-2wd/","locale":"ja","output_path":"dist/cars/jp-nissan-leaf-2026-b7-g-2wd/index.html","markers":["Nissan","リーフ","B7 G","5,999,400円","Level 2","ハンズオフ：条件内で可"]},
+      {"url":"/compare/?ids=jp-nissan-leaf-2026-b5-s-2wd&ids=jp-nissan-leaf-2026-b7-g-2wd","locale":"ja","output_path":"dist/compare/index.html","markers":["B5 S","B7 G","Level 2"]},
+      {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-nissan-leaf-2026-b5-s-2wd","jp-nissan-leaf-2026-b7-g-2wd"]}
+    ],
+    "required_render_selectors": [
+      {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-nissan-leaf-2026-b5-s-2wd\"])" ,"markers":["Nissan","リーフ","B5 S","LEVEL 2"]},
+      {"url":"/cars/jp-nissan-leaf-2026-b5-s-2wd/","selector":"main","markers":["Nissan","リーフ","B5 S","4,389,000円","Level 2","ハンズオフ：不可"]},
+      {"url":"/compare/?ids=jp-nissan-leaf-2026-b5-s-2wd&ids=jp-nissan-leaf-2026-b7-g-2wd","selector":"[data-compare-result]","markers":["B5 S","B7 G","Level 2"]}
+    ],
+    "historical_markers": [],
+    "refresh_entrypoint": "npm run build"
   }
 }

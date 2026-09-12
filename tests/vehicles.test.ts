@@ -143,7 +143,7 @@ describe('vehicle data contract and filters', () => {
     expect(filterVehicleList(vehicles, { level: 1, handsOff: 'allowed_in_conditions' })).toHaveLength(0);
     expect(filterVehicleList(vehicles, { level: 3, availability: 'new_order_available' })).toHaveLength(0);
     expect(filterVehicleList(vehicles, { level: 3, availability: 'all' })).toHaveLength(1);
-    expect(filterVehicleList(vehicles, {})).toHaveLength(462);
+    expect(filterVehicleList(vehicles, {})).toHaveLength(467);
   });
 
   it('uses one default-list predicate for filtering and top-page counts', () => {
@@ -178,14 +178,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(463);
+    expect(vehicles).toHaveLength(468);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補462件は全件の公式金額を保持する', () => {
+  it('現行候補467件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(462);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(462);
+    expect(current).toHaveLength(467);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(467);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -330,7 +330,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(84);
+    expect(officialLinks).toHaveLength(85);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -385,7 +385,7 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(174);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(178);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
@@ -1206,6 +1206,28 @@ describe('vehicle data contract and filters', () => {
     expect(ekSpace.every((vehicle) => vehicle.price?.optionalPackages.length === 0 && vehicle.handsOff === 'not_allowed' && vehicle.driverMonitoring === 'required' && vehicle.availability === 'new_order_available' && vehicle.availabilityCheckedAt === '2026-09-12')).toBe(true);
     expect(ekSpace.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('/ek_space.pdf')) && vehicle.sources.some((source) => source.url === 'https://www.mitsubishi-motors.co.jp/lineup/ek_space/' && source.supports.some((fact) => fact.includes('商談予約・購入予約受付中'))))).toBe(true);
     expect(officialLinkFor({ maker: 'Mitsubishi', model: 'eKスペース' })?.actions).toHaveLength(5);
+  });
+
+  it('日産リーフ ZE2はB5/B7の5販売単位とプロパイロット2.0装備差を保持する', () => {
+    const leaf = vehicles.filter((vehicle) => vehicle.model === 'リーフ');
+    expect(leaf).toHaveLength(5);
+    expect(leaf.map((vehicle) => vehicle.id).sort()).toEqual([
+      'jp-nissan-leaf-2026-b5-g-2wd',
+      'jp-nissan-leaf-2026-b5-s-2wd',
+      'jp-nissan-leaf-2026-b5-x-2wd',
+      'jp-nissan-leaf-2026-b7-g-2wd',
+      'jp-nissan-leaf-2026-b7-x-2wd',
+    ]);
+    expect(leaf.every((vehicle) => vehicle.currentCatalogListed && vehicle.generation === 'ZE2' && vehicle.catalogAsOf === '2026-09' && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.availability === 'unknown' && vehicle.availabilityCheckedAt === '2026-09-12' && vehicle.lastReviewedAt === '2026-09-12')).toBe(true);
+    expect(leaf.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([4_389_000, 4_738_800, 5_188_700, 5_648_500, 5_999_400]);
+    const b5s = leaf.find((vehicle) => vehicle.grade === 'B5 S');
+    expect(b5s).toMatchObject({ handsOff: 'not_allowed', capabilities: ['adaptive_cruise_control', 'lane_centering'], salesUnitIntroducedAt: '2026-01-29' });
+    expect(leaf.filter((vehicle) => vehicle.grade !== 'B5 S').every((vehicle) => vehicle.handsOff === 'allowed_in_conditions' && vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,hands_off_highway,lane_change_support')).toBe(true);
+    expect(leaf.filter((vehicle) => vehicle.grade.startsWith('B5')).every((vehicle) => vehicle.salesUnitIntroducedAt === '2026-01-29')).toBe(true);
+    expect(leaf.filter((vehicle) => vehicle.grade.startsWith('B7')).every((vehicle) => vehicle.salesUnitIntroducedAt === '2025-10-08')).toBe(true);
+    expect(leaf.every((vehicle) => vehicle.sources.some((source) => source.url.includes('/vehicles/new/leaf/specifications.html') && source.supports.some((fact) => fact.includes('メーカー希望小売価格'))))).toBe(true);
+    expect(leaf.every((vehicle) => vehicle.sources.some((source) => source.url.includes('leaf_equipment.pdf')))).toBe(true);
+    expect(officialLinkFor(leaf[0])?.actions?.map(({ kind }) => kind)).toEqual(['estimate', 'test_drive', 'dealer', 'catalog']);
   });
 
   it('Cadillac LYRIQ SPORTは日本向け1販売単位として保守的にLevel 1で保持する', () => {

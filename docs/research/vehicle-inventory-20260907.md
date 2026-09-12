@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 463 | `src/data/vehicles.json` の全レコード（現行462 + 過去1） |
-| 既定表示 | 462 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 468 | `src/data/vehicles.json` の全レコード（現行467 + 過去1） |
+| 既定表示 | 467 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 23 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu / Cadillac / Peugeot / Jeep / Land Rover |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -29,6 +29,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Honda ステップ ワゴン / 後発対策） | 10 | e:HEV AIR EX／SPADA／SPADA PREMIUM LINEとAIR EX／AIR／SPADA／SPADA PREMIUM LINEのFF・4WD。価格334万8,400円〜426万8,000円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
 | 今回追加（Honda フリード CROSSTAR / 後発対策） | 8 | e:HEV／ガソリン CROSSTARのFF・4WD、5／6人乗り。価格292万8,200円〜360万2,500円、Honda SENSINGのACC・LKAS・トラフィックジャムアシスト、約0〜65km/hの渋滞時支援、ステアリング保持条件を販売単位へ固定 |
 | 今回追加（日産 キックス / 後発対策） | 12 | P16のG／X+／X／X シンプルパッケージ／ROCK CREEK／ROCK CREEK Utility Specを2WD・4WD（e-4ORCE）別に登録。価格299万9,700円〜430万9,800円、全車プロパイロット標準（車速30〜135km/h・車線中央付近の操舵支援）、ステアリング保持・常時監視、ハンズオフ不可を公式価格・FAQで確認 |
+| 今回追加（日産 リーフ ZE2 / 後発対策） | 5 | B5 S／X／G、B7 X／Gの2WD・5人乗りを登録。価格438万9,000円〜599万9,400円、全車プロパイロット標準。B5 Sはハンズオン、B5 X/G・B7 X/Gはメーカーオプションのプロパイロット2.0選択時のみ条件内ハンズオフ・車線変更支援として能力差を固定。個別の新車注文可否は未確認 |
 | 今回追加（Honda CIVIC / 後発対策） | 5 | 2026年6月5日発売のe:HEV LX／EX／RS、ガソリンEX／RSを登録。価格394万6,800円〜465万9,600円、全車ACC＋LKASのLevel 2相当。e:HEV 3単位とガソリンEXはトラフィックジャムアシスト標準、ガソリンRSは対象外として同じLevel 2内の渋滞支援差を比較可能にした |
 | 今回追加（Honda N-BOX / 後発対策） | 34 | 現行17タイプ×FF・4WD（N-BOX／ファッションスタイル／N-BOX JOY／CUSTOM／各特別仕様・ターボ）を登録。価格176万8,800円〜282万400円、Honda SENSINGの渋滞追従ACC・LKAS、Level 2相当・ステアリング保持必須。2026年7月カタログ掲載、個別発売日・注文可否は未確認 |
 | 今回追加（Toyota クラウン（クロスオーバー） / 後発対策） | 3 | 通常カタログのCROSSOVER RS／Z／G（いずれもE-Four）を追加。価格517万9,900円〜673万9,700円、RS/Zはアドバンスト ドライブ（渋滞時支援）・LCA・条件内ハンズオフ、GはACC・LTA・渋滞時支援のみとして能力差を販売単位へ固定。特別仕様THE LIMITED-MATTE METALは既存の別単位として保持 |
@@ -80,6 +81,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Nissan | セレナ C28 e-POWER LUXION | 掲載 | 2 | 2026-09-07 |
 | Nissan | エクストレイル X/G 2WD、X/G e-4ORCE、ROCK CREEK、NISMO、AUTECH（2列・3列） | 掲載（現行14単位、プロパイロット標準・ハンズオフ不可）／注文可否 未確認 | 2相当 | 2026-09-11 |
 | Nissan | キックス P16 G / X+ / X / X シンプルパッケージ / ROCK CREEK / ROCK CREEK Utility Spec（2WD・4WD/e-4ORCE） | 掲載（現行12単位、プロパイロット標準・ハンズオフ不可）／注文可否 未確認 | 2相当 | 2026-09-12 |
+| Nissan | リーフ ZE2 B5 S / B5 X / B5 G / B7 X / B7 G（2WD・5人乗り） | 掲載（現行5単位、プロパイロット標準。B5 X/G・B7 X/Gは2.0オプション選択時のみ条件内ハンズオフ・車線変更支援）／注文可否 未確認 | 2相当 | 2026-09-12 |
 | SUBARU | レヴォーグ レイバック（現行仕様）Limited EX | 注文可否 未確認（注文済み1.8Lグレードの工場出荷目処のみ確認） | 2 | 2026-09-11 |
 | SUBARU | フォレスター Premium S:HEV EX / X-BREAK S:HEV EX / Touring EX / SPORT EX / X-BREAK S:HEV / Touring / SPORT EX Black Selection | 掲載（現行7単位、EyeSight X 5単位は条件内ハンズオフ・車線変更支援）／注文可否 未確認 | 2相当 | 2026-09-11 |
 | Tesla | Model 3 Premium RWD / Premium ロングレンジAWD / Performance、Model Y Premium RWD / Premium ロングレンジAWD / L | 新車注文可（6単位） | 2相当 | 2026-09-10 |
@@ -141,6 +143,29 @@ Teslaは日本向け公式のModel別情報とサポートFAQに加え、2026年
 - 対象: Tesla Model S / Model X。日本向け公式ホーム、Model S／Model X日本語取扱説明書、保証、[新車在庫](https://www.tesla.com/ja_jp/inventory/new?redirect=no)、[補助金](https://www.tesla.com/ja_JP/support/incentives)、[注文FAQ](https://www.tesla.com/ja_JP/support/faq)を確認。
 - 判定: 公式ページ自体の存在は確認できるが、現行日本円価格・グレード・注文CTA・在庫車・日本仕様ADASのODD／監視条件を一次情報で固定できないため、`未確認／掲載保留`。Model 3／Model Yの現行6販売単位とは混ぜない。
 - 制約: 主要URLへの直接HTTP GETは調査環境で403。検索インデックスだけで価格・注文可否・Levelを補完せず、S/Xの公開ID追加は行わない。再確認時は日本向けの現行トリム＋円価格、注文受付または在庫車、Autopilot／Autosteerの日本仕様条件を別々に確認する。
+
+## 2026-09-12 Peugeot NEW E-3008 GT追加
+
+## 2026-09-12 日産リーフ ZE2追加
+
+日産の日本向け現行Webカタログ、価格・グレード、主要装備PDF、プロパイロットFAQを照合し、リーフZE2のB5 S／B5 X／B5 G／B7 X／B7 Gを5販売単位として登録した。いずれも2WD・5人乗り、プロパイロット標準、車速・車間制御と車線中央付近の操舵支援を持つため、サイト上はLevel 2相当としている。税込メーカー希望小売価格はB5 S 438万9,000円、B5 X 473万8,800円、B5 G 564万8,500円、B7 X 518万8,700円、B7 G 599万9,400円である。
+
+B5 Sはプロパイロット2.0の設定が確認できず、ステアリング保持が必要なハンズオンとして登録した。B5 X／B5 G／B7 X／B7 Gは、メーカーオプションのプロパイロット2.0を選択し、NissanConnectの対象サービスを契約した場合に限り、所定の高速道路等で条件付きハンズオフと車線変更支援が可能な販売単位としている。オプションを選択しない車両ではステアリング保持が必要であるため、一覧・比較では「条件内で可」と必要装備を併記し、無条件の自動運転とは表示しない。
+
+現行商品・見積り・試乗・販売店導線は確認したが、個別グレードの現在の受注可否・在庫・納期を固定できる一次情報は確認できなかったため、5単位の`availability`は`unknown`を維持した。価格適用時点は公式ページの2026年9月東京地区表示に合わせ、確認日は2026-09-12とした。
+
+| 対象事実 | 発行元 | URL | 確認日 |
+|---|---|---|---|
+| リーフ現行商品ページ（見積り・試乗予約・販売店導線） | 日産自動車 | https://www3.nissan.co.jp/vehicles/new/leaf.html | 2026-09-12 |
+| B5/B7価格・グレード | 日産自動車 | https://www3.nissan.co.jp/vehicles/new/leaf/specifications.html | 2026-09-12 |
+| 主要装備・諸元（2WD・5人、プロパイロット2.0設定） | 日産自動車 | https://www.nissan.co.jp/SP/LEAF/DIGITALCATALOG/PDF/leaf_equipment.pdf | 2026-09-12 |
+| プロパイロット標準・設定可能車速 | 日産自動車 | https://faq2.nissan.co.jp/faq/show/78358?category_id=63&site_domain=default | 2026-09-12 |
+| プロパイロット2.0の条件付きハンズオフ・車線変更 | 日産自動車 | https://faq2.nissan.co.jp/faq/show/78361?category_id=63&site_domain=default | 2026-09-12 |
+| B5価格・発表日 | 日産自動車 | https://ev2.nissan.co.jp/BLOG/874/ | 2026-09-12 |
+| B7価格・注文受付開始の発表 | 日産自動車 | https://global.nissannews.com/ja-JP/releases/251008-01-j | 2026-09-12 |
+| Level 2の定義（運転者主体の前後・左右支援） | 国土交通省 | https://www.mlit.go.jp/common/001343740.pdf | 2026-09-12 |
+
+5単位は一覧・詳細・比較・サイトマップへ波及させ、公式見積り・試乗・販売店・カタログのモデル導線を`official-links.json`へ追加した。未確認の受注可否を注文可能へ読み替えず、今後は販売店ごとの受注状況または日産公式の明示が確認できた時点で別途更新する。
 
 ## 2026-09-12 Peugeot NEW E-3008 GT追加
 
