@@ -2,6 +2,17 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 0件フィルター救済）
+
+- exact release commit: `d923268`
+- immutable: https://7f083b08.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 条件を重ねて0件になったとき、市場に存在しないと断定せず、実データで1条件だけ緩めると候補が戻る選択肢を件数付きで提示。Level 3の0件では「Level 3の条件を外す → 447件」を表示し、適用後もURL・戻る・リセットを既存契約で維持。Level／メーカー／道路／ハンズオフ／販売状態／価格帯／能力のうち、候補が戻るものだけを表示し、0件の候補は出さない。
+- 計測: `filter_empty_results`／`filter_relaxation_shown`／`filter_relaxation_apply`をdataLayer・GTM/GA4へ追加。個人情報・保存本文・車両IDは送信しない。GTM-PV9QVMJV version 10、Custom Event trigger 9個、GA4 Event tag 9個、variable 17個、compiler error 0。
+- SEO／公開面: 454 HTML、sitemap-0は453 URL、車両詳細448件、トップ／一覧ItemListは2ページ・894項目。実ID GTM各HTML 1件、テスト計測ID0件、公開HTML内部情報漏れ0件。
+- QA: `npm test` Vitest71/71＋保存再開5（計76/76）＋Python16/16、価格448/448、公式導線78モデル／75 URL／159 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry 546/546、独立監査PASS。
+- 本番smoke: 本体／immutable E2E各1/1（本体GA collect HTTP204）、0件→緩和候補→447件復帰、トップ／一覧／Level／比較／sitemap／robots HTTP200、未知URL404。既存Wikimedia Commons画像は一覧でデスクトップ約374×115px・モバイル約360×88pxのサムネイル表示を維持。
+
 ## 最新の配信（2026-09-12 日産4モデルの工場出荷目処を追加）
 
 - exact release commit: `535b082`
