@@ -165,13 +165,52 @@ const publicCatalog = vehicles.map((vehicle) => ({
         selected.map((v) => v.requiredPackage || '不明'),
         selected.map((v) => availabilityLabels[v.availability]),
       ].filter((values) => stateFor(values) === 'diff').length;
-      result.innerHTML = `<div class="compare-diff-summary"><strong data-compare-diff-count="${diffCount}">確認済みの差分 ${diffCount}項目</strong><span>「未確認」は優劣ではなく、根拠不足の表示です。</span><button type="button" class="button small text" data-toggle-same>すべての項目を表示</button></div><div class="cards" style="margin-bottom:28px;">${selected.map((v) => `<article class="vehicle-card"><div class="vehicle-card-body"><div class="eyebrow">LEVEL ${v.automationLevel} · ${escapeHtml(levelLabels[v.automationLevel])}</div><h3>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</h3><div class="maker">${escapeHtml(v.referenceLabel)}　${escapeHtml(v.grade)}</div></div></article>`).join('')}</div><div style="overflow-x:auto;"><table class="compare-table" data-hide-same="true"><thead><tr><th>比較項目</th>${headings}</tr></thead><tbody>${comparisonRows}${capabilityRows}</tbody></table></div>`;
+      result.innerHTML = `<div class="compare-diff-summary"><strong data-compare-diff-count="${diffCount}">確認済みの差分 ${diffCount}項目</strong><span>「未確認」は優劣ではなく、根拠不足の表示です。</span><button type="button" class="button small text" data-toggle-same>すべての項目を表示</button><button type="button" class="button small text" data-compare-print>印刷</button><button type="button" class="button small text" data-compare-copy>比較をコピー</button><span class="compare-export-note" data-compare-export-note role="status" aria-live="polite"></span></div><div class="cards" style="margin-bottom:28px;">${selected.map((v) => `<article class="vehicle-card"><div class="vehicle-card-body"><div class="eyebrow">LEVEL ${v.automationLevel} · ${escapeHtml(levelLabels[v.automationLevel])}</div><h3>${escapeHtml(v.maker)} ${escapeHtml(v.model)}</h3><div class="maker">${escapeHtml(v.referenceLabel)}　${escapeHtml(v.grade)}</div></div></article>`).join('')}</div><div style="overflow-x:auto;"><table class="compare-table" data-hide-same="true"><thead><tr><th>比較項目</th>${headings}</tr></thead><tbody>${comparisonRows}${capabilityRows}</tbody></table></div>`;
       result.querySelector('[data-toggle-same]')?.addEventListener('click', (event) => {
         const table = result.querySelector('.compare-table');
         if (!table) return;
         const hideSame = table.dataset.hideSame !== 'true';
         table.dataset.hideSame = String(hideSame);
         event.currentTarget.textContent = hideSame ? 'すべての項目を表示' : '同じ項目を隠す';
+      });
+      const briefText = [
+        '自動運転.jp 比較ブリーフ',
+        selected.map((v) => `${v.maker} ${v.model} ${v.grade}｜Level ${v.automationLevel}・${levelLabels[v.automationLevel]}`).join('\n'),
+        '',
+        ...selected.map((v) => [
+          `${v.maker} ${v.model} ${v.grade}`,
+          `参考価格: ${v.priceLabel}`,
+          `道路: ${fact(v.odd.roadTypes)}`,
+          `速度: ${v.odd.speedKph?.condition || (v.odd.speedKph?.max ? `${v.odd.speedKph.min ?? 0}〜${v.odd.speedKph.max}km/h` : '不明')}`,
+          `ハンズオフ: ${handsOffLabels[v.handsOff]}`,
+          `運転者監視: ${monitoringLabels[v.driverMonitoring]}`,
+          `公式: ${v.officialLink?.url || 'リンク未確認'}`,
+        ].join('\n')).join('\n\n'),
+        '',
+        `比較URL: ${location.href}`,
+        '「未確認」は優劣ではなく、根拠不足の表示です。最新仕様はメーカー公式で確認してください。',
+      ].join('\n');
+      const exportNote = result.querySelector('[data-compare-export-note]');
+      const trackExport = (kind) => window.jidouuntenTrack?.('compare_export', { vehicle_count: selected.length, export_type: kind });
+      result.querySelector('[data-compare-print]')?.addEventListener('click', () => {
+        trackExport('print');
+        window.print();
+      });
+      result.querySelector('[data-compare-copy]')?.addEventListener('click', async (event) => {
+        let copied = false;
+        try {
+          if (navigator.clipboard?.writeText) { await navigator.clipboard.writeText(briefText); copied = true; }
+        } catch { /* fall back to a local textarea for browsers without clipboard permission */ }
+        if (!copied) {
+          const textarea = document.createElement('textarea');
+          textarea.value = briefText; textarea.setAttribute('readonly', ''); textarea.style.position = 'fixed'; textarea.style.opacity = '0';
+          document.body.appendChild(textarea); textarea.select(); copied = document.execCommand('copy'); textarea.remove();
+        }
+        if (copied) {
+          trackExport('copy');
+          if (exportNote) exportNote.textContent = '比較をコピーしました';
+          window.setTimeout(() => { if (exportNote) exportNote.textContent = ''; }, 1800);
+        } else if (exportNote) exportNote.textContent = 'コピーできませんでした。印刷をお試しください';
       });
       result.querySelectorAll('[data-official-link]').forEach((link) => link.addEventListener('click', () => {
         const url = new URL(link.href);

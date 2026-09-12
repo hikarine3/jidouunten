@@ -35,6 +35,11 @@ try {
 
   const sameRows = await page.locator('.compare-table .compare-row-same').count();
   assert.ok(sameRows > 0, '同値行を識別');
+  await page.evaluate(() => { window.__printed = false; window.print = () => { window.__printed = true; }; Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async (text) => { window.__copied = text; } } }); });
+  await page.getByRole('button', { name: '印刷' }).click();
+  assert.equal(await page.evaluate(() => window.__printed), true, '比較ブリーフの印刷を起動');
+  await page.getByRole('button', { name: '比較をコピー' }).click();
+  assert.match(await page.evaluate(() => window.__copied || ''), /自動運転\.jp 比較ブリーフ/, '比較ブリーフをコピー');
   await page.getByRole('button', { name: 'すべての項目を表示' }).click();
   assert.equal(await page.locator('.compare-table .compare-row-same:visible').count(), sameRows, '同値行を1操作で再表示');
 
@@ -49,7 +54,7 @@ try {
   assert.equal(await page.locator('input[name="ids"]:checked').count(), 2, '既存2台URLの選択を維持');
   assert.equal(await page.locator('input[name="ids"]:not(:checked):not(:disabled)').count() > 0, true, '2台選択時は3台目を追加できる');
   assert.equal(await page.locator('.compare-table .compare-row-same:visible').count(), 0, '2台でも同値行を初期非表示');
-  console.log('PASS: JID-024 focused browser checks 10/10');
+  console.log('PASS: JID-024 focused browser checks 12/12');
 } finally {
   await browser.close();
 }

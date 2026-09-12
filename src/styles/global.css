@@ -259,6 +259,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .compare-diff-summary { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; padding: 11px 14px; border: 1px solid rgba(149,214,0,.5); border-radius: 11px; background: #f5faea; }
 .compare-diff-summary strong { color: var(--ink); font-size: .86rem; }
 .compare-diff-summary span { flex: 1; color: var(--muted); font-size: .72rem; }
+.compare-diff-summary .compare-export-note { flex: 0 0 auto; color: #315200; font-size: .68rem; font-weight: 800; }
 .compare-diff-badge { display: inline-block; margin-left: 6px; padding: 2px 6px; border-radius: 999px; color: #315200; background: var(--lime); font-size: .61rem; font-weight: 900; white-space: nowrap; }
 .compare-select { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 26px 0; }
 .compare-change { display: flex; justify-content: flex-end; margin: 8px 0 18px; }
