@@ -2,6 +2,18 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 日産4モデルの工場出荷目処を追加）
+
+- exact release commit: `535b082`
+- immutable: https://b63dfcb5.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- 内容: 日産公式の「各車両の工場出荷時期の目処について」（2026/9/11時点）を一次情報として、日産アリア4、エクストレイル14、キックス12、セレナ1の計31販売単位へモデル単位の出荷目処を追加。アリアは3〜4ヶ月程度、エクストレイル／キックスは1〜2ヶ月程度、セレナは販売店問い合わせとして、一覧は「出荷目処」、詳細・比較は「工場出荷目処」を表示する。仕様・グレードや販売店状況で変動するため、個別注文の根拠とは扱わず、availabilityは注文可48／未確認399を維持。
+- 根拠: https://www3.nissan.co.jp/siteinfo/product.html（確認日: 2026-09-12）。`sources[].supports`の出荷目処と注文可否を分離し、内部URL・確認日は公開HTMLへ出していない。
+- SEO／公開面: 454 HTML、sitemap-0は453 URL、車両詳細448件、トップ／一覧ItemListは2ページ・894項目。GTM実IDは各HTML 1件、テスト計測ID0件。公開HTML内部enum・source・accessedAt漏れ0件。
+- UI: 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のWebPサムネイルで省スペース表示（実ブラウザでデスクトップ374×115px、モバイル360×88px）。詳細の大きい画像、作者・ライセンス帰属リンク、セルフホスト方針を維持。
+- QA: `npm test` Vitest75/75＋Python16/16、価格448/448（exact432／range15／未確認1）、公式導線78モデル／75 URL／159 actions、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、registry surface marker 546/546、独立リリース監査PASS。
+- 本番smoke: immutable／本体のトップ、一覧、X-TRAIL詳細、比較、sitemap、robotsはHTTP200。X-TRAIL詳細で「工場出荷目処 1〜2ヶ月程度」を確認。未知URL404、`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）はpath/queryを本体へ301。本体E2E（GA collect HTTP204）／immutable E2E各1/1。Cloudflare Pages deployment listで`b63dfcb5`をProduction・main・`535b082`として確認。
+
 ## 最新の配信（2026-09-12 Honda N-BOX 34販売単位追加）
 
 - exact release commit: `e410abb`
