@@ -37,7 +37,8 @@
 - 文書、checker、監査だけを利用者価値Sprintとして水増ししない。
 - Issueを先に作る経路（Chatを含む）では、`python3 scripts/github_work_board.py sync-issues` を
   実行してJID形式の全IssueをProject Kanbanへ冪等登録する。これはIssue本文・Status・Priorityを
-  書き換えず、Project itemの欠落だけを補う。登録結果（scanned/work_issues/missing/added）を
+  書き換えず、Project itemの欠落だけを補う（新規itemのStatusはopen/closedに合わせて初期化）。
+  登録結果（scanned/work_issues/missing/added）を
   作業Issueへ記録し、Project取得失敗を「欠落なし」と解釈しない。
 
 詳細は `docs/pm/github-work-management.md` を正本とする。

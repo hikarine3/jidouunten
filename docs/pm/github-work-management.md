@@ -53,8 +53,9 @@ python3 scripts/github_work_board.py sync-issues
 ```
 
 このコマンドはRESTでリポジトリの全Issueを読み、タイトルが`JID-...:`または本文にJID識別子を
-持つ作業Issueだけを対象に、Project Kanbanにないものを`item-add`する。既存itemは再追加せず、
-Issue本文・ラベル・状態・優先順位は変更しない。出力の`scanned/work_issues/missing/added`を
+持つ作業Issueだけを対象に、Project Kanbanにないものを`item-add`する。新規itemはIssueのopen/closed
+に合わせてProjectのBacklog/Doneへ初期化する。既存itemは再追加せず、Issue本文・ラベル・状態・
+優先順位は変更しない。出力の`scanned/work_issues/missing/added`を
 作業ログまたは対象Issueへ記録する。Project APIが読めない場合は失敗として扱い、Issueだけを
 見て「Kanban登録済み」と報告してはならない。
 

@@ -424,7 +424,7 @@ def sync_issues(config: dict[str, Any]) -> None:
     missing Project item; it never edits, closes, relabels, or reprioritizes an
     Issue and it is safe to rerun after an interrupted ``item-add``.
     """
-    view, _ = doctor(config)
+    view, fields = doctor(config)
     issues = repository_issues(config)
     items = project_items(config)
     missing, work_count = issue_project_diff(issues, items)
@@ -446,10 +446,10 @@ def sync_issues(config: dict[str, Any]) -> None:
             print(f"PROJECT_ITEM_ADD: #{issue.get('number')} SKIP race-already-present")
             continue
         try:
-            run_gh([
+            added_row = run_gh([
                 "project", "item-add", str(config["project_number"]),
-                "--owner", config["owner"], "--url", issue_url,
-            ])
+                "--owner", config["owner"], "--url", issue_url, "--format", "json",
+            ], expect_json=True)
         except BoardError as exc:
             # A second worker may have added it after the inventory read. Do a
             # single bounded refresh before reporting a real failure.
@@ -467,6 +467,14 @@ def sync_issues(config: dict[str, Any]) -> None:
                 print(f"PROJECT_ITEM_ADD: #{issue.get('number')} SKIP race-already-present")
                 continue
             raise BoardError(f"Issue #{issue.get('number')} item-add failed: {exc}") from exc
+        item_id = str(added_row.get("id") or "") if isinstance(added_row, dict) else ""
+        if not item_id:
+            raise BoardError(f"Issue #{issue.get('number')} item-add returned no Project item ID")
+        desired_status = "Done" if issue.get("state") == "CLOSED" else "Backlog"
+        edit_item(
+            str(view["id"]), item_id, str(fields["Status"]["id"]),
+            "--single-select-option-id", option_id(fields, "Status", desired_status),
+        )
         known_urls.add(issue_url)
         added += 1
         print(f"PROJECT_ITEM_ADD: #{issue.get('number')} PASS added")
