@@ -2,6 +2,19 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 日産リーフ ZE2 5販売単位追加）
+
+- exact release commit: `66cd1459887aad74e106459c2ab504017850faf9`
+- immutable: https://18c08aa1.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Cloudflare Pages: `18c08aa1-24ce-4b69-b19d-2096e3c57ecc`（Production / main / source `66cd145`）
+- 内容: 日産リーフ ZE2のB5/B7、S・X・Gを2WD・5人乗りの5販売単位として追加。公式価格は438万9,000円〜599万9,400円（税込）。全車ACC＋車線中央維持のLevel 2相当で、B5 Sはハンズオフ不可、B5/B7 X・GはProPILOT 2.0の条件内ハンズオフ・車線変更支援を比較できるようにした。個別受注可否は一次情報で固定できないため5単位とも`unknown`を維持。
+- 公式導線: 商品、価格・グレード、主要装備、先進運転支援、見積り、試乗、販売店、カタログを詳細・比較へ追加。公式掲載は在庫・納期・契約成立を保証しないため、購入前の販売店確認を促す。
+- 根拠: [日産リーフ公式](https://www3.nissan.co.jp/vehicles/new/leaf.html)、[価格・グレード](https://www3.nissan.co.jp/vehicles/new/leaf/specifications.html)、[主要装備PDF](https://www.nissan.co.jp/SP/LEAF/DIGITALCATALOG/PDF/leaf_equipment.pdf)、[先進運転支援](https://www3.nissan.co.jp/vehicles/new/leaf/performance_safety/advanced_driving_assistance.html)、[日産EV B5発表](https://ev2.nissan.co.jp/BLOG/874/)（確認日: 2026-09-12）。
+- SEO／公開面: 474 HTML、sitemap-0は473 URL、車両詳細468件、トップ／一覧ItemListは2ページ・934項目。GTM実IDは各HTML 1件、テスト計測ID0件、公開HTML内部enum・source・accessedAt漏れ0件。registry closureは546/546。
+- QA: `npm test` Vitest82/82＋Python16/16、価格468/468（exact446／range21／未確認1）、公式導線85モデル／82 URL／178 actions、注文可48／未確認419／利用不可1、鮮度確認済み467／要再確認0／競合1、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、独立リリース監査PASS。
+- 本番smoke: immutable／本体E2E各1/1（GA collect HTTP204）。本体・immutableのトップ、一覧、リーフ5詳細、リーフ比較、sitemap、robotsはHTTP200、未知URL404。`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）の`/cars/?level=1&sort=release_desc`は本体へqueryを維持した301。一覧のWikimedia Commons参考写真はデスクトップ約374×115px・モバイル約360×88pxのWebPサムネイル（`loading=lazy`・`object-fit: cover`）で省スペース表示し、作者・ライセンス帰属リンクとセルフホスト方針を維持。新規画像は追加していない。
+
 ## 最新の配信（2026-09-12 Lexus ES 7販売単位追加）
 
 - exact release commit: `1f51944beb2cfadd8ac201661c20a138d2616d55`
