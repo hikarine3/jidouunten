@@ -280,8 +280,16 @@ class CacheFallbackTest(unittest.TestCase):
 
     def test_cache_status_does_not_contact_github(self):
         board.save_board_snapshot(self.config, [])
-        result = board.cache_status(self.config)
+        original_run_gh = board.run_gh
+        board.run_gh = lambda *_args, **_kwargs: self.fail("cache-status must not contact GitHub")
+        try:
+            result = board.cache_status(self.config)
+        finally:
+            board.run_gh = original_run_gh
         self.assertEqual(result["status"], "available")
+        self.assertEqual(result["source"], "cache")
+        self.assertEqual(result["read_only"], True)
+        self.assertEqual(result["live_state_unknown"], True)
         self.assertEqual(result["item_count"], 0)
         self.assertEqual(result["last_known_status"], "exhausted")
 

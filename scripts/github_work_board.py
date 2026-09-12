@@ -176,16 +176,28 @@ def cache_status(config: dict[str, Any], max_age_hours: float = CACHE_MAX_AGE_HO
     try:
         items, metadata = read_board_snapshot(config, max_age_hours)
     except BoardError as exc:
-        return {"status": "unavailable", "path": str(CACHE_PATH), "reason": str(exc)}
+        return {
+            "status": "unavailable",
+            "source": "none",
+            "path": str(CACHE_PATH),
+            "read_only": True,
+            "live_state_unknown": True,
+            "next_action": "reconnect_github",
+            "reason": str(exc),
+        }
     selected = select_next(items)
     return {
         "status": "available",
+        "source": metadata["source"],
         "path": str(CACHE_PATH),
         "item_count": len(items),
         "captured_at": metadata["captured_at"],
         "age_seconds": metadata["age_seconds"],
         "max_age_hours": metadata["max_age_hours"],
         "sha256": metadata["sha256"],
+        "read_only": True,
+        "live_state_unknown": True,
+        "next_action": "reconnect_github_before_claim_or_write",
         "last_known_status": selected["status"],
     }
 
