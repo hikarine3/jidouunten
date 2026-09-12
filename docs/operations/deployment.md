@@ -2,6 +2,18 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Peugeot E-3008 GT候補追加）
+
+- exact release commit: `9bebe69`（Peugeot E-3008 GTの正本・公式導線・台帳・テストを同期）
+- immutable: https://ce08097e.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Cloudflare Pages: `ce08097e-c61d-4568-9d19-c87f652e8434`（Production / main / source `9bebe69`）
+- 内容: Peugeot NEW E-3008 GTを日本向けのLevel 2相当候補として1販売単位追加。日本向け公式商品ページの全車共通ACC（ストップ＆ゴー）・レーンキープアシスト、GTのレーンポジショニングアシストと、購入サポートページの2026年9月現在税込メーカー希望小売価格760万円〜を確認した。発売日・個別受注可否・作動道路／速度・ハンズオフ条件は未確認のまま保持し、ハンズオフ不可・運転者監視必須として一覧／詳細／比較へ反映。公式商品ページと見積もりシミュレーション導線を追加した。
+- 根拠: [NEW E-3008商品ページ](https://www.peugeot.co.jp/range/new-peugeot-3008/electric.html)、[購入サポート](https://www.peugeot.co.jp/buy/buy-peugeot/current-offers/peugeot-e-3008.html)、[ADAS説明](https://www.peugeot.co.jp/brand/innovation/driving-experience/adas.html/1000)、[Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)（確認日: 2026-09-12）。調査環境のWAFで商品・購入サポートページの直接HTTP取得は403だったため、HTTP 200や注文可能とは扱わず、公式検索表示と公式説明を照合した。
+- SEO／公開面: 456 HTML、sitemap-0は455 URL、車両詳細450件、トップ／一覧ItemListは2ページ・898項目。GTM実IDは各HTML 1件、テスト計測ID0件、公開HTML内部enum・source・accessedAt漏れ0件。
+- QA: `npm test` 78/78＋Python16/16、価格450/450（exact432／range17／未確認1）、公式導線80モデル／77 URL／164 actions、注文可48／未確認401／利用不可1、鮮度確認済み449／要再確認0／競合1、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release PASS、registry closure 546/546、独立リリース監査PASS。
+- 本番smoke: immutable／本体E2E各1/1（本体GA collect HTTP204）。トップ、一覧、Peugeot詳細、Peugeot＋Tesla比較、sitemap、robotsはHTTP200、未知URL404、`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）のpath/queryは本体へ301。既存Wikimedia Commons画像は一覧でデスクトップ約374×115px・モバイル約360×88pxのWebPサムネイル（`loading=lazy`・`object-fit: cover`）を維持し、Peugeot用画像は権利確認できる素材がないため追加していない。
+
 ## 最新の配信（2026-09-12 Cadillac LYRIQ SPORT候補追加）
 
 - exact release commit: `51db9e6`（実装 `10c0310`、依存レジストリ件数同期を含む）

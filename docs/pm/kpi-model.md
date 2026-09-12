@@ -15,14 +15,14 @@
 
 | 項目 | 値 | 確認方法 |
 |---|---:|---|
-| sitemap掲載URL数 | 453 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外、Honda N-BOX追加後） |
-| うち車両詳細 | 448 | `src/data/vehicles.json` の販売単位レコード数 |
-| 掲載メーカー数 | 19 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu |
+| sitemap掲載URL数 | 455 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外、Peugeot E-3008追加後） |
+| うち車両詳細 | 450 | `src/data/vehicles.json` の販売単位レコード数 |
+| 掲載メーカー数 | 21 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu / Cadillac / Peugeot |
 | 条件別（レベル・道路・ハンズオフ・価格帯）の静的URL | 0 | 絞り込みはquery paramのみ（`/cars/?level=2`） |
 | 機能名（プロパイロット2.0等）の静的URL | 0 | 該当ページなし |
 | 2台比較の静的URL | 0 | `/compare/?ids=a,b` のquery paramのみ |
-| 構造化データの型 | 全454ページ: WebSite + WebPage + BreadcrumbList（一覧2ページはItemList）／車両詳細448ページ: Product + Car + BreadcrumbList | `src/layouts/Layout.astro` と `src/pages/cars/[id].astro` のJSON-LD `@graph` |
-| 公式アクションリンク | 159 | `src/data/official-links.json` の action 件数。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線、BYD 4車種は試乗・販売店・カタログ導線、Mitsubishi OUTLANDER PHEV／eKクロス／eKクロス EV／デリカミニ／eKスペースは商談・購入予約・試乗車・見積り・販売店・カタログ導線、Audi A5 / A5 Avantは見積り・正規ディーラー・試乗車導線、Toyota GRヤリスは販売店・試乗・見積り・カタログ導線、Suzukiスペーシア／スペーシア カスタムは購入相談・試乗・見積り・カタログ導線、Toyotaアクア／カローラ／カローラ スポーツ／カローラ ツーリング／ヤリス／ヤリス クロス／クラウン スポーツ／クラウン（クロスオーバー）は公式見積り導線、Lexus LXは販売店・見積り・カタログ・価格表導線、SUBARU フォレスターはセルフ見積り・販売店・試乗車導線、Honda ステップ ワゴン／フリード／CIVIC／N-BOXは販売店・試乗・見積り・カタログ導線、日産キックスは販売店・試乗・見積り・カタログ導線、Daihatsuタント／カスタム／ファンクロスは販売店・試乗・見積り・カタログ導線を保持。Mercedes-Benz GLC／C-Class Sedanは現行モデルページのみを保持し、注文可否と分離。検討用導線と注文可否は分離 |
+| 構造化データの型 | 全456ページ: WebSite + WebPage + BreadcrumbList（一覧2ページはItemList）／車両詳細450ページ: Product + Car + BreadcrumbList | `src/layouts/Layout.astro` と `src/pages/cars/[id].astro` のJSON-LD `@graph` |
+| 公式アクションリンク | 164 | `src/data/official-links.json` の action 件数。Peugeot E-3008は商品ページと見積もりシミュレーション導線を保持し、注文可否とは分離。Teslaは販売単位の注文・試乗導線、Volvo EX30はグレード別注文可否を未確認のままモデル単位の公式オンライン注文導線を保持し、Hyundai IONIQ 5は試乗・見積り・カタログ導線、BYD 4車種は試乗・販売店・カタログ導線、Mitsubishi OUTLANDER PHEV／eKクロス／eKクロス EV／デリカミニ／eKスペースは商談・購入予約・試乗車・見積り・販売店・カタログ導線、Audi A5 / A5 Avantは見積り・正規ディーラー・試乗車導線、Toyota GRヤリスは販売店・試乗・見積り・カタログ導線、Suzukiスペーシア／スペーシア カスタムは購入相談・試乗・見積り・カタログ導線、Toyotaアクア／カローラ／カローラ スポーツ／カローラ ツーリング／ヤリス／ヤリス クロス／クラウン スポーツ／クラウン（クロスオーバー）は公式見積り導線、Lexus LXは販売店・見積り・カタログ・価格表導線、SUBARU フォレスターはセルフ見積り・販売店・試乗車導線、Honda ステップ ワゴン／フリード／CIVIC／N-BOXは販売店・試乗・見積り・カタログ導線、日産キックスは販売店・試乗・見積り・カタログ導線、Daihatsuタント／カスタム／ファンクロスは販売店・試乗・見積り・カタログ導線を保持。Mercedes-Benz GLC／C-Class Sedanは現行モデルページのみを保持し、注文可否と分離。検討用導線と注文可否は分離 |
 | 新車注文可（一次情報で確認） | 48 | `src/data/vehicles.json` の販売単位。Tesla 6、Volvo EX30 3、Hyundai IONIQ 5 2、Mitsubishi OUTLANDER PHEV 9／eKクロス 8／eKクロス EV 3／デリカミニ 12／eKスペース 4、日産アリアB6 1。公式の注文・購入予約導線を確認した単位のみで、在庫・納期・契約成立は保証しない |
 | Lighthouse production (mobile) | performance 1.00 / accessibility 1.00 | `.cache/lighthouse-production.json` |
 | KPI実測（GA4、本番hostname） | active users 17 / sessions 21 / pageviews 47 / event count 155（2026-09-10〜09-11） | GA4 Data API。`hostName=jidouunten.jp`で絞り、localhost・Pages preview・初期QAを除外。速報値 |
