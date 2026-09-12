@@ -379,3 +379,8 @@
 - カタログ掲載は新規受注可能の保証ではない。受注可否未確認はunknownとして表示。
 - vpshikakuの現行CLAUDEモデル割当と共通contractを直接参照。Luna=実装/データ/限定レビュー、Sol=調査/外部計測設定、親=採択/統合/公開。
 - 別ブラウザprofileに誤作成した同名測定resourceは未削除。本番GTMの送信先から除外済み。詳細はignored `.cache/measurement-mistakes.json`。
+
+## 2026-09-12 Issue→Project運用
+
+- Chat等で先に作られたJID形式IssueをProject Kanbanへ冪等登録する `python3 scripts/github_work_board.py sync-issues` を追加し、`CLAUDE.md`・Sprint Loop・GitHub Work Managementへ起動手順を固定した。新規itemだけIssueのopen/closedに合わせてBacklog/Doneへ初期化し、Issue本文・ラベル・優先順位は変更しない。
+- checkpoint `5bf6b9e0071d66ecc4f9095ba6c6c49a4acf1cf1` をpush済み。2026-09-12時点はGitHub GraphQL Project APIの一時rate limitで実登録の再確認ができないため、回復後に `sync-issues` を実行し、`scanned/work_issues/missing/added` を記録する。
