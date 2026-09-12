@@ -1,0 +1,68 @@
+<div class="favorites-status" data-favorites-status hidden aria-live="polite"></div>
+
+<script>
+  // @ts-nocheck
+  import { addFavorite, FAVORITES_LIMIT, readFavoriteIds, removeFavorite } from '../lib/favorites';
+  const toggles = [...document.querySelectorAll('[data-favorite-toggle]')];
+  const links = [...document.querySelectorAll('[data-favorites-link]')];
+  const counts = [...document.querySelectorAll('[data-favorites-count]')];
+  const status = document.querySelector('[data-favorites-status]');
+  const track = (event, payload = {}) => {
+    if (window.jidouuntenTrack) window.jidouuntenTrack(event, payload);
+    else {
+      window.__jidouuntenPendingEvents = window.__jidouuntenPendingEvents || [];
+      window.__jidouuntenPendingEvents.push({ event, payload });
+    }
+  };
+  const storage = () => { try { return window.localStorage; } catch { return null; } };
+  const ids = () => readFavoriteIds(storage());
+  const showStatus = (message = '') => {
+    if (!status) return;
+    status.textContent = message;
+    status.hidden = !message;
+  };
+  const render = () => {
+    const favoriteIds = ids();
+    const favoriteSet = new Set(favoriteIds);
+    toggles.forEach((toggle) => {
+      const active = favoriteSet.has(toggle.dataset.vehicleId || '');
+      toggle.setAttribute('aria-pressed', String(active));
+      toggle.textContent = active ? 'お気に入り済み' : 'お気に入りに追加';
+      toggle.classList.toggle('is-favorite', active);
+    });
+    counts.forEach((count) => { count.textContent = String(favoriteIds.length); });
+    links.forEach((link) => {
+      link.href = favoriteIds.length ? '/?favorites=1' : '/';
+      link.setAttribute('aria-label', `お気に入り ${favoriteIds.length}件`);
+    });
+    window.dispatchEvent(new CustomEvent('jidouunten:favorites-change', { detail: { count: favoriteIds.length } }));
+    return favoriteIds;
+  };
+  const change = (toggle) => {
+    const id = toggle.dataset.vehicleId;
+    if (!id) return;
+    const before = ids();
+    const result = before.includes(id) ? removeFavorite(storage(), id) : addFavorite(storage(), id);
+    if (result.limitReached) {
+      showStatus(`お気に入りは${FAVORITES_LIMIT}台まで保存できます。`);
+      return;
+    }
+    if (!result.ok) {
+      showStatus('保存できません。URLをブックマークして続きから再開できます。');
+      return;
+    }
+    showStatus('');
+    render();
+    if (result.added) track('favorites_add', { favorite_count: result.ids.length });
+    if (result.removed) track('favorites_remove', { favorite_count: result.ids.length });
+  };
+  toggles.forEach((toggle) => toggle.addEventListener('click', () => change(toggle)));
+  links.forEach((link) => link.addEventListener('click', () => {
+    const count = ids().length;
+    if (count) track('favorites_open', { favorite_count: count });
+  }));
+  window.addEventListener('storage', (event) => { if (event.key === 'jidouunten:favorites:v1') render(); });
+  window.jidouuntenFavoriteIds = ids;
+  window.jidouuntenFavoritesRender = render;
+  render();
+</script>

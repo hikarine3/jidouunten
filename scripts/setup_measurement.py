@@ -35,6 +35,10 @@ EVENT_PARAMETERS = {
     "view_vehicle": ("vehicle_id", "model_year", "grade"),
     "outbound_manufacturer": ("vehicle_id", "manufacturer", "link_url", "link_domain", "link_type", "placement"),
     "outbound_purchase_action": ("vehicle_id", "manufacturer", "action_type", "link_url", "link_domain", "placement"),
+    # お気に入りの台数だけを測り、車両ID・検索語・保存内容は送らない。
+    "favorites_add": ("favorite_count",),
+    "favorites_remove": ("favorite_count",),
+    "favorites_open": ("favorite_count",),
 }
 
 

@@ -21,6 +21,17 @@
 
 初期スクリプト実行順で計測関数が未定義でもイベントを失わないよう、一覧側は`__jidouuntenPendingEvents`へ一時キューし、Analytics初期化後にdrainする。0件へ戻る導線の表示自体はイベント送信の同意を追加せず、既存の通常計測方針に従う。
 
+## 2026-09-12 お気に入り再訪イベントの契約
+
+一覧・詳細で同じブラウザに保存した販売単位を`/?favorites=1`で再表示できるようにした。localStorageの保存上限は100台で、ログイン・メール・push通知・端末間同期は行わない。保存に失敗した場合はURLのブックマークを代替手段として案内する。
+
+再訪のファネル（S6→S7）を測るため、次のイベントを追加した。車両ID・表示名・検索条件・localStorage本文は送らず、保存台数だけを固定整数で送信する。
+
+- `favorites_add` / `favorites_remove`: 追加・解除後の`favorite_count`
+- `favorites_open`: お気に入り一覧リンクを開いた時点の`favorite_count`
+
+公開GTM APIのread-only確認で、`GTM-PV9QVMJV` version 12（Google tag 1、Custom Event trigger 13、ネイティブGA4 Event tag 13、dataLayer variable 20、compiler error 0、HTML tag 0）を確認した。公開receiptは`python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish`、`version_id=12`。実IDを入れた本番ブラウザで、追加・解除・一覧を各1回操作し、GTM実ID 1件・GTM-TEST 0件・GA collect HTTP 204を確認する。
+
 ## 2026-09-11 本番観測スナップショット（GA4／GSC／Bing）
 
 2026-09-11 20:50 JSTに、公開後の本番データをAPIのread-only取得で確認した。GA4は`hostName=jidouunten.jp`で絞り、localhost・Pages preview・2026-09-07の初期QA値を除外した。GA4は処理遅延があるため速報値であり、実利用の完了数を保証しない。
@@ -97,7 +108,7 @@ localStorageのみを使い、保存本文・検索query・車両ID・表示名�
 | サービス | resource | 状態 |
 |---|---|---|
 | Google Analytics 4 | account `1st` / property `jidouunten.jp` (`552960231`) / web stream `https://jidouunten.jp` / `G-Q58GM7BVB6` | 日本時間・JPY、拡張計測有効 |
-| Google Tag Manager | web container `jidouunten.jp` / `GTM-PV9QVMJV` | version 11公開済み |
+| Google Tag Manager | web container `jidouunten.jp` / `GTM-PV9QVMJV` | version 12公開済み |
 | Google Search Console | domain property `sc-domain:jidouunten.jp` | DNS TXT確認済み、sitemap取得成功 |
 | Bing Webmaster Tools | `https://jidouunten.jp/` | DNS CNAME確認済み、sitemap送信済み・処理中 |
 
@@ -192,15 +203,15 @@ python3 scripts/setup_measurement.py --create-container
 python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish
 ```
 
-公開version 11にはGoogle tag、10個のCustom Event trigger、対応する10個のネイティブGA4 Event tag、
-19個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
-構成だったため停止・除去した。API取得した公開版で、ネイティブevent tag 10個（pause 0）、HTML tag 0個、
-10個すべて正しい測定ID `G-Q58GM7BVB6`、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
+公開version 12にはGoogle tag、13個のCustom Event trigger、対応する13個のネイティブGA4 Event tag、
+20個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
+構成だったため停止・除去した。API取得した公開版で、ネイティブevent tag 13個（pause 0）、HTML tag 0個、
+13個すべて正しい測定ID `G-Q58GM7BVB6`、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
 workspaceに差分がなければpublishしない。
 
 2026-09-10にversion 8で `outbound_manufacturer` の分類項目を反映した後、version 9で
 `outbound_purchase_action` のtrigger、GA4 Event tag、`action_type`等の変数を追加した。version 10では
-0件到達・緩和候補表示・緩和適用を追加した後、version 11で比較完了（2〜3台の結果描画）を追加した。公開版の10イベント構成でページ表示・一覧操作・0件救済・比較開始/完了・詳細表示・公式情報遷移・購入/試乗アクションを各1契約で扱う。
+0件到達・緩和候補表示・緩和適用を追加した後、version 11で比較完了（2〜3台の結果描画）、version 12でお気に入り追加・解除・一覧表示を追加した。公開版の13イベント構成でページ表示・一覧操作・0件救済・比較開始/完了・詳細表示・公式情報遷移・購入/試乗アクション・再訪導線を各1契約で扱う。
 
 ## 読み込み方針
 

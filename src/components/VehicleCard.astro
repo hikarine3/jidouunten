@@ -37,6 +37,7 @@ const visibleCapabilities = [...vehicle.capabilities]
   <div class="card-foot">
     <div class="card-actions">
       <a class="button small text" href={`/cars/${vehicle.id}/`}>詳細を見る <span aria-hidden="true">→</span></a>
+      <button class="button small text favorite-toggle" type="button" data-favorite-toggle data-vehicle-id={vehicle.id} aria-pressed="false">お気に入りに追加</button>
       {selectable && <label class="check-card compare-check"><input type="checkbox" name="ids" value={vehicle.id} checked={checked} aria-label={`${vehicle.maker} ${vehicle.model}を比較に追加`} /> 比較に追加</label>}
     </div>
   </div>

@@ -15,4 +15,6 @@ interface Window {
   jidouuntenTrack?: (event: string, payload?: Record<string, unknown>) => void;
   jidouuntenSave?: (kind: 'search' | 'compare', href: string, label: string, snapshot?: unknown) => boolean;
   jidouuntenSavedResumeRender?: () => unknown;
+  jidouuntenFavoriteIds?: () => string[];
+  jidouuntenFavoritesRender?: () => string[];
 }

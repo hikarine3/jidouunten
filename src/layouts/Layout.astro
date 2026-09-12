@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Analytics from '../components/Analytics.astro';
 import SavedResume from '../components/SavedResume.astro';
+import Favorites from '../components/Favorites.astro';
 const { title = '自動運転・Level 1/2車種一覧｜機能・価格で比較｜自動運転.jp', description = '日本で選べる自動運転・Level 1/2運転支援車を、自動化レベル、ハンズオフ、機能、価格、発売・導入時期から探して比較できます。', structuredData: extraStructuredData = [], breadcrumbs: customBreadcrumbs = [] } = Astro.props;
 const extraGraph = Array.isArray(extraStructuredData) ? extraStructuredData : [extraStructuredData];
 const canonical = new URL(Astro.url.pathname, 'https://jidouunten.jp').toString();
@@ -58,10 +59,12 @@ const structuredData = {
           <a href="/levels/">レベルを知る</a>
           <a href="/">車を探す</a>
           <a href="/compare/">比較する</a>
+          <a href="/" data-favorites-link>お気に入り <span data-favorites-count>0</span></a>
         </nav>
       </div>
     </header>
     <SavedResume />
+    <Favorites />
     <main><slot /></main>
     <footer class="footer">
       <div class="wrap footer-inner">
