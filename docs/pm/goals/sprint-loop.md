@@ -4,6 +4,8 @@
 候補選定・lane・branch・planning/release分離の共通規範は、repo rootから
 `../vpshikaku/docs/claude-rules/sprint-loop-common-contract.md` を直接読みます。共通規範の本文はここへ複製しません。
 
+> **最初に停止ガードを確認する。** 文末の「打ち切りと価値レーンの切り替え」を先に適用し、車種・グレード追加、件数・marker・registry同期だけの作業に該当したら、そのレーンを再開しない。
+
 ## 正本
 
 - 現行task、Priority、Rank、Status、PM Phase、依存、Release status:
