@@ -211,6 +211,12 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .detail-hero h1 { font-size: 2.4rem; margin: 12px 0; letter-spacing: -.06em; }
 .detail-section { background: var(--white); border: 1px solid var(--line); border-radius: 15px; padding: 24px; margin-bottom: 16px; }
 .detail-section h2 { font-size: 1.35rem; margin-bottom: 16px; }
+.about-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.about-grid .detail-section { margin-bottom: 0; }
+.about-card { min-height: 185px; }
+.about-card p:last-child { margin-bottom: 0; }
+.about-grid .detail-list { display: grid; gap: 8px; }
+.about-grid .detail-list li::marker { color: var(--lime-deep); }
 .official-next { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-color: rgba(149, 214, 0, .65); background: linear-gradient(135deg, var(--white), #f5faea); }
 .official-next h2 { margin-bottom: 8px; }
 .official-next p:last-child { margin: 0; color: var(--muted); max-width: 620px; }
@@ -295,6 +301,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
   .brand-mark::after { width: 6px; height: 6px; left: 7px; top: 7px; }
   nav { width: auto; margin-left: auto; justify-content: flex-end; gap: 9px; font-size: .66rem; }
   .level-grid, .cards, .compare-select, .level-boundary { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
   .level-card:last-child { grid-column: auto; }
   .section { padding: 58px 0; }
   .section-head, .results-bar, .footer-inner, .compare-toolbar { align-items: flex-start; flex-direction: column; }

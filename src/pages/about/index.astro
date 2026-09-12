@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const aboutStructuredData = {
+  '@type': 'AboutPage',
+  '@id': 'https://jidouunten.jp/about/#about',
+  url: 'https://jidouunten.jp/about/',
+  name: '運営者情報・お問い合わせ｜自動運転.jp',
+  isPartOf: { '@id': 'https://jidouunten.jp/#website' },
+  about: { '@id': 'https://jidouunten.jp/#organization' },
+};
+const organizationStructuredData = {
+  '@type': 'Organization',
+  '@id': 'https://jidouunten.jp/#organization',
+  name: '株式会社1st Class（1st Class）',
+  url: 'https://1stclass.co.jp/',
+};
+---
+
+<Layout
+  title="運営者情報・お問い合わせ｜自動運転.jp"
+  description="自動運転.jpの運営主体、情報の確認方法、お問い合わせ先を確認できます。"
+  structuredData={[aboutStructuredData, organizationStructuredData]}
+>
+  <section class="page-intro">
+    <div class="wrap">
+      <div class="eyebrow">ABOUT / CONTACT</div>
+      <h1>誰が、どう調べているか。</h1>
+      <p class="hero-copy">自動運転.jpは、日本で選べる運転支援車を、レベル・機能・価格・作動条件から比較する情報サイトです。</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 18px;">
+    <div class="wrap about-grid">
+      <article class="detail-section about-card">
+        <div class="eyebrow">OPERATOR</div>
+        <h2>運営主体</h2>
+        <p><strong>株式会社1st Class（1st Class）</strong></p>
+        <p class="subtle">運営主体の公式サイトは<a href="https://1stclass.co.jp/" target="_blank" rel="noopener noreferrer">1st Class公式サイト</a>です。</p>
+      </article>
+
+      <article class="detail-section about-card">
+        <div class="eyebrow">CONTACT</div>
+        <h2>掲載内容の連絡</h2>
+        <p>車両情報の誤り、更新情報、出典の追加は、公開<a href="https://github.com/hikarine3/jidouunten/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a>でお知らせください。</p>
+        <p class="subtle">公開欄には氏名・メールアドレスなどの個人情報を書かないでください。個別の購入相談や安全性の保証は受け付けていません。</p>
+      </article>
+
+      <article class="detail-section">
+        <div class="eyebrow">HOW WE CHECK</div>
+        <h2>情報の作り方</h2>
+        <ul class="detail-list">
+          <li>メーカー公式カタログ、装備表、取扱説明書などの一次情報を確認します。</li>
+          <li>車種名だけでなく、グレード・駆動方式・装備パッケージなどの販売単位で記録します。</li>
+          <li>詳細ページでは、確認できた発売・導入時期、価格、作動条件、確認日を表示します。</li>
+          <li>情報が確認できない場合は、推測で埋めず「未確認」と表示します。</li>
+        </ul>
+      </article>
+
+      <article class="detail-section">
+        <div class="eyebrow">LEVELS &amp; LIMITS</div>
+        <h2>レベルの見方</h2>
+        <p>Level 1〜5は、運転タスクをシステムと運転者のどちらが担うかを整理する分類です。このサイトのLevel表示は、一次情報を国土交通省の定義へ照合した独自整理であり、メーカーの認証や安全性の評価ではありません。</p>
+        <p>Level 2でも、ハンズオフや車線変更支援の有無、道路・速度・監視条件が異なります。購入・利用前にはメーカー公式情報と取扱説明書をご確認ください。</p>
+      </article>
+
+      <article class="detail-section">
+        <div class="eyebrow">DISCLAIMER</div>
+        <h2>免責</h2>
+        <p>掲載情報は確認時点の公開情報に基づくもので、在庫・納期・価格・作動可否の最新性や安全性を保証するものではありません。実際の購入・利用条件は、メーカー、販売店、サービス提供者の公式案内を確認してください。</p>
+        <p class="subtle"><a href="/privacy/">プライバシーと計測設定</a>もあわせてご確認ください。</p>
+      </article>
+    </div>
+  </section>
+</Layout>
