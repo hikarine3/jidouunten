@@ -1,5 +1,14 @@
 # 計測・検索登録
 
+## 2026-09-13 自宅充電チェックの計測契約
+
+一覧の自宅充電チェックは、既存の候補を一次情報で充電が必要と確認できた販売単位へ絞る操作である。住所・工事可否・自由入力は扱わず、未確認の動力源を「充電不要」と解釈しない。
+
+- `charge_check_start`: 選択開始（`charge_check_value` は `available` / `not_available` / `unknown` の固定enum）
+- `charge_check_result`: 結果表示（同じ固定enumと `result_count` の整数）
+
+成功指標は `charge_check_start` → `charge_check_result` の完了率と、結果から詳細・比較へ進む割合（S3→S4/S5）。GSC/Bingは自宅充電・家庭充電などの検索クエリを28日単位で確認し、未取得を需要ゼロとは扱わない。GTMへは既存コンテナに同名Custom EventとGA4 Eventを冪等に追加し、公開版で正しい測定ID・compiler error 0を確認する。
+
 ## 2026-09-12 本番観測スナップショット（GA4／GSC／Bing）
 
 2026-09-12 JSTに、Discovery Sport配信後の本番データをread-onlyで再取得した。GA4は`hostName=jidouunten.jp`、期間は2026-09-10〜2026-09-11に限定し、localhost・Pages preview・初期QAを除外した。前回取得後の集計反映により数値が増えている。今回のデプロイ直後の新候補利用はまだ集計期間へ反映されていない。GA4の集計遅延を考慮し、成約や需要の達成値とは扱わない。
@@ -30,7 +39,7 @@
 - `favorites_add` / `favorites_remove`: 追加・解除後の`favorite_count`
 - `favorites_open`: お気に入り一覧リンクを開いた時点の`favorite_count`
 
-公開GTM APIのread-only確認で、`GTM-PV9QVMJV` version 12（Google tag 1、Custom Event trigger 13、ネイティブGA4 Event tag 13、dataLayer variable 20、compiler error 0、HTML tag 0）を確認した。公開receiptは`python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish`、`version_id=12`。実IDを入れた本番ブラウザで、追加・解除・一覧を各1回操作し、GTM実ID 1件・GTM-TEST 0件・GA collect HTTP 204を確認する。
+公開GTM APIのread-only確認で、`GTM-PV9QVMJV` version 13（Google tag 1、Custom Event trigger 15、ネイティブGA4 Event tag 15、dataLayer variable 22、compiler error 0、HTML tag 0）を確認した。公開receiptは`python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish`、`version_id=13`。実IDを入れた本番ブラウザで、自宅充電チェックの開始・結果を各1回操作し、GTM実ID 1件・GTM-TEST 0件・GA collect HTTP 204を確認する。
 
 ## 2026-09-11 本番観測スナップショット（GA4／GSC／Bing）
 
@@ -108,7 +117,7 @@ localStorageのみを使い、保存本文・検索query・車両ID・表示名�
 | サービス | resource | 状態 |
 |---|---|---|
 | Google Analytics 4 | account `1st` / property `jidouunten.jp` (`552960231`) / web stream `https://jidouunten.jp` / `G-Q58GM7BVB6` | 日本時間・JPY、拡張計測有効 |
-| Google Tag Manager | web container `jidouunten.jp` / `GTM-PV9QVMJV` | version 12公開済み |
+| Google Tag Manager | web container `jidouunten.jp` / `GTM-PV9QVMJV` | version 13公開済み |
 | Google Search Console | domain property `sc-domain:jidouunten.jp` | DNS TXT確認済み、sitemap取得成功 |
 | Bing Webmaster Tools | `https://jidouunten.jp/` | DNS CNAME確認済み、sitemap送信済み・処理中 |
 
@@ -183,6 +192,15 @@ window.dataLayer.push({
   link_domain: "example.invalid",
   placement: "vehicle_detail",
 });
+window.dataLayer.push({
+  event: "charge_check_start",
+  charge_check_value: "available",
+});
+window.dataLayer.push({
+  event: "charge_check_result",
+  charge_check_value: "available",
+  result_count: 69,
+});
 ```
 
 `filter_results` は、初期表示や同じ値の再選択ではなく、利用者の操作で結果集合が変わった時だけ送る。
@@ -192,6 +210,7 @@ window.dataLayer.push({
 `link_type` は `product` / `archive`、`placement` は `vehicle_detail` / `comparison` とし、
 メーカー公式の商品情報と過去資料を区別する。`outbound_purchase_action` の `action_type` は
 `order` / `test_drive` / `dealer` / `catalog` のいずれかとし、確認済みのアクションだけを表示・送信する。
+`charge_check_start` / `charge_check_result` の `charge_check_value` は `available` / `not_available` / `unknown` の固定enumのみとし、`result_count` は画面で実際に表示した件数を送る。`unknown` はフィルターを解除した全候補であり、充電不要の判定ではない。
 
 ## GTM設定
 
@@ -203,15 +222,15 @@ python3 scripts/setup_measurement.py --create-container
 python3 scripts/setup_measurement.py --measurement-id G-Q58GM7BVB6 --publish
 ```
 
-公開version 12にはGoogle tag、13個のCustom Event trigger、対応する13個のネイティブGA4 Event tag、
-20個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
-構成だったため停止・除去した。API取得した公開版で、ネイティブevent tag 13個（pause 0）、HTML tag 0個、
-13個すべて正しい測定ID `G-Q58GM7BVB6`、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
+公開version 13にはGoogle tag、15個のCustom Event trigger、対応する15個のネイティブGA4 Event tag、
+22個のdataLayer variableがある。初期版のCustom HTML event tagは同名イベントをdataLayerへ再投入する
+構成だったため停止・除去した。API取得した公開版で、ネイティブevent tag 15個（pause 0）、HTML tag 0個、
+15個すべて正しい測定ID `G-Q58GM7BVB6`、旧ID0箇所、compiler errorなしを確認済み。再実行時は同名resourceを再作成せず、
 workspaceに差分がなければpublishしない。
 
 2026-09-10にversion 8で `outbound_manufacturer` の分類項目を反映した後、version 9で
 `outbound_purchase_action` のtrigger、GA4 Event tag、`action_type`等の変数を追加した。version 10では
-0件到達・緩和候補表示・緩和適用を追加した後、version 11で比較完了（2〜3台の結果描画）、version 12でお気に入り追加・解除・一覧表示を追加した。公開版の13イベント構成でページ表示・一覧操作・0件救済・比較開始/完了・詳細表示・公式情報遷移・購入/試乗アクション・再訪導線を各1契約で扱う。
+0件到達・緩和候補表示・緩和適用を追加した後、version 11で比較完了（2〜3台の結果描画）、version 12でお気に入り追加・解除・一覧表示、version 13で自宅充電チェック開始・結果を追加した。公開版の15イベント構成でページ表示・一覧操作・0件救済・比較開始/完了・詳細表示・公式情報遷移・購入/試乗アクション・再訪導線・自宅充電チェックを各1契約で扱う。
 
 ## 読み込み方針
 

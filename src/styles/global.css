@@ -409,6 +409,17 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
 .availability-summary-grid span { color: #bdcad1; font-size: .59rem; font-weight: 800; line-height: 1.25; }
 .availability-summary-grid strong { color: var(--lime); font-size: 1.1rem; line-height: 1; }
 .availability-summary p { margin: 0; color: #8fa4af; font-size: .6rem; line-height: 1.5; }
+.charging-check { display: grid; gap: 7px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.12); }
+.charging-check-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; color: #f8fbf4; font-size: .7rem; font-weight: 800; }
+.charging-check-head small { color: #8fa4af; font-size: .6rem; font-weight: 600; }
+.charging-check p { margin: 0; color: #bdcad1; font-size: .64rem; line-height: 1.45; }
+.charging-check p strong { color: var(--lime); }
+.charging-check-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.charging-check-actions button { display: grid; gap: 3px; min-width: 0; padding: 8px 9px; border: 1px solid rgba(255,255,255,.15); border-radius: 10px; color: white; text-align: left; background: rgba(255,255,255,.05); cursor: pointer; }
+.charging-check-actions button:hover, .charging-check-actions button:focus-visible, .charging-check-actions button[aria-pressed="true"] { border-color: var(--lime); background: rgba(200,242,58,.14); }
+.charging-check-actions span { color: #bdcad1; font-size: .59rem; font-weight: 800; line-height: 1.25; }
+.charging-check-actions strong { overflow: hidden; color: var(--lime); font-size: .75rem; line-height: 1.1; text-overflow: ellipsis; white-space: nowrap; }
+.charging-check-note { color: #8fa4af; font-size: .6rem; line-height: 1.45; }
 .list-section { padding-top: 8px; }
 #vehicle-filters .filters { padding: 0; margin: 16px 0; }
 #vehicle-filters summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; cursor: pointer; font-size: .78rem; font-weight: 900; }
@@ -439,6 +450,7 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
   .quick-filters { grid-template-columns: auto auto; margin: 0; }
   .quick-filters small { display: none; }
   .availability-summary { grid-column: 1 / -1; }
+  .charging-check { grid-column: 1 / -1; }
 }
 
 @media (max-width: 650px) {
@@ -474,6 +486,16 @@ select { width: 100%; border: 1px solid var(--line); border-radius: 9px; padding
   .availability-summary { margin-top: 6px; padding-top: 6px; }
   .availability-summary-grid button { padding: 5px 7px; }
   .availability-summary { display: none; }
+  .charging-check { margin-top: 6px; padding-top: 6px; }
+  .charging-check p, .charging-check-note { display: none; }
+  .charging-check-head { font-size: .66rem; }
+  .charging-check-actions { gap: 4px; }
+  .charging-check-actions button { padding: 5px 6px; }
+  .charging-check-actions span { font-size: .54rem; }
+  .charging-check-actions strong { font-size: .66rem; }
+  .guide-deck { display: none; }
+  .charging-check p { font-size: .6rem; }
+  .charging-check-note { font-size: .56rem; }
   .filter-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-inner { grid-template-columns: 1fr; align-items: start; }
   .footer-inner nav { flex-wrap: wrap; justify-content: flex-start; }

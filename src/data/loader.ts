@@ -11,6 +11,52 @@ export type Availability =
 export type HandsOff = 'allowed_in_conditions' | 'not_allowed' | 'unknown';
 export type DriverMonitoring = 'required' | 'takeover_ready' | 'not_required_in_odd' | 'unknown';
 
+/**
+ * 自宅充電チェックで使う保守的な判定。
+ *
+ * `required` は、既存レコードのモデル名または販売単位グレードが
+ * BEV/PHEVであることを一次情報付きで確認したものだけを表す。
+ * `unknown` を「充電不要」とは解釈しない。未確認の候補を残すことで、
+ * データにない動力源を推測して購入適合を断定しない。
+ */
+export type HomeChargingRequirement = 'required' | 'unknown';
+
+const homeChargingModelKeys = new Set([
+  'Nissan|日産アリア',
+  'Nissan|リーフ',
+  'Tesla|Model 3',
+  'Tesla|Model Y',
+  'Volvo|EX30',
+  'Suzuki|e VITARA',
+  'Lexus|RZ',
+  'Hyundai|IONIQ 5',
+  'BYD|DOLPHIN',
+  'BYD|ATTO 3',
+  'BYD|SEAL',
+  'BYD|SEALION 6',
+  'Mitsubishi|アウトランダーPHEV',
+  'Mitsubishi|eKクロス EV',
+  'Toyota|bZ4X',
+  'Mazda|MX-30 ROTARY-EV',
+  'Peugeot|E-3008',
+  'Cadillac|LYRIQ',
+]);
+
+/**
+ * 既存の販売単位へ紐づく、一次情報で充電が必要と確認済みかを返す。
+ * グレードでPHEV/プラグインを明示する車は同じモデル内でも限定する。
+ */
+export function vehicleHomeChargingRequirement(
+  vehicle: Pick<Vehicle, 'maker' | 'model' | 'grade'>,
+): HomeChargingRequirement {
+  const key = `${vehicle.maker}|${vehicle.model}`;
+  if (homeChargingModelKeys.has(key)) {
+    return 'required';
+  }
+  if (/PHEV|プラグインハイブリッド車|ES500e|ES350e|\d{3}e(?:\s|$)|E PERFORMANCE|(?:^|\s)(?:E|SE ALL4)(?:\s|$)/i.test(vehicle.grade)) return 'required';
+  return 'unknown';
+}
+
 export const capabilityDefinitions = {
   adaptive_cruise_control: { label: '追従走行（ACC）', description: '先行車との車間を保つよう速度を調整します。' },
   lane_centering: { label: '車線中央維持', description: '車線の中央付近を走るようハンドル操作を支援します。' },

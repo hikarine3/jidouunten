@@ -32,7 +32,7 @@ try {
   const after = await events();
   assert.equal(after.filter((event) => event.event === 'adas_checklist_open').length - before.filter((event) => event.event === 'adas_checklist_open').length, 1, 'adas_checklist_openを1回計測');
   assert.equal(after.filter((event) => event.event === 'adas_checklist_complete').length - before.filter((event) => event.event === 'adas_checklist_complete').length, 1, 'adas_checklist_completeを1回計測');
-  assert.equal(await checklist.locator('[data-purchase-action][data-placement="vehicle_detail_checklist"]').count(), 1, 'チェック完了後の公式試乗導線を表示');
+  assert.equal(await checklist.locator('[data-checklist-action][data-placement="vehicle_detail_checklist"]').count(), 1, 'チェック完了後の公式試乗導線を表示');
   await page.setViewportSize({ width: 390, height: 844 });
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth), '390pxで横はみ出しなし');
   await page.setViewportSize({ width: 1280, height: 900 });

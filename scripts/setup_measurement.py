@@ -39,6 +39,9 @@ EVENT_PARAMETERS = {
     "favorites_add": ("favorite_count",),
     "favorites_remove": ("favorite_count",),
     "favorites_open": ("favorite_count",),
+    # 自宅充電の確認値は固定enumだけを送信し、住所・設備情報は送らない。
+    "charge_check_start": ("charge_check_value",),
+    "charge_check_result": ("charge_check_value", "result_count"),
 }
 
 

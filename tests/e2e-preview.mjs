@@ -304,6 +304,22 @@ try {
   assert.equal(await page.locator('select[name="budget"]').inputValue(), 'under_300', '価格帯条件をURLから復元');
   assert.match(await page.locator('[data-selected-label]').innerText(), /〜300万円/, '価格帯を結果見出しへ明示');
 
+  await page.goto(`${base}/?homeCharging=available`);
+  assert.equal(await visibleCards(), 69, '自宅充電ありは充電が必要と確認済みの69販売単位へ絞り込む');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])[data-home-charging="required"]').count(), 69, '自宅充電ありの表示候補は確認済み属性だけ');
+  assert.equal(await page.locator('[data-home-charging-input]').inputValue(), 'available', '自宅充電条件をURLから復元');
+  assert.match(await page.locator('[data-selected-label]').innerText(), /自宅充電あり/, '自宅充電条件を結果見出しへ明示');
+  assert.match(await page.locator('.charging-check-note').innerText(), /未確認の動力源は残します/, '未確認の動力源を充電不要と扱わない');
+  await page.goto(`${base}/?homeCharging=not_available`);
+  assert.equal(await visibleCards(), 406, '自宅充電が難しい場合は充電必須と確認済みの候補だけを除外');
+  assert.equal(await page.locator('[data-vehicle-shell]:not([hidden])[data-home-charging="required"]').count(), 0, '充電必須と確認済みの候補を除外');
+  await page.goto(`${base}/?homeCharging=unknown`);
+  assert.equal(await visibleCards(), 475, '自宅充電が不明なら既定候補を維持');
+  await page.locator('[data-home-charging-shortcut="available"]').click();
+  assert.equal(new URL(page.url()).searchParams.get('homeCharging'), 'available', '自宅充電チェックのクリックでURLを更新');
+  assert.equal((await events()).filter((event) => event.event === 'charge_check_start').length, 1, 'charge_check_startイベント');
+  assert.equal((await events()).filter((event) => event.event === 'charge_check_result').at(-1).result_count, 69, 'charge_check_resultに絞り込み件数');
+
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
   assert.equal(await visibleCards(), 72, 'Level 2・高速・ハンズオフ条件は72件（ES 7販売単位を含む）');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');

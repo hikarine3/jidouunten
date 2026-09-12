@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehicleFactStatus, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, factStatusLabels, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleFactStatus, vehicleFactoryShippingEstimate, vehicleImageFor, vehicleImages, vehicleItemListStructuredData, vehicleMatchesPriceBand, vehiclePriceMin, vehiclePublicUrl, vehicleReferenceLabel, vehicleReferenceTotal, vehicleStructuredData, vehicles, type Vehicle } from '../src/data/loader';
+import { canonicalRoadType, displayCatalogAsOf, displayOptionalPackagePrices, displayVehicleFactStatus, displayVehiclePrice, displayVehicleReferenceTotal, displayVehicleTiming, factStatusLabels, filterVehicleList, isDefaultListedVehicle, levelCaveat, officialLinkFor, officialLinks, sortVehicleList, validateVehicle, vehicleDecisionFingerprint, vehicleDecisionSignals, vehicleFactStatus, vehicleFactoryShippingEstimate, vehicleHomeChargingRequirement, vehicleImageFor, vehicleImages, vehicleItemListStructuredData, vehicleMatchesPriceBand, vehiclePriceMin, vehiclePublicUrl, vehicleReferenceLabel, vehicleReferenceTotal, vehicleStructuredData, vehicles, type Vehicle } from '../src/data/loader';
 
 const makeVehicle = (overrides: Partial<Vehicle> = {}): Vehicle => ({
   id: 'test-car', market: 'JP', maker: 'テスト', model: 'モデル', modelYear: '2026', generation: null, catalogAsOf: null, salesUnitIntroducedAt: null, priceEffectiveAt: null, price: null, grade: '標準',
@@ -192,6 +192,18 @@ describe('vehicle data contract and filters', () => {
     expect(vehicles.find(({ id }) => id === 'jp-nissan-serena-2026-e-power-luxion')?.price?.optionalPackages[0].amountJpy).toBe(49_500);
     expect(displayOptionalPackagePrices(vehicles.find(({ id }) => id === 'jp-mazda-cx-5-g-ex-package')!)).toBe('EX Package +227,700円');
     expect(vehicles.find(({ id }) => id === 'jp-subaru-levorg-layback-2023-limited-ex')?.price?.kind).toBe('range');
+  });
+
+  it('自宅充電チェックは一次情報付きで明示できるBEV/PHEVだけを対象にし、未確認を充電不要と扱わない', () => {
+    const ariya = vehicles.find(({ maker, model }) => maker === 'Nissan' && model === '日産アリア')!;
+    const rav4Phev = vehicles.find(({ maker, model, grade }) => maker === 'Toyota' && model === 'RAV4' && grade.includes('プラグインハイブリッド車'))!;
+    const rav4Hybrid = vehicles.find(({ maker, model, grade }) => maker === 'Toyota' && model === 'RAV4' && grade.includes('ハイブリッド車') && !grade.includes('プラグイン'))!;
+    const eHev = vehicles.find(({ maker, model, grade }) => maker === 'Honda' && model === 'VEZEL' && grade.includes('e:HEV'))!;
+    expect(vehicleHomeChargingRequirement(ariya)).toBe('required');
+    expect(vehicleHomeChargingRequirement(rav4Phev)).toBe('required');
+    expect(vehicleHomeChargingRequirement(rav4Hybrid)).toBe('unknown');
+    expect(vehicleHomeChargingRequirement(eHev)).toBe('unknown');
+    expect(vehicles.filter(isDefaultListedVehicle).filter((vehicle) => vehicleHomeChargingRequirement(vehicle) === 'required').length).toBeGreaterThan(0);
   });
 
   it('Audi A5 / A5 Avantは2026年4月価格表の6販売単位をLevel 2能力付きで保持する', () => {
