@@ -2,6 +2,19 @@
 
 更新: 2026-09-12
 
+## 最新の配信（2026-09-12 Lexus ES 7販売単位追加）
+
+- exact release commit: `1f51944beb2cfadd8ac201661c20a138d2616d55`
+- immutable: https://6f98eeaf.jidouunten.pages.dev
+- 本体: https://jidouunten.jp/
+- Cloudflare Pages: `6f98eeaf-8ef5-4e16-89f6-b18d1e9ae13c`（Production / main / source `1f51944`）
+- 内容: Lexus ESのES500e／ES350e／ES350hを、グレード・駆動方式ごとの7販売単位で追加。2026年6月発売、税込790万円〜920万円、全車5人乗り、ACC＋LTAのLevel 2相当として掲載した。ES500eの渋滞時支援は0〜40km/hの条件付きハンズオフ、運転者監視必須。車線変更支援（LCA）は販売単位別の差を公式資料で固定できないため能力タグへ付与せず、個別注文可否は未確認を維持した。
+- 公式導線: ESの商品、見積り、試乗、販売店を詳細・比較へ追加。公式掲載や工場出荷目処は個別契約・在庫を保証しないため、購入前の販売店確認を促す。
+- 根拠: [Lexus ES商品](https://lexus.jp/models/es/)、[Toyota発売リリース](https://global.toyota/jp/newsroom/lexus/44452094.html)、[Lexus安全機能](https://lexus.jp/models/es/features/safety/)、[Lexus納期案内](https://lexus.jp/news/info/delivery/)（確認日: 2026-09-12）。
+- SEO／公開面: 469 HTML、sitemap-0は468 URL、車両詳細463件、トップ／一覧ItemListは2ページ・924項目。GTM実IDは各HTML 1件、テスト計測ID0件、公開HTML内部enum・source・accessedAt漏れ0件。ES registryは11/11 surface closure。
+- QA: `npm test` Vitest81/81＋Python16/16、価格462/462（exact441／range21／未確認0）、公式導線84モデル／81 URL／174 actions、注文可48／未確認414、鮮度確認済み462／要再確認0／競合1、画像3/3、`npm run check` 0 errors / 0 warnings / 6 hints、実ID build／release／structured PASS、独立リリース監査PASS。ローカル／immutable／本体E2E各1/1（immutable・本体GA collect HTTP204）。
+- 本番smoke: 本体・immutableのトップ、一覧、ES詳細、ES比較、sitemap、robotsはHTTP200。未知URL404、`自動運転.jp`（Punycode: `xn--hhrp90iveiimb.jp`）の`/cars/?level=1&sort=release_desc`は本体へqueryを維持した301。一覧の既存Wikimedia Commons画像はデスクトップ約374×115px・モバイル約360×88pxのWebPサムネイル（`loading=lazy`・`object-fit: cover`）を維持し、新規画像は権利確認ができないため追加していない。
+
 ## 最新の配信（2026-09-12 Land Rover Discovery Sport 3販売単位追加）
 
 - exact release commit: `4c619d6fc7a04bda0b2d59a73582fa40e99fc014`（Discovery Sportの正本・公式導線・依存registry・E2E・KPIを同期）
