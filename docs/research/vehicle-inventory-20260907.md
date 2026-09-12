@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 468 | `src/data/vehicles.json` の全レコード（現行467 + 過去1） |
-| 既定表示 | 467 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 476 | `src/data/vehicles.json` の全レコード（現行475 + 過去1） |
+| 既定表示 | 475 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 23 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu / Cadillac / Peugeot / Jeep / Land Rover |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -56,6 +56,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Peugeot E-3008） | 1 | NEW E-3008 GT。税込760万円〜（2026年9月価格）、全車共通ACC（ストップ＆ゴー）・レーンキープアシストとGTのレーンポジショニングアシストを公式ページで確認。発売日・個別受注可否・作動道路／速度・ハンズオフ条件は未確認のためLevel 2相当・ハンズオフ不可・注文可否未確認として登録 |
 | 今回追加（Jeep Commander） | 1 | Commander Limited（4WD・7人乗り）。税込619万円〜（2026年7月価格）、ACC STOP&GO・Active Lane Management・Highway Assistを公式商品／安全ページで確認。Level 2相当・ハンズオフ不可・自動車線変更なし、個別受注可否は未確認 |
 | 今回追加（Suzuki FRONX） | 2 | 2WD・6AT／4WD・6AT。税込254万1,000円／273万9,000円、2024年10月16日発売、全車速追従ACC・車線維持支援を公式価格／安全ページで確認。Level 2相当・ハンズオフ不可、ドライバーモニタリングと個別受注可否は未確認 |
+| 今回追加（Suzuki ソリオ／ソリオ バンディット） | 8 | HYBRID MG／MX／MZとバンディット MVの2WD・4WD。税込192万6,100円〜264万8,800円、2025年1月16日発売、全車ACC＋車線維持支援、MZ／MVのみ停止保持。Level 2相当・ハンズオフ不可、個別受注可否は未確認 |
 | 今回追加（Land Rover Discovery Sport） | 3 | Dynamic S / Landmark / Metropolitan。税込724万〜1,071万円〜、ACC・レーンキープアシストを公式仕様・安全ページで確認。Level 2相当・ハンズオフ不可・自動車線変更なし、道路・速度・発売日・個別受注可否は未確認 |
 | 注文状態更新（2026-09-11） | 5 | Volvo EX30 3、Hyundai IONIQ 5 Voyage／Lounge 2は、メーカー公式のオンライン契約・在庫車両「車両注文」を確認し、`new_order_available`へ更新。SUBARU レイバック1とLexus LM 2は注文済み車両の出荷目処のみで現在の受付導線を直接確認できず、`unknown`を維持 |
 | 注文状態更新（2026-09-12） | 27 | 三菱公式の商品ページに「商談予約・購入予約受付中」を確認したeKクロス8、eKクロス EV 3、デリカミニ12、eKスペース4を`new_order_available`へ更新。購入予約は注文確定ではなく、在庫・納期・契約成立は販売店での確認が必要 |
@@ -89,6 +90,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | Volvo | EX30 2027 Plus P5 / Ultra P5 Long Range / Ultra P8 AWD Electric | 新車注文可（3単位、オンライン契約） | 2相当 | 2026-09-11 |
 | Suzuki | e VITARA X 2WD / Z 2WD / Z 4WD（現行仕様） | 掲載（3単位） | 2相当 | 2026-09-07 |
 | Suzuki | スペーシア HYBRID G／X／X セーフティプラスパッケージ、スペーシア カスタム HYBRID GS／XS／XSターボ（2WD・4WD） | 掲載（現行12単位、Level 1の車線逸脱抑制4単位／Level 2のACC・車線維持8単位、注文可否 未確認） | 1／2相当 | 2026-09-12 |
+| Suzuki | ソリオ HYBRID MG／MX／MZ、ソリオ バンディット HYBRID MV（2WD・4WD） | 掲載（現行8単位、MZ／MVのみ停止保持、注文可否 未確認） | 2相当 | 2026-09-12 |
 | Renault | ARKANA esprit Alpine FULL HYBRID E-TECH / MILD HYBRID、techno FULL HYBRID E-TECH / MILD HYBRID | 掲載（4単位） | 2相当 | 2026-09-07 |
 | BMW | 3シリーズ セダン G20 318i / 320i / 320d xDrive / 330e M Sport、M340i xDrive | 掲載（通常カタログ5単位） | 2相当 | 2026-09-07 |
 | BMW | 3シリーズ ツーリング G21 318i / 320i / 320d xDrive M Sport、M340i xDrive | 掲載（通常カタログ4単位） | 2相当 | 2026-09-07 |
@@ -338,7 +340,7 @@ Audi Japanの2026年4月価格表とA5 / A5 Avant公式商品ページ、装備�
 | VolvoのEX30以外の現行Pilot Assist搭載車 | 日本仕様のモデル年・必要装備を未確認 | Volvo Cars Japan公式モデルページ・取扱説明書 |
 | Volkswagenの現行IQ.DRIVE搭載車 | 日本仕様のモデル年・販売状態を未確認 | Volkswagen Japan公式モデルページ・取扱説明書 |
 | Hyundaiの現行HDA搭載車 | 日本向け販売単位・現行掲載を未確認 | Hyundai Mobility Japan公式モデルページ |
-| Mitsubishi / Suzuki / Daihatsuの一次確認候補 | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、デリカミニ 12単位、eKスペース 4単位、e VITARA 3単位は掲載済み。ECLIPSE CROSSは公式ページで生産終了を確認したため現行新車カタログへの追加を保留し、残在庫・受注可否を継続確認 | 各社日本公式グレード表・装備表・取扱説明書・販売店在庫 |
+| Mitsubishi / Suzuki / Daihatsuの一次確認候補 | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、デリカミニ 12単位、eKスペース 4単位、e VITARA 3単位、ソリオ系8単位は掲載済み。ECLIPSE CROSSは公式ページで生産終了を確認したため現行新車カタログへの追加を保留し、残在庫・受注可否を継続確認 | 各社日本公式グレード表・装備表・取扱説明書・販売店在庫 |
 | BMW限定車 / Mモデル・MINIの一次確認候補 | BMW通常3シリーズ9単位とMINI Countryman通常8単位は掲載済み。BMW限定車・M3、MINI Countryman Shadow Edition / Slate Blueは通常単位と分けて確認待ち | 各社日本公式装備価格表・取扱説明書 |
 | Audi / Mercedes-Benz / Porsche等 | モデル単位の支援機能は確認できるが、グレード別の標準／オプションと販売状態の確認が未完 | 各社日本公式装備価格表・コンフィギュレーター |
 
@@ -369,7 +371,7 @@ Toyotaの日本向け現行ラインアップと公式安全・主要装備資�
 |---|---|---|
 | Mazda | 掲載済み35単位（CX-80 8、CX-60 11、新型CX-5 4、MAZDA3 7、CX-30 4、MX-30 Natural Monotone 1） | MAZDA3 FASTBACK 15C / 15S・SEDAN 20S、CX-30 20C / 20S、MX-30 ROTARY-EVグレードはMRCCとCTSの同時支援を確定できず対象外。ROTARY-EV以外の限定仕様は別途確認 |
 | Mitsubishi | OUTLANDER PHEV 9単位、eKクロス 8単位、eKクロス EV 3単位、デリカミニ 12単位、eKスペース 4単位（掲載済み）、ECLIPSE CROSS（生産終了・残在庫確認待ち） | 残在庫・受注可否が確認できた場合のみ、MI-PILOTの標準／メーカーオプションとグレード別価格を別区分で固定 |
-| Suzuki | FRONX、SOLIO/BANDIT、SWIFT CVT、SPACIA系（e VITARA 3単位は掲載済み） | ACC＋車線中央維持の対象グレードとパッケージを販売単位へ展開 |
+| Suzuki | SWIFT CVT、SPACIA系（FRONX 2単位、e VITARA 3単位、ソリオ系8単位は掲載済み） | SWIFTのACC＋車線中央維持の対象グレードとパッケージを販売単位へ展開 |
 | Daihatsu | MOVE、MOVE CANBUS、TANTO系、TAFT、ROCKY | Smart Cruise Packを含む標準／オプション差を販売単位へ展開 |
 | BMW | 3シリーズ Sedan 5グレード、Touring 4グレード | 掲載済み。Edition Shadow、M3、50周年限定車は受注・在庫確認待ち |
 | MINI | Countryman 8グレード | 2026年7月生産装備価格表から8販売単位を登録 |
@@ -1249,6 +1251,23 @@ ACC〈STOP & GO〉（前後方向）、Active Lane Management／Highway Assist�
 公式の商品・価格・安全ページとオンライン見積り導線は`src/data/official-links.json`に記録した。画像は追加していない。
 
 根拠: [FRONX商品ページ](https://www.suzuki.co.jp/car/fronx/)、[価格・グレード](https://www.suzuki.co.jp/car/fronx/detail/)、[安全装備](https://www.suzuki.co.jp/car/fronx/safety/)、[発売資料](https://www.suzuki.co.jp/release/a/2024/1016/)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。確認日: 2026-09-12。
+
+## 2026-09-12 Suzuki ソリオ／ソリオ バンディット8販売単位追加
+
+スズキ公式の現行商品・価格ページ、安全装備ページ、2025年1月16日発売資料を照合し、ソリオ HYBRID MG／MX／MZとソリオ バンディット HYBRID MVを2WD・4WDの8販売単位へ分解した。税込メーカー希望小売価格は1,926,100円〜2,648,800円で、MZ 4WDとMV 4WDは全方位モニター付メモリーナビゲーション標準込みの価格である。現行商品ページ・見積り・試乗導線は確認できたが、個別の受注可否・在庫・納期は直接固定できないため全8単位を `availability=unknown` とした。
+
+全8単位でACC（前後方向）と車線維持支援機能（左右方向）を確認し、国土交通省の定義へ照合してLevel 2相当とした。HYBRID MZ／MVは全車速追従ACCに停止保持機能を組み合わせ、MG／MXは停止保持なしとして同じLevel 2内の差を保持する。いずれもハンドル保持・常時監視が必要で、ブラインドスポットモニター等の警告機能は自動車線変更支援として登録していない。
+
+| 販売単位 | 価格（税込） | Level相当 | 同じLevel 2内の差分 | 注文可否 |
+|---|---:|---|---|---|
+| ソリオ HYBRID MG 2WD／4WD | 1,926,100円／2,051,500円 | 2 | ACC＋車線維持支援、停止保持なし | unknown |
+| ソリオ HYBRID MX 2WD／4WD | 2,051,500円／2,176,900円 | 2 | ACC＋車線維持支援、停止保持なし | unknown |
+| ソリオ HYBRID MZ 2WD／4WD | 2,248,400円／2,593,800円 | 2 | ACC＋車線維持支援＋停止保持 | unknown |
+| ソリオ バンディット HYBRID MV 2WD／4WD | 2,303,400円／2,648,800円 | 2 | ACC＋車線維持支援＋停止保持 | unknown |
+
+公式の商品・価格・安全ページ、購入相談・見積り・試乗・販売店・主要装備PDFの導線は `src/data/official-links.json` に記録した。画像は追加していない。
+
+根拠: [ソリオ商品ページ](https://www.suzuki.co.jp/car/solio/)、[価格・オンライン見積り](https://www.suzuki.co.jp/car/solio/detail/)、[安全装備](https://www.suzuki.co.jp/car/solio/safety/)、[2025年1月16日発売資料](https://www.suzuki.co.jp/release/a/2025/0116/)、[公式見積り](https://www.suzuki.co.jp/car/purchase/estimate/)、[試乗車検索](https://www.suzuki.co.jp/car/purchase/democar/)、[販売店検索](https://www.suzuki.co.jp/dealer/Map/getPref/shop)、[主要装備・主要諸元PDF](https://www.suzuki.co.jp/car/solio/asset/pdf/detail/detail.pdf)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。確認日: 2026-09-12。
 
 ## 2026-09-12 Land Rover Discovery Sport 3販売単位追加
 

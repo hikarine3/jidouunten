@@ -15,14 +15,14 @@
 
 | 項目 | 値 | 確認方法 |
 |---|---:|---|
-| sitemap掲載URL数 | 473 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外、日産リーフ ZE2 5販売単位追加後） |
-| うち車両詳細 | 468 | `src/data/vehicles.json` の販売単位レコード数 |
+| sitemap掲載URL数 | 481 | `dist/sitemap-0.xml` の `<loc>` 件数（sitemap index自身は除外、Suzuki ソリオ／ソリオ バンディット8販売単位追加後） |
+| うち車両詳細 | 476 | `src/data/vehicles.json` の販売単位レコード数 |
 | 掲載メーカー数 | 23 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu / Cadillac / Peugeot / Jeep / Land Rover |
 | 条件別（レベル・道路・ハンズオフ・価格帯）の静的URL | 0 | 絞り込みはquery paramのみ（`/cars/?level=2`） |
 | 機能名（プロパイロット2.0等）の静的URL | 0 | 該当ページなし |
 | 2台比較の静的URL | 0 | `/compare/?ids=a,b` のquery paramのみ |
-| 構造化データの型 | 全474ページ: WebSite + WebPage + BreadcrumbList（一覧2ページはItemList）／車両詳細468ページ: Product + Car + BreadcrumbList | `src/layouts/Layout.astro` と `src/pages/cars/[id].astro` のJSON-LD `@graph` |
-| 公式アクションリンク | 178 | `src/data/official-links.json` の action 件数。日産リーフZE2は商品・価格・装備・先進運転支援・見積り・試乗・販売店・カタログ導線を追加し、注文可否とは分離。既存モデルの公式導線も同じ原則で保持 |
+| 構造化データの型 | 全482ページ: WebSite + WebPage + BreadcrumbList（一覧2ページはItemList）／車両詳細476ページ: Product + Car + BreadcrumbList | `src/layouts/Layout.astro` と `src/pages/cars/[id].astro` のJSON-LD `@graph` |
+| 公式アクションリンク | 186 | `src/data/official-links.json` の action 件数。Suzuki ソリオ／ソリオ バンディットの購入・試乗・販売店・カタログ導線を追加し、注文可否とは分離。既存モデルの公式導線も同じ原則で保持 |
 | 新車注文可（一次情報で確認） | 48 | `src/data/vehicles.json` の販売単位。Tesla 6、Volvo EX30 3、Hyundai IONIQ 5 2、Mitsubishi OUTLANDER PHEV 9／eKクロス 8／eKクロス EV 3／デリカミニ 12／eKスペース 4、日産アリアB6 1。リーフ5単位は個別受注可否を未確認として除外。公式の注文・購入予約導線を確認した単位のみで、在庫・納期・契約成立は保証しない |
 | Lighthouse production (mobile) | performance 1.00 / accessibility 1.00 | `.cache/lighthouse-production.json` |
 | KPI実測（GA4、本番hostname） | active users 25 / sessions 37 / pageviews 85 / event count 261（2026-09-10〜09-11、9/12 JST再取得） | GA4 Data API。`hostName=jidouunten.jp`で絞り、localhost・Pages preview・初期QAを除外。集計反映後の速報値 |
@@ -85,7 +85,7 @@ S1 検索表示回数
 
 ## 4. シナリオ（12か月後・月間）
 
-構成は「#17で公開済み販売単位を継続拡大」を前提とする。現時点の詳細ページは468件だが、未確認候補群を含む国内全候補の網羅率は未確定である。
+構成は「#17で公開済み販売単位を継続拡大」を前提とする。現時点の詳細ページは476件だが、未確認候補群を含む国内全候補の網羅率は未確定である。
 
 | 構成 | URL数 | 表示/URL | 表示回数 |
 |---|---:|---:|---:|
@@ -114,7 +114,7 @@ S1 検索表示回数
 
 | Issue | 支配する段 | 推定効果（中位・月間） | 実測で置き換える指標 |
 |---|---|---|---|
-| #17 販売単位の網羅 | S1の分母 | 車両詳細 468件を起点に、未掲載母集団と欠損理由を解決 | 掲載販売単位数・母集団カバー率 |
+| #17 販売単位の網羅 | S1の分母 | 車両詳細 476件を起点に、未掲載母集団と欠損理由を解決 | 掲載販売単位数・母集団カバー率 |
 | #19 条件別ページ生成 | S1 | indexable 179 URLを起点に、検索需要のある条件だけを追加 | GSC 表示回数/ページ |
 | #20 構造化データ・メタ | S2 | CTR 3.0%→4.2%、同表示回数でクリック +300 | GSC CTR |
 | #22 機能名ページ | S1 | 表示 +8,400、指名検索の受け皿 | GSC クエリ別表示 |

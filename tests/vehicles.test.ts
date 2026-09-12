@@ -143,7 +143,7 @@ describe('vehicle data contract and filters', () => {
     expect(filterVehicleList(vehicles, { level: 1, handsOff: 'allowed_in_conditions' })).toHaveLength(0);
     expect(filterVehicleList(vehicles, { level: 3, availability: 'new_order_available' })).toHaveLength(0);
     expect(filterVehicleList(vehicles, { level: 3, availability: 'all' })).toHaveLength(1);
-    expect(filterVehicleList(vehicles, {})).toHaveLength(467);
+    expect(filterVehicleList(vehicles, {})).toHaveLength(475);
   });
 
   it('uses one default-list predicate for filtering and top-page counts', () => {
@@ -178,14 +178,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(468);
+    expect(vehicles).toHaveLength(476);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補467件は全件の公式金額を保持する', () => {
+  it('現行候補475件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(467);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(467);
+    expect(current).toHaveLength(475);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(475);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -330,7 +330,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(85);
+    expect(officialLinks).toHaveLength(87);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -385,7 +385,20 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(178);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(186);
+  });
+
+  it('Suzukiソリオ／ソリオ バンディットは8販売単位の価格・停止保持差を保持する', () => {
+    const solio = vehicles.filter((vehicle) => vehicle.maker === 'Suzuki' && ['ソリオ', 'ソリオ バンディット'].includes(vehicle.model));
+    expect(solio).toHaveLength(8);
+    expect(solio.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([1_926_100, 2_051_500, 2_051_500, 2_176_900, 2_248_400, 2_303_400, 2_593_800, 2_648_800]);
+    expect(solio.every((vehicle) => vehicle.currentCatalogListed && vehicle.catalogAsOf === '2026-09' && vehicle.salesUnitIntroducedAt === '2025-01-16' && vehicle.priceEffectiveAt === '2025-01-16' && vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'not_allowed' && vehicle.availability === 'unknown')).toBe(true);
+    expect(solio.filter((vehicle) => vehicle.grade.includes('MZ') || vehicle.grade.includes('MV')).every((vehicle) => vehicle.odd.speedKph.min === 0 && vehicle.requiredPackage?.includes('停止保持'))).toBe(true);
+    expect(solio.filter((vehicle) => vehicle.grade.includes('MG') || vehicle.grade.includes('MX')).every((vehicle) => vehicle.odd.speedKph.min === 1 && !vehicle.requiredPackage?.includes('停止保持'))).toBe(true);
+    expect(solio.every((vehicle) => vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering' && !vehicle.capabilities.includes('lane_change_support'))).toBe(true);
+    expect(solio.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://www.suzuki.co.jp/release/a/2025/0116/' && source.supports.some((fact) => fact.includes('2025年1月16日発売'))))).toBe(true);
+    expect(officialLinkFor(solio[0])?.actions?.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'dealer', 'catalog']);
+    expect(officialLinkFor(solio.find((vehicle) => vehicle.model === 'ソリオ バンディット')!)?.actions?.map(({ kind }) => kind)).toEqual(['order', 'test_drive', 'dealer', 'catalog']);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
