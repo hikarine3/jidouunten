@@ -35,14 +35,14 @@ try {
   const rootGraph = structuredGraph(rootHtml);
   assert.deepEqual(rootGraph.map((entry) => entry['@type']), ['WebSite', 'WebPage', 'ItemList', 'BreadcrumbList'], 'トップJSON-LDにWebSite/WebPage/ItemList/BreadcrumbList');
   const rootItemList = rootGraph.find((entry) => entry['@type'] === 'ItemList');
-  assert.equal(rootItemList.numberOfItems, 455, 'トップItemListは初期可視455件');
-  assert.equal(rootItemList.itemListElement.length, 455, 'トップItemList要素数は初期可視455件');
-  assert.deepEqual(rootItemList.itemListElement.map(({ position }) => position), Array.from({ length: 455 }, (_, index) => index + 1), 'トップItemList positionを連番で出力');
+  assert.equal(rootItemList.numberOfItems, 462, 'トップItemListは初期可視462件');
+  assert.equal(rootItemList.itemListElement.length, 462, 'トップItemList要素数は初期可視462件');
+  assert.deepEqual(rootItemList.itemListElement.map(({ position }) => position), Array.from({ length: 462 }, (_, index) => index + 1), 'トップItemList positionを連番で出力');
   assert.equal(rootGraph.filter((entry) => entry['@type'] === 'BreadcrumbList').length, 1, 'トップBreadcrumbListは重複しない');
   await page.goto(`${base}/`);
   await page.evaluate(() => localStorage.clear());
   await page.reload();
-  assert.equal(await visibleCards(), 455, '既定カタログは現行確認455件');
+  assert.equal(await visibleCards(), 462, '既定カタログは現行確認462件');
   const listImages = page.locator('.vehicle-card-image img');
   const listImageSources = await listImages.evaluateAll((elements) => [...new Set(elements.map((element) => element.getAttribute('src')))]);
   assert.deepEqual(listImageSources.sort(), ['/vehicles/tesla-model-3.webp', '/vehicles/tesla-model-y.webp', '/vehicles/toyota-prius.webp'], '一覧の登録済み参考写真は3種類');
@@ -56,7 +56,7 @@ try {
   assert.ok(listImageBox.height >= 88 && listImageBox.height <= 118, `一覧画像の高さをサムネイル範囲に収める: ${listImageBox.height}`);
   assert.equal(listImageBox.objectFit, 'cover', '一覧画像はcoverでカード内に収める');
   assert.match(await page.locator('.vehicle-card-image figcaption').first().innerText(), /Wikimedia Commons/, '一覧画像の帰属表示');
-  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*455[\s\S]*条件内可[\s\S]*70[\s\S]*不可[\s\S]*384[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*68/, 'トップ操作盤に能力差の実データ分布');
+  assert.match(await page.locator('.catalog-command').innerText(), /同じLevel 2でも[\s\S]*できることは違う[\s\S]*462[\s\S]*条件内可[\s\S]*77[\s\S]*不可[\s\S]*384[\s\S]*未確認[\s\S]*1[\s\S]*車線変更支援[\s\S]*68/, 'トップ操作盤に能力差の実データ分布');
   assert.equal(await page.locator('[data-level-shortcut]').count(), 5, 'Level 1〜5を同時表示');
   assert.match(await page.locator('[data-level-shortcut="1"]').innerText(), /L1[\s\S]*29件/, 'Level 1の現行29件を表示');
   assert.equal(await page.locator('[data-level-shortcut="1"]').isDisabled(), false, '現行車があるLevel 1を絞り込み可能にする');
@@ -159,13 +159,13 @@ try {
   await page.locator('[data-saved-resume-delete="search"]').click();
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '検索条件を削除すると再開バーを隠す');
   await page.locator('[data-reset-shortcut]').click();
-  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可48', '注文可否 未確認407', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
+  assert.deepEqual(await page.locator('[data-status-shortcut]').allTextContents(), ['新車注文可48', '注文可否 未確認414', '現在利用不可1'], '販売状態の内訳を一覧の操作盤に表示');
   await page.locator('[data-status-shortcut="uncertain"]').click();
   assert.equal(new URL(page.url()).searchParams.get('availability'), 'unknown', '注文可否未確認のクイック絞り込みをURLへ保存');
-  assert.equal(await visibleCards(), 407, '注文可否未確認は407販売単位');
+  assert.equal(await visibleCards(), 414, '注文可否未確認は414販売単位');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-hands-off-shortcut="conditional"]').click();
-  assert.equal(await visibleCards(), 70, '条件内ハンズオフは70件');
+  assert.equal(await visibleCards(), 77, '条件内ハンズオフは77件');
   await page.locator('[data-reset-shortcut]').click();
   await page.locator('[data-capability-shortcut="lane_change"]').click();
   assert.equal(await visibleCards(), 68, '車線変更支援は68件');
@@ -213,7 +213,7 @@ try {
   assert.equal(await page.locator('link[rel="alternate"][hreflang="ja-JP"]').getAttribute('href'), 'https://jidouunten.jp/', '日本語alternateを本体URLへ固定');
   const structuredData = JSON.parse(await page.locator('script[type="application/ld+json"]').first().textContent());
   assert.deepEqual(structuredData['@graph'].map((entry) => entry['@type']), ['WebSite', 'WebPage', 'ItemList', 'BreadcrumbList'], 'トップJSON-LDにWebSite/WebPage/ItemList/BreadcrumbListを出力');
-  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本で選べる自動運転・Level 1\/2運転支援車455販売単位/, 'トップのdescription件数は公開データから生成');
+  assert.match(await page.locator('meta[name="description"]').getAttribute('content'), /日本で選べる自動運転・Level 1\/2運転支援車462販売単位/, 'トップのdescription件数は公開データから生成');
   assert.doesNotMatch(await page.locator('meta[name="description"]').getAttribute('content'), /日本向け173販売単位|日本向け157販売単位|日本向け139販売単位/, '古い固定件数を残さない');
   assert.doesNotMatch(await page.locator('meta[property="og:image:alt"]').getAttribute('content'), /72販売単位/, 'OG画像altに古い固定件数を残さない');
   assert.equal(await page.locator('meta[name="twitter:card"]').getAttribute('content'), 'summary_large_image', 'X向けlarge card');
@@ -231,7 +231,7 @@ try {
   await levelMapPage.locator('[data-level-shortcut="2"]').click();
   assert.equal(new URL(levelMapPage.url()).searchParams.get('level'), '2', 'レベルマップでLevel 2へ切替');
   assert.equal(new URL(levelMapPage.url()).searchParams.has('availability'), false, '現行Level 2では既定掲載状態へ戻す');
-  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 426, 'Level 2現行426件へ復帰');
+  assert.equal(await levelMapPage.locator('[data-vehicle-shell]:not([hidden])').count(), 433, 'Level 2現行433件へ復帰');
   await levelMapPage.close();
   await page.goto(`${base}/levels/`);
   assert.match(await page.locator('.level-1').innerText(), /現行掲載 29件[\s\S]*このレベルの車両/, 'Level 1の現行掲載をレベル解説にも明記');
@@ -256,7 +256,7 @@ try {
   }
 
   await page.goto(`${base}/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 61, 'トップのLevel 2・高速・ハンズオフ条件は61件（フォレスター5グレードとMIRAI 2グレードを含む）');
+  assert.equal(await visibleCards(), 68, 'トップのLevel 2・高速・ハンズオフ条件は68件（ES 7販売単位を含む）');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'トップのLevel 2注意表示');
   assert.equal(new URL(page.url()).pathname, '/', 'トップの深いリンクはトップに留まる');
 
@@ -264,7 +264,7 @@ try {
   assert.equal(await visibleCards(), 2, 'メーカーと能力をAND条件で絞り込む');
   assert.equal(await page.locator('input[name="capability"][value="lane_change"]').isChecked(), true, '能力条件をURLから復元');
   await page.goto(`${base}/?capability=traffic_jam_assist&capability=hands_off_highway`);
-  assert.equal(await visibleCards(), 65, '能力チェックは複数選択をAND条件で適用');
+  assert.equal(await visibleCards(), 72, '能力チェックは複数選択をAND条件で適用');
   assert.equal(await page.locator('input[name="capability"]:checked').count(), 2, '能力チェックを2つ選択');
   await page.evaluate(() => localStorage.clear());
   await page.locator('[data-save-search]').click();
@@ -274,7 +274,7 @@ try {
   await page.locator('[data-saved-resume-open="search"]').click();
   await page.waitForURL((url) => url.searchParams.getAll('capability').length === 2);
   assert.deepEqual(new URL(page.url()).searchParams.getAll('capability'), ['traffic_jam_assist', 'hands_off_highway'], '保存した複数能力を再開');
-  assert.equal(await visibleCards(), 65, '保存したAND条件の再開結果');
+  assert.equal(await visibleCards(), 72, '保存したAND条件の再開結果');
   await page.locator('[data-saved-resume-delete="search"]').click();
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '複数能力の保存を削除');
   await page.goto(`${base}/?capability=%22`);
@@ -286,7 +286,7 @@ try {
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '使い方ガイドがLevel 2を設定');
   assert.equal(new URL(page.url()).searchParams.get('handsOff'), 'allowed_in_conditions', '使い方ガイドがハンズオフ条件を設定');
   assert.equal(new URL(page.url()).searchParams.get('capability'), 'traffic_jam_assist', '使い方ガイドが必要能力を設定');
-  assert.equal(await visibleCards(), 56, '使い方ガイドが高速道路・渋滞・条件内ハンズオフへ絞り込む');
+  assert.equal(await visibleCards(), 63, '使い方ガイドが高速道路・渋滞・条件内ハンズオフへ絞り込む');
 
   await page.goto(`${base}/?sort=maker_asc`);
   assert.match(await page.locator('[data-vehicle-shell]:not([hidden])').first().innerText(), /^LEVEL 2[\s\S]*Audi/, 'メーカー名順へ切替');
@@ -302,7 +302,7 @@ try {
   assert.match(await page.locator('[data-selected-label]').innerText(), /〜300万円/, '価格帯を結果見出しへ明示');
 
   await page.goto(`${base}/cars/?level=2&road=${encodeURIComponent('高速道路')}&handsOff=allowed_in_conditions`);
-  assert.equal(await visibleCards(), 61, 'Level 2・高速・ハンズオフ条件は61件（フォレスター5グレードとMIRAI 2グレードを含む）');
+  assert.equal(await visibleCards(), 68, 'Level 2・高速・ハンズオフ条件は68件（ES 7販売単位を含む）');
   assert.equal(await page.locator('[data-level2-notice]:visible').count(), 1, 'Level 2注意表示');
   assert.equal(new URL(page.url()).searchParams.get('level'), '2', '深いリンクのlevel復元');
   assert.equal(await page.locator('#vehicle-filters').getAttribute('action'), '/cars/', '旧一覧は現在のルートで送信');
@@ -331,24 +331,24 @@ try {
   assert.equal((await events()).filter((event) => event.event === 'select_level').length, 1, 'select_levelは一覧レベル操作時に1回');
   await page.goBack();
   assert.equal(new URL(page.url()).pathname, '/', '戻るでトップ一覧を復元');
-  assert.equal(await visibleCards(), 455, '戻る後の結果件数');
+  assert.equal(await visibleCards(), 462, '戻る後の結果件数');
 
   await page.goto(`${base}/?level=3`);
   assert.equal(await visibleCards(), 0, '空結果を表示');
   assert.match(await page.locator('[data-empty]').innerText(), /掲載データに一致する候補がない/, '0件時に市場不存在と断定しない');
   assert.equal(await page.locator('[data-empty-relax]').count(), 1, '0件時に候補が出る緩和だけを提示');
-  assert.match(await page.locator('[data-empty-relax]').first().innerText(), /Level 3の条件を外す[\s\S]*455件/, 'Level条件を外した実データ件数を提示');
+  assert.match(await page.locator('[data-empty-relax]').first().innerText(), /Level 3の条件を外す[\s\S]*462件/, 'Level条件を外した実データ件数を提示');
   assert.ok((await events()).some((event) => event.event === 'filter_empty_results'), '0件到達イベントをdataLayerへ送る');
   assert.ok((await events()).some((event) => event.event === 'filter_relaxation_shown'), '緩和候補表示イベントをdataLayerへ送る');
   await page.locator('[data-empty-relax]').first().click();
   assert.equal(new URL(page.url()).searchParams.has('level'), false, '緩和ボタンでLevel条件をURLから外す');
-  assert.equal(await visibleCards(), 455, '緩和ボタンで候補455件を表示');
+  assert.equal(await visibleCards(), 462, '緩和ボタンで候補462件を表示');
   assert.ok((await events()).some((event) => event.event === 'filter_relaxation_apply' && event.relaxation_filter === 'level'), '緩和適用イベントをdataLayerへ送る');
   await page.goto(`${base}/?level=3`);
   await page.getByRole('link', { name: '条件をリセット' }).click();
   assert.equal(new URL(page.url()).pathname, '/', 'リセットでトップ一覧へ戻る');
-  await page.waitForFunction(() => document.querySelectorAll('[data-vehicle-shell]:not([hidden])').length === 455);
-  assert.equal(await visibleCards(), 455, 'リセット後に既定455件');
+  await page.waitForFunction(() => document.querySelectorAll('[data-vehicle-shell]:not([hidden])').length === 462);
+  assert.equal(await visibleCards(), 462, 'リセット後に既定462件');
 
   await page.locator('input[name="ids"]').nth(0).check();
   await page.locator('input[name="ids"]').nth(1).check();
@@ -381,7 +381,7 @@ try {
   assert.equal(await page.locator('[data-saved-resume]').isVisible(), false, '比較保存を削除すると再開バーを隠す');
 
   await page.goto(`${base}/cars/?availability=all`);
-  assert.equal(await visibleCards(), 456, 'すべての状態で過去車両を含む456件');
+  assert.equal(await visibleCards(), 463, 'すべての状態で過去車両を含む463件');
   assert.equal(await page.locator('[data-selected-label]').innerText(), 'すべての状態', '全状態選択時の結果見出しを正しく表示');
   await page.goto(`${base}/cars/?availability=unavailable`);
   assert.equal(await visibleCards(), 1, '現在利用不可は過去車両1件');
@@ -736,6 +736,13 @@ try {
   assert.match(lexusContrast, /UX300h[\s\S]*LM500h version L/);
   assert.match(lexusContrast, /5,210,000円[\s\S]*15,200,000円[\s\S]*ハンズオフ：不可[\s\S]*条件内で可/, '同一Lexus内の価格・ハンズオフ差を比較');
   assert.doesNotMatch(lexusContrast, /equipmentlist\.pdf|specificationslist\.pdf|sources|accessedAt|not_allowed|allowed_in_conditions/, 'Lexus比較に内部根拠や内部enumを表示しない');
+
+  await page.goto(`${base}/cars/jp-lexus-es-2026-es500e-version-l-awd/`);
+  assert.match(await page.locator('main').innerText(), /Lexus[\s\S]*ES[\s\S]*ES500e “version L”[\s\S]*AWD・5人乗り/);
+  assert.match(await page.locator('main').innerText(), /参考価格[\s\S]*9,200,000円[\s\S]*ハンズオフ[\s\S]*条件内で可/, 'ESの価格と条件付きハンズオフを表示');
+  assert.match(await page.locator('main').innerText(), /0〜40km\/h[\s\S]*ドライバー/, 'ESの渋滞時支援・作動速度・監視条件を表示');
+  assert.equal(await page.locator('[data-purchase-action]').count(), 3, 'Lexus ES詳細に見積り・試乗・販売店導線');
+  assert.doesNotMatch(await page.locator('main').innerText(), /sources|accessedAt|allowed_in_conditions/, 'ES詳細に内部根拠や内部enumを表示しない');
 
   await page.goto(`${base}/compare/?ids=jp-toyota-voxy-2026-sz-2wd-7seater&ids=jp-toyota-voxy-2026-sg-2wd-8seater`);
   await page.locator('[data-compare-result]').waitFor({ state: 'visible' });

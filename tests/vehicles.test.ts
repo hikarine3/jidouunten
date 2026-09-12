@@ -143,7 +143,7 @@ describe('vehicle data contract and filters', () => {
     expect(filterVehicleList(vehicles, { level: 1, handsOff: 'allowed_in_conditions' })).toHaveLength(0);
     expect(filterVehicleList(vehicles, { level: 3, availability: 'new_order_available' })).toHaveLength(0);
     expect(filterVehicleList(vehicles, { level: 3, availability: 'all' })).toHaveLength(1);
-    expect(filterVehicleList(vehicles, {})).toHaveLength(455);
+    expect(filterVehicleList(vehicles, {})).toHaveLength(462);
   });
 
   it('uses one default-list predicate for filtering and top-page counts', () => {
@@ -178,14 +178,14 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('validates every supplied catalog record before release', () => {
-    expect(vehicles).toHaveLength(456);
+    expect(vehicles).toHaveLength(463);
     expect(vehicles.every((vehicle) => validateVehicle(vehicle))).toBe(true);
   });
 
-  it('現行候補455件は全件の公式金額を保持する', () => {
+  it('現行候補462件は全件の公式金額を保持する', () => {
     const current = vehicles.filter(isDefaultListedVehicle);
-    expect(current).toHaveLength(455);
-    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(455);
+    expect(current).toHaveLength(462);
+    expect(current.filter((vehicle) => vehicle.price !== null)).toHaveLength(462);
     expect(current.filter((vehicle) => vehicle.price === null)).toHaveLength(0);
     expect(vehicles.find(({ id }) => id === 'jp-honda-accord-2025-ehev-sensing360plus')?.price?.amounts[0].amountJpy).toBe(6_351_400);
     expect(vehicles.find(({ id }) => id === 'jp-nissan-ariya-2026-b6')?.priceEffectiveAt).toBe('2026-02');
@@ -330,7 +330,7 @@ describe('vehicle data contract and filters', () => {
   });
 
   it('全販売単位に用途を分けたメーカー公式導線を持つ', () => {
-    expect(officialLinks).toHaveLength(83);
+    expect(officialLinks).toHaveLength(84);
     expect(vehicles.every((vehicle) => Boolean(officialLinkFor(vehicle)))).toBe(true);
     expect(vehicles.filter(isDefaultListedVehicle).every((vehicle) => officialLinkFor(vehicle)?.kind === 'product')).toBe(true);
     expect(officialLinkFor(vehicles.find(({ id }) => id === 'jp-honda-legend-2021-honda-sensing-elite')!)?.kind).toBe('archive');
@@ -385,7 +385,7 @@ describe('vehicle data contract and filters', () => {
     const spaciaActions = officialLinks.filter(({ maker, model }) => maker === 'Suzuki' && ['スペーシア', 'スペーシア カスタム'].includes(model)).flatMap(({ actions = [] }) => actions);
     expect(spaciaActions).toHaveLength(8);
     expect(spaciaActions.every(({ checkedAt, url }) => checkedAt === '2026-09-12' && url.startsWith('https://www.suzuki.co.jp/'))).toBe(true);
-    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(171);
+    expect(officialLinks.flatMap(({ actions = [] }) => actions)).toHaveLength(174);
   });
 
   it('日産エクストレイルは現行14販売単位をProPILOT標準・価格付きで保持する', () => {
@@ -816,6 +816,24 @@ describe('vehicle data contract and filters', () => {
     expect(ux.every((vehicle) => vehicle.sources.some((source) => source.url.endsWith('vhch04se050404.php') && source.supports.some((support) => support.includes('ステアリング保持'))))).toBe(true);
     expect(ux.every((vehicle) => vehicle.limitations.some((limitation) => limitation.includes('2027年2月生産終了予定')))).toBe(true);
     expect(ux.every((vehicle) => !vehicle.capabilities.includes('hands_off_highway') && !vehicle.capabilities.includes('lane_change_support') && !vehicle.capabilities.includes('driver_monitoring'))).toBe(true);
+  });
+
+  it('Lexus ESは7販売単位をAdvanced Drive条件付きハンズオフLevel 2として保持する', () => {
+    const es = vehicles.filter((vehicle) => vehicle.model === 'ES');
+    expect(es).toHaveLength(7);
+    expect(es.map((vehicle) => vehicle.grade).sort()).toEqual([
+      'ES500e “version L”（AWD・5人乗り）', 'ES500e（AWD・5人乗り）',
+      'ES350e “Rr Comfort package”（FWD・5人乗り）', 'ES350e “version L”（FWD・5人乗り）', 'ES350e（FWD・5人乗り）',
+      'ES350h（FWD・5人乗り）', 'ES350h（AWD・5人乗り）',
+    ].sort());
+    expect(es.map((vehicle) => vehicle.price?.amounts[0].amountJpy).sort((a, b) => (a ?? 0) - (b ?? 0))).toEqual([7_900_000, 7_900_000, 8_100_000, 8_300_000, 8_800_000, 9_200_000, 9_200_000]);
+    expect(es.every((vehicle) => vehicle.currentCatalogListed && vehicle.modelYear === null && vehicle.catalogAsOf === '2026-06' && vehicle.salesUnitIntroducedAt === '2026-06-11' && vehicle.priceEffectiveAt === '2026-06')).toBe(true);
+    expect(es.every((vehicle) => vehicle.automationLevel === 2 && vehicle.driverMonitoring === 'required' && vehicle.handsOff === 'allowed_in_conditions' && vehicle.availability === 'unknown')).toBe(true);
+    expect(es.every((vehicle) => vehicle.odd.speedKph.min === 0 && vehicle.odd.speedKph.max === 40 && vehicle.capabilities.join(',') === 'adaptive_cruise_control,lane_centering,traffic_jam_assist,hands_off_highway')).toBe(true);
+    expect(es.every((vehicle) => !vehicle.capabilities.includes('lane_change_support') && vehicle.limitations.some((limitation) => limitation.includes('LCA')))).toBe(true);
+    expect(es.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://lexus.jp/models/es/' && source.supports.some((fact) => fact.includes('2026年6月現在'))))).toBe(true);
+    expect(es.every((vehicle) => vehicle.sources.some((source) => source.url === 'https://lexus.jp/models/es/features/safety/' && source.supports.some((fact) => fact.includes('0〜40km/h'))))).toBe(true);
+    expect(officialLinkFor(es[0])?.actions?.map(({ kind }) => kind)).toEqual(['estimate', 'test_drive', 'dealer']);
   });
 
   it('Honda VEZEL e:HEV ZはFF/4WDを分け、支援速度と価格を保持する', () => {

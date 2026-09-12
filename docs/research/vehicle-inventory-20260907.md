@@ -8,8 +8,8 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 
 | 区分 | 件数 | 定義 |
 |---|---:|---|
-| 公開データ | 456 | `src/data/vehicles.json` の全レコード（現行455 + 過去1） |
-| 既定表示 | 455 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
+| 公開データ | 463 | `src/data/vehicles.json` の全レコード（現行462 + 過去1） |
+| 既定表示 | 462 | `currentCatalogListed=true` かつ新車候補として一覧に出る現行レコード |
 | 掲載メーカー数 | 23 | Honda / Nissan / SUBARU / Tesla / Volvo / Suzuki / Renault / BMW / MINI / Mazda / Toyota / Lexus / Hyundai / BYD / Mitsubishi / Volkswagen / Audi / Mercedes-Benz / Daihatsu / Cadillac / Peugeot / Jeep / Land Rover |
 | 今回追加（Mazda） | 35 | CX-80 8 / CX-60 11 / 新型CX-5 4 / MAZDA3 7 / CX-30 4 / MX-30 ROTARY-EV Natural Monotone 1。日本向け現行価格・主要諸元・装備表・安全ページで販売単位とMRCC/CTS・監視条件を確認 |
 | 今回追加（MINI） | 8 | Countrymanの2026年7月以降生産の通常8販売単位。日本向け装備・価格表と公式導入資料で確認 |
@@ -44,6 +44,7 @@ Issue #17の公開候補を、販売単位（市場・メーカー・メーカ�
 | 今回追加（Toyota アクア / 後発対策） | 9 | Z / G / X / U（KINTO専用）の2WD・E-Four、GR SPORT 2WD。価格244万3,100円〜323万8,400円、全車速追従ACC・LTA・ステアリング保持を販売単位へ固定 |
 | 今回追加（Toyota カローラ / 後発対策） | 6 | HYBRID W×B / G / Xの2WD・E-Four。価格238万400円〜334万2,900円、全車速追従ACC・LTA・停止保持・ステアリング保持を販売単位へ固定 |
 | 今回追加（Lexus LX / 後発対策） | 10 | LX700h/LX600のEXECUTIVE、5/7人乗り、OVERTRAIL+ 5/7人乗り。価格1,450万〜2,100万円、全車速追従ACC・LTA、Advanced Drive渋滞時0〜40km/hの条件付き支援、運転者監視を販売単位へ固定。LCA・自動車線変更は付与せず、受注可否は未確認 |
+| 今回追加（Lexus ES / 後発対策） | 7 | ES500e version L／標準、ES350e Rr Comfort package／version L／標準、ES350hのFWD／AWD。価格790万〜920万円（税込）、全車速追従ACC・LTA、Advanced Drive渋滞時0〜40km/hの条件付きハンズオフと運転者監視を公式安全ページで確認。LCAはパッケージ差未確定のため付与せず、受注可否は未確認 |
 | 今回追加（Daihatsu タント系 / 後発対策） | 20 | タント／タント カスタム／タント ファンクロスのグレード×2WD/4WDを登録。車線逸脱抑制のみのLevel 1を8単位、ACC＋LKCのLevel 2を12単位（スマートクルーズパック標準・メーカーオプション差を別単位）として価格149万6,000円〜214万5,000円を保持。2024年10月モデル、注文可否は未確認 |
 | 今回追加（Volkswagen / Lexus / Toyota） | 9 | Volkswagen Tiguan 6単位、Lexus GX550 2単位、Toyota ランドクルーザー250 VX ガソリン4WD 1単位。価格・ACC／車線維持支援・ステアリング保持を一次資料で確認し、注文可否は未確認のまま掲載 |
 | 今回追加（Toyota ヤリス クロス） | 20 | 2026年8月公式グレードJSONのZ“Adventure”／Z／G／X／U／GR SPORT、ハイブリッド・ガソリン、2WD／E-Fourの全20販売単位。価格212万6,300円〜335万5,000円、全車速追従ACC・LTA・渋滞時支援、ステアリング保持条件を一次資料で確認し、注文可否は未確認のまま掲載 |
@@ -1237,3 +1238,21 @@ Land Rover Japanの日本向け商品ページ、モデル・仕様比較、安�
 | Metropolitan | 10,710,000円〜 | 2相当 | ACC＋レーンキープアシスト、ハンズオフ不可、自動車線変更なし | unknown |
 
 根拠: [Discovery Sport商品ページ](https://www.landrover.co.jp/discovery/discovery-sport/index.html)、[モデル・仕様比較](https://www.landrover.co.jp/discovery/discovery-sport/models-and-specifications.html)、[安全機能](https://www.landrover.co.jp/explore-land-rover/about-suvs/safety-features.html)、[コンフィギュレーター](https://www.landrover.co.jp/build-your-own/index.html)、[試乗予約](https://www.landrover.co.jp/book-a-test-drive/index.html)、[リテイラー検索](https://retailers.landrover.co.jp/search)、[国土交通省 Level 2定義](https://www.mlit.go.jp/common/001343740.pdf)。確認日: 2026-09-12。
+
+## 2026-09-12 Lexus ES 7販売単位追加
+
+Lexus日本公式の現行ES商品・安全装備ページと、トヨタ自動車の日本導入発表を照合し、ES500e、ES350e、ES350hの通常グレードを駆動方式・パッケージ別の7販売単位として追加した。全車5人乗り、メーカー希望小売価格は790万〜920万円（税込、2026年6月現在）。発売日は2026年6月11日。公式見積り・試乗予約・販売店導線は到達できるが、個別グレードの受注可否は固定できないため`availability=unknown`とした。
+
+安全装備表では、全単位に全車速追従レーダークルーズコントロールとレーントレーシングアシストを確認した。Lexus Teammate Advanced Driveは渋滞時支援のみで、所定の高速道路等における0〜40km/hの条件下で手放しが可能だが、運転者の周囲監視が必須であるため、全単位をLevel 2相当、`handsOff=allowed_in_conditions`、`driverMonitoring=required`とした。LCAは公式ページに記載があるものの、グレード／パッケージ別の差を一次情報で固定できないため能力キーへ付与していない。モデル単位の工場出荷目処（ES500e／ES350e 1.5〜2.0ヶ月、ES350h 2.5〜3.0ヶ月）は注文可否の根拠に流用しない。画像は追加していない。
+
+| 販売単位 | 価格（税込） | Level相当 | 能力・制約 | 注文可否 |
+|---|---:|---|---|---|
+| ES500e “version L”（AWD・5人乗り） | 9,200,000円 | 2相当 | 全車速追従ACC＋LTA、Advanced Drive渋滞時0〜40km/hの条件付きハンズオフ、監視必須 | unknown |
+| ES500e（AWD・5人乗り） | 8,300,000円 | 2相当 | 同上 | unknown |
+| ES350e “Rr Comfort package”（FWD・5人乗り） | 9,200,000円 | 2相当 | 同上 | unknown |
+| ES350e “version L”（FWD・5人乗り） | 8,800,000円 | 2相当 | 同上 | unknown |
+| ES350e（FWD・5人乗り） | 7,900,000円 | 2相当 | 同上 | unknown |
+| ES350h（FWD・5人乗り） | 7,900,000円 | 2相当 | 同上 | unknown |
+| ES350h（AWD・5人乗り） | 8,100,000円 | 2相当 | 同上 | unknown |
+
+根拠: [ES商品・価格ページ](https://lexus.jp/models/es/)、[ES安全装備](https://lexus.jp/models/es/features/safety/)、[新型ES発売発表](https://global.toyota/jp/newsroom/lexus/44452094.html)、[工場出荷時期目処](https://lexus.jp/news/info/delivery/)、[ES見積り](https://lexus.jp/request/estimate_sim/version?car_name_en=ES500e)、[ES試乗予約](https://lexus.jp/request/trial/service/dealerselect?seriesCode=ES)、[販売店検索](https://lexus.jp/dealership/)。確認日: 2026-09-12。

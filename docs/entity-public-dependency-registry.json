@@ -3294,5 +3294,31 @@
     ],
     "historical_markers": [],
     "refresh_entrypoint": "npm run build"
+  },
+  "vehicle:lexus-es-2026": {
+    "entity_id": "vehicle:lexus-es-2026",
+    "entity_type": "vehicle_catalog_entries",
+    "source_of_truth": ["src/data/vehicles.json", "src/data/official-links.json", "docs/research/vehicle-inventory-20260907.md"],
+    "generators": ["src/data/loader.ts", "src/components/VehicleList.astro", "src/components/VehicleCard.astro", "src/pages/cars/[id].astro", "src/pages/compare/index.astro", "@astrojs/sitemap"],
+    "surfaces": [
+      {"url":"/","locale":"ja","output_path":"dist/index.html","markers":["Lexus","ES","LEVEL 2","462販売単位"]},
+      {"url":"/cars/","locale":"ja","output_path":"dist/cars/index.html","markers":["Lexus","ES","Level 2"]},
+      {"url":"/cars/jp-lexus-es-2026-es500e-version-l-awd/","locale":"ja","output_path":"dist/cars/jp-lexus-es-2026-es500e-version-l-awd/index.html","markers":["Lexus","ES","ES500e “version L”（AWD・5人乗り）","9,200,000円","Level 2","ハンズオフ：条件内で可","注文可否：未確認"]},
+      {"url":"/cars/jp-lexus-es-2026-es500e-awd/","locale":"ja","output_path":"dist/cars/jp-lexus-es-2026-es500e-awd/index.html","markers":["Lexus","ES","ES500e（AWD・5人乗り）","8,300,000円","Level 2"]},
+      {"url":"/cars/jp-lexus-es-2026-es350e-rr-comfort-package-fwd/","locale":"ja","output_path":"dist/cars/jp-lexus-es-2026-es350e-rr-comfort-package-fwd/index.html","markers":["Lexus","ES","ES350e “Rr Comfort package”（FWD・5人乗り）","9,200,000円","Level 2"]},
+      {"url":"/cars/jp-lexus-es-2026-es350e-version-l-fwd/","locale":"ja","output_path":"dist/cars/jp-lexus-es-2026-es350e-version-l-fwd/index.html","markers":["Lexus","ES","ES350e “version L”（FWD・5人乗り）","8,800,000円","Level 2"]},
+      {"url":"/cars/jp-lexus-es-2026-es350e-fwd/","locale":"ja","output_path":"dist/cars/jp-lexus-es-2026-es350e-fwd/index.html","markers":["Lexus","ES","ES350e（FWD・5人乗り）","7,900,000円","Level 2"]},
+      {"url":"/cars/jp-lexus-es-2026-es350h-fwd/","locale":"ja","output_path":"dist/cars/jp-lexus-es-2026-es350h-fwd/index.html","markers":["Lexus","ES","ES350h（FWD・5人乗り）","7,900,000円","Level 2"]},
+      {"url":"/cars/jp-lexus-es-2026-es350h-awd/","locale":"ja","output_path":"dist/cars/jp-lexus-es-2026-es350h-awd/index.html","markers":["Lexus","ES","ES350h（AWD・5人乗り）","8,100,000円","Level 2"]},
+      {"url":"/compare/?ids=jp-lexus-es-2026-es500e-version-l-awd&ids=jp-lexus-es-2026-es350h-awd","locale":"ja","output_path":"dist/compare/index.html","markers":["ES500e","ES350h","Level 2"]},
+      {"url":"/sitemap-0.xml","locale":"ja","output_path":"dist/sitemap-0.xml","markers":["jp-lexus-es-2026-es500e-version-l-awd","jp-lexus-es-2026-es350h-awd"]}
+    ],
+    "required_render_selectors": [
+      {"url":"/","selector":"[data-vehicle-shell]:has(input[value=\"jp-lexus-es-2026-es500e-version-l-awd\"])","markers":["Lexus","ES","ES500e “version L”（AWD・5人乗り）","LEVEL 2"]},
+      {"url":"/cars/jp-lexus-es-2026-es500e-version-l-awd/","selector":"main","markers":["Lexus","ES","ES500e “version L”（AWD・5人乗り）","9,200,000円","Level 2","ハンズオフ：条件内で可"]},
+      {"url":"/compare/?ids=jp-lexus-es-2026-es500e-version-l-awd&ids=jp-lexus-es-2026-es350h-awd","selector":"[data-compare-result]","markers":["ES500e","ES350h","Level 2"]}
+    ],
+    "historical_markers": [],
+    "refresh_entrypoint": "npm run build"
   }
 }
