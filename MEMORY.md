@@ -2,6 +2,14 @@
 
 更新: 2026-09-12
 
+## 2026-09-12 Cadillac LYRIQ SPORT追加（本番反映済み）
+
+- キャデラック日本公式の商品ページ・主要諸元・販売開始リリースを突合し、LYRIQ SPORTを1販売単位で追加。税込1,100万円〜、2025-03-08販売開始、全車速追従ACC＋レーンキープアシストを確認した。日本向け一次情報からLevel 2、車線中央維持、ハンズオフ、注文可を確認できないため、Level 1相当・ハンズオフ不可・注文可否未確認として登録し、モデル年は未設定。試乗予約・見積り・販売店・カタログの公式導線を同期した。LYRIQの新規写真は権利確認できる素材がないため追加していない。
+- exact app `51db9e6`、Production `https://jidouunten.jp/`、immutable `https://d25bb67f.jidouunten.pages.dev`、直前rollback `https://7f083b08.jidouunten.pages.dev`。Cloudflare Pages production/mainへ実IDで反映済み。
+- QA: 455 HTML、sitemap-0 454 URL、詳細449件、ItemList 2ページ896項目、公式導線79モデル／76 URL／163 actions、Vitest77/77、価格449/449（exact432／range16／未確認1）、鮮度確認済み448／要再確認0／競合1／未確認0、画像3/3、Python16/16、Astro check 0 errors/0 warnings/6 hints、実ID build／release／structured PASS、registry closure 546/546、公開HTML内部enum/source/accessedAt漏れ0、独立監査PASS、immutable／本体E2E各1/1（本体GA collect HTTP204）、主要URL200、未知URL404、IDN path/query301。
+- 一覧のWikimedia Commons参考写真は`clamp(88px, 8vw, 118px)`・`object-fit: cover`・`loading=lazy`のWebPサムネイル（実測デスクトップ374×115px／モバイル360×88px）で省スペース表示。作者・ライセンス帰属リンクと詳細の大きい画像を維持。
+- 出典: [LYRIQ商品ページ](https://www.cadillacjapan.com/electric/lyriq)、[主要諸元](https://www.cadillacjapan.com/electric/lyriq/features-specs/features-specs-1)、[販売開始リリース](https://news.cadillacjapan.com/jp/cadillac/newsroom.detail.html/Pages/news/jp/ja/2025/mar/0307_Cadillac-LYRIQ.html)。
+
 ## 2026-09-12 三菱 デリカミニ／eKスペース追加（本番反映済み）
 
 - 三菱公式の商品・グレード価格・主要装備・MI-PILOT・カタログ・発売資料を突合し、デリカミニ12単位（T／GのLevel 1、Premium／DELIMARU PackageのLevel 2）とeKスペース4単位（M／G、全車LDPのみのLevel 1）を追加。価格は1,749,000〜2,907,300円（税込）。eKスペースは現行カタログにMI-PILOT標準の記載がないためLevel 2を推測していない。全16単位ともハンズオフ不可・常時監視必須・注文可否未確認。
